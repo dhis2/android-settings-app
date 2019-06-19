@@ -1,0 +1,23 @@
+.data-table {
+    margin-bottom: 2rem;
+}
+
+.data-table__headers__header {
+    vertical-align: middle;
+    border-bottom: 2px solid #E0E0E0 !important;
+    color: #757575;
+    display: table-cell;
+    font-weight: 400;
+    text-align: left;
+    transition: all .3s ease;
+}
+
+.data-table__rows__row__column {
+    vertical-align: middle;
+    border-bottom: 1px solid #E0E0E0 !important;
+    border-top: 0;
+    display: table-cell;
+    text-align: left;
+    transition: all .3s ease;
+    position: relative;
+}
