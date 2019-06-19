@@ -32,3 +32,8 @@ body {
 .app-wrapper * {
   font-family: Roboto;
 }
+
+.app__container {
+  background-color: #F3F3F3;
+  font-family: Roboto, sans-serif;
+}

@@ -5,13 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { App as D2UIApp, mui3theme as dhis2theme } from '@dhis2/d2-ui-core'
 
 import './App.css'
-
-const styles = {
-    app: {
-        backgroundColor: '#F3F3F3',
-        fontFamily: 'Roboto, sans-serif',
-    },
-}
+import Layout from './pages/layout'
 
 class App extends Component {
     constructor(props) {
@@ -35,10 +29,10 @@ class App extends Component {
         }
 
         return (
-            <div style={styles.app}>
+            <div className="app__container">
                 <D2UIApp>
                     <MuiThemeProvider theme={createMuiTheme(dhis2theme)}>
-                        Hola
+                        <Layout d2={this.state.d2} />
                     </MuiThemeProvider>
                 </D2UIApp>
             </div>
