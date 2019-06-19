@@ -20,3 +20,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+[dir] body {
+  background-color: #f4f6f8;
+}
+
+body {
+  background-color: #f3f3f3;
+}
+
+.app-wrapper * {
+  font-family: Roboto;
+}
