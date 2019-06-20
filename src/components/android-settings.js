@@ -26,32 +26,46 @@ class AndroidSettings extends React.Component {
         }
 
         this.nameSpace = undefined
+        this.keyName = undefined
         /* if (this.props.d2) {
             setInstance(props.d2);
         } */
     }
 
-    componentDidMount() {
-        api.getNamespaces()
+    async componentDidMount() {
+        await api
+            .getNamespaces()
             .then(res => {
-                console.log('res', res)
                 const nameSpace = res.filter(
                     name => name === 'ANDROID_SETTING_APP'
                 )
-                console.log(nameSpace)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
                 this.nameSpace !== undefined
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
+                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                    api.getKeys(this.nameSpace).then(res => {
+                        const keyName = res.filter(
+                            name => name === 'android_settings'
+                        )
+                        keyName.length === 0
+                            ? (this.keyName = undefined)
+                            : (this.keyName = keyName[0])
+                    })
+                } else if (this.nameSpace === undefined) {
+                    api.createNamespace(
+                        'ANDROID_SETTING_APP',
+                        'android_settings'
+                    ).catch(e => console.log(e))
+                }
             })
             .catch(e => {
                 this.setState({
                     isUpdated: false,
                 })
             })
-
         console.log({
             state: this.state,
         })
@@ -92,7 +106,7 @@ class AndroidSettings extends React.Component {
         const androidData = this.state
         androidData.date = new Date().toJSON()
 
-        if (this.state.isUpdated === true) {
+        if (this.nameSpace === 'android_settings') {
             api.updateValue(
                 'ANDROID_SETTING_APP',
                 'android_settings',
@@ -105,32 +119,17 @@ class AndroidSettings extends React.Component {
                     console.log('data response update', data)
                 })
         } else {
-            if (this.nameSpace === undefined) {
-                api.createNamespace('ANDROID_SETTING_APP', 'android_settings')
-                    .then(res => {
-                        console.log(res)
-                    })
-                    .then(
-                        api.createValue(
-                            'ANDROID_SETTING_APP',
-                            'android_settings',
-                            androidData
-                        )
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .updateValue(
+                        'ANDROID_SETTING_APP',
+                        'android_settings',
+                        androidData
                     )
-                    .catch(e => {
-                        console.log('error', e)
+                    .then(data => {
+                        console.log('data response update', data)
                     })
-            }
-            /* api.createValue("ANDROID_SETTING_APP", "android_settings", androidData)
-                .then(res => {
-                    console.log('res', res)
-                })
-                .then(data => {
-                    console.log('data response', data)
-                })
-                .catch(e => {
-                    console.log('error', e)
-                }) */
+            )
         }
 
         console.log({

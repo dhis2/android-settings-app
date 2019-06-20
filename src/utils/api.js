@@ -71,7 +71,7 @@ class Api {
             .then(d2 => {
                 console.log(d2.dataStore)
                 d2.dataStore.create(namespace).then(namespace => {
-                    namespace.set(key, '')
+                    namespace.set(key, {})
                 })
             })
             .then(name => console.log(name))
