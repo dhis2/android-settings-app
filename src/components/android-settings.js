@@ -6,11 +6,11 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Button } from '@dhis2/d2-ui-core'
-// import api from '../API/api';
-// import { api, callApi } from '../API/api_test'
+import api from '../utils/api'
+
 // import { setInstance } from 'd2';
 
-import { metadataOptions, dataOptions } from '../JSONS/android-settings'
+import { metadataOptions, dataOptions } from '../constants/android-settings'
 
 class AndroidSettings extends React.Component {
     constructor(props) {
@@ -22,11 +22,39 @@ class AndroidSettings extends React.Component {
             numberSmsConfirmation: '',
             valuesTEI: '',
             encryptDB: '',
+            isUpdated: false,
         }
 
+        this.nameSpace = undefined
         /* if (this.props.d2) {
             setInstance(props.d2);
         } */
+    }
+
+    componentDidMount() {
+        api.getNamespaces()
+            .then(res => {
+                console.log('res', res)
+                const nameSpace = res.filter(
+                    name => name === 'ANDROID_SETTING_APP'
+                )
+                console.log(nameSpace)
+                nameSpace.length === 0
+                    ? (this.nameSpace = undefined)
+                    : (this.nameSpace = nameSpace[0])
+                this.nameSpace !== undefined
+                    ? this.setState({ isUpdated: true })
+                    : this.setState({ isUpdated: false })
+            })
+            .catch(e => {
+                this.setState({
+                    isUpdated: false,
+                })
+            })
+
+        console.log({
+            state: this.state,
+        })
     }
 
     onChangeValue = e => {
@@ -43,7 +71,7 @@ class AndroidSettings extends React.Component {
     handleSubmit = async e => {
         e.preventDefault()
 
-        this.props.d2.dataStore
+        /* this.props.d2.dataStore
             .create('ANDROID_SETTING')
             .then(namespace => {
                 namespace.set('android_settings', this.state)
@@ -53,13 +81,57 @@ class AndroidSettings extends React.Component {
                 console.log('data response', data2)
             })
             .catch(e => {
-                console.log('error ', e)
+                // console.log('error ', e)
                 this.props.d2.dataStore
                     .get('ANDROID_SETTING')
                     .then(namespace => {
                         namespace.set('android_settings', this.state)
                     })
-            })
+            }) */
+
+        const androidData = this.state
+        androidData.date = new Date().toJSON()
+
+        if (this.state.isUpdated === true) {
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'android_settings',
+                androidData
+            )
+                .then(res => {
+                    console.log('res update', res)
+                })
+                .then(data => {
+                    console.log('data response update', data)
+                })
+        } else {
+            if (this.nameSpace === undefined) {
+                api.createNamespace('ANDROID_SETTING_APP', 'android_settings')
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .then(
+                        api.createValue(
+                            'ANDROID_SETTING_APP',
+                            'android_settings',
+                            androidData
+                        )
+                    )
+                    .catch(e => {
+                        console.log('error', e)
+                    })
+            }
+            /* api.createValue("ANDROID_SETTING_APP", "android_settings", androidData)
+                .then(res => {
+                    console.log('res', res)
+                })
+                .then(data => {
+                    console.log('data response', data)
+                })
+                .catch(e => {
+                    console.log('error', e)
+                }) */
+        }
 
         console.log({
             state: this.state,
@@ -177,15 +249,13 @@ class AndroidSettings extends React.Component {
 
                 <div className="main-content__button__container">
                     <Button onClick={this.handleSubmit} raised color="primary">
-                        {' '}
-                        SAVE{' '}
+                        SAVE
                     </Button>
                     <Button
                         onClick={this.handleCancel}
                         className="main-content__button__cancel"
                     >
-                        {' '}
-                        CANCEL{' '}
+                        CANCEL
                     </Button>
                 </div>
             </form>
