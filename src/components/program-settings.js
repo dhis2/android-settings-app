@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
 import { Program, SpecificProgram } from '../constants/program-settings'
+import api from '../utils/api'
 import ProgramTable from './program-table'
 
 const programData = Program
@@ -43,6 +44,9 @@ class ProgramSettings extends React.Component {
             specificEventDownload: '',
             specificEventDBTrimming: '',
         }
+
+        this.nameSpace = undefined
+        this.keyName = undefined
 
         console.log('props program', props)
     }
@@ -88,19 +92,121 @@ class ProgramSettings extends React.Component {
         })
     }
 
+    handleSubmit = async e => {
+        e.preventDefault()
+
+        const androidData = {
+            generalSettings: {
+                date: new Date().toJSON(),
+                settingDownload: this.state.settingDownload,
+                settingDBTrimming: this.state.settingDBTrimming,
+                enrollmentDownload: this.state.enrollmentDownload,
+                enrollmentDBTrimming: this.state.enrollmentDBTrimming,
+                enrollmentDateDownload: this.state.enrollmentDateDownload,
+                enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
+                updateDownload: this.state.updateDownload,
+                updateDBTrimming: this.state.updateDBTrimming,
+                eventDownload: this.state.eventDownload,
+                eventDBTrimming: this.state.eventDBTrimming,
+            },
+        }
+
+        if (this.nameSpace === 'program_settings') {
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'program_settings',
+                androidData
+            )
+                .then(res => {
+                    console.log('res update', res)
+                })
+                .then(data => {
+                    console.log('data response update', data)
+                })
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'program_settings',
+                        androidData
+                    )
+                    .then(data => {
+                        console.log('data response update', data)
+                    })
+            )
+        }
+
+        console.log({
+            state: this.state,
+        })
+    }
+
+    handleCancel = e => {
+        e.preventDefault()
+    }
+
+    async componentDidMount() {
+        await api
+            .getNamespaces()
+            .then(res => {
+                const nameSpace = res.filter(
+                    name => name === 'ANDROID_SETTING_APP'
+                )
+                nameSpace.length === 0
+                    ? (this.nameSpace = undefined)
+                    : (this.nameSpace = nameSpace[0])
+                this.nameSpace !== undefined
+                    ? this.setState({ isUpdated: true })
+                    : this.setState({ isUpdated: false })
+                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                    api.getKeys(this.nameSpace).then(res => {
+                        const keyName = res.filter(
+                            name => name === 'program_settings'
+                        )
+                        keyName.length === 0
+                            ? (this.keyName = undefined)
+                            : (this.keyName = keyName[0])
+                        if (this.keyName !== undefined) {
+                            api.getValue(this.nameSpace, this.keyName).then(
+                                res => {
+                                    console.group(res)
+                                    this.setState({
+                                        ...res.value.generalSettings,
+                                        isUpdated: true,
+                                    })
+                                }
+                            )
+                        } else {
+                            console.log('no program settings')
+                        }
+                    })
+                } else if (this.nameSpace === undefined) {
+                    console.log('no hay program setting')
+                    api.createNamespace(
+                        'ANDROID_SETTING_APP',
+                        'program_settings'
+                    ).catch(e => console.log(e))
+                }
+            })
+            .catch(e => {
+                this.setState({
+                    isUpdated: false,
+                })
+            })
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <p className="main-content__title main-content__title__main">
-                        {' '}
-                        Program global settings{' '}
+                        Program global settings
                     </p>
                     <p className="main-content__title main-content__subtitle">
-                        {' '}
                         Applies to all programs that an Android user has access
                         to, unless an specific set of values has been configured
-                        for a program (see below){' '}
+                        for a program (see below)
                     </p>
 
                     <ProgramTable
@@ -112,19 +218,32 @@ class ProgramSettings extends React.Component {
 
                 <div>
                     <p className="main-content__title main-content__title__main">
-                        {' '}
-                        Program specific settings{' '}
+                        Program specific settings
                     </p>
                     <p className="main-content__title main-content__subtitle">
-                        {' '}
                         Programs settings listed below overwrite the global
-                        settings above{' '}
+                        settings above
                     </p>
 
                     <Button raised onClick={this.handleClickOpen}>
-                        {' '}
-                        ADD{' '}
+                        ADD
                     </Button>
+
+                    <div className="main-content__button__container">
+                        <Button
+                            onClick={this.handleSubmit}
+                            raised
+                            color="primary"
+                        >
+                            SAVE
+                        </Button>
+                        <Button
+                            onClick={this.handleCancel}
+                            className="main-content__button__cancel"
+                        >
+                            CANCEL
+                        </Button>
+                    </div>
 
                     <Dialog
                         open={this.state.specificProgram.openDialog}

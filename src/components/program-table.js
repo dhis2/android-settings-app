@@ -26,15 +26,13 @@ class ProgramTable extends React.Component {
                             className="data-table__headers__header"
                             align="right"
                         >
-                            {' '}
-                            Download{' '}
+                            Download
                         </TableCell>
                         <TableCell
                             className="data-table__headers__header"
                             align="right"
                         >
-                            {' '}
-                            DB trimming{' '}
+                            DB trimming
                         </TableCell>
                     </TableRow>
                 </TableHead>
