@@ -53,6 +53,16 @@ class AndroidSettings extends React.Component {
                         keyName.length === 0
                             ? (this.keyName = undefined)
                             : (this.keyName = keyName[0])
+                        if (this.keyName !== undefined) {
+                            api.getValue(this.nameSpace, this.keyName).then(
+                                res => {
+                                    this.setState({
+                                        ...res.value,
+                                        isUpdated: true,
+                                    })
+                                }
+                            )
+                        }
                     })
                 } else if (this.nameSpace === undefined) {
                     api.createNamespace(
@@ -66,9 +76,6 @@ class AndroidSettings extends React.Component {
                     isUpdated: false,
                 })
             })
-        console.log({
-            state: this.state,
-        })
     }
 
     onChangeValue = e => {

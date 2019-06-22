@@ -2,7 +2,6 @@ import { sprintf } from 'sprintf-js'
 import { init, getInstance, getManifest } from 'd2'
 
 const CREATED = 'CREATED'
-// const UPDATED = 'UPDATED';
 const DELETED = 'DELETED'
 // const API_URL = 'https://play.dhis2.org/test/api';
 const API_URL = 'http://localhost:8080'
@@ -133,8 +132,17 @@ class Api {
     /**
      * @param namespace
      * @param key
+     */
+    getMetaData(namespace, key) {
+        return getInstance()
+            .then(d2 => d2.dataStore.get(namespace, false))
+            .then(namespace => namespace.getMetaData(key))
+    }
+
+    /**
+     * @param namespace
+     * @param key
      * @param value
-     * @param log Should action be logged?
      */
     createValue(namespace, key, value) {
         return getInstance()
@@ -160,7 +168,6 @@ class Api {
      * @param namespace
      * @param key
      * @param value
-     * @param log Should action be logged?
      */
     updateValue(namespace, key, value) {
         return getInstance()
