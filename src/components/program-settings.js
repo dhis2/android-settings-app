@@ -33,6 +33,7 @@ class ProgramSettings extends React.Component {
             specificProgram: {
                 openDialog: false,
             },
+            specificProgramName: '',
             specificSettingDownload: '',
             specificSettingDBTrimming: '',
             specificEnrollmentDownload: '',
@@ -47,8 +48,12 @@ class ProgramSettings extends React.Component {
 
         this.nameSpace = undefined
         this.keyName = undefined
-
-        console.log('props program', props)
+        this.programNamesList = []
+        this.globalSettings = {}
+        this.specificSettings = {}
+        this.currentUserData = props.d2.currentUser
+        this.userPrograms = this.currentUserData.programs
+        console.log('props program', props, this.currentUserData)
     }
 
     handleChange = e => {
@@ -74,6 +79,8 @@ class ProgramSettings extends React.Component {
             },
         })
 
+        this.cleanDialogStates()
+
         console.log({
             action: 'open',
             state: this.state,
@@ -95,8 +102,8 @@ class ProgramSettings extends React.Component {
     handleSubmit = async e => {
         e.preventDefault()
 
-        const androidData = {
-            generalSettings: {
+        const programData = {
+            globalSettings: {
                 date: new Date().toJSON(),
                 settingDownload: this.state.settingDownload,
                 settingDBTrimming: this.state.settingDBTrimming,
@@ -111,25 +118,23 @@ class ProgramSettings extends React.Component {
             },
         }
 
-        if (this.nameSpace === 'program_settings') {
+        this.globalSettings = programData
+
+        if (this.keyName === 'program_settings') {
             api.updateValue(
                 'ANDROID_SETTING_APP',
                 'program_settings',
-                androidData
-            )
-                .then(res => {
-                    console.log('res update', res)
-                })
-                .then(data => {
-                    console.log('data response update', data)
-                })
+                programData
+            ).then(res => {
+                console.log('res update', res)
+            })
         } else {
             api.getKeys('ANDROID_SETTING_APP').then(
                 api
                     .createValue(
                         'ANDROID_SETTING_APP',
                         'program_settings',
-                        androidData
+                        programData
                     )
                     .then(data => {
                         console.log('data response update', data)
@@ -171,10 +176,30 @@ class ProgramSettings extends React.Component {
                             api.getValue(this.nameSpace, this.keyName).then(
                                 res => {
                                     console.group(res)
-                                    this.setState({
-                                        ...res.value.generalSettings,
-                                        isUpdated: true,
-                                    })
+
+                                    if (res.value.globalSettings) {
+                                        this.setState({
+                                            ...res.value.globalSettings,
+                                            isUpdated: true,
+                                        })
+                                        this.globalSettings =
+                                            res.value.globalSettings
+                                    }
+
+                                    if (res.value.specificSettings) {
+                                        this.specificSettings =
+                                            res.value.specificSettings
+                                        this.programNamesList = Object.keys(
+                                            this.specificSettings
+                                        )
+                                        console.log(this.programNamesList)
+                                    }
+                                    console.log(
+                                        this.globalSettings,
+                                        this.specificSettings,
+                                        this.state,
+                                        this.programNamesList
+                                    )
                                 }
                             )
                         } else {
@@ -194,6 +219,108 @@ class ProgramSettings extends React.Component {
                     isUpdated: false,
                 })
             })
+    }
+
+    cleanDialogStates = () => {
+        this.setState({
+            programName: '',
+            specificSettingDownload: '',
+            specificSettingDBTrimming: '',
+            specificEnrollmentDownload: '',
+            specificEnrollmentDBTrimming: '',
+            specificEnrollmentDateDownload: '',
+            specificEnrollmentDateDBTrimming: '',
+            specificUpdateDownload: '',
+            specificUpdateDBTrimming: '',
+            specificEventDownload: '',
+            specificEventDBTrimming: '',
+        })
+    }
+
+    handleSubmitDialog = async e => {
+        e.preventDefault()
+
+        if (Object.keys(this.specificSettings).length) {
+            console.log(this.specificSettings)
+        }
+
+        var specificProgramNameKey = this.state.specificProgramName
+        var objData = {
+            ...this.specificSettings,
+        }
+        objData[specificProgramNameKey] = {
+            date: new Date().toJSON(),
+            programName: this.state.specificProgramName,
+            specificSettingDownload: this.state.specificSettingDownload,
+            specificSettingDBTrimming: this.state.specificSettingDBTrimming,
+            specificEnrollmentDownload: this.state.specificEnrollmentDownload,
+            specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
+            specificEnrollmentDateDownload: this.state
+                .specificEnrollmentDateDownload,
+            specificEnrollmentDateDBTrimming: this.state
+                .specificEnrollmentDateDBTrimming,
+            specificUpdateDownload: this.state.specificUpdateDownload,
+            specificUpdateDBTrimming: this.state.updateDBTrimming,
+            specificEventDownload: this.state.specificEventDownload,
+            specificEventDBTrimming: this.state.specificEventDBTrimming,
+        }
+
+        const programData = {
+            specificSettings: objData,
+        }
+
+        this.specificSettings = programData
+        /*
+        const programData = {
+            specificSettings : {
+                nameP: {
+                    date: new Date().toJSON(),
+                    programName: this.state.specificProgramName,
+                    specificSettingDownload: this.state.specificSettingDownload,
+                    specificSettingDBTrimming: this.state.specificSettingDBTrimming,
+                    specificEnrollmentDownload: this.state.specificEnrollmentDownload,
+                    specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
+                    specificEnrollmentDateDownload: this.state.specificEnrollmentDateDownload,
+                    specificEnrollmentDateDBTrimming: this.state.specificEnrollmentDateDBTrimming,
+                    specificUpdateDownload: this.state.specificUpdateDownload,
+                    specificUpdateDBTrimming: this.state.updateDBTrimming,
+                    specificEventDownload: this.state.specificEventDownload,
+                    specificEventDBTrimming: this.state.specificEventDBTrimming,
+                }
+            }
+        }
+*/
+        this.programNamesList.push(this.state.specificProgramName)
+        console.log(programData)
+
+        if (this.keyName === 'program_settings') {
+            if (Object.keys(this.globalSettings).length) {
+                programData.globalSettings = this.globalSettings
+                console.log(programData)
+            }
+
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'program_settings',
+                programData
+            ).then(res => {
+                console.log('res update', res)
+            })
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'program_settings',
+                        programData
+                    )
+                    .then(data => {
+                        console.log('data response update', data)
+                    })
+            )
+        }
+
+        this.handleClose()
     }
 
     render() {
@@ -224,6 +351,17 @@ class ProgramSettings extends React.Component {
                         Programs settings listed below overwrite the global
                         settings above
                     </p>
+
+                    {this.programNamesList.length > 0 ? (
+                        <div>
+                            Tabla
+                            {this.programNamesList.map(program => (
+                                <p key={program}> {program} </p>
+                            ))}
+                        </div>
+                    ) : (
+                        <p></p>
+                    )}
 
                     <Button raised onClick={this.handleClickOpen}>
                         ADD
@@ -259,9 +397,11 @@ class ProgramSettings extends React.Component {
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                id="name"
+                                id="specificProgramName"
                                 label="Programs"
                                 type="text"
+                                name="specificProgramName"
+                                onChange={this.handleChange}
                             />
 
                             <ProgramTable
@@ -285,7 +425,7 @@ class ProgramSettings extends React.Component {
                             >
                                 CANCEL
                             </Button>
-                            <Button raised onClick={this.handleClose}>
+                            <Button raised onClick={this.handleSubmitDialog}>
                                 ADD/SAVE
                             </Button>
                         </DialogActions>
