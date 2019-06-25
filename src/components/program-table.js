@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 class ProgramTable extends React.Component {
     constructor(props) {
@@ -71,7 +72,16 @@ class ProgramTable extends React.Component {
                                         ))}
                                     </Select>
                                 ) : (
-                                    row.download
+                                    <TextField
+                                        id={row.keyDownload}
+                                        name={row.keyDownload}
+                                        type="number"
+                                        margin="normal"
+                                        value={
+                                            this.props.states[row.keyDownload]
+                                        }
+                                        onChange={this.props.onChange}
+                                    />
                                 )}
                             </TableCell>
                             <TableCell
@@ -99,7 +109,16 @@ class ProgramTable extends React.Component {
                                         ))}
                                     </Select>
                                 ) : (
-                                    row.DBTrimming
+                                    <TextField
+                                        id={row.keyDBTrimming}
+                                        name={row.keyDBTrimming}
+                                        type="number"
+                                        margin="normal"
+                                        value={
+                                            this.props.states[row.keyDBTrimming]
+                                        }
+                                        onChange={this.props.onChange}
+                                    />
                                 )}
                             </TableCell>
                         </TableRow>

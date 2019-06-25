@@ -25,9 +25,9 @@ export const Program = [
         ],
     },
     {
+        keyDownload: 'teiDownload',
+        keyDBTrimming: 'teiDBTrimmming',
         option: 'TEI per program',
-        download: '500',
-        DBTrimming: '500',
     },
     {
         keyDownload: 'enrollmentDownload',
@@ -138,17 +138,17 @@ export const Program = [
     },
     {
         option: 'TE reserved values',
-        download: '100',
-        DBTrimming: '500',
+        keyDownload: 'teReservedDownload',
+        keyDBTrimming: 'teReservedDBTrimming',
     },
     {
         option: 'Events',
-        download: '1000',
-        DBTrimming: '1000',
+        keyDownload: 'eventsDownload',
+        keyDBTrimming: 'eventsDBTrimming',
     },
     {
-        keyDownload: 'eventDownload',
-        keyDBTrimming: 'eventDBTrimming',
+        keyDownload: 'eventPeriodDownload',
+        keyDBTrimming: 'eventPeriodDBTrimming',
         option: 'Event period',
         download: [
             {
@@ -217,8 +217,8 @@ export const SpecificProgram = [
     },
     {
         option: 'TEI per program',
-        download: '500',
-        DBTrimming: '500',
+        keyDownload: 'specificTeiDownload',
+        keyDBTrimming: 'specificTeiDBTrimming',
     },
     {
         keyDownload: 'specificEnrollmentDownload',
@@ -329,17 +329,17 @@ export const SpecificProgram = [
     },
     {
         option: 'TE reserved values',
-        download: '100',
-        DBTrimming: '500',
+        eyDownload: 'specificTEReservedDownload',
+        keyDBTrimming: 'specificTEReservedDBTrimming',
     },
     {
         option: 'Events',
-        download: '1000',
-        DBTrimming: '1000',
+        eyDownload: 'specificEventsDownload',
+        keyDBTrimming: 'specificEventsDBTrimming',
     },
     {
-        keyDownload: 'specificEventDownload',
-        keyDBTrimming: 'specificEventDBTrimming',
+        keyDownload: 'specificEventPeriodDownload',
+        keyDBTrimming: 'specificEventPeriodDBTrimming',
         option: 'Event period',
         download: [
             {

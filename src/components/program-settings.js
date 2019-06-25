@@ -22,28 +22,40 @@ class ProgramSettings extends React.Component {
             download: '',
             settingDownload: '',
             settingDBTrimming: '',
+            teiDownload: '',
+            teiDBTrimmming: '',
             enrollmentDownload: '',
             enrollmentDBTrimming: '',
             enrollmentDateDownload: '',
             enrollmentDateDBTrimming: '',
             updateDownload: '',
             updateDBTrimming: '',
-            eventDownload: '',
-            eventDBTrimming: '',
+            teReservedDownload: '',
+            teReservedDBTrimming: '',
+            eventsDownload: '',
+            eventsDBTrimming: '',
+            eventPeriodDownload: '',
+            eventPeriodDBTrimming: '',
             specificProgram: {
                 openDialog: false,
             },
             specificProgramName: '',
             specificSettingDownload: '',
             specificSettingDBTrimming: '',
+            specificTeiDownload: '',
+            specificTeiDBTrimming: '',
             specificEnrollmentDownload: '',
             specificEnrollmentDBTrimming: '',
             specificEnrollmentDateDownload: '',
             specificEnrollmentDateDBTrimming: '',
             specificUpdateDownload: '',
             specificUpdateDBTrimming: '',
-            specificEventDownload: '',
-            specificEventDBTrimming: '',
+            specificTEReservedDownload: '',
+            specificTEReservedDBTrimming: '',
+            specificEventsDownload: '',
+            specificEventsDBTrimming: '',
+            specificEventPeriodDownload: '',
+            specificEventPeriodDBTrimming: '',
         }
 
         this.nameSpace = undefined
@@ -100,27 +112,49 @@ class ProgramSettings extends React.Component {
     }
 
     handleSubmit = async e => {
-        e.preventDefault()
+        // e.preventDefault()
+
+        /* this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value,
+        }) */
+
+        this.handleChange(e)
+
+        const globalSettings = {
+            date: new Date().toJSON(),
+            settingDownload: this.state.settingDownload,
+            settingDBTrimming: this.state.settingDBTrimming,
+            teiDownload: this.state.teiDownload,
+            teiDBTrimmming: this.state.teiDBTrimmming,
+            enrollmentDownload: this.state.enrollmentDownload,
+            enrollmentDBTrimming: this.state.enrollmentDBTrimming,
+            enrollmentDateDownload: this.state.enrollmentDateDownload,
+            enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
+            updateDownload: this.state.updateDownload,
+            updateDBTrimming: this.state.updateDBTrimming,
+            teReservedDownload: this.state.teReservedDownload,
+            teReservedDBTrimming: this.state.teReservedDBTrimming,
+            eventsDownload: this.state.eventsDownload,
+            eventsDBTrimming: this.state.eventsDBTrimming,
+            eventPeriodDownload: this.state.eventPeriodDownload,
+            eventPeriodDBTrimming: this.state.eventPeriodDBTrimming,
+        }
+
+        this.globalSettings = globalSettings
 
         const programData = {
             globalSettings: {
-                date: new Date().toJSON(),
-                settingDownload: this.state.settingDownload,
-                settingDBTrimming: this.state.settingDBTrimming,
-                enrollmentDownload: this.state.enrollmentDownload,
-                enrollmentDBTrimming: this.state.enrollmentDBTrimming,
-                enrollmentDateDownload: this.state.enrollmentDateDownload,
-                enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
-                updateDownload: this.state.updateDownload,
-                updateDBTrimming: this.state.updateDBTrimming,
-                eventDownload: this.state.eventDownload,
-                eventDBTrimming: this.state.eventDBTrimming,
+                ...this.globalSettings,
             },
         }
 
-        this.globalSettings = programData
-
         if (this.keyName === 'program_settings') {
+            if (Object.keys(this.specificSettings).length) {
+                programData.specificSettings = this.specificSettings
+                console.log(programData)
+            }
+
             api.updateValue(
                 'ANDROID_SETTING_APP',
                 'program_settings',
@@ -226,23 +260,29 @@ class ProgramSettings extends React.Component {
             programName: '',
             specificSettingDownload: '',
             specificSettingDBTrimming: '',
+            specificTeiDownload: '',
+            specificTeiDBTrimming: '',
             specificEnrollmentDownload: '',
             specificEnrollmentDBTrimming: '',
             specificEnrollmentDateDownload: '',
             specificEnrollmentDateDBTrimming: '',
             specificUpdateDownload: '',
             specificUpdateDBTrimming: '',
-            specificEventDownload: '',
-            specificEventDBTrimming: '',
+            specificTEReservedDownload: '',
+            specificTEReservedDBTrimming: '',
+            specificEventsDownload: '',
+            specificEventsDBTrimming: '',
+            specificEventPeriodDownload: '',
+            specificEventPeriodDBTrimming: '',
         })
     }
 
     handleSubmitDialog = async e => {
         e.preventDefault()
 
-        if (Object.keys(this.specificSettings).length) {
+        /* if (Object.keys(this.specificSettings).length) {
             console.log(this.specificSettings)
-        }
+        } */
 
         var specificProgramNameKey = this.state.specificProgramName
         var objData = {
@@ -253,6 +293,8 @@ class ProgramSettings extends React.Component {
             programName: this.state.specificProgramName,
             specificSettingDownload: this.state.specificSettingDownload,
             specificSettingDBTrimming: this.state.specificSettingDBTrimming,
+            specificTeiDownload: this.state.specificTeiDownload,
+            specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
             specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
             specificEnrollmentDateDownload: this.state
@@ -261,8 +303,14 @@ class ProgramSettings extends React.Component {
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
             specificUpdateDBTrimming: this.state.updateDBTrimming,
-            specificEventDownload: this.state.specificEventDownload,
-            specificEventDBTrimming: this.state.specificEventDBTrimming,
+            specificTEReservedDownload: this.state.specificTEReservedDownload,
+            specificTEReservedDBTrimming: this.state
+                .specificTEReservedDBTrimming,
+            specificEventsDownload: this.state.specificEventsDownload,
+            specificEventsDBTrimming: this.state.specificEventsDBTrimming,
+            specificEventPeriodDownload: this.state.specificEventPeriodDownload,
+            specificEventPeriodDBTrimming: this.state
+                .specificEventPeriodDBTrimming,
         }
 
         const programData = {
@@ -339,7 +387,7 @@ class ProgramSettings extends React.Component {
                     <ProgramTable
                         data={programData}
                         states={this.state}
-                        onChange={this.handleChange}
+                        onChange={this.handleSubmit}
                     />
                 </div>
 
@@ -373,13 +421,7 @@ class ProgramSettings extends React.Component {
                             raised
                             color="primary"
                         >
-                            SAVE
-                        </Button>
-                        <Button
-                            onClick={this.handleCancel}
-                            className="main-content__button__cancel"
-                        >
-                            CANCEL
+                            SET TO DEFAULT
                         </Button>
                     </div>
 
