@@ -79,39 +79,26 @@ class AndroidSettings extends React.Component {
     }
 
     onChangeValue = e => {
-        console.log({
-            field: e.target.name,
-            value: e.target.value,
-        })
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
         })
+        console.log({
+            field: e.target.name,
+            value: e.target.value,
+            state: this.state,
+        })
     }
 
     handleSubmit = async e => {
-        e.preventDefault()
+        // e.preventDefault()
 
-        /* this.props.d2.dataStore
-            .create('ANDROID_SETTING')
-            .then(namespace => {
-                namespace.set('android_settings', this.state)
-            })
-            .then(res => res.json())
-            .then(data2 => {
-                console.log('data response', data2)
-            })
-            .catch(e => {
-                // console.log('error ', e)
-                this.props.d2.dataStore
-                    .get('ANDROID_SETTING')
-                    .then(namespace => {
-                        namespace.set('android_settings', this.state)
-                    })
-            }) */
+        this.onChangeValue(e)
 
         const androidData = this.state
         androidData.date = new Date().toJSON()
+
+        console.log(androidData)
 
         if (this.nameSpace === 'android_settings') {
             api.updateValue(
@@ -144,6 +131,19 @@ class AndroidSettings extends React.Component {
         })
     }
 
+    handleReset = e => {
+        e.preventDefault()
+        this.setState({
+            metadataSync: '',
+            dataSync: '',
+            numberSmsToSent: '',
+            numberSmsConfirmation: '',
+            valuesTEI: '',
+            encryptDB: '',
+            isUpdated: false,
+        })
+    }
+
     handleCancel = e => {
         e.preventDefault()
     }
@@ -162,7 +162,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.metadataSync}
-                    onChange={this.onChangeValue}
+                    onChange={this.handleSubmit}
                 >
                     {metadataOptions.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -182,7 +182,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.dataSync}
-                    onChange={this.onChangeValue}
+                    onChange={this.handleSubmit}
                 >
                     {dataOptions.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -201,7 +201,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.numberSmsToSent}
-                    onChange={this.onChangeValue}
+                    onChange={this.handleSubmit}
                 />
 
                 <TextField
@@ -214,7 +214,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.numberSmsConfirmation}
-                    onChange={this.onChangeValue}
+                    onChange={this.handleSubmit}
                 />
 
                 <TextField
@@ -228,7 +228,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.valuesTEI}
-                    onChange={this.onChangeValue}
+                    onChange={this.handleSubmit}
                 />
 
                 <div>
@@ -237,7 +237,7 @@ class AndroidSettings extends React.Component {
                         aria-label="Encrypt"
                         name="encryptDB"
                         value={this.state.encryptDB}
-                        onChange={this.onChangeValue}
+                        onChange={this.handleSubmit}
                         row
                     >
                         <FormControlLabel
@@ -254,14 +254,8 @@ class AndroidSettings extends React.Component {
                 </div>
 
                 <div className="main-content__button__container">
-                    <Button onClick={this.handleSubmit} raised color="primary">
-                        SAVE
-                    </Button>
-                    <Button
-                        onClick={this.handleCancel}
-                        className="main-content__button__cancel"
-                    >
-                        CANCEL
+                    <Button onClick={this.handleReset} raised color="primary">
+                        SET TO DEFAULT
                     </Button>
                 </div>
             </form>

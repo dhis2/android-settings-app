@@ -6,6 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
+import Table from '@dhis2/d2-ui-table'
+import '@dhis2/d2-ui-core/build/css/Table.css'
 
 import { Program, SpecificProgram } from '../constants/program-settings'
 import api from '../utils/api'
@@ -18,45 +20,12 @@ class ProgramSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            download: '',
-            settingDownload: '',
-            settingDBTrimming: '',
-            teiDownload: '',
-            teiDBTrimmming: '',
-            enrollmentDownload: '',
-            enrollmentDBTrimming: '',
-            enrollmentDateDownload: '',
-            enrollmentDateDBTrimming: '',
-            updateDownload: '',
-            updateDBTrimming: '',
-            teReservedDownload: '',
-            teReservedDBTrimming: '',
-            eventsDownload: '',
-            eventsDBTrimming: '',
-            eventPeriodDownload: '',
-            eventPeriodDBTrimming: '',
-            specificProgram: {
-                openDialog: false,
-            },
-            specificProgramName: '',
-            specificSettingDownload: '',
-            specificSettingDBTrimming: '',
-            specificTeiDownload: '',
-            specificTeiDBTrimming: '',
-            specificEnrollmentDownload: '',
-            specificEnrollmentDBTrimming: '',
-            specificEnrollmentDateDownload: '',
-            specificEnrollmentDateDBTrimming: '',
-            specificUpdateDownload: '',
-            specificUpdateDBTrimming: '',
-            specificTEReservedDownload: '',
-            specificTEReservedDBTrimming: '',
-            specificEventsDownload: '',
-            specificEventsDBTrimming: '',
-            specificEventPeriodDownload: '',
-            specificEventPeriodDBTrimming: '',
-        }
+        props.d2.i18n.translations['program_name'] = 'Program Name'
+        props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
+
+        props.d2.i18n.translations['edit'] = 'edit'
+        props.d2.i18n.translations['delete'] = 'delete'
+        props.d2.i18n.translations['actions'] = 'actions'
 
         this.nameSpace = undefined
         this.keyName = undefined
@@ -65,7 +34,86 @@ class ProgramSettings extends React.Component {
         this.specificSettings = {}
         this.currentUserData = props.d2.currentUser
         this.userPrograms = this.currentUserData.programs
-        console.log('props program', props, this.currentUserData)
+        console.log('props program', props, this.currentUserData, this)
+        this.openDialog = false
+        this.myRows = [
+            {
+                programName: 'John',
+                sumarySettings: '2014-11-11T21:56:05.469',
+                publicAccess: 'rwrw----',
+                props: this.state,
+            },
+            {
+                programName: 'Tom',
+                sumarySettings: '2015-08-06T13:28:05.512',
+                publicAccess: 'r-rw----',
+                props: this.state,
+            },
+        ]
+
+        //this.multipleCma = this.multipleCma.bind(this)
+    }
+
+    _this = this
+
+    state = {
+        download: '',
+        settingDownload: '',
+        settingDBTrimming: '',
+        teiDownload: '',
+        teiDBTrimmming: '',
+        enrollmentDownload: '',
+        enrollmentDBTrimming: '',
+        enrollmentDateDownload: '',
+        enrollmentDateDBTrimming: '',
+        updateDownload: '',
+        updateDBTrimming: '',
+        teReservedDownload: '',
+        teReservedDBTrimming: '',
+        eventsDownload: '',
+        eventPeriodDownload: '',
+        eventPeriodDBTrimming: '',
+        specificProgram: {
+            openDialog: false,
+        },
+        specificProgramName: '',
+        specificSettingDownload: '',
+        specificSettingDBTrimming: '',
+        eventsDBTrimming: '',
+        specificTeiDownload: '',
+        specificTeiDBTrimming: '',
+        specificEnrollmentDownload: '',
+        specificEnrollmentDBTrimming: '',
+        specificEnrollmentDateDownload: '',
+        specificEnrollmentDateDBTrimming: '',
+        specificUpdateDownload: '',
+        specificUpdateDBTrimming: '',
+        specificTEReservedDownload: '',
+        specificTEReservedDBTrimming: '',
+        specificEventsDownload: '',
+        specificEventsDBTrimming: '',
+        specificEventPeriodDownload: '',
+        specificEventPeriodDBTrimming: '',
+    }
+
+    multipleCma = {
+        edit(props, ...args) {
+            console.log('Edit', ...args)
+            /* this.setState({
+                specificProgram: {
+                    openDialog: true,
+                },
+            }) */
+            // this.openDialog = true
+            console.log(props, props.specificProgram, this.state)
+            //props.specificProgram.openDialog = true
+        },
+        delete(...args) {
+            console.log('Delete', ...args)
+        },
+        remove(...args) {
+            console.log('Remove', ...args)
+        },
     }
 
     handleChange = e => {
@@ -91,6 +139,8 @@ class ProgramSettings extends React.Component {
             },
         })
 
+        this.openDialog = true
+
         this.cleanDialogStates()
 
         console.log({
@@ -105,10 +155,16 @@ class ProgramSettings extends React.Component {
                 openDialog: false,
             },
         })
-        console.log({
+
+        console.log('close', this.openDialog)
+
+        this.openDialog = false
+
+        console.log(this.openDialog)
+        /* console.log({
             action: 'close',
             state: this.state,
-        })
+        }) */
     }
 
     handleSubmit = async e => {
@@ -185,7 +241,7 @@ class ProgramSettings extends React.Component {
         e.preventDefault()
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         await api
             .getNamespaces()
             .then(res => {
@@ -277,12 +333,30 @@ class ProgramSettings extends React.Component {
         })
     }
 
+    handleReset = e => {
+        e.preventDefault()
+        this.setState({
+            settingDownload: '',
+            settingDBTrimming: '',
+            teiDownload: '',
+            teiDBTrimmming: '',
+            enrollmentDownload: '',
+            enrollmentDBTrimming: '',
+            enrollmentDateDownload: '',
+            enrollmentDateDBTrimming: '',
+            updateDownload: '',
+            updateDBTrimming: '',
+            teReservedDownload: '',
+            teReservedDBTrimming: '',
+            eventsDownload: '',
+            eventsDBTrimming: '',
+            eventPeriodDownload: '',
+            eventPeriodDBTrimming: '',
+        })
+    }
+
     handleSubmitDialog = async e => {
         e.preventDefault()
-
-        /* if (Object.keys(this.specificSettings).length) {
-            console.log(this.specificSettings)
-        } */
 
         var specificProgramNameKey = this.state.specificProgramName
         var objData = {
@@ -318,26 +392,6 @@ class ProgramSettings extends React.Component {
         }
 
         this.specificSettings = programData
-        /*
-        const programData = {
-            specificSettings : {
-                nameP: {
-                    date: new Date().toJSON(),
-                    programName: this.state.specificProgramName,
-                    specificSettingDownload: this.state.specificSettingDownload,
-                    specificSettingDBTrimming: this.state.specificSettingDBTrimming,
-                    specificEnrollmentDownload: this.state.specificEnrollmentDownload,
-                    specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
-                    specificEnrollmentDateDownload: this.state.specificEnrollmentDateDownload,
-                    specificEnrollmentDateDBTrimming: this.state.specificEnrollmentDateDBTrimming,
-                    specificUpdateDownload: this.state.specificUpdateDownload,
-                    specificUpdateDBTrimming: this.state.updateDBTrimming,
-                    specificEventDownload: this.state.specificEventDownload,
-                    specificEventDBTrimming: this.state.specificEventDBTrimming,
-                }
-            }
-        }
-*/
         this.programNamesList.push(this.state.specificProgramName)
         console.log(programData)
 
@@ -401,8 +455,13 @@ class ProgramSettings extends React.Component {
                     </p>
 
                     {this.programNamesList.length > 0 ? (
-                        <div>
-                            Tabla
+                        <div className="data__top-margin">
+                            <Table
+                                {...this.state}
+                                columns={['programName', 'sumarySettings']}
+                                rows={this.myRows}
+                                contextMenuActions={this.multipleCma}
+                            />
                             {this.programNamesList.map(program => (
                                 <p key={program}> {program} </p>
                             ))}
@@ -417,7 +476,7 @@ class ProgramSettings extends React.Component {
 
                     <div className="main-content__button__container">
                         <Button
-                            onClick={this.handleSubmit}
+                            onClick={this.handleReset}
                             raised
                             color="primary"
                         >
@@ -426,7 +485,7 @@ class ProgramSettings extends React.Component {
                     </div>
 
                     <Dialog
-                        open={this.state.specificProgram.openDialog}
+                        open={this.openDialog}
                         onClose={this.handleClose}
                         aria-labelledby="form-dialog-title"
                         fullWidth
