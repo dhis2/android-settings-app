@@ -7,7 +7,6 @@ import { TwoPanel } from '@dhis2/d2-ui-core'
 import { Sidebar } from '@dhis2/d2-ui-core'
 import { MainContent } from '@dhis2/d2-ui-core'
 import { Heading } from '@dhis2/d2-ui-core'
-// import { SvgIcon } from '@dhis2/d2-ui-core';
 
 import {
     AndroidSettingsIcon,
@@ -32,24 +31,21 @@ const styles = {
 
 const sections = [
     {
-        key: '1',
+        key: 'android',
         label: 'Android',
         url: 'android',
-        icon: 'adb',
         path: <AndroidSettingsIcon />,
     },
     {
-        key: '2',
+        key: 'programs',
         label: 'Programs',
         url: 'programs',
-        icon: 'apps',
         path: <ProgramsIcon />,
     },
     {
-        key: '3',
+        key: 'dataSets',
         label: 'Data Sets',
         url: 'dataSets',
-        icon: 'description',
         path: <DataSetIcon />,
     },
 ]
@@ -59,6 +55,7 @@ const sections = [
 let currentSection
 let lastSection
 let sidebarRef
+//let pathname
 
 function changeSectionHandler(key, searchText) {
     console.log({
@@ -71,24 +68,42 @@ function changeSectionHandler(key, searchText) {
     }
 }
 
+function changeSearchTextHandler(searchText) {
+    console.log('changeSearch', searchText)
+    if (searchText.toString().trim().length > 0) {
+        if (currentSection !== 'search') {
+            lastSection = currentSection
+        }
+        changeSectionHandler('search', searchText)
+    } else {
+        changeSectionHandler(lastSection)
+    }
+}
+
+function storeRef(ref) {
+    sidebarRef = ref
+}
+
 /* Layout, Sidebar methods */
 
-class Layout extends React.Component {
+/* class Layout extends React.Component {
     constructor(props) {
         super(props)
         console.log({
             props: props,
             d2: props.d2,
         })
-        /* this.state = {
-            d2: props.d2
-        } */
     }
 
-    /* 
-    onChangeSearchText = { changeSearchTextHandler }
-    ref = { storeRef }
-     */
+    componentDidMount() {
+        pathname = window.location.pathname
+        pathname = pathname.split("/")
+        console.log('current mount', this.props.currentSection)
+        currentSection = pathname[1]
+        sidebarRef.state.currentSection = currentSection
+        console.log(pathname[1], currentSection, sidebarRef.state.currentSection, this.props)
+    }
+
     render() {
         return (
             <Router>
@@ -97,7 +112,7 @@ class Layout extends React.Component {
                     <div className="paper__two-panel__side-bar">
                         <Sidebar
                             sections={sections.map(
-                                ({ key, label, url, icon, path }, i) => ({
+                                ({ key, label, url, path }, i) => ({
                                     key,
                                     label,
                                     icon: path,
@@ -106,16 +121,18 @@ class Layout extends React.Component {
                                     ),
                                 })
                             )}
-                            onChangeSection={changeSectionHandler}
                             showSearchField
                             searchFieldLabel="Search settings"
+                            onChangeSection={changeSectionHandler}
+                            currentSection={this.props.currentSection}
+                            onChangeSearchText={changeSearchTextHandler}
+                            ref={storeRef}
                         />
                     </div>
                     <MainContent>
                         <header className="header">
                             <h1 className="App-title paper__two-panel__main-title">
-                                {' '}
-                                Android settings{' '}
+                                Android settings
                             </h1>
                         </header>
                         <Paper className="paper__layout">
@@ -140,11 +157,19 @@ class Layout extends React.Component {
                                     />
                                     <Route
                                         path="/programs"
-                                        component={ProgramSettings}
+                                        render={() => (
+                                            <ProgramSettings
+                                                d2={this.props.d2}
+                                            />
+                                        )}
                                     />
                                     <Route
                                         path="/dataSets"
-                                        component={DataSetSettings}
+                                        render={() => (
+                                            <DataSetSettings
+                                                d2={this.props.d2}
+                                            />
+                                        )}
                                     />
                                 </Switch>
                             </Heading>
@@ -154,6 +179,81 @@ class Layout extends React.Component {
             </Router>
         )
     }
+} */
+
+function Layout(props) {
+    console.log(props)
+    return (
+        <Router>
+            <HeaderBar d2={props.d2} />
+            <TwoPanel mainStyle={styles.twoPanelMain}>
+                <div className="paper__two-panel__side-bar">
+                    <Sidebar
+                        sections={sections.map(
+                            ({ key, label, url, path }, i) => ({
+                                key,
+                                label,
+                                icon: path,
+                                containerElement: (
+                                    <Link to={url}> {label} </Link>
+                                ),
+                            })
+                        )}
+                        showSearchField
+                        searchFieldLabel="Search settings"
+                        onChangeSection={changeSectionHandler}
+                        currentSection={props.currentSection}
+                        onChangeSearchText={changeSearchTextHandler}
+                        ref={storeRef}
+                    />
+                </div>
+                <MainContent>
+                    <header className="header">
+                        <h1 className="App-title paper__two-panel__main-title">
+                            Android settings
+                        </h1>
+                    </header>
+                    <Paper className="paper__layout">
+                        <Heading>
+                            <Switch>
+                                <Route
+                                    path="/"
+                                    exact
+                                    render={() => (
+                                        <AndroidSettings d2={props.d2} />
+                                    )}
+                                />
+                                <Route
+                                    path="/android"
+                                    render={() => (
+                                        <AndroidSettings d2={props.d2} />
+                                    )}
+                                />
+                                <Route
+                                    path="/programs"
+                                    render={() => (
+                                        <ProgramSettings d2={props.d2} />
+                                    )}
+                                />
+                                <Route
+                                    path="/dataSets"
+                                    render={() => (
+                                        <DataSetSettings d2={props.d2} />
+                                    )}
+                                />
+                            </Switch>
+                        </Heading>
+                    </Paper>
+                </MainContent>
+            </TwoPanel>
+        </Router>
+    )
 }
 
 export default Layout
+
+/* render = {() => (
+    <AndroidSettings
+        d2={this.props.d2}
+    />
+)} */
