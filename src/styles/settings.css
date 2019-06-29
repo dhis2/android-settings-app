@@ -1,11 +1,13 @@
 .data-table {
     margin-bottom: 2rem;
+    font-family: Roboto, sans-serif;
 }
 
 .data-table__headers__header {
+    font-family: Roboto, sans-serif;
     vertical-align: middle;
     border-bottom: 2px solid #E0E0E0 !important;
-    color: #757575;
+    color: #757575 !important;
     display: table-cell;
     font-weight: 400;
     text-align: left;
@@ -13,8 +15,10 @@
 }
 
 .data-table__rows__row__column {
+    font-family: Roboto, sans-serif;
     vertical-align: middle;
     border-bottom: 1px solid #E0E0E0 !important;
+    color: #212121;
     border-top: 0;
     display: table-cell;
     text-align: left;
@@ -23,6 +27,7 @@
 }
 
 .main-content__title {
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -32,17 +37,20 @@
 }
 
 .main-content__title__main {
+    font-family: Roboto, sans-serif;
     font-size: 16px;
     margin-bottom: initial;
 }
 
 .main-content__subtitle {
+    font-family: Roboto, sans-serif;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
 }
 
 .main-content__button__container {
+    font-family: Roboto, sans-serif;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -70,6 +78,7 @@
 }
 
 .main-content__button__save {
+    font-family: Roboto, sans-serif;
     margin: 0px;
     width: 100%;
     background-color: rgb(33, 150, 243);
@@ -77,6 +86,7 @@
 }
 
 .main-content__button__cancel {
+    font-family: Roboto, sans-serif;
     margin: 0px 0px 0px 1rem;
     min-width: 88px;
     color: rgb(255, 152, 0);
@@ -86,5 +96,18 @@
 }
 
 .main-content__dialog__button {
+    font-family: Roboto, sans-serif;
     margin-right: 10px;
+}
+
+.d2-ui-table__headers__header {
+    font-size: 12px;
+}
+
+.d2-ui-table__rows__row__column span {
+    font-size: 13px;
+}
+
+.data__top-margin {
+    margin-top: 50px;
 }
