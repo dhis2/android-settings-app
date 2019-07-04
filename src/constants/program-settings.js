@@ -379,3 +379,22 @@ export const SpecificProgram = [
         ],
     },
 ]
+
+export const ProgramSettingsDefault = {
+    settingDownload: 'global',
+    settingDBTrimming: 'global',
+    teiDownload: 500,
+    teiDBTrimmming: 500,
+    enrollmentDownload: 'all',
+    enrollmentDBTrimming: 'all',
+    enrollmentDateDownload: 'any',
+    enrollmentDateDBTrimming: 'any',
+    updateDownload: 'any',
+    updateDBTrimming: 'any',
+    teReservedDownload: 100,
+    teReservedDBTrimming: 100,
+    eventsDownload: 1000,
+    eventsDBTrimming: 1000,
+    eventPeriodDownload: 'any',
+    eventPeriodDBTrimming: 'any',
+}

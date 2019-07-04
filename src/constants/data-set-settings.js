@@ -85,3 +85,8 @@ export const DataSpecificSetting = [
         ],
     },
 ]
+
+export const DataSetSettingsDefault = {
+    periodDSDownload: 'last12Month',
+    periodDSDBTrimming: 'last12Month',
+}

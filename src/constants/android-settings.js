@@ -39,3 +39,12 @@ export const dataOptions = [
         label: '24h',
     },
 ]
+
+export const androidSettingsDefault = {
+    metadataSync: '1d',
+    dataSync: '24h',
+    numberSmsToSent: '',
+    numberSmsConfirmation: '',
+    valuesTEI: '',
+    encryptDB: 'no',
+}
