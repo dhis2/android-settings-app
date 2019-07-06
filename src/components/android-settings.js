@@ -26,6 +26,7 @@ class AndroidSettings extends React.Component {
         this.nameSpace = undefined
         this.keyName = undefined
         this.updateGlobal = false
+        this.errorConfirmation = false
         /* if (this.props.d2) {
             setInstance(props.d2);
         } */
@@ -40,6 +41,7 @@ class AndroidSettings extends React.Component {
         encryptDB: encryptDB,
         isUpdated: false,
         loading: true,
+        errorConfirmation: false,
     }
 
     handleChange = e => {
@@ -51,8 +53,30 @@ class AndroidSettings extends React.Component {
         this.updateGlobal = true
     }
 
+    checkMatchingConfirmation = () => {
+        if (
+            this.state.numberSmsToSent !== '' &&
+            this.state.numberSmsConfirmation !== ''
+        ) {
+            if (
+                this.state.numberSmsToSent !== this.state.numberSmsConfirmation
+            ) {
+                this.errorConfirmation = true
+                this.setState({
+                    errorConfirmation: true,
+                })
+            } else {
+                this.setState({
+                    errorConfirmation: false,
+                })
+                this.errorConfirmation = false
+            }
+        }
+    }
+
     submitData = () => {
         if (!this.updateGlobal) {
+            // console.log('update', this)
             return true
         }
 
@@ -213,6 +237,7 @@ class AndroidSettings extends React.Component {
                     }}
                     value={this.state.numberSmsToSent}
                     onChange={this.handleChange}
+                    onBlur={this.checkMatchingConfirmation}
                 />
 
                 <TextField
@@ -226,6 +251,8 @@ class AndroidSettings extends React.Component {
                     }}
                     value={this.state.numberSmsConfirmation}
                     onChange={this.handleChange}
+                    onBlur={this.checkMatchingConfirmation}
+                    error={this.errorConfirmation}
                 />
 
                 <TextField
