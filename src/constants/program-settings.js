@@ -196,8 +196,8 @@ export const SpecificProgram = [
         option: 'Setting for',
         download: [
             {
-                label: 'Global',
-                value: 'global',
+                label: 'All Org Units',
+                value: 'all',
             },
             {
                 label: 'Per Org Unit',
@@ -206,8 +206,8 @@ export const SpecificProgram = [
         ],
         DBTrimming: [
             {
-                label: 'Global',
-                value: 'global',
+                label: 'All Org Units',
+                value: 'all',
             },
             {
                 label: 'Per Org Unit',
