@@ -5,31 +5,95 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { CircularProgress } from '@dhis2/d2-ui-core'
 import { Button } from '@dhis2/d2-ui-core'
 import api from '../utils/api'
 
 // import { setInstance } from 'd2';
 
-import { metadataOptions, dataOptions } from '../constants/android-settings'
+import {
+    metadataOptions,
+    dataOptions,
+    androidSettingsDefault,
+} from '../constants/android-settings'
+
+const { metadataSync, dataSync, encryptDB } = androidSettingsDefault
 
 class AndroidSettings extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            metadataSync: '',
-            dataSync: '',
-            numberSmsToSent: '',
-            numberSmsConfirmation: '',
-            valuesTEI: '',
-            encryptDB: '',
-            isUpdated: false,
-        }
 
         this.nameSpace = undefined
         this.keyName = undefined
+        this.updateGlobal = false
         /* if (this.props.d2) {
             setInstance(props.d2);
         } */
+    }
+
+    state = {
+        metadataSync: metadataSync,
+        dataSync: dataSync,
+        numberSmsToSent: '',
+        numberSmsConfirmation: '',
+        valuesTEI: '',
+        encryptDB: encryptDB,
+        isUpdated: false,
+        loading: true,
+    }
+
+    handleChange = e => {
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value,
+        })
+
+        this.updateGlobal = true
+    }
+
+    submitData = () => {
+        if (!this.updateGlobal) {
+            return true
+        }
+
+        const androidData = this.state
+        androidData.date = new Date().toJSON()
+
+        if (this.keyName === 'android_settings') {
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'android_settings',
+                androidData
+            ).then(res => {
+                console.log('res update', res)
+            })
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'android_settings',
+                        androidData
+                    )
+                    .then(data => {
+                        console.log('data response update', data)
+                    })
+            )
+        }
+    }
+
+    handleReset = e => {
+        e.preventDefault()
+        this.setState({
+            metadataSync: metadataSync,
+            dataSync: dataSync,
+            numberSmsToSent: '',
+            numberSmsConfirmation: '',
+            valuesTEI: '',
+            encryptDB: encryptDB,
+            isUpdated: false,
+        })
+        this.updateGlobal = true
     }
 
     async componentDidMount() {
@@ -59,9 +123,17 @@ class AndroidSettings extends React.Component {
                                     this.setState({
                                         ...res.value,
                                         isUpdated: true,
+                                        loading: false,
                                     })
                                 }
                             )
+                        } else {
+                            console.log('no data settings')
+
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                            })
                         }
                     })
                 } else if (this.nameSpace === undefined) {
@@ -74,81 +146,20 @@ class AndroidSettings extends React.Component {
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
     }
 
-    onChangeValue = e => {
-        this.setState({
-            ...this.state,
-            [e.target.name]: e.target.value,
-        })
-        console.log({
-            field: e.target.name,
-            value: e.target.value,
-            state: this.state,
-        })
-    }
-
-    handleSubmit = async e => {
-        // e.preventDefault()
-
-        this.onChangeValue(e)
-
-        const androidData = this.state
-        androidData.date = new Date().toJSON()
-
-        console.log(androidData)
-
-        if (this.nameSpace === 'android_settings') {
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'android_settings',
-                androidData
-            )
-                .then(res => {
-                    console.log('res update', res)
-                })
-                .then(data => {
-                    console.log('data response update', data)
-                })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .updateValue(
-                        'ANDROID_SETTING_APP',
-                        'android_settings',
-                        androidData
-                    )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
-            )
-        }
-
-        console.log({
-            state: this.state,
-        })
-    }
-
-    handleReset = e => {
-        e.preventDefault()
-        this.setState({
-            metadataSync: '',
-            dataSync: '',
-            numberSmsToSent: '',
-            numberSmsConfirmation: '',
-            valuesTEI: '',
-            encryptDB: '',
-            isUpdated: false,
-        })
-    }
-
-    handleCancel = e => {
-        e.preventDefault()
+    componentDidUpdate() {
+        this.submitData()
     }
 
     render() {
+        if (this.state.loading === true) {
+            return <CircularProgress small />
+        }
+
         return (
             <form>
                 <TextField
@@ -162,7 +173,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.metadataSync}
-                    onChange={this.handleSubmit}
+                    onChange={this.handleChange}
                 >
                     {metadataOptions.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -182,7 +193,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.dataSync}
-                    onChange={this.handleSubmit}
+                    onChange={this.handleChange}
                 >
                     {dataOptions.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -201,7 +212,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.numberSmsToSent}
-                    onChange={this.handleSubmit}
+                    onChange={this.handleChange}
                 />
 
                 <TextField
@@ -214,7 +225,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.numberSmsConfirmation}
-                    onChange={this.handleSubmit}
+                    onChange={this.handleChange}
                 />
 
                 <TextField
@@ -228,7 +239,7 @@ class AndroidSettings extends React.Component {
                         shrink: true,
                     }}
                     value={this.state.valuesTEI}
-                    onChange={this.handleSubmit}
+                    onChange={this.handleChange}
                 />
 
                 <div>
@@ -237,7 +248,7 @@ class AndroidSettings extends React.Component {
                         aria-label="Encrypt"
                         name="encryptDB"
                         value={this.state.encryptDB}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                         row
                     >
                         <FormControlLabel
