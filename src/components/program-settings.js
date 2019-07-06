@@ -1,20 +1,44 @@
 import React from 'react'
 
 import { Button } from '@dhis2/d2-ui-core'
+import { CircularProgress } from '@dhis2/d2-ui-core'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import TextField from '@material-ui/core/TextField'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 import Table from '@dhis2/d2-ui-table'
 import '@dhis2/d2-ui-core/build/css/Table.css'
 
-import { Program, SpecificProgram } from '../constants/program-settings'
+import {
+    Program,
+    SpecificProgram,
+    ProgramSettingsDefault,
+} from '../constants/program-settings'
 import api from '../utils/api'
 import ProgramTable from './program-table'
 
 const programData = Program
 const specificProgramData = SpecificProgram
+const {
+    settingDownload,
+    settingDBTrimming,
+    teiDownload,
+    teiDBTrimmming,
+    enrollmentDownload,
+    enrollmentDBTrimming,
+    enrollmentDateDownload,
+    enrollmentDateDBTrimming,
+    updateDownload,
+    updateDBTrimming,
+    teReservedDownload,
+    teReservedDBTrimming,
+    eventsDownload,
+    eventsDBTrimming,
+    eventPeriodDownload,
+    eventPeriodDBTrimming,
+} = ProgramSettingsDefault
 
 class ProgramSettings extends React.Component {
     constructor(props) {
@@ -32,54 +56,36 @@ class ProgramSettings extends React.Component {
         this.programNamesList = []
         this.globalSettings = {}
         this.specificSettings = {}
-        this.currentUserData = props.d2.currentUser
-        this.userPrograms = this.currentUserData.programs
-        console.log('props program', props, this.currentUserData, this)
-        this.openDialog = false
-        this.myRows = [
-            {
-                programName: 'John',
-                sumarySettings: '2014-11-11T21:56:05.469',
-                publicAccess: 'rwrw----',
-                props: this.state,
-            },
-            {
-                programName: 'Tom',
-                sumarySettings: '2015-08-06T13:28:05.512',
-                publicAccess: 'r-rw----',
-                props: this.state,
-            },
-        ]
-
-        //this.multipleCma = this.multipleCma.bind(this)
+        this.updateGlobal = false
+        this.specificSettingsRows = []
+        this.programList = []
+        this.programToChange = undefined
+        this.argsRow = undefined
     }
 
-    _this = this
-
     state = {
-        download: '',
-        settingDownload: '',
-        settingDBTrimming: '',
-        teiDownload: '',
-        teiDBTrimmming: '',
-        enrollmentDownload: '',
-        enrollmentDBTrimming: '',
-        enrollmentDateDownload: '',
-        enrollmentDateDBTrimming: '',
-        updateDownload: '',
-        updateDBTrimming: '',
-        teReservedDownload: '',
-        teReservedDBTrimming: '',
-        eventsDownload: '',
-        eventPeriodDownload: '',
-        eventPeriodDBTrimming: '',
+        settingDownload: settingDownload,
+        settingDBTrimming: settingDBTrimming,
+        teiDownload: teiDownload,
+        teiDBTrimmming: teiDBTrimmming,
+        enrollmentDownload: enrollmentDownload,
+        enrollmentDBTrimming: enrollmentDBTrimming,
+        enrollmentDateDownload: enrollmentDateDownload,
+        enrollmentDateDBTrimming: enrollmentDateDBTrimming,
+        updateDownload: updateDownload,
+        updateDBTrimming: updateDBTrimming,
+        teReservedDownload: teReservedDownload,
+        teReservedDBTrimming: teReservedDBTrimming,
+        eventsDownload: eventsDownload,
+        eventsDBTrimming: eventsDBTrimming,
+        eventPeriodDownload: eventPeriodDownload,
+        eventPeriodDBTrimming: eventPeriodDBTrimming,
         specificProgram: {
             openDialog: false,
         },
         specificProgramName: '',
         specificSettingDownload: '',
         specificSettingDBTrimming: '',
-        eventsDBTrimming: '',
         specificTeiDownload: '',
         specificTeiDBTrimming: '',
         specificEnrollmentDownload: '',
@@ -94,89 +100,79 @@ class ProgramSettings extends React.Component {
         specificEventsDBTrimming: '',
         specificEventPeriodDownload: '',
         specificEventPeriodDBTrimming: '',
+        loading: true,
+        isUpdated: false,
+        deleteDialog: {
+            open: false,
+        },
     }
 
-    multipleCma = {
-        edit(props, ...args) {
+    tableActions = {
+        edit: (...args) => {
             console.log('Edit', ...args)
-            /* this.setState({
-                specificProgram: {
-                    openDialog: true,
-                },
-            }) */
-            // this.openDialog = true
-            console.log(props, props.specificProgram, this.state)
-            //props.specificProgram.openDialog = true
+            this.programToChange = args[0].programName
+            const argsData = args[0]
+            this.setState({
+                specificSettingDownload: argsData.specificSettingDownload,
+                specificSettingDBTrimming: argsData.specificSettingDBTrimming,
+                specificTeiDownload: argsData.specificTeiDownload,
+                specificTeiDBTrimming: argsData.specificTeiDBTrimming,
+                specificEnrollmentDownload: argsData.specificEnrollmentDownload,
+                specificEnrollmentDBTrimming:
+                    argsData.specificEnrollmentDBTrimming,
+                specificEnrollmentDateDownload:
+                    argsData.specificEnrollmentDateDownload,
+                specificEnrollmentDateDBTrimming:
+                    argsData.specificEnrollmentDateDBTrimming,
+                specificUpdateDownload: argsData.specificUpdateDownload,
+                specificUpdateDBTrimming: argsData.specificUpdateDBTrimming,
+                specificTEReservedDownload: argsData.specificTEReservedDownload,
+                specificTEReservedDBTrimming:
+                    argsData.specificTEReservedDBTrimming,
+                specificEventsDownload: argsData.specificEventsDownload,
+                specificEventsDBTrimming: argsData.specificEventsDBTrimming,
+                specificEventPeriodDownload:
+                    argsData.specificEventPeriodDownload,
+                specificEventPeriodDBTrimming:
+                    argsData.specificEventPeriodDBTrimming,
+                specificProgramName: argsData.programId,
+            })
+            this.handleClickOpen()
         },
-        delete(...args) {
+        delete: (...args) => {
             console.log('Delete', ...args)
-        },
-        remove(...args) {
-            console.log('Remove', ...args)
+            this.argsRow = args[0]
+            this.setState({
+                deleteDialog: {
+                    open: true,
+                },
+            })
+            this.updateGlobal = false
         },
     }
 
     handleChange = e => {
-        console.log({
-            target: e.target,
-            name: e.target.name,
-            value: e.target.value,
-        })
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
         })
-        console.log({
-            state: this.state,
-            changedValue: e.target.value,
-        })
+        this.updateGlobal = true
     }
 
-    handleClickOpen = () => {
+    handleChangeDialog = e => {
         this.setState({
-            specificProgram: {
-                openDialog: true,
-            },
-        })
-
-        this.openDialog = true
-
-        this.cleanDialogStates()
-
-        console.log({
-            action: 'open',
-            state: this.state,
-        })
-    }
-
-    handleClose = () => {
-        this.setState({
-            specificProgram: {
-                openDialog: false,
-            },
-        })
-
-        console.log('close', this.openDialog)
-
-        this.openDialog = false
-
-        console.log(this.openDialog)
-        /* console.log({
-            action: 'close',
-            state: this.state,
-        }) */
-    }
-
-    handleSubmit = async e => {
-        // e.preventDefault()
-
-        /* this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
-        }) */
+        })
+        this.updateGlobal = false
+    }
 
-        this.handleChange(e)
-
+    submitData = () => {
+        if (!this.updateGlobal) {
+            console.log('update', this)
+            return true
+        }
+        console.log('update', this.specificSettings)
         const globalSettings = {
             date: new Date().toJSON(),
             settingDownload: this.state.settingDownload,
@@ -199,7 +195,7 @@ class ProgramSettings extends React.Component {
 
         this.globalSettings = globalSettings
 
-        const programData = {
+        const programSettingData = {
             globalSettings: {
                 ...this.globalSettings,
             },
@@ -207,14 +203,14 @@ class ProgramSettings extends React.Component {
 
         if (this.keyName === 'program_settings') {
             if (Object.keys(this.specificSettings).length) {
-                programData.specificSettings = this.specificSettings
-                console.log(programData)
+                programSettingData.specificSettings = this.specificSettings
+                console.log(programSettingData)
             }
 
             api.updateValue(
                 'ANDROID_SETTING_APP',
                 'program_settings',
-                programData
+                programSettingData
             ).then(res => {
                 console.log('res update', res)
             })
@@ -224,96 +220,32 @@ class ProgramSettings extends React.Component {
                     .createValue(
                         'ANDROID_SETTING_APP',
                         'program_settings',
-                        programData
+                        programSettingData
                     )
                     .then(data => {
                         console.log('data response update', data)
                     })
             )
         }
-
-        console.log({
-            state: this.state,
-        })
     }
 
-    handleCancel = e => {
-        e.preventDefault()
-    }
-
-    async componentWillMount() {
-        await api
-            .getNamespaces()
-            .then(res => {
-                const nameSpace = res.filter(
-                    name => name === 'ANDROID_SETTING_APP'
-                )
-                nameSpace.length === 0
-                    ? (this.nameSpace = undefined)
-                    : (this.nameSpace = nameSpace[0])
-                this.nameSpace !== undefined
-                    ? this.setState({ isUpdated: true })
-                    : this.setState({ isUpdated: false })
-                if (this.nameSpace === 'ANDROID_SETTING_APP') {
-                    api.getKeys(this.nameSpace).then(res => {
-                        const keyName = res.filter(
-                            name => name === 'program_settings'
-                        )
-                        keyName.length === 0
-                            ? (this.keyName = undefined)
-                            : (this.keyName = keyName[0])
-                        if (this.keyName !== undefined) {
-                            api.getValue(this.nameSpace, this.keyName).then(
-                                res => {
-                                    console.group(res)
-
-                                    if (res.value.globalSettings) {
-                                        this.setState({
-                                            ...res.value.globalSettings,
-                                            isUpdated: true,
-                                        })
-                                        this.globalSettings =
-                                            res.value.globalSettings
-                                    }
-
-                                    if (res.value.specificSettings) {
-                                        this.specificSettings =
-                                            res.value.specificSettings
-                                        this.programNamesList = Object.keys(
-                                            this.specificSettings
-                                        )
-                                        console.log(this.programNamesList)
-                                    }
-                                    console.log(
-                                        this.globalSettings,
-                                        this.specificSettings,
-                                        this.state,
-                                        this.programNamesList
-                                    )
-                                }
-                            )
-                        } else {
-                            console.log('no program settings')
-                        }
-                    })
-                } else if (this.nameSpace === undefined) {
-                    console.log('no hay program setting')
-                    api.createNamespace(
-                        'ANDROID_SETTING_APP',
-                        'program_settings'
-                    ).catch(e => console.log(e))
-                }
-            })
-            .catch(e => {
-                this.setState({
-                    isUpdated: false,
-                })
-            })
-    }
-
-    cleanDialogStates = () => {
+    handleClickOpen = () => {
         this.setState({
-            programName: '',
+            specificProgram: {
+                openDialog: true,
+            },
+        })
+
+        this.updateGlobal = true
+    }
+
+    handleClose = () => {
+        this.programToChange = undefined
+
+        this.setState({
+            specificProgram: {
+                openDialog: false,
+            },
             specificSettingDownload: '',
             specificSettingDBTrimming: '',
             specificTeiDownload: '',
@@ -330,29 +262,10 @@ class ProgramSettings extends React.Component {
             specificEventsDBTrimming: '',
             specificEventPeriodDownload: '',
             specificEventPeriodDBTrimming: '',
+            specificProgramName: '',
         })
-    }
 
-    handleReset = e => {
-        e.preventDefault()
-        this.setState({
-            settingDownload: '',
-            settingDBTrimming: '',
-            teiDownload: '',
-            teiDBTrimmming: '',
-            enrollmentDownload: '',
-            enrollmentDBTrimming: '',
-            enrollmentDateDownload: '',
-            enrollmentDateDBTrimming: '',
-            updateDownload: '',
-            updateDBTrimming: '',
-            teReservedDownload: '',
-            teReservedDBTrimming: '',
-            eventsDownload: '',
-            eventsDBTrimming: '',
-            eventPeriodDownload: '',
-            eventPeriodDBTrimming: '',
-        })
+        this.updateGlobal = false
     }
 
     handleSubmitDialog = async e => {
@@ -362,9 +275,16 @@ class ProgramSettings extends React.Component {
         var objData = {
             ...this.specificSettings,
         }
+
+        const programNameFilter = this.programList.filter(
+            option => option.id === specificProgramNameKey
+        )
+
+        console.log(programNameFilter[0])
+
         objData[specificProgramNameKey] = {
             date: new Date().toJSON(),
-            programName: this.state.specificProgramName,
+            programName: programNameFilter[0].name,
             specificSettingDownload: this.state.specificSettingDownload,
             specificSettingDBTrimming: this.state.specificSettingDBTrimming,
             specificTeiDownload: this.state.specificTeiDownload,
@@ -391,9 +311,49 @@ class ProgramSettings extends React.Component {
             specificSettings: objData,
         }
 
+        const sumarySettings =
+            (this.state.specificTeiDownload === undefined
+                ? 0
+                : this.state.specificTeiDownload) +
+            ' TEI/ ' +
+            (this.state.specificEventsDownload === undefined
+                ? 0
+                : this.state.specificEventsDownload) +
+            ' events per OU, ' +
+            (this.state.specificTEReservedDownload === undefined
+                ? 0
+                : this.state.specificTEReservedDownload) +
+            ' reserved values'
+        const newProgramRow = {
+            programName: programNameFilter[0].name,
+            sumarySettings: sumarySettings,
+            programId: specificProgramNameKey,
+            specificSettingDownload: this.state.specificSettingDownload,
+            specificSettingDBTrimming: this.state.specificSettingDBTrimming,
+            specificTeiDownload: this.state.specificTeiDownload,
+            specificTeiDBTrimming: this.state.specificTeiDBTrimming,
+            specificEnrollmentDownload: this.state.specificEnrollmentDownload,
+            specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
+            specificEnrollmentDateDownload: this.state
+                .specificEnrollmentDateDownload,
+            specificEnrollmentDateDBTrimming: this.state
+                .specificEnrollmentDateDBTrimming,
+            specificUpdateDownload: this.state.specificUpdateDownload,
+            specificUpdateDBTrimming: this.state.updateDBTrimming,
+            specificTEReservedDownload: this.state.specificTEReservedDownload,
+            specificTEReservedDBTrimming: this.state
+                .specificTEReservedDBTrimming,
+            specificEventsDownload: this.state.specificEventsDownload,
+            specificEventsDBTrimming: this.state.specificEventsDBTrimming,
+            specificEventPeriodDownload: this.state.specificEventPeriodDownload,
+            specificEventPeriodDBTrimming: this.state
+                .specificEventPeriodDBTrimming,
+        }
+
         this.specificSettings = programData
         this.programNamesList.push(this.state.specificProgramName)
-        console.log(programData)
+        this.specificSettingsRows.push(newProgramRow)
+        console.log(programData, this.specificSettingsRows)
 
         if (this.keyName === 'program_settings') {
             if (Object.keys(this.globalSettings).length) {
@@ -425,7 +385,278 @@ class ProgramSettings extends React.Component {
         this.handleClose()
     }
 
+    handleReset = e => {
+        e.preventDefault()
+
+        this.setState({
+            settingDownload: settingDownload,
+            settingDBTrimming: settingDBTrimming,
+            teiDownload: teiDownload,
+            teiDBTrimmming: teiDBTrimmming,
+            enrollmentDownload: enrollmentDownload,
+            enrollmentDBTrimming: enrollmentDBTrimming,
+            enrollmentDateDownload: enrollmentDateDownload,
+            enrollmentDateDBTrimming: enrollmentDateDBTrimming,
+            updateDownload: updateDownload,
+            updateDBTrimming: updateDBTrimming,
+            teReservedDownload: teReservedDownload,
+            teReservedDBTrimming: teReservedDBTrimming,
+            eventsDownload: eventsDownload,
+            eventsDBTrimming: eventsDBTrimming,
+            eventPeriodDownload: eventPeriodDownload,
+            eventPeriodDBTrimming: eventPeriodDBTrimming,
+        })
+
+        this.updateGlobal = true
+    }
+
+    handleCloseDelete = () => {
+        console.log('delete', this.argsRow)
+        const data = this.argsRow
+        const oldList = this.specificSettings
+        const rowList = this.specificSettingsRows
+
+        console.log({
+            specificSettings: oldList,
+            args: data,
+        })
+        const newList = {}
+        let newRowList = []
+
+        for (const key in oldList) {
+            if (key !== data.programId) {
+                const dataSet = this.specificSettings[key]
+                newList[key] = dataSet
+            }
+        }
+
+        newRowList = rowList.filter(row => row.programId !== data.programId)
+
+        this.specificSettingsRows = newRowList
+        this.specificSettings = newList
+
+        const programSettingData = {}
+        programSettingData.specificSettings = this.specificSettings
+        programSettingData.globalSettings = this.globalSettings
+
+        console.log({
+            newList: newList,
+            row: newRowList,
+            specificSettings: this.specificSettings,
+            globalSettings: this.globalSettings,
+            programData: programSettingData,
+        })
+
+        this.setState({
+            isUpdated: true,
+            deleteDialog: {
+                open: false,
+            },
+        })
+
+        if (this.keyName === 'program_settings') {
+            if (Object.keys(this.specificSettings).length) {
+                programSettingData.specificSettings = this.specificSettings
+                console.log(programSettingData)
+            }
+
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'program_settings',
+                programSettingData
+            ).then(res => {
+                console.log('res update', res)
+            })
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'program_settings',
+                        programSettingData
+                    )
+                    .then(data => {
+                        console.log('data response update', data)
+                    })
+            )
+        }
+    }
+
+    handleCancelDialog = () => {
+        this.setState({
+            isUpdated: true,
+            deleteDialog: {
+                open: false,
+            },
+        })
+        this.updateGlobal = false
+    }
+
+    async componentDidMount() {
+        await api
+            .getNamespaces()
+            .then(res => {
+                const nameSpace = res.filter(
+                    name => name === 'ANDROID_SETTING_APP'
+                )
+                nameSpace.length === 0
+                    ? (this.nameSpace = undefined)
+                    : (this.nameSpace = nameSpace[0])
+                this.nameSpace !== undefined
+                    ? this.setState({ isUpdated: true })
+                    : this.setState({ isUpdated: false })
+                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                    api.getKeys(this.nameSpace).then(res => {
+                        const keyName = res.filter(
+                            name => name === 'program_settings'
+                        )
+                        keyName.length === 0
+                            ? (this.keyName = undefined)
+                            : (this.keyName = keyName[0])
+                        if (this.keyName !== undefined) {
+                            api.getValue(this.nameSpace, this.keyName).then(
+                                res => {
+                                    console.group(res)
+
+                                    if (res.value.specificSettings) {
+                                        this.specificSettings =
+                                            res.value.specificSettings
+                                        this.programNamesList = Object.keys(
+                                            this.specificSettings
+                                        )
+                                        console.log(this.programNamesList)
+                                        for (const key in this
+                                            .specificSettings) {
+                                            if (
+                                                this.specificSettings.hasOwnProperty(
+                                                    key
+                                                )
+                                            ) {
+                                                const program = this
+                                                    .specificSettings[key]
+                                                console.log(program)
+                                                const sumarySettings =
+                                                    (program.specificTeiDownload ===
+                                                    undefined
+                                                        ? 0
+                                                        : program.specificTeiDownload) +
+                                                    ' TEI/ ' +
+                                                    (program.specificEventsDownload ===
+                                                    undefined
+                                                        ? 0
+                                                        : program.specificEventsDownload) +
+                                                    ' events per OU, ' +
+                                                    (program.specificTEReservedDownload ===
+                                                    undefined
+                                                        ? 0
+                                                        : program.specificTEReservedDownload) +
+                                                    ' reserved values'
+                                                const newProgramRow = {
+                                                    programName:
+                                                        program.programName,
+                                                    sumarySettings: sumarySettings,
+                                                    programId: key,
+                                                    specificSettingDownload:
+                                                        program.specificSettingDownload,
+                                                    specificSettingDBTrimming:
+                                                        program.specificSettingDBTrimming,
+                                                    specificTeiDownload:
+                                                        program.specificTeiDownload,
+                                                    specificTeiDBTrimming:
+                                                        program.specificTeiDBTrimming,
+                                                    specificEnrollmentDownload:
+                                                        program.specificEnrollmentDownload,
+                                                    specificEnrollmentDBTrimming:
+                                                        program.specificEventDBTrimming,
+                                                    specificEnrollmentDateDownload:
+                                                        program.specificEnrollmentDateDownload,
+                                                    specificEnrollmentDateDBTrimming:
+                                                        program.specificEnrollmentDateDBTrimming,
+                                                    specificUpdateDownload:
+                                                        program.specificUpdateDownload,
+                                                    specificUpdateDBTrimming:
+                                                        program.updateDBTrimming,
+                                                    specificTEReservedDownload:
+                                                        program.specificTEReservedDownload,
+                                                    specificTEReservedDBTrimming:
+                                                        program.specificTEReservedDBTrimming,
+                                                    specificEventsDownload:
+                                                        program.specificEventsDownload,
+                                                    specificEventsDBTrimming:
+                                                        program.specificEventsDBTrimming,
+                                                    specificEventPeriodDownload:
+                                                        program.specificEventPeriodDownload,
+                                                    specificEventPeriodDBTrimming:
+                                                        program.specificEventPeriodDBTrimming,
+                                                }
+                                                console.log(newProgramRow)
+                                                this.specificSettingsRows.push(
+                                                    newProgramRow
+                                                )
+                                            }
+                                        }
+                                        this.setState({
+                                            loading: false,
+                                        })
+                                    }
+
+                                    if (res.value.globalSettings) {
+                                        this.setState({
+                                            ...res.value.globalSettings,
+                                            isUpdated: true,
+                                            loading: false,
+                                        })
+                                        this.globalSettings =
+                                            res.value.globalSettings
+                                    }
+                                }
+                            )
+                        } else {
+                            console.log('no program settings')
+
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                            })
+                        }
+                    })
+                } else if (this.nameSpace === undefined) {
+                    console.log('no hay program setting')
+                    api.createNamespace(
+                        'ANDROID_SETTING_APP',
+                        'program_settings'
+                    ).catch(e => console.log(e))
+                }
+            })
+            .catch(e => {
+                this.setState({
+                    isUpdated: false,
+                })
+            })
+
+        this.props.d2.models.program
+            .list({
+                paging: false,
+                level: 1,
+                fields: 'id,name',
+                filter: 'access.data.write:eq:true',
+            })
+            .then(collection => {
+                const programList = collection.toArray()
+                this.programList = programList
+                console.log('program list', this.programList)
+            })
+    }
+
+    componentDidUpdate() {
+        this.submitData()
+    }
+
     render() {
+        if (this.state.loading === true) {
+            return <CircularProgress small />
+        }
+
         return (
             <div>
                 <div>
@@ -441,7 +672,7 @@ class ProgramSettings extends React.Component {
                     <ProgramTable
                         data={programData}
                         states={this.state}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                     />
                 </div>
 
@@ -454,25 +685,44 @@ class ProgramSettings extends React.Component {
                         settings above
                     </p>
 
-                    {this.programNamesList.length > 0 ? (
+                    {this.programNamesList.length > 0 && (
                         <div className="data__top-margin">
                             <Table
                                 {...this.state}
                                 columns={['programName', 'sumarySettings']}
-                                rows={this.myRows}
-                                contextMenuActions={this.multipleCma}
+                                rows={this.specificSettingsRows}
+                                contextMenuActions={this.tableActions}
                             />
-                            {this.programNamesList.map(program => (
-                                <p key={program}> {program} </p>
-                            ))}
                         </div>
-                    ) : (
-                        <p></p>
                     )}
 
                     <Button raised onClick={this.handleClickOpen}>
                         ADD
                     </Button>
+
+                    <Dialog
+                        open={this.state.deleteDialog.open}
+                        onClose={this.handleCloseDelete}
+                    >
+                        <DialogTitle>
+                            {' Are you sure you want to delete this program?'}
+                        </DialogTitle>
+                        <DialogActions style={{ borderTop: 'none' }}>
+                            <Button
+                                onClick={this.handleCloseDelete}
+                                color="primary"
+                            >
+                                Delete
+                            </Button>
+                            <Button
+                                onClick={this.handleCloseDelete}
+                                color="primary"
+                                autoFocus
+                            >
+                                Cancel
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
 
                     <div className="main-content__button__container">
                         <Button
@@ -485,7 +735,7 @@ class ProgramSettings extends React.Component {
                     </div>
 
                     <Dialog
-                        open={this.openDialog}
+                        open={this.state.specificProgram.openDialog}
                         onClose={this.handleClose}
                         aria-labelledby="form-dialog-title"
                         fullWidth
@@ -495,30 +745,37 @@ class ProgramSettings extends React.Component {
                             Values per program
                         </DialogTitle>
                         <DialogContent>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="specificProgramName"
-                                label="Programs"
-                                type="text"
-                                name="specificProgramName"
-                                onChange={this.handleChange}
-                            />
+                            {this.programToChange === undefined ? (
+                                <Select
+                                    value={this.state.specificProgramName}
+                                    onChange={this.handleChangeDialog}
+                                    id="specificProgramName"
+                                    name="specificProgramName"
+                                    style={{ minWidth: '150px' }}
+                                >
+                                    {this.programList.map(option => (
+                                        <MenuItem
+                                            value={option.id}
+                                            key={option.id}
+                                            name={option.name}
+                                        >
+                                            <em> {option.name} </em>
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            ) : (
+                                <p className="main-content__title main-content__title__dialog">
+                                    {this.programToChange}
+                                </p>
+                            )}
 
                             <ProgramTable
                                 data={specificProgramData}
                                 states={this.state}
-                                onChange={this.handleChange}
+                                onChange={this.handleChangeDialog}
                             />
                         </DialogContent>
                         <DialogActions>
-                            <Button
-                                raised
-                                onClick={this.handleClose}
-                                className="main-content__dialog__button"
-                            >
-                                RUN TEST
-                            </Button>
                             <Button
                                 raised
                                 onClick={this.handleClose}
