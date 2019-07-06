@@ -49,6 +49,13 @@
     line-height: 24px;
 }
 
+.main-content__title__dialog {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
 .main-content__button__container {
     font-family: Roboto, sans-serif;
     display: flex;

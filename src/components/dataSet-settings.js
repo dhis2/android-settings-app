@@ -6,7 +6,6 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-//import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Table from '@dhis2/d2-ui-table'
@@ -60,7 +59,7 @@ class DataSetSettings extends React.Component {
         loading: true,
     }
 
-    multipleCma = {
+    tableActions = {
         edit: (...args) => {
             console.log('Edit', args, args[0], this.dataSetToChange)
             this.dataSetToChange = args[0].dataSetName
@@ -71,14 +70,42 @@ class DataSetSettings extends React.Component {
                 specificDataSetName: argsData.dataSetId,
             })
             this.handleClickOpen()
-            console.log(this.state)
         },
-        delete(...args) {
+        delete: (...args) => {
             console.log('Delete', ...args)
-        },
-        remove: (...args) => {
-            this.handleClickOpen()
-            console.log('Remove', this, this.state, ...args)
+            const data = args[0]
+            const oldList = this.specificSettings
+            const rowList = this.specificSettingsRows
+
+            console.log({
+                specificSettings: oldList,
+                args: data,
+            })
+            const newList = {}
+            let newRowList = []
+
+            for (const key in oldList) {
+                if (key !== data.dataSetId) {
+                    const dataSet = this.specificSettings[key]
+                    newList[key] = dataSet
+                }
+            }
+
+            newRowList = rowList.filter(row => row.dataSetId !== data.dataSetId)
+
+            this.specificSettingsRows = newRowList
+            this.specificSettings = newList
+
+            console.log({
+                newList: newList,
+                row: newRowList,
+                specificSettings: this.specificSettings,
+            })
+
+            this.setState({
+                isUpdated: true,
+            })
+            this.updateGlobal = true
         },
     }
 
@@ -122,9 +149,10 @@ class DataSetSettings extends React.Component {
         }
 
         if (this.keyName === 'dataSet_settings') {
+            console.log('specificSettings', this.specificSettings)
             if (Object.keys(this.specificSettings).length) {
                 dataSetData.specificSettings = this.specificSettings
-                console.log(dataSetData)
+                console.log('envio de data', dataSetData)
             }
 
             console.log('submit', dataSetData)
@@ -160,10 +188,6 @@ class DataSetSettings extends React.Component {
         })
 
         this.updateGlobal = false
-        console.log({
-            action: 'open',
-            state: this.state,
-        })
     }
 
     handleClose = () => {
@@ -179,10 +203,6 @@ class DataSetSettings extends React.Component {
         })
 
         this.updateGlobal = false
-        console.log({
-            action: 'close',
-            state: this.state,
-        })
     }
 
     handleSubmitDialog = async e => {
@@ -225,7 +245,7 @@ class DataSetSettings extends React.Component {
         this.specificSettings = dataSetData
         this.dataSetNamesList.push(this.state.specificDataSetName)
         this.specificSettingsRows.push(newDataSetRow)
-        console.log(dataSetData)
+        console.log(dataSetData, this.specificSettings)
 
         if (this.keyName === 'dataSet_settings') {
             if (Object.keys(this.globalSettings).length) {
@@ -410,8 +430,7 @@ class DataSetSettings extends React.Component {
             <div>
                 <div>
                     <p className="main-content__title main-content__title__main">
-                        {' '}
-                        Data Sets global settings{' '}
+                        Data Sets global settings
                     </p>
                     <p className="main-content__title main-content__subtitle">
                         Applies to all Data Sets that an Android user has access
@@ -428,8 +447,7 @@ class DataSetSettings extends React.Component {
 
                 <div>
                     <p className="main-content__title main-content__title__main">
-                        {' '}
-                        Data Sets specific settings{' '}
+                        Data Sets specific settings
                     </p>
                     <p className="main-content__title main-content__subtitle">
                         Data Set settings listed below overwrite the global
@@ -442,7 +460,7 @@ class DataSetSettings extends React.Component {
                                 {...this.state}
                                 columns={['dataSetName', 'sumarySettings']}
                                 rows={this.specificSettingsRows}
-                                contextMenuActions={this.multipleCma}
+                                contextMenuActions={this.tableActions}
                             />
                         </div>
                     )}
@@ -491,9 +509,8 @@ class DataSetSettings extends React.Component {
                                     ))}
                                 </Select>
                             ) : (
-                                <p className="main-content__title main-content__title__main">
-                                    {' '}
-                                    {this.dataSetToChange}{' '}
+                                <p className="main-content__title main-content__title__dialog">
+                                    {this.dataSetToChange}
                                 </p>
                             )}
 
@@ -523,13 +540,3 @@ class DataSetSettings extends React.Component {
 }
 
 export default DataSetSettings
-
-/*     < TextField
-autoFocus
-margin = "dense"
-id = "specificDataSetName"
-label = "Data Set"
-type = "text"
-name = "specificDataSetName"
-onChange = { this.handleChangeDialog }
-    /> */
