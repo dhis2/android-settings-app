@@ -329,12 +329,12 @@ export const SpecificProgram = [
     },
     {
         option: 'TE reserved values',
-        eyDownload: 'specificTEReservedDownload',
+        keyDownload: 'specificTEReservedDownload',
         keyDBTrimming: 'specificTEReservedDBTrimming',
     },
     {
         option: 'Events',
-        eyDownload: 'specificEventsDownload',
+        keyDownload: 'specificEventsDownload',
         keyDBTrimming: 'specificEventsDBTrimming',
     },
     {
