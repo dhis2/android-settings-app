@@ -243,7 +243,7 @@ class AndroidSettings extends React.Component {
                 <TextField
                     id="numberSmsConfirmation"
                     name="numberSmsConfirmation"
-                    label="Confirmation SMS number"
+                    label="Confirm SMS Gateway Phone number"
                     margin="normal"
                     fullWidth
                     InputLabelProps={{
@@ -261,10 +261,12 @@ class AndroidSettings extends React.Component {
                     name="valuesTEI"
                     type="number"
                     margin="normal"
+                    min
                     fullWidth
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    InputProps={{ inputProps: { min: 0, step: 10 } }}
                     value={this.state.valuesTEI}
                     onChange={this.handleChange}
                 />

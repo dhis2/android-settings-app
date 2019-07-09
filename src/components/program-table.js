@@ -77,7 +77,11 @@ class ProgramTable extends React.Component {
                                         id={row.keyDownload}
                                         name={row.keyDownload}
                                         type="number"
-                                        inputProps={{ 'aria-label': 'naked' }}
+                                        inputProps={{
+                                            'aria-label': 'naked',
+                                            min: 0,
+                                            step: 10,
+                                        }}
                                         value={
                                             this.props.states[row.keyDownload]
                                         }
@@ -114,7 +118,11 @@ class ProgramTable extends React.Component {
                                         id={row.keyDBTrimming}
                                         name={row.keyDBTrimming}
                                         type="number"
-                                        inputProps={{ 'aria-label': 'naked' }}
+                                        inputProps={{
+                                            'aria-label': 'naked',
+                                            min: 0,
+                                            step: 10,
+                                        }}
                                         value={
                                             this.props.states[row.keyDBTrimming]
                                         }
