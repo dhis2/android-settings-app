@@ -12,6 +12,7 @@ import Table from '@dhis2/d2-ui-table'
 import '@dhis2/d2-ui-core/build/css/Table.css'
 import api from '../utils/api'
 
+import DialogDelete from '../components/dialog-delete'
 import ProgramTable from './program-table'
 import {
     DataSetting,
@@ -28,7 +29,7 @@ class DataSetSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        props.d2.i18n.translations['data_set_name'] = 'Data Set Name'
+        props.d2.i18n.translations['name'] = 'Data Set Name'
         props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
 
         props.d2.i18n.translations['edit'] = 'edit'
@@ -44,6 +45,8 @@ class DataSetSettings extends React.Component {
         this.specificSettingsRows = []
         this.dataSetList = []
         this.dataSetToChange = undefined
+        this.argsRow = undefined
+        this.dataSetName = undefined
     }
 
     state = {
@@ -57,23 +60,26 @@ class DataSetSettings extends React.Component {
         specificPeriodDSDBTrimming: '',
         specificDataSetName: '',
         loading: true,
+        deleteDialog: {
+            open: false,
+        },
     }
 
     tableActions = {
         edit: (...args) => {
-            console.log('Edit', args, args[0], this.dataSetToChange)
-            this.dataSetToChange = args[0].dataSetName
+            console.log('Edit', args, args[0])
+            this.dataSetToChange = args[0].name
             const argsData = args[0]
             this.setState({
                 specificPeriodDSDownload: argsData.specificPeriodDSDownload,
                 specificPeriodDSDBTrimming: argsData.specificPeriodDSDBTrimming,
-                specificDataSetName: argsData.dataSetId,
+                specificDataSetName: argsData.id,
             })
             this.handleClickOpen()
         },
         delete: (...args) => {
             console.log('Delete', ...args)
-            const data = args[0]
+            /*             const data = args[0]
             const oldList = this.specificSettings
             const rowList = this.specificSettingsRows
 
@@ -85,13 +91,13 @@ class DataSetSettings extends React.Component {
             let newRowList = []
 
             for (const key in oldList) {
-                if (key !== data.dataSetId) {
+                if (key !== data.id) {
                     const dataSet = this.specificSettings[key]
                     newList[key] = dataSet
                 }
             }
 
-            newRowList = rowList.filter(row => row.dataSetId !== data.dataSetId)
+            newRowList = rowList.filter(row => row.id !== data.id)
 
             this.specificSettingsRows = newRowList
             this.specificSettings = newList
@@ -100,12 +106,17 @@ class DataSetSettings extends React.Component {
                 newList: newList,
                 row: newRowList,
                 specificSettings: this.specificSettings,
-            })
+            }) */
+            this.argsRow = args[0]
+            this.dataSetName = args[0].name
 
             this.setState({
+                deleteDialog: {
+                    open: true,
+                },
                 isUpdated: true,
             })
-            this.updateGlobal = true
+            this.updateGlobal = false
         },
     }
 
@@ -118,9 +129,6 @@ class DataSetSettings extends React.Component {
     }
 
     handleChangeDialog = e => {
-        console.log({
-            [e.target.name]: e.target.value,
-        })
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -208,26 +216,20 @@ class DataSetSettings extends React.Component {
     handleSubmitDialog = async e => {
         e.preventDefault()
 
-        var specificProgramNameKey = this.state.specificDataSetName
-        var objData = {
-            ...this.specificSettings,
-        }
+        var specificDataSetNameKey = this.state.specificDataSetName
+        var objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetList.filter(
-            option => option.id === specificProgramNameKey
+            option => option.id === specificDataSetNameKey
         )
 
-        console.log(dataSetNameFilter[0])
+        console.log(dataSetNameFilter[0], this.specificSettings)
 
-        objData[specificProgramNameKey] = {
+        objData[specificDataSetNameKey] = {
             date: new Date().toJSON(),
-            dataSetName: dataSetNameFilter[0].name,
+            name: dataSetNameFilter[0].name,
             specificPeriodDSDownload: this.state.specificPeriodDSDownload,
             specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
-        }
-
-        const dataSetData = {
-            specificSettings: objData,
         }
 
         const sumarySettings =
@@ -235,16 +237,31 @@ class DataSetSettings extends React.Component {
                 ? 0
                 : this.state.specificPeriodDSDownload
         const newDataSetRow = {
-            dataSetName: dataSetNameFilter[0].name,
+            name: dataSetNameFilter[0].name,
             sumarySettings: sumarySettings,
             specificPeriodDSDownload: this.state.specificPeriodDSDownload,
             specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
-            dataSetId: specificProgramNameKey,
+            id: specificDataSetNameKey,
         }
 
-        this.specificSettings = dataSetData
+        this.specificSettings = objData
         this.dataSetNamesList.push(this.state.specificDataSetName)
-        this.specificSettingsRows.push(newDataSetRow)
+
+        const dataSetData = {
+            specificSettings: objData,
+        }
+
+        if (this.dataSetToChange !== undefined) {
+            let newRowList = []
+            const rowList = this.specificSettingsRows
+            newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
+            newRowList.push(newDataSetRow)
+            this.specificSettingsRows = newRowList
+        } else {
+            this.specificSettingsRows.push(newDataSetRow)
+            console.log('rows table', this.specificSettingsRows)
+        }
+
         console.log(dataSetData, this.specificSettings)
 
         if (this.keyName === 'dataSet_settings') {
@@ -285,6 +302,58 @@ class DataSetSettings extends React.Component {
             periodDSDBTrimming: periodDSDBTrimming,
         })
         this.updateGlobal = true
+    }
+
+    handleCloseDelete = () => {
+        console.log('delete', this.argsRow)
+        const data = this.argsRow
+        const oldList = this.specificSettings
+        const rowList = this.specificSettingsRows
+
+        console.log({
+            specificSettings: oldList,
+            args: data,
+        })
+        const newList = {}
+        let newRowList = []
+
+        for (const key in oldList) {
+            if (key !== data.id) {
+                const dataSet = this.specificSettings[key]
+                newList[key] = dataSet
+            }
+        }
+
+        newRowList = rowList.filter(row => row.id !== data.id)
+
+        this.specificSettingsRows = newRowList
+        this.specificSettings = newList
+
+        console.log({
+            newList: newList,
+            row: newRowList,
+            specificSettings: this.specificSettings,
+        })
+
+        this.setState({
+            isUpdated: true,
+            deleteDialog: {
+                open: false,
+            },
+        })
+        this.updateGlobal = true
+    }
+
+    handleCancelDialog = () => {
+        this.argsRow = undefined
+        this.dataSetName = undefined
+        this.setState({
+            isUpdated: true,
+            deleteDialog: {
+                open: false,
+            },
+        })
+        this.updateGlobal = false
     }
 
     async componentDidMount() {
@@ -336,14 +405,13 @@ class DataSetSettings extends React.Component {
                                                         ? 0
                                                         : dataSet.specificPeriodDSDownload
                                                 const newDataSetRow = {
-                                                    dataSetName:
-                                                        dataSet.dataSetName,
+                                                    name: dataSet.name,
                                                     sumarySettings: sumarySettings,
                                                     specificPeriodDSDownload:
                                                         dataSet.specificPeriodDSDownload,
                                                     specificPeriodDSDBTrimming:
                                                         dataSet.specificPeriodDSDBTrimming,
-                                                    dataSetId: key,
+                                                    id: key,
                                                 }
 
                                                 console.log(newDataSetRow)
@@ -389,18 +457,6 @@ class DataSetSettings extends React.Component {
                 this.setState({
                     isUpdated: false,
                 })
-            })
-
-        this.props.d2.models.program
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name',
-                filter: 'access.data.write:eq:true',
-            })
-            .then(collection => {
-                const programList = collection.toArray()
-                console.log('program list', programList)
             })
 
         this.props.d2.models.dataSet
@@ -458,7 +514,7 @@ class DataSetSettings extends React.Component {
                         <div className="data__top-margin">
                             <Table
                                 {...this.state}
-                                columns={['dataSetName', 'sumarySettings']}
+                                columns={['name', 'sumarySettings']}
                                 rows={this.specificSettingsRows}
                                 contextMenuActions={this.tableActions}
                             />
@@ -468,6 +524,14 @@ class DataSetSettings extends React.Component {
                     <Button raised onClick={this.handleClickOpen}>
                         ADD
                     </Button>
+
+                    <DialogDelete
+                        open={this.state.deleteDialog.open}
+                        onHandleDelete={this.handleCloseDelete}
+                        onHandleClose={this.handleCancelDialog}
+                        typeName="data set"
+                        name={this.dataSetName}
+                    />
 
                     <div className="main-content__button__container">
                         <Button
