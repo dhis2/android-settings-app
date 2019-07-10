@@ -261,7 +261,6 @@ class AndroidSettings extends React.Component {
                     name="valuesTEI"
                     type="number"
                     margin="normal"
-                    min
                     fullWidth
                     InputLabelProps={{
                         shrink: true,
