@@ -15,7 +15,7 @@ class DialogDelete extends React.Component {
         return (
             <Dialog open={this.props.open} onClose={this.props.onHandleClose}>
                 <DialogTitle>
-                    Are you sure you want to delete {this.props.name}
+                    Are you sure you want to delete {this.props.name}{' '}
                     {this.props.typeName} settings?
                 </DialogTitle>
                 <DialogActions style={{ borderTop: 'none' }}>
