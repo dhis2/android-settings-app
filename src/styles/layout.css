@@ -20,3 +20,8 @@
 .paper__two-panel__side-bar {
     position: absolute;
 }
+
+.button__right-corner {
+    margin: 40px 0px 10px 0px;
+    float: right;
+}
