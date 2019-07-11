@@ -25,6 +25,16 @@ const dataSpecificSetting = DataSpecificSetting
 
 const { periodDSDownload, periodDSDBTrimming } = DataSetSettingsDefault
 
+const style = {
+    button: {
+        margin: '20px 0px 10px 0px',
+    },
+    container: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+}
+
 class DataSetSettings extends React.Component {
     constructor(props) {
         super(props)
@@ -548,9 +558,15 @@ class DataSetSettings extends React.Component {
                         </div>
                     )}
 
-                    <Button raised onClick={this.handleClickOpen}>
-                        ADD
-                    </Button>
+                    <div style={style.container}>
+                        <Button
+                            raised
+                            style={style.button}
+                            onClick={this.handleClickOpen}
+                        >
+                            ADD
+                        </Button>
+                    </div>
 
                     <DialogDelete
                         open={this.state.deleteDialog.open}

@@ -41,6 +41,16 @@ const {
     eventPeriodDBTrimming,
 } = ProgramSettingsDefault
 
+const style = {
+    button: {
+        margin: '20px 0px 10px 0px',
+    },
+    container: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+}
+
 class ProgramSettings extends React.Component {
     constructor(props) {
         super(props)
@@ -714,9 +724,15 @@ class ProgramSettings extends React.Component {
                         </div>
                     )}
 
-                    <Button raised onClick={this.handleClickOpen}>
-                        ADD
-                    </Button>
+                    <div style={style.container}>
+                        <Button
+                            raised
+                            style={style.button}
+                            onClick={this.handleClickOpen}
+                        >
+                            ADD
+                        </Button>
+                    </div>
 
                     <DialogDelete
                         open={this.state.deleteDialog.open}
