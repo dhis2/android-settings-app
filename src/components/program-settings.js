@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Table from '@dhis2/d2-ui-table'
 import '@dhis2/d2-ui-core/build/css/Table.css'
 
+import DialogDelete from '../components/dialog-delete'
 import {
     Program,
     SpecificProgram,
@@ -44,7 +45,7 @@ class ProgramSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        props.d2.i18n.translations['program_name'] = 'Program Name'
+        props.d2.i18n.translations['name'] = 'Program Name'
         props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
 
         props.d2.i18n.translations['edit'] = 'edit'
@@ -59,8 +60,10 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
         this.specificSettingsRows = []
         this.programList = []
+        this.programListComplete = []
         this.programToChange = undefined
         this.argsRow = undefined
+        this.programName = undefined
     }
 
     state = {
@@ -110,7 +113,7 @@ class ProgramSettings extends React.Component {
     tableActions = {
         edit: (...args) => {
             console.log('Edit', ...args)
-            this.programToChange = args[0].programName
+            this.programToChange = args[0].name
             const argsData = args[0]
             this.setState({
                 specificSettingDownload: argsData.specificSettingDownload,
@@ -135,17 +138,20 @@ class ProgramSettings extends React.Component {
                     argsData.specificEventPeriodDownload,
                 specificEventPeriodDBTrimming:
                     argsData.specificEventPeriodDBTrimming,
-                specificProgramName: argsData.programId,
+                specificProgramName: argsData.id,
             })
             this.handleClickOpen()
         },
         delete: (...args) => {
             console.log('Delete', ...args)
             this.argsRow = args[0]
+            this.programName = args[0].name
+
             this.setState({
                 deleteDialog: {
                     open: true,
                 },
+                isUpdated: true,
             })
             this.updateGlobal = false
         },
@@ -226,17 +232,29 @@ class ProgramSettings extends React.Component {
                         console.log('data response update', data)
                     })
             )
+            console.log('submit', programSettingData)
         }
     }
 
     handleClickOpen = () => {
+        if (this.programNamesList.length > 0) {
+            const programListComplete = this.programListComplete
+            const programUsedlist = this.programNamesList
+
+            const dataSetNameFilter = programListComplete.filter(
+                item => !programUsedlist.includes(item.id)
+            )
+            this.programList = dataSetNameFilter
+            console.log('nueva lista', this.programList)
+        }
+
         this.setState({
             specificProgram: {
                 openDialog: true,
             },
         })
 
-        this.updateGlobal = true
+        this.updateGlobal = false
     }
 
     handleClose = () => {
@@ -272,19 +290,17 @@ class ProgramSettings extends React.Component {
         e.preventDefault()
 
         var specificProgramNameKey = this.state.specificProgramName
-        var objData = {
-            ...this.specificSettings,
-        }
+        var objData = this.specificSettings
 
-        const programNameFilter = this.programList.filter(
+        const programNameFilter = this.programListComplete.filter(
             option => option.id === specificProgramNameKey
         )
 
-        console.log(programNameFilter[0])
+        console.log(programNameFilter[0], this.specificSettings)
 
         objData[specificProgramNameKey] = {
             date: new Date().toJSON(),
-            programName: programNameFilter[0].name,
+            name: programNameFilter[0].name,
             specificSettingDownload: this.state.specificSettingDownload,
             specificSettingDBTrimming: this.state.specificSettingDBTrimming,
             specificTeiDownload: this.state.specificTeiDownload,
@@ -305,10 +321,6 @@ class ProgramSettings extends React.Component {
             specificEventPeriodDownload: this.state.specificEventPeriodDownload,
             specificEventPeriodDBTrimming: this.state
                 .specificEventPeriodDBTrimming,
-        }
-
-        const programData = {
-            specificSettings: objData,
         }
 
         const sumarySettings =
@@ -325,9 +337,9 @@ class ProgramSettings extends React.Component {
                 : this.state.specificTEReservedDownload) +
             ' reserved values'
         const newProgramRow = {
-            programName: programNameFilter[0].name,
+            name: programNameFilter[0].name,
             sumarySettings: sumarySettings,
-            programId: specificProgramNameKey,
+            id: specificProgramNameKey,
             specificSettingDownload: this.state.specificSettingDownload,
             specificSettingDBTrimming: this.state.specificSettingDBTrimming,
             specificTeiDownload: this.state.specificTeiDownload,
@@ -350,10 +362,33 @@ class ProgramSettings extends React.Component {
                 .specificEventPeriodDBTrimming,
         }
 
-        this.specificSettings = programData
+        this.specificSettings = objData
+
+        const programData = {
+            specificSettings: objData,
+        }
+
+        if (this.programToChange !== undefined) {
+            let newRowList = []
+            const rowList = this.specificSettingsRows
+            newRowList = rowList.filter(row => row.id !== newProgramRow.id)
+            newRowList.push(newProgramRow)
+            this.specificSettingsRows = newRowList
+
+            const nameList = this.programNamesList
+            const newNameList = nameList.filter(
+                name => name !== this.state.specificProgramName
+            )
+
+            this.programNamesList = newNameList
+            console.log('nameList', this.programNamesList)
+        } else {
+            this.specificSettingsRows.push(newProgramRow)
+            console.log('rows table', this.specificSettingsRows)
+        }
+
         this.programNamesList.push(this.state.specificProgramName)
-        this.specificSettingsRows.push(newProgramRow)
-        console.log(programData, this.specificSettingsRows)
+        console.log(programData, this.specificSettings)
 
         if (this.keyName === 'program_settings') {
             if (Object.keys(this.globalSettings).length) {
@@ -415,36 +450,42 @@ class ProgramSettings extends React.Component {
         const data = this.argsRow
         const oldList = this.specificSettings
         const rowList = this.specificSettingsRows
+        const programNamesUsed = this.programNamesList
+
+        const programListNew = programNamesUsed.filter(
+            program => program !== data.id
+        )
+        this.programNamesList = programListNew
 
         console.log({
             specificSettings: oldList,
             args: data,
+            listName: this.programNamesList,
         })
         const newList = {}
         let newRowList = []
 
         for (const key in oldList) {
-            if (key !== data.programId) {
+            if (key !== data.id) {
                 const dataSet = this.specificSettings[key]
                 newList[key] = dataSet
             }
         }
 
-        newRowList = rowList.filter(row => row.programId !== data.programId)
+        newRowList = rowList.filter(row => row.id !== data.id)
 
         this.specificSettingsRows = newRowList
         this.specificSettings = newList
 
-        const programSettingData = {}
+        /* const programSettingData = {}
         programSettingData.specificSettings = this.specificSettings
-        programSettingData.globalSettings = this.globalSettings
+        programSettingData.globalSettings = this.globalSettings */
 
         console.log({
             newList: newList,
             row: newRowList,
             specificSettings: this.specificSettings,
             globalSettings: this.globalSettings,
-            programData: programSettingData,
         })
 
         this.setState({
@@ -454,35 +495,12 @@ class ProgramSettings extends React.Component {
             },
         })
 
-        if (this.keyName === 'program_settings') {
-            if (Object.keys(this.specificSettings).length) {
-                programSettingData.specificSettings = this.specificSettings
-                console.log(programSettingData)
-            }
-
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'program_settings',
-                programSettingData
-            ).then(res => {
-                console.log('res update', res)
-            })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'program_settings',
-                        programSettingData
-                    )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
-            )
-        }
+        this.updateGlobal = true
     }
 
     handleCancelDialog = () => {
+        this.argsRow = undefined
+        this.programName = undefined
         this.setState({
             isUpdated: true,
             deleteDialog: {
@@ -552,10 +570,9 @@ class ProgramSettings extends React.Component {
                                                         : program.specificTEReservedDownload) +
                                                     ' reserved values'
                                                 const newProgramRow = {
-                                                    programName:
-                                                        program.programName,
+                                                    name: program.name,
                                                     sumarySettings: sumarySettings,
-                                                    programId: key,
+                                                    id: key,
                                                     specificSettingDownload:
                                                         program.specificSettingDownload,
                                                     specificSettingDBTrimming:
@@ -644,6 +661,7 @@ class ProgramSettings extends React.Component {
             .then(collection => {
                 const programList = collection.toArray()
                 this.programList = programList
+                this.programListComplete = programList
                 console.log('program list', this.programList)
             })
     }
@@ -689,7 +707,7 @@ class ProgramSettings extends React.Component {
                         <div className="data__top-margin">
                             <Table
                                 {...this.state}
-                                columns={['programName', 'sumarySettings']}
+                                columns={['name', 'sumarySettings']}
                                 rows={this.specificSettingsRows}
                                 contextMenuActions={this.tableActions}
                             />
@@ -700,29 +718,13 @@ class ProgramSettings extends React.Component {
                         ADD
                     </Button>
 
-                    <Dialog
+                    <DialogDelete
                         open={this.state.deleteDialog.open}
-                        onClose={this.handleCloseDelete}
-                    >
-                        <DialogTitle>
-                            {' Are you sure you want to delete this program?'}
-                        </DialogTitle>
-                        <DialogActions style={{ borderTop: 'none' }}>
-                            <Button
-                                onClick={this.handleCloseDelete}
-                                color="primary"
-                            >
-                                Delete
-                            </Button>
-                            <Button
-                                onClick={this.handleCloseDelete}
-                                color="primary"
-                                autoFocus
-                            >
-                                Cancel
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                        onHandleDelete={this.handleCloseDelete}
+                        onHandleClose={this.handleCancelDialog}
+                        typeName="program"
+                        name={this.programName}
+                    />
 
                     <div className="main-content__button__container">
                         <Button
@@ -795,3 +797,27 @@ class ProgramSettings extends React.Component {
 }
 
 export default ProgramSettings
+
+/* < Dialog
+open = { this.state.deleteDialog.open }
+onClose = { this.handleCloseDelete }
+    >
+    <DialogTitle>
+        {' Are you sure you want to delete this program?'}
+    </DialogTitle>
+    <DialogActions style={{ borderTop: 'none' }}>
+        <Button
+            onClick={this.handleCloseDelete}
+            color="primary"
+        >
+            Delete
+                            </Button>
+        <Button
+            onClick={this.handleCloseDelete}
+            color="primary"
+            autoFocus
+        >
+            Cancel
+                            </Button>
+    </DialogActions>
+                    </Dialog > */

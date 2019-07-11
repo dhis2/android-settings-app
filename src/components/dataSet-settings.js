@@ -231,7 +231,7 @@ class DataSetSettings extends React.Component {
         var specificDataSetNameKey = this.state.specificDataSetName
         var objData = this.specificSettings
 
-        const dataSetNameFilter = this.dataSetList.filter(
+        const dataSetNameFilter = this.dataSetListComplete.filter(
             option => option.id === specificDataSetNameKey
         )
 
