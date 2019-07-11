@@ -44,6 +44,7 @@ class DataSetSettings extends React.Component {
         this.updateGlobal = false
         this.specificSettingsRows = []
         this.dataSetList = []
+        this.dataSetListComplete = []
         this.dataSetToChange = undefined
         this.argsRow = undefined
         this.dataSetName = undefined
@@ -189,6 +190,17 @@ class DataSetSettings extends React.Component {
     }
 
     handleClickOpen = () => {
+        if (this.dataSetNamesList.length > 0) {
+            const dataSetListComplete = this.dataSetListComplete
+            const dataUsedlist = this.dataSetNamesList
+
+            const dataSetNameFilter = dataSetListComplete.filter(
+                item => !dataUsedlist.includes(item.id)
+            )
+            this.dataSetList = dataSetNameFilter
+            console.log('nueva lista', this.dataSetList)
+        }
+
         this.setState({
             specificDataSet: {
                 openDialog: true,
@@ -245,7 +257,6 @@ class DataSetSettings extends React.Component {
         }
 
         this.specificSettings = objData
-        this.dataSetNamesList.push(this.state.specificDataSetName)
 
         const dataSetData = {
             specificSettings: objData,
@@ -257,10 +268,20 @@ class DataSetSettings extends React.Component {
             newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
             newRowList.push(newDataSetRow)
             this.specificSettingsRows = newRowList
+
+            const nameList = this.dataSetNamesList
+            const newNameList = nameList.filter(
+                name => name !== this.state.specificDataSetName
+            )
+
+            this.dataSetNamesList = newNameList
+            console.log('nameList', this.dataSetNamesList)
         } else {
             this.specificSettingsRows.push(newDataSetRow)
             console.log('rows table', this.specificSettingsRows)
         }
+
+        this.dataSetNamesList.push(this.state.specificDataSetName)
 
         console.log(dataSetData, this.specificSettings)
 
@@ -309,10 +330,15 @@ class DataSetSettings extends React.Component {
         const data = this.argsRow
         const oldList = this.specificSettings
         const rowList = this.specificSettingsRows
+        const dataNamesUsed = this.dataSetNamesList
+
+        const dataListNew = dataNamesUsed.filter(dataSet => dataSet !== data.id)
+        this.dataSetNamesList = dataListNew
 
         console.log({
             specificSettings: oldList,
             args: data,
+            listName: this.dataSetNamesList,
         })
         const newList = {}
         let newRowList = []
@@ -469,6 +495,7 @@ class DataSetSettings extends React.Component {
             .then(collection => {
                 const dataSetList = collection.toArray()
                 this.dataSetList = dataSetList
+                this.dataSetListComplete = dataSetList
                 console.log('data set list', this.dataSetList)
             })
     }
