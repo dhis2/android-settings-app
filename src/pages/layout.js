@@ -12,6 +12,7 @@ import {
     AndroidSettingsIcon,
     ProgramsIcon,
     DataSetIcon,
+    TestRun,
 } from '../components/icons-svg'
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
@@ -19,6 +20,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import AndroidSettings from '../components/android-settings'
 import ProgramSettings from '../components/program-settings'
 import DataSetSettings from '../components/dataSet-settings'
+import TestAndroid from '../components/test-android'
 
 import '../styles/settings.css'
 import '../styles/layout.css'
@@ -47,6 +49,12 @@ const sections = [
         label: 'Data Sets',
         url: 'dataSets',
         path: <DataSetIcon />,
+    },
+    {
+        key: 'tesAndroid',
+        label: 'Test Android Login ',
+        url: 'testAndroid',
+        path: <TestRun />,
     },
 ]
 
@@ -240,6 +248,10 @@ function Layout(props) {
                                     render={() => (
                                         <DataSetSettings d2={props.d2} />
                                     )}
+                                />
+                                <Route
+                                    path="/testAndroid"
+                                    render={() => <TestAndroid d2={props.d2} />}
                                 />
                             </Switch>
                         </Heading>
