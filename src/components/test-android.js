@@ -20,7 +20,6 @@ const style = {
 class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.userGroupOptions = []
         this.usersOptions = []
         this.usersOptionsComplete = []
@@ -28,11 +27,11 @@ class TestAndroid extends React.Component {
         this.userGroupIds = []
         this.userSelected = undefined
         this.userSelectedId = undefined
-        this.organisationUnitsNumber = undefined
-        this.organisationUnitSearchNumber = undefined
-        this.datasetNumber = undefined
-        this.programNumber = undefined
-        this.programRuleNumber = undefined
+        this.organisationUnitsNumber = 0
+        this.organisationUnitSearchNumber = 0
+        this.datasetNumber = 0
+        this.programNumber = 0
+        this.programRuleNumber = 0
         this.tooltipOUCapture = undefined
         this.tooltipOUSearch = undefined
         this.tooltipDataSet = undefined
@@ -52,11 +51,11 @@ class TestAndroid extends React.Component {
         this.userGroupIds = []
         this.userSelected = undefined
         this.userSelectedId = undefined
-        this.organisationUnitsNumber = undefined
-        this.organisationUnitSearchNumber = undefined
-        this.datasetNumber = undefined
-        this.programNumber = undefined
-        this.programRuleNumber = undefined
+        this.organisationUnitsNumber = 0
+        this.organisationUnitSearchNumber = 0
+        this.datasetNumber = 0
+        this.programNumber = 0
+        this.programRuleNumber = 0
     }
 
     createTooltipText = () => {
@@ -131,19 +130,31 @@ class TestAndroid extends React.Component {
         })
     }
 
-    getUserData = () => {
+    getUserData = async () => {
         const organisationUnits = this.userSelected.organisationUnits
             .valuesContainerMap
 
+        const organisationUnitSearch = this.userSelected
+            .teiSearchOrganisationUnits.valuesContainerMap
+
         const organisationUnitList = []
-        const dataSetList = []
-        const programsList = []
-        const programsId = []
-        const organisationUnitSearch = []
-        const programRuleList = []
+        //const dataSetList = []
+        let programsList = []
+        const programsIdAccess = []
+        const organisationUnitSearchList = []
+        // const programRuleList = []
+        const promisesOrganisationUnits = []
+        const organisationUnitCapture = []
+        const promisesOrganisationUnitsSearch = []
+        const organisationUnitSearchCollection = []
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
+            console.log(`key: ${key}, value: ${value}`)
+        })
+
+        organisationUnitSearch.forEach((value, key) => {
+            organisationUnitSearchList.push(key)
             console.log(`key: ${key}, value: ${value}`)
         })
         console.log(
@@ -153,102 +164,152 @@ class TestAndroid extends React.Component {
             organisationUnitList
         )
 
-        this.props.d2.models.organisationUnits
-            .list({
-                paging: false,
-                filter: `id:in:[${organisationUnitList}]`,
-            })
-            .then(data => {
-                const orgUnitData = data.toArray()
-                this.organisationUnitsNumber = orgUnitData.length
-                console.log(orgUnitData, this.organisationUnitsNumber)
-                for (const i in orgUnitData) {
-                    const dataSet = orgUnitData[i].dataSets.valuesContainerMap
-                    const programs = orgUnitData[i].programs.valuesContainerMap
-
-                    console.log(
-                        'data para program y dataset',
-                        programs,
-                        dataSet
-                    )
-
-                    dataSet.forEach((value, key) => {
-                        dataSetList.push(key)
-                        console.log(`key: ${key}, value: ${value}`)
+        if (organisationUnitSearchList.length > 0) {
+            organisationUnitSearchList.map(orgUnitSearch => {
+                promisesOrganisationUnitsSearch.push(
+                    this.props.d2.models.organisationUnits.list({
+                        paging: false,
+                        filter: `path:like:${orgUnitSearch}`,
                     })
-
-                    if (programs.size > 0) {
-                        programs.forEach((value, key) => {
-                            const program = {
-                                id: key,
-                                value: value,
-                            }
-                            programsList.push(program)
-                            programsId.push(key)
-                            console.log(`key: ${key}, value: ${value}`)
-                        })
-
-                        this.props.d2.models.program
-                            .list({
-                                paging: false,
-                                filter: `id:in:[${programsId}]`,
-                            })
-                            .then(data => {
-                                const programsListForOUSearch = data.toArray()
-                                /* for (let j in programsListForOUSearch) {
-                                let orgUnitSearch = programsListForOUSearch[j].organisationUnits.valuprogramsListForOUSearchesContainerMap
-                                orgUnitSearch.forEach((value, key) => {
-                                    if (organisationUnitSearch.length > 0) {
-                                        organisationUnitSearch.filter( ouSearch => ouSearch !== key )
-                                    }
-                                    organisationUnitSearch.push(key)
-                                })
-                            } */
-                                console.log(
-                                    'programas',
-                                    programsListForOUSearch
-                                )
-                            })
-                    }
-
-                    this.organisationUnitSearchNumber =
-                        organisationUnitSearch.length > 0
-                            ? organisationUnitSearch.length
-                            : 0
-                    this.datasetNumber =
-                        dataSetList.length > 0 ? dataSetList.length : 0
-                    this.programNumber =
-                        programsList.length > 0 ? programsList.length : 0
-                    this.programRuleNumber =
-                        programRuleList.length > 0 ? programRuleList.length : 0
-                }
-                console.log(
-                    'data OU',
-                    data.toArray()[0],
-                    data.toArray(),
-                    dataSetList,
-                    programsList,
-                    this.datasetNumber,
-                    this.programNumber,
-                    this.organisationUnitsNumber
                 )
-
-                this.setState({
-                    loading: false,
-                    runTest: true,
-                })
             })
 
-        /* if (programsList.length > 0) {
-            this.props.d2.models.program.list({
-                paging: false,
-                filter: `id:in:[${programsList}]`
+            await Promise.all(promisesOrganisationUnitsSearch).then(data => {
+                console.log('data promises search', data, data[0].toArray())
+                if (data.length > 0) {
+                    data.map(orgUnitData => {
+                        orgUnitData.toArray().map(ousearch => {
+                            organisationUnitSearchCollection.push(ousearch)
+                        })
+                    })
+                    console.log(organisationUnitSearchCollection)
+                    this.organisationUnitSearchNumber =
+                        organisationUnitSearchCollection.length
+                }
             })
-            .then (data => {
-                let programs = data.toArray()
-                console.log(programs)
+        }
+
+        if (organisationUnitList.length > 0) {
+            organisationUnitList.map(orgUnit => {
+                promisesOrganisationUnits.push(
+                    this.props.d2.models.organisationUnits.list({
+                        paging: false,
+                        filter: `path:like:${orgUnit}`,
+                    })
+                )
             })
-        } */
+
+            await Promise.all(promisesOrganisationUnits).then(data => {
+                console.log('data promises ou', data, data[0].toArray())
+                if (data.length > 0) {
+                    data.map(orgUnitData => {
+                        orgUnitData.toArray().map(oucapture => {
+                            organisationUnitCapture.push(oucapture)
+                            const programPerOU = []
+                            if (
+                                oucapture.programs.valuesContainerMap.size > 0
+                            ) {
+                                oucapture.programs.valuesContainerMap.forEach(
+                                    key => {
+                                        programPerOU.push(key)
+                                    }
+                                )
+                                console.log(programPerOU)
+                                oucapture.programs.valuesContainerMap.forEach(
+                                    (value, key) => {
+                                        console.log('key program', key)
+                                        if (programsList.length >= 1) {
+                                            const programIds = programsList.filter(
+                                                program => program !== key
+                                            )
+                                            //programsList.filter(program => program)
+                                            programsList = programIds
+                                            programsList.push(key)
+                                            console.log({
+                                                status: 'filtrado lenght > 1',
+                                                key: key,
+                                                programIdListAfterFilter: programIds,
+                                                programListAfterKey: programsList,
+                                            })
+                                        } else {
+                                            programsList.push(key)
+                                            console.log(
+                                                'program 1',
+                                                programsList
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+
+                            console.log(programPerOU)
+                        })
+                    })
+                    console.log(organisationUnitCapture, data.length)
+                    this.organisationUnitsNumber =
+                        organisationUnitCapture.length
+                }
+
+                if (programsList.length > 0) {
+                    this.props.d2.models.program
+                        .list({
+                            paging: false,
+                            filter: `id:in:[${programsList}]`,
+                        })
+                        .then(data => {
+                            const programs = data.toArray()
+                            programs.forEach(program => {
+                                switch (program.publicAccess) {
+                                    case 'r-------':
+                                        // if user userGroupAccess, if user userAccess
+                                        console.log(
+                                            'access r',
+                                            program,
+                                            programsIdAccess
+                                        )
+                                        break
+                                    case 'rw------':
+                                        programsIdAccess.push(program)
+                                        console.log(
+                                            'access rw',
+                                            program,
+                                            programsIdAccess
+                                        )
+                                        break
+                                    case 'rwr-----':
+                                        programsIdAccess.push(program)
+                                        break
+                                    case 'rwrw----':
+                                        programsIdAccess.push(program)
+                                        break
+                                    case 'rwrwr---':
+                                        programsIdAccess.push(program)
+                                        break
+                                    case 'rwrwrw--':
+                                        programsIdAccess.push(program)
+                                        break
+                                    case 'rwrwrwr-':
+                                        programsIdAccess.push(program)
+                                        break
+                                    case 'rwrwrwrw':
+                                        programsIdAccess.push(program)
+                                        break
+                                    default:
+                                        break
+                                }
+                            })
+
+                            this.programNumber = programsIdAccess.length
+                            console.log('programs list data', programsIdAccess)
+
+                            this.setState({
+                                loading: false,
+                                runTest: true,
+                            })
+                        })
+                }
+            })
+        }
     }
 
     handleRun = () => {
@@ -270,11 +331,11 @@ class TestAndroid extends React.Component {
             })
             .then(collection => {
                 const userGroupOptions = collection.toArray()
-                for (const i in userGroupOptions) {
+                /* for (const i in userGroupOptions) {
                     console.log(userGroupOptions[i].users)
-                    /*  userGroupOptions[i].users
-                    .then(users => (console.log("users", users))) */
-                }
+                     userGroupOptions[i].users
+                    .then(users => (console.log("users", users)))
+                } */
                 this.userGroupOptions = userGroupOptions
                 this.userGroupOptionsComplete = userGroupOptions
                 console.log('data set list', this.userGroupOptionsComplete)
