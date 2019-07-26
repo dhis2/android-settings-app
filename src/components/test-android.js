@@ -138,7 +138,7 @@ class TestAndroid extends React.Component {
             .teiSearchOrganisationUnits.valuesContainerMap
 
         const organisationUnitList = []
-        //const dataSetList = []
+        let dataSetList = []
         let programsList = []
         const programsIdAccess = []
         const organisationUnitSearchList = []
@@ -147,6 +147,7 @@ class TestAndroid extends React.Component {
         const organisationUnitCapture = []
         const promisesOrganisationUnitsSearch = []
         const organisationUnitSearchCollection = []
+        const datasetsIdAccess = []
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
@@ -206,6 +207,7 @@ class TestAndroid extends React.Component {
                         orgUnitData.toArray().map(oucapture => {
                             organisationUnitCapture.push(oucapture)
                             const programPerOU = []
+                            const datasetPerOU = []
                             if (
                                 oucapture.programs.valuesContainerMap.size > 0
                             ) {
@@ -242,7 +244,33 @@ class TestAndroid extends React.Component {
                                 )
                             }
 
-                            console.log(programPerOU)
+                            if (
+                                oucapture.dataSets.valuesContainerMap.size > 0
+                            ) {
+                                oucapture.dataSets.valuesContainerMap.forEach(
+                                    key => {
+                                        datasetPerOU.push(key)
+                                    }
+                                )
+
+                                oucapture.dataSets.valuesContainerMap.forEach(
+                                    (value, key) => {
+                                        if (dataSetList.length >= 1) {
+                                            const datasetIds = dataSetList.filter(
+                                                dataset => dataset !== key
+                                            )
+                                            dataSetList = datasetIds
+                                            dataSetList.push(key)
+                                        } else {
+                                            dataSetList.push(key)
+                                        }
+                                    }
+                                )
+                            }
+                            console.log({
+                                dataset: dataSetList,
+                                program: programsList,
+                            })
                         })
                     })
                     console.log(organisationUnitCapture, data.length)
@@ -250,15 +278,67 @@ class TestAndroid extends React.Component {
                         organisationUnitCapture.length
                 }
 
-                if (programsList.length > 0) {
-                    this.props.d2.models.program
-                        .list({
+                if ((dataSetList.length > 0) & (programsList.length > 0)) {
+                    console.log('data set lista', dataSetList)
+                    Promise.all([
+                        this.props.d2.models.dataSets.list({
+                            paging: false,
+                            filter: `id:in:[${dataSetList}]`,
+                        }),
+                        this.props.d2.models.program.list({
                             paging: false,
                             filter: `id:in:[${programsList}]`,
-                        })
-                        .then(data => {
-                            const programs = data.toArray()
-                            programs.forEach(program => {
+                        }),
+                        this.props.d2.models.programRules.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                        }),
+                    ])
+                    .then(([datasets, programs, programRules]) => {
+                        const datasetToAccess = datasets.toArray()
+                        console.log('dataset', datasetToAccess)
+                        /* datasets.forEach(dataset => {
+                                switch (dataset.publicAccess) {
+                                    case 'r-------':
+                                        // if user userGroupAccess, if user userAccess
+                                        console.log(
+                                            'access r',
+                                            dataset,
+                                            datasetsIdAccess
+                                        )
+                                        break
+                                    case 'rw------':
+                                        programsIdAccess.push(dataset)
+                                        console.log(
+                                            'access rw',
+                                            dataset,
+                                            datasetsIdAccess
+                                        )
+                                        break
+                                    case 'rwr-----':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    case 'rwrw----':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    case 'rwrwr---':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    case 'rwrwrw--':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    case 'rwrwrwr-':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    case 'rwrwrwrw':
+                                        datasetsIdAccess.push(dataset)
+                                        break
+                                    default:
+                                        break
+                                }
+                            }) */
+                        const programsToAccess = programs.toArray()
+                        /* programs.forEach(program => {
                                 switch (program.publicAccess) {
                                     case 'r-------':
                                         // if user userGroupAccess, if user userAccess
@@ -297,17 +377,30 @@ class TestAndroid extends React.Component {
                                     default:
                                         break
                                 }
-                            })
+                            }) */
 
-                            this.programNumber = programsIdAccess.length
-                            console.log('programs list data', programsIdAccess)
+                        //this.programNumber = programsIdAccess.length
+                        console.log('programs list data', programsToAccess)
+                        const programRulesToAccess = programRules.toArray()
+                        console.log(programRulesToAccess)
 
-                            this.setState({
-                                loading: false,
-                                runTest: true,
-                            })
+                        this.programNumber = programsToAccess.length
+                        this.datasetNumber = datasetToAccess.length
+                        this.programRuleNumber = programRulesToAccess.length
+
+                        this.setState({
+                            loading: false,
+                            runTest: true,
                         })
+                    })
                 }
+
+                /* if (programsList.length > 0) {
+                   
+                        .then(data => {
+                            
+                        })
+                } */
             })
         }
     }
