@@ -5,7 +5,10 @@ import { Divider, Grid } from '@material-ui/core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
 import MenuItem from 'material-ui/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
-import { testAndroidConstants } from '../constants/test-android'
+import {
+    testAndroidConstants,
+    testAndroidDataConstants,
+} from '../constants/test-android'
 
 const style = {
     button: {
@@ -32,11 +35,15 @@ class TestAndroid extends React.Component {
         this.datasetNumber = 0
         this.programNumber = 0
         this.programRuleNumber = 0
+        this.metadataSize = 0
+        this.dataSize = 0
         this.tooltipOUCapture = undefined
         this.tooltipOUSearch = undefined
         this.tooltipDataSet = undefined
         this.tooltipProgram = undefined
         this.tooltipProgramRule = undefined
+        this.tooltipMetadata = undefined
+        this.tooltipData = undefined
     }
 
     state = {
@@ -293,8 +300,7 @@ class TestAndroid extends React.Component {
                             paging: false,
                             filter: `program.id:in:[${programsList}]`,
                         }),
-                    ])
-                    .then(([datasets, programs, programRules]) => {
+                    ]).then(([datasets, programs, programRules]) => {
                         const datasetToAccess = datasets.toArray()
                         console.log('dataset', datasetToAccess)
                         /* datasets.forEach(dataset => {
@@ -513,7 +519,32 @@ class TestAndroid extends React.Component {
 
                     {this.state.runTest && (
                         <div className="data__top-margin">
-                            <Grid container>
+                            {testAndroidDataConstants.map(test => (
+                                <div>
+                                    <Grid container>
+                                        <Grid item xs={10}>
+                                            <small className="subitem-title">
+                                                {test.title}
+                                            </small>
+                                            <p className="subitem-item">
+                                                {test.description}
+                                            </p>
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <Tooltip
+                                                title={this[test.tooltipTitle]}
+                                                placement="bottom"
+                                            >
+                                                <p className="subitem-item subitem-bigitem">
+                                                    {this[test.state]}
+                                                </p>
+                                            </Tooltip>
+                                        </Grid>
+                                    </Grid>
+                                    <Divider />
+                                </div>
+                            ))}
+                            {/* <Grid container>
                                 <Grid item xs={10}>
                                     <small className="subitem-title">
                                         Org Units capture
@@ -528,7 +559,7 @@ class TestAndroid extends React.Component {
                                         title={this.tooltipOUCapture}
                                         placement="bottom"
                                     >
-                                        <p className="subitem-item">
+                                        <p className="subitem-item subitem-bigitem">
                                             {this.organisationUnitsNumber}
                                         </p>
                                     </Tooltip>
@@ -622,7 +653,7 @@ class TestAndroid extends React.Component {
                                     </Tooltip>
                                 </Grid>
                             </Grid>
-                            <Divider />
+                            <Divider /> */}
                         </div>
                     )}
 

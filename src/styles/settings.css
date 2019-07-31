@@ -134,3 +134,8 @@
     font-family: Roboto, sans-serif;
     font-weight: 500;
 }
+
+.subitem-bigitem {
+    font-size: 1.1rem;
+    text-align: center;
+}
