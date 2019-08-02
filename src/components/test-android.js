@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import { Button } from '@dhis2/d2-ui-core'
 import { Divider, Grid } from '@material-ui/core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
-import MenuItem from 'material-ui/MenuItem'
+// import MenuItem from 'material-ui/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
 import {
     testAndroidConstants,
@@ -44,6 +44,7 @@ class TestAndroid extends React.Component {
         this.tooltipProgramRule = undefined
         this.tooltipMetadata = undefined
         this.tooltipData = undefined
+        this.errorUsername = false
     }
 
     state = {
@@ -51,7 +52,8 @@ class TestAndroid extends React.Component {
         username: '',
         runTest: false,
         loading: true,
-        disabled: false,
+        disabled: true,
+        errorUsername: false,
     }
 
     clearFields = () => {
@@ -86,11 +88,21 @@ class TestAndroid extends React.Component {
             Normal: ${testAndroidConstants.programRules.normal}
             Max: ${testAndroidConstants.programRules.max}`
 
+        const metadata = `Min: ${testAndroidConstants.metadata.min} 
+            Normal: ${testAndroidConstants.metadata.normal}
+            Max: ${testAndroidConstants.metadata.max}`
+
+        const data = `Min: ${testAndroidConstants.data.min} 
+            Normal: ${testAndroidConstants.data.normal}
+            Max: ${testAndroidConstants.data.max}`
+
         this.tooltipOUCapture = organisationUnitCapture
         this.tooltipOUSearch = organisationUnitSearch
         this.tooltipDataSet = dataSet
         this.tooltipProgram = program
         this.tooltipProgramRule = programRules
+        this.tooltipMetadata = metadata
+        this.tooltipData = data
     }
 
     handleChange = e => {
@@ -397,6 +409,7 @@ class TestAndroid extends React.Component {
                         this.setState({
                             loading: false,
                             runTest: true,
+                            disabled: true,
                         })
                     })
                 }
@@ -407,6 +420,76 @@ class TestAndroid extends React.Component {
                             
                         })
                 } */
+            })
+        }
+    }
+
+    handleUsernameChange = e => {
+        console.log({
+            [e.target.name]: e.target.value,
+        })
+        this.setState({
+            username: e.target.value,
+        })
+    }
+
+    checkUsername = () => {
+        console.log(
+            'username',
+            this.state.username,
+            this.usersOptionsComplete,
+            this.usersOptionsComplete[0],
+            this.usersOptionsComplete[0].name
+        )
+        this.clearFields()
+        if (this.state.username.length > 3) {
+            const foundUser = this.usersOptionsComplete.find(
+                user => user.name === this.state.username
+            )
+            console.log('found user', foundUser)
+            // foundUser !== undefined ? this.errorUsername = false : this.errorUsername = true
+            if (foundUser !== undefined) {
+                this.errorUsername = false
+
+                this.props.d2.models.users
+                    .list({
+                        paging: false,
+                        level: 1,
+                        filter: `id:eq:${foundUser.id}`,
+                    })
+                    .then(collection => {
+                        const user = collection.toArray()[0]
+
+                        /* const group = user.userGroups.valuesContainerMap
+                        const userGroup = []
+                        group.forEach(element => {
+                            userGroup.push(element)
+                        })
+                        this.userGroupIds = userGroup
+                        console.log('userGroup Id', group, userGroup) */
+
+                        this.userSelected = user
+                        console.log('user selected', user, this.userSelected)
+                        this.userSelectedId = foundUser.id
+                    })
+
+                this.setState({
+                    disabled: false,
+                    errorUsername: false,
+                })
+            } else {
+                this.errorUsername = true
+                this.setState({
+                    disabled: true,
+                    errorUsername: true,
+                })
+            }
+            console.log(this.errorUsername)
+        } else {
+            this.errorUsername = true
+            this.setState({
+                disabled: true,
+                errorUsername: true,
             })
         }
     }
@@ -422,24 +505,23 @@ class TestAndroid extends React.Component {
 
     async componentDidMount() {
         this.createTooltipText()
-        this.props.d2.models.userGroups
+        /* this.props.d2.models.userGroups
             .list({
                 paging: false,
                 level: 1,
-                fields: 'id,name',
+                fields: 'id,name,users',
             })
             .then(collection => {
                 const userGroupOptions = collection.toArray()
-                /* for (const i in userGroupOptions) {
-                    console.log(userGroupOptions[i].users)
-                     userGroupOptions[i].users
-                    .then(users => (console.log("users", users)))
-                } */
+                userGroupOptions.forEach(userGroup => {
+                    userGroup.users.valuesContainerMap.forEach()
+                })
+                
                 this.userGroupOptions = userGroupOptions
                 this.userGroupOptionsComplete = userGroupOptions
                 console.log('data set list', this.userGroupOptionsComplete)
             })
-            .then(users => console.log('users ', users))
+            .then(users => console.log('users ', users)) */
 
         this.props.d2.models.users
             .list({
@@ -494,7 +576,7 @@ class TestAndroid extends React.Component {
                                 {option.name}
                             </MenuItem>
                         ))}
-                    </TextField> */}
+                    </TextField>
 
                     <TextField
                         id="username"
@@ -515,12 +597,28 @@ class TestAndroid extends React.Component {
                                 {option.name}
                             </MenuItem>
                         ))}
-                    </TextField>
+                    </TextField> */}
+
+                    <TextField
+                        id="username"
+                        name="username"
+                        label="Username"
+                        type="text"
+                        margin="normal"
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={this.state.username}
+                        onChange={this.handleUsernameChange}
+                        onBlur={this.checkUsername}
+                        error={this.state.errorUsername}
+                    />
 
                     {this.state.runTest && (
                         <div className="data__top-margin">
                             {testAndroidDataConstants.map(test => (
-                                <div>
+                                <div key={test.state}>
                                     <Grid container>
                                         <Grid item xs={10}>
                                             <small className="subitem-title">
@@ -552,6 +650,7 @@ class TestAndroid extends React.Component {
                             raised
                             style={style.button}
                             onClick={this.handleRun}
+                            disabled={this.state.disabled}
                         >
                             RUN TEST
                         </Button>
