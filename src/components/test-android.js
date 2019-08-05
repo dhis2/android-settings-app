@@ -1,8 +1,9 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
+//import TextField from '@material-ui/core/TextField'
 import { Button } from '@dhis2/d2-ui-core'
 import { Divider, Grid } from '@material-ui/core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
+import TextFieldSearch from './text-field-search'
 // import MenuItem from 'material-ui/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
 import {
@@ -44,7 +45,7 @@ class TestAndroid extends React.Component {
         this.tooltipProgramRule = undefined
         this.tooltipMetadata = undefined
         this.tooltipData = undefined
-        this.errorUsername = false
+        this.disabled = true
     }
 
     state = {
@@ -413,13 +414,6 @@ class TestAndroid extends React.Component {
                         })
                     })
                 }
-
-                /* if (programsList.length > 0) {
-                   
-                        .then(data => {
-                            
-                        })
-                } */
             })
         }
     }
@@ -433,24 +427,25 @@ class TestAndroid extends React.Component {
         })
     }
 
-    checkUsername = () => {
+    checkUsername = userToCheck => {
+        //userToCheck
         console.log(
             'username',
-            this.state.username,
             this.usersOptionsComplete,
             this.usersOptionsComplete[0],
             this.usersOptionsComplete[0].name
         )
+
         this.clearFields()
-        if (this.state.username.length > 3) {
+        if (userToCheck.length > 3) {
+            // this.state.username.length > 3
             const foundUser = this.usersOptionsComplete.find(
-                user => user.name === this.state.username
+                // user => user.name === this.state.username
+                user => user.name === userToCheck
             )
             console.log('found user', foundUser)
-            // foundUser !== undefined ? this.errorUsername = false : this.errorUsername = true
-            if (foundUser !== undefined) {
-                this.errorUsername = false
 
+            if (foundUser !== undefined) {
                 this.props.d2.models.users
                     .list({
                         paging: false,
@@ -459,38 +454,30 @@ class TestAndroid extends React.Component {
                     })
                     .then(collection => {
                         const user = collection.toArray()[0]
-
-                        /* const group = user.userGroups.valuesContainerMap
-                        const userGroup = []
-                        group.forEach(element => {
-                            userGroup.push(element)
-                        })
-                        this.userGroupIds = userGroup
-                        console.log('userGroup Id', group, userGroup) */
-
                         this.userSelected = user
                         console.log('user selected', user, this.userSelected)
                         this.userSelectedId = foundUser.id
                     })
 
+                this.disabled = false
                 this.setState({
-                    disabled: false,
                     errorUsername: false,
+                    disabled: false,
+                    username: userToCheck,
                 })
             } else {
-                this.errorUsername = true
                 this.setState({
                     disabled: true,
                     errorUsername: true,
                 })
+                this.disabled = true
             }
-            console.log(this.errorUsername)
         } else {
-            this.errorUsername = true
             this.setState({
                 disabled: true,
                 errorUsername: true,
             })
+            this.disabled = true
         }
     }
 
@@ -505,23 +492,6 @@ class TestAndroid extends React.Component {
 
     async componentDidMount() {
         this.createTooltipText()
-        /* this.props.d2.models.userGroups
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name,users',
-            })
-            .then(collection => {
-                const userGroupOptions = collection.toArray()
-                userGroupOptions.forEach(userGroup => {
-                    userGroup.users.valuesContainerMap.forEach()
-                })
-                
-                this.userGroupOptions = userGroupOptions
-                this.userGroupOptionsComplete = userGroupOptions
-                console.log('data set list', this.userGroupOptionsComplete)
-            })
-            .then(users => console.log('users ', users)) */
 
         this.props.d2.models.users
             .list({
@@ -538,6 +508,10 @@ class TestAndroid extends React.Component {
                     loading: false,
                 })
             })
+    }
+
+    componentDidUpdate() {
+        console.log('update')
     }
 
     render() {
@@ -558,48 +532,6 @@ class TestAndroid extends React.Component {
 
                 <div>
                     {/* <TextField
-                        id="userGroup"
-                        name="userGroup"
-                        label="User Group"
-                        type="text"
-                        margin="normal"
-                        select
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        value={this.state.userGroup}
-                        onChange={this.handleChange}
-                    > 
-                        {this.userGroupOptions.map(option => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
-                    <TextField
-                        id="username"
-                        name="username"
-                        label="Username"
-                        type="text"
-                        margin="normal"
-                        select
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        value={this.state.username}
-                        onChange={this.handleChange}
-                    >
-                        {this.usersOptions.map(option => (
-                            <MenuItem key={option.id} value={option.id}>
-                                {option.name}
-                            </MenuItem>
-                        ))}
-                    </TextField> */}
-
-                    <TextField
                         id="username"
                         name="username"
                         label="Username"
@@ -613,6 +545,14 @@ class TestAndroid extends React.Component {
                         onChange={this.handleUsernameChange}
                         onBlur={this.checkUsername}
                         error={this.state.errorUsername}
+                    /> */}
+
+                    <TextFieldSearch
+                        suggestions={this.usersOptionsComplete}
+                        handleChange={this.handleChange}
+                        checkUsername={this.checkUsername}
+                        clearFields={this.clearFields}
+                        suggestionPreSelected={this.state.username}
                     />
 
                     {this.state.runTest && (
