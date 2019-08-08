@@ -1,10 +1,9 @@
 import React from 'react'
-//import TextField from '@material-ui/core/TextField'
+
 import { Button } from '@dhis2/d2-ui-core'
 import { Divider, Grid } from '@material-ui/core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
 import TextFieldSearch from './text-field-search'
-// import MenuItem from 'material-ui/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
 import {
     testAndroidConstants,
@@ -24,11 +23,8 @@ const style = {
 class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
-        this.userGroupOptions = []
         this.usersOptions = []
         this.usersOptionsComplete = []
-        this.userGroupOptionsComplete = []
-        this.userGroupIds = []
         this.userSelected = undefined
         this.userSelectedId = undefined
         this.organisationUnitsNumber = 0
@@ -45,11 +41,9 @@ class TestAndroid extends React.Component {
         this.tooltipProgramRule = undefined
         this.tooltipMetadata = undefined
         this.tooltipData = undefined
-        this.disabled = true
     }
 
     state = {
-        userGroup: '',
         username: '',
         runTest: false,
         loading: true,
@@ -58,7 +52,6 @@ class TestAndroid extends React.Component {
     }
 
     clearFields = () => {
-        this.userGroupIds = []
         this.userSelected = undefined
         this.userSelectedId = undefined
         this.organisationUnitsNumber = 0
@@ -113,10 +106,6 @@ class TestAndroid extends React.Component {
 
         this.clearFields()
 
-        /* const d2Api = this.props.d2.Api.getApi()
-        d2Api.get()
-        .then(data => console.log('data', data) ) */
-
         this.props.d2.models.users
             .list({
                 paging: false,
@@ -125,14 +114,6 @@ class TestAndroid extends React.Component {
             })
             .then(collection => {
                 const user = collection.toArray()[0]
-
-                const group = user.userGroups.valuesContainerMap
-                const userGroup = []
-                group.forEach(element => {
-                    userGroup.push(element)
-                })
-                this.userGroupIds = userGroup
-                console.log('userGroup Id', group, userGroup)
 
                 this.userSelected = user
                 console.log(
@@ -186,7 +167,7 @@ class TestAndroid extends React.Component {
         )
 
         if (organisationUnitSearchList.length > 0) {
-            organisationUnitSearchList.map(orgUnitSearch => {
+            organisationUnitSearchList.forEach(orgUnitSearch => {
                 promisesOrganisationUnitsSearch.push(
                     this.props.d2.models.organisationUnits.list({
                         paging: false,
@@ -198,8 +179,8 @@ class TestAndroid extends React.Component {
             await Promise.all(promisesOrganisationUnitsSearch).then(data => {
                 console.log('data promises search', data, data[0].toArray())
                 if (data.length > 0) {
-                    data.map(orgUnitData => {
-                        orgUnitData.toArray().map(ousearch => {
+                    data.forEach(orgUnitData => {
+                        orgUnitData.toArray().forEach(ousearch => {
                             organisationUnitSearchCollection.push(ousearch)
                         })
                     })
@@ -211,7 +192,7 @@ class TestAndroid extends React.Component {
         }
 
         if (organisationUnitList.length > 0) {
-            organisationUnitList.map(orgUnit => {
+            organisationUnitList.forEach(orgUnit => {
                 promisesOrganisationUnits.push(
                     this.props.d2.models.organisationUnits.list({
                         paging: false,
@@ -223,8 +204,8 @@ class TestAndroid extends React.Component {
             await Promise.all(promisesOrganisationUnits).then(data => {
                 console.log('data promises ou', data, data[0].toArray())
                 if (data.length > 0) {
-                    data.map(orgUnitData => {
-                        orgUnitData.toArray().map(oucapture => {
+                    data.forEach(orgUnitData => {
+                        orgUnitData.toArray().forEach(oucapture => {
                             organisationUnitCapture.push(oucapture)
                             const programPerOU = []
                             const datasetPerOU = []
@@ -418,17 +399,7 @@ class TestAndroid extends React.Component {
         }
     }
 
-    handleUsernameChange = e => {
-        console.log({
-            [e.target.name]: e.target.value,
-        })
-        this.setState({
-            username: e.target.value,
-        })
-    }
-
     checkUsername = userToCheck => {
-        //userToCheck
         console.log(
             'username',
             this.usersOptionsComplete,
@@ -438,9 +409,7 @@ class TestAndroid extends React.Component {
 
         this.clearFields()
         if (userToCheck.length > 3) {
-            // this.state.username.length > 3
             const foundUser = this.usersOptionsComplete.find(
-                // user => user.name === this.state.username
                 user => user.name === userToCheck
             )
             console.log('found user', foundUser)
@@ -459,7 +428,6 @@ class TestAndroid extends React.Component {
                         this.userSelectedId = foundUser.id
                     })
 
-                this.disabled = false
                 this.setState({
                     errorUsername: false,
                     disabled: false,
@@ -470,19 +438,16 @@ class TestAndroid extends React.Component {
                     disabled: true,
                     errorUsername: true,
                 })
-                this.disabled = true
             }
         } else {
             this.setState({
                 disabled: true,
                 errorUsername: true,
             })
-            this.disabled = true
         }
     }
 
     handleRun = () => {
-        console.log('run')
         this.setState({
             loading: true,
         })
@@ -503,15 +468,15 @@ class TestAndroid extends React.Component {
                 const usersOptions = collection.toArray()
                 this.usersOptions = usersOptions
                 this.usersOptionsComplete = usersOptions
-                console.log('data set list', usersOptions)
+                console.log({
+                    'data set list': usersOptions,
+                    'collection-wholeDate': collection,
+                })
+                // 'contentLength': collection.headers.get("content-length")
                 this.setState({
                     loading: false,
                 })
             })
-    }
-
-    componentDidUpdate() {
-        console.log('update')
     }
 
     render() {
@@ -531,22 +496,6 @@ class TestAndroid extends React.Component {
                 </div>
 
                 <div>
-                    {/* <TextField
-                        id="username"
-                        name="username"
-                        label="Username"
-                        type="text"
-                        margin="normal"
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        value={this.state.username}
-                        onChange={this.handleUsernameChange}
-                        onBlur={this.checkUsername}
-                        error={this.state.errorUsername}
-                    /> */}
-
                     <TextFieldSearch
                         suggestions={this.usersOptionsComplete}
                         handleChange={this.handleChange}

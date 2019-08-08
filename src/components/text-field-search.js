@@ -6,56 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 
-/* function renderInput(inputProps) {
-    const { InputProps, style, ref, ...other } = inputProps;
-
-    if (inputProps.inputProps.value.length > 3) {
-        console.log('valor props', inputProps.inputProps.value)
-        const foundUser = this.usersOptionsComplete.find(
-            user => user.name === inputProps.inputProps.value
-        )
-        console.log('found user', foundUser)
-    }
-    console.log('input props', inputProps)
-
-    return (
-        <TextField
-            InputProps={{
-                inputRef: ref,
-                style: {
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                },
-                ...InputProps,
-            }}
-            {...other}
-        />
-    );
-} */
-
-/* function renderSuggestion(suggestionProps) {
-    const { suggestion, index, itemProps, highlightedIndex, selectedItem } = suggestionProps;
-    const isHighlighted = highlightedIndex === index;
-    const isSelected = (selectedItem || '').indexOf(suggestion.name) > -1;
-
-    this.props.clearSelection()
-    console.log('suggestions props', suggestionProps)
-
-    return (
-        <MenuItem
-            {...itemProps}
-            key={suggestion.id}
-            selected={isHighlighted}
-            component="div"
-            style={{
-                fontWeight: isSelected ? 500 : 400,
-            }}
-        >
-            {suggestion.name}
-        </MenuItem>
-    );
-} */
-
 const classes = {
     root: {
         flexGrow: 1,
@@ -85,7 +35,6 @@ export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
         this.suggestions = this.props.suggestions
-        console.log('props downshift', props, this.suggestions)
     }
 
     state = {
@@ -93,37 +42,14 @@ export default class TextFieldSearch extends React.Component {
     }
 
     handleChangeSelect = selection => {
-        console.log(
-            selection ? `You selected ${selection}` : 'Selection Cleared'
-        )
-
         this.props.checkUsername(selection)
         this.setState({
             suggestionSelected: selection,
         })
     }
 
-    componentDidUpdate() {
-        console.log('update search box', this.state.suggestionSelected)
-    }
-
-    componentDidMount() {
-        console.log('mounted', this.state.suggestionSelected)
-    }
-
     renderInput = inputProps => {
         const { InputProps, style, ref, ...other } = inputProps
-
-        /* if (inputProps.inputProps.value.length > 3) {
-            console.log('valor props', inputProps.inputProps.value)
-            const foundUser = this.suggestions.find(
-                user => user.name === inputProps.inputProps.value
-            )
-            console.log('found user', foundUser)
-
-           // this.props.checkUsername(inputProps.inputProps.value)
-        } */
-        console.log('input props', inputProps)
 
         return (
             <TextField
@@ -150,8 +76,6 @@ export default class TextFieldSearch extends React.Component {
         } = suggestionProps
         const isHighlighted = highlightedIndex === index
         const isSelected = (selectedItem || '').indexOf(suggestion.name) > -1
-
-        console.log('suggestions props', suggestionProps)
 
         return (
             <MenuItem
@@ -215,13 +139,11 @@ export default class TextFieldSearch extends React.Component {
                             onChange,
                             ...inputProps
                         } = getInputProps({
-                            placeholder: 'Search for a username',
+                            placeholder: 'Search for a user',
                             onChange: event => {
                                 this.props.clearFields()
                                 if (event.target.value === '') {
                                     clearSelection()
-                                } else {
-                                    console.log('change', event.target.value)
                                 }
                             },
                         })
@@ -230,7 +152,7 @@ export default class TextFieldSearch extends React.Component {
                             <div style={classes.container}>
                                 {this.renderInput({
                                     fullWidth: true,
-                                    label: 'Username',
+                                    label: 'User',
                                     InputLabelProps: getLabelProps({
                                         shrink: true,
                                     }),

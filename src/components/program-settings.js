@@ -813,27 +813,3 @@ class ProgramSettings extends React.Component {
 }
 
 export default ProgramSettings
-
-/* < Dialog
-open = { this.state.deleteDialog.open }
-onClose = { this.handleCloseDelete }
-    >
-    <DialogTitle>
-        {' Are you sure you want to delete this program?'}
-    </DialogTitle>
-    <DialogActions style={{ borderTop: 'none' }}>
-        <Button
-            onClick={this.handleCloseDelete}
-            color="primary"
-        >
-            Delete
-                            </Button>
-        <Button
-            onClick={this.handleCloseDelete}
-            color="primary"
-            autoFocus
-        >
-            Cancel
-                            </Button>
-    </DialogActions>
-                    </Dialog > */
