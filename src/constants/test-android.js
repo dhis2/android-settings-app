@@ -1,40 +1,54 @@
-export const testAndroidConstants = {
-    organisationUnitCapture: {
+export const testAndroidConstants = [
+    {
+        value: 'tooltipOUCapture',
+        tootip: 'organisationUnitCapture',
         min: 1,
         normal: 3,
         max: 5,
     },
-    organisationUnitSearch: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipOUSearch',
+        tootip: 'organisationUnitSearch',
+        min: 3,
+        normal: 5,
+        max: 7,
     },
-    dataSet: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipDataSet',
+        tootip: 'dataSet',
+        min: 5,
+        normal: 7,
+        max: 9,
     },
-    program: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipProgram',
+        tootip: 'program',
+        min: 7,
+        normal: 9,
+        max: 11,
     },
-    programRules: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipProgramRule',
+        tootip: 'programRules',
+        min: 9,
+        normal: 11,
+        max: 13,
     },
-    metadata: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipMetadata',
+        tootip: 'metadata',
+        min: 11,
+        normal: 13,
+        max: 15,
     },
-    data: {
-        min: 1,
-        normal: 3,
-        max: 5,
+    {
+        value: 'tooltipData',
+        tootip: 'data',
+        min: 13,
+        normal: 15,
+        max: 17,
     },
-}
+]
 
 export const testAndroidDataConstants = [
     {

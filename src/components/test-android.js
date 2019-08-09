@@ -62,41 +62,13 @@ class TestAndroid extends React.Component {
     }
 
     createTooltipText = () => {
-        const organisationUnitCapture = `Min: ${testAndroidConstants.organisationUnitCapture.min} 
-            Normal: ${testAndroidConstants.organisationUnitCapture.normal}
-            Max: ${testAndroidConstants.organisationUnitCapture.max}`
+        testAndroidConstants.forEach(test => {
+            const tooltip = `Min: ${test.min} 
+            Normal: ${test.normal}
+            Max: ${test.max}`
 
-        const organisationUnitSearch = `Min: ${testAndroidConstants.organisationUnitSearch.min} 
-            Normal: ${testAndroidConstants.organisationUnitSearch.normal}
-            Max: ${testAndroidConstants.organisationUnitSearch.max}`
-
-        const dataSet = `Min: ${testAndroidConstants.dataSet.min} 
-            Normal: ${testAndroidConstants.dataSet.normal}
-            Max: ${testAndroidConstants.dataSet.max}`
-
-        const program = `Min: ${testAndroidConstants.program.min} 
-            Normal: ${testAndroidConstants.program.normal}
-            Max: ${testAndroidConstants.program.max}`
-
-        const programRules = `Min: ${testAndroidConstants.programRules.min} 
-            Normal: ${testAndroidConstants.programRules.normal}
-            Max: ${testAndroidConstants.programRules.max}`
-
-        const metadata = `Min: ${testAndroidConstants.metadata.min} 
-            Normal: ${testAndroidConstants.metadata.normal}
-            Max: ${testAndroidConstants.metadata.max}`
-
-        const data = `Min: ${testAndroidConstants.data.min} 
-            Normal: ${testAndroidConstants.data.normal}
-            Max: ${testAndroidConstants.data.max}`
-
-        this.tooltipOUCapture = organisationUnitCapture
-        this.tooltipOUSearch = organisationUnitSearch
-        this.tooltipDataSet = dataSet
-        this.tooltipProgram = program
-        this.tooltipProgramRule = programRules
-        this.tooltipMetadata = metadata
-        this.tooltipData = data
+            this[test.value] = tooltip
+        })
     }
 
     handleChange = e => {
