@@ -8,124 +8,132 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import { Button } from '@dhis2/d2-ui-core'
 
-const AndroidSettings = props => {
-    console.log('props android set', props)
+class AndroidSettings extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-    return (
-        <form>
-            <TextField
-                id="metadataSync"
-                name="metadataSync"
-                label="Metadata Sync"
-                margin="normal"
-                select
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                value={this.props.state.metadataSync}
-                onChange={this.props.handleChange}
-            >
-                {this.props.metadataOptions.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-
-            <TextField
-                id="dataSync"
-                name="dataSync"
-                label="Data Sync"
-                margin="normal"
-                select
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                value={this.props.state.dataSync}
-                onChange={this.props.handleChange}
-            >
-                {this.props.dataOptions.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-
-            <TextField
-                id="numberSmsToSent"
-                name="numberSmsToSent"
-                label="SMS Gateway Phone number where SMS are sent"
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                value={this.props.state.numberSmsToSent}
-                onChange={this.props.handleChange}
-                onBlur={this.props.checkMatchingConfirmation}
-            />
-
-            <TextField
-                id="numberSmsConfirmation"
-                name="numberSmsConfirmation"
-                label="Confirm SMS Gateway Phone number"
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                value={this.props.state.numberSmsConfirmation}
-                onChange={this.props.handleChange}
-                onBlur={this.props.checkMatchingConfirmation}
-                error={this.props.state.errorConfirmation}
-            />
-
-            <TextField
-                id="valuesTEI"
-                label="Reserved values downloaded per TEI attribute"
-                name="valuesTEI"
-                type="number"
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                InputProps={{ inputProps: { min: 0, step: 10 } }}
-                value={this.props.state.valuesTEI}
-                onChange={this.props.handleChange}
-            />
-
-            <div>
-                <p className="main-content__title"> Encrypt DB </p>
-                <RadioGroup
-                    aria-label="Encrypt"
-                    name="encryptDB"
-                    value={this.props.state.encryptDB}
+    render() {
+        return (
+            <form>
+                <TextField
+                    id="metadataSync"
+                    name="metadataSync"
+                    label="Metadata Sync"
+                    margin="normal"
+                    select
+                    fullWidth
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={this.props.state.metadataSync}
                     onChange={this.props.handleChange}
-                    row
                 >
-                    <FormControlLabel
-                        value="no"
-                        control={<Radio color="primary" />}
-                        label="No"
-                    />
-                    <FormControlLabel
-                        value="yes"
-                        control={<Radio color="primary" />}
-                        label="Yes"
-                    />
-                </RadioGroup>
-            </div>
+                    {this.props.metadataOptions.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
 
-            <div className="main-content__button__container">
-                <Button onClick={this.props.handleReset} raised color="primary">
-                    SET TO DEFAULT
-                </Button>
-            </div>
-        </form>
-    )
+                <TextField
+                    id="dataSync"
+                    name="dataSync"
+                    label="Data Sync"
+                    margin="normal"
+                    select
+                    fullWidth
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={this.props.state.dataSync}
+                    onChange={this.props.handleChange}
+                >
+                    {this.props.dataOptions.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+
+                <TextField
+                    id="numberSmsToSent"
+                    name="numberSmsToSent"
+                    label="SMS Gateway Phone number where SMS are sent"
+                    margin="normal"
+                    fullWidth
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={this.props.state.numberSmsToSent}
+                    onChange={this.props.handleChange}
+                    onBlur={this.props.checkMatchingConfirmation}
+                />
+
+                <TextField
+                    id="numberSmsConfirmation"
+                    name="numberSmsConfirmation"
+                    label="Confirm SMS Gateway Phone number"
+                    margin="normal"
+                    fullWidth
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={this.props.state.numberSmsConfirmation}
+                    onChange={this.props.handleChange}
+                    onBlur={this.props.checkMatchingConfirmation}
+                    error={this.props.state.errorConfirmation}
+                />
+
+                <TextField
+                    id="valuesTEI"
+                    label="Reserved values downloaded per TEI attribute"
+                    name="valuesTEI"
+                    type="number"
+                    margin="normal"
+                    fullWidth
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    InputProps={{ inputProps: { min: 0, step: 10 } }}
+                    value={this.props.state.valuesTEI}
+                    onChange={this.props.handleChange}
+                />
+
+                <div>
+                    <p className="main-content__title"> Encrypt DB </p>
+                    <RadioGroup
+                        aria-label="Encrypt"
+                        name="encryptDB"
+                        value={this.props.state.encryptDB}
+                        onChange={this.props.handleChange}
+                        row
+                    >
+                        <FormControlLabel
+                            value="no"
+                            control={<Radio color="primary" />}
+                            label="No"
+                        />
+                        <FormControlLabel
+                            value="yes"
+                            control={<Radio color="primary" />}
+                            label="Yes"
+                        />
+                    </RadioGroup>
+                </div>
+
+                <div className="main-content__button__container">
+                    <Button
+                        onClick={this.props.handleReset}
+                        raised
+                        color="primary"
+                    >
+                        SET TO DEFAULT
+                    </Button>
+                </div>
+            </form>
+        )
+    }
 }
 
 export default AndroidSettings
