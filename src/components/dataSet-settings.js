@@ -2,18 +2,14 @@ import React from 'react'
 
 import { Button } from '@dhis2/d2-ui-core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+
 import Table from '@dhis2/d2-ui-table'
 import '@dhis2/d2-ui-core/build/css/Table.css'
 import api from '../utils/api'
 
 import DialogDelete from '../components/dialog-delete'
 import ProgramTable from './program-table'
+import DialogTable from './dialog-table'
 import {
     DataSetting,
     DataSpecificSetting,
@@ -76,9 +72,13 @@ class DataSetSettings extends React.Component {
         },
     }
 
+    /**
+     * Edit and Delete actions for specific settings table
+     * @param args
+     */
     tableActions = {
         edit: (...args) => {
-            console.log('Edit', args, args[0])
+            // console.log('Edit', ...args, args[0])
             this.dataSetToChange = args[0].name
             const argsData = args[0]
             this.setState({
@@ -89,35 +89,6 @@ class DataSetSettings extends React.Component {
             this.handleClickOpen()
         },
         delete: (...args) => {
-            console.log('Delete', ...args)
-            /*             const data = args[0]
-            const oldList = this.specificSettings
-            const rowList = this.specificSettingsRows
-
-            console.log({
-                specificSettings: oldList,
-                args: data,
-            })
-            const newList = {}
-            let newRowList = []
-
-            for (const key in oldList) {
-                if (key !== data.id) {
-                    const dataSet = this.specificSettings[key]
-                    newList[key] = dataSet
-                }
-            }
-
-            newRowList = rowList.filter(row => row.id !== data.id)
-
-            this.specificSettingsRows = newRowList
-            this.specificSettings = newList
-
-            console.log({
-                newList: newList,
-                row: newRowList,
-                specificSettings: this.specificSettings,
-            }) */
             this.argsRow = args[0]
             this.dataSetName = args[0].name
 
@@ -132,6 +103,7 @@ class DataSetSettings extends React.Component {
     }
 
     handleChange = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -140,6 +112,7 @@ class DataSetSettings extends React.Component {
     }
 
     handleChangeDialog = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -147,14 +120,42 @@ class DataSetSettings extends React.Component {
         this.updateGlobal = false
     }
 
+    saveDataApi = (settingType, data) => {
+        if (this.keyName === 'dataSet_settings') {
+            if (Object.keys(this[settingType]).length) {
+                data[settingType] = this[settingType]
+                console.log(data)
+            }
+
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'dataSet_settings',
+                data
+            ).then(res => {
+                console.log('res update', res)
+            })
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'dataSet_settings',
+                        data
+                    )
+                    .then(data => {
+                        console.log('data response update', data)
+                    })
+            )
+        }
+    }
+
     submitData = () => {
         if (!this.updateGlobal) {
-            console.log('update', this)
             return true
         }
 
         const globalSettings = {
-            date: new Date().toJSON(),
+            lastUpdated: new Date().toJSON(),
             periodDSDownload: this.state.periodDSDownload,
             periodDSDBTrimming: this.state.periodDSDBTrimming,
         }
@@ -167,7 +168,9 @@ class DataSetSettings extends React.Component {
             },
         }
 
-        if (this.keyName === 'dataSet_settings') {
+        this.saveDataApi('specificSettings', dataSetData)
+
+        /* if (this.keyName === 'dataSet_settings') {
             console.log('specificSettings', this.specificSettings)
             if (Object.keys(this.specificSettings).length) {
                 dataSetData.specificSettings = this.specificSettings
@@ -196,7 +199,7 @@ class DataSetSettings extends React.Component {
                     })
             )
             console.log('submit', dataSetData)
-        }
+        } */
     }
 
     handleClickOpen = () => {
@@ -248,7 +251,7 @@ class DataSetSettings extends React.Component {
         console.log(dataSetNameFilter[0], this.specificSettings)
 
         objData[specificDataSetNameKey] = {
-            date: new Date().toJSON(),
+            lastUpdated: new Date().toJSON(),
             name: dataSetNameFilter[0].name,
             specificPeriodDSDownload: this.state.specificPeriodDSDownload,
             specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
@@ -364,12 +367,6 @@ class DataSetSettings extends React.Component {
 
         this.specificSettingsRows = newRowList
         this.specificSettings = newList
-
-        console.log({
-            newList: newList,
-            row: newRowList,
-            specificSettings: this.specificSettings,
-        })
 
         this.setState({
             isUpdated: true,
@@ -586,60 +583,20 @@ class DataSetSettings extends React.Component {
                         </Button>
                     </div>
 
-                    <Dialog
+                    <DialogTable
                         open={this.state.specificDataSet.openDialog}
-                        onClose={this.handleClose}
-                        aria-labelledby="form-dialog-title"
-                        fullWidth
-                        maxWidth="lg"
-                    >
-                        <DialogTitle id="form-dialog-title">
-                            Values per Data Set
-                        </DialogTitle>
-                        <DialogContent>
-                            {this.dataSetToChange === undefined ? (
-                                <Select
-                                    value={this.state.specificDataSetName}
-                                    onChange={this.handleChangeDialog}
-                                    id="specificDataSetName"
-                                    name="specificDataSetName"
-                                    style={{ minWidth: '150px' }}
-                                >
-                                    {this.dataSetList.map(option => (
-                                        <MenuItem
-                                            value={option.id}
-                                            key={option.id}
-                                            name={option.name}
-                                        >
-                                            <em> {option.name} </em>
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            ) : (
-                                <p className="main-content__title main-content__title__dialog">
-                                    {this.dataSetToChange}
-                                </p>
-                            )}
-
-                            <ProgramTable
-                                data={dataSpecificSetting}
-                                states={this.state}
-                                onChange={this.handleChangeDialog}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <Button
-                                raised
-                                onClick={this.handleClose}
-                                className="main-content__dialog__button"
-                            >
-                                CANCEL
-                            </Button>
-                            <Button raised onClick={this.handleSubmitDialog}>
-                                ADD/SAVE
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                        title="Data Sets"
+                        handleClose={this.handleClose}
+                        dataTitle={this.dataSetToChange}
+                        dataTitleOptions={this.dataSetList}
+                        titleValue={this.state.specificDataSetName}
+                        handleChange={this.handleChangeDialog}
+                        textFieldTitleId="specificDataSetName"
+                        textFieldTitleName="specificDataSetName"
+                        data={dataSpecificSetting}
+                        state={this.state}
+                        handleSubmitDialog={this.handleSubmitDialog}
+                    />
                 </div>
             </div>
         )
