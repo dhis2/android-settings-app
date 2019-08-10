@@ -2,12 +2,7 @@ import React from 'react'
 
 import { Button } from '@dhis2/d2-ui-core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+
 import Table from '@dhis2/d2-ui-table'
 import '@dhis2/d2-ui-core/build/css/Table.css'
 
@@ -19,6 +14,7 @@ import {
 } from '../constants/program-settings'
 import api from '../utils/api'
 import ProgramTable from './program-table'
+import DialogTable from './dialog-table'
 
 const programData = Program
 const specificProgramData = SpecificProgram
@@ -168,6 +164,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleChange = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -176,6 +173,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleChangeDialog = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -752,60 +750,20 @@ class ProgramSettings extends React.Component {
                         </Button>
                     </div>
 
-                    <Dialog
+                    <DialogTable
                         open={this.state.specificProgram.openDialog}
-                        onClose={this.handleClose}
-                        aria-labelledby="form-dialog-title"
-                        fullWidth
-                        maxWidth="lg"
-                    >
-                        <DialogTitle id="form-dialog-title">
-                            Values per program
-                        </DialogTitle>
-                        <DialogContent>
-                            {this.programToChange === undefined ? (
-                                <Select
-                                    value={this.state.specificProgramName}
-                                    onChange={this.handleChangeDialog}
-                                    id="specificProgramName"
-                                    name="specificProgramName"
-                                    style={{ minWidth: '150px' }}
-                                >
-                                    {this.programList.map(option => (
-                                        <MenuItem
-                                            value={option.id}
-                                            key={option.id}
-                                            name={option.name}
-                                        >
-                                            <em> {option.name} </em>
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            ) : (
-                                <p className="main-content__title main-content__title__dialog">
-                                    {this.programToChange}
-                                </p>
-                            )}
-
-                            <ProgramTable
-                                data={specificProgramData}
-                                states={this.state}
-                                onChange={this.handleChangeDialog}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <Button
-                                raised
-                                onClick={this.handleClose}
-                                className="main-content__dialog__button"
-                            >
-                                CANCEL
-                            </Button>
-                            <Button raised onClick={this.handleSubmitDialog}>
-                                ADD/SAVE
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                        title="program"
+                        handleClose={this.handleClose}
+                        dataTitle={this.programToChange}
+                        dataTitleOptions={this.programList}
+                        titleValue={this.state.specificProgramName}
+                        handleChange={this.handleChangeDialog}
+                        textFieldTitleId="specificProgramName"
+                        textFieldTitleName="specificProgramName"
+                        data={specificProgramData}
+                        state={this.state}
+                        handleSubmitDialog={this.handleSubmitDialog}
+                    />
                 </div>
             </div>
         )

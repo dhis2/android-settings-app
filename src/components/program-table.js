@@ -7,13 +7,11 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-// import TextField from '@material-ui/core/TextField'
 import InputBase from '@material-ui/core/InputBase'
 
 class ProgramTable extends React.Component {
     constructor(props) {
         super(props)
-        console.log('props table', props)
     }
 
     render() {
@@ -139,26 +137,3 @@ class ProgramTable extends React.Component {
 }
 
 export default ProgramTable
-
-/*  < TextField
-            id = { row.keyDownload }
-            name = { row.keyDownload }
-            type = "number"
-            margin = "normal"
-            value = {
-                this.props.states[row.keyDownload]
-            }
-            onChange = { this.props.onChange }
-    /> 
-
-    <TextField
-        id={row.keyDBTrimming}
-        name={row.keyDBTrimming}
-        type="number"
-        margin="normal"
-        value={
-            this.props.states[row.keyDBTrimming]
-        }
-        onChange={this.props.onChange}
-    />
-*/
