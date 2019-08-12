@@ -77,7 +77,7 @@ export const testAndroidDataConstants = [
     },
     {
         title: 'Program rules associated to OU',
-        description: 'Number of program rules to capture OUs',
+        description: 'Number of program rules to download',
         tooltipTitle: 'tooltipProgramRule',
         state: 'programRuleNumber',
     },
