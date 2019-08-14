@@ -12,6 +12,7 @@ import InputBase from '@material-ui/core/InputBase'
 class ProgramTable extends React.Component {
     constructor(props) {
         super(props)
+        this.programTable = props
     }
 
     render() {

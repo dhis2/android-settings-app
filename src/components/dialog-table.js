@@ -13,7 +13,7 @@ import ProgramTable from './program-table'
 class DialogTable extends React.Component {
     constructor(props) {
         super(props)
-        console.log('props dialog', props)
+        this.dialogTable = props
     }
 
     render() {
