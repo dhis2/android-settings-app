@@ -23,13 +23,6 @@ class TestAndroidContainer extends React.Component {
         this.programRuleNumber = 0
         this.metadataSize = 0
         this.dataSize = 0
-        this.tooltipOUCapture = undefined
-        this.tooltipOUSearch = undefined
-        this.tooltipDataSet = undefined
-        this.tooltipProgram = undefined
-        this.tooltipProgramRule = undefined
-        this.tooltipMetadata = undefined
-        this.tooltipData = undefined
     }
 
     state = {
@@ -38,6 +31,20 @@ class TestAndroidContainer extends React.Component {
         loading: true,
         disabled: true,
         errorUsername: false,
+        organisationUnitsNumber: 0,
+        organisationUnitSearchNumber: 0,
+        datasetNumber: 0,
+        programNumber: 0,
+        programRuleNumber: 0,
+        metadataSize: 0,
+        dataSize: 0,
+        tooltipOUCapture: undefined,
+        tooltipOUSearch: undefined,
+        tooltipDataSet: undefined,
+        tooltipProgram: undefined,
+        tooltipProgramRule: undefined,
+        tooltipMetadata: undefined,
+        tooltipData: undefined,
     }
 
     clearFields = () => {
@@ -56,7 +63,10 @@ class TestAndroidContainer extends React.Component {
             Normal: ${test.normal}
             Max: ${test.max}`
 
-            this[test.value] = tooltip
+            this.setState({
+                [test.value]: tooltip,
+            })
+            //this[test.value] = tooltip
         })
     }
 
@@ -113,19 +123,11 @@ class TestAndroidContainer extends React.Component {
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
-            console.log(`key: ${key}, value: ${value}`)
         })
 
         organisationUnitSearch.forEach((value, key) => {
             organisationUnitSearchList.push(key)
-            console.log(`key: ${key}, value: ${value}`)
         })
-        console.log(
-            'user',
-            this.userSelected.organisationUnits.valuesContainerMap,
-            this.userSelectedId,
-            organisationUnitList
-        )
 
         if (organisationUnitSearchList.length > 0) {
             organisationUnitSearchList.forEach(orgUnitSearch => {
@@ -138,7 +140,6 @@ class TestAndroidContainer extends React.Component {
             })
 
             await Promise.all(promisesOrganisationUnitsSearch).then(data => {
-                console.log('data promises search', data, data[0].toArray())
                 if (data.length > 0) {
                     data.forEach(orgUnitData => {
                         orgUnitData.toArray().forEach(ousearch => {
@@ -189,18 +190,8 @@ class TestAndroidContainer extends React.Component {
                                             //programsList.filter(program => program)
                                             programsList = programIds
                                             programsList.push(key)
-                                            console.log({
-                                                status: 'filtrado lenght > 1',
-                                                key: key,
-                                                programIdListAfterFilter: programIds,
-                                                programListAfterKey: programsList,
-                                            })
                                         } else {
                                             programsList.push(key)
-                                            console.log(
-                                                'program 1',
-                                                programsList
-                                            )
                                         }
                                     }
                                 )
@@ -235,7 +226,6 @@ class TestAndroidContainer extends React.Component {
                             })
                         })
                     })
-                    console.log(organisationUnitCapture, data.length)
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
                 }
@@ -250,6 +240,8 @@ class TestAndroidContainer extends React.Component {
                         this.props.d2.models.program.list({
                             paging: false,
                             filter: `id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,relationshipFromA,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,relationshipType[id],relationshipText,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,pattern,sortOrderInListNoProgram,valueType,expression,programScope,displayInListNoProgram,generated,displayOnVisitSchedule,orgunitScope,unique,inherit,optionSet[id],style[color,icon],access[read],formName],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programIndicators[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]]],programStages[id],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],sortOrder,description,style[color,icon],formName]',
                         }),
                         this.props.d2.models.programRules.list({
                             paging: false,
@@ -353,6 +345,13 @@ class TestAndroidContainer extends React.Component {
                             loading: false,
                             runTest: true,
                             disabled: true,
+                            organisationUnitSearchNumber: this
+                                .organisationUnitSearchNumber,
+                            organisationUnitsNumber: this
+                                .organisationUnitsNumber,
+                            programNumber: this.programNumber,
+                            datasetNumber: this.datasetNumber,
+                            programRuleNumber: this.programRuleNumber,
                         })
                     })
                 }
@@ -361,13 +360,6 @@ class TestAndroidContainer extends React.Component {
     }
 
     checkUsername = userToCheck => {
-        console.log(
-            'username',
-            this.usersOptionsComplete,
-            this.usersOptionsComplete[0],
-            this.usersOptionsComplete[0].name
-        )
-
         this.clearFields()
         if (userToCheck.length > 3) {
             const foundUser = this.usersOptionsComplete.find(
@@ -376,11 +368,6 @@ class TestAndroidContainer extends React.Component {
 
             if (foundUser !== undefined) {
                 this.props.d2.models.users
-                    /* .list({
-                        paging: false,
-                        level: 1,
-                        filter: `id:eq:${foundUser.id}`,
-                    }) */
                     .get(`${foundUser.id}`, { paging: false })
                     .then(collection => {
                         const user = collection
@@ -447,7 +434,7 @@ class TestAndroidContainer extends React.Component {
                 searchFieldValue={this.state.username}
                 runTest={this.state.runTest}
                 dataConstants={testAndroidDataConstants}
-                states={this}
+                states={this.state}
                 handleRun={this.handleRun}
                 disabledTest={this.state.disabled}
             />
@@ -456,66 +443,3 @@ class TestAndroidContainer extends React.Component {
 }
 
 export default TestAndroidContainer
-
-/*
-<div>
-                <div>
-                    <p className="main-content__title main-content__title__main">
-                        Test Android Login
-                    </p>
-                    <p className="main-content__title main-content__subtitle">
-                        Enter a user to check access to
-                    </p>
-                </div>
-
-                <div>
-                    <TextFieldSearch
-                        suggestions={this.usersOptionsComplete}
-                        checkUsername={this.checkUsername}
-                        clearFields={this.clearFields}
-                        suggestionPreSelected={this.state.username}
-                    />
-
-                    {this.state.runTest && (
-                        <div className="data__top-margin">
-                            {testAndroidDataConstants.map(test => (
-                                <div key={test.state}>
-                                    <Grid container>
-                                        <Grid item xs={10}>
-                                            <small className="subitem-title">
-                                                {test.title}
-                                            </small>
-                                            <p className="subitem-item">
-                                                {test.description}
-                                            </p>
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <Tooltip
-                                                title={this[test.tooltipTitle]}
-                                                placement="bottom"
-                                            >
-                                                <p className="subitem-item subitem-bigitem">
-                                                    {this[test.state]}
-                                                </p>
-                                            </Tooltip>
-                                        </Grid>
-                                    </Grid>
-                                    <Divider />
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
-                    <div style={style.container}>
-                        <Button
-                            raised
-                            style={style.button}
-                            onClick={this.handleRun}
-                            disabled={this.state.disabled}
-                        >
-                            RUN TEST
-                        </Button>
-                    </div>
-                </div>
-            </div>
-*/

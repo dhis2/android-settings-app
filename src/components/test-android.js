@@ -19,12 +19,7 @@ const style = {
 class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
-        console.log(
-            'props testAndroid',
-            props,
-            props.states,
-            props.states.TestAndroidContainer
-        )
+        this.TestAndroid = props
     }
 
     render() {

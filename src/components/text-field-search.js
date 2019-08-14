@@ -35,6 +35,7 @@ export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
         this.suggestions = this.props.suggestions
+        console.log('props', props)
     }
 
     state = {
@@ -42,10 +43,12 @@ export default class TextFieldSearch extends React.Component {
     }
 
     handleChangeSelect = selection => {
-        this.props.checkUsername(selection)
-        this.setState({
-            suggestionSelected: selection,
-        })
+        if (selection !== null) {
+            this.props.checkUsername(selection)
+            this.setState({
+                suggestionSelected: selection,
+            })
+        }
     }
 
     renderInput = inputProps => {
