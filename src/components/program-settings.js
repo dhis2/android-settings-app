@@ -1,20 +1,14 @@
 import React from 'react'
 
-import { Button } from '@dhis2/d2-ui-core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
 
-import Table from '@dhis2/d2-ui-table'
-import '@dhis2/d2-ui-core/build/css/Table.css'
-
-import DialogDelete from '../components/dialog-delete'
 import {
     Program,
     SpecificProgram,
     ProgramSettingsDefault,
 } from '../constants/program-settings'
 import api from '../utils/api'
-import ProgramTable from './program-table'
-import DialogTable from './dialog-table'
+import GlobalSpecificSettings from '../pages/global-specific-settings'
 
 const programData = Program
 const specificProgramData = SpecificProgram
@@ -37,26 +31,9 @@ const {
     eventPeriodDBTrimming,
 } = ProgramSettingsDefault
 
-const style = {
-    button: {
-        margin: '20px 0px 10px 0px',
-    },
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-}
-
 class ProgramSettings extends React.Component {
     constructor(props) {
         super(props)
-
-        props.d2.i18n.translations['name'] = 'Program Name'
-        props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
-
-        props.d2.i18n.translations['edit'] = 'edit'
-        props.d2.i18n.translations['delete'] = 'delete'
-        props.d2.i18n.translations['actions'] = 'actions'
 
         this.nameSpace = undefined
         this.keyName = undefined
@@ -89,10 +66,10 @@ class ProgramSettings extends React.Component {
         eventsDBTrimming: eventsDBTrimming,
         eventPeriodDownload: eventPeriodDownload,
         eventPeriodDBTrimming: eventPeriodDBTrimming,
-        specificProgram: {
+        specificSetting: {
             openDialog: false,
         },
-        specificProgramName: '',
+        specificSettingName: '',
         specificSettingDownload: '',
         specificSettingDBTrimming: '',
         specificTeiDownload: '',
@@ -118,7 +95,6 @@ class ProgramSettings extends React.Component {
 
     tableActions = {
         edit: (...args) => {
-            console.log('Edit', ...args)
             this.programToChange = args[0].name
             const argsData = args[0]
             this.setState({
@@ -144,12 +120,11 @@ class ProgramSettings extends React.Component {
                     argsData.specificEventPeriodDownload,
                 specificEventPeriodDBTrimming:
                     argsData.specificEventPeriodDBTrimming,
-                specificProgramName: argsData.id,
+                specificSettingName: argsData.id,
             })
             this.handleClickOpen()
         },
         delete: (...args) => {
-            console.log('Delete', ...args)
             this.argsRow = args[0]
             this.programName = args[0].name
 
@@ -257,7 +232,7 @@ class ProgramSettings extends React.Component {
         }
 
         this.setState({
-            specificProgram: {
+            specificSetting: {
                 openDialog: true,
             },
         })
@@ -269,7 +244,7 @@ class ProgramSettings extends React.Component {
         this.programToChange = undefined
 
         this.setState({
-            specificProgram: {
+            specificSetting: {
                 openDialog: false,
             },
             specificSettingDownload: '',
@@ -288,7 +263,7 @@ class ProgramSettings extends React.Component {
             specificEventsDBTrimming: '',
             specificEventPeriodDownload: '',
             specificEventPeriodDBTrimming: '',
-            specificProgramName: '',
+            specificSettingName: '',
         })
 
         this.updateGlobal = false
@@ -297,7 +272,7 @@ class ProgramSettings extends React.Component {
     handleSubmitDialog = async e => {
         e.preventDefault()
 
-        var specificProgramNameKey = this.state.specificProgramName
+        var specificProgramNameKey = this.state.specificSettingName
         var objData = this.specificSettings
 
         const programNameFilter = this.programListComplete.filter(
@@ -385,7 +360,7 @@ class ProgramSettings extends React.Component {
 
             const nameList = this.programNamesList
             const newNameList = nameList.filter(
-                name => name !== this.state.specificProgramName
+                name => name !== this.state.specificSettingName
             )
 
             this.programNamesList = newNameList
@@ -395,7 +370,7 @@ class ProgramSettings extends React.Component {
             console.log('rows table', this.specificSettingsRows)
         }
 
-        this.programNamesList.push(this.state.specificProgramName)
+        this.programNamesList.push(this.state.specificSettingName)
         console.log(programData, this.specificSettings)
 
         if (this.keyName === 'program_settings') {
@@ -684,88 +659,30 @@ class ProgramSettings extends React.Component {
         }
 
         return (
-            <div>
-                <div>
-                    <p className="main-content__title main-content__title__main">
-                        Program global settings
-                    </p>
-                    <p className="main-content__title main-content__subtitle">
-                        Applies to all programs that an Android user has access
-                        to, unless an specific set of values has been configured
-                        for a program (see below)
-                    </p>
-
-                    <ProgramTable
-                        data={programData}
-                        states={this.state}
-                        onChange={this.handleChange}
-                    />
-                </div>
-
-                <div>
-                    <p className="main-content__title main-content__title__main">
-                        Program specific settings
-                    </p>
-                    <p className="main-content__title main-content__subtitle">
-                        Programs settings listed below overwrite the global
-                        settings above
-                    </p>
-
-                    {this.programNamesList.length > 0 && (
-                        <div className="data__top-margin">
-                            <Table
-                                {...this.state}
-                                columns={['name', 'sumarySettings']}
-                                rows={this.specificSettingsRows}
-                                contextMenuActions={this.tableActions}
-                            />
-                        </div>
-                    )}
-
-                    <div style={style.container}>
-                        <Button
-                            raised
-                            style={style.button}
-                            onClick={this.handleClickOpen}
-                        >
-                            ADD
-                        </Button>
-                    </div>
-
-                    <DialogDelete
-                        open={this.state.deleteDialog.open}
-                        onHandleDelete={this.handleCloseDelete}
-                        onHandleClose={this.handleCancelDialog}
-                        typeName="program"
-                        name={this.programName}
-                    />
-
-                    <div className="main-content__button__container">
-                        <Button
-                            onClick={this.handleReset}
-                            raised
-                            color="primary"
-                        >
-                            SET TO DEFAULT
-                        </Button>
-                    </div>
-
-                    <DialogTable
-                        open={this.state.specificProgram.openDialog}
-                        title="program"
-                        handleClose={this.handleClose}
-                        dataTitle={this.programToChange}
-                        dataTitleOptions={this.programList}
-                        titleValue={this.state.specificProgramName}
-                        handleChange={this.handleChangeDialog}
-                        textFieldTitleId="specificProgramName"
-                        textFieldTitleName="specificProgramName"
-                        data={specificProgramData}
-                        state={this.state}
-                        handleSubmitDialog={this.handleSubmitDialog}
-                    />
-                </div>
-            </div>
+            <GlobalSpecificSettings
+                d2={this.props.d2}
+                tableNameProperty="Program Name"
+                componentSubtitleSingular="Program"
+                componentSubtitlePlural="Program"
+                programTableData={programData}
+                states={this.state}
+                handleTableChange={this.handleChange}
+                specificSettings={this.programNamesList}
+                specificSettingList={this.specificSettingsRows}
+                programTableActions={this.tableActions}
+                addSpecificSetting={this.handleClickOpen}
+                deleteDialogDelete={this.handleCloseDelete}
+                closeDialogDelete={this.handleCancelDialog}
+                typeNameDialogDelete="program"
+                dialogDeleteName={this.programName}
+                handleResetGlobalSettings={this.handleReset}
+                specificSettingDialogClose={this.handleClose}
+                specificSettingDataTitle={this.programToChange}
+                specificSettingOptions={this.programList}
+                specificSettingHandleChange={this.handleChangeDialog}
+                specificSettingData={specificProgramData}
+                specificSettingHandleSubmit={this.handleSubmitDialog}
+            />
         )
     }
 }

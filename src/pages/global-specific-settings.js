@@ -103,7 +103,6 @@ class GlobalSpecificSettings extends React.Component {
                     </div>
 
                     <DialogTable
-                        //open={this.props.specificSettingDialogOpen}
                         open={this.props.states.specificSetting.openDialog}
                         title={this.props.componentSubtitlePlural}
                         handleClose={this.props.specificSettingDialogClose}
