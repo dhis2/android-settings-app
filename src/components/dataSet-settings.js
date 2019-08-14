@@ -1,20 +1,14 @@
 import React from 'react'
 
-import { Button } from '@dhis2/d2-ui-core'
 import { CircularProgress } from '@dhis2/d2-ui-core'
-
-import Table from '@dhis2/d2-ui-table'
-import '@dhis2/d2-ui-core/build/css/Table.css'
 import api from '../utils/api'
 
-import DialogDelete from '../components/dialog-delete'
-import ProgramTable from './program-table'
-import DialogTable from './dialog-table'
 import {
     DataSetting,
     DataSpecificSetting,
     DataSetSettingsDefault,
 } from '../constants/data-set-settings'
+import GlobalSpecificSettings from '../pages/global-specific-settings'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -35,13 +29,13 @@ class DataSetSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        props.d2.i18n.translations['name'] = 'Data Set Name'
+        /* props.d2.i18n.translations['name'] = 'Data Set Name'
         props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
 
         props.d2.i18n.translations['edit'] = 'edit'
         props.d2.i18n.translations['delete'] = 'delete'
-        props.d2.i18n.translations['actions'] = 'actions'
-
+        props.d2.i18n.translations['actions'] = 'actions' */
+        console.log('datasets props', props)
         this.nameSpace = undefined
         this.keyName = undefined
         this.dataSetNamesList = []
@@ -120,20 +114,22 @@ class DataSetSettings extends React.Component {
         this.updateGlobal = false
     }
 
+    /**
+     * Updates data using Api, checks if keyname exists before updating or creating keyname
+     * @param settingType (global or specific setting)
+     * @param data (object data)
+     */
     saveDataApi = (settingType, data) => {
         if (this.keyName === 'dataSet_settings') {
             if (Object.keys(this[settingType]).length) {
                 data[settingType] = this[settingType]
-                console.log(data)
             }
 
             api.updateValue(
                 'ANDROID_SETTING_APP',
                 'dataSet_settings',
                 data
-            ).then(res => {
-                console.log('res update', res)
-            })
+            ).then(res => res)
         } else {
             api.getKeys('ANDROID_SETTING_APP').then(
                 api
@@ -142,9 +138,7 @@ class DataSetSettings extends React.Component {
                         'dataSet_settings',
                         data
                     )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
+                    .then(data => data)
             )
         }
     }
@@ -169,37 +163,6 @@ class DataSetSettings extends React.Component {
         }
 
         this.saveDataApi('specificSettings', dataSetData)
-
-        /* if (this.keyName === 'dataSet_settings') {
-            console.log('specificSettings', this.specificSettings)
-            if (Object.keys(this.specificSettings).length) {
-                dataSetData.specificSettings = this.specificSettings
-                console.log('envio de data', dataSetData)
-            }
-
-            console.log('submit', dataSetData)
-
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'dataSet_settings',
-                dataSetData
-            ).then(res => {
-                console.log('res update', res)
-            })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'dataSet_settings',
-                        dataSetData
-                    )
-                    .then(res => {
-                        console.log('data response update', res)
-                    })
-            )
-            console.log('submit', dataSetData)
-        } */
     }
 
     handleClickOpen = () => {
@@ -211,7 +174,6 @@ class DataSetSettings extends React.Component {
                 item => !dataUsedlist.includes(item.id)
             )
             this.dataSetList = dataSetNameFilter
-            console.log('nueva lista', this.dataSetList)
         }
 
         this.setState({
@@ -238,17 +200,17 @@ class DataSetSettings extends React.Component {
         this.updateGlobal = false
     }
 
-    handleSubmitDialog = async e => {
-        e.preventDefault()
+    /**
+     * Submit Dialog data, specific settings
+     */
 
+    handleSubmitDialog = () => {
         var specificDataSetNameKey = this.state.specificDataSetName
         var objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetListComplete.filter(
             option => option.id === specificDataSetNameKey
         )
-
-        console.log(dataSetNameFilter[0], this.specificSettings)
 
         objData[specificDataSetNameKey] = {
             lastUpdated: new Date().toJSON(),
@@ -296,41 +258,12 @@ class DataSetSettings extends React.Component {
 
         this.dataSetNamesList.push(this.state.specificDataSetName)
 
-        console.log(dataSetData, this.specificSettings)
-
-        if (this.keyName === 'dataSet_settings') {
-            if (Object.keys(this.globalSettings).length) {
-                dataSetData.globalSettings = this.globalSettings
-                console.log(dataSetData)
-            }
-
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'dataSet_settings',
-                dataSetData
-            ).then(res => {
-                console.log('res update', res)
-            })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'dataSet_settings',
-                        dataSetData
-                    )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
-            )
-        }
+        this.saveDataApi('globalSettings', dataSetData)
 
         this.handleClose()
     }
 
-    handleReset = e => {
-        e.preventDefault()
-
+    handleReset = () => {
         this.setState({
             periodDSDownload: periodDSDownload,
             periodDSDBTrimming: periodDSDBTrimming,
@@ -339,7 +272,6 @@ class DataSetSettings extends React.Component {
     }
 
     handleCloseDelete = () => {
-        console.log('delete', this.argsRow)
         const data = this.argsRow
         const oldList = this.specificSettings
         const rowList = this.specificSettingsRows
@@ -479,7 +411,6 @@ class DataSetSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    console.log('no hay data setting')
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'dataSet_settings'
@@ -503,7 +434,6 @@ class DataSetSettings extends React.Component {
                 const dataSetList = collection.toArray()
                 this.dataSetList = dataSetList
                 this.dataSetListComplete = dataSetList
-                console.log('data set list', this.dataSetList)
             })
     }
 
@@ -517,7 +447,45 @@ class DataSetSettings extends React.Component {
         }
 
         return (
-            <div>
+            <GlobalSpecificSettings
+                d2={this.props.d2}
+                tableNameProperty="Data Set Name"
+                componentSubtitleSingular="Data Set"
+                componentSubtitlePlural="Data Sets"
+                programTableData={dataSetSettings}
+                states={this.state}
+                handleTableChange={this.handleChange}
+                specificSettings={this.dataSetNamesList}
+                specificSettingList={this.specificSettingsRows}
+                programTableActions={this.tableActions}
+                addSpecificSetting={this.handleClickOpen}
+                openDialogDelete={this.state.deleteDialog.open}
+                deleteDialogDelete={this.handleCloseDelete}
+                closeDialogDelete={this.handleCancelDialog}
+                typeNameDialogDelete="data set"
+                dialogDeleteName={this.dataSetName}
+                handleResetGlobalSettings={this.handleReset}
+                specificSettingDialogOpen={
+                    this.state.specificDataSet.openDialog
+                }
+                specificSettingDialogClose={this.handleClose}
+                specificSettingDataTitle={this.dataSetToChange}
+                specificSettingOptions={this.dataSetList}
+                specificSettingTitleValue={this.state.specificDataSetName}
+                specificSettingHandleChange={this.handleChangeDialog}
+                specificSettingtextFieldId="specificDataSetName"
+                specificSettingtextFieldName="specificDataSetName"
+                specificSettingData={dataSpecificSetting}
+                specificSettingHandleSubmit={this.handleSubmitDialog}
+            />
+        )
+    }
+}
+
+export default DataSetSettings
+
+/*
+    <div>
                 <div>
                     <p className="main-content__title main-content__title__main">
                         Data Sets global settings
@@ -599,8 +567,4 @@ class DataSetSettings extends React.Component {
                     />
                 </div>
             </div>
-        )
-    }
-}
-
-export default DataSetSettings
+*/
