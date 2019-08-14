@@ -23,7 +23,6 @@ class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        console.log('props', props)
         props.d2.i18n.translations['name'] = this.props.tableNameProperty
         props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
 
@@ -86,7 +85,7 @@ class GlobalSpecificSettings extends React.Component {
                     </div>
 
                     <DialogDelete
-                        open={this.props.openDialogDelete}
+                        open={this.props.states.deleteDialog.open}
                         onHandleDelete={this.props.deleteDialogDelete}
                         onHandleClose={this.props.closeDialogDelete}
                         typeName={this.props.typeNameDialogDelete}
@@ -104,17 +103,16 @@ class GlobalSpecificSettings extends React.Component {
                     </div>
 
                     <DialogTable
-                        open={this.props.specificSettingDialogOpen}
+                        //open={this.props.specificSettingDialogOpen}
+                        open={this.props.states.specificSetting.openDialog}
                         title={this.props.componentSubtitlePlural}
                         handleClose={this.props.specificSettingDialogClose}
                         dataTitle={this.props.specificSettingDataTitle}
                         dataTitleOptions={this.props.specificSettingOptions}
-                        titleValue={this.props.specificSettingTitleValue}
+                        titleValue={this.props.states.specificSettingName}
                         handleChange={this.props.specificSettingHandleChange}
-                        textFieldTitleId={this.props.specificSettingtextFieldId}
-                        textFieldTitleName={
-                            this.props.specificSettingtextFieldName
-                        }
+                        textFieldTitleId="specificSettingName"
+                        textFieldTitleName="specificSettingName"
                         data={this.props.specificSettingData}
                         state={this.props.states}
                         handleSubmitDialog={
