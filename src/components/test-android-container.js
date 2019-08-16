@@ -7,6 +7,7 @@ import {
     testAndroidDataConstants,
 } from '../constants/test-android'
 import TestAndroid from './test-android'
+import memorySizeOf from '../utils/memory-size'
 //import main from '../utils/puppeteer'
 
 class TestAndroidContainer extends React.Component {
@@ -45,6 +46,13 @@ class TestAndroidContainer extends React.Component {
         tooltipProgramRule: undefined,
         tooltipMetadata: undefined,
         tooltipData: undefined,
+        maxValueOUCapture: undefined,
+        maxValueOUSearch: undefined,
+        maxValueDataSet: undefined,
+        maxValueProgram: undefined,
+        maxValueProgramRule: undefined,
+        maxValueMetadata: undefined,
+        maxValueData: undefined,
     }
 
     clearFields = () => {
@@ -55,6 +63,16 @@ class TestAndroidContainer extends React.Component {
         this.datasetNumber = 0
         this.programNumber = 0
         this.programRuleNumber = 0
+
+        this.setState({
+            userSelected: undefined,
+            userSelectedId: undefined,
+            organisationUnitsNumber: 0,
+            organisationUnitSearchNumber: 0,
+            datasetNumber: 0,
+            programNumber: 0,
+            programRuleNumber: 0,
+        })
     }
 
     createTooltipText = () => {
@@ -65,40 +83,9 @@ class TestAndroidContainer extends React.Component {
 
             this.setState({
                 [test.value]: tooltip,
+                [test.maxValueState]: test.max,
             })
             //this[test.value] = tooltip
-        })
-    }
-
-    handleChange = e => {
-        console.log({
-            [e.target.name]: e.target.value,
-        })
-
-        this.clearFields()
-
-        this.props.d2.models.users
-            .list({
-                paging: false,
-                level: 1,
-                filter: `id:eq:${e.target.value}`,
-            })
-            .then(collection => {
-                const user = collection.toArray()[0]
-
-                this.userSelected = user
-                console.log({
-                    'user selected': user,
-                    user: this.userSelected,
-                    'collection[0]': collection.toArray()[0],
-                    collection: collection,
-                })
-                this.userSelectedId = e.target.value
-            })
-
-        this.setState({
-            ...this.state,
-            [e.target.name]: e.target.value,
         })
     }
 
@@ -112,6 +99,7 @@ class TestAndroidContainer extends React.Component {
         const organisationUnitList = []
         let dataSetList = []
         let programsList = []
+        const programsValuesList = []
         const programsIdAccess = []
         const organisationUnitSearchList = []
         // const programRuleList = []
@@ -179,10 +167,8 @@ class TestAndroidContainer extends React.Component {
                                         programPerOU.push(key)
                                     }
                                 )
-                                console.log(programPerOU)
                                 oucapture.programs.valuesContainerMap.forEach(
                                     (value, key) => {
-                                        console.log('key program', key)
                                         if (programsList.length >= 1) {
                                             const programIds = programsList.filter(
                                                 program => program !== key
@@ -190,8 +176,10 @@ class TestAndroidContainer extends React.Component {
                                             //programsList.filter(program => program)
                                             programsList = programIds
                                             programsList.push(key)
+                                            programsValuesList.push(value)
                                         } else {
                                             programsList.push(key)
+                                            programsValuesList.push(value)
                                         }
                                     }
                                 )
@@ -223,6 +211,7 @@ class TestAndroidContainer extends React.Component {
                             console.log({
                                 dataset: dataSetList,
                                 program: programsList,
+                                programV: programsValuesList,
                             })
                         })
                     })
@@ -236,8 +225,10 @@ class TestAndroidContainer extends React.Component {
                         this.props.d2.models.dataSets.list({
                             paging: false,
                             filter: `id:in:[${dataSetList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,periodType,categoryCombo[id],mobile,version,expiryDays,timelyDays,notifyCompletingUser,openFuturePeriods,fieldCombinationRequired,validCompleteOnly,noValueRequiresComment,skipOffline,dataElementDecoration,renderAsTabs,renderHorizontally,workflow[id],dataSetElements[dataSet[id],dataElement[id],categoryCombo[id]],indicators[id],sections[id,code,name,displayName,created,lastUpdated,deleted,description,sortOrder,dataSet[id],showRowTotals,showColumnTotals,dataElements[id],greyedFields[id,deleted,dataElement[id],categoryOptionCombo[id]]],compulsoryDataElementOperands[id,deleted,dataElement[id],categoryOptionCombo[id]],dataInputPeriods[period,openingDate,closingDate],access[data[write]],style[color,icon]',
                         }),
-                        this.props.d2.models.program.list({
+                        this.props.d2.models.programs.list({
                             paging: false,
                             filter: `id:in:[${programsList}]`,
                             fields:
@@ -246,11 +237,49 @@ class TestAndroidContainer extends React.Component {
                         this.props.d2.models.programRules.list({
                             paging: false,
                             filter: `program.id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,priority,condition,program[id],programStage[id],programRuleActions[id,code,name,displayName,created,lastUpdated,deleted,data,content,location,trackedEntityAttribute[id],programIndicator[id],programStageSection[id],programRuleActionType,programStage[id],dataElement[id],option[id],optionGroup[id]]',
                         }),
-                    ]).then(([datasets, programs, programRules]) => {
-                        const datasetToAccess = datasets.toArray()
-                        console.log('dataset', datasetToAccess)
-                        /* datasets.forEach(dataset => {
+                        this.props.d2.models.programStages.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
+                        }),
+                        /* this.props.d2.models.trackedEntityTypes.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]'
+                        }), */
+                        this.props.d2.models.relationshipTypes.list({
+                            paging: false,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
+                        }),
+                        /* this.props.d2.models.optionSets.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]'
+                        }) */
+                    ]).then(
+                        ([
+                            datasets,
+                            programs,
+                            programRules,
+                            programStages,
+                            relationshipTypes,
+                        ]) => {
+                            const datasetToAccess = datasets.toArray()
+                            console.log({
+                                dataset: datasetToAccess,
+                                'datasets response': datasets,
+                                'size response': JSON.stringify(datasetToAccess)
+                                    .length,
+                                size: memorySizeOf(
+                                    JSON.stringify(datasetToAccess)
+                                ),
+                            })
+                            /* datasets.forEach(dataset => {
                                 switch (dataset.publicAccess) {
                                     case 'r-------':
                                         // if user userGroupAccess, if user userAccess
@@ -290,8 +319,8 @@ class TestAndroidContainer extends React.Component {
                                         break
                                 }
                             }) */
-                        const programsToAccess = programs.toArray()
-                        /* programs.forEach(program => {
+                            const programsToAccess = programs.toArray()
+                            /* programs.forEach(program => {
                                 switch (program.publicAccess) {
                                     case 'r-------':
                                         // if user userGroupAccess, if user userAccess
@@ -332,28 +361,47 @@ class TestAndroidContainer extends React.Component {
                                 }
                             }) */
 
-                        //this.programNumber = programsIdAccess.length
-                        console.log('programs list data', programsToAccess)
-                        const programRulesToAccess = programRules.toArray()
-                        console.log(programRulesToAccess)
+                            //this.programNumber = programsIdAccess.length
+                            console.log({
+                                'no array': programs,
+                                'no array string': JSON.stringify(
+                                    programs.toArray()
+                                ),
+                                'no array size': JSON.stringify(
+                                    programs.toArray()
+                                ).length,
+                                'programs list data': programsToAccess,
+                                'size response': JSON.stringify(
+                                    programsToAccess
+                                ).length,
+                                'string response': JSON.stringify(
+                                    programsToAccess
+                                ),
+                                size: memorySizeOf(
+                                    JSON.stringify(programsToAccess)
+                                ),
+                            })
+                            const programRulesToAccess = programRules.toArray()
+                            console.log(programRulesToAccess)
 
-                        this.programNumber = programsToAccess.length
-                        this.datasetNumber = datasetToAccess.length
-                        this.programRuleNumber = programRulesToAccess.length
+                            this.programNumber = programsToAccess.length
+                            this.datasetNumber = datasetToAccess.length
+                            this.programRuleNumber = programRulesToAccess.length
 
-                        this.setState({
-                            loading: false,
-                            runTest: true,
-                            disabled: true,
-                            organisationUnitSearchNumber: this
-                                .organisationUnitSearchNumber,
-                            organisationUnitsNumber: this
-                                .organisationUnitsNumber,
-                            programNumber: this.programNumber,
-                            datasetNumber: this.datasetNumber,
-                            programRuleNumber: this.programRuleNumber,
-                        })
-                    })
+                            this.setState({
+                                loading: false,
+                                runTest: true,
+                                disabled: true,
+                                organisationUnitSearchNumber: this
+                                    .organisationUnitSearchNumber,
+                                organisationUnitsNumber: this
+                                    .organisationUnitsNumber,
+                                programNumber: this.programNumber,
+                                datasetNumber: this.datasetNumber,
+                                programRuleNumber: this.programRuleNumber,
+                            })
+                        }
+                    )
                 }
             })
         }

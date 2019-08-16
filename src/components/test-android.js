@@ -20,6 +20,7 @@ class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
         this.TestAndroid = props
+        console.log(props)
     }
 
     render() {
@@ -64,13 +65,25 @@ class TestAndroid extends React.Component {
                                                 }
                                                 placement="bottom"
                                             >
-                                                <p className="subitem-item subitem-bigitem">
+                                                <p
+                                                    className={`subitem-item subitem-bigitem ${
+                                                        this.props.states[
+                                                            test.state
+                                                        ] >=
+                                                        this.props.states[
+                                                            test.maxValueState
+                                                        ]
+                                                            ? 'max-value'
+                                                            : ''
+                                                    }`}
+                                                >
                                                     {
                                                         this.props.states[
                                                             test.state
                                                         ]
                                                     }
                                                 </p>
+                                                {/* "subitem-item subitem-bigitem" */}
                                             </Tooltip>
                                         </Grid>
                                     </Grid>

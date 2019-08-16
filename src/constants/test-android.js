@@ -2,6 +2,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipOUCapture',
         tootip: 'organisationUnitCapture',
+        maxValueState: 'maxValueOUCapture',
         min: 1,
         normal: 3,
         max: 5,
@@ -9,6 +10,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipOUSearch',
         tootip: 'organisationUnitSearch',
+        maxValueState: 'maxValueOUSearch',
         min: 3,
         normal: 5,
         max: 7,
@@ -16,6 +18,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipDataSet',
         tootip: 'dataSet',
+        maxValueState: 'maxValueDataSet',
         min: 5,
         normal: 7,
         max: 9,
@@ -23,6 +26,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipProgram',
         tootip: 'program',
+        maxValueState: 'maxValueProgram',
         min: 7,
         normal: 9,
         max: 11,
@@ -30,6 +34,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipProgramRule',
         tootip: 'programRules',
+        maxValueState: 'maxValueProgramRule',
         min: 9,
         normal: 11,
         max: 13,
@@ -37,6 +42,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipMetadata',
         tootip: 'metadata',
+        maxValueState: 'maxValueMetadata',
         min: 11,
         normal: 13,
         max: 15,
@@ -44,6 +50,7 @@ export const testAndroidConstants = [
     {
         value: 'tooltipData',
         tootip: 'data',
+        maxValueState: 'maxValueData',
         min: 13,
         normal: 15,
         max: 17,
@@ -56,41 +63,48 @@ export const testAndroidDataConstants = [
         description: 'Number of org unit that are available for data capture',
         tooltipTitle: 'tooltipOUCapture',
         state: 'organisationUnitsNumber',
+        maxValueState: 'maxValueOUCapture',
     },
     {
         title: 'Org Units search',
         description: 'Number of org unit that are available for data capture',
         tooltipTitle: 'tooltipOUSearch',
         state: 'organisationUnitSearchNumber',
+        maxValueState: 'maxValueOUSearch',
     },
     {
         title: 'Data sets associated to OU capture of user',
         description: 'Number of datasets associated to capture OUs',
         tooltipTitle: 'tooltipDataSet',
         state: 'datasetNumber',
+        maxValueState: 'maxValueDataSet',
     },
     {
         title: 'Program associated to OU',
         description: 'Number of program associated to capture OUs',
         tooltipTitle: 'tooltipProgram',
         state: 'programNumber',
+        maxValueState: 'maxValueProgram',
     },
     {
         title: 'Program rules associated to OU',
         description: 'Number of program rules to download',
         tooltipTitle: 'tooltipProgramRule',
         state: 'programRuleNumber',
+        maxValueState: 'maxValueProgramRule',
     },
     {
-        title: 'Metadata download size',
+        title: 'Metadata download size  (KB)',
         description: '',
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
+        maxValueState: 'maxValueMetadata',
     },
     {
         title: 'Data download size',
         description: '',
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
+        maxValueState: 'maxValueData',
     },
 ]
