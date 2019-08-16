@@ -20,7 +20,6 @@ class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
         this.TestAndroid = props
-        console.log(props)
     }
 
     render() {
