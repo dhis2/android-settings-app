@@ -7,8 +7,8 @@ import {
     testAndroidDataConstants,
 } from '../constants/test-android'
 import TestAndroid from './test-android'
-import memorySizeOf from '../utils/memory-size'
-//import main from '../utils/puppeteer'
+import { memorySizeOf, formatByteSize } from '../utils/memory-size'
+//import { sizeRequest } from '../utils/puppeteer'
 
 class TestAndroidContainer extends React.Component {
     constructor(props) {
@@ -72,6 +72,7 @@ class TestAndroidContainer extends React.Component {
             datasetNumber: 0,
             programNumber: 0,
             programRuleNumber: 0,
+            metadataSize: 0,
         })
     }
 
@@ -108,6 +109,15 @@ class TestAndroidContainer extends React.Component {
         const promisesOrganisationUnitsSearch = []
         const organisationUnitSearchCollection = []
         const datasetsIdAccess = []
+        let trackedEntityTypeListId = []
+        let optionSetListId = []
+        const dataSetValuesList = []
+        let dataElementListId = []
+        let indicatorListId = []
+        const indicatorValuesList = []
+        let indicatorTypeListId = []
+        let categoryComboListId = []
+        let categoryListId = []
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
@@ -147,6 +157,8 @@ class TestAndroidContainer extends React.Component {
                     this.props.d2.models.organisationUnits.list({
                         paging: false,
                         filter: `path:like:${orgUnit}`,
+                        fields:
+                            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,path,openingDate,closedDate,level,parent[id],programs[id,name,trackedEntityType[id],programTrackedEntityAttributes[trackedEntityAttribute[optionSet[id]]]],dataSets[id,categoryCombo[id,categories[id]],indicators[id,indicatorType[id]],dataSetElements[dataElement[id]]],ancestors[id,displayName],organisationUnitGroups[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName]',
                     })
                 )
             })
@@ -173,7 +185,6 @@ class TestAndroidContainer extends React.Component {
                                             const programIds = programsList.filter(
                                                 program => program !== key
                                             )
-                                            //programsList.filter(program => program)
                                             programsList = programIds
                                             programsList.push(key)
                                             programsValuesList.push(value)
@@ -202,16 +213,240 @@ class TestAndroidContainer extends React.Component {
                                             )
                                             dataSetList = datasetIds
                                             dataSetList.push(key)
+                                            dataSetValuesList.push(value)
                                         } else {
                                             dataSetList.push(key)
+                                            dataSetValuesList.push(value)
                                         }
                                     }
                                 )
+                            }
+                            if (dataSetValuesList.length > 0) {
+                                dataSetValuesList.forEach(value => {
+                                    const dataSetElement = value.dataSetElements
+                                    if (
+                                        dataSetElement !== undefined &&
+                                        dataSetElement.length > 0
+                                    ) {
+                                        dataSetElement.forEach(value => {
+                                            if (
+                                                Object.keys(value.dataElement)
+                                                    .length !== 0
+                                            ) {
+                                                if (
+                                                    dataElementListId.length >=
+                                                    1
+                                                ) {
+                                                    const dataElements = dataElementListId.filter(
+                                                        dataElement =>
+                                                            dataElement !==
+                                                            value.dataElement.id
+                                                    )
+                                                    dataElementListId = dataElements
+                                                    dataElementListId.push(
+                                                        value.dataElement.id
+                                                    )
+                                                } else {
+                                                    dataElementListId.push(
+                                                        value.dataElement.id
+                                                    )
+                                                }
+                                            }
+                                        })
+                                    }
+                                    const indicators =
+                                        value.indicators.valuesContainerMap
+                                    if (indicators.size > 0) {
+                                        value.indicators.valuesContainerMap.forEach(
+                                            (value, key) => {
+                                                if (
+                                                    indicatorListId.length >= 1
+                                                ) {
+                                                    const indicators = indicatorListId.filter(
+                                                        indicator =>
+                                                            indicator !== key
+                                                    )
+                                                    indicatorListId = indicators
+                                                    indicatorListId.push(key)
+                                                    indicatorValuesList.push(
+                                                        value
+                                                    )
+                                                } else {
+                                                    indicatorListId.push(key)
+                                                    indicatorValuesList.push(
+                                                        value
+                                                    )
+                                                }
+                                            }
+                                        )
+                                    }
+                                    const categoryCombos = value.categoryCombo
+                                    if (categoryCombos !== undefined) {
+                                        if (categoryComboListId.length >= 1) {
+                                            const categoryComboL = categoryComboListId.filter(
+                                                categoryCombo =>
+                                                    categoryCombo !==
+                                                    categoryCombos.id
+                                            )
+                                            categoryComboListId = categoryComboL
+                                            categoryComboListId.push(
+                                                categoryCombos.id
+                                            )
+                                        } else {
+                                            categoryComboListId.push(
+                                                categoryCombos.id
+                                            )
+                                        }
+
+                                        if (
+                                            value.categoryCombo.categories
+                                                .length > 0
+                                        ) {
+                                            value.categoryCombo.categories.forEach(
+                                                categoryValue => {
+                                                    console.log(
+                                                        'categorys',
+                                                        categoryListId,
+                                                        categoryValue
+                                                    )
+                                                    if (
+                                                        categoryListId.length >=
+                                                        1
+                                                    ) {
+                                                        const categoryL = categoryListId.filter(
+                                                            category =>
+                                                                category !==
+                                                                categoryValue.id
+                                                        )
+                                                        categoryListId = categoryL
+                                                        categoryListId.push(
+                                                            categoryValue.id
+                                                        )
+                                                    } else {
+                                                        categoryListId.push(
+                                                            categoryValue.id
+                                                        )
+                                                    }
+                                                }
+                                            )
+                                        }
+
+                                        if (indicatorValuesList.length > 0) {
+                                            indicatorValuesList.forEach(
+                                                value => {
+                                                    if (
+                                                        Object.keys(
+                                                            value.indicatorType
+                                                        ).length !== 0
+                                                    ) {
+                                                        if (
+                                                            indicatorTypeListId.length >=
+                                                            1
+                                                        ) {
+                                                            const indicatorType = indicatorTypeListId.filter(
+                                                                indicatorT =>
+                                                                    indicatorT !==
+                                                                    value
+                                                                        .indicatorType
+                                                                        .id
+                                                            )
+                                                            indicatorTypeListId = indicatorType
+                                                            indicatorTypeListId.push(
+                                                                value
+                                                                    .indicatorType
+                                                                    .id
+                                                            )
+                                                        } else {
+                                                            indicatorTypeListId.push(
+                                                                value
+                                                                    .indicatorType
+                                                                    .id
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    }
+                                })
+                            }
+                            if (programsValuesList.length > 0) {
+                                programsValuesList.forEach((value, key) => {
+                                    const trackedEntityT =
+                                        value.trackedEntityType
+                                    if (trackedEntityT !== undefined) {
+                                        if (
+                                            trackedEntityTypeListId.length >= 1
+                                        ) {
+                                            const trackedEntityTypes = trackedEntityTypeListId.filter(
+                                                trackedEntity =>
+                                                    trackedEntity !==
+                                                    trackedEntityT.id
+                                            )
+                                            trackedEntityTypeListId = trackedEntityTypes
+                                            trackedEntityTypeListId.push(
+                                                trackedEntityT.id
+                                            )
+                                        } else {
+                                            trackedEntityTypeListId.push(
+                                                trackedEntityT.id
+                                            )
+                                        }
+                                    }
+
+                                    const programTEA =
+                                        value.programTrackedEntityAttributes
+                                    if (
+                                        programTEA !== undefined &&
+                                        programTEA.length > 0
+                                    ) {
+                                        programTEA.forEach(value => {
+                                            if (
+                                                Object.keys(
+                                                    value.trackedEntityAttribute
+                                                ).length !== 0
+                                            ) {
+                                                if (
+                                                    optionSetListId.length >= 1
+                                                ) {
+                                                    const optionSets = optionSetListId.filter(
+                                                        optionSet =>
+                                                            optionSet !==
+                                                            value
+                                                                .trackedEntityAttribute
+                                                                .optionSet.id
+                                                    )
+                                                    optionSetListId = optionSets
+                                                    optionSetListId.push(
+                                                        value
+                                                            .trackedEntityAttribute
+                                                            .optionSet.id
+                                                    )
+                                                } else {
+                                                    optionSetListId.push(
+                                                        value
+                                                            .trackedEntityAttribute
+                                                            .optionSet.id
+                                                    )
+                                                }
+                                            }
+                                        })
+                                    }
+                                })
                             }
                             console.log({
                                 dataset: dataSetList,
                                 program: programsList,
                                 programV: programsValuesList,
+                                trackedEntity: trackedEntityTypeListId,
+                                optionSetListId: optionSetListId,
+                                dataSetValuesList: dataSetValuesList,
+                                dataElement: dataElementListId,
+                                indicators: indicatorListId,
+                                categoryCombo: categoryComboListId,
+                                category: categoryListId,
+                                indicatorValuesList: indicatorValuesList,
+                                indicatorT: indicatorTypeListId,
                             })
                         })
                     })
@@ -246,28 +481,72 @@ class TestAndroidContainer extends React.Component {
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
                         }),
-                        /* this.props.d2.models.trackedEntityTypes.list({
+                        this.props.d2.models.trackedEntityTypes.list({
                             paging: false,
-                            filter: `program.id:in:[${programsList}]`,
-                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]'
-                        }), */
+                            filter: `id:in:[${trackedEntityTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
+                        }),
                         this.props.d2.models.relationshipTypes.list({
                             paging: false,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
                         }),
-                        /* this.props.d2.models.optionSets.list({
+                        this.props.d2.models.optionSets.list({
                             paging: false,
-                            filter: `program.id:in:[${programsList}]`,
-                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]'
-                        }) */
+                            filter: `id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
+                        }),
+                        this.props.d2.models.optionGroups.list({
+                            paging: false,
+                            filter: `optionSet.id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
+                        }),
+                        /* this.props.d2.models.dataElements.list({
+                            paging: false,
+                            filter: `id:in:[${dataElementListId}]`,
+                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]'
+                        }), */
+                        this.props.d2.models.indicators.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
+                        }),
+                        this.props.d2.models.indicatorTypes.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
+                        }),
+                        this.props.d2.models.categoryCombos.list({
+                            paging: false,
+                            filter: `id:in:[${categoryComboListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
+                        }),
+                        this.props.d2.models.categories.list({
+                            paging: false,
+                            filter: `id:in:[${categoryListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
+                        }),
                     ]).then(
                         ([
                             datasets,
                             programs,
                             programRules,
                             programStages,
+                            trackedEntityTypes,
                             relationshipTypes,
+                            optionSets,
+                            optionGroups,
+                            indicators,
+                            indicatorTypes,
+                            categoryCombos,
+                            categories,
                         ]) => {
                             const datasetToAccess = datasets.toArray()
                             console.log({
@@ -278,7 +557,116 @@ class TestAndroidContainer extends React.Component {
                                 size: memorySizeOf(
                                     JSON.stringify(datasetToAccess)
                                 ),
+                                'dataset Size': memorySizeOf(
+                                    JSON.stringify(datasets.toArray())
+                                ),
+                                'prgram size': memorySizeOf(
+                                    JSON.stringify(programs.toArray())
+                                ),
+                                programStages: memorySizeOf(
+                                    JSON.stringify(programStages.toArray())
+                                ),
+                                relation: memorySizeOf(
+                                    JSON.stringify(relationshipTypes.toArray())
+                                ),
+                                trackedEntity: memorySizeOf(
+                                    JSON.stringify(trackedEntityTypes.toArray())
+                                ),
+                                optionSet: memorySizeOf(
+                                    JSON.stringify(optionSets.toArray())
+                                ),
+                                optionG: memorySizeOf(
+                                    JSON.stringify(optionGroups.toArray())
+                                ),
+                                indicator: memorySizeOf(
+                                    JSON.stringify(indicators.toArray())
+                                ),
+                                categoryCombo: memorySizeOf(
+                                    JSON.stringify(categoryCombos.toArray())
+                                ),
+                                programRule: memorySizeOf(
+                                    JSON.stringify(programRules.toArray())
+                                ),
+                                indicatorTypes: memorySizeOf(
+                                    JSON.stringify(indicatorTypes.toArray())
+                                ),
+                                categories: memorySizeOf(
+                                    JSON.stringify(categories.toArray())
+                                ),
+                                /* test: sizeRequest(googleapifont).then(function (result) {
+                                    console.log(result)
+                                }) */
                             })
+
+                            let metadata =
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(programs.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(datasets.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(programRules.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(programStages.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(
+                                            trackedEntityTypes.toArray()
+                                        )
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(
+                                            relationshipTypes.toArray()
+                                        )
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(indicators.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(categoryCombos.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(indicatorTypes.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(categories.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(optionSets.toArray())
+                                    )
+                                ) +
+                                parseFloat(
+                                    memorySizeOf(
+                                        JSON.stringify(optionGroups.toArray())
+                                    )
+                                )
+
+                            console.log(metadata, formatByteSize(metadata))
+                            metadata = formatByteSize(metadata)
+
                             /* datasets.forEach(dataset => {
                                 switch (dataset.publicAccess) {
                                     case 'r-------':
@@ -399,6 +787,7 @@ class TestAndroidContainer extends React.Component {
                                 programNumber: this.programNumber,
                                 datasetNumber: this.datasetNumber,
                                 programRuleNumber: this.programRuleNumber,
+                                metadataSize: metadata,
                             })
                         }
                     )
