@@ -99,63 +99,29 @@ export default class TextFieldSearch extends React.Component {
         const inputLength = inputValue.length
         let count = 0
 
-        console.log('suggestion', inputLength, inputValue)
-        /* return inputLength === 0 && !showEmpty
+        return inputLength === 0 && !showEmpty
             ? []
             : this.suggestions.filter(suggestion => {
-                  const keep =
+                  let keep =
                       count < 5 &&
                       suggestion.name.slice(0, inputLength).toLowerCase() ===
                           inputValue
 
-                    console.log('suggestions', keep)
                   if (keep) {
                       count += 1
+                  } else {
+                      keep =
+                          count < 5 &&
+                          suggestion.userCredentials.username
+                              .slice(0, inputLength)
+                              .toLowerCase() === inputValue
+
+                      if (keep) {
+                          count += 1
+                      }
                   }
-
                   return keep
-              }) */
-
-        if (inputLength === 0 && !showEmpty) {
-            return []
-        } else {
-            const suggestionList = this.suggestions.filter(suggestion => {
-                let keep =
-                    count < 5 &&
-                    suggestion.name.slice(0, inputLength).toLowerCase() ===
-                        inputValue
-
-                // let checkKeep
-                console.log('suggestions', keep, count)
-                if (keep) {
-                    count += 1
-                    //return keep
-                } else {
-                    keep =
-                        count < 5 &&
-                        suggestion.userCredentials.username
-                            .slice(0, inputLength)
-                            .toLowerCase() === inputValue
-
-                    console.log('checkkeep', keep)
-
-                    if (keep) {
-                        count += 1
-                    }
-                }
-
-                console.log('suggestions', keep, count)
-                return keep
-            })
-
-            return suggestionList
-            /* if (suggestionList.length > 0) {
-                console.log('suggestions list', suggestionList)
-                return suggestionList
-            } else {
-
-            } */
-        }
+              })
     }
 
     render() {
