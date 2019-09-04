@@ -289,13 +289,14 @@ class ProgramSettings extends React.Component {
             specificTeiDownload: this.state.specificTeiDownload,
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
-            specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
+            specificEnrollmentDBTrimming: this.state
+                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
@@ -328,13 +329,14 @@ class ProgramSettings extends React.Component {
             specificTeiDownload: this.state.specificTeiDownload,
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
-            specificEnrollmentDBTrimming: this.state.specificEventDBTrimming,
+            specificEnrollmentDBTrimming: this.state
+                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
@@ -567,7 +569,7 @@ class ProgramSettings extends React.Component {
                                                     specificEnrollmentDownload:
                                                         program.specificEnrollmentDownload,
                                                     specificEnrollmentDBTrimming:
-                                                        program.specificEventDBTrimming,
+                                                        program.specificEnrollmentDBTrimming, //specificEventDBTrimming,
                                                     specificEnrollmentDateDownload:
                                                         program.specificEnrollmentDateDownload,
                                                     specificEnrollmentDateDBTrimming:
@@ -575,7 +577,7 @@ class ProgramSettings extends React.Component {
                                                     specificUpdateDownload:
                                                         program.specificUpdateDownload,
                                                     specificUpdateDBTrimming:
-                                                        program.updateDBTrimming,
+                                                        program.specificUpdateDBTrimming, //updateDBTrimming,
                                                     specificTEReservedDownload:
                                                         program.specificTEReservedDownload,
                                                     specificTEReservedDBTrimming:
