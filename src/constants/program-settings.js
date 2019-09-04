@@ -6,21 +6,21 @@ export const Program = [
         download: [
             {
                 label: 'Global',
-                value: 'global',
+                value: 'Global',
             },
             {
                 label: 'Per Org Unit',
-                value: 'orgUnit',
+                value: 'Per Org Unit',
             },
         ],
         DBTrimming: [
             {
                 label: 'Global',
-                value: 'global',
+                value: 'Global',
             },
             {
                 label: 'Per Org Unit',
-                value: 'orgUnit',
+                value: 'Per Org Unit',
             },
         ],
     },
@@ -36,21 +36,21 @@ export const Program = [
         download: [
             {
                 label: 'All',
-                value: 'all',
+                value: 'All',
             },
             {
                 label: 'Only Active',
-                value: 'onlyActive',
+                value: 'Only Active',
             },
         ],
         DBTrimming: [
             {
                 label: 'All',
-                value: 'all',
+                value: 'All',
             },
             {
                 label: 'Only Active',
-                value: 'onlyActive',
+                value: 'Only Active',
             },
         ],
     },
@@ -61,37 +61,37 @@ export const Program = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -102,37 +102,37 @@ export const Program = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -153,37 +153,37 @@ export const Program = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -197,21 +197,21 @@ export const SpecificProgram = [
         download: [
             {
                 label: 'All Org Units',
-                value: 'all',
+                value: 'All Org Units',
             },
             {
                 label: 'Per Org Unit',
-                value: 'orgUnit',
+                value: 'Per Org Unit',
             },
         ],
         DBTrimming: [
             {
                 label: 'All Org Units',
-                value: 'all',
+                value: 'All Org Units',
             },
             {
                 label: 'Per Org Unit',
-                value: 'orgUnit',
+                value: 'Per Org Unit',
             },
         ],
     },
@@ -227,21 +227,21 @@ export const SpecificProgram = [
         download: [
             {
                 label: 'All',
-                value: 'all',
+                value: 'All',
             },
             {
                 label: 'Only Active',
-                value: 'onlyActive',
+                value: 'Only Active',
             },
         ],
         DBTrimming: [
             {
                 label: 'All',
-                value: 'all',
+                value: 'All',
             },
             {
                 label: 'Only Active',
-                value: 'onlyActive',
+                value: 'Only Active',
             },
         ],
     },
@@ -252,37 +252,37 @@ export const SpecificProgram = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -293,37 +293,37 @@ export const SpecificProgram = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -344,57 +344,57 @@ export const SpecificProgram = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
 ]
 
 export const ProgramSettingsDefault = {
-    settingDownload: 'global',
-    settingDBTrimming: 'global',
+    settingDownload: 'Global',
+    settingDBTrimming: 'Global',
     teiDownload: 500,
     teiDBTrimmming: 500,
-    enrollmentDownload: 'all',
-    enrollmentDBTrimming: 'all',
-    enrollmentDateDownload: 'any',
-    enrollmentDateDBTrimming: 'any',
-    updateDownload: 'any',
-    updateDBTrimming: 'any',
+    enrollmentDownload: 'All',
+    enrollmentDBTrimming: 'All',
+    enrollmentDateDownload: 'Any',
+    enrollmentDateDBTrimming: 'Any',
+    updateDownload: 'Any',
+    updateDBTrimming: 'Any',
     teReservedDownload: 100,
     teReservedDBTrimming: 100,
     eventsDownload: 1000,
     eventsDBTrimming: 1000,
-    eventPeriodDownload: 'any',
-    eventPeriodDBTrimming: 'any',
+    eventPeriodDownload: 'Any',
+    eventPeriodDBTrimming: 'Any',
 }

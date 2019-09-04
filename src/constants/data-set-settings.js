@@ -6,37 +6,37 @@ export const DataSetting = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
@@ -50,43 +50,43 @@ export const DataSpecificSetting = [
         download: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
                 label: 'Any',
-                value: 'any',
+                value: 'Any',
             },
             {
                 label: 'Last month',
-                value: 'lastMonth',
+                value: 'Last month',
             },
             {
                 label: 'Last 3 months',
-                value: 'last3Month',
+                value: 'Last 3 months',
             },
             {
                 label: 'Last 12 months',
-                value: 'last12Month',
+                value: 'Last 12 months',
             },
         ],
     },
 ]
 
 export const DataSetSettingsDefault = {
-    periodDSDownload: 'last12Month',
-    periodDSDBTrimming: 'last12Month',
+    periodDSDownload: 'Last 12 months',
+    periodDSDBTrimming: 'Last 12 months',
 }
