@@ -420,17 +420,6 @@ class ProgramSettings extends React.Component {
         this.specificSettingsRows = newRowList
         this.specificSettings = newList
 
-        /* const programSettingData = {}
-        programSettingData.specificSettings = this.specificSettings
-        programSettingData.globalSettings = this.globalSettings */
-
-        console.log({
-            newList: newList,
-            row: newRowList,
-            specificSettings: this.specificSettings,
-            globalSettings: this.globalSettings,
-        })
-
         this.setState({
             isUpdated: true,
             deleteDialog: {
@@ -477,15 +466,13 @@ class ProgramSettings extends React.Component {
                         if (this.keyName !== undefined) {
                             api.getValue(this.nameSpace, this.keyName).then(
                                 res => {
-                                    console.group(res)
-
                                     if (res.value.specificSettings) {
                                         this.specificSettings =
                                             res.value.specificSettings
                                         this.programNamesList = Object.keys(
                                             this.specificSettings
                                         )
-                                        console.log(this.programNamesList)
+
                                         for (const key in this
                                             .specificSettings) {
                                             if (
@@ -495,7 +482,6 @@ class ProgramSettings extends React.Component {
                                             ) {
                                                 const program = this
                                                     .specificSettings[key]
-                                                console.log(program)
                                                 const sumarySettings =
                                                     (program.specificTeiDownload ===
                                                     undefined
@@ -572,8 +558,6 @@ class ProgramSettings extends React.Component {
                                 }
                             )
                         } else {
-                            console.log('no program settings')
-
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
@@ -581,7 +565,6 @@ class ProgramSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    console.log('no hay program setting')
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'program_settings'
@@ -605,7 +588,6 @@ class ProgramSettings extends React.Component {
                 const programList = collection.toArray()
                 this.programList = programList
                 this.programListComplete = programList
-                console.log('program list', this.programList)
             })
     }
 
