@@ -80,6 +80,7 @@ class ProgramTable extends React.Component {
                                             'aria-label': 'naked',
                                             min: 0,
                                             step: 10,
+                                            max: row.maxValue,
                                         }}
                                         value={
                                             this.props.states[row.keyDownload]
@@ -121,6 +122,7 @@ class ProgramTable extends React.Component {
                                             'aria-label': 'naked',
                                             min: 0,
                                             step: 10,
+                                            max: row.maxValue,
                                         }}
                                         value={
                                             this.props.states[row.keyDBTrimming]
