@@ -7,6 +7,7 @@ import {
     metadataOptions,
     dataOptions,
     androidSettingsDefault,
+    maxValues,
 } from '../constants/android-settings'
 import AndroidSettings from './android-settings'
 
@@ -38,11 +39,16 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleChange = e => {
         e.preventDefault()
+        if (e.target.name === 'valuesTEI') {
+            const valueInput = e.target.value
+            e.target.value > maxValues.valuesTEI
+                ? (e.target.value = maxValues.valuesTEI)
+                : (e.target.value = valueInput)
+        }
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
         })
-
         this.updateGlobal = true
     }
 
@@ -178,6 +184,7 @@ class AndroidSettingsContainer extends React.Component {
                 dataOptions={dataOptions}
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
+                maxValues={maxValues}
             />
         )
     }

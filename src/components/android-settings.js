@@ -11,6 +11,7 @@ import { Button } from '@dhis2/d2-ui-core'
 class AndroidSettings extends React.Component {
     constructor(props) {
         super(props)
+        this.androidSettings = props
     }
 
     render() {
@@ -95,7 +96,13 @@ class AndroidSettings extends React.Component {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    InputProps={{ inputProps: { min: 0, step: 10 } }}
+                    InputProps={{
+                        inputProps: {
+                            min: 0,
+                            step: 10,
+                            max: this.props.maxValues.valuesTEI,
+                        },
+                    }}
                     value={this.props.state.valuesTEI}
                     onChange={this.props.handleChange}
                 />

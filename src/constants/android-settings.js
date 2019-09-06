@@ -40,6 +40,10 @@ export const dataOptions = [
     },
 ]
 
+export const maxValues = {
+    valuesTEI: 50,
+}
+
 export const androidSettingsDefault = {
     metadataSync: '1d',
     dataSync: '24h',
