@@ -156,14 +156,36 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
     }
 
+    saveDataApi = (settingType, data) => {
+        if (this.keyName === 'program_settings') {
+            if (Object.keys(this[settingType]).length) {
+                data[settingType] = this[settingType]
+            }
+
+            api.updateValue(
+                'ANDROID_SETTING_APP',
+                'program_settings',
+                data
+            ).then(res => res)
+        } else {
+            api.getKeys('ANDROID_SETTING_APP').then(
+                api
+                    .createValue(
+                        'ANDROID_SETTING_APP',
+                        'program_settings',
+                        data
+                    )
+                    .then(data => data)
+            )
+        }
+    }
+
     submitData = () => {
         if (!this.updateGlobal) {
-            console.log('update', this)
             return true
         }
-        console.log('update', this.specificSettings)
         const globalSettings = {
-            date: new Date().toJSON(),
+            lastUpdated: new Date().toJSON(),
             settingDownload: this.state.settingDownload,
             settingDBTrimming: this.state.settingDBTrimming,
             teiDownload: this.state.teiDownload,
@@ -190,33 +212,7 @@ class ProgramSettings extends React.Component {
             },
         }
 
-        if (this.keyName === 'program_settings') {
-            if (Object.keys(this.specificSettings).length) {
-                programSettingData.specificSettings = this.specificSettings
-                console.log(programSettingData)
-            }
-
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'program_settings',
-                programSettingData
-            ).then(res => {
-                console.log('res update', res)
-            })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'program_settings',
-                        programSettingData
-                    )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
-            )
-            console.log('submit', programSettingData)
-        }
+        this.saveDataApi('specificSettings', programSettingData)
     }
 
     handleClickOpen = () => {
@@ -228,7 +224,6 @@ class ProgramSettings extends React.Component {
                 item => !programUsedlist.includes(item.id)
             )
             this.programList = dataSetNameFilter
-            console.log('nueva lista', this.programList)
         }
 
         this.setState({
@@ -279,10 +274,8 @@ class ProgramSettings extends React.Component {
             option => option.id === specificProgramNameKey
         )
 
-        console.log(programNameFilter[0], this.specificSettings)
-
         objData[specificProgramNameKey] = {
-            date: new Date().toJSON(),
+            lastUpdated: new Date().toJSON(),
             name: programNameFilter[0].name,
             specificSettingDownload: this.state.specificSettingDownload,
             specificSettingDBTrimming: this.state.specificSettingDBTrimming,
@@ -366,42 +359,13 @@ class ProgramSettings extends React.Component {
             )
 
             this.programNamesList = newNameList
-            console.log('nameList', this.programNamesList)
         } else {
             this.specificSettingsRows.push(newProgramRow)
-            console.log('rows table', this.specificSettingsRows)
         }
 
         this.programNamesList.push(this.state.specificSettingName)
-        console.log(programData, this.specificSettings)
 
-        if (this.keyName === 'program_settings') {
-            if (Object.keys(this.globalSettings).length) {
-                programData.globalSettings = this.globalSettings
-                console.log(programData)
-            }
-
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'program_settings',
-                programData
-            ).then(res => {
-                console.log('res update', res)
-            })
-        } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
-                api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'program_settings',
-                        programData
-                    )
-                    .then(data => {
-                        console.log('data response update', data)
-                    })
-            )
-        }
-
+        this.saveDataApi('globalSettings', programData)
         this.handleClose()
     }
 
@@ -431,7 +395,6 @@ class ProgramSettings extends React.Component {
     }
 
     handleCloseDelete = () => {
-        console.log('delete', this.argsRow)
         const data = this.argsRow
         const oldList = this.specificSettings
         const rowList = this.specificSettingsRows
@@ -442,11 +405,6 @@ class ProgramSettings extends React.Component {
         )
         this.programNamesList = programListNew
 
-        console.log({
-            specificSettings: oldList,
-            args: data,
-            listName: this.programNamesList,
-        })
         const newList = {}
         let newRowList = []
 

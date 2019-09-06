@@ -380,6 +380,15 @@ export const SpecificProgram = [
     },
 ]
 
+export const maxValues = {
+    teiDownload: 5000,
+    teiDBTrimmming: 5000,
+    teReservedDownload: 1000,
+    teReservedDBTrimming: 1000,
+    eventsDownload: 3000,
+    eventsDBTrimming: 3000,
+}
+
 export const ProgramSettingsDefault = {
     settingDownload: 'Global',
     settingDBTrimming: 'Global',
