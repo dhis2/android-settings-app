@@ -28,7 +28,7 @@ export const Program = [
         keyDownload: 'teiDownload',
         keyDBTrimming: 'teiDBTrimmming',
         option: 'TEI per program',
-        maxValue: 5000,
+        maxValue: 2000,
     },
     {
         keyDownload: 'enrollmentDownload',
@@ -141,7 +141,7 @@ export const Program = [
         option: 'TE reserved values',
         keyDownload: 'teReservedDownload',
         keyDBTrimming: 'teReservedDBTrimming',
-        maxValue: 1000,
+        maxValue: 1500,
     },
     {
         option: 'Events',
@@ -222,7 +222,7 @@ export const SpecificProgram = [
         option: 'TEI per program',
         keyDownload: 'specificTeiDownload',
         keyDBTrimming: 'specificTeiDBTrimming',
-        maxValue: 5000,
+        maxValue: 2000,
     },
     {
         keyDownload: 'specificEnrollmentDownload',
@@ -335,7 +335,7 @@ export const SpecificProgram = [
         option: 'TE reserved values',
         keyDownload: 'specificTEReservedDownload',
         keyDBTrimming: 'specificTEReservedDBTrimming',
-        maxValue: 1000,
+        maxValue: 1500,
     },
     {
         option: 'Events',
@@ -387,12 +387,18 @@ export const SpecificProgram = [
 ]
 
 export const maxValues = {
-    teiDownload: 5000,
-    teiDBTrimmming: 5000,
-    teReservedDownload: 1000,
-    teReservedDBTrimming: 1000,
+    teiDownload: 2000,
+    teiDBTrimmming: 2000,
+    teReservedDownload: 1500,
+    teReservedDBTrimming: 1500,
     eventsDownload: 3000,
     eventsDBTrimming: 3000,
+    specificTeiDownload: 2000,
+    specificTeiDBTrimming: 2000,
+    specificTEReservedDownload: 1500,
+    specificTEReservedDBTrimming: 1500,
+    specificEventsDownload: 3000,
+    specificEventsDBTrimming: 3000,
 }
 
 export const ProgramSettingsDefault = {

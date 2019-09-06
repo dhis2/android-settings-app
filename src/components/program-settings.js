@@ -6,6 +6,7 @@ import {
     Program,
     SpecificProgram,
     ProgramSettingsDefault,
+    maxValues,
 } from '../constants/program-settings'
 import api from '../utils/api'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
@@ -140,6 +141,42 @@ class ProgramSettings extends React.Component {
 
     handleChange = e => {
         e.preventDefault()
+        const valueInput = e.target.value
+        switch (e.target.name) {
+            case 'teiDownload':
+                e.target.value > maxValues.teiDownload
+                    ? (e.target.value = maxValues.teiDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'teiDBTrimmming':
+                e.target.value > maxValues.teiDBTrimmming
+                    ? (e.target.value = maxValues.teiDBTrimmming)
+                    : (e.target.value = valueInput)
+                break
+            case 'teReservedDownload':
+                e.target.value > maxValues.teReservedDownload
+                    ? (e.target.value = maxValues.teReservedDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'teReservedDBTrimming':
+                e.target.value > maxValues.teReservedDBTrimming
+                    ? (e.target.value = maxValues.teReservedDBTrimming)
+                    : (e.target.value = valueInput)
+                break
+            case 'eventsDownload':
+                e.target.value > maxValues.eventsDownload
+                    ? (e.target.value = maxValues.eventsDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'eventsDBTrimming':
+                e.target.value > maxValues.eventsDBTrimming
+                    ? (e.target.value = maxValues.eventsDBTrimming)
+                    : (e.target.value = valueInput)
+                break
+            default:
+                break
+        }
+
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -149,6 +186,41 @@ class ProgramSettings extends React.Component {
 
     handleChangeDialog = e => {
         e.preventDefault()
+        const valueInput = e.target.value
+        switch (e.target.name) {
+            case 'specificTeiDownload':
+                e.target.value > maxValues.specificTeiDownload
+                    ? (e.target.value = maxValues.specificTeiDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'specificTeiDBTrimming':
+                e.target.value > maxValues.specificTeiDBTrimming
+                    ? (e.target.value = maxValues.specificTeiDBTrimming)
+                    : (e.target.value = valueInput)
+                break
+            case 'specificTEReservedDownload':
+                e.target.value > maxValues.specificTEReservedDownload
+                    ? (e.target.value = maxValues.specificTEReservedDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'specificTEReservedDBTrimming':
+                e.target.value > maxValues.specificTEReservedDBTrimming
+                    ? (e.target.value = maxValues.specificTEReservedDBTrimming)
+                    : (e.target.value = valueInput)
+                break
+            case 'specificEventsDownload':
+                e.target.value > maxValues.specificEventsDownload
+                    ? (e.target.value = maxValues.specificEventsDownload)
+                    : (e.target.value = valueInput)
+                break
+            case 'specificEventsDBTrimming':
+                e.target.value > maxValues.specificEventsDBTrimming
+                    ? (e.target.value = maxValues.specificEventsDBTrimming)
+                    : (e.target.value = valueInput)
+                break
+            default:
+                break
+        }
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
