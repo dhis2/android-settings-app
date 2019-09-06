@@ -17,13 +17,14 @@ import {
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
-import AndroidSettings from '../components/android-settings'
+import AndroidSettingsContainer from '../components/android-settings-container'
 import ProgramSettings from '../components/program-settings'
 import DataSetSettings from '../components/dataSet-settings'
-import TestAndroid from '../components/test-android'
+import TestAndroidContainer from '../components/test-android-container'
 
 import '../styles/settings.css'
 import '../styles/layout.css'
+import { Grid } from '@material-ui/core'
 
 const styles = {
     twoPanelMain: {
@@ -191,73 +192,93 @@ function storeRef(ref) {
 
 function Layout(props) {
     console.log(props)
+    console.log(props.currentSection)
     return (
         <Router>
             <HeaderBar d2={props.d2} />
-            <TwoPanel mainStyle={styles.twoPanelMain}>
-                <div className="paper__two-panel__side-bar">
-                    <Sidebar
-                        sections={sections.map(
-                            ({ key, label, url, path }, i) => ({
-                                key,
-                                label,
-                                icon: path,
-                                containerElement: (
-                                    <Link to={url}> {label} </Link>
-                                ),
-                            })
-                        )}
-                        showSearchField
-                        searchFieldLabel="Search settings"
-                        onChangeSection={changeSectionHandler}
-                        currentSection={props.currentSection}
-                        onChangeSearchText={changeSearchTextHandler}
-                        ref={storeRef}
-                    />
-                </div>
-                <MainContent>
-                    <header className="header">
-                        <h1 className="App-title paper__two-panel__main-title">
-                            Android settings
-                        </h1>
-                    </header>
-                    <Paper className="paper__layout">
-                        <Heading>
-                            <Switch>
-                                <Route
-                                    path="/"
-                                    exact
-                                    render={() => (
-                                        <AndroidSettings d2={props.d2} />
-                                    )}
-                                />
-                                <Route
-                                    path="/android"
-                                    render={() => (
-                                        <AndroidSettings d2={props.d2} />
-                                    )}
-                                />
-                                <Route
-                                    path="/programs"
-                                    render={() => (
-                                        <ProgramSettings d2={props.d2} />
-                                    )}
-                                />
-                                <Route
-                                    path="/dataSets"
-                                    render={() => (
-                                        <DataSetSettings d2={props.d2} />
-                                    )}
-                                />
-                                <Route
-                                    path="/testAndroid"
-                                    render={() => <TestAndroid d2={props.d2} />}
-                                />
-                            </Switch>
-                        </Heading>
-                    </Paper>
-                </MainContent>
-            </TwoPanel>
+            <Grid container>
+                <TwoPanel mainStyle={styles.twoPanelMain}>
+                    <Grid item>
+                        <div className="paper__two-panel__side-bar">
+                            <Sidebar
+                                sections={sections.map(
+                                    ({ key, label, url, path }, i) => ({
+                                        key,
+                                        label,
+                                        icon: path,
+                                        containerElement: (
+                                            <Link to={url}> {label} </Link>
+                                        ),
+                                    })
+                                )}
+                                showSearchField
+                                searchFieldLabel="Search settings"
+                                onChangeSection={changeSectionHandler}
+                                currentSection={props.currentSection}
+                                onChangeSearchText={changeSearchTextHandler}
+                                ref={storeRef}
+                            />
+                        </div>
+                    </Grid>
+
+                    <Grid item>
+                        <MainContent>
+                            <header className="header">
+                                <h1 className="App-title paper__two-panel__main-title">
+                                    Android settings
+                                </h1>
+                            </header>
+                            <Paper className="paper__layout">
+                                <Heading>
+                                    <Switch>
+                                        <Route
+                                            path="/"
+                                            exact
+                                            render={() => (
+                                                <AndroidSettingsContainer
+                                                    d2={props.d2}
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            path="/android"
+                                            render={() => (
+                                                <AndroidSettingsContainer
+                                                    d2={props.d2}
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            path="/programs"
+                                            render={() => (
+                                                <ProgramSettings
+                                                    d2={props.d2}
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            path="/dataSets"
+                                            render={() => (
+                                                <DataSetSettings
+                                                    d2={props.d2}
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            path="/testAndroid"
+                                            render={() => (
+                                                <TestAndroidContainer
+                                                    d2={props.d2}
+                                                />
+                                            )}
+                                        />
+                                    </Switch>
+                                </Heading>
+                            </Paper>
+                        </MainContent>
+                    </Grid>
+                </TwoPanel>
+            </Grid>
         </Router>
     )
 }
