@@ -605,7 +605,7 @@ class ProgramSettings extends React.Component {
                 d2={this.props.d2}
                 tableNameProperty="Program Name"
                 componentSubtitleSingular="Program"
-                componentSubtitlePlural="Program"
+                componentSubtitlePlural="Programs"
                 programTableData={programData}
                 states={this.state}
                 handleTableChange={this.handleChange}
