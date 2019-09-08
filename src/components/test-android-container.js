@@ -54,6 +54,11 @@ class TestAndroidContainer extends React.Component {
         maxValueProgramRule: undefined,
         maxValueMetadata: undefined,
         maxValueData: undefined,
+        orgUnitLoad: false,
+        dataSetLoad: false,
+        programLoad: false,
+        programRuleLoad: false,
+        metadataLoad: false,
     }
 
     clearFields = () => {
@@ -75,7 +80,11 @@ class TestAndroidContainer extends React.Component {
             programRuleNumber: 0,
             metadataSize: 0,
             loadData: false,
-            completed: '...',
+            orgUnitLoad: false,
+            dataSetLoad: false,
+            programLoad: false,
+            programRuleLoad: false,
+            metadataLoad: false,
         })
     }
 
@@ -215,10 +224,28 @@ class TestAndroidContainer extends React.Component {
                 )
             })
 
+            this.setState({
+                loading: false,
+                runTest: false,
+                loadData: true,
+                disabled: true,
+                orgUnitLoad: true,
+            })
+
             await Promise.all(promisesOrganisationUnits).then(data => {
                 //console.log('data promises ou', data, data[0].toArray())
                 if (data.length > 0) {
+                    /* this.setState({
+                        loading: false,
+                        runTest: false,
+                        loadData: true,
+                        disabled: true,
+                        orgUnitLoad: true,
+                    }) */
+
                     data.forEach(orgUnitData => {
+                        console.log('obteniendo org units')
+
                         orgUnitData.toArray().forEach(oucapture => {
                             organisationUnitCapture.push(oucapture)
                             const programPerOU = []
@@ -494,7 +521,7 @@ class TestAndroidContainer extends React.Component {
                                     }
                                 })
                             }
-                            console.log({
+                            /* console.log({
                                 dataset: dataSetList,
                                 datasetV: dataSetValuesList,
                                 program: programsList,
@@ -508,24 +535,15 @@ class TestAndroidContainer extends React.Component {
                                 category: categoryListId,
                                 indicatorValuesList: indicatorValuesList,
                                 indicatorT: indicatorTypeListId,
-                            })
+                            }) */
                         })
-                        console.log('obteniendo org units')
                     })
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
-
-                    this.setState({
-                        loading: false,
-                        runTest: false,
-                        loadData: true,
-                        disabled: true,
-                        completed: 'done',
-                    })
                 }
 
                 if ((dataSetList.length > 0) & (programsList.length > 0)) {
-                    console.log('data set lista', dataSetList)
+                    // console.log('data set lista', dataSetList)
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
@@ -540,20 +558,14 @@ class TestAndroidContainer extends React.Component {
                         .then(collection => {
                             console.log('obteniendo datasets')
                             dataSetResult = collection
-                            console.log('datasets', dataSetResult)
+                            console.log(
+                                'datasets',
+                                dataSetResult.toArray().length
+                            )
                             this.setState({
-                                //loading: false,
-                                runTest: true,
-                                loadData: false,
-                                //disabled: true,
-                                organisationUnitSearchNumber: this
-                                    .organisationUnitSearchNumber,
-                                organisationUnitsNumber: this
-                                    .organisationUnitsNumber,
-                                //programNumber: this.programNumber,
-                                datasetNumber: collection.toArray().length,
-                                /* programRuleNumber: this.programRuleNumber,
-                                metadataSize: metadata, */
+                                loadData: true,
+                                orgUnitLoad: true,
+                                dataSetLoad: true,
                             })
                         })
 
@@ -567,7 +579,14 @@ class TestAndroidContainer extends React.Component {
                         .then(collection => {
                             console.log('obteniendo programs')
                             programResult = collection
-                            console.log('programs', programResult)
+                            console.log(
+                                'programs',
+                                programResult.toArray().length
+                            )
+                            this.setState({
+                                loadData: true,
+                                programLoad: false,
+                            })
                         })
 
                     this.props.d2.models.programRules
@@ -580,8 +599,125 @@ class TestAndroidContainer extends React.Component {
                         .then(collection => {
                             console.log('obteniendo program rules')
                             programRuleResult = collection
-                            console.log('program rules', programRuleResult)
-                        }) /* .then(
+                            console.log(
+                                'program rules',
+                                programRuleResult.toArray().length
+                            )
+                            this.setState({
+                                loadData: true,
+                                programRuleLoad: true,
+                            })
+                        })
+
+                    Promise.all([
+                        this.props.d2.models.programStages.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
+                        }),
+                        this.props.d2.models.trackedEntityTypes.list({
+                            paging: false,
+                            filter: `id:in:[${trackedEntityTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
+                        }),
+                        this.props.d2.models.relationshipTypes.list({
+                            paging: false,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
+                        }),
+                        this.props.d2.models.optionSets.list({
+                            paging: false,
+                            filter: `id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
+                        }),
+                        this.props.d2.models.optionGroups.list({
+                            paging: false,
+                            filter: `optionSet.id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
+                        }),
+                        // this.props.d2.models.dataElements.list({
+                        //     paging: false,
+                        //     filter: `id:in:[${dataElementListId}]`,
+                        //     fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]'
+                        // }),
+                        this.props.d2.models.indicators.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
+                        }),
+                        this.props.d2.models.indicatorTypes.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
+                        }),
+                        this.props.d2.models.categoryCombos.list({
+                            paging: false,
+                            filter: `id:in:[${categoryComboListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
+                        }),
+                        this.props.d2.models.categories.list({
+                            paging: false,
+                            filter: `id:in:[${categoryListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
+                        }),
+                    ]).then(
+                        ([
+                            programStages,
+                            trackedEntityTypes,
+                            relationshipTypes,
+                            optionSets,
+                            optionGroups,
+                            indicators,
+                            indicatorTypes,
+                            categoryCombos,
+                            categories,
+                        ]) => {
+                            console.log('obteniendo metadata')
+                            let metadata = this.getDownloadSize([
+                                programResult,
+                                dataSetResult,
+                                programRuleResult,
+                                programStages,
+                                trackedEntityTypes,
+                                relationshipTypes,
+                                indicators,
+                                categoryCombos,
+                                indicatorTypes,
+                                categories,
+                                optionSets,
+                                optionGroups,
+                            ])
+                            console.log('metadata', metadata)
+                            console.log(metadata, formatByteSize(metadata))
+                            metadata = formatByteSize(metadata)
+
+                            this.setState({
+                                //loading: false,
+                                runTest: true,
+                                loadData: false,
+                                //disabled: true,
+                                organisationUnitSearchNumber: this
+                                    .organisationUnitSearchNumber,
+                                organisationUnitsNumber: this
+                                    .organisationUnitsNumber,
+                                programNumber: programResult.toArray().length,
+                                datasetNumber: dataSetResult.toArray().length,
+                                programRuleNumber: programRuleResult.toArray()
+                                    .length,
+                                metadataSize: metadata,
+                            })
+                        }
+                    )
+
+                    /* .then(
                         ([
                             datasets,
                             programs,
@@ -856,8 +992,11 @@ class TestAndroidContainer extends React.Component {
                 states={this.state}
                 handleRun={this.handleRun}
                 disabledTest={this.state.disabled}
-                completed={this.state.completed}
                 loadData={this.state.loadData}
+                orgUnitLoad={this.state.orgUnitLoad}
+                dataSetLoad={this.state.dataSetLoad}
+                programLoad={this.programLoad}
+                programRuleLoad={this.programRuleLoad}
             />
         )
     }
