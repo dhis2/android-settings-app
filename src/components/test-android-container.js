@@ -8,7 +8,6 @@ import {
 } from '../constants/test-android'
 import TestAndroid from './test-android'
 import { memorySizeOf, formatByteSize } from '../utils/memory-size'
-//import { sizeRequest } from '../utils/puppeteer'
 
 class TestAndroidContainer extends React.Component {
     constructor(props) {
@@ -31,6 +30,8 @@ class TestAndroidContainer extends React.Component {
         runTest: false,
         loading: true,
         disabled: true,
+        loadData: false,
+        completed: '...',
         errorUsername: false,
         organisationUnitsNumber: 0,
         organisationUnitSearchNumber: 0,
@@ -73,6 +74,8 @@ class TestAndroidContainer extends React.Component {
             programNumber: 0,
             programRuleNumber: 0,
             metadataSize: 0,
+            loadData: false,
+            completed: '...',
         })
     }
 
@@ -90,6 +93,55 @@ class TestAndroidContainer extends React.Component {
         })
     }
 
+    getDownloadSize = dataArray => {
+        let downloadSize = 0
+        dataArray.forEach(dataElement => {
+            const dataSize = parseFloat(
+                memorySizeOf(JSON.stringify(dataElement.toArray()))
+            )
+
+            downloadSize += dataSize
+        })
+        return downloadSize
+    }
+
+    checkAccess = (elementArray, accessIDList) => {
+        elementArray.forEach(element => {
+            switch (element.publicAccess) {
+                case 'r-------':
+                    // if user userGroupAccess, if user userAccess
+                    console.log('access r', element, accessIDList)
+                    break
+                case 'rw------':
+                    accessIDList.push(element)
+                    console.log('access rw', element, accessIDList)
+                    break
+                case 'rwr-----':
+                    accessIDList.push(element)
+                    break
+                case 'rwrw----':
+                    accessIDList.push(element)
+                    break
+                case 'rwrwr---':
+                    accessIDList.push(element)
+                    break
+                case 'rwrwrw--':
+                    accessIDList.push(element)
+                    break
+                case 'rwrwrwr-':
+                    accessIDList.push(element)
+                    break
+                case 'rwrwrwrw':
+                    accessIDList.push(element)
+                    break
+                default:
+                    break
+            }
+        })
+
+        return accessIDList
+    }
+
     getUserData = async () => {
         const organisationUnits = this.userSelected.organisationUnits
             .valuesContainerMap
@@ -100,7 +152,7 @@ class TestAndroidContainer extends React.Component {
         const organisationUnitList = []
         let dataSetList = []
         let programsList = []
-        const programsValuesList = []
+        let programsValuesList = []
         const programsIdAccess = []
         const organisationUnitSearchList = []
         // const programRuleList = []
@@ -111,7 +163,7 @@ class TestAndroidContainer extends React.Component {
         const datasetsIdAccess = []
         let trackedEntityTypeListId = []
         let optionSetListId = []
-        const dataSetValuesList = []
+        let dataSetValuesList = []
         let dataElementListId = []
         let indicatorListId = []
         const indicatorValuesList = []
@@ -164,7 +216,7 @@ class TestAndroidContainer extends React.Component {
             })
 
             await Promise.all(promisesOrganisationUnits).then(data => {
-                console.log('data promises ou', data, data[0].toArray())
+                //console.log('data promises ou', data, data[0].toArray())
                 if (data.length > 0) {
                     data.forEach(orgUnitData => {
                         orgUnitData.toArray().forEach(oucapture => {
@@ -187,6 +239,10 @@ class TestAndroidContainer extends React.Component {
                                             )
                                             programsList = programIds
                                             programsList.push(key)
+                                            const programVIds = programsValuesList.filter(
+                                                program => program.id !== key
+                                            )
+                                            programsValuesList = programVIds
                                             programsValuesList.push(value)
                                         } else {
                                             programsList.push(key)
@@ -213,6 +269,10 @@ class TestAndroidContainer extends React.Component {
                                             )
                                             dataSetList = datasetIds
                                             dataSetList.push(key)
+                                            const datasetVIds = dataSetValuesList.filter(
+                                                dataset => dataset.id !== key
+                                            )
+                                            dataSetValuesList = datasetVIds
                                             dataSetValuesList.push(value)
                                         } else {
                                             dataSetList.push(key)
@@ -304,11 +364,11 @@ class TestAndroidContainer extends React.Component {
                                         ) {
                                             value.categoryCombo.categories.forEach(
                                                 categoryValue => {
-                                                    console.log(
+                                                    /* console.log(
                                                         'categorys',
                                                         categoryListId,
                                                         categoryValue
-                                                    )
+                                                    ) */
                                                     if (
                                                         categoryListId.length >=
                                                         1
@@ -436,6 +496,7 @@ class TestAndroidContainer extends React.Component {
                             }
                             console.log({
                                 dataset: dataSetList,
+                                datasetV: dataSetValuesList,
                                 program: programsList,
                                 programV: programsValuesList,
                                 trackedEntity: trackedEntityTypeListId,
@@ -449,91 +510,78 @@ class TestAndroidContainer extends React.Component {
                                 indicatorT: indicatorTypeListId,
                             })
                         })
+                        console.log('obteniendo org units')
                     })
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
+
+                    this.setState({
+                        loading: false,
+                        runTest: false,
+                        loadData: true,
+                        disabled: true,
+                        completed: 'done',
+                    })
                 }
 
                 if ((dataSetList.length > 0) & (programsList.length > 0)) {
                     console.log('data set lista', dataSetList)
-                    Promise.all([
-                        this.props.d2.models.dataSets.list({
+                    let dataSetResult = []
+                    let programResult = []
+                    let programRuleResult = []
+
+                    this.props.d2.models.dataSets
+                        .list({
                             paging: false,
                             filter: `id:in:[${dataSetList}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,periodType,categoryCombo[id],mobile,version,expiryDays,timelyDays,notifyCompletingUser,openFuturePeriods,fieldCombinationRequired,validCompleteOnly,noValueRequiresComment,skipOffline,dataElementDecoration,renderAsTabs,renderHorizontally,workflow[id],dataSetElements[dataSet[id],dataElement[id],categoryCombo[id]],indicators[id],sections[id,code,name,displayName,created,lastUpdated,deleted,description,sortOrder,dataSet[id],showRowTotals,showColumnTotals,dataElements[id],greyedFields[id,deleted,dataElement[id],categoryOptionCombo[id]]],compulsoryDataElementOperands[id,deleted,dataElement[id],categoryOptionCombo[id]],dataInputPeriods[period,openingDate,closingDate],access[data[write]],style[color,icon]',
-                        }),
-                        this.props.d2.models.programs.list({
+                        })
+                        .then(collection => {
+                            console.log('obteniendo datasets')
+                            dataSetResult = collection
+                            console.log('datasets', dataSetResult)
+                            this.setState({
+                                //loading: false,
+                                runTest: true,
+                                loadData: false,
+                                //disabled: true,
+                                organisationUnitSearchNumber: this
+                                    .organisationUnitSearchNumber,
+                                organisationUnitsNumber: this
+                                    .organisationUnitsNumber,
+                                //programNumber: this.programNumber,
+                                datasetNumber: collection.toArray().length,
+                                /* programRuleNumber: this.programRuleNumber,
+                                metadataSize: metadata, */
+                            })
+                        })
+
+                    this.props.d2.models.programs
+                        .list({
                             paging: false,
                             filter: `id:in:[${programsList}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,relationshipFromA,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,relationshipType[id],relationshipText,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,pattern,sortOrderInListNoProgram,valueType,expression,programScope,displayInListNoProgram,generated,displayOnVisitSchedule,orgunitScope,unique,inherit,optionSet[id],style[color,icon],access[read],formName],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programIndicators[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]]],programStages[id],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],sortOrder,description,style[color,icon],formName]',
-                        }),
-                        this.props.d2.models.programRules.list({
+                        })
+                        .then(collection => {
+                            console.log('obteniendo programs')
+                            programResult = collection
+                            console.log('programs', programResult)
+                        })
+
+                    this.props.d2.models.programRules
+                        .list({
                             paging: false,
                             filter: `program.id:in:[${programsList}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,priority,condition,program[id],programStage[id],programRuleActions[id,code,name,displayName,created,lastUpdated,deleted,data,content,location,trackedEntityAttribute[id],programIndicator[id],programStageSection[id],programRuleActionType,programStage[id],dataElement[id],option[id],optionGroup[id]]',
-                        }),
-                        this.props.d2.models.programStages.list({
-                            paging: false,
-                            filter: `program.id:in:[${programsList}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
-                        }),
-                        this.props.d2.models.trackedEntityTypes.list({
-                            paging: false,
-                            filter: `id:in:[${trackedEntityTypeListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
-                        }),
-                        this.props.d2.models.relationshipTypes.list({
-                            paging: false,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
-                        }),
-                        this.props.d2.models.optionSets.list({
-                            paging: false,
-                            filter: `id:in:[${optionSetListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
-                        }),
-                        this.props.d2.models.optionGroups.list({
-                            paging: false,
-                            filter: `optionSet.id:in:[${optionSetListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
-                        }),
-                        /* this.props.d2.models.dataElements.list({
-                            paging: false,
-                            filter: `id:in:[${dataElementListId}]`,
-                            fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]'
-                        }), */
-                        this.props.d2.models.indicators.list({
-                            paging: false,
-                            filter: `id:in:[${indicatorListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
-                        }),
-                        this.props.d2.models.indicatorTypes.list({
-                            paging: false,
-                            filter: `id:in:[${indicatorTypeListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
-                        }),
-                        this.props.d2.models.categoryCombos.list({
-                            paging: false,
-                            filter: `id:in:[${categoryComboListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
-                        }),
-                        this.props.d2.models.categories.list({
-                            paging: false,
-                            filter: `id:in:[${categoryListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
-                        }),
-                    ]).then(
+                        })
+                        .then(collection => {
+                            console.log('obteniendo program rules')
+                            programRuleResult = collection
+                            console.log('program rules', programRuleResult)
+                        }) /* .then(
                         ([
                             datasets,
                             programs,
@@ -593,161 +641,14 @@ class TestAndroidContainer extends React.Component {
                                 categories: memorySizeOf(
                                     JSON.stringify(categories.toArray())
                                 ),
-                                /* test: sizeRequest(googleapifont).then(function (result) {
-                                    console.log(result)
-                                }) */
                             })
 
-                            let metadata =
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(programs.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(datasets.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(programRules.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(programStages.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(
-                                            trackedEntityTypes.toArray()
-                                        )
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(
-                                            relationshipTypes.toArray()
-                                        )
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(indicators.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(categoryCombos.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(indicatorTypes.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(categories.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(optionSets.toArray())
-                                    )
-                                ) +
-                                parseFloat(
-                                    memorySizeOf(
-                                        JSON.stringify(optionGroups.toArray())
-                                    )
-                                )
-
+                            let metadata = this.getDownloadSize([programs, datasets, programRules, programStages, trackedEntityTypes, relationshipTypes, indicators, categoryCombos, indicatorTypes, categories, optionSets, optionGroups])
+                            console.log('metadata', metadata)
                             console.log(metadata, formatByteSize(metadata))
                             metadata = formatByteSize(metadata)
 
-                            /* datasets.forEach(dataset => {
-                                switch (dataset.publicAccess) {
-                                    case 'r-------':
-                                        // if user userGroupAccess, if user userAccess
-                                        console.log(
-                                            'access r',
-                                            dataset,
-                                            datasetsIdAccess
-                                        )
-                                        break
-                                    case 'rw------':
-                                        programsIdAccess.push(dataset)
-                                        console.log(
-                                            'access rw',
-                                            dataset,
-                                            datasetsIdAccess
-                                        )
-                                        break
-                                    case 'rwr-----':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    case 'rwrw----':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    case 'rwrwr---':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    case 'rwrwrw--':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    case 'rwrwrwr-':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    case 'rwrwrwrw':
-                                        datasetsIdAccess.push(dataset)
-                                        break
-                                    default:
-                                        break
-                                }
-                            }) */
                             const programsToAccess = programs.toArray()
-                            /* programs.forEach(program => {
-                                switch (program.publicAccess) {
-                                    case 'r-------':
-                                        // if user userGroupAccess, if user userAccess
-                                        console.log(
-                                            'access r',
-                                            program,
-                                            programsIdAccess
-                                        )
-                                        break
-                                    case 'rw------':
-                                        programsIdAccess.push(program)
-                                        console.log(
-                                            'access rw',
-                                            program,
-                                            programsIdAccess
-                                        )
-                                        break
-                                    case 'rwr-----':
-                                        programsIdAccess.push(program)
-                                        break
-                                    case 'rwrw----':
-                                        programsIdAccess.push(program)
-                                        break
-                                    case 'rwrwr---':
-                                        programsIdAccess.push(program)
-                                        break
-                                    case 'rwrwrw--':
-                                        programsIdAccess.push(program)
-                                        break
-                                    case 'rwrwrwr-':
-                                        programsIdAccess.push(program)
-                                        break
-                                    case 'rwrwrwrw':
-                                        programsIdAccess.push(program)
-                                        break
-                                    default:
-                                        break
-                                }
-                            }) */
 
                             //this.programNumber = programsIdAccess.length
                             console.log({
@@ -777,9 +678,10 @@ class TestAndroidContainer extends React.Component {
                             this.programRuleNumber = programRulesToAccess.length
 
                             this.setState({
-                                loading: false,
+                                //loading: false,
                                 runTest: true,
-                                disabled: true,
+                                loadData: false,
+                                //disabled: true,
                                 organisationUnitSearchNumber: this
                                     .organisationUnitSearchNumber,
                                 organisationUnitsNumber: this
@@ -790,7 +692,86 @@ class TestAndroidContainer extends React.Component {
                                 metadataSize: metadata,
                             })
                         }
-                    )
+                    ) */
+
+                    /* Promise.all([
+                        this.props.d2.models.dataSets.list({
+                            paging: false,
+                            filter: `id:in:[${dataSetList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,periodType,categoryCombo[id],mobile,version,expiryDays,timelyDays,notifyCompletingUser,openFuturePeriods,fieldCombinationRequired,validCompleteOnly,noValueRequiresComment,skipOffline,dataElementDecoration,renderAsTabs,renderHorizontally,workflow[id],dataSetElements[dataSet[id],dataElement[id],categoryCombo[id]],indicators[id],sections[id,code,name,displayName,created,lastUpdated,deleted,description,sortOrder,dataSet[id],showRowTotals,showColumnTotals,dataElements[id],greyedFields[id,deleted,dataElement[id],categoryOptionCombo[id]]],compulsoryDataElementOperands[id,deleted,dataElement[id],categoryOptionCombo[id]],dataInputPeriods[period,openingDate,closingDate],access[data[write]],style[color,icon]',
+                        }),
+                        this.props.d2.models.programs.list({
+                            paging: false,
+                            filter: `id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,relationshipFromA,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,relationshipType[id],relationshipText,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,pattern,sortOrderInListNoProgram,valueType,expression,programScope,displayInListNoProgram,generated,displayOnVisitSchedule,orgunitScope,unique,inherit,optionSet[id],style[color,icon],access[read],formName],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programIndicators[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]]],programStages[id],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],sortOrder,description,style[color,icon],formName]',
+                        }),
+                        this.props.d2.models.programRules.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,priority,condition,program[id],programStage[id],programRuleActions[id,code,name,displayName,created,lastUpdated,deleted,data,content,location,trackedEntityAttribute[id],programIndicator[id],programStageSection[id],programRuleActionType,programStage[id],dataElement[id],option[id],optionGroup[id]]',
+                        }),
+                        this.props.d2.models.programStages.list({
+                            paging: false,
+                            filter: `program.id:in:[${programsList}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
+                        }),
+                        this.props.d2.models.trackedEntityTypes.list({
+                            paging: false,
+                            filter: `id:in:[${trackedEntityTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
+                        }),
+                        this.props.d2.models.relationshipTypes.list({
+                            paging: false,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
+                        }),
+                        this.props.d2.models.optionSets.list({
+                            paging: false,
+                            filter: `id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
+                        }),
+                        this.props.d2.models.optionGroups.list({
+                            paging: false,
+                            filter: `optionSet.id:in:[${optionSetListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
+                        }),
+                        // this.props.d2.models.dataElements.list({
+                        //     paging: false,
+                        //     filter: `id:in:[${dataElementListId}]`,
+                        //     fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]'
+                        // }),
+                        this.props.d2.models.indicators.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
+                        }),
+                        this.props.d2.models.indicatorTypes.list({
+                            paging: false,
+                            filter: `id:in:[${indicatorTypeListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
+                        }),
+                        this.props.d2.models.categoryCombos.list({
+                            paging: false,
+                            filter: `id:in:[${categoryComboListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
+                        }),
+                        this.props.d2.models.categories.list({
+                            paging: false,
+                            filter: `id:in:[${categoryListId}]`,
+                            fields:
+                                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
+                        }),
+                    ]) */
                 }
             })
         }
@@ -846,12 +827,13 @@ class TestAndroidContainer extends React.Component {
             .list({
                 paging: false,
                 level: 1,
-                fields: 'id,name',
+                fields: 'id,name,userCredentials',
             })
             .then(collection => {
                 const usersOptions = collection.toArray()
                 this.usersOptions = usersOptions
                 this.usersOptionsComplete = usersOptions
+                console.log('userOptions', this.usersOptionsComplete)
                 this.setState({
                     loading: false,
                 })
@@ -874,6 +856,8 @@ class TestAndroidContainer extends React.Component {
                 states={this.state}
                 handleRun={this.handleRun}
                 disabledTest={this.state.disabled}
+                completed={this.state.completed}
+                loadData={this.state.loadData}
             />
         )
     }
