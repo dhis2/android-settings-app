@@ -21,6 +21,11 @@ class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
         this.TestAndroid = props
+        console.log(props)
+
+        this.props.dataConstants.map(test =>
+            console.log(test, this.props[test.load])
+        )
     }
 
     render() {
@@ -49,32 +54,27 @@ class TestAndroid extends React.Component {
                             <div>
                                 {this.props.orgUnitLoad && (
                                     <p className="subitem-item">
-                                        {' '}
-                                        Invoking Organization Units capture{' '}
+                                        Invoking Organization Units capture
                                     </p>
                                 )}
                                 {this.props.dataSetLoad && (
                                     <p className="subitem-item">
-                                        {' '}
-                                        Invoking Data sets associated to OU{' '}
+                                        Invoking Data sets associated to OU
                                     </p>
                                 )}
                                 {this.props.programLoad && (
                                     <p className="subitem-item">
-                                        {' '}
-                                        Invoking Program associated to OU{' '}
+                                        Invoking Program associated to OU
                                     </p>
                                 )}
                                 {this.props.programRuleLoad && (
                                     <p className="subitem-item">
-                                        {' '}
-                                        Invoking Program rules associated to OU{' '}
+                                        Invoking Program rules associated to OU
                                     </p>
                                 )}
                                 {this.props.metadataLoad && (
                                     <p className="subitem-item">
-                                        {' '}
-                                        Invoking Metadata download size{' '}
+                                        Invoking Metadata download size
                                     </p>
                                 )}
                             </div>
@@ -95,34 +95,41 @@ class TestAndroid extends React.Component {
                                             </p>
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <Tooltip
-                                                title={
-                                                    this.props.states[
-                                                        test.tooltipTitle
-                                                    ]
-                                                }
-                                                placement="bottom"
-                                            >
-                                                <p
-                                                    className={`subitem-item subitem-bigitem ${
+                                            {this.props[test.load] === true ? (
+                                                <p className="subitem-item subitem-bigitem">
+                                                    Invoking ...
+                                                </p>
+                                            ) : (
+                                                <Tooltip
+                                                    title={
                                                         this.props.states[
-                                                            test.state
-                                                        ] >=
-                                                        this.props.states[
-                                                            test.maxValueState
-                                                        ]
-                                                            ? 'max-value'
-                                                            : ''
-                                                    }`}
-                                                >
-                                                    {
-                                                        this.props.states[
-                                                            test.state
+                                                            test.tooltipTitle
                                                         ]
                                                     }
-                                                </p>
-                                                {/* "subitem-item subitem-bigitem" */}
-                                            </Tooltip>
+                                                    placement="bottom"
+                                                >
+                                                    <p
+                                                        className={`subitem-item subitem-bigitem ${
+                                                            this.props.states[
+                                                                test.state
+                                                            ] >=
+                                                            this.props.states[
+                                                                test
+                                                                    .maxValueState
+                                                            ]
+                                                                ? 'max-value'
+                                                                : ''
+                                                        }`}
+                                                    >
+                                                        {
+                                                            this.props.states[
+                                                                test.state
+                                                            ]
+                                                        }
+                                                    </p>
+                                                    {/* "subitem-item subitem-bigitem" */}
+                                                </Tooltip>
+                                            )}
                                         </Grid>
                                     </Grid>
                                     <Divider />

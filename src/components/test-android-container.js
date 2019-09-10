@@ -151,6 +151,18 @@ class TestAndroidContainer extends React.Component {
         return accessIDList
     }
 
+    splitArray = (list, howMany) => {
+        let idx = 0
+        const result = []
+
+        while (idx < list.length) {
+            if (idx % howMany === 0) result.push([])
+            result[result.length - 1].push(list[idx++])
+        }
+
+        return result
+    }
+
     getUserData = async () => {
         const organisationUnits = this.userSelected.organisationUnits
             .valuesContainerMap
@@ -226,10 +238,14 @@ class TestAndroidContainer extends React.Component {
 
             this.setState({
                 loading: false,
-                runTest: false,
+                runTest: false, //true
                 loadData: true,
                 disabled: true,
                 orgUnitLoad: true,
+                dataSetLoad: false,
+                programLoad: false,
+                programRuleLoad: false,
+                metadataLoad: false,
             })
 
             await Promise.all(promisesOrganisationUnits).then(data => {
@@ -543,10 +559,41 @@ class TestAndroidContainer extends React.Component {
                 }
 
                 if ((dataSetList.length > 0) & (programsList.length > 0)) {
-                    // console.log('data set lista', dataSetList)
+                    console.log('data element lista', dataElementListId)
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
+                    let dataElementResult = []
+                    const dataElementList = []
+
+                    if (dataElementListId.length > 100) {
+                        const dataElementCollection = dataElementListId.slice()
+                        const splitCollection = this.splitArray(
+                            dataElementCollection,
+                            100
+                        )
+                        console.log('split', splitCollection)
+
+                        splitCollection.forEach(dataElement => {
+                            dataElementList.push(
+                                this.props.d2.models.dataElements.list({
+                                    paging: false,
+                                    filter: `id:in:[${dataElement}]`,
+                                    fields:
+                                        'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]',
+                                })
+                            )
+                        })
+
+                        Promise.all(dataElementList).then(data => {
+                            dataElementResult = this.getDownloadSize(data)
+                            console.log(
+                                'data elements result api',
+                                data,
+                                dataElementResult
+                            )
+                        })
+                    }
 
                     this.props.d2.models.dataSets
                         .list({
@@ -556,12 +603,7 @@ class TestAndroidContainer extends React.Component {
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,periodType,categoryCombo[id],mobile,version,expiryDays,timelyDays,notifyCompletingUser,openFuturePeriods,fieldCombinationRequired,validCompleteOnly,noValueRequiresComment,skipOffline,dataElementDecoration,renderAsTabs,renderHorizontally,workflow[id],dataSetElements[dataSet[id],dataElement[id],categoryCombo[id]],indicators[id],sections[id,code,name,displayName,created,lastUpdated,deleted,description,sortOrder,dataSet[id],showRowTotals,showColumnTotals,dataElements[id],greyedFields[id,deleted,dataElement[id],categoryOptionCombo[id]]],compulsoryDataElementOperands[id,deleted,dataElement[id],categoryOptionCombo[id]],dataInputPeriods[period,openingDate,closingDate],access[data[write]],style[color,icon]',
                         })
                         .then(collection => {
-                            console.log('obteniendo datasets')
                             dataSetResult = collection
-                            console.log(
-                                'datasets',
-                                dataSetResult.toArray().length
-                            )
                             this.setState({
                                 loadData: true,
                                 orgUnitLoad: true,
@@ -577,12 +619,7 @@ class TestAndroidContainer extends React.Component {
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,relationshipFromA,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,relationshipType[id],relationshipText,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,pattern,sortOrderInListNoProgram,valueType,expression,programScope,displayInListNoProgram,generated,displayOnVisitSchedule,orgunitScope,unique,inherit,optionSet[id],style[color,icon],access[read],formName],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programIndicators[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]]],programStages[id],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],sortOrder,description,style[color,icon],formName]',
                         })
                         .then(collection => {
-                            console.log('obteniendo programs')
                             programResult = collection
-                            console.log(
-                                'programs',
-                                programResult.toArray().length
-                            )
                             this.setState({
                                 loadData: true,
                                 programLoad: false,
@@ -597,12 +634,7 @@ class TestAndroidContainer extends React.Component {
                                 'id,code,name,displayName,created,lastUpdated,deleted,priority,condition,program[id],programStage[id],programRuleActions[id,code,name,displayName,created,lastUpdated,deleted,data,content,location,trackedEntityAttribute[id],programIndicator[id],programStageSection[id],programRuleActionType,programStage[id],dataElement[id],option[id],optionGroup[id]]',
                         })
                         .then(collection => {
-                            console.log('obteniendo program rules')
                             programRuleResult = collection
-                            console.log(
-                                'program rules',
-                                programRuleResult.toArray().length
-                            )
                             this.setState({
                                 loadData: true,
                                 programRuleLoad: true,
@@ -694,11 +726,19 @@ class TestAndroidContainer extends React.Component {
                                 categories,
                                 optionSets,
                                 optionGroups,
+                                //dataElementResult
                             ])
+
+                            metadata = metadata + dataElementResult
                             metadata = formatByteSize(metadata)
+
                             this.setState({
                                 runTest: true,
                                 loadData: false,
+                                orgUnitLoad: false,
+                                dataSetLoad: false,
+                                programLoad: false,
+                                programRuleLoad: false,
                                 organisationUnitSearchNumber: this
                                     .organisationUnitSearchNumber,
                                 organisationUnitsNumber: this

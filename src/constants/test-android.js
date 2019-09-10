@@ -64,6 +64,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipOUCapture',
         state: 'organisationUnitsNumber',
         maxValueState: 'maxValueOUCapture',
+        load: 'orgUnitLoad',
     },
     {
         title: 'Org Units search',
@@ -71,6 +72,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipOUSearch',
         state: 'organisationUnitSearchNumber',
         maxValueState: 'maxValueOUSearch',
+        load: 'orgUnitLoad',
     },
     {
         title: 'Data sets associated to OU capture of user',
@@ -78,6 +80,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipDataSet',
         state: 'datasetNumber',
         maxValueState: 'maxValueDataSet',
+        load: 'dataSetLoad',
     },
     {
         title: 'Program associated to OU',
@@ -85,6 +88,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipProgram',
         state: 'programNumber',
         maxValueState: 'maxValueProgram',
+        load: 'programLoad',
     },
     {
         title: 'Program rules associated to OU',
@@ -92,6 +96,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipProgramRule',
         state: 'programRuleNumber',
         maxValueState: 'maxValueProgramRule',
+        load: 'programRuleLoad',
     },
     {
         title: 'Metadata download size  (KB)',
@@ -99,6 +104,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
         maxValueState: 'maxValueMetadata',
+        load: 'programLoad',
     },
     {
         title: 'Data download size',
@@ -106,5 +112,6 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
         maxValueState: 'maxValueData',
+        load: 'programLoad',
     },
 ]
