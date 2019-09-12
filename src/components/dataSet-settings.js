@@ -382,6 +382,22 @@ class DataSetSettings extends React.Component {
                                 }
                             )
                         } else {
+                            this.globalSettings = {
+                                periodDSDownload: periodDSDownload,
+                                periodDSDBTrimming: periodDSDBTrimming,
+                            }
+
+                            const data = {
+                                globalSettings: {
+                                    ...this.globalSettings,
+                                },
+                            }
+
+                            this.saveDataApi('specificSettings', data)
+
+                            this.nameSpace = 'ANDROID_SETTING_APP'
+                            this.keyName = 'dataSet_settings'
+
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
