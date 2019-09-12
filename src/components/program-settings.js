@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { CircularProgress } from '@dhis2/d2-ui-core'
+import api from '../utils/api'
 
 import {
     Program,
@@ -8,7 +9,7 @@ import {
     ProgramSettingsDefault,
     maxValues,
 } from '../constants/program-settings'
-import api from '../utils/api'
+
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 
 const programData = Program
@@ -292,10 +293,10 @@ class ProgramSettings extends React.Component {
             const programListComplete = this.programListComplete
             const programUsedlist = this.programNamesList
 
-            const dataSetNameFilter = programListComplete.filter(
+            const programNameFilter = programListComplete.filter(
                 item => !programUsedlist.includes(item.id)
             )
-            this.programList = dataSetNameFilter
+            this.programList = programNameFilter
         }
 
         this.setState({
@@ -443,7 +444,7 @@ class ProgramSettings extends React.Component {
 
     handleReset = e => {
         e.preventDefault()
-
+        console.log('e reset', e)
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
@@ -482,8 +483,8 @@ class ProgramSettings extends React.Component {
 
         for (const key in oldList) {
             if (key !== data.id) {
-                const dataSet = this.specificSettings[key]
-                newList[key] = dataSet
+                const program = this.specificSettings[key]
+                newList[key] = program
             }
         }
 
@@ -528,6 +529,7 @@ class ProgramSettings extends React.Component {
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
                 if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                    console.log('namespace android')
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
                             name => name === 'program_settings'
@@ -630,6 +632,36 @@ class ProgramSettings extends React.Component {
                                 }
                             )
                         } else {
+                            this.globalSettings = {
+                                settingDownload: settingDownload,
+                                settingDBTrimming: settingDBTrimming,
+                                teiDownload: teiDownload,
+                                teiDBTrimmming: teiDBTrimmming,
+                                enrollmentDownload: enrollmentDownload,
+                                enrollmentDBTrimming: enrollmentDBTrimming,
+                                enrollmentDateDownload: enrollmentDateDownload,
+                                enrollmentDateDBTrimming: enrollmentDateDBTrimming,
+                                updateDownload: updateDownload,
+                                updateDBTrimming: updateDBTrimming,
+                                teReservedDownload: teReservedDownload,
+                                teReservedDBTrimming: teReservedDBTrimming,
+                                eventsDownload: eventsDownload,
+                                eventsDBTrimming: eventsDBTrimming,
+                                eventPeriodDownload: eventPeriodDownload,
+                                eventPeriodDBTrimming: eventPeriodDBTrimming,
+                            }
+
+                            const data = {
+                                globalSettings: {
+                                    ...this.globalSettings,
+                                },
+                            }
+
+                            this.saveDataApi('specificSettings', data)
+
+                            this.nameSpace = 'ANDROID_SETTING_APP'
+                            this.keyName = 'program_settings'
+
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
