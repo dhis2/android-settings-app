@@ -238,7 +238,7 @@ class TestAndroidContainer extends React.Component {
 
             this.setState({
                 loading: false,
-                runTest: false, //true
+                runTest: true,
                 loadData: true,
                 disabled: true,
                 orgUnitLoad: true,
@@ -251,14 +251,6 @@ class TestAndroidContainer extends React.Component {
             await Promise.all(promisesOrganisationUnits).then(data => {
                 //console.log('data promises ou', data, data[0].toArray())
                 if (data.length > 0) {
-                    /* this.setState({
-                        loading: false,
-                        runTest: false,
-                        loadData: true,
-                        disabled: true,
-                        orgUnitLoad: true,
-                    }) */
-
                     data.forEach(orgUnitData => {
                         console.log('obteniendo org units')
 
@@ -556,10 +548,20 @@ class TestAndroidContainer extends React.Component {
                     })
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
+
+                    this.setState({
+                        loadData: true,
+                        orgUnitLoad: true,
+                        dataSetLoad: true,
+                        programLoad: true,
+                        programRuleLoad: true,
+                        metadataLoad: false,
+                    })
                 }
 
                 if ((dataSetList.length > 0) & (programsList.length > 0)) {
                     console.log('data element lista', dataElementListId)
+
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
@@ -567,6 +569,15 @@ class TestAndroidContainer extends React.Component {
                     const dataElementList = []
 
                     if (dataElementListId.length > 100) {
+                        this.setState({
+                            loadData: true,
+                            orgUnitLoad: true,
+                            dataSetLoad: true,
+                            programLoad: true,
+                            programRuleLoad: true,
+                            metadataLoad: true,
+                        })
+
                         const dataElementCollection = dataElementListId.slice()
                         const splitCollection = this.splitArray(
                             dataElementCollection,
@@ -604,11 +615,11 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             dataSetResult = collection
-                            this.setState({
+                            /* this.setState({
                                 loadData: true,
                                 orgUnitLoad: true,
                                 dataSetLoad: true,
-                            })
+                            }) */
                         })
 
                     this.props.d2.models.programs
@@ -620,10 +631,10 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             programResult = collection
-                            this.setState({
+                            /* this.setState({
                                 loadData: true,
                                 programLoad: false,
-                            })
+                            }) */
                         })
 
                     this.props.d2.models.programRules
@@ -635,10 +646,10 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             programRuleResult = collection
-                            this.setState({
+                            /* this.setState({
                                 loadData: true,
                                 programRuleLoad: true,
-                            })
+                            }) */
                         })
 
                     Promise.all([
@@ -739,6 +750,7 @@ class TestAndroidContainer extends React.Component {
                                 dataSetLoad: false,
                                 programLoad: false,
                                 programRuleLoad: false,
+                                metadataLoad: false,
                                 organisationUnitSearchNumber: this
                                     .organisationUnitSearchNumber,
                                 organisationUnitsNumber: this

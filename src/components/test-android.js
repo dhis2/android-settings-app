@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Button } from '@dhis2/d2-ui-core'
 import { Divider, Grid } from '@material-ui/core'
-import { CircularProgress } from '@dhis2/d2-ui-core'
+// import { CircularProgress } from '@dhis2/d2-ui-core'
 import Tooltip from '@material-ui/core/Tooltip'
 
 import TextFieldSearch from './text-field-search'
@@ -21,11 +21,6 @@ class TestAndroid extends React.Component {
     constructor(props) {
         super(props)
         this.TestAndroid = props
-        console.log(props)
-
-        this.props.dataConstants.map(test =>
-            console.log(test, this.props[test.load])
-        )
     }
 
     render() {
@@ -48,7 +43,7 @@ class TestAndroid extends React.Component {
                         suggestionPreSelected={this.props.searchFieldValue}
                     />
 
-                    {this.props.loadData && (
+                    {/* {this.props.loadData && (
                         <div>
                             <CircularProgress small />
                             <div>
@@ -79,7 +74,7 @@ class TestAndroid extends React.Component {
                                 )}
                             </div>
                         </div>
-                    )}
+                    )} */}
 
                     {this.props.runTest && (
                         <div className="data__top-margin">
