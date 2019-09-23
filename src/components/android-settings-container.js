@@ -77,7 +77,9 @@ class AndroidSettingsContainer extends React.Component {
         const androidData = this.state
         androidData.lastUpdated = new Date().toJSON()
 
-        this.keyName === 'android_settings'
+        this.saveDataApi(androidData)
+
+        /* this.keyName === 'android_settings'
             ? api
                   .updateValue(
                       'ANDROID_SETTING_APP',
@@ -95,6 +97,24 @@ class AndroidSettingsContainer extends React.Component {
                               androidData
                           )
                           .then(data => data)
+                  ) */
+    }
+
+    saveDataApi = data => {
+        this.keyName === 'android_settings'
+            ? api
+                  .updateValue('ANDROID_SETTING_APP', 'android_settings', data)
+                  .then(res => res)
+            : api
+                  .getKeys('ANDROID_SETTING_APP')
+                  .then(
+                      api
+                          .createValue(
+                              'ANDROID_SETTING_APP',
+                              'android_settings',
+                              data
+                          )
+                          .then(res => res)
                   )
     }
 
@@ -147,16 +167,65 @@ class AndroidSettingsContainer extends React.Component {
                                           loading: false,
                                       })
                                   })
-                            : this.setState({
-                                  isUpdated: true,
-                                  loading: false,
-                              })
+                            : api
+                                  .updateValue(
+                                      'ANDROID_SETTING_APP',
+                                      'android_settings',
+                                      {
+                                          metadataSync: metadataSync,
+                                          dataSync: dataSync,
+                                          numberSmsToSent: '',
+                                          numberSmsConfirmation: '',
+                                          valuesTEI: '',
+                                          encryptDB: encryptDB,
+                                      }
+                                  )
+                                  .then(res => {
+                                      console.log(res)
+                                      this.setState({
+                                          isUpdated: true,
+                                          loading: false,
+                                          metadataSync: metadataSync,
+                                          dataSync: dataSync,
+                                          numberSmsToSent: '',
+                                          numberSmsConfirmation: '',
+                                          valuesTEI: '',
+                                          encryptDB: encryptDB,
+                                      })
+                                  })
                     })
                 } else if (this.nameSpace === undefined) {
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'android_settings'
-                    ).catch(e => console.log(e))
+                    )
+                        .then(res => {
+                            console.log('sin nameSpace', res)
+                            this.keyName = 'android_settings'
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                                metadataSync: metadataSync,
+                                dataSync: dataSync,
+                                numberSmsToSent: '',
+                                numberSmsConfirmation: '',
+                                valuesTEI: '',
+                                encryptDB: encryptDB,
+                            })
+                        })
+                        .catch(e => {
+                            console.log('sin nameSpace error', e)
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                                metadataSync: metadataSync,
+                                dataSync: dataSync,
+                                numberSmsToSent: '',
+                                numberSmsConfirmation: '',
+                                valuesTEI: '',
+                                encryptDB: encryptDB,
+                            })
+                        })
                 }
             })
             .catch(e => {
