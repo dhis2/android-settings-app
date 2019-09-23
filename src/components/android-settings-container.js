@@ -78,26 +78,6 @@ class AndroidSettingsContainer extends React.Component {
         androidData.lastUpdated = new Date().toJSON()
 
         this.saveDataApi(androidData)
-
-        /* this.keyName === 'android_settings'
-            ? api
-                  .updateValue(
-                      'ANDROID_SETTING_APP',
-                      'android_settings',
-                      androidData
-                  )
-                  .then(res => res)
-            : api
-                  .getKeys('ANDROID_SETTING_APP')
-                  .then(
-                      api
-                          .createValue(
-                              'ANDROID_SETTING_APP',
-                              'android_settings',
-                              androidData
-                          )
-                          .then(data => data)
-                  ) */
     }
 
     saveDataApi = data => {
