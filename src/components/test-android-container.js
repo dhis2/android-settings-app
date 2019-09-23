@@ -119,7 +119,7 @@ class TestAndroidContainer extends React.Component {
             switch (element.publicAccess) {
                 case 'r-------':
                     // if user userGroupAccess, if user userAccess
-                    console.log('access r', element, accessIDList)
+                    console.log('access r', element, element.userGroupAccesses)
                     break
                 case 'rw------':
                     accessIDList.push(element)
@@ -217,7 +217,6 @@ class TestAndroidContainer extends React.Component {
                             organisationUnitSearchCollection.push(ousearch)
                         })
                     })
-                    console.log(organisationUnitSearchCollection)
                     this.organisationUnitSearchNumber =
                         organisationUnitSearchCollection.length
                 }
@@ -231,7 +230,7 @@ class TestAndroidContainer extends React.Component {
                         paging: false,
                         filter: `path:like:${orgUnit}`,
                         fields:
-                            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,path,openingDate,closedDate,level,parent[id],programs[id,name,trackedEntityType[id],programTrackedEntityAttributes[trackedEntityAttribute[optionSet[id]]]],dataSets[id,categoryCombo[id,categories[id]],indicators[id,indicatorType[id]],dataSetElements[dataElement[id]]],ancestors[id,displayName],organisationUnitGroups[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName]',
+                            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,path,openingDate,closedDate,level,parent[id],programs[id,name,publicAccess,userAccesses,userGroupAccesses,trackedEntityType[id],programTrackedEntityAttributes[trackedEntityAttribute[optionSet[id]]]],dataSets[id,categoryCombo[id,categories[id]],publicAccess,userAccesses,userGroupAccesses,indicators[id,indicatorType[id]],dataSetElements[dataElement[id]]],ancestors[id,displayName],organisationUnitGroups[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName]',
                     })
                 )
             })
@@ -253,7 +252,7 @@ class TestAndroidContainer extends React.Component {
                 if (data.length > 0) {
                     data.forEach(orgUnitData => {
                         console.log('obteniendo org units')
-
+                        console.log('ou', orgUnitData.toArray())
                         orgUnitData.toArray().forEach(oucapture => {
                             organisationUnitCapture.push(oucapture)
                             const programPerOU = []
@@ -285,6 +284,14 @@ class TestAndroidContainer extends React.Component {
                                         }
                                     }
                                 )
+
+                                console.log(
+                                    'idAccess program',
+                                    this.checkAccess(
+                                        programsValuesList,
+                                        programsIdAccess
+                                    )
+                                )
                             }
 
                             if (
@@ -314,6 +321,15 @@ class TestAndroidContainer extends React.Component {
                                             dataSetValuesList.push(value)
                                         }
                                     }
+                                )
+
+                                console.log(
+                                    'idAccess dataset',
+                                    this.checkAccess(
+                                        dataSetValuesList,
+                                        datasetsIdAccess
+                                    ),
+                                    dataSetValuesList
                                 )
                             }
                             if (dataSetValuesList.length > 0) {
@@ -763,6 +779,85 @@ class TestAndroidContainer extends React.Component {
                             })
                         }
                     )
+                    /* 
+                    this.props.d2.models.trackedEntityInstances.list({
+                        paging: false,
+                        filter: 'ou=DiszpKrYNg8&ouMode=DESCENDANTS&includeAllAttributes=true&includeDeleted=true',//`id:in:[${categoryComboListId}]`,
+                        fields:
+                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                        page:1,
+                        pageSize:5,
+                    }).then(collection => {
+                        console.log('TEI', collection, collection.toArray())
+                    }) */
+
+                    const orgUnitParent = organisationUnitList
+
+                    const teiPromises = []
+
+                    orgUnitParent.forEach(orgUnit => {
+                        //let i = 1
+                        const teiPerOU = []
+
+                        for (let i = 1; i <= 100; i++) {
+                            //console.log(i)
+                            teiPerOU.push(
+                                this.props.d2.Api.getApi().get(
+                                    'trackedEntityInstances',
+                                    {
+                                        page: `${i}`,
+                                        pageSize: 5,
+                                        ou: `${orgUnit}`, //'DiszpKrYNg8',
+                                        ouMode: 'DESCENDANTS',
+                                        fields:
+                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                        includeAllAttributes: true,
+                                        includeDeleted: true,
+                                    }
+                                )
+                            )
+
+                            teiPromises.push(
+                                this.props.d2.Api.getApi().get(
+                                    'trackedEntityInstances',
+                                    {
+                                        page: `${i}`,
+                                        pageSize: 5,
+                                        ou: `${orgUnit}`, //'DiszpKrYNg8',
+                                        ouMode: 'DESCENDANTS',
+                                        fields:
+                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                        includeAllAttributes: true,
+                                        includeDeleted: true,
+                                    }
+                                )
+                            )
+                        }
+                        let tei = []
+                        tei.length > 1 ? tei.push(teiPerOU) : (tei = teiPerOU)
+                        console.log('tei promise', teiPerOU, teiPromises, tei)
+                    })
+
+                    Promise.all(teiPromises)
+                        /* this.props.d2.Api.getApi().get(
+                        'trackedEntityInstances', {
+                            page: 1,
+                            pageSize: 5,
+                            ou:`{$}`,//'DiszpKrYNg8',
+                            ouMode:'DESCENDANTS',
+                            fields: 'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                            includeAllAttributes:true,
+                            includeDeleted:true,
+                        }
+                    ) */ .then(
+                            data =>
+                                console.log(
+                                    'TEI',
+                                    data,
+                                    memorySizeOf(data)
+                                    //this.getDownloadSize(data))
+                                )
+                        )
                 }
             })
         }
@@ -818,7 +913,7 @@ class TestAndroidContainer extends React.Component {
             .list({
                 paging: false,
                 level: 1,
-                fields: 'id,name,userCredentials',
+                fields: 'id,name,userCredentials,userGroups',
             })
             .then(collection => {
                 const usersOptions = collection.toArray()
