@@ -222,14 +222,6 @@ export const SpecificProgram = [
                 label: 'Per Org Unit',
                 value: 'Per Org Unit',
             },
-            {
-                label: 'Per program',
-                value: 'Per program',
-            },
-            {
-                label: 'Per OU and program',
-                value: 'Per OU and program',
-            },
         ],
         DBTrimming: [
             {
@@ -239,14 +231,6 @@ export const SpecificProgram = [
             {
                 label: 'Per Org Unit',
                 value: 'Per Org Unit',
-            },
-            {
-                label: 'Per program',
-                value: 'Per program',
-            },
-            {
-                label: 'Per OU and program',
-                value: 'Per OU and program',
             },
         ],
     },
