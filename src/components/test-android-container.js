@@ -9,6 +9,8 @@ import {
 import TestAndroid from './test-android'
 import { memorySizeOf, formatByteSize } from '../utils/memory-size'
 
+import api from '../utils/api'
+
 class TestAndroidContainer extends React.Component {
     constructor(props) {
         super(props)
@@ -23,6 +25,9 @@ class TestAndroidContainer extends React.Component {
         this.programRuleNumber = 0
         this.metadataSize = 0
         this.dataSize = 0
+        this.globalSettings = undefined
+        this.specificSettings = undefined
+        this.organisationUnitsCapture = undefined
     }
 
     state = {
@@ -59,6 +64,7 @@ class TestAndroidContainer extends React.Component {
         programLoad: false,
         programRuleLoad: false,
         metadataLoad: false,
+        dataLoad: false,
     }
 
     clearFields = () => {
@@ -79,12 +85,14 @@ class TestAndroidContainer extends React.Component {
             programNumber: 0,
             programRuleNumber: 0,
             metadataSize: 0,
+            dataSize: 0,
             loadData: false,
             orgUnitLoad: false,
             dataSetLoad: false,
             programLoad: false,
             programRuleLoad: false,
             metadataLoad: false,
+            dataLoad: false,
         })
     }
 
@@ -245,6 +253,7 @@ class TestAndroidContainer extends React.Component {
                 programLoad: false,
                 programRuleLoad: false,
                 metadataLoad: false,
+                dataLoad: false,
             })
 
             await Promise.all(promisesOrganisationUnits).then(data => {
@@ -565,6 +574,9 @@ class TestAndroidContainer extends React.Component {
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
 
+                    // organisationUnitCapture.forEach(ou => this.organisationUnitsCapture.push(ou.id))
+                    this.organisationUnitsCapture = organisationUnitCapture
+
                     this.setState({
                         loadData: true,
                         orgUnitLoad: true,
@@ -572,6 +584,7 @@ class TestAndroidContainer extends React.Component {
                         programLoad: true,
                         programRuleLoad: true,
                         metadataLoad: false,
+                        dataLoad: false,
                     })
                 }
 
@@ -592,6 +605,7 @@ class TestAndroidContainer extends React.Component {
                             programLoad: true,
                             programRuleLoad: true,
                             metadataLoad: true,
+                            dataLoad: true,
                         })
 
                         const dataElementCollection = dataElementListId.slice()
@@ -767,6 +781,7 @@ class TestAndroidContainer extends React.Component {
                                 programLoad: false,
                                 programRuleLoad: false,
                                 metadataLoad: false,
+                                dataLoad: true,
                                 organisationUnitSearchNumber: this
                                     .organisationUnitSearchNumber,
                                 organisationUnitsNumber: this
@@ -779,51 +794,20 @@ class TestAndroidContainer extends React.Component {
                             })
                         }
                     )
-                    /* 
-                    this.props.d2.models.trackedEntityInstances.list({
-                        paging: false,
-                        filter: 'ou=DiszpKrYNg8&ouMode=DESCENDANTS&includeAllAttributes=true&includeDeleted=true',//`id:in:[${categoryComboListId}]`,
-                        fields:
-                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                        page:1,
-                        pageSize:5,
-                    }).then(collection => {
-                        console.log('TEI', collection, collection.toArray())
-                    }) */
 
                     const orgUnitParent = organisationUnitList
 
-                    const teiPromises = []
-
+                    this.getData(orgUnitParent)
+                    /* let teiPromises = []
                     orgUnitParent.forEach(orgUnit => {
-                        //let i = 1
-                        const teiPerOU = []
-
                         for (let i = 1; i <= 100; i++) {
-                            //console.log(i)
-                            teiPerOU.push(
-                                this.props.d2.Api.getApi().get(
-                                    'trackedEntityInstances',
-                                    {
-                                        page: `${i}`,
-                                        pageSize: 5,
-                                        ou: `${orgUnit}`, //'DiszpKrYNg8',
-                                        ouMode: 'DESCENDANTS',
-                                        fields:
-                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                        includeAllAttributes: true,
-                                        includeDeleted: true,
-                                    }
-                                )
-                            )
-
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get(
                                     'trackedEntityInstances',
                                     {
                                         page: `${i}`,
                                         pageSize: 5,
-                                        ou: `${orgUnit}`, //'DiszpKrYNg8',
+                                        ou: `${orgUnit}`,
                                         ouMode: 'DESCENDANTS',
                                         fields:
                                             'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
@@ -834,33 +818,132 @@ class TestAndroidContainer extends React.Component {
                             )
                         }
                         let tei = []
-                        tei.length > 1 ? tei.push(teiPerOU) : (tei = teiPerOU)
-                        console.log('tei promise', teiPerOU, teiPromises, tei)
+                        console.log('tei promise', teiPromises, tei)
                     })
 
                     Promise.all(teiPromises)
-                        /* this.props.d2.Api.getApi().get(
-                        'trackedEntityInstances', {
-                            page: 1,
-                            pageSize: 5,
-                            ou:`{$}`,//'DiszpKrYNg8',
-                            ouMode:'DESCENDANTS',
-                            fields: 'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                            includeAllAttributes:true,
-                            includeDeleted:true,
-                        }
-                    ) */ .then(
+                        .then(
                             data =>
-                                console.log(
-                                    'TEI',
-                                    data,
-                                    memorySizeOf(data)
-                                    //this.getDownloadSize(data))
-                                )
-                        )
+                                {
+                                    console.log(
+                                        'TEI',
+                                        data,
+                                        memorySizeOf(data),
+                                        formatByteSize(memorySizeOf(data))
+                                        //this.getDownloadSize(data))
+                                    )
+                                    let dataSizeDownload = formatByteSize(memorySizeOf(data))
+                                    this.setState({
+                                        dataSize: dataSizeDownload
+                                    })
+                                }
+                        ) */
                 }
             })
         }
+    }
+
+    getMetadata = () => {
+        // metadata
+    }
+
+    checkType = (type, settingType) => {
+        switch (type) {
+            case 'Global':
+                settingType = 'global'
+                break
+            case 'Per Org Unit':
+                settingType = 'ou'
+                break
+            case 'Per program':
+                settingType = 'program'
+                break
+            case 'Per OU and program':
+                settingType = 'ouProgram'
+                break
+            default:
+                break
+        }
+
+        return settingType
+    }
+
+    getData = orgUnitParent => {
+        // switch with 4 cases
+        const teiPromises = []
+        let settingType = undefined
+
+        if (this.globalSettings === undefined) {
+            console.log(this.specificSettings)
+        } else {
+            console.log(this.specificSettings)
+            settingType = 'global'
+            this.checkType(this.specificSettings.settingDownload, settingType)
+
+            // per OU
+            // per program
+            // per program & per ou
+        }
+
+        switch (this.specificSettings) {
+            case undefined:
+                // if it's global or doesn't have specific settings
+                // with ou Parents and "DESCENDENT"
+                console.log(
+                    'undefined',
+                    this.specificSettings,
+                    this.organisationUnitsCapture
+                )
+                break
+            case 'a':
+                // per ou
+                // should put every single ou capture by itself with no ouMode
+                console.log(this.organisationUnitsCapture)
+                break
+            case 'b':
+                // per program
+                // with
+                console.log('spec', this.specificSettings)
+                break
+            case 'c':
+                // per program & per ou
+                break
+            default:
+                console.log(this.specificSettings)
+                break
+        }
+
+        orgUnitParent.forEach(orgUnit => {
+            for (let i = 1; i <= 100; i++) {
+                teiPromises.push(
+                    this.props.d2.Api.getApi().get('trackedEntityInstances', {
+                        page: `${i}`,
+                        pageSize: 5,
+                        ou: `${orgUnit}`,
+                        ouMode: 'DESCENDANTS',
+                        fields:
+                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                        includeAllAttributes: true,
+                        includeDeleted: true,
+                    })
+                )
+            }
+            //console.log('tei promise', teiPromises, tei)
+        })
+
+        Promise.all(teiPromises).then(data => {
+            console.log(
+                'TEI',
+                data,
+                memorySizeOf(data),
+                formatByteSize(memorySizeOf(data))
+            )
+            const dataSizeDownload = formatByteSize(memorySizeOf(data))
+            this.setState({
+                dataLoad: false,
+                dataSize: dataSizeDownload,
+            })
+        })
     }
 
     checkUsername = userToCheck => {
@@ -924,6 +1007,14 @@ class TestAndroidContainer extends React.Component {
                     loading: false,
                 })
             })
+
+        api.getValue('ANDROID_SETTING_APP', 'program_settings')
+            .then(res => {
+                console.log('getvalue api', res)
+                this.globalSettings = res.value.globalSettings
+                this.specificSettings = res.value.specificSettings
+            })
+            .catch(e => console.log('error', e))
     }
 
     render() {
@@ -945,8 +1036,10 @@ class TestAndroidContainer extends React.Component {
                 loadData={this.state.loadData}
                 orgUnitLoad={this.state.orgUnitLoad}
                 dataSetLoad={this.state.dataSetLoad}
-                programLoad={this.programLoad}
-                programRuleLoad={this.programRuleLoad}
+                programLoad={this.state.programLoad}
+                programRuleLoad={this.state.programRuleLoad}
+                metadataLoad={this.state.metadataLoad}
+                dataLoad={this.state.dataLoad}
             />
         )
     }

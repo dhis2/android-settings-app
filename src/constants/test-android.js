@@ -104,7 +104,7 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
         maxValueState: 'maxValueMetadata',
-        load: 'programLoad',
+        load: 'metadataLoad',
     },
     {
         title: 'Data download size',
@@ -112,6 +112,6 @@ export const testAndroidDataConstants = [
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
         maxValueState: 'maxValueData',
-        load: 'programLoad',
+        load: 'dataLoad',
     },
 ]
