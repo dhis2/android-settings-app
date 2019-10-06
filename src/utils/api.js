@@ -4,7 +4,21 @@ import { init, getInstance, getManifest } from 'd2'
 const CREATED = 'CREATED'
 const DELETED = 'DELETED'
 // const API_URL = 'https://play.dhis2.org/test/api';
-const API_URL = 'http://localhost:8080'
+// const API_URL = 'http://localhost:8080'
+let API_URL
+let baseUrl = process.env.REACT_APP_DHIS2_BASE_URL
+
+if (!baseUrl) {
+    console.warn(
+        'Set the environment variable `REACT_APP_DHIS2_BASE_URL` to your DHIS2 instance to override localhost:8080!'
+    )
+    baseUrl = 'http://localhost:8080'
+    API_URL = baseUrl
+    console.log('env', process.env)
+} else {
+    console.log('.env', process.env)
+    API_URL = baseUrl // + '/api'
+}
 
 class Api {
     /**
@@ -35,10 +49,17 @@ class Api {
                     process.env.NODE_ENV === 'production'
                         ? manifest.getBaseUrl()
                         : this.url
-                console.log('baseUrl', baseUrl, headers, getManifest())
-                console.info('Using URL: ' + baseUrl)
+                console.log(
+                    'baseUrl',
+                    baseUrl,
+                    headers,
+                    getManifest(),
+                    manifest.getBaseUrl()
+                )
+                console.info('Using URL: ' + baseUrl + manifest.baseUrl)
                 console.info(`Loading: ${manifest.name} v${manifest.version}`)
                 console.info(`Built ${manifest.manifest_generated_at}`)
+
                 this.baseUrl = baseUrl
                 return baseUrl + '/api'
             })
