@@ -7,7 +7,7 @@ import ProgramTable from '../components/program-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
 
-import '@dhis2/d2-ui-core/build/css/Table.css'
+import '@dhis2/d2-ui-core/css/Table.css'
 
 const style = {
     button: {
