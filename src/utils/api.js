@@ -6,18 +6,15 @@ const DELETED = 'DELETED'
 // const API_URL = 'https://play.dhis2.org/test/api';
 // const API_URL = 'http://localhost:8080'
 let API_URL
-let baseUrl = process.env.REACT_APP_DHIS2_BASE_URL
+let BASE_URL = process.env.REACT_APP_DHIS2_BASE_URL
 
-if (!baseUrl) {
-    console.warn(
-        'Set the environment variable `REACT_APP_DHIS2_BASE_URL` to your DHIS2 instance to override localhost:8080!'
-    )
-    baseUrl = 'http://localhost:8080'
-    API_URL = baseUrl
+if (!BASE_URL) {
+    BASE_URL = 'http://localhost:8080'
+    API_URL = BASE_URL
     console.log('env', process.env)
 } else {
-    console.log('.env', process.env)
-    API_URL = baseUrl // + '/api'
+    console.log('.env production API', process.env)
+    API_URL = BASE_URL // + '/api'
 }
 
 class Api {
@@ -47,16 +44,10 @@ class Api {
             .then(manifest => {
                 const baseUrl =
                     process.env.NODE_ENV === 'production'
-                        ? manifest.getBaseUrl()
+                        ? BASE_URL //manifest.getBaseUrl()
                         : this.url
-                console.log(
-                    'baseUrl',
-                    baseUrl,
-                    headers,
-                    getManifest(),
-                    manifest.getBaseUrl()
-                )
-                console.info('Using URL: ' + baseUrl + manifest.baseUrl)
+                console.log('baseUrl', baseUrl, headers, getManifest())
+                console.info('Using URL: ' + baseUrl + ' ' + manifest.baseUrl)
                 console.info(`Loading: ${manifest.name} v${manifest.version}`)
                 console.info(`Built ${manifest.manifest_generated_at}`)
 
@@ -66,11 +57,12 @@ class Api {
             .catch(e => {
                 return this.url
             })
-            .then(baseUrl =>
+            .then(baseUrl => {
+                console.log('then getmanifest', baseUrl, headers)
                 init({ baseUrl, headers }).then(
                     d2 => (this.userId = d2.currentUser.username)
                 )
-            )
+            })
         return this
     }
 
