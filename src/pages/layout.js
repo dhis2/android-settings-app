@@ -193,6 +193,7 @@ function storeRef(ref) {
 function Layout(props) {
     console.log(props)
     console.log(props.currentSection)
+    props.d2.i18n.translations['app_search_placeholder'] = 'Search Apps'
     return (
         <Router>
             <HeaderBar d2={props.d2} />
