@@ -56,7 +56,7 @@ They will not be included in the production build so you can use them for things
 The dependencies of the app are managed by npm or yarn (recommended). Working on the app requires cloning the repository and installing the dependencies:
 
 ```
-  git clone https://github.com/Sharmyn28/android-settings-app.git
+  git clone https://github.com/dhis2/android-settings-app.git
 ```
 
 In the android-settings-app root directory:
