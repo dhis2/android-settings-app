@@ -199,6 +199,7 @@ class TestAndroidContainer extends React.Component {
         let indicatorTypeListId = []
         let categoryComboListId = []
         let categoryListId = []
+        const organisationUnitIDList = []
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
@@ -264,6 +265,7 @@ class TestAndroidContainer extends React.Component {
                         console.log('ou', orgUnitData.toArray())
                         orgUnitData.toArray().forEach(oucapture => {
                             organisationUnitCapture.push(oucapture)
+                            organisationUnitIDList.push(oucapture.id)
                             const programPerOU = []
                             const datasetPerOU = []
                             if (
@@ -796,48 +798,8 @@ class TestAndroidContainer extends React.Component {
                     )
 
                     const orgUnitParent = organisationUnitList
-
-                    this.getData(orgUnitParent)
-                    /* let teiPromises = []
-                    orgUnitParent.forEach(orgUnit => {
-                        for (let i = 1; i <= 100; i++) {
-                            teiPromises.push(
-                                this.props.d2.Api.getApi().get(
-                                    'trackedEntityInstances',
-                                    {
-                                        page: `${i}`,
-                                        pageSize: 5,
-                                        ou: `${orgUnit}`,
-                                        ouMode: 'DESCENDANTS',
-                                        fields:
-                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                        includeAllAttributes: true,
-                                        includeDeleted: true,
-                                    }
-                                )
-                            )
-                        }
-                        let tei = []
-                        console.log('tei promise', teiPromises, tei)
-                    })
-
-                    Promise.all(teiPromises)
-                        .then(
-                            data =>
-                                {
-                                    console.log(
-                                        'TEI',
-                                        data,
-                                        memorySizeOf(data),
-                                        formatByteSize(memorySizeOf(data))
-                                        //this.getDownloadSize(data))
-                                    )
-                                    let dataSizeDownload = formatByteSize(memorySizeOf(data))
-                                    this.setState({
-                                        dataSize: dataSizeDownload
-                                    })
-                                }
-                        ) */
+                    const orgUnitCompleteList = organisationUnitIDList
+                    this.getData(orgUnitCompleteList, orgUnitParent)
                 }
             })
         }
@@ -845,6 +807,144 @@ class TestAndroidContainer extends React.Component {
 
     getMetadata = () => {
         // metadata
+    }
+
+    getDataPerSettingType = (settingType, totalTEI, orgUnitParent) => {
+        // after checking setting type, get promise data
+        // check how to add parameter orgUnitCompleteList
+        let orgUnitCompleteList
+        const teiPromises = []
+        const _tei = (totalTEI / 5).toFixed()
+        switch (
+            settingType //this.specificSettings
+        ) {
+            case undefined:
+                // if it's global or doesn't have specific settings
+                // with ou Parents and "DESCENDENT"
+                console.log(
+                    'undefined',
+                    this.specificSettings,
+                    this.organisationUnitsCapture
+                )
+
+                // i = TEI/5
+                orgUnitParent.forEach(orgUnit => {
+                    for (let i = 1; i <= _tei; i++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get(
+                                'trackedEntityInstances',
+                                {
+                                    page: `${i}`,
+                                    pageSize: 50,
+                                    ou: `${orgUnit}`,
+                                    ouMode: 'DESCENDANTS',
+                                    fields:
+                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                    includeAllAttributes: true,
+                                    includeDeleted: true,
+                                }
+                            )
+                        )
+                    }
+                    //console.log('tei promise', teiPromises, tei)
+                })
+
+                break
+            case 'a':
+                // per ou
+                // should put every single ou capture by itself with no ouMode
+                orgUnitCompleteList.forEach(orgUnit => {
+                    for (let i = 1; i <= _tei; i++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get(
+                                'trackedEntityInstances',
+                                {
+                                    page: `${i}`,
+                                    pageSize: 50,
+                                    ou: `${orgUnit}`,
+                                    fields:
+                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                    includeAllAttributes: true,
+                                    includeDeleted: true,
+                                }
+                            )
+                        )
+                    }
+                    //console.log('tei promise', teiPromises, tei)
+                })
+                console.log(this.organisationUnitsCapture)
+                break
+            case 'b':
+                // per program
+                // I should get programTEI also if OUPrograms have specificSettings
+                // should add a for programs
+                orgUnitParent.forEach(orgUnit => {
+                    for (let i = 1; i <= _tei; i++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get(
+                                'trackedEntityInstances',
+                                {
+                                    page: `${i}`,
+                                    pageSize: 50,
+                                    ou: `${orgUnit}`,
+                                    ouMode: 'DESCENDANTS',
+                                    programs: 'VBqh0ynB2wv', //`${VBqh0ynB2wv}`
+                                    fields:
+                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                    includeAllAttributes: true,
+                                    includeDeleted: true,
+                                }
+                            )
+                        )
+                    }
+                    //console.log('tei promise', teiPromises, tei)
+                })
+
+                console.log('spec', this.specificSettings)
+                break
+            case 'c':
+                // per program & per ou
+
+                orgUnitCompleteList.forEach(orgUnit => {
+                    for (let i = 1; i <= _tei; i++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get(
+                                'trackedEntityInstances',
+                                {
+                                    page: `${i}`,
+                                    pageSize: 50,
+                                    ou: `${orgUnit}`,
+                                    programs: 'VBqh0ynB2wv', //`${VBqh0ynB2wv}`
+                                    fields:
+                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                    includeAllAttributes: true,
+                                    includeDeleted: true,
+                                }
+                            )
+                        )
+                    }
+                    //console.log('tei promise', teiPromises, tei)
+                })
+
+                break
+            default:
+                console.log(this.specificSettings)
+                break
+        }
+
+        Promise.all(teiPromises).then(data => {
+            console.log(
+                'TEI',
+                data,
+                memorySizeOf(data),
+                formatByteSize(memorySizeOf(data))
+            )
+            const dataSizeDownload = formatByteSize(memorySizeOf(data))
+            this.setState({
+                dataLoad: false,
+                dataSize: dataSizeDownload,
+            })
+        })
     }
 
     checkType = (type, settingType) => {
@@ -868,23 +968,42 @@ class TestAndroidContainer extends React.Component {
         return settingType
     }
 
-    getData = orgUnitParent => {
+    getData = (orgUnitCompleteList, orgUnitParent) => {
         // switch with 4 cases
         const teiPromises = []
-        let settingType = undefined
+        const settingType = undefined
 
-        if (this.globalSettings === undefined) {
-            console.log(this.specificSettings)
+        if (this.specificSettings === undefined) {
+            // no specific Settings
+            console.log(this.globalSettings)
+            this.checkType(this.globalSettings.settingDownload, settingType)
+            console.log(
+                'setings type only global settings',
+                this.globalSettings.settingDownload
+            )
         } else {
             console.log(this.specificSettings)
-            settingType = 'global'
-            this.checkType(this.specificSettings.settingDownload, settingType)
-
+            //this.checkType(this.specificSettings.settingDownload, settingType)
+            const _settingType = undefined
+            let _temporalObject = {}
+            this.specificSettings.forEach(specificSetting => {
+                this.checkType(
+                    specificSetting.specificSettingDownload,
+                    _settingType
+                )
+                _temporalObject = {
+                    [specificSetting.id]: _settingType,
+                }
+                console.log('temporal obj')
+                settingType.push(_temporalObject)
+            })
+            console.log('setting type for specific settings', settingType)
             // per OU
             // per program
             // per program & per ou
         }
 
+        // switch type setting and
         switch (this.specificSettings) {
             case undefined:
                 // if it's global or doesn't have specific settings
@@ -902,6 +1021,7 @@ class TestAndroidContainer extends React.Component {
                 break
             case 'b':
                 // per program
+                // compare which programs user has and which program has specific settings
                 // with
                 console.log('spec', this.specificSettings)
                 break
@@ -913,12 +1033,13 @@ class TestAndroidContainer extends React.Component {
                 break
         }
 
+        // i = TEI/5
         orgUnitParent.forEach(orgUnit => {
             for (let i = 1; i <= 100; i++) {
                 teiPromises.push(
                     this.props.d2.Api.getApi().get('trackedEntityInstances', {
                         page: `${i}`,
-                        pageSize: 5,
+                        pageSize: 50,
                         ou: `${orgUnit}`,
                         ouMode: 'DESCENDANTS',
                         fields:
