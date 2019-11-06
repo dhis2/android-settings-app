@@ -1,6 +1,7 @@
 {
   "name": "android-settings-app",
   "version": "1.0.0",
+  "author": "Milagros Rodriguez <sharmynrodriguez@gmail.com>",
   "private": true,
   "dependencies": {
     "@dhis2/d2-ui-core": "^6.3.0",
