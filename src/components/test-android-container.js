@@ -799,7 +799,11 @@ class TestAndroidContainer extends React.Component {
 
                     const orgUnitParent = organisationUnitList
                     const orgUnitCompleteList = organisationUnitIDList
-                    this.getData(orgUnitCompleteList, orgUnitParent)
+                    this.getData(
+                        orgUnitCompleteList,
+                        orgUnitParent,
+                        programsList
+                    )
                 }
             })
         }
@@ -809,14 +813,19 @@ class TestAndroidContainer extends React.Component {
         // metadata
     }
 
-    getDataPerSettingType = (settingType, totalTEI, orgUnitParent) => {
+    getDataPerSettingType = (
+        settingType,
+        orgUnitParent,
+        orgUnitCompleteList
+    ) => {
         // after checking setting type, get promise data
-        // check how to add parameter orgUnitCompleteList
-        let orgUnitCompleteList
+
         const teiPromises = []
-        const _tei = (totalTEI / 5).toFixed()
+        const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
+        //let _event = (parseInt(settingType.sizeEvent)/50).toFixed()
+
         switch (
-            settingType //this.specificSettings
+            settingType.type //this.specificSettings
         ) {
             case undefined:
                 // if it's global or doesn't have specific settings
@@ -850,7 +859,33 @@ class TestAndroidContainer extends React.Component {
                 })
 
                 break
-            case 'a':
+            case 'global':
+                // if it's global or doesn't have specific settings
+                // with ou Parents and "DESCENDENT"
+
+                orgUnitParent.forEach(orgUnit => {
+                    for (let i = 1; i <= _tei; i++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get(
+                                'trackedEntityInstances',
+                                {
+                                    page: `${i}`,
+                                    pageSize: 50,
+                                    ou: `${orgUnit}`,
+                                    ouMode: 'DESCENDANTS',
+                                    fields:
+                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
+                                    includeAllAttributes: true,
+                                    includeDeleted: true,
+                                }
+                            )
+                        )
+                    }
+                    //console.log('tei promise', teiPromises, tei)
+                })
+
+                break
+            case 'ou':
                 // per ou
                 // should put every single ou capture by itself with no ouMode
                 orgUnitCompleteList.forEach(orgUnit => {
@@ -874,7 +909,7 @@ class TestAndroidContainer extends React.Component {
                 })
                 console.log(this.organisationUnitsCapture)
                 break
-            case 'b':
+            case 'program':
                 // per program
                 // I should get programTEI also if OUPrograms have specificSettings
                 // should add a for programs
@@ -902,7 +937,7 @@ class TestAndroidContainer extends React.Component {
 
                 console.log('spec', this.specificSettings)
                 break
-            case 'c':
+            case 'ouProgram':
                 // per program & per ou
 
                 orgUnitCompleteList.forEach(orgUnit => {
@@ -961,6 +996,9 @@ class TestAndroidContainer extends React.Component {
             case 'Per OU and program':
                 settingType = 'ouProgram'
                 break
+            case 'All Org Units':
+                settingType = 'global'
+                break
             default:
                 break
         }
@@ -968,43 +1006,68 @@ class TestAndroidContainer extends React.Component {
         return settingType
     }
 
-    getData = (orgUnitCompleteList, orgUnitParent) => {
-        // switch with 4 cases
-        const teiPromises = []
-        const settingType = undefined
+    getSettingsID = array => {
+        array[1].id = array[0]
+        return array[1]
+    }
 
-        if (this.specificSettings === undefined) {
-            // no specific Settings
-            console.log(this.globalSettings)
-            this.checkType(this.globalSettings.settingDownload, settingType)
-            console.log(
-                'setings type only global settings',
-                this.globalSettings.settingDownload
-            )
-        } else {
+    getData = (orgUnitCompleteList, orgUnitParent, programList) => {
+        //const teiPromises = []
+        const settingTypeArray = []
+        let temporalType = undefined
+        let _settingType = undefined
+        let _temporalObject = {}
+
+        console.log('program list', programList)
+
+        console.log(this.globalSettings)
+        temporalType = this.checkType(
+            this.globalSettings.settingDownload,
+            _settingType
+        )
+        _temporalObject = {
+            type: temporalType,
+            sizeTEI: this.globalSettings.teiDownload,
+            sizeEvent: this.globalSettings.eventsDownload,
+        }
+
+        settingTypeArray.push(_temporalObject)
+
+        if (this.specificSettings !== undefined) {
             console.log(this.specificSettings)
-            //this.checkType(this.specificSettings.settingDownload, settingType)
-            const _settingType = undefined
-            let _temporalObject = {}
-            this.specificSettings.forEach(specificSetting => {
-                this.checkType(
+            _temporalObject = {}
+            _settingType = undefined
+            temporalType = undefined
+            const _temporalSettingsArray = Object.entries(this.specificSettings)
+            const _specificSettingArray = []
+            _temporalSettingsArray.forEach(array => {
+                const tempt = this.getSettingsID(array)
+                _specificSettingArray.push(tempt)
+            })
+
+            _specificSettingArray.forEach(specificSetting => {
+                temporalType = this.checkType(
                     specificSetting.specificSettingDownload,
                     _settingType
                 )
                 _temporalObject = {
-                    [specificSetting.id]: _settingType,
+                    id: specificSetting.id,
+                    type: temporalType,
+                    sizeTEI: specificSetting.specificTeiDownload,
+                    sizeEvent: specificSetting.specificEventsDownload,
                 }
-                console.log('temporal obj')
-                settingType.push(_temporalObject)
+                settingTypeArray.push(_temporalObject)
             })
-            console.log('setting type for specific settings', settingType)
-            // per OU
-            // per program
-            // per program & per ou
+
+            console.log('setting type for specific settings', settingTypeArray)
         }
 
+        // should check every program (program associated to OU)
+        /* settingTypeArray.forEach(settingType => {
+            this.getDataPerSettingType(settingType, orgUnitParent, orgUnitCompleteList)
+        }) */
         // switch type setting and
-        switch (this.specificSettings) {
+        /* switch (this.specificSettings) {
             case undefined:
                 // if it's global or doesn't have specific settings
                 // with ou Parents and "DESCENDENT"
@@ -1031,10 +1094,10 @@ class TestAndroidContainer extends React.Component {
             default:
                 console.log(this.specificSettings)
                 break
-        }
+        } */
 
         // i = TEI/5
-        orgUnitParent.forEach(orgUnit => {
+        /* orgUnitParent.forEach(orgUnit => {
             for (let i = 1; i <= 100; i++) {
                 teiPromises.push(
                     this.props.d2.Api.getApi().get('trackedEntityInstances', {
@@ -1064,7 +1127,7 @@ class TestAndroidContainer extends React.Component {
                 dataLoad: false,
                 dataSize: dataSizeDownload,
             })
-        })
+        }) */
     }
 
     checkUsername = userToCheck => {
