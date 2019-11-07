@@ -822,7 +822,7 @@ class TestAndroidContainer extends React.Component {
 
         const teiPromises = []
         const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
-        //let _event = (parseInt(settingType.sizeEvent)/50).toFixed()
+        const _event = (parseInt(settingType.sizeEvent) / 50).toFixed()
 
         switch (
             settingType.type //this.specificSettings
@@ -836,7 +836,6 @@ class TestAndroidContainer extends React.Component {
                     this.organisationUnitsCapture
                 )
 
-                // i = TEI/5
                 orgUnitParent.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
                         teiPromises.push(
@@ -855,7 +854,19 @@ class TestAndroidContainer extends React.Component {
                             )
                         )
                     }
-                    //console.log('tei promise', teiPromises, tei)
+
+                    for (let j = 1; j <= _event; j++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get('events', {
+                                page: `${j}`,
+                                pageSize: 50,
+                                orgUnit: `${orgUnit}`,
+                                ouMode: 'DESCENDANTS',
+                                includeAllAttributes: true,
+                                includeDeleted: true,
+                            })
+                        )
+                    }
                 })
 
                 break
@@ -881,6 +892,19 @@ class TestAndroidContainer extends React.Component {
                             )
                         )
                     }
+
+                    for (let j = 1; j <= _event; j++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get('events', {
+                                page: `${j}`,
+                                pageSize: 50,
+                                orgUnit: `${orgUnit}`,
+                                ouMode: 'DESCENDANTS',
+                                includeAllAttributes: true,
+                                includeDeleted: true,
+                            })
+                        )
+                    }
                     //console.log('tei promise', teiPromises, tei)
                 })
 
@@ -903,6 +927,18 @@ class TestAndroidContainer extends React.Component {
                                     includeDeleted: true,
                                 }
                             )
+                        )
+                    }
+
+                    for (let j = 1; j <= _event; j++) {
+                        teiPromises.push(
+                            this.props.d2.Api.getApi().get('events', {
+                                page: `${j}`,
+                                pageSize: 50,
+                                orgUnit: `${orgUnit}`,
+                                includeAllAttributes: true,
+                                includeDeleted: true,
+                            })
                         )
                     }
                     //console.log('tei promise', teiPromises, tei)
@@ -1096,69 +1132,6 @@ class TestAndroidContainer extends React.Component {
                 dataSize: dataSizeDownload,
             })
         })
-
-        // switch type setting and
-        /* switch (this.specificSettings) {
-            case undefined:
-                // if it's global or doesn't have specific settings
-                // with ou Parents and "DESCENDENT"
-                console.log(
-                    'undefined',
-                    this.specificSettings,
-                    this.organisationUnitsCapture
-                )
-                break
-            case 'a':
-                // per ou
-                // should put every single ou capture by itself with no ouMode
-                console.log(this.organisationUnitsCapture)
-                break
-            case 'b':
-                // per program
-                // compare which programs user has and which program has specific settings
-                // with
-                console.log('spec', this.specificSettings)
-                break
-            case 'c':
-                // per program & per ou
-                break
-            default:
-                console.log(this.specificSettings)
-                break
-        } */
-
-        // i = TEI/5
-        /* orgUnitParent.forEach(orgUnit => {
-            for (let i = 1; i <= 100; i++) {
-                teiPromises.push(
-                    this.props.d2.Api.getApi().get('trackedEntityInstances', {
-                        page: `${i}`,
-                        pageSize: 50,
-                        ou: `${orgUnit}`,
-                        ouMode: 'DESCENDANTS',
-                        fields:
-                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                        includeAllAttributes: true,
-                        includeDeleted: true,
-                    })
-                )
-            }
-            //console.log('tei promise', teiPromises, tei)
-        })
-
-        Promise.all(teiPromises).then(data => {
-            console.log(
-                'TEI',
-                data,
-                memorySizeOf(data),
-                formatByteSize(memorySizeOf(data))
-            )
-            const dataSizeDownload = formatByteSize(memorySizeOf(data))
-            this.setState({
-                dataLoad: false,
-                dataSize: dataSizeDownload,
-            })
-        }) */
     }
 
     checkUsername = userToCheck => {
