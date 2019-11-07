@@ -967,7 +967,9 @@ class TestAndroidContainer extends React.Component {
                 break
         }
 
-        Promise.all(teiPromises).then(data => {
+        return teiPromises
+
+        /* Promise.all(teiPromises).then(data => {
             console.log(
                 'TEI',
                 data,
@@ -979,7 +981,7 @@ class TestAndroidContainer extends React.Component {
                 dataLoad: false,
                 dataSize: dataSizeDownload,
             })
-        })
+        }) */
     }
 
     checkType = (type, settingType) => {
@@ -1012,11 +1014,12 @@ class TestAndroidContainer extends React.Component {
     }
 
     getData = (orgUnitCompleteList, orgUnitParent, programList) => {
-        //const teiPromises = []
+        const teiPromises = []
         const settingTypeArray = []
         let temporalType = undefined
         let _settingType = undefined
         let _temporalObject = {}
+        const _tempPromises = []
 
         console.log('program list', programList)
 
@@ -1063,9 +1066,37 @@ class TestAndroidContainer extends React.Component {
         }
 
         // should check every program (program associated to OU)
-        /* settingTypeArray.forEach(settingType => {
-            this.getDataPerSettingType(settingType, orgUnitParent, orgUnitCompleteList)
-        }) */
+        settingTypeArray.forEach(settingType => {
+            const _tempSettingType = this.getDataPerSettingType(
+                settingType,
+                orgUnitParent,
+                orgUnitCompleteList
+            )
+            _tempPromises.push(_tempSettingType)
+        })
+
+        _tempPromises.forEach(promise => {
+            promise.forEach(prom => {
+                teiPromises.push(prom)
+            })
+        })
+
+        console.log('promises', _tempPromises, teiPromises, teiPromises.length)
+
+        Promise.all(teiPromises).then(data => {
+            console.log(
+                'TEI',
+                data,
+                memorySizeOf(data),
+                formatByteSize(memorySizeOf(data))
+            )
+            const dataSizeDownload = formatByteSize(memorySizeOf(data))
+            this.setState({
+                dataLoad: false,
+                dataSize: dataSizeDownload,
+            })
+        })
+
         // switch type setting and
         /* switch (this.specificSettings) {
             case undefined:
