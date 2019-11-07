@@ -830,11 +830,6 @@ class TestAndroidContainer extends React.Component {
             case undefined:
                 // if it's global or doesn't have specific settings
                 // with ou Parents and "DESCENDENT"
-                console.log(
-                    'undefined',
-                    this.specificSettings,
-                    this.organisationUnitsCapture
-                )
 
                 orgUnitParent.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
@@ -912,6 +907,7 @@ class TestAndroidContainer extends React.Component {
             case 'ou':
                 // per ou
                 // should put every single ou capture by itself with no ouMode
+
                 orgUnitCompleteList.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
                         teiPromises.push(
@@ -941,14 +937,14 @@ class TestAndroidContainer extends React.Component {
                             })
                         )
                     }
-                    //console.log('tei promise', teiPromises, tei)
                 })
-                console.log(this.organisationUnitsCapture)
+
                 break
             case 'program':
                 // per program
                 // I should get programTEI also if OUPrograms have specificSettings
                 // should add a for programs
+
                 orgUnitParent.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
                         teiPromises.push(
@@ -970,8 +966,6 @@ class TestAndroidContainer extends React.Component {
                     }
                     //console.log('tei promise', teiPromises, tei)
                 })
-
-                console.log('spec', this.specificSettings)
                 break
             case 'ouProgram':
                 // per program & per ou
@@ -1004,20 +998,6 @@ class TestAndroidContainer extends React.Component {
         }
 
         return teiPromises
-
-        /* Promise.all(teiPromises).then(data => {
-            console.log(
-                'TEI',
-                data,
-                memorySizeOf(data),
-                formatByteSize(memorySizeOf(data))
-            )
-            const dataSizeDownload = formatByteSize(memorySizeOf(data))
-            this.setState({
-                dataLoad: false,
-                dataSize: dataSizeDownload,
-            })
-        }) */
     }
 
     checkType = (type, settingType) => {
