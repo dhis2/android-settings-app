@@ -6,7 +6,8 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import { Button } from '@dhis2/d2-ui-core'
+import D2UICore from '@dhis2/d2-ui-core'
+const Button = D2UICore.Button
 
 class AndroidSettings extends React.Component {
     constructor(props) {

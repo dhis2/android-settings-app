@@ -1,11 +1,13 @@
 import React from 'react'
 
-import { Button } from '@dhis2/d2-ui-core'
+import D2UICore from '@dhis2/d2-ui-core'
 import Table from '@dhis2/d2-ui-table'
 
 import ProgramTable from '../components/program-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
+
+const Button = D2UICore.Button
 
 import '@dhis2/d2-ui-core/css/Table.css'
 
@@ -22,13 +24,6 @@ const style = {
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
-
-        props.d2.i18n.translations['name'] = this.props.tableNameProperty
-        props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
-
-        props.d2.i18n.translations['edit'] = 'edit'
-        props.d2.i18n.translations['delete'] = 'delete'
-        props.d2.i18n.translations['actions'] = 'actions'
     }
 
     render() {
