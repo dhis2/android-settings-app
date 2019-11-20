@@ -10,6 +10,8 @@ import {
 } from '../constants/data-set-settings'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 
+import { dataSetQuery } from '../constants/queries'
+
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
 
@@ -417,18 +419,18 @@ class DataSetSettings extends React.Component {
                 })
             })
 
-        this.props.d2.models.dataSet
+        /* this.props.d2.models.dataSet
             .list({
                 paging: false,
                 level: 1,
                 fields: 'id,name',
                 filter: 'access.data.write:eq:true',
-            })
-            .then(collection => {
-                const dataSetList = collection.toArray()
-                this.dataSetList = dataSetList
-                this.dataSetListComplete = dataSetList
-            })
+            }) */
+        this.props.d2.models.dataSet.list(dataSetQuery).then(collection => {
+            const dataSetList = collection.toArray()
+            this.dataSetList = dataSetList
+            this.dataSetListComplete = dataSetList
+        })
     }
 
     componentDidUpdate() {
