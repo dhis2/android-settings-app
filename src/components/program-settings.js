@@ -11,6 +11,7 @@ import {
 } from '../constants/program-settings'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
+import { programQuery } from '../constants/queries'
 
 const programData = Program
 const specificProgramData = SpecificProgram
@@ -681,18 +682,17 @@ class ProgramSettings extends React.Component {
                 })
             })
 
-        this.props.d2.models.program
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name',
-                filter: 'access.data.write:eq:true',
-            })
-            .then(collection => {
-                const programList = collection.toArray()
-                this.programList = programList
-                this.programListComplete = programList
-            })
+        this.props.d2.models.program.list(programQuery).then(collection => {
+            const programList = collection.toArray()
+            this.programList = programList
+            this.programListComplete = programList
+        })
+        /* {
+            paging: false,
+            level: 1,
+            fields: 'id,name',
+            filter: 'access.data.write:eq:true',
+        } */
     }
 
     componentDidUpdate() {
