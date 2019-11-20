@@ -687,12 +687,6 @@ class ProgramSettings extends React.Component {
             this.programList = programList
             this.programListComplete = programList
         })
-        /* {
-            paging: false,
-            level: 1,
-            fields: 'id,name',
-            filter: 'access.data.write:eq:true',
-        } */
     }
 
     componentDidUpdate() {
