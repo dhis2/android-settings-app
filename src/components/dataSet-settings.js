@@ -419,13 +419,6 @@ class DataSetSettings extends React.Component {
                 })
             })
 
-        /* this.props.d2.models.dataSet
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name',
-                filter: 'access.data.write:eq:true',
-            }) */
         this.props.d2.models.dataSet.list(dataSetQuery).then(collection => {
             const dataSetList = collection.toArray()
             this.dataSetList = dataSetList
