@@ -651,59 +651,88 @@ class TestAndroidContainer extends React.Component {
                         })
 
                     Promise.all([
-                        this.props.d2.models.programStages.list({
+                        this.props.d2.models.programStages.list(
+                            /* {
                             paging: false,
                             filter: `program.id:in:[${programsList}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
-                        }),
-                        this.props.d2.models.trackedEntityTypes.list({
+                        } */
+                            testAndroidQuery.programStage(programsList)
+                        ),
+                        this.props.d2.models.trackedEntityTypes.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${trackedEntityTypeListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
-                        }),
-                        this.props.d2.models.relationshipTypes.list({
+                        } */
+                            testAndroidQuery.trackedEntityType(
+                                trackedEntityTypeListId
+                            )
+                        ),
+                        this.props.d2.models.relationshipTypes.list(
+                            /* {
                             paging: false,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
-                        }),
-                        this.props.d2.models.optionSets.list({
+                        } */
+                            testAndroidQuery.relationshipType
+                        ),
+                        this.props.d2.models.optionSets.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${optionSetListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
-                        }),
-                        this.props.d2.models.optionGroups.list({
+                        } */
+                            testAndroidQuery.optionSet(optionSetListId)
+                        ),
+                        this.props.d2.models.optionGroups.list(
+                            /* {
                             paging: false,
                             filter: `optionSet.id:in:[${optionSetListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
-                        }),
-                        this.props.d2.models.indicators.list({
+                        } */
+                            testAndroidQuery.optionGroup(optionSetListId)
+                        ),
+                        this.props.d2.models.indicators.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${indicatorListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
-                        }),
-                        this.props.d2.models.indicatorTypes.list({
+                        } */
+                            testAndroidQuery.indicator(indicatorListId)
+                        ),
+                        this.props.d2.models.indicatorTypes.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${indicatorTypeListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
-                        }),
-                        this.props.d2.models.categoryCombos.list({
+                        } */
+                            testAndroidQuery.indicatorType(indicatorTypeListId)
+                        ),
+                        this.props.d2.models.categoryCombos.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${categoryComboListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
-                        }),
-                        this.props.d2.models.categories.list({
+                        } */
+                            testAndroidQuery.categoryCombo(categoryComboListId)
+                        ),
+                        this.props.d2.models.categories.list(
+                            /* {
                             paging: false,
                             filter: `id:in:[${categoryListId}]`,
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
-                        }),
+                        } */
+                            testAndroidQuery.category(categoryListId)
+                        ),
                     ]).then(
                         ([
                             programStages,
@@ -780,8 +809,8 @@ class TestAndroidContainer extends React.Component {
         const teiPromises = []
         const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
         const _event = (parseInt(settingType.sizeEvent) / 50).toFixed()
-        const _teiProgram = (parseInt(settingType.sizeTEI) / 25).toFixed()
-        const _eventProgrm = (parseInt(settingType.sizeEvent) / 25).toFixed()
+        const _teiProgram = (parseInt(settingType.sizeTEI) / 20).toFixed()
+        const _eventProgrm = (parseInt(settingType.sizeEvent) / 20).toFixed()
 
         /* let organisationUnitIDLists = {
             orgUnit: orgUnitCompleteList,
@@ -917,7 +946,7 @@ class TestAndroidContainer extends React.Component {
                                     'trackedEntityInstances',
                                     {
                                         page: `${i}`,
-                                        pageSize: 25,
+                                        pageSize: 20,
                                         ou: `${orgUnit}`,
                                         ouMode: 'DESCENDANTS',
                                         programs: `${program}`,
@@ -934,7 +963,7 @@ class TestAndroidContainer extends React.Component {
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get('events', {
                                     page: `${j}`,
-                                    pageSize: 25,
+                                    pageSize: 20,
                                     orgUnit: `${orgUnit}`,
                                     ouMode: 'DESCENDANTS',
                                     programs: `${program}`,
@@ -958,7 +987,7 @@ class TestAndroidContainer extends React.Component {
                                     'trackedEntityInstances',
                                     {
                                         page: `${i}`,
-                                        pageSize: 25,
+                                        pageSize: 20,
                                         ou: `${orgUnit}`,
                                         programs: `${program}`, //`${VBqh0ynB2wv}`
                                         fields:
@@ -974,7 +1003,7 @@ class TestAndroidContainer extends React.Component {
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get('events', {
                                     page: `${j}`,
-                                    pageSize: 25,
+                                    pageSize: 20,
                                     orgUnit: `${orgUnit}`,
                                     programs: `${program}`,
                                     includeAllAttributes: true,

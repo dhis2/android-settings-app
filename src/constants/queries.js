@@ -71,4 +71,81 @@ export const testAndroidQuery = {
         }
         return query
     },
+    programStage: programsList => {
+        const query = {
+            paging: false,
+            filter: `program.id:in:[${programsList}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
+        }
+        return query
+    },
+    trackedEntityType: trackedEntityTypeListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${trackedEntityTypeListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
+        }
+        return query
+    },
+    relationshipType: {
+        paging: false,
+        fields:
+            'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
+    },
+    optionSet: optionSetListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${optionSetListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
+        }
+        return query
+    },
+    optionGroup: optionSetListId => {
+        const query = {
+            paging: false,
+            filter: `optionSet.id:in:[${optionSetListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
+        }
+        return query
+    },
+    indicator: indicatorListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${indicatorListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
+        }
+        return query
+    },
+    indicatorType: indicatorTypeListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${indicatorTypeListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
+        }
+        return query
+    },
+    categoryCombo: categoryComboListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${categoryComboListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
+        }
+        return query
+    },
+    category: categoryListId => {
+        const query = {
+            paging: false,
+            filter: `id:in:[${categoryListId}]`,
+            fields:
+                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
+        }
+        return query
+    },
 }
