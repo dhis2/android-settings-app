@@ -652,85 +652,32 @@ class TestAndroidContainer extends React.Component {
 
                     Promise.all([
                         this.props.d2.models.programStages.list(
-                            /* {
-                            paging: false,
-                            filter: `program.id:in:[${programsList}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id,program[id]],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted',
-                        } */
                             testAndroidQuery.programStage(programsList)
                         ),
                         this.props.d2.models.trackedEntityTypes.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${trackedEntityTypeListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,trackedEntityTypeAttributes[trackedEntityType[id],trackedEntityAttribute[id],displayInList,mandatory,searchable],style[color,icon]',
-                        } */
                             testAndroidQuery.trackedEntityType(
                                 trackedEntityTypeListId
                             )
                         ),
                         this.props.d2.models.relationshipTypes.list(
-                            /* {
-                            paging: false,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,bIsToA,aIsToB,fromConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]],toConstraint[id,code,name,displayName,created,lastUpdated,deleted,relationshipEntity,trackedEntityType[id],program[id],programStage[id]]',
-                        } */
                             testAndroidQuery.relationshipType
                         ),
                         this.props.d2.models.optionSets.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${optionSetListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,version,valueType,options[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,optionSet[id],style[color,icon]]',
-                        } */
                             testAndroidQuery.optionSet(optionSetListId)
                         ),
                         this.props.d2.models.optionGroups.list(
-                            /* {
-                            paging: false,
-                            filter: `optionSet.id:in:[${optionSetListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
-                        } */
                             testAndroidQuery.optionGroup(optionSetListId)
                         ),
                         this.props.d2.models.indicators.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${indicatorListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url',
-                        } */
                             testAndroidQuery.indicator(indicatorListId)
                         ),
                         this.props.d2.models.indicatorTypes.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${indicatorTypeListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
-                        } */
                             testAndroidQuery.indicatorType(indicatorTypeListId)
                         ),
                         this.props.d2.models.categoryCombos.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${categoryComboListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,isDefault,categories[id],categoryOptionCombos[id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id]]',
-                        } */
                             testAndroidQuery.categoryCombo(categoryComboListId)
                         ),
                         this.props.d2.models.categories.list(
-                            /* {
-                            paging: false,
-                            filter: `id:in:[${categoryListId}]`,
-                            fields:
-                                'id,code,name,displayName,created,lastUpdated,deleted,categoryOptions[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,startDate,endDate,access[data[read,write]]],dataDimensionType',
-                        } */
                             testAndroidQuery.category(categoryListId)
                         ),
                     ]).then(
@@ -807,8 +754,8 @@ class TestAndroidContainer extends React.Component {
         // after checking setting type, get promise data
 
         const teiPromises = []
-        const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
-        const _event = (parseInt(settingType.sizeEvent) / 50).toFixed()
+        const _tei = (parseInt(settingType.sizeTEI) / 20).toFixed()
+        const _event = (parseInt(settingType.sizeEvent) / 20).toFixed()
         const _teiProgram = (parseInt(settingType.sizeTEI) / 20).toFixed()
         const _eventProgrm = (parseInt(settingType.sizeEvent) / 20).toFixed()
 
@@ -816,6 +763,12 @@ class TestAndroidContainer extends React.Component {
             orgUnit: orgUnitCompleteList,
             orgUnitParents: orgUnitParent
         } */
+
+        let settingsObject = {
+            orgUnit: '',
+            page: '',
+            program: '',
+        }
 
         switch (
             settingType.type //this.specificSettings
@@ -826,19 +779,28 @@ class TestAndroidContainer extends React.Component {
 
                 orgUnitList.orgUnitParents.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
+                        settingsObject = {
+                            orgUnit: orgUnit,
+                            page: i,
+                            program: '',
+                        }
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
-                                {
+                                /* {
                                     page: `${i}`,
-                                    pageSize: 50,
+                                    pageSize: 20,
                                     ou: `${orgUnit}`,
                                     ouMode: 'DESCENDANTS',
                                     fields:
                                         'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                     includeAllAttributes: true,
                                     includeDeleted: true,
-                                }
+                                } */
+                                testAndroidQuery.trackedEntityInstance(
+                                    undefined,
+                                    settingsObject
+                                )
                             )
                         )
                     }
@@ -847,7 +809,7 @@ class TestAndroidContainer extends React.Component {
                         teiPromises.push(
                             this.props.d2.Api.getApi().get('events', {
                                 page: `${j}`,
-                                pageSize: 50,
+                                pageSize: 20,
                                 orgUnit: `${orgUnit}`,
                                 ouMode: 'DESCENDANTS',
                                 includeAllAttributes: true,
@@ -864,19 +826,28 @@ class TestAndroidContainer extends React.Component {
 
                 orgUnitList.orgUnitParents.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
+                        settingsObject = {
+                            orgUnit: orgUnit,
+                            page: i,
+                            program: '',
+                        }
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
-                                {
+                                /* {
                                     page: `${i}`,
-                                    pageSize: 50,
+                                    pageSize: 20,
                                     ou: `${orgUnit}`,
                                     ouMode: 'DESCENDANTS',
                                     fields:
                                         'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                     includeAllAttributes: true,
                                     includeDeleted: true,
-                                }
+                                } */
+                                testAndroidQuery.trackedEntityInstance(
+                                    'global',
+                                    settingsObject
+                                )
                             )
                         )
                     }
@@ -885,7 +856,7 @@ class TestAndroidContainer extends React.Component {
                         teiPromises.push(
                             this.props.d2.Api.getApi().get('events', {
                                 page: `${j}`,
-                                pageSize: 50,
+                                pageSize: 20,
                                 orgUnit: `${orgUnit}`,
                                 ouMode: 'DESCENDANTS',
                                 includeAllAttributes: true,
@@ -903,18 +874,27 @@ class TestAndroidContainer extends React.Component {
 
                 orgUnitList.orgUnit.forEach(orgUnit => {
                     for (let i = 1; i <= _tei; i++) {
+                        settingsObject = {
+                            orgUnit: orgUnit,
+                            page: i,
+                            program: '',
+                        }
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
-                                {
+                                /* {
                                     page: `${i}`,
-                                    pageSize: 50,
+                                    pageSize: 20,
                                     ou: `${orgUnit}`,
                                     fields:
                                         'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                     includeAllAttributes: true,
                                     includeDeleted: true,
-                                }
+                                } */
+                                testAndroidQuery.trackedEntityInstance(
+                                    'ou',
+                                    settingsObject
+                                )
                             )
                         )
                     }
@@ -923,7 +903,7 @@ class TestAndroidContainer extends React.Component {
                         teiPromises.push(
                             this.props.d2.Api.getApi().get('events', {
                                 page: `${j}`,
-                                pageSize: 50,
+                                pageSize: 20,
                                 orgUnit: `${orgUnit}`,
                                 includeAllAttributes: true,
                                 includeDeleted: true,
@@ -941,10 +921,15 @@ class TestAndroidContainer extends React.Component {
                 programList.forEach(program => {
                     orgUnitList.orgUnitParents.forEach(orgUnit => {
                         for (let i = 1; i <= _teiProgram; i++) {
+                            settingsObject = {
+                                orgUnit: orgUnit,
+                                page: i,
+                                program: program,
+                            }
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get(
                                     'trackedEntityInstances',
-                                    {
+                                    /* {
                                         page: `${i}`,
                                         pageSize: 20,
                                         ou: `${orgUnit}`,
@@ -954,7 +939,11 @@ class TestAndroidContainer extends React.Component {
                                             'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                         includeAllAttributes: true,
                                         includeDeleted: true,
-                                    }
+                                    } */
+                                    testAndroidQuery.trackedEntityInstance(
+                                        'program',
+                                        settingsObject
+                                    )
                                 )
                             )
                         }
@@ -982,10 +971,15 @@ class TestAndroidContainer extends React.Component {
                 orgUnitList.orgUnit.forEach(orgUnit => {
                     programList.forEach(program => {
                         for (let i = 1; i <= _tei; i++) {
+                            settingsObject = {
+                                orgUnit: orgUnit,
+                                page: i,
+                                program: program,
+                            }
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get(
                                     'trackedEntityInstances',
-                                    {
+                                    /* {
                                         page: `${i}`,
                                         pageSize: 20,
                                         ou: `${orgUnit}`,
@@ -994,7 +988,11 @@ class TestAndroidContainer extends React.Component {
                                             'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                         includeAllAttributes: true,
                                         includeDeleted: true,
-                                    }
+                                    } */
+                                    testAndroidQuery.trackedEntityInstance(
+                                        'ouProgram',
+                                        settingsObject
+                                    )
                                 )
                             )
                         }
@@ -1127,19 +1125,21 @@ class TestAndroidContainer extends React.Component {
 
         console.log('promises', _tempPromises, teiPromises, teiPromises.length)
 
-        Promise.all(teiPromises).then(data => {
-            console.log(
-                'TEI',
-                data,
-                memorySizeOf(data),
-                formatByteSize(memorySizeOf(data))
-            )
-            const dataSizeDownload = formatByteSize(memorySizeOf(data))
-            this.setState({
-                dataLoad: false,
-                dataSize: dataSizeDownload,
+        Promise.all(teiPromises)
+            .then(data => {
+                console.log(
+                    'TEI',
+                    data,
+                    memorySizeOf(data),
+                    formatByteSize(memorySizeOf(data))
+                )
+                const dataSizeDownload = formatByteSize(memorySizeOf(data))
+                this.setState({
+                    dataLoad: false,
+                    dataSize: dataSizeDownload,
+                })
             })
-        })
+            .catch(error => console.log({ errorDataDwn: error }))
     }
 
     checkUsername = userToCheck => {
