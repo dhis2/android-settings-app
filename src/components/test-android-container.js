@@ -764,10 +764,11 @@ class TestAndroidContainer extends React.Component {
             orgUnitParents: orgUnitParent
         } */
 
-        let settingsObject = {
+        const settingsObject = {
             orgUnit: '',
-            page: '',
             program: '',
+            page: '',
+            pageEvent: '',
         }
 
         switch (
@@ -778,12 +779,9 @@ class TestAndroidContainer extends React.Component {
                 // with ou Parents and "DESCENDENT"
 
                 orgUnitList.orgUnitParents.forEach(orgUnit => {
+                    settingsObject.orgUnit = orgUnit
                     for (let i = 1; i <= _tei; i++) {
-                        settingsObject = {
-                            orgUnit: orgUnit,
-                            page: i,
-                            program: '',
-                        }
+                        settingsObject.page = i
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
@@ -796,15 +794,15 @@ class TestAndroidContainer extends React.Component {
                     }
 
                     for (let j = 1; j <= _event; j++) {
+                        settingsObject.pageEvent = j
                         teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 20,
-                                orgUnit: `${orgUnit}`,
-                                ouMode: 'DESCENDANTS',
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
+                            this.props.d2.Api.getApi().get(
+                                'events',
+                                testAndroidQuery.event(
+                                    undefined,
+                                    settingsObject
+                                )
+                            )
                         )
                     }
                 })
@@ -815,12 +813,9 @@ class TestAndroidContainer extends React.Component {
                 // with ou Parents and "DESCENDENT"
 
                 orgUnitList.orgUnitParents.forEach(orgUnit => {
+                    settingsObject.orgUnit = orgUnit
                     for (let i = 1; i <= _tei; i++) {
-                        settingsObject = {
-                            orgUnit: orgUnit,
-                            page: i,
-                            program: '',
-                        }
+                        settingsObject.page = i
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
@@ -833,18 +828,14 @@ class TestAndroidContainer extends React.Component {
                     }
 
                     for (let j = 1; j <= _event; j++) {
+                        settingsObject.pageEvent = j
                         teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 20,
-                                orgUnit: `${orgUnit}`,
-                                ouMode: 'DESCENDANTS',
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
+                            this.props.d2.Api.getApi().get(
+                                'events',
+                                testAndroidQuery.event('global', settingsObject)
+                            )
                         )
                     }
-                    //console.log('tei promise', teiPromises, tei)
                 })
 
                 break
@@ -853,12 +844,9 @@ class TestAndroidContainer extends React.Component {
                 // should put every single ou capture by itself with no ouMode
 
                 orgUnitList.orgUnit.forEach(orgUnit => {
+                    settingsObject.orgUnit = orgUnit
                     for (let i = 1; i <= _tei; i++) {
-                        settingsObject = {
-                            orgUnit: orgUnit,
-                            page: i,
-                            program: '',
-                        }
+                        settingsObject.page = i
                         teiPromises.push(
                             this.props.d2.Api.getApi().get(
                                 'trackedEntityInstances',
@@ -871,14 +859,12 @@ class TestAndroidContainer extends React.Component {
                     }
 
                     for (let j = 1; j <= _event; j++) {
+                        settingsObject.pageEvent = j
                         teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 20,
-                                orgUnit: `${orgUnit}`,
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
+                            this.props.d2.Api.getApi().get(
+                                'events',
+                                testAndroidQuery.event('ou', settingsObject)
+                            )
                         )
                     }
                 })
@@ -891,12 +877,10 @@ class TestAndroidContainer extends React.Component {
 
                 programList.forEach(program => {
                     orgUnitList.orgUnitParents.forEach(orgUnit => {
+                        settingsObject.orgUnit = orgUnit
+                        settingsObject.program = program
                         for (let i = 1; i <= _teiProgram; i++) {
-                            settingsObject = {
-                                orgUnit: orgUnit,
-                                page: i,
-                                program: program,
-                            }
+                            settingsObject.page = i
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get(
                                     'trackedEntityInstances',
@@ -909,33 +893,29 @@ class TestAndroidContainer extends React.Component {
                         }
 
                         for (let j = 1; j <= _eventProgrm; j++) {
+                            settingsObject.pageEvent = j
                             teiPromises.push(
-                                this.props.d2.Api.getApi().get('events', {
-                                    page: `${j}`,
-                                    pageSize: 20,
-                                    orgUnit: `${orgUnit}`,
-                                    ouMode: 'DESCENDANTS',
-                                    programs: `${program}`,
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                })
+                                this.props.d2.Api.getApi().get(
+                                    'events',
+                                    testAndroidQuery.event(
+                                        'program',
+                                        settingsObject
+                                    )
+                                )
                             )
                         }
                     })
-                    //console.log('tei promise', teiPromises, tei)
                 })
                 break
             case 'ouProgram':
                 // per program & per ou
 
                 orgUnitList.orgUnit.forEach(orgUnit => {
+                    settingsObject.orgUnit = orgUnit
                     programList.forEach(program => {
                         for (let i = 1; i <= _tei; i++) {
-                            settingsObject = {
-                                orgUnit: orgUnit,
-                                page: i,
-                                program: program,
-                            }
+                            settingsObject.page = i
+                            settingsObject.program = program
                             teiPromises.push(
                                 this.props.d2.Api.getApi().get(
                                     'trackedEntityInstances',
@@ -949,18 +929,16 @@ class TestAndroidContainer extends React.Component {
 
                         for (let j = 1; j <= _event; j++) {
                             teiPromises.push(
-                                this.props.d2.Api.getApi().get('events', {
-                                    page: `${j}`,
-                                    pageSize: 20,
-                                    orgUnit: `${orgUnit}`,
-                                    programs: `${program}`,
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                })
+                                this.props.d2.Api.getApi().get(
+                                    'events',
+                                    testAndroidQuery.event(
+                                        'ouProgram',
+                                        settingsObject
+                                    )
+                                )
                             )
                         }
                     })
-                    //console.log('tei promise', teiPromises, tei)
                 })
 
                 break

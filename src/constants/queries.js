@@ -218,4 +218,62 @@ export const testAndroidQuery = {
         }
         return query
     },
+    event: (type, settings) => {
+        let query = {}
+        switch (type) {
+            case undefined:
+                query = {
+                    page: `${settings.pageEvent}`,
+                    pageSize: 20,
+                    orgUnit: `${settings.orgUnit}`,
+                    ouMode: 'DESCENDANTS',
+                    includeAllAttributes: true,
+                    includeDeleted: true,
+                }
+                break
+            case 'global':
+                query = {
+                    page: `${settings.pageEvent}`,
+                    pageSize: 20,
+                    orgUnit: `${settings.orgUnit}`,
+                    ouMode: 'DESCENDANTS',
+                    includeAllAttributes: true,
+                    includeDeleted: true,
+                }
+                break
+            case 'ou':
+                query = {
+                    page: `${settings.pageEvent}`,
+                    pageSize: 20,
+                    orgUnit: `${settings.orgUnit}`,
+                    includeAllAttributes: true,
+                    includeDeleted: true,
+                }
+                break
+            case 'program':
+                query = {
+                    page: `${settings.pageEvent}`,
+                    pageSize: 20,
+                    orgUnit: `${settings.orgUnit}`,
+                    ouMode: 'DESCENDANTS',
+                    programs: `${settings.program}`,
+                    includeAllAttributes: true,
+                    includeDeleted: true,
+                }
+                break
+            case 'ouProgram':
+                query = {
+                    page: `${settings.pageEvent}`,
+                    pageSize: 20,
+                    orgUnit: `${settings.orgUnit}`,
+                    programs: `${settings.program}`,
+                    includeAllAttributes: true,
+                    includeDeleted: true,
+                }
+                break
+            default:
+                break
+        }
+        return query
+    },
 }
