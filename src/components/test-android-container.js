@@ -131,8 +131,9 @@ class TestAndroidContainer extends React.Component {
                     console.log('access r', element, element.userGroupAccesses)
                     break
                 case 'rw------':
+                    // public Access
                     accessIDList.push(element)
-                    console.log('access rw', element, accessIDList)
+                    // console.log('access rw', element, accessIDList)
                     break
                 case 'rwr-----':
                     accessIDList.push(element)
@@ -293,13 +294,18 @@ class TestAndroidContainer extends React.Component {
                                     }
                                 )
 
-                                console.log(
+                                /* console.log(
                                     'idAccess program',
                                     this.checkAccess(
                                         programsValuesList,
                                         programsIdAccess
                                     )
+                                ) */
+                                this.checkAccess(
+                                    programsValuesList,
+                                    programsIdAccess
                                 )
+                                console.log('access program', programsIdAccess)
                             }
 
                             if (
@@ -331,17 +337,24 @@ class TestAndroidContainer extends React.Component {
                                     }
                                 )
 
-                                console.log(
+                                /* console.log(
                                     'idAccess dataset',
                                     this.checkAccess(
                                         dataSetValuesList,
                                         datasetsIdAccess
                                     ),
                                     dataSetValuesList
+                                ) */
+                                this.checkAccess(
+                                    dataSetValuesList,
+                                    datasetsIdAccess
                                 )
+                                console.log('dataset access', datasetsIdAccess)
                             }
-                            if (dataSetValuesList.length > 0) {
-                                dataSetValuesList.forEach(value => {
+                            if (datasetsIdAccess.length > 0) {
+                                //dataSetValuesList
+                                datasetsIdAccess.forEach(value => {
+                                    //dataSetValuesList
                                     const dataSetElement = value.dataSetElements
                                     if (
                                         dataSetElement !== undefined &&
@@ -489,8 +502,10 @@ class TestAndroidContainer extends React.Component {
                                     }
                                 })
                             }
-                            if (programsValuesList.length > 0) {
-                                programsValuesList.forEach((value, key) => {
+                            if (programsIdAccess.length > 0) {
+                                //programsValuesList
+                                programsIdAccess.forEach((value, key) => {
+                                    //programsValuesList
                                     const trackedEntityT =
                                         value.trackedEntityType
                                     if (trackedEntityT !== undefined) {
@@ -555,12 +570,12 @@ class TestAndroidContainer extends React.Component {
                             }
                             /* console.log({
                                 dataset: dataSetList,
-                                datasetV: dataSetValuesList,
+                                datasetV: datasetsIdAccess, //dataSetValuesList,
                                 program: programsList,
-                                programV: programsValuesList,
+                                programV: programsIdAccess, //programsValuesList,
                                 trackedEntity: trackedEntityTypeListId,
                                 optionSetListId: optionSetListId,
-                                dataSetValuesList: dataSetValuesList,
+                                dataSetValuesList: datasetsIdAccess, //dataSetValuesList,
                                 dataElement: dataElementListId,
                                 indicators: indicatorListId,
                                 categoryCombo: categoryComboListId,
