@@ -6,8 +6,8 @@ const style = {
     dataTable__headers__header: {
         fontFamily: 'Roboto, sans-serif',
         verticalAlign: 'middle',
-        borderBottom: '2px solid #E0E0E0', //!important
-        color: '#757575', //!important
+        borderBottom: '2px solid #E0E0E0',
+        color: '#757575',
         display: 'table-cell',
         fontWeight: '400',
         textAlign: 'left',
@@ -16,7 +16,7 @@ const style = {
     dataTable__rows__row__column: {
         fontFamily: 'Roboto, sans-serif',
         verticalAlign: 'middle',
-        borderBottom: '1px solid #E0E0E0', //!important
+        borderBottom: '1px solid #E0E0E0',
         color: '#212121',
         borderTop: 0,
         display: 'table-cell',

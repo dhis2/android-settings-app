@@ -28,11 +28,9 @@ class TestAndroid extends React.Component {
             <div>
                 <div>
                     <p style={style.mainContent__title__main}>
-                        {/*  className="main-content__title main-content__title__main" */}
                         Test Android Login
                     </p>
                     <p style={style.mainContent__subtitle}>
-                        {/* className="main-content__title main-content__subtitle" */}
                         Enter a user to check access to
                     </p>
                 </div>
@@ -80,17 +78,14 @@ class TestAndroid extends React.Component {
 
                     {this.props.runTest && (
                         <div style={style.data__topMargin}>
-                            {/* className="data__top-margin" */}
                             {this.props.dataConstants.map(test => (
                                 <div key={test.state}>
                                     <Grid container>
                                         <Grid item xs={10}>
                                             <small style={style.subitemTitle}>
-                                                {/* className="subitem-title" */}
                                                 {test.title}
                                             </small>
                                             <p style={style.subitemItem}>
-                                                {/*  className="subitem-item" */}
                                                 {test.description}
                                             </p>
                                         </Grid>
@@ -127,7 +122,6 @@ class TestAndroid extends React.Component {
                                                             ]
                                                         }
                                                     </p>
-                                                    {/* "subitem-item subitem-bigitem" */}
                                                 </Tooltip>
                                             )}
                                         </Grid>

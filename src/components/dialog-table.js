@@ -50,7 +50,6 @@ class DialogTable extends React.Component {
                         </Select>
                     ) : (
                         <p style={style.mainContent__title__dialog}>
-                            {/* className="main-content__title main-content__title__dialog" */}
                             {this.props.dataTitle}
                         </p>
                     )}
@@ -67,7 +66,6 @@ class DialogTable extends React.Component {
                         onClick={this.props.handleClose}
                         style={style.mainContent__dialog__button}
                     >
-                        {/* className="main-content__dialog__button" */}
                         CANCEL
                     </Button>
                     <Button raised onClick={this.props.handleSubmitDialog}>

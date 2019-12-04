@@ -19,24 +19,21 @@ class ProgramTable extends React.Component {
     render() {
         return (
             <Table style={style.dataTable}>
-                {/* className="data-table" */}
                 <TableHead>
                     <TableRow>
                         <TableCell style={style.dataTable__headers__header}>
-                            {/* className="data-table__headers__header" */}{' '}
+                            {' '}
                         </TableCell>
                         <TableCell
                             style={style.dataTable__headers__header}
                             align="right"
                         >
-                            {/* className="data-table__headers__header" */}
                             Download
                         </TableCell>
                         <TableCell
                             style={style.dataTable__headers__header}
                             align="right"
                         >
-                            {/* className="data-table__headers__header" */}
                             DB trimming
                         </TableCell>
                     </TableRow>
@@ -49,14 +46,12 @@ class ProgramTable extends React.Component {
                                 scope="row"
                                 style={style.dataTable__rows__row__column}
                             >
-                                {/* className="data-table__rows__row__column" */}
                                 {row.option}
                             </TableCell>
                             <TableCell
                                 align="right"
                                 style={style.dataTable__rows__row__column}
                             >
-                                {/* className="data-table__rows__row__column" */}
                                 {Array.isArray(row.download) === true ? (
                                     <Select
                                         key={row.keyDownload}
@@ -99,7 +94,6 @@ class ProgramTable extends React.Component {
                                 align="right"
                                 style={style.dataTable__rows__row__column}
                             >
-                                {/* className="data-table__rows__row__column" */}
                                 {Array.isArray(row.DBTrimming) === true ? (
                                     <Select
                                         key={row.keyDBTrimming}

@@ -110,7 +110,6 @@ class AndroidSettings extends React.Component {
 
                 <div>
                     <p style={style.mainContent__title}> Encrypt DB </p>
-                    {/* className="main-content__title" */}
                     <RadioGroup
                         aria-label="Encrypt"
                         name="encryptDB"
@@ -132,7 +131,6 @@ class AndroidSettings extends React.Component {
                 </div>
 
                 <div style={style.mainContent__button__container}>
-                    {/* className="main-content__button__container" */}
                     <Button
                         onClick={this.props.handleReset}
                         raised
