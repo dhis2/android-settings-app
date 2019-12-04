@@ -4,10 +4,10 @@ import { Button } from '@dhis2/d2-ui-core'
 import { Divider, Grid } from '@material-ui/core'
 // import { CircularProgress } from '@dhis2/d2-ui-core'
 import Tooltip from '@material-ui/core/Tooltip'
-
+import style from '../styles/settings.style'
 import TextFieldSearch from './text-field-search'
 
-const style = {
+const inlineStyle = {
     button: {
         margin: '20px 0px 10px 0px',
     },
@@ -27,10 +27,12 @@ class TestAndroid extends React.Component {
         return (
             <div>
                 <div>
-                    <p className="main-content__title main-content__title__main">
+                    <p style={style.mainContent__title__main}>
+                        {/*  className="main-content__title main-content__title__main" */}
                         Test Android Login
                     </p>
-                    <p className="main-content__title main-content__subtitle">
+                    <p style={style.mainContent__subtitle}>
+                        {/* className="main-content__title main-content__subtitle" */}
                         Enter a user to check access to
                     </p>
                 </div>
@@ -77,15 +79,18 @@ class TestAndroid extends React.Component {
                     )} */}
 
                     {this.props.runTest && (
-                        <div className="data__top-margin">
+                        <div style={style.data__topMargin}>
+                            {/* className="data__top-margin" */}
                             {this.props.dataConstants.map(test => (
                                 <div key={test.state}>
                                     <Grid container>
                                         <Grid item xs={10}>
-                                            <small className="subitem-title">
+                                            <small style={style.subitemTitle}>
+                                                {/* className="subitem-title" */}
                                                 {test.title}
                                             </small>
-                                            <p className="subitem-item">
+                                            <p style={style.subitemItem}>
+                                                {/*  className="subitem-item" */}
                                                 {test.description}
                                             </p>
                                         </Grid>
@@ -133,10 +138,10 @@ class TestAndroid extends React.Component {
                         </div>
                     )}
 
-                    <div style={style.container}>
+                    <div style={inlineStyle.container}>
                         <Button
                             raised
-                            style={style.button}
+                            style={inlineStyle.button}
                             onClick={this.props.handleRun}
                             disabled={this.props.disabledTest}
                         >

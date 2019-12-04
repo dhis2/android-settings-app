@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputBase from '@material-ui/core/InputBase'
+import style from '../styles/settings.style'
 
 class ProgramTable extends React.Component {
     constructor(props) {
@@ -17,22 +18,25 @@ class ProgramTable extends React.Component {
 
     render() {
         return (
-            <Table className="data-table">
+            <Table style={style.dataTable}>
+                {/* className="data-table" */}
                 <TableHead>
                     <TableRow>
-                        <TableCell className="data-table__headers__header">
-                            {' '}
+                        <TableCell style={style.dataTable__headers__header}>
+                            {/* className="data-table__headers__header" */}{' '}
                         </TableCell>
                         <TableCell
-                            className="data-table__headers__header"
+                            style={style.dataTable__headers__header}
                             align="right"
                         >
+                            {/* className="data-table__headers__header" */}
                             Download
                         </TableCell>
                         <TableCell
-                            className="data-table__headers__header"
+                            style={style.dataTable__headers__header}
                             align="right"
                         >
+                            {/* className="data-table__headers__header" */}
                             DB trimming
                         </TableCell>
                     </TableRow>
@@ -43,14 +47,16 @@ class ProgramTable extends React.Component {
                             <TableCell
                                 component="th"
                                 scope="row"
-                                className="data-table__rows__row__column"
+                                style={style.dataTable__rows__row__column}
                             >
+                                {/* className="data-table__rows__row__column" */}
                                 {row.option}
                             </TableCell>
                             <TableCell
                                 align="right"
-                                className="data-table__rows__row__column"
+                                style={style.dataTable__rows__row__column}
                             >
+                                {/* className="data-table__rows__row__column" */}
                                 {Array.isArray(row.download) === true ? (
                                     <Select
                                         key={row.keyDownload}
@@ -91,8 +97,9 @@ class ProgramTable extends React.Component {
                             </TableCell>
                             <TableCell
                                 align="right"
-                                className="data-table__rows__row__column"
+                                style={style.dataTable__rows__row__column}
                             >
+                                {/* className="data-table__rows__row__column" */}
                                 {Array.isArray(row.DBTrimming) === true ? (
                                     <Select
                                         key={row.keyDBTrimming}

@@ -8,8 +8,9 @@ import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
 
 import '@dhis2/d2-ui-core/css/Table.css'
+import style from '../styles/settings.style'
 
-const style = {
+const inlineStyle = {
     button: {
         margin: '20px 0px 10px 0px',
     },
@@ -35,10 +36,12 @@ class GlobalSpecificSettings extends React.Component {
         return (
             <React.Fragment>
                 <div>
-                    <p className="main-content__title main-content__title__main">
+                    <p style={style.mainContent__title__main}>
+                        {/* className="main-content__title main-content__title__main" */}
                         {this.props.componentSubtitlePlural} global settings
                     </p>
-                    <p className="main-content__title main-content__subtitle">
+                    <p style={style.mainContent__subtitle}>
+                        {/* className="main-content__title main-content__subtitle" */}
                         Applies to all {this.props.componentSubtitlePlural} that
                         an Android user has access to, unless an specific set of
                         values has been configured for a{' '}
@@ -53,16 +56,21 @@ class GlobalSpecificSettings extends React.Component {
                 </div>
 
                 <div>
-                    <p className="main-content__title main-content__title__main">
+                    <p style={style.mainContent__title__main}>
+                        {/* className="main-content__title main-content__title__main" */}
                         {this.props.componentSubtitlePlural} specific settings
                     </p>
-                    <p className="main-content__title main-content__subtitle">
+                    <p style={style.mainContent__subtitle}>
+                        {/* className="main-content__title main-content__subtitle" */}
                         {this.props.componentSubtitlePlural} settings listed
                         below overwrite the global settings above
                     </p>
 
                     {this.props.specificSettings.length > 0 && (
-                        <div className="data__top-margin">
+                        <div
+                            style={style.data__topMargin}
+                            className="data__top-margin"
+                        >
                             <Table
                                 {...this.props.states}
                                 columns={['name', 'sumarySettings']}
@@ -74,10 +82,10 @@ class GlobalSpecificSettings extends React.Component {
                         </div>
                     )}
 
-                    <div style={style.container}>
+                    <div style={inlineStyle.container}>
                         <Button
                             raised
-                            style={style.button}
+                            style={inlineStyle.button}
                             onClick={this.props.addSpecificSetting}
                         >
                             ADD
@@ -92,7 +100,10 @@ class GlobalSpecificSettings extends React.Component {
                         name={this.props.dialogDeleteName}
                     />
 
-                    <div className="main-content__button__container">
+                    <div
+                        style={style.mainContent__button__container}
+                        className="main-content__button__container"
+                    >
                         <Button
                             onClick={this.props.handleResetGlobalSettings}
                             raised

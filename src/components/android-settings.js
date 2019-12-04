@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import style from '../styles/settings.style'
 
 import { Button } from '@dhis2/d2-ui-core'
 
@@ -108,7 +109,8 @@ class AndroidSettings extends React.Component {
                 />
 
                 <div>
-                    <p className="main-content__title"> Encrypt DB </p>
+                    <p style={style.mainContent__title}> Encrypt DB </p>
+                    {/* className="main-content__title" */}
                     <RadioGroup
                         aria-label="Encrypt"
                         name="encryptDB"
@@ -129,7 +131,8 @@ class AndroidSettings extends React.Component {
                     </RadioGroup>
                 </div>
 
-                <div className="main-content__button__container">
+                <div style={style.mainContent__button__container}>
+                    {/* className="main-content__button__container" */}
                     <Button
                         onClick={this.props.handleReset}
                         raised

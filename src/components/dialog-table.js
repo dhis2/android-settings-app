@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import style from '../styles/settings.style'
 import { Button } from '@dhis2/d2-ui-core'
 
 import ProgramTable from './program-table'
@@ -48,7 +49,8 @@ class DialogTable extends React.Component {
                             ))}
                         </Select>
                     ) : (
-                        <p className="main-content__title main-content__title__dialog">
+                        <p style={style.mainContent__title__dialog}>
+                            {/* className="main-content__title main-content__title__dialog" */}
                             {this.props.dataTitle}
                         </p>
                     )}
@@ -63,8 +65,9 @@ class DialogTable extends React.Component {
                     <Button
                         raised
                         onClick={this.props.handleClose}
-                        className="main-content__dialog__button"
+                        style={style.mainContent__dialog__button}
                     >
+                        {/* className="main-content__dialog__button" */}
                         CANCEL
                     </Button>
                     <Button raised onClick={this.props.handleSubmitDialog}>
