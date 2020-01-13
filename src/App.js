@@ -1,10 +1,8 @@
 import React from 'react'
 
-import MuiStyles from '@material-ui/core/styles'
-const { MuiThemeProvider, createMuiTheme } = MuiStyles
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
-import D2UICore from '@dhis2/d2-ui-core'
-const { App: D2UIApp, mui3theme: dhis2theme } = D2UICore
+import { App as D2UIApp, mui3theme as dhis2theme } from '@dhis2/d2-ui-core'
 
 import './App.css'
 import Layout from './pages/layout'

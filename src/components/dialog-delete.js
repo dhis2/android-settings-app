@@ -1,11 +1,9 @@
 import React from 'react'
 
-import D2UICore from '@dhis2/d2-ui-core'
+import { Button } from '@dhis2/d2-ui-core'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogTitle from '@material-ui/core/DialogTitle'
-
-const Button = D2UICore.Button
 
 class DialogDelete extends React.Component {
     constructor(props) {

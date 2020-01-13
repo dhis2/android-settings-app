@@ -6,9 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import D2UICore from '@dhis2/d2-ui-core'
-
-const Button = D2UICore.Button
+import { Button } from '@dhis2/d2-ui-core'
 
 import ProgramTable from './program-table'
 

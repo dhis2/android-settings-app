@@ -1,13 +1,11 @@
 import React from 'react'
 
-import D2UICore from '@dhis2/d2-ui-core'
+import { Button } from '@dhis2/d2-ui-core'
 import Table from '@dhis2/d2-ui-table'
 
 import ProgramTable from '../components/program-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
-
-const Button = D2UICore.Button
 
 import '@dhis2/d2-ui-core/css/Table.css'
 

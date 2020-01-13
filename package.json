@@ -4,7 +4,7 @@
   "author": "Milagros Rodriguez <sharmynrodriguez@gmail.com>",
   "private": true,
   "dependencies": {
-    "@dhis2/app-runtime": "^2.0.2",
+    "@dhis2/app-runtime": "^2.0.4",
     "@dhis2/d2-ui-core": "^6.3.0",
     "@dhis2/d2-ui-table": "^6.3.0",
     "@material-ui/core": "^3.9.2",
@@ -12,6 +12,7 @@
     "d3-color": "^1.4.0",
     "downshift": "^3.2.10",
     "loglevel": "^1.6.6",
+    "prop-types": "^15.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^5.0.1"
@@ -24,7 +25,7 @@
     "format": "d2-style js apply"
   },
   "devDependencies": {
-    "@dhis2/cli-app-scripts": "^1.5.7",
+    "@dhis2/cli-app-scripts": "^3.1.1",
     "@dhis2/cli-style": "^3.3.4",
     "husky": "^2.4.1"
   },
