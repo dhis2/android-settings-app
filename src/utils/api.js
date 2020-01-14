@@ -1,70 +1,16 @@
-import { sprintf } from 'sprintf-js'
 import { init, getInstance, getManifest } from 'd2'
 
 const CREATED = 'CREATED'
 const DELETED = 'DELETED'
-// const API_URL = 'https://play.dhis2.org/test/api';
-// const API_URL = 'http://localhost:8080'
-let API_URL
-let BASE_URL = process.env.REACT_APP_DHIS2_BASE_URL
-
-if (!BASE_URL) {
-    BASE_URL = 'http://localhost:8080'
-    API_URL = BASE_URL
-    console.log('env', process.env)
-} else {
-    console.log('.env production API', process.env)
-    API_URL = BASE_URL // + '/api'
-}
 
 class Api {
-    /**
-     * @param url API endpoint url
-     * @param auth Authentication HTTP header content
-     */
-    constructor(url) {
-        this.url = url
-        this.cache = []
-        this.userId = ''
-        this.baseUrl = '..'
-        this.ignoredStores = ['']
-        console.log(this.url)
-    }
+    cache = []
+    ignoredStores = ['']
 
     /**
      * Initialized the Api to a d2 instance.
      * @returns {Api}
      */
-    initialize() {
-        const headers =
-            process.env.NODE_ENV === 'development'
-                ? { Authorization: 'Basic YWRtaW46ZGlzdHJpY3Q=' }
-                : null
-        this.d2 = getManifest('./manifest.webapp')
-            .then(manifest => {
-                const baseUrl =
-                    process.env.NODE_ENV === 'production'
-                        ? BASE_URL //manifest.getBaseUrl()
-                        : this.url
-                console.log('baseUrl', baseUrl, headers, getManifest())
-                console.info('Using URL: ' + baseUrl + ' ' + manifest.baseUrl)
-                console.info(`Loading: ${manifest.name} v${manifest.version}`)
-                console.info(`Built ${manifest.manifest_generated_at}`)
-
-                this.baseUrl = baseUrl
-                return baseUrl + '/api'
-            })
-            .catch(e => {
-                return this.url
-            })
-            .then(baseUrl => {
-                console.log('then getmanifest', baseUrl, headers)
-                init({ baseUrl, headers }).then(
-                    d2 => (this.userId = d2.currentUser.username)
-                )
-            })
-        return this
-    }
 
     getNamespaces() {
         return getInstance().then(d2 =>
@@ -212,11 +158,7 @@ class Api {
             action: historyRecord.action,
             date: new Date(),
             user: historyRecord.user,
-            value: sprintf(
-                "Key '%s' was %s.",
-                key,
-                historyRecord.action.toLowerCase()
-            ),
+            value: `Key '${key}' was '${historyRecord.action.toLowerCase()}.`,
         }
 
         return this.getHistory(namespace)
@@ -299,4 +241,4 @@ class Api {
     }
 }
 
-export default (() => new Api(API_URL).initialize())()
+export default new Api()

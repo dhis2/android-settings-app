@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CircularProgress } from '@dhis2/d2-ui-core'
+import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
@@ -11,6 +11,7 @@ import {
 } from '../constants/program-settings'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
+import { getInstance } from 'd2'
 
 const programData = Program
 const specificProgramData = SpecificProgram
@@ -681,18 +682,20 @@ class ProgramSettings extends React.Component {
                 })
             })
 
-        this.props.d2.models.program
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name',
-                filter: 'access.data.write:eq:true',
-            })
-            .then(collection => {
-                const programList = collection.toArray()
-                this.programList = programList
-                this.programListComplete = programList
-            })
+        getInstance().then(d2 => {
+            d2.models.program
+                .list({
+                    paging: false,
+                    level: 1,
+                    fields: 'id,name',
+                    filter: 'access.data.write:eq:true',
+                })
+                .then(collection => {
+                    const programList = collection.toArray()
+                    this.programList = programList
+                    this.programListComplete = programList
+                })
+        })
     }
 
     componentDidUpdate() {
@@ -701,12 +704,11 @@ class ProgramSettings extends React.Component {
 
     render() {
         if (this.state.loading === true) {
-            return <CircularProgress small />
+            return <CircularLoader small />
         }
 
         return (
             <GlobalSpecificSettings
-                d2={this.props.d2}
                 tableNameProperty="Program Name"
                 componentSubtitleSingular="Program"
                 componentSubtitlePlural="Programs"

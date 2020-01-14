@@ -1,14 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-import HeaderBar from '@dhis2/d2-ui-header-bar'
-
-import { TwoPanel } from '@dhis2/d2-ui-core'
-import { Sidebar } from '@dhis2/d2-ui-core'
-import { MainContent } from '@dhis2/d2-ui-core'
-import { Heading } from '@dhis2/d2-ui-core'
-
-import { Paper } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { TwoPanel, Sidebar, MainContent, Heading } from '@dhis2/d2-ui-core'
+import { Paper, Grid } from '@material-ui/core'
 
 import {
     AndroidSettingsIcon,
@@ -26,6 +19,7 @@ import TestAndroidContainer from '../components/test-android-container'
 
 import '../styles/settings.css'
 import '../styles/layout.css'
+import { D2Shim } from '../utils/D2Shim'
 
 const styles = {
     twoPanelMain: {
@@ -60,142 +54,30 @@ const sections = [
     },
 ]
 
-/* Layout, Sidebar methods */
-
-let currentSection
-let lastSection
-let sidebarRef
-//let pathname
-
-function changeSectionHandler(key, searchText) {
-    console.log({
-        key: key,
-        searchText: searchText,
-    })
-    currentSection = key
-    if (key !== 'search' && sidebarRef) {
-        sidebarRef.clearSearchBox()
-    }
-}
-
-function changeSearchTextHandler(searchText) {
-    console.log('changeSearch', searchText)
-    if (searchText.toString().trim().length > 0) {
-        if (currentSection !== 'search') {
-            lastSection = currentSection
-        }
-        changeSectionHandler('search', searchText)
-    } else {
-        changeSectionHandler(lastSection)
-    }
-}
-
-function storeRef(ref) {
-    sidebarRef = ref
-}
-
-/* Layout, Sidebar methods */
-
-/* class Layout extends React.Component {
-    constructor(props) {
-        super(props)
-        console.log({
-            props: props,
-            d2: props.d2,
-        })
-    }
-
-    componentDidMount() {
-        pathname = window.location.pathname
-        pathname = pathname.split("/")
-        console.log('current mount', this.props.currentSection)
-        currentSection = pathname[1]
-        sidebarRef.state.currentSection = currentSection
-        console.log(pathname[1], currentSection, sidebarRef.state.currentSection, this.props)
-    }
-
-    render() {
-        return (
-            <Router>
-                <HeaderBar d2={this.props.d2} />
-                <TwoPanel mainStyle={styles.twoPanelMain}>
-                    <div className="paper__two-panel__side-bar">
-                        <Sidebar
-                            sections={sections.map(
-                                ({ key, label, url, path }, i) => ({
-                                    key,
-                                    label,
-                                    icon: path,
-                                    containerElement: (
-                                        <Link to={url}> {label} </Link>
-                                    ),
-                                })
-                            )}
-                            showSearchField
-                            searchFieldLabel="Search settings"
-                            onChangeSection={changeSectionHandler}
-                            currentSection={this.props.currentSection}
-                            onChangeSearchText={changeSearchTextHandler}
-                            ref={storeRef}
-                        />
-                    </div>
-                    <MainContent>
-                        <header className="header">
-                            <h1 className="App-title paper__two-panel__main-title">
-                                Android settings
-                            </h1>
-                        </header>
-                        <Paper className="paper__layout">
-                            <Heading>
-                                <Switch>
-                                    <Route
-                                        path="/"
-                                        exact
-                                        render={() => (
-                                            <AndroidSettings
-                                                d2={this.props.d2}
-                                            />
-                                        )}
-                                    />
-                                    <Route
-                                        path="/android"
-                                        render={() => (
-                                            <AndroidSettings
-                                                d2={this.props.d2}
-                                            />
-                                        )}
-                                    />
-                                    <Route
-                                        path="/programs"
-                                        render={() => (
-                                            <ProgramSettings
-                                                d2={this.props.d2}
-                                            />
-                                        )}
-                                    />
-                                    <Route
-                                        path="/dataSets"
-                                        render={() => (
-                                            <DataSetSettings
-                                                d2={this.props.d2}
-                                            />
-                                        )}
-                                    />
-                                </Switch>
-                            </Heading>
-                        </Paper>
-                    </MainContent>
-                </TwoPanel>
-            </Router>
-        )
-    }
-} */
-
 function Layout(props) {
-    props.d2.i18n.translations['app_search_placeholder'] = 'Search Apps'
+    const currentSection = useRef()
+    const lastSection = useRef()
+    const sidebarRef = useRef()
+
+    const changeSectionHandler = key => {
+        currentSection.current = key
+        if (key !== 'search' && sidebarRef.current) {
+            sidebarRef.current.clearSearchBox()
+        }
+    }
+
+    const changeSearchTextHandler = searchText => {
+        if (searchText.toString().trim().length > 0) {
+            if (currentSection.current !== 'search') {
+                lastSection.current = currentSection.current
+            }
+            changeSectionHandler('search', searchText, sidebarRef)
+        } else {
+            changeSectionHandler(lastSection.current, undefined, sidebarRef)
+        }
+    }
     return (
         <Router>
-            <HeaderBar d2={props.d2} />
             <Grid container>
                 <TwoPanel mainStyle={styles.twoPanelMain}>
                     <Grid item>
@@ -216,7 +98,7 @@ function Layout(props) {
                                 onChangeSection={changeSectionHandler}
                                 currentSection={props.currentSection}
                                 onChangeSearchText={changeSearchTextHandler}
-                                ref={storeRef}
+                                ref={sidebarRef}
                             />
                         </div>
                     </Grid>
@@ -229,51 +111,53 @@ function Layout(props) {
                                 </h1>
                             </header>
                             <Paper className="paper__layout">
-                                <Heading>
-                                    <Switch>
-                                        <Route
-                                            path="/"
-                                            exact
-                                            render={() => (
-                                                <AndroidSettingsContainer
-                                                    d2={props.d2}
-                                                />
-                                            )}
-                                        />
-                                        <Route
-                                            path="/android"
-                                            render={() => (
-                                                <AndroidSettingsContainer
-                                                    d2={props.d2}
-                                                />
-                                            )}
-                                        />
-                                        <Route
-                                            path="/programs"
-                                            render={() => (
-                                                <ProgramSettings
-                                                    d2={props.d2}
-                                                />
-                                            )}
-                                        />
-                                        <Route
-                                            path="/dataSets"
-                                            render={() => (
-                                                <DataSetSettings
-                                                    d2={props.d2}
-                                                />
-                                            )}
-                                        />
-                                        <Route
-                                            path="/testAndroid"
-                                            render={() => (
-                                                <TestAndroidContainer
-                                                    d2={props.d2}
-                                                />
-                                            )}
-                                        />
-                                    </Switch>
-                                </Heading>
+                                <D2Shim>
+                                    <Heading>
+                                        <Switch>
+                                            <Route
+                                                path="/"
+                                                exact
+                                                render={() => (
+                                                    <D2Shim>
+                                                        <AndroidSettingsContainer />
+                                                    </D2Shim>
+                                                )}
+                                            />
+                                            <Route
+                                                path="/android"
+                                                render={() => (
+                                                    <D2Shim>
+                                                        <AndroidSettingsContainer />
+                                                    </D2Shim>
+                                                )}
+                                            />
+                                            <Route
+                                                path="/programs"
+                                                render={() => (
+                                                    <D2Shim>
+                                                        <ProgramSettings />
+                                                    </D2Shim>
+                                                )}
+                                            />
+                                            <Route
+                                                path="/dataSets"
+                                                render={() => (
+                                                    <D2Shim>
+                                                        <DataSetSettings />
+                                                    </D2Shim>
+                                                )}
+                                            />
+                                            <Route
+                                                path="/testAndroid"
+                                                render={() => (
+                                                    <D2Shim>
+                                                        <TestAndroidContainer />
+                                                    </D2Shim>
+                                                )}
+                                            />
+                                        </Switch>
+                                    </Heading>
+                                </D2Shim>
                             </Paper>
                         </MainContent>
                     </Grid>
@@ -284,9 +168,3 @@ function Layout(props) {
 }
 
 export default Layout
-
-/* render = {() => (
-    <AndroidSettings
-        d2={this.props.d2}
-    />
-)} */

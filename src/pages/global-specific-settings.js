@@ -22,13 +22,6 @@ const style = {
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
-
-        props.d2.i18n.translations['name'] = this.props.tableNameProperty
-        props.d2.i18n.translations['sumary_settings'] = 'Sumary Settings'
-
-        props.d2.i18n.translations['edit'] = 'edit'
-        props.d2.i18n.translations['delete'] = 'delete'
-        props.d2.i18n.translations['actions'] = 'actions'
     }
 
     render() {

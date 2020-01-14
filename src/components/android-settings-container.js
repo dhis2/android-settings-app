@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CircularProgress } from '@dhis2/d2-ui-core'
+import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
@@ -222,7 +222,7 @@ class AndroidSettingsContainer extends React.Component {
 
     render() {
         if (this.state.loading === true) {
-            return <CircularProgress small />
+            return <CircularLoader small />
         }
 
         return (

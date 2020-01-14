@@ -4,28 +4,28 @@
   "author": "Milagros Rodriguez <sharmynrodriguez@gmail.com>",
   "private": true,
   "dependencies": {
+    "@dhis2/app-runtime": "^2.0.4",
     "@dhis2/d2-ui-core": "^6.3.0",
-    "@dhis2/d2-ui-header-bar": "^6.3.0",
     "@dhis2/d2-ui-table": "^6.3.0",
     "@material-ui/core": "^3.9.2",
     "d2": "^31.7",
     "d3-color": "^1.4.0",
     "downshift": "^3.2.10",
+    "loglevel": "^1.6.6",
+    "prop-types": "^15.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "1.1.1",
-    "sprintf-js": "^1.1.2"
+    "react-router-dom": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "start": "d2-app-scripts start",
+    "build": "d2-app-scripts build",
+    "test": "d2-app-scripts test",
     "clean": "rimraf build",
     "format": "d2-style js apply"
   },
   "devDependencies": {
+    "@dhis2/cli-app-scripts": "^3.1.1",
     "@dhis2/cli-style": "^3.3.4",
     "husky": "^2.4.1"
   },

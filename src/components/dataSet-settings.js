@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CircularProgress } from '@dhis2/d2-ui-core'
+import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
@@ -9,6 +9,7 @@ import {
     DataSetSettingsDefault,
 } from '../constants/data-set-settings'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
+import { getInstance } from 'd2'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -417,18 +418,20 @@ class DataSetSettings extends React.Component {
                 })
             })
 
-        this.props.d2.models.dataSet
-            .list({
-                paging: false,
-                level: 1,
-                fields: 'id,name',
-                filter: 'access.data.write:eq:true',
-            })
-            .then(collection => {
-                const dataSetList = collection.toArray()
-                this.dataSetList = dataSetList
-                this.dataSetListComplete = dataSetList
-            })
+        getInstance().then(d2 => {
+            d2.models.dataSet
+                .list({
+                    paging: false,
+                    level: 1,
+                    fields: 'id,name',
+                    filter: 'access.data.write:eq:true',
+                })
+                .then(collection => {
+                    const dataSetList = collection.toArray()
+                    this.dataSetList = dataSetList
+                    this.dataSetListComplete = dataSetList
+                })
+        })
     }
 
     componentDidUpdate() {
@@ -437,12 +440,11 @@ class DataSetSettings extends React.Component {
 
     render() {
         if (this.state.loading === true) {
-            return <CircularProgress small />
+            return <CircularLoader small />
         }
 
         return (
             <GlobalSpecificSettings
-                d2={this.props.d2}
                 tableNameProperty="Data Set Name"
                 componentSubtitleSingular="Data Set"
                 componentSubtitlePlural="Data Sets"

@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Button } from '@dhis2/d2-ui-core'
-import { Divider, Grid } from '@material-ui/core'
+import { Button } from '@dhis2/ui-core'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
 // import { CircularProgress } from '@dhis2/d2-ui-core'
 import Tooltip from '@material-ui/core/Tooltip'
 
