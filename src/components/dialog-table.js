@@ -6,9 +6,13 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { Button } from '@dhis2/d2-ui-core'
+/* import { Button } from '@dhis2/d2-ui-core' */
+import { Button } from '@dhis2/ui-core'
 
 import ProgramTable from './program-table'
+import i18n from '@dhis2/d2-i18n'
+import titleStyles from '../styles/LayoutTitles.module.css'
+import buttonStyles from '../styles/Button.module.css'
 
 class DialogTable extends React.Component {
     constructor(props) {
@@ -48,7 +52,7 @@ class DialogTable extends React.Component {
                             ))}
                         </Select>
                     ) : (
-                        <p className="main-content__title main-content__title__dialog">
+                        <p className={titleStyles.mainContent__title__dialog}>
                             {this.props.dataTitle}
                         </p>
                     )}
@@ -63,12 +67,12 @@ class DialogTable extends React.Component {
                     <Button
                         raised
                         onClick={this.props.handleClose}
-                        className="main-content__dialog__button"
+                        className={buttonStyles.mainContent__dialog__button}
                     >
-                        CANCEL
+                        {i18n.t('CANCEL')}
                     </Button>
                     <Button raised onClick={this.props.handleSubmitDialog}>
-                        ADD/SAVE
+                        {i18n.t('ADD/SAVE')}
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -14,6 +14,7 @@ import api from '../utils/api'
 class TestAndroidContainer extends React.Component {
     constructor(props) {
         super(props)
+        console.log(props)
         this.usersOptions = []
         this.usersOptionsComplete = []
         this.userSelected = undefined

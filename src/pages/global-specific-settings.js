@@ -1,41 +1,47 @@
 import React from 'react'
 
-import { Button } from '@dhis2/d2-ui-core'
+/* import { Button } from '@dhis2/d2-ui-core' */
+import { Button } from '@dhis2/ui-core'
 import Table from '@dhis2/d2-ui-table'
+import i18n from '@dhis2/d2-i18n'
 
 import ProgramTable from '../components/program-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
 
-import '@dhis2/d2-ui-core/css/Table.css'
+import styles from '../styles/LayoutTitles.module.css'
+import buttonStyles from '../styles/Button.module.css'
+import layoutStyles from '../styles/Layout.module.css'
 
-const style = {
-    button: {
-        margin: '20px 0px 10px 0px',
-    },
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-}
+import '@dhis2/d2-ui-core/css/Table.css'
 
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
+        console.log('props', props, i18n)
     }
 
     render() {
         return (
             <React.Fragment>
                 <div>
-                    <p className="main-content__title main-content__title__main">
-                        {this.props.componentSubtitlePlural} global settings
+                    <p className={styles.mainContent__title__main}>
+                        {' '}
+                        {/* "main-content__title main-content__title__main" */}
+                        {i18n.t('{{elementPlural}} global settings', {
+                            elementPlural: this.props.componentSubtitlePlural,
+                        })}
                     </p>
-                    <p className="main-content__title main-content__subtitle">
-                        Applies to all {this.props.componentSubtitlePlural} that
-                        an Android user has access to, unless an specific set of
-                        values has been configured for a{' '}
-                        {this.props.componentSubtitleSingular} (see below)
+                    <p className={styles.mainContent__subtitle}>
+                        {i18n.t(
+                            'Applies to all {{elementPlural}} that an Android user has access to, unless an specific set of values has been configured for a {{elementSingular}} (see below).',
+                            {
+                                elementPlural: this.props
+                                    .componentSubtitlePlural,
+                                elementSingular: this.props
+                                    .componentSubtitleSingular,
+                            }
+                        )}
                     </p>
 
                     <ProgramTable
@@ -46,34 +52,41 @@ class GlobalSpecificSettings extends React.Component {
                 </div>
 
                 <div>
-                    <p className="main-content__title main-content__title__main">
-                        {this.props.componentSubtitlePlural} specific settings
+                    <p className={styles.mainContent__title__main}>
+                        {i18n.t('{{elementPlural}} specific settings', {
+                            elementPlural: this.props.componentSubtitlePlural,
+                        })}
                     </p>
-                    <p className="main-content__title main-content__subtitle">
-                        {this.props.componentSubtitlePlural} settings listed
-                        below overwrite the global settings above
+                    <p className={styles.mainContent__subtitle}>
+                        {i18n.t(
+                            '{{elementPlural}} settings listed below overwrite the global settings above',
+                            {
+                                elementPlural: this.props
+                                    .componentSubtitlePlural,
+                            }
+                        )}
                     </p>
 
                     {this.props.specificSettings.length > 0 && (
-                        <div className="data__top-margin">
-                            <Table
+                        <div className={layoutStyles.data__topMargin}>
+                            {/* <Table
                                 {...this.props.states}
                                 columns={['name', 'sumarySettings']}
                                 rows={this.props.specificSettingList}
                                 contextMenuActions={
                                     this.props.programTableActions
                                 }
-                            />
+                            /> */}
                         </div>
                     )}
 
-                    <div style={style.container}>
+                    <div className={buttonStyles.container_button__add}>
                         <Button
                             raised
-                            style={style.button}
+                            className={buttonStyles.button__add}
                             onClick={this.props.addSpecificSetting}
                         >
-                            ADD
+                            {i18n.t('ADD')}
                         </Button>
                     </div>
 
@@ -85,13 +98,15 @@ class GlobalSpecificSettings extends React.Component {
                         name={this.props.dialogDeleteName}
                     />
 
-                    <div className="main-content__button__container">
+                    <div
+                        className={buttonStyles.mainContent__button__container}
+                    >
                         <Button
                             onClick={this.props.handleResetGlobalSettings}
                             raised
-                            color="primary"
+                            primary
                         >
-                            SET TO DEFAULT
+                            {i18n.t('SET TO DEFAULT')}
                         </Button>
                     </div>
 

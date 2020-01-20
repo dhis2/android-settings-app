@@ -1,0 +1,27 @@
+.dataTable {
+    margin-bottom: 2rem;
+    font-family: Roboto, sans-serif;
+}
+
+.dataTable__headers__header {
+    font-family: Roboto, sans-serif;
+    vertical-align: middle;
+    border-bottom: 2px solid #E0E0E0 !important;
+    color: #757575 !important;
+    display: table-cell;
+    font-weight: 400;
+    text-align: left;
+    transition: all .3s ease;
+}
+
+.dataTable__rows__row__column {
+    font-family: Roboto, sans-serif;
+    vertical-align: middle;
+    border-bottom: 1px solid #E0E0E0 !important;
+    color: #212121;
+    border-top: 0;
+    display: table-cell;
+    text-align: left;
+    transition: all .3s ease;
+    position: relative;
+}

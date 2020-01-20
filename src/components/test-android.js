@@ -7,16 +7,11 @@ import Grid from '@material-ui/core/Grid'
 import Tooltip from '@material-ui/core/Tooltip'
 
 import TextFieldSearch from './text-field-search'
-
-const style = {
-    button: {
-        margin: '20px 0px 10px 0px',
-    },
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-}
+import i18n from '@dhis2/d2-i18n'
+import titleStyles from '../styles/LayoutTitles.module.css'
+import buttonStyles from '../styles/Button.module.css'
+import itemStyles from '../styles/TestAndroidTable.module.css'
+import layoutStyles from '../styles/Layout.module.css'
 
 class TestAndroid extends React.Component {
     constructor(props) {
@@ -28,11 +23,13 @@ class TestAndroid extends React.Component {
         return (
             <div>
                 <div>
-                    <p className="main-content__title main-content__title__main">
-                        Test Android Login
+                    <p className={titleStyles.mainContent__title__main}>
+                        {/* "main-content__title main-content__title__main" */}
+                        {i18n.t('Test Android Login')}
                     </p>
-                    <p className="main-content__title main-content__subtitle">
-                        Enter a user to check access to
+                    <p className={titleStyles.mainContent__subtitle}>
+                        {/* "main-content__title main-content__subtitle" */}
+                        {i18n.t(' Enter a user to check access to')}
                     </p>
                 </div>
 
@@ -78,21 +75,33 @@ class TestAndroid extends React.Component {
                     )} */}
 
                     {this.props.runTest && (
-                        <div className="data__top-margin">
+                        <div className={layoutStyles.data__topMargin}>
                             {this.props.dataConstants.map(test => (
                                 <div key={test.state}>
                                     <Grid container>
                                         <Grid item xs={10}>
-                                            <small className="subitem-title">
+                                            <small
+                                                className={
+                                                    itemStyles.subitemTitle
+                                                }
+                                            >
                                                 {test.title}
                                             </small>
-                                            <p className="subitem-item">
+                                            <p
+                                                className={
+                                                    itemStyles.subitemItem
+                                                }
+                                            >
                                                 {test.description}
                                             </p>
                                         </Grid>
                                         <Grid item xs={2}>
                                             {this.props[test.load] === true ? (
-                                                <p className="subitem-item subitem-bigitem">
+                                                <p
+                                                    className={
+                                                        itemStyles.subitemBigitem
+                                                    }
+                                                >
                                                     Invoking ...
                                                 </p>
                                             ) : (
@@ -105,7 +114,9 @@ class TestAndroid extends React.Component {
                                                     placement="bottom"
                                                 >
                                                     <p
-                                                        className={`subitem-item subitem-bigitem ${
+                                                        className={`${
+                                                            itemStyles.subitemBigitem
+                                                        } ${
                                                             this.props.states[
                                                                 test.state
                                                             ] >=
@@ -113,7 +124,7 @@ class TestAndroid extends React.Component {
                                                                 test
                                                                     .maxValueState
                                                             ]
-                                                                ? 'max-value'
+                                                                ? itemStyles.maxValue
                                                                 : ''
                                                         }`}
                                                     >
@@ -134,14 +145,14 @@ class TestAndroid extends React.Component {
                         </div>
                     )}
 
-                    <div style={style.container}>
+                    <div className={buttonStyles.container_button__add}>
                         <Button
                             raised
-                            style={style.button}
+                            className={buttonStyles.button__add}
                             onClick={this.props.handleRun}
                             disabled={this.props.disabledTest}
                         >
-                            RUN TEST
+                            {i18n.t('RUN TEST')}
                         </Button>
                     </div>
                 </div>
