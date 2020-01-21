@@ -12,43 +12,35 @@ import {
 import IconButton from '@material-ui/core/IconButton'
 import { DeleteOutlined, CreateOutlined } from '@material-ui/icons'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from '@dhis2/prop-types'
 import dataTableStyles from '../styles/DataTable.module.css'
 
 const TableActions = ({ columns, rows, menuActions }) => {
     return (
-        <Table dataTest="dhis2-uicore-table">
-            <TableHead dataTest="dhis2-uicore-tablehead">
-                <TableRowHead dataTest="dhis2-uicore-tablerowhead">
+        <Table>
+            <TableHead>
+                <TableRowHead>
                     {columns.map(column => (
-                        <TableCellHead
-                            dataTest="dhis2-uicore-tablecellhead"
-                            key={column}
-                        >
-                            {column}
-                        </TableCellHead>
+                        <TableCellHead key={column}>{column}</TableCellHead>
                     ))}
-                    <TableCellHead dataTest="dhis2-uicore-tablecellhead">
-                        {i18n.t('Actions')}
-                    </TableCellHead>
+                    <TableCellHead>{i18n.t('Actions')}</TableCellHead>
                 </TableRowHead>
             </TableHead>
-            <TableBody dataTest="dhis2-uicore-tablebody">
+            <TableBody>
                 {rows.map(row => (
-                    <TableRow dataTest="dhis2-uicore-tablerow" key={row.id}>
+                    <TableRow key={row.id}>
                         <TableCell
-                            dataTest="dhis2-uicore-tablecell"
                             className={dataTableStyles.dataTable_row_title}
                         >
                             {row.name}
                         </TableCell>
                         <TableCell
-                            dataTest="dhis2-uicore-tablecell"
                             className={dataTableStyles.dataTable_row_title}
                         >
                             {row.sumarySettings}
                         </TableCell>
 
-                        <TableCell dataTest="dhis2-uicore-tablecell" dense>
+                        <TableCell dense>
                             <IconButton
                                 onClick={() => {
                                     menuActions.edit(row)
@@ -69,6 +61,12 @@ const TableActions = ({ columns, rows, menuActions }) => {
             </TableBody>
         </Table>
     )
+}
+
+TableActions.propTypes = {
+    columns: PropTypes.array.isRequired,
+    rows: PropTypes.array.isRequired,
+    menuActions: PropTypes.object.isRequired,
 }
 
 export default TableActions
