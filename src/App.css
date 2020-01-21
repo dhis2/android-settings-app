@@ -21,9 +21,9 @@
   to { transform: rotate(360deg); }
 }
 
-[dir] body {
+/* [dir] body {
   background-color: #f4f6f8;
-}
+} */
 
 body {
   background-color: #f3f3f3;

@@ -10,8 +10,8 @@ import DataSetSettings from '../components/dataSet-settings'
 import TestAndroidContainer from '../components/test-android-container'
 import menuSection from '../constants/menu-sections'
 
-import '../styles/settings.css'
-import '../styles/layout.css'
+/* import '../styles/settings.css'
+import '../styles/layout.css' */
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
 
