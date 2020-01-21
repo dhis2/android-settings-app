@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Button } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from '@dhis2/prop-types'
 
 import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
@@ -143,6 +144,16 @@ const AndroidSettings = ({
             </div>
         </form>
     )
+}
+
+AndroidSettings.propTypes = {
+    state: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    metadataOptions: PropTypes.array.isRequired,
+    dataOptions: PropTypes.array.isRequired,
+    checkMatchingConfirmation: PropTypes.func.isRequired,
+    handleReset: PropTypes.func.isRequired,
+    maxValues: PropTypes.object.isRequired,
 }
 
 export default AndroidSettings
