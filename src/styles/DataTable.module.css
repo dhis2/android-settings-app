@@ -25,3 +25,10 @@
     transition: all .3s ease;
     position: relative;
 }
+
+.dataTable_row_title {
+    font-family: Roboto, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.82rem !important;
+}
