@@ -1,6 +1,5 @@
 import React from 'react'
 
-/* import { Button } from '@dhis2/d2-ui-core' */
 import { Button } from '@dhis2/ui-core'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'

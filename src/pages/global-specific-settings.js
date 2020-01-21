@@ -26,8 +26,6 @@ class GlobalSpecificSettings extends React.Component {
             <React.Fragment>
                 <div>
                     <p className={styles.mainContent__title__main}>
-                        {' '}
-                        {/* "main-content__title main-content__title__main" */}
                         {i18n.t('{{elementPlural}} global settings', {
                             elementPlural: this.props.componentSubtitlePlural,
                         })}

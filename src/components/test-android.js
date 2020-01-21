@@ -24,11 +24,9 @@ class TestAndroid extends React.Component {
             <div>
                 <div>
                     <p className={titleStyles.mainContent__title__main}>
-                        {/* "main-content__title main-content__title__main" */}
                         {i18n.t('Test Android Login')}
                     </p>
                     <p className={titleStyles.mainContent__subtitle}>
-                        {/* "main-content__title main-content__subtitle" */}
                         {i18n.t(' Enter a user to check access to')}
                     </p>
                 </div>

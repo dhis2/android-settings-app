@@ -12,7 +12,6 @@ const style = {
     left: '4px',
 }
 
-// display: block,
 export const AndroidSettingsIcon = () => {
     return (
         <span style={style}>

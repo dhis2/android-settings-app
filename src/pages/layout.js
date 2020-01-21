@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
 import { TwoPanel, Sidebar, MainContent, Heading } from '@dhis2/d2-ui-core'
-import { Paper, Grid } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 import AndroidSettingsContainer from '../components/android-settings-container'
@@ -45,11 +45,8 @@ function Layout(props) {
     }
     return (
         <Router>
-            {/* <Grid container> */}
             <TwoPanel mainStyle={styles.twoPanelMain}>
-                {/* <Grid item> */}
                 <div className={layoutStyles.paper__twoPanel__sideBar}>
-                    {/* paper__two-panel__side-bar */}
                     <Sidebar
                         sections={menuSection.map(
                             ({ key, label, path, icon }, i) => ({
@@ -69,18 +66,13 @@ function Layout(props) {
                         ref={sidebarRef}
                     />
                 </div>
-                {/* </Grid> */}
-
-                {/* <Grid item> */}
                 <MainContent>
                     <header>
                         <h1 className={layoutStyles.paper__twoPanel__mainTitle}>
-                            {/* "App-title paper__two-panel__main-title" */}
                             Android settings
                         </h1>
                     </header>
                     <Paper className={layoutStyles.paper__layout}>
-                        {/* "paper__layout" */}
                         <D2Shim>
                             <Heading>
                                 <Switch>
@@ -130,9 +122,7 @@ function Layout(props) {
                         </D2Shim>
                     </Paper>
                 </MainContent>
-                {/* </Grid> */}
             </TwoPanel>
-            {/* </Grid> */}
         </Router>
     )
 }
