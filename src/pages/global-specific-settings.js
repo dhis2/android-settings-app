@@ -8,6 +8,7 @@ import i18n from '@dhis2/d2-i18n'
 import ProgramTable from '../components/program-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
+import TableActions from '../components/table-actions'
 
 import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
@@ -75,6 +76,12 @@ class GlobalSpecificSettings extends React.Component {
                                     this.props.programTableActions
                                 }
                             /> */}
+                            <TableActions
+                                {...this.props.states}
+                                columns={['Name', 'Sumary Settings']}
+                                rows={this.props.specificSettingList}
+                                menuActions={this.props.programTableActions}
+                            />
                         </div>
                     )}
 

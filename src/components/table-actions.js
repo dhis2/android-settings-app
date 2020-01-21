@@ -47,16 +47,14 @@ const TableActions = ({ columns, rows, menuActions }) => {
                                     menuActions.edit(row)
                                 }}
                             >
-                                {' '}
-                                <CreateOutlined fontSize="small" />{' '}
+                                <CreateOutlined fontSize="small" />
                             </IconButton>
                             <IconButton
                                 onClick={() => {
                                     menuActions.delete(row)
                                 }}
                             >
-                                {' '}
-                                <DeleteOutlined fontSize="small" />{' '}
+                                <DeleteOutlined fontSize="small" />
                             </IconButton>
                         </TableCell>
                     </TableRow>

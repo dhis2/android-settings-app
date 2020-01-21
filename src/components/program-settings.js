@@ -339,7 +339,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleSubmitDialog = async e => {
-        e.preventDefault()
+        //e.preventDefault()
 
         var specificProgramNameKey = this.state.specificSettingName
         var objData = this.specificSettings
