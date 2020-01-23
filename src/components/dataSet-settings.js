@@ -203,6 +203,7 @@ class DataSetSettings extends React.Component {
         )
 
         objData[specificDataSetNameKey] = {
+            id: specificDataSetNameKey,
             lastUpdated: new Date().toJSON(),
             name: dataSetNameFilter[0].name,
             specificPeriodDSDownload: this.state.specificPeriodDSDownload,

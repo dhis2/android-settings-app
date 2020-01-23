@@ -349,6 +349,7 @@ class ProgramSettings extends React.Component {
         )
 
         objData[specificProgramNameKey] = {
+            id: specificProgramNameKey,
             lastUpdated: new Date().toJSON(),
             name: programNameFilter[0].name,
             specificSettingDownload: this.state.specificSettingDownload,
