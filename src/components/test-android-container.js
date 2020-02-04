@@ -14,7 +14,6 @@ import api from '../utils/api'
 class TestAndroidContainer extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.usersOptions = []
         this.usersOptionsComplete = []
         this.userSelected = undefined
@@ -128,11 +127,9 @@ class TestAndroidContainer extends React.Component {
             switch (element.publicAccess) {
                 case 'r-------':
                     // if user userGroupAccess, if user userAccess
-                    console.log('access r', element, element.userGroupAccesses)
                     break
                 case 'rw------':
                     accessIDList.push(element)
-                    console.log('access rw', element, accessIDList)
                     break
                 case 'rwr-----':
                     accessIDList.push(element)
@@ -185,7 +182,6 @@ class TestAndroidContainer extends React.Component {
         let programsValuesList = []
         const programsIdAccess = []
         const organisationUnitSearchList = []
-        // const programRuleList = []
         const promisesOrganisationUnits = []
         const organisationUnitCapture = []
         const promisesOrganisationUnitsSearch = []
@@ -259,11 +255,8 @@ class TestAndroidContainer extends React.Component {
             })
 
             await Promise.all(promisesOrganisationUnits).then(data => {
-                //console.log('data promises ou', data, data[0].toArray())
                 if (data.length > 0) {
                     data.forEach(orgUnitData => {
-                        console.log('obteniendo org units')
-                        console.log('ou', orgUnitData.toArray())
                         orgUnitData.toArray().forEach(oucapture => {
                             organisationUnitCapture.push(oucapture)
                             organisationUnitIDList.push(oucapture.id)
@@ -296,14 +289,6 @@ class TestAndroidContainer extends React.Component {
                                         }
                                     }
                                 )
-
-                                console.log(
-                                    'idAccess program',
-                                    this.checkAccess(
-                                        programsValuesList,
-                                        programsIdAccess
-                                    )
-                                )
                             }
 
                             if (
@@ -333,15 +318,6 @@ class TestAndroidContainer extends React.Component {
                                             dataSetValuesList.push(value)
                                         }
                                     }
-                                )
-
-                                console.log(
-                                    'idAccess dataset',
-                                    this.checkAccess(
-                                        dataSetValuesList,
-                                        datasetsIdAccess
-                                    ),
-                                    dataSetValuesList
                                 )
                             }
                             if (dataSetValuesList.length > 0) {
@@ -427,11 +403,6 @@ class TestAndroidContainer extends React.Component {
                                         ) {
                                             value.categoryCombo.categories.forEach(
                                                 categoryValue => {
-                                                    /* console.log(
-                                                        'categorys',
-                                                        categoryListId,
-                                                        categoryValue
-                                                    ) */
                                                     if (
                                                         categoryListId.length >=
                                                         1
@@ -577,7 +548,6 @@ class TestAndroidContainer extends React.Component {
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
 
-                    // organisationUnitCapture.forEach(ou => this.organisationUnitsCapture.push(ou.id))
                     this.organisationUnitsCapture = organisationUnitCapture
 
                     this.setState({
@@ -592,8 +562,6 @@ class TestAndroidContainer extends React.Component {
                 }
 
                 if ((dataSetList.length > 0) & (programsList.length > 0)) {
-                    console.log('data element lista', dataElementListId)
-
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
@@ -616,7 +584,6 @@ class TestAndroidContainer extends React.Component {
                             dataElementCollection,
                             100
                         )
-                        console.log('split', splitCollection)
 
                         splitCollection.forEach(dataElement => {
                             dataElementList.push(
@@ -631,11 +598,6 @@ class TestAndroidContainer extends React.Component {
 
                         Promise.all(dataElementList).then(data => {
                             dataElementResult = this.getDownloadSize(data)
-                            console.log(
-                                'data elements result api',
-                                data,
-                                dataElementResult
-                            )
                         })
                     }
 
@@ -648,11 +610,6 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             dataSetResult = collection
-                            /* this.setState({
-                                loadData: true,
-                                orgUnitLoad: true,
-                                dataSetLoad: true,
-                            }) */
                         })
 
                     this.props.d2.models.programs
@@ -664,10 +621,6 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             programResult = collection
-                            /* this.setState({
-                                loadData: true,
-                                programLoad: false,
-                            }) */
                         })
 
                     this.props.d2.models.programRules
@@ -679,10 +632,6 @@ class TestAndroidContainer extends React.Component {
                         })
                         .then(collection => {
                             programRuleResult = collection
-                            /* this.setState({
-                                loadData: true,
-                                programRuleLoad: true,
-                            }) */
                         })
 
                     Promise.all([
@@ -715,11 +664,6 @@ class TestAndroidContainer extends React.Component {
                             fields:
                                 'id,code,name,displayName,created,lastUpdated,deleted,optionSet[id],options[id]',
                         }),
-                        // this.props.d2.models.dataElements.list({
-                        //     paging: false,
-                        //     filter: `id:in:[${dataElementListId}]`,
-                        //     fields: 'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],style[color,icon],access[read]'
-                        // }),
                         this.props.d2.models.indicators.list({
                             paging: false,
                             filter: `id:in:[${indicatorListId}]`,
@@ -756,7 +700,6 @@ class TestAndroidContainer extends React.Component {
                             categoryCombos,
                             categories,
                         ]) => {
-                            console.log('obteniendo metadata')
                             let metadata = this.getDownloadSize([
                                 programResult,
                                 dataSetResult,
@@ -770,7 +713,6 @@ class TestAndroidContainer extends React.Component {
                                 categories,
                                 optionSets,
                                 optionGroups,
-                                //dataElementResult
                             ])
 
                             metadata = metadata + dataElementResult
@@ -810,10 +752,6 @@ class TestAndroidContainer extends React.Component {
         }
     }
 
-    getMetadata = () => {
-        // metadata
-    }
-
     getDataPerSettingType = (settingType, orgUnitList, programList) => {
         // after checking setting type, get promise data
 
@@ -823,14 +761,7 @@ class TestAndroidContainer extends React.Component {
         const _teiProgram = (parseInt(settingType.sizeTEI) / 25).toFixed()
         const _eventProgrm = (parseInt(settingType.sizeEvent) / 25).toFixed()
 
-        /* let organisationUnitIDLists = {
-            orgUnit: orgUnitCompleteList,
-            orgUnitParents: orgUnitParent
-        } */
-
-        switch (
-            settingType.type //this.specificSettings
-        ) {
+        switch (settingType.type) {
             case undefined:
                 // if it's global or doesn't have specific settings
                 // with ou Parents and "DESCENDENT"
@@ -904,7 +835,6 @@ class TestAndroidContainer extends React.Component {
                             })
                         )
                     }
-                    //console.log('tei promise', teiPromises, tei)
                 })
 
                 break
@@ -984,7 +914,6 @@ class TestAndroidContainer extends React.Component {
                             )
                         }
                     })
-                    //console.log('tei promise', teiPromises, tei)
                 })
                 break
             case 'ouProgram':
@@ -1000,7 +929,7 @@ class TestAndroidContainer extends React.Component {
                                         page: `${i}`,
                                         pageSize: 25,
                                         ou: `${orgUnit}`,
-                                        programs: `${program}`, //`${VBqh0ynB2wv}`
+                                        programs: `${program}`,
                                         fields:
                                             'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
                                         includeAllAttributes: true,
@@ -1023,12 +952,10 @@ class TestAndroidContainer extends React.Component {
                             )
                         }
                     })
-                    //console.log('tei promise', teiPromises, tei)
                 })
 
                 break
             default:
-                console.log(this.specificSettings)
                 break
         }
 
@@ -1076,9 +1003,6 @@ class TestAndroidContainer extends React.Component {
         let _temporalObject = {}
         const _tempPromises = []
 
-        console.log('program list', programList, organisationUnitIDLists)
-
-        console.log(this.globalSettings)
         temporalType = this.checkType(
             this.globalSettings.settingDownload,
             _settingType
@@ -1092,7 +1016,6 @@ class TestAndroidContainer extends React.Component {
         settingTypeArray.push(_temporalObject)
 
         if (this.specificSettings !== undefined) {
-            console.log(this.specificSettings)
             _temporalObject = {}
             _settingType = undefined
             temporalType = undefined
@@ -1116,8 +1039,6 @@ class TestAndroidContainer extends React.Component {
                 }
                 settingTypeArray.push(_temporalObject)
             })
-
-            console.log('setting type for specific settings', settingTypeArray)
         }
 
         // should check every program (program associated to OU)
@@ -1136,15 +1057,13 @@ class TestAndroidContainer extends React.Component {
             })
         })
 
-        console.log('promises', _tempPromises, teiPromises, teiPromises.length)
-
         Promise.all(teiPromises).then(data => {
-            console.log(
+            /* console.log(
                 'TEI',
                 data,
                 memorySizeOf(data),
                 formatByteSize(memorySizeOf(data))
-            )
+            ) */
             const dataSizeDownload = formatByteSize(memorySizeOf(data))
             this.setState({
                 dataLoad: false,
@@ -1209,7 +1128,6 @@ class TestAndroidContainer extends React.Component {
                 const usersOptions = collection.toArray()
                 this.usersOptions = usersOptions
                 this.usersOptionsComplete = usersOptions
-                console.log('userOptions', this.usersOptionsComplete)
                 this.setState({
                     loading: false,
                 })
@@ -1217,11 +1135,10 @@ class TestAndroidContainer extends React.Component {
 
         api.getValue('ANDROID_SETTING_APP', 'program_settings')
             .then(res => {
-                console.log('getvalue api', res)
                 this.globalSettings = res.value.globalSettings
                 this.specificSettings = res.value.specificSettings
             })
-            .catch(e => console.log('error', e))
+            .catch(e => console.error('error', e))
     }
 
     render() {

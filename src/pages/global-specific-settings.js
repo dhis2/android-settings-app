@@ -1,8 +1,6 @@
 import React from 'react'
 
-/* import { Button } from '@dhis2/d2-ui-core' */
 import { Button } from '@dhis2/ui-core'
-import Table from '@dhis2/d2-ui-table'
 import i18n from '@dhis2/d2-i18n'
 
 import ProgramTable from '../components/program-table'
@@ -19,7 +17,6 @@ import '@dhis2/d2-ui-core/css/Table.css'
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
-        console.log('props', props, i18n)
     }
 
     render() {
@@ -68,14 +65,6 @@ class GlobalSpecificSettings extends React.Component {
 
                     {this.props.specificSettings.length > 0 && (
                         <div className={layoutStyles.data__topMargin}>
-                            {/* <Table
-                                {...this.props.states}
-                                columns={['name', 'sumarySettings']}
-                                rows={this.props.specificSettingList}
-                                contextMenuActions={
-                                    this.props.programTableActions
-                                }
-                            /> */}
                             <TableActions
                                 {...this.props.states}
                                 columns={['Name', 'Sumary Settings']}

@@ -3,7 +3,6 @@ import React from 'react'
 import { Button } from '@dhis2/ui-core'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-// import { CircularProgress } from '@dhis2/d2-ui-core'
 import Tooltip from '@material-ui/core/Tooltip'
 
 import TextFieldSearch from './text-field-search'
@@ -38,39 +37,6 @@ class TestAndroid extends React.Component {
                         clearFields={this.props.clearSearchField}
                         suggestionPreSelected={this.props.searchFieldValue}
                     />
-
-                    {/* {this.props.loadData && (
-                        <div>
-                            <CircularProgress small />
-                            <div>
-                                {this.props.orgUnitLoad && (
-                                    <p className="subitem-item">
-                                        Invoking Organization Units capture
-                                    </p>
-                                )}
-                                {this.props.dataSetLoad && (
-                                    <p className="subitem-item">
-                                        Invoking Data sets associated to OU
-                                    </p>
-                                )}
-                                {this.props.programLoad && (
-                                    <p className="subitem-item">
-                                        Invoking Program associated to OU
-                                    </p>
-                                )}
-                                {this.props.programRuleLoad && (
-                                    <p className="subitem-item">
-                                        Invoking Program rules associated to OU
-                                    </p>
-                                )}
-                                {this.props.metadataLoad && (
-                                    <p className="subitem-item">
-                                        Invoking Metadata download size
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-                    )} */}
 
                     {this.props.runTest && (
                         <div className={layoutStyles.data__topMargin}>

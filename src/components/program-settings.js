@@ -358,7 +358,7 @@ class ProgramSettings extends React.Component {
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
             specificEnrollmentDBTrimming: this.state
-                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
+                .specificEnrollmentDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
@@ -446,7 +446,6 @@ class ProgramSettings extends React.Component {
 
     handleReset = e => {
         e.preventDefault()
-        console.log('e reset', e)
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
@@ -531,7 +530,6 @@ class ProgramSettings extends React.Component {
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
                 if (this.nameSpace === 'ANDROID_SETTING_APP') {
-                    console.log('namespace android')
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
                             name => name === 'program_settings'
@@ -611,7 +609,6 @@ class ProgramSettings extends React.Component {
                                                     specificEventPeriodDBTrimming:
                                                         program.specificEventPeriodDBTrimming,
                                                 }
-                                                console.log(newProgramRow)
                                                 this.specificSettingsRows.push(
                                                     newProgramRow
                                                 )
@@ -674,7 +671,7 @@ class ProgramSettings extends React.Component {
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'program_settings'
-                    ).catch(e => console.log(e))
+                    ).catch(e => console.error(e))
                 }
             })
             .catch(e => {

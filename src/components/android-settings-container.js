@@ -161,7 +161,6 @@ class AndroidSettingsContainer extends React.Component {
                                       }
                                   )
                                   .then(res => {
-                                      console.log(res)
                                       this.setState({
                                           isUpdated: true,
                                           loading: false,
@@ -180,7 +179,6 @@ class AndroidSettingsContainer extends React.Component {
                         'android_settings'
                     )
                         .then(res => {
-                            console.log('sin nameSpace', res)
                             this.keyName = 'android_settings'
                             this.setState({
                                 isUpdated: true,
@@ -194,7 +192,7 @@ class AndroidSettingsContainer extends React.Component {
                             })
                         })
                         .catch(e => {
-                            console.log('sin nameSpace error', e)
+                            console.error('no namespace error', e)
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
