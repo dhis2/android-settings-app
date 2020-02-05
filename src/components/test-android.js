@@ -98,7 +98,6 @@ class TestAndroid extends React.Component {
                                                             ]
                                                         }
                                                     </p>
-                                                    {/* "subitem-item subitem-bigitem" */}
                                                 </Tooltip>
                                             )}
                                         </Grid>
@@ -111,7 +110,6 @@ class TestAndroid extends React.Component {
 
                     <div className={buttonStyles.container_button__add}>
                         <Button
-                            raised
                             className={buttonStyles.button__add}
                             onClick={this.props.handleRun}
                             disabled={this.props.disabledTest}

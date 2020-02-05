@@ -76,7 +76,6 @@ class GlobalSpecificSettings extends React.Component {
 
                     <div className={buttonStyles.container_button__add}>
                         <Button
-                            raised
                             className={buttonStyles.button__add}
                             onClick={this.props.addSpecificSetting}
                         >
@@ -97,7 +96,6 @@ class GlobalSpecificSettings extends React.Component {
                     >
                         <Button
                             onClick={this.props.handleResetGlobalSettings}
-                            raised
                             primary
                         >
                             {i18n.t('SET TO DEFAULT')}

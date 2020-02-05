@@ -64,13 +64,12 @@ class DialogTable extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        raised
                         onClick={this.props.handleClose}
                         className={buttonStyles.mainContent__dialog__button}
                     >
                         {i18n.t('CANCEL')}
                     </Button>
-                    <Button raised onClick={this.props.handleSubmitDialog}>
+                    <Button onClick={this.props.handleSubmitDialog}>
                         {i18n.t('ADD/SAVE')}
                     </Button>
                 </DialogActions>

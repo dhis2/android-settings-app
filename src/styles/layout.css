@@ -1,26 +1,7 @@
-/* .paper__layout {
-    padding: 2rem 2.5rem;
-    min-height: 300px;
-    margin-top: 40px;
-    max-width: 1200px;
-} */
-
 .paper__two-panel__main {
     margin-top: 3rem;
 }
 
-/* .paper__two-panel__main-title {
-    font-weight: 300;
-    font-family: Roboto, sans-serif;
-    font-size: 24px;
-    color: rgba(0, 0, 0, 0.87);
-    padding: 16px 0px 5px;
-} */
-
-/* .paper__two-panel__side-bar {
-    position: absolute;
-}
- */
 .button__right-corner {
     margin: 40px 0px 10px 0px;
     float: right;

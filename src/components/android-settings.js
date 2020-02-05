@@ -138,7 +138,7 @@ const AndroidSettings = ({
             </div>
 
             <div className={buttonStyles.mainContent__button__container}>
-                <Button onClick={handleReset} raised primary>
+                <Button onClick={handleReset} primary>
                     {i18n.t('SET TO DEFAULT')}
                 </Button>
             </div>
