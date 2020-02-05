@@ -19,10 +19,10 @@ const DialogDelete = ({
                 Are you sure you want to delete {name} {typeName} settings?
             </DialogTitle>
             <DialogActions style={{ borderTop: 'none' }}>
-                <Button onClick={onHandleDelete} primary>
+                <Button onClick={onHandleDelete} destructive>
                     {i18n.t('Delete')}
                 </Button>
-                <Button onClick={onHandleClose} primary autoFocus>
+                <Button onClick={onHandleClose} primary>
                     {i18n.t('Cancel')}
                 </Button>
             </DialogActions>
