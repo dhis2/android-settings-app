@@ -17,7 +17,6 @@ import '@dhis2/d2-ui-core/css/Table.css'
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
-        console.log('global specific', props, props.statesSpecific)
     }
 
     render() {

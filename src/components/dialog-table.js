@@ -17,7 +17,6 @@ class DialogTable extends React.Component {
     constructor(props) {
         super(props)
         this.dialogTable = props
-        console.log('dialog', props, props.statesSpecific)
     }
 
     render() {
@@ -56,12 +55,6 @@ class DialogTable extends React.Component {
                             {this.props.dataTitle}
                         </p>
                     )}
-
-                    {/* <ProgramTable
-                        data={this.props.data}
-                        states={this.props.state}
-                        onChange={this.props.handleChange}
-                    /> */}
 
                     <ProgramTable
                         data={this.props.data}
