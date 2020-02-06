@@ -39,11 +39,11 @@ class DataSetSettings extends React.Component {
         periodDSDBTrimming: periodDSDBTrimming,
         specificSetting: {
             openDialog: false,
+            periodDSDBTrimming: '',
+            periodDSDownload: '',
+            specificSettingName: '',
         },
         isUpdated: false,
-        specificPeriodDSDownload: '',
-        specificPeriodDSDBTrimming: '',
-        specificSettingName: '',
         loading: true,
         deleteDialog: {
             open: false,
@@ -59,11 +59,15 @@ class DataSetSettings extends React.Component {
             this.dataSetToChange = args[0].name
             const argsData = args[0]
             this.setState({
-                specificPeriodDSDownload: argsData.specificPeriodDSDownload,
-                specificPeriodDSDBTrimming: argsData.specificPeriodDSDBTrimming,
-                specificSettingName: argsData.id,
+                specificSetting: {
+                    specificSettingName: argsData.id,
+                    periodDSDownload: argsData.periodDSDownload,
+                    periodDSDBTrimming: argsData.periodDSDBTrimming,
+                    openDialog: true,
+                },
             })
-            this.handleClickOpen()
+            this.getItemList()
+            this.updateGlobal = false
         },
         delete: (...args) => {
             this.argsRow = args[0]
@@ -92,7 +96,10 @@ class DataSetSettings extends React.Component {
         e.preventDefault()
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            specificSetting: {
+                ...this.state.specificSetting,
+                [e.target.name]: e.target.value,
+            },
         })
         this.updateGlobal = false
     }
@@ -152,11 +159,11 @@ class DataSetSettings extends React.Component {
     }
 
     /**
-     * Open Dialog Table Component
-     * @case edit action: get selected specific setting data and open Dialog Component
-     * @case add specific setting: opens Dialog Component with DataSets specific setting List
+     * Get dataset list not including current data sets with specific settings
+     * @case edit action
+     * @case add specific setting
      */
-    handleClickOpen = () => {
+    getItemList = () => {
         if (this.dataSetNamesList.length > 0) {
             const dataSetListComplete = this.dataSetListComplete
             const dataUsedlist = this.dataSetNamesList
@@ -166,9 +173,18 @@ class DataSetSettings extends React.Component {
             )
             this.dataSetList = dataSetNameFilter
         }
+    }
+
+    /**
+     * Open Dialog Table Component
+     * @case add specific setting: opens Dialog Component with DataSets specific setting List
+     */
+    handleClickOpen = () => {
+        this.getItemList()
 
         this.setState({
             specificSetting: {
+                ...this.state.specificSetting,
                 openDialog: true,
             },
         })
@@ -182,20 +198,27 @@ class DataSetSettings extends React.Component {
         this.setState({
             specificSetting: {
                 openDialog: false,
+                periodDSDownload: '',
+                periodDSDBTrimming: '',
+                specificSettingName: '',
             },
-            specificPeriodDSDownload: '',
-            specificPeriodDSDBTrimming: '',
-            specificSettingName: '',
         })
 
         this.updateGlobal = false
+    }
+
+    arrangeWord = word => {
+        let newString = word.toUpperCase().split('_')
+        newString = newString.join(' ')
+        return newString
     }
 
     /**
      * Submit Dialog data, specific settings
      */
     handleSubmitDialog = () => {
-        var specificDataSetNameKey = this.state.specificSettingName
+        var specificDataSetNameKey = this.state.specificSetting
+            .specificSettingName
         var objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetListComplete.filter(
@@ -206,19 +229,20 @@ class DataSetSettings extends React.Component {
             id: specificDataSetNameKey,
             lastUpdated: new Date().toJSON(),
             name: dataSetNameFilter[0].name,
-            specificPeriodDSDownload: this.state.specificPeriodDSDownload,
-            specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
+            periodDSDownload: this.state.specificSetting.periodDSDownload,
+            periodDSDBTrimming: this.state.specificSetting.periodDSDBTrimming,
         }
 
+        const sumaryString = this.state.specificSetting.periodDSDownload
         const sumarySettings =
-            this.state.specificPeriodDSDownload === undefined
+            this.state.specificSetting.periodDSDownload === undefined
                 ? 0
-                : this.state.specificPeriodDSDownload
+                : this.arrangeWord(sumaryString)
         const newDataSetRow = {
             name: dataSetNameFilter[0].name,
             sumarySettings: sumarySettings,
-            specificPeriodDSDownload: this.state.specificPeriodDSDownload,
-            specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
+            periodDSDownload: this.state.specificSetting.periodDSDownload,
+            periodDSDBTrimming: this.state.specificSetting.periodDSDBTrimming,
             id: specificDataSetNameKey,
         }
 
@@ -237,7 +261,7 @@ class DataSetSettings extends React.Component {
 
             const nameList = this.dataSetNamesList
             const newNameList = nameList.filter(
-                name => name !== this.state.specificSettingName
+                name => name !== this.state.specificSetting.specificSettingName
             )
 
             this.dataSetNamesList = newNameList
@@ -245,7 +269,9 @@ class DataSetSettings extends React.Component {
             this.specificSettingsRows.push(newDataSetRow)
         }
 
-        this.dataSetNamesList.push(this.state.specificSettingName)
+        this.dataSetNamesList.push(
+            this.state.specificSetting.specificSettingName
+        )
 
         this.saveDataApi('globalSettings', dataSetData)
 
@@ -344,18 +370,22 @@ class DataSetSettings extends React.Component {
                                             ) {
                                                 const dataSet = this
                                                     .specificSettings[key]
+                                                const sumaryString =
+                                                    dataSet.periodDSDownload
                                                 const sumarySettings =
-                                                    dataSet.specificPeriodDSDownload ===
+                                                    dataSet.periodDSDownload ===
                                                     undefined
                                                         ? 0
-                                                        : dataSet.specificPeriodDSDownload
+                                                        : this.arrangeWord(
+                                                              sumaryString
+                                                          )
                                                 const newDataSetRow = {
                                                     name: dataSet.name,
                                                     sumarySettings: sumarySettings,
-                                                    specificPeriodDSDownload:
-                                                        dataSet.specificPeriodDSDownload,
-                                                    specificPeriodDSDBTrimming:
-                                                        dataSet.specificPeriodDSDBTrimming,
+                                                    periodDSDownload:
+                                                        dataSet.periodDSDownload,
+                                                    periodDSDBTrimming:
+                                                        dataSet.periodDSDBTrimming,
                                                     id: key,
                                                 }
 
@@ -464,6 +494,7 @@ class DataSetSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
+                statesSpecific={this.state.specificSetting}
             />
         )
     }

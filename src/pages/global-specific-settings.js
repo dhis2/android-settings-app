@@ -17,6 +17,7 @@ import '@dhis2/d2-ui-core/css/Table.css'
 class GlobalSpecificSettings extends React.Component {
     constructor(props) {
         super(props)
+        console.log('global specific', props, props.statesSpecific)
     }
 
     render() {
@@ -108,15 +109,17 @@ class GlobalSpecificSettings extends React.Component {
                         handleClose={this.props.specificSettingDialogClose}
                         dataTitle={this.props.specificSettingDataTitle}
                         dataTitleOptions={this.props.specificSettingOptions}
-                        titleValue={this.props.states.specificSettingName}
+                        titleValue={
+                            this.props.statesSpecific.specificSettingName
+                        }
                         handleChange={this.props.specificSettingHandleChange}
-                        textFieldTitleId="specificSettingName"
                         textFieldTitleName="specificSettingName"
                         data={this.props.specificSettingData}
                         state={this.props.states}
                         handleSubmitDialog={
                             this.props.specificSettingHandleSubmit
                         }
+                        statesSpecific={this.props.statesSpecific}
                     />
                 </div>
             </React.Fragment>
