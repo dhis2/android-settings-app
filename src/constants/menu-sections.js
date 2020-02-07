@@ -8,9 +8,9 @@ import {
 
 const menuSection = [
     {
-        key: 'android-setting',
-        label: 'Android',
-        path: '/android-setting',
+        key: 'general-setting',
+        label: 'General Setting',
+        path: '/general-setting',
         icon: <AndroidSettingsIcon />,
     },
     {
@@ -26,9 +26,9 @@ const menuSection = [
         icon: <DataSetIcon />,
     },
     {
-        key: 'test-android-login',
-        label: 'Test Android Login ',
-        path: '/test-android-login',
+        key: 'test-android-sync',
+        label: 'Test Android Sync ',
+        path: '/test-android-sync',
         icon: <TestRun />,
     },
 ]

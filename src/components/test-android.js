@@ -23,7 +23,7 @@ class TestAndroid extends React.Component {
             <div>
                 <div>
                     <p className={titleStyles.mainContent__title__main}>
-                        {i18n.t('Test Android Login')}
+                        {i18n.t('Test Android Sync')}
                     </p>
                     <p className={titleStyles.mainContent__subtitle}>
                         {i18n.t(' Enter a user to check access to')}

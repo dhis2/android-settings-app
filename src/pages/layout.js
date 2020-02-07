@@ -84,7 +84,7 @@ function Layout(props) {
                                         )}
                                     />
                                     <Route
-                                        path="/android-setting"
+                                        path="/general-setting"
                                         render={() => (
                                             <D2Shim>
                                                 <AndroidSettingsContainer />
@@ -108,7 +108,7 @@ function Layout(props) {
                                         )}
                                     />
                                     <Route
-                                        path="/test-android-login"
+                                        path="/test-android-sync"
                                         render={() => (
                                             <D2Shim>
                                                 <TestAndroidContainer />
