@@ -42,8 +42,8 @@ export const Program = [
     },
     {
         keyDownload: 'teiDownload',
-        keyDBTrimming: 'teiDBTrimmming',
-        option: 'TEI', // per program
+        keyDBTrimming: 'teiDBTrimming',
+        option: 'TEI',
         maxValue: 2000,
     },
     {
@@ -415,7 +415,7 @@ export const ProgramSettingsDefault = {
     settingDownload: 'GLOBAL',
     settingDBTrimming: 'GLOBAL',
     teiDownload: 500,
-    teiDBTrimmming: 500,
+    teiDBTrimming: 500,
     enrollmentDownload: 'ALL',
     enrollmentDBTrimming: 'ALL',
     enrollmentDateDownload: 'ANY',

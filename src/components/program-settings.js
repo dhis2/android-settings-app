@@ -19,7 +19,7 @@ const {
     settingDownload,
     settingDBTrimming,
     teiDownload,
-    teiDBTrimmming,
+    teiDBTrimming,
     enrollmentDownload,
     enrollmentDBTrimming,
     enrollmentDateDownload,
@@ -56,7 +56,7 @@ class ProgramSettings extends React.Component {
         settingDownload: settingDownload,
         settingDBTrimming: settingDBTrimming,
         teiDownload: teiDownload,
-        teiDBTrimmming: teiDBTrimmming,
+        teiDBTrimming: teiDBTrimming,
         enrollmentDownload: enrollmentDownload,
         enrollmentDBTrimming: enrollmentDBTrimming,
         enrollmentDateDownload: enrollmentDateDownload,
@@ -148,9 +148,9 @@ class ProgramSettings extends React.Component {
                     ? (e.target.value = maxValues.teiDownload)
                     : (e.target.value = valueInput)
                 break
-            case 'teiDBTrimmming':
-                e.target.value > maxValues.teiDBTrimmming
-                    ? (e.target.value = maxValues.teiDBTrimmming)
+            case 'teiDBTrimming':
+                e.target.value > maxValues.teiDBTrimming
+                    ? (e.target.value = maxValues.teiDBTrimming)
                     : (e.target.value = valueInput)
                 break
             case 'teReservedDownload':
@@ -265,7 +265,7 @@ class ProgramSettings extends React.Component {
             settingDownload: this.state.settingDownload,
             settingDBTrimming: this.state.settingDBTrimming,
             teiDownload: this.state.teiDownload,
-            teiDBTrimmming: this.state.teiDBTrimmming,
+            teiDBTrimming: this.state.teiDBTrimming,
             enrollmentDownload: this.state.enrollmentDownload,
             enrollmentDBTrimming: this.state.enrollmentDBTrimming,
             enrollmentDateDownload: this.state.enrollmentDateDownload,
@@ -459,7 +459,7 @@ class ProgramSettings extends React.Component {
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
             teiDownload: teiDownload,
-            teiDBTrimmming: teiDBTrimmming,
+            teiDBTrimming: teiDBTrimming,
             enrollmentDownload: enrollmentDownload,
             enrollmentDBTrimming: enrollmentDBTrimming,
             enrollmentDateDownload: enrollmentDateDownload,
@@ -644,7 +644,7 @@ class ProgramSettings extends React.Component {
                                 settingDownload: settingDownload,
                                 settingDBTrimming: settingDBTrimming,
                                 teiDownload: teiDownload,
-                                teiDBTrimmming: teiDBTrimmming,
+                                teiDBTrimming: teiDBTrimming,
                                 enrollmentDownload: enrollmentDownload,
                                 enrollmentDBTrimming: enrollmentDBTrimming,
                                 enrollmentDateDownload: enrollmentDateDownload,
