@@ -107,7 +107,7 @@ export const testAndroidDataConstants = [
         load: 'metadataLoad',
     },
     {
-        title: 'Data download size',
+        title: 'Data download size   (KB)',
         description: '',
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
