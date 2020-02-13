@@ -58,7 +58,7 @@ function Layout(props) {
                             })
                         )}
                         showSearchField
-                        searchFieldLabel="Search settings"
+                        searchFieldLabel={i18n.t('Search settings')}
                         onChangeSection={changeSectionHandler}
                         currentSection={props.currentSection}
                         onChangeSearchText={changeSearchTextHandler}
