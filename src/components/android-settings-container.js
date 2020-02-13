@@ -101,8 +101,7 @@ class AndroidSettingsContainer extends React.Component {
     /**
      * Resets values to default
      */
-    handleReset = e => {
-        e.preventDefault()
+    handleReset = () => {
         this.setState({
             metadataSync: metadataSync,
             dataSync: dataSync,
@@ -183,12 +182,6 @@ class AndroidSettingsContainer extends React.Component {
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
-                                metadataSync: metadataSync,
-                                dataSync: dataSync,
-                                numberSmsToSent: '',
-                                numberSmsConfirmation: '',
-                                valuesTEI: '',
-                                encryptDB: encryptDB,
                             })
                         })
                         .catch(e => {

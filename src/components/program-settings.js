@@ -442,8 +442,7 @@ class ProgramSettings extends React.Component {
         this.handleClose()
     }
 
-    handleReset = e => {
-        e.preventDefault()
+    handleReset = () => {
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
@@ -675,6 +674,7 @@ class ProgramSettings extends React.Component {
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
 
