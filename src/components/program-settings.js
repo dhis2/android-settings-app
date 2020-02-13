@@ -338,9 +338,7 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
     }
 
-    handleSubmitDialog = async e => {
-        //e.preventDefault()
-
+    handleSubmitDialog = async () => {
         var specificProgramNameKey = this.state.specificSettingName
         var objData = this.specificSettings
 
@@ -364,7 +362,7 @@ class ProgramSettings extends React.Component {
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
@@ -398,13 +396,13 @@ class ProgramSettings extends React.Component {
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
             specificEnrollmentDBTrimming: this.state
-                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
+                .specificEnrollmentDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
