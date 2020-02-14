@@ -1,14 +1,8 @@
 import React, { useRef } from 'react'
 
-import { TwoPanel, Sidebar, MainContent, Heading } from '@dhis2/d2-ui-core'
+import { TwoPanel, Sidebar, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Switch,
-    HashRouter,
-} from 'react-router-dom'
+import { Route, Link, Switch, HashRouter } from 'react-router-dom'
 
 import AndroidSettingsContainer from '../components/android-settings-container'
 import ProgramSettings from '../components/program-settings'
@@ -28,7 +22,6 @@ const styles = {
 
 function Layout(props) {
     const currentSection = useRef()
-    const lastSection = useRef()
     const sidebarRef = useRef()
 
     const changeSectionHandler = key => {
@@ -38,16 +31,6 @@ function Layout(props) {
         }
     }
 
-    const changeSearchTextHandler = searchText => {
-        if (searchText.toString().trim().length > 0) {
-            if (currentSection.current !== 'search') {
-                lastSection.current = currentSection.current
-            }
-            changeSectionHandler('search', searchText, sidebarRef)
-        } else {
-            changeSectionHandler(lastSection.current, undefined, sidebarRef)
-        }
-    }
     return (
         <HashRouter>
             <TwoPanel mainStyle={styles.twoPanelMain}>
