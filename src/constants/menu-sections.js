@@ -8,12 +8,6 @@ import {
 import i18n from '@dhis2/d2-i18n'
 
 const menuSection = [
-    /* {
-        key: 'android-setting',
-        label: 'Android',
-        path: '/android-setting',
-        icon: <AndroidSettingsIcon />,
-    }, */
     {
         key: 'general-setting',
         label: i18n.t('General Settings'),

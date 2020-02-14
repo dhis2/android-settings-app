@@ -63,11 +63,8 @@ function Layout(props) {
                                 ),
                             })
                         )}
-                        //showSearchField
-                        //searchFieldLabel={i18n.t('Search settings')}
                         onChangeSection={changeSectionHandler}
                         currentSection={props.currentSection}
-                        //onChangeSearchText={changeSearchTextHandler}
                         ref={sidebarRef}
                     />
                 </div>
