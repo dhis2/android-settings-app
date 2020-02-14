@@ -2,7 +2,13 @@ import React, { useRef } from 'react'
 
 import { TwoPanel, Sidebar, MainContent, Heading } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    HashRouter,
+} from 'react-router-dom'
 
 import AndroidSettingsContainer from '../components/android-settings-container'
 import ProgramSettings from '../components/program-settings'
@@ -43,7 +49,7 @@ function Layout(props) {
         }
     }
     return (
-        <Router>
+        <HashRouter>
             <TwoPanel mainStyle={styles.twoPanelMain}>
                 <div className={layoutStyles.paper__twoPanel__sideBar}>
                     <Sidebar
@@ -57,11 +63,11 @@ function Layout(props) {
                                 ),
                             })
                         )}
-                        showSearchField
-                        searchFieldLabel={i18n.t('Search settings')}
+                        //showSearchField
+                        //searchFieldLabel={i18n.t('Search settings')}
                         onChangeSection={changeSectionHandler}
                         currentSection={props.currentSection}
-                        onChangeSearchText={changeSearchTextHandler}
+                        //onChangeSearchText={changeSearchTextHandler}
                         ref={sidebarRef}
                     />
                 </div>
@@ -73,56 +79,54 @@ function Layout(props) {
                     </header>
                     <Paper className={layoutStyles.paper__layout}>
                         <D2Shim>
-                            <Heading>
-                                <Switch>
-                                    <Route
-                                        path="/"
-                                        exact
-                                        render={() => (
-                                            <D2Shim>
-                                                <AndroidSettingsContainer />
-                                            </D2Shim>
-                                        )}
-                                    />
-                                    <Route
-                                        path="/android-setting"
-                                        render={() => (
-                                            <D2Shim>
-                                                <AndroidSettingsContainer />
-                                            </D2Shim>
-                                        )}
-                                    />
-                                    <Route
-                                        path="/program-setting"
-                                        render={() => (
-                                            <D2Shim>
-                                                <ProgramSettings />
-                                            </D2Shim>
-                                        )}
-                                    />
-                                    <Route
-                                        path="/dataset-setting"
-                                        render={() => (
-                                            <D2Shim>
-                                                <DataSetSettings />
-                                            </D2Shim>
-                                        )}
-                                    />
-                                    <Route
-                                        path="/test-android-login"
-                                        render={() => (
-                                            <D2Shim>
-                                                <TestAndroidContainer />
-                                            </D2Shim>
-                                        )}
-                                    />
-                                </Switch>
-                            </Heading>
+                            <Switch>
+                                <Route
+                                    path="/"
+                                    exact
+                                    render={() => (
+                                        <D2Shim>
+                                            <AndroidSettingsContainer />
+                                        </D2Shim>
+                                    )}
+                                />
+                                <Route
+                                    path="/general-setting"
+                                    render={() => (
+                                        <D2Shim>
+                                            <AndroidSettingsContainer />
+                                        </D2Shim>
+                                    )}
+                                />
+                                <Route
+                                    path="/program-setting"
+                                    render={() => (
+                                        <D2Shim>
+                                            <ProgramSettings />
+                                        </D2Shim>
+                                    )}
+                                />
+                                <Route
+                                    path="/dataset-setting"
+                                    render={() => (
+                                        <D2Shim>
+                                            <DataSetSettings />
+                                        </D2Shim>
+                                    )}
+                                />
+                                <Route
+                                    path="/test-android-sync"
+                                    render={() => (
+                                        <D2Shim>
+                                            <TestAndroidContainer />
+                                        </D2Shim>
+                                    )}
+                                />
+                            </Switch>
                         </D2Shim>
                     </Paper>
                 </MainContent>
             </TwoPanel>
-        </Router>
+        </HashRouter>
     )
 }
 
