@@ -30,7 +30,7 @@ class GlobalSpecificSettings extends React.Component {
                     </p>
                     <p className={styles.mainContent__subtitle}>
                         {i18n.t(
-                            'Applies to all {{elementPlural}} that an Android user has access to, unless an specific set of values has been configured for a {{elementSingular}} (see below).',
+                            'Applies to all {{elementPlural}} that an Android user has access to, unless a specific set of values has been configured for {{elementSingular}} (see below).',
                             {
                                 elementPlural: this.props
                                     .componentSubtitlePlural,
