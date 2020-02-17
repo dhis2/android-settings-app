@@ -338,9 +338,7 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
     }
 
-    handleSubmitDialog = async e => {
-        e.preventDefault()
-
+    handleSubmitDialog = async () => {
         var specificProgramNameKey = this.state.specificSettingName
         var objData = this.specificSettings
 
@@ -349,6 +347,7 @@ class ProgramSettings extends React.Component {
         )
 
         objData[specificProgramNameKey] = {
+            id: specificProgramNameKey,
             lastUpdated: new Date().toJSON(),
             name: programNameFilter[0].name,
             specificSettingDownload: this.state.specificSettingDownload,
@@ -357,13 +356,13 @@ class ProgramSettings extends React.Component {
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
             specificEnrollmentDBTrimming: this.state
-                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
+                .specificEnrollmentDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
@@ -397,13 +396,13 @@ class ProgramSettings extends React.Component {
             specificTeiDBTrimming: this.state.specificTeiDBTrimming,
             specificEnrollmentDownload: this.state.specificEnrollmentDownload,
             specificEnrollmentDBTrimming: this.state
-                .specificEnrollmentDBTrimming, //specificEventDBTrimming,
+                .specificEnrollmentDBTrimming,
             specificEnrollmentDateDownload: this.state
                 .specificEnrollmentDateDownload,
             specificEnrollmentDateDBTrimming: this.state
                 .specificEnrollmentDateDBTrimming,
             specificUpdateDownload: this.state.specificUpdateDownload,
-            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming, //updateDBTrimming,
+            specificUpdateDBTrimming: this.state.specificUpdateDBTrimming,
             specificTEReservedDownload: this.state.specificTEReservedDownload,
             specificTEReservedDBTrimming: this.state
                 .specificTEReservedDBTrimming,
@@ -443,9 +442,7 @@ class ProgramSettings extends React.Component {
         this.handleClose()
     }
 
-    handleReset = e => {
-        e.preventDefault()
-        console.log('e reset', e)
+    handleReset = () => {
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
@@ -530,7 +527,6 @@ class ProgramSettings extends React.Component {
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
                 if (this.nameSpace === 'ANDROID_SETTING_APP') {
-                    console.log('namespace android')
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
                             name => name === 'program_settings'
@@ -610,7 +606,6 @@ class ProgramSettings extends React.Component {
                                                     specificEventPeriodDBTrimming:
                                                         program.specificEventPeriodDBTrimming,
                                                 }
-                                                console.log(newProgramRow)
                                                 this.specificSettingsRows.push(
                                                     newProgramRow
                                                 )
@@ -673,12 +668,13 @@ class ProgramSettings extends React.Component {
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'program_settings'
-                    ).catch(e => console.log(e))
+                    ).catch(e => console.error(e))
                 }
             })
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
 

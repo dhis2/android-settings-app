@@ -203,6 +203,7 @@ class DataSetSettings extends React.Component {
         )
 
         objData[specificDataSetNameKey] = {
+            id: specificDataSetNameKey,
             lastUpdated: new Date().toJSON(),
             name: dataSetNameFilter[0].name,
             specificPeriodDSDownload: this.state.specificPeriodDSDownload,
@@ -334,7 +335,6 @@ class DataSetSettings extends React.Component {
                                         this.dataSetNamesList = Object.keys(
                                             this.specificSettings
                                         )
-                                        console.log(this.dataSetNamesList)
                                         for (const key in this
                                             .specificSettings) {
                                             if (
@@ -344,7 +344,6 @@ class DataSetSettings extends React.Component {
                                             ) {
                                                 const dataSet = this
                                                     .specificSettings[key]
-                                                console.log(dataSet)
                                                 const sumarySettings =
                                                     dataSet.specificPeriodDSDownload ===
                                                     undefined
@@ -360,7 +359,6 @@ class DataSetSettings extends React.Component {
                                                     id: key,
                                                 }
 
-                                                console.log(newDataSetRow)
                                                 this.specificSettingsRows.push(
                                                     newDataSetRow
                                                 )
@@ -409,12 +407,13 @@ class DataSetSettings extends React.Component {
                     api.createNamespace(
                         'ANDROID_SETTING_APP',
                         'dataSet_settings'
-                    ).catch(e => console.log(e))
+                    ).catch(e => console.error(e))
                 }
             })
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
 

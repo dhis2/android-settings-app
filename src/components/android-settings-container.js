@@ -101,8 +101,7 @@ class AndroidSettingsContainer extends React.Component {
     /**
      * Resets values to default
      */
-    handleReset = e => {
-        e.preventDefault()
+    handleReset = () => {
         this.setState({
             metadataSync: metadataSync,
             dataSync: dataSync,
@@ -161,7 +160,6 @@ class AndroidSettingsContainer extends React.Component {
                                       }
                                   )
                                   .then(res => {
-                                      console.log(res)
                                       this.setState({
                                           isUpdated: true,
                                           loading: false,
@@ -180,21 +178,14 @@ class AndroidSettingsContainer extends React.Component {
                         'android_settings'
                     )
                         .then(res => {
-                            console.log('sin nameSpace', res)
                             this.keyName = 'android_settings'
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
-                                metadataSync: metadataSync,
-                                dataSync: dataSync,
-                                numberSmsToSent: '',
-                                numberSmsConfirmation: '',
-                                valuesTEI: '',
-                                encryptDB: encryptDB,
                             })
                         })
                         .catch(e => {
-                            console.log('sin nameSpace error', e)
+                            console.error('no namespace error', e)
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
