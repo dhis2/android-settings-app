@@ -443,6 +443,7 @@ class DataSetSettings extends React.Component {
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
 

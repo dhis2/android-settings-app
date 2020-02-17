@@ -16,7 +16,10 @@ const DialogDelete = ({
     return (
         <Dialog open={open} onClose={onHandleClose}>
             <DialogTitle>
-                Are you sure you want to delete {name} {typeName} settings?
+                {i18n.t(
+                    'Are you sure you want to delete {{name}} {{typeName}} settings?',
+                    { name: name, typeName: typeName }
+                )}
             </DialogTitle>
             <DialogActions style={{ borderTop: 'none' }}>
                 <Button onClick={onHandleDelete} destructive>

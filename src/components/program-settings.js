@@ -345,8 +345,6 @@ class ProgramSettings extends React.Component {
     }
 
     handleSubmitDialog = async e => {
-        //e.preventDefault()
-
         var specificProgramNameKey = this.state.specificSetting
             .specificSettingName
         var objData = this.specificSettings
@@ -371,7 +369,7 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: this.state.specificSetting
                 .enrollmentDateDBTrimming,
             updateDownload: this.state.specificSetting.updateDownload,
-            updateDBTrimming: this.state.specificSetting.updateDBTrimming, //updateDBTrimming,
+            updateDBTrimming: this.state.specificSetting.updateDBTrimming,
             teReservedDownload: this.state.specificSetting.teReservedDownload,
             teReservedDBTrimming: this.state.specificSetting
                 .teReservedDBTrimming,
@@ -453,8 +451,7 @@ class ProgramSettings extends React.Component {
         this.handleClose()
     }
 
-    handleReset = e => {
-        e.preventDefault()
+    handleReset = () => {
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
@@ -686,6 +683,7 @@ class ProgramSettings extends React.Component {
             .catch(e => {
                 this.setState({
                     isUpdated: false,
+                    loading: false,
                 })
             })
 

@@ -189,12 +189,6 @@ class AndroidSettingsContainer extends React.Component {
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
-                                metadataSync: metadataSync,
-                                dataSync: dataSync,
-                                numberSmsToSend: '',
-                                numberSmsConfirmation: '',
-                                valuesTEI: '',
-                                encryptDB: encryptDB,
                             })
                         })
                         .catch(e => {

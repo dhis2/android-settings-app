@@ -9,6 +9,7 @@ import ProgramSettings from '../components/program-settings'
 import DataSetSettings from '../components/dataSet-settings'
 import TestAndroidContainer from '../components/test-android-container'
 import menuSection from '../constants/menu-sections'
+import i18n from '@dhis2/d2-i18n'
 
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
@@ -57,7 +58,7 @@ function Layout(props) {
                             })
                         )}
                         showSearchField
-                        searchFieldLabel="Search settings"
+                        searchFieldLabel={i18n.t('Search settings')}
                         onChangeSection={changeSectionHandler}
                         currentSection={props.currentSection}
                         onChangeSearchText={changeSearchTextHandler}
@@ -67,7 +68,7 @@ function Layout(props) {
                 <MainContent>
                     <header>
                         <h1 className={layoutStyles.paper__twoPanel__mainTitle}>
-                            Android settings
+                            {i18n.t('Android settings')}
                         </h1>
                     </header>
                     <Paper className={layoutStyles.paper__layout}>

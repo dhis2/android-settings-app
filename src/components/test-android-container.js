@@ -528,21 +528,6 @@ class TestAndroidContainer extends React.Component {
                                     }
                                 })
                             }
-                            /* console.log({
-                                dataset: dataSetList,
-                                datasetV: dataSetValuesList,
-                                program: programsList,
-                                programV: programsValuesList,
-                                trackedEntity: trackedEntityTypeListId,
-                                optionSetListId: optionSetListId,
-                                dataSetValuesList: dataSetValuesList,
-                                dataElement: dataElementListId,
-                                indicators: indicatorListId,
-                                categoryCombo: categoryComboListId,
-                                category: categoryListId,
-                                indicatorValuesList: indicatorValuesList,
-                                indicatorT: indicatorTypeListId,
-                            }) */
                         })
                     })
                     this.organisationUnitsNumber =
@@ -1058,12 +1043,6 @@ class TestAndroidContainer extends React.Component {
         })
 
         Promise.all(teiPromises).then(data => {
-            /* console.log(
-                'TEI',
-                data,
-                memorySizeOf(data),
-                formatByteSize(memorySizeOf(data))
-            ) */
             const dataSizeDownload = formatByteSize(memorySizeOf(data))
             this.setState({
                 dataLoad: false,
