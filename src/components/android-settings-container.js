@@ -168,8 +168,6 @@ class AndroidSettingsContainer extends React.Component {
                                   )
                                   .then(res => {
                                       this.setState({
-                                          /* isUpdated: true,
-                                          loading: false, */
                                           metadataSync: metadataSync,
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
@@ -209,7 +207,7 @@ class AndroidSettingsContainer extends React.Component {
             .catch(e => {
                 this.setState({
                     isUpdated: false,
-                    //loading: false,
+                    loading: false,
                 })
             })
     }
