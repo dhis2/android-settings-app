@@ -41,7 +41,7 @@ class DataSetSettings extends React.Component {
             openDialog: false,
             periodDSDBTrimming: '',
             periodDSDownload: '',
-            specificSettingName: '',
+            name: '',
         },
         isUpdated: false,
         loading: true,
@@ -60,7 +60,7 @@ class DataSetSettings extends React.Component {
             const argsData = args[0]
             this.setState({
                 specificSetting: {
-                    specificSettingName: argsData.id,
+                    name: argsData.id,
                     periodDSDownload: argsData.periodDSDownload,
                     periodDSDBTrimming: argsData.periodDSDBTrimming,
                     openDialog: true,
@@ -200,7 +200,7 @@ class DataSetSettings extends React.Component {
                 openDialog: false,
                 periodDSDownload: '',
                 periodDSDBTrimming: '',
-                specificSettingName: '',
+                name: '',
             },
         })
 
@@ -217,8 +217,7 @@ class DataSetSettings extends React.Component {
      * Submit Dialog data, specific settings
      */
     handleSubmitDialog = () => {
-        var specificDataSetNameKey = this.state.specificSetting
-            .specificSettingName
+        var specificDataSetNameKey = this.state.specificSetting.name
         var objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetListComplete.filter(
@@ -261,7 +260,7 @@ class DataSetSettings extends React.Component {
 
             const nameList = this.dataSetNamesList
             const newNameList = nameList.filter(
-                name => name !== this.state.specificSetting.specificSettingName
+                name => name !== this.state.specificSetting.name
             )
 
             this.dataSetNamesList = newNameList
@@ -269,9 +268,7 @@ class DataSetSettings extends React.Component {
             this.specificSettingsRows.push(newDataSetRow)
         }
 
-        this.dataSetNamesList.push(
-            this.state.specificSetting.specificSettingName
-        )
+        this.dataSetNamesList.push(this.state.specificSetting.name)
 
         this.saveDataApi('globalSettings', dataSetData)
 

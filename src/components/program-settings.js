@@ -71,7 +71,7 @@ class ProgramSettings extends React.Component {
         eventPeriodDBTrimming: eventPeriodDBTrimming,
         specificSetting: {
             openDialog: false,
-            specificSettingName: '',
+            name: '',
             settingDownload: '',
             settingDBTrimming: '',
             teiDownload: '',
@@ -118,7 +118,7 @@ class ProgramSettings extends React.Component {
                     eventsDBTrimming: argsData.eventsDBTrimming,
                     eventPeriodDownload: argsData.eventPeriodDownload,
                     eventPeriodDBTrimming: argsData.eventPeriodDBTrimming,
-                    specificSettingName: argsData.id,
+                    name: argsData.id,
                     openDialog: true,
                 },
             })
@@ -337,7 +337,7 @@ class ProgramSettings extends React.Component {
                 eventsDBTrimming: '',
                 eventPeriodDownload: '',
                 eventPeriodDBTrimming: '',
-                specificSettingName: '',
+                name: '',
             },
         })
 
@@ -345,8 +345,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleSubmitDialog = async e => {
-        var specificProgramNameKey = this.state.specificSetting
-            .specificSettingName
+        var specificProgramNameKey = this.state.specificSetting.name
         var objData = this.specificSettings
 
         const programNameFilter = this.programListComplete.filter(
@@ -435,7 +434,7 @@ class ProgramSettings extends React.Component {
 
             const nameList = this.programNamesList
             const newNameList = nameList.filter(
-                name => name !== this.state.specificSetting.specificSettingName
+                name => name !== this.state.specificSetting.name
             )
 
             this.programNamesList = newNameList
@@ -443,9 +442,7 @@ class ProgramSettings extends React.Component {
             this.specificSettingsRows.push(newProgramRow)
         }
 
-        this.programNamesList.push(
-            this.state.specificSetting.specificSettingName
-        )
+        this.programNamesList.push(this.state.specificSetting.name)
 
         this.saveDataApi('globalSettings', programData)
         this.handleClose()
