@@ -344,7 +344,7 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
     }
 
-    handleSubmitDialog = async e => {
+    handleSubmitDialog = async () => {
         var specificProgramNameKey = this.state.specificSetting.name
         var objData = this.specificSettings
 
@@ -352,99 +352,107 @@ class ProgramSettings extends React.Component {
             option => option.id === specificProgramNameKey
         )
 
-        objData[specificProgramNameKey] = {
-            id: specificProgramNameKey,
-            lastUpdated: new Date().toJSON(),
-            name: programNameFilter[0].name,
-            settingDownload: this.state.specificSetting.settingDownload,
-            settingDBTrimming: this.state.specificSetting.settingDBTrimming,
-            teiDownload: this.state.specificSetting.teiDownload,
-            teiDBTrimming: this.state.specificSetting.teiDBTrimming,
-            enrollmentDownload: this.state.specificSetting.enrollmentDownload,
-            enrollmentDBTrimming: this.state.specificSetting
-                .enrollmentDBTrimming,
-            enrollmentDateDownload: this.state.specificSetting
-                .enrollmentDateDownload,
-            enrollmentDateDBTrimming: this.state.specificSetting
-                .enrollmentDateDBTrimming,
-            updateDownload: this.state.specificSetting.updateDownload,
-            updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-            teReservedDownload: this.state.specificSetting.teReservedDownload,
-            teReservedDBTrimming: this.state.specificSetting
-                .teReservedDBTrimming,
-            eventsDownload: this.state.specificSetting.eventsDownload,
-            eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-            eventPeriodDownload: this.state.specificSetting.eventPeriodDownload,
-            eventPeriodDBTrimming: this.state.specificSetting
-                .eventPeriodDBTrimming,
+        if (programNameFilter.length > 0) {
+            objData[specificProgramNameKey] = {
+                id: specificProgramNameKey,
+                lastUpdated: new Date().toJSON(),
+                name: programNameFilter[0].name,
+                settingDownload: this.state.specificSetting.settingDownload,
+                settingDBTrimming: this.state.specificSetting.settingDBTrimming,
+                teiDownload: this.state.specificSetting.teiDownload,
+                teiDBTrimming: this.state.specificSetting.teiDBTrimming,
+                enrollmentDownload: this.state.specificSetting
+                    .enrollmentDownload,
+                enrollmentDBTrimming: this.state.specificSetting
+                    .enrollmentDBTrimming,
+                enrollmentDateDownload: this.state.specificSetting
+                    .enrollmentDateDownload,
+                enrollmentDateDBTrimming: this.state.specificSetting
+                    .enrollmentDateDBTrimming,
+                updateDownload: this.state.specificSetting.updateDownload,
+                updateDBTrimming: this.state.specificSetting.updateDBTrimming,
+                teReservedDownload: this.state.specificSetting
+                    .teReservedDownload,
+                teReservedDBTrimming: this.state.specificSetting
+                    .teReservedDBTrimming,
+                eventsDownload: this.state.specificSetting.eventsDownload,
+                eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
+                eventPeriodDownload: this.state.specificSetting
+                    .eventPeriodDownload,
+                eventPeriodDBTrimming: this.state.specificSetting
+                    .eventPeriodDBTrimming,
+            }
+
+            const sumarySettings =
+                (this.state.specificSetting.teiDownload === undefined
+                    ? 0
+                    : this.state.specificSetting.teiDownload) +
+                ' TEI/ ' +
+                (this.state.specificSetting.eventsDownload === undefined
+                    ? 0
+                    : this.state.specificSetting.eventsDownload) +
+                ' events per OU, ' +
+                (this.state.specificSetting.teReservedDownload === undefined
+                    ? 0
+                    : this.state.specificSetting.teReservedDownload) +
+                ' reserved values'
+            const newProgramRow = {
+                name: programNameFilter[0].name,
+                sumarySettings: sumarySettings,
+                id: specificProgramNameKey,
+                settingDownload: this.state.specificSetting.settingDownload,
+                settingDBTrimming: this.state.specificSetting.settingDBTrimming,
+                teiDownload: this.state.specificSetting.teiDownload,
+                teiDBTrimming: this.state.specificSetting.teiDBTrimming,
+                enrollmentDownload: this.state.specificSetting
+                    .enrollmentDownload,
+                enrollmentDBTrimming: this.state.specificSetting
+                    .enrollmentDBTrimming,
+                enrollmentDateDownload: this.state.specificSetting
+                    .enrollmentDateDownload,
+                enrollmentDateDBTrimming: this.state.specificSetting
+                    .enrollmentDateDBTrimming,
+                updateDownload: this.state.specificSetting.updateDownload,
+                updateDBTrimming: this.state.specificSetting.updateDBTrimming,
+                teReservedDownload: this.state.specificSetting
+                    .teReservedDownload,
+                teReservedDBTrimming: this.state.specificSetting
+                    .teReservedDBTrimming,
+                eventsDownload: this.state.specificSetting.eventsDownload,
+                eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
+                eventPeriodDownload: this.state.specificSetting
+                    .eventPeriodDownload,
+                eventPeriodDBTrimming: this.state.specificSetting
+                    .eventPeriodDBTrimming,
+            }
+
+            this.specificSettings = objData
+
+            const programData = {
+                specificSettings: objData,
+            }
+
+            if (this.programToChange !== undefined) {
+                let newRowList = []
+                const rowList = this.specificSettingsRows
+                newRowList = rowList.filter(row => row.id !== newProgramRow.id)
+                newRowList.push(newProgramRow)
+                this.specificSettingsRows = newRowList
+
+                const nameList = this.programNamesList
+                const newNameList = nameList.filter(
+                    name => name !== this.state.specificSetting.name
+                )
+
+                this.programNamesList = newNameList
+            } else {
+                this.specificSettingsRows.push(newProgramRow)
+            }
+
+            this.programNamesList.push(this.state.specificSetting.name)
+
+            this.saveDataApi('globalSettings', programData)
         }
-
-        const sumarySettings =
-            (this.state.specificSetting.teiDownload === undefined
-                ? 0
-                : this.state.specificSetting.teiDownload) +
-            ' TEI/ ' +
-            (this.state.specificSetting.eventsDownload === undefined
-                ? 0
-                : this.state.specificSetting.eventsDownload) +
-            ' events per OU, ' +
-            (this.state.specificSetting.teReservedDownload === undefined
-                ? 0
-                : this.state.specificSetting.teReservedDownload) +
-            ' reserved values'
-        const newProgramRow = {
-            name: programNameFilter[0].name,
-            sumarySettings: sumarySettings,
-            id: specificProgramNameKey,
-            settingDownload: this.state.specificSetting.settingDownload,
-            settingDBTrimming: this.state.specificSetting.settingDBTrimming,
-            teiDownload: this.state.specificSetting.teiDownload,
-            teiDBTrimming: this.state.specificSetting.teiDBTrimming,
-            enrollmentDownload: this.state.specificSetting.enrollmentDownload,
-            enrollmentDBTrimming: this.state.specificSetting
-                .enrollmentDBTrimming,
-            enrollmentDateDownload: this.state.specificSetting
-                .enrollmentDateDownload,
-            enrollmentDateDBTrimming: this.state.specificSetting
-                .enrollmentDateDBTrimming,
-            updateDownload: this.state.specificSetting.updateDownload,
-            updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-            teReservedDownload: this.state.specificSetting.teReservedDownload,
-            teReservedDBTrimming: this.state.specificSetting
-                .teReservedDBTrimming,
-            eventsDownload: this.state.specificSetting.eventsDownload,
-            eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-            eventPeriodDownload: this.state.specificSetting.eventPeriodDownload,
-            eventPeriodDBTrimming: this.state.specificSetting
-                .eventPeriodDBTrimming,
-        }
-
-        this.specificSettings = objData
-
-        const programData = {
-            specificSettings: objData,
-        }
-
-        if (this.programToChange !== undefined) {
-            let newRowList = []
-            const rowList = this.specificSettingsRows
-            newRowList = rowList.filter(row => row.id !== newProgramRow.id)
-            newRowList.push(newProgramRow)
-            this.specificSettingsRows = newRowList
-
-            const nameList = this.programNamesList
-            const newNameList = nameList.filter(
-                name => name !== this.state.specificSetting.name
-            )
-
-            this.programNamesList = newNameList
-        } else {
-            this.specificSettingsRows.push(newProgramRow)
-        }
-
-        this.programNamesList.push(this.state.specificSetting.name)
-
-        this.saveDataApi('globalSettings', programData)
         this.handleClose()
     }
 

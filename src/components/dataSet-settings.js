@@ -224,53 +224,57 @@ class DataSetSettings extends React.Component {
             option => option.id === specificDataSetNameKey
         )
 
-        objData[specificDataSetNameKey] = {
-            id: specificDataSetNameKey,
-            lastUpdated: new Date().toJSON(),
-            name: dataSetNameFilter[0].name,
-            periodDSDownload: this.state.specificSetting.periodDSDownload,
-            periodDSDBTrimming: this.state.specificSetting.periodDSDBTrimming,
+        if (dataSetNameFilter.length > 0) {
+            objData[specificDataSetNameKey] = {
+                id: specificDataSetNameKey,
+                lastUpdated: new Date().toJSON(),
+                name: dataSetNameFilter[0].name,
+                periodDSDownload: this.state.specificSetting.periodDSDownload,
+                periodDSDBTrimming: this.state.specificSetting
+                    .periodDSDBTrimming,
+            }
+
+            const sumaryString = this.state.specificSetting.periodDSDownload
+            const sumarySettings =
+                this.state.specificSetting.periodDSDownload === undefined
+                    ? undefined
+                    : this.arrangeWord(sumaryString)
+            const newDataSetRow = {
+                name: dataSetNameFilter[0].name,
+                sumarySettings: sumarySettings,
+                periodDSDownload: this.state.specificSetting.periodDSDownload,
+                periodDSDBTrimming: this.state.specificSetting
+                    .periodDSDBTrimming,
+                id: specificDataSetNameKey,
+            }
+
+            this.specificSettings = objData
+
+            const dataSetData = {
+                specificSettings: objData,
+            }
+
+            if (this.dataSetToChange !== undefined) {
+                let newRowList = []
+                const rowList = this.specificSettingsRows
+                newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
+                newRowList.push(newDataSetRow)
+                this.specificSettingsRows = newRowList
+
+                const nameList = this.dataSetNamesList
+                const newNameList = nameList.filter(
+                    name => name !== this.state.specificSetting.name
+                )
+
+                this.dataSetNamesList = newNameList
+            } else {
+                this.specificSettingsRows.push(newDataSetRow)
+            }
+
+            this.dataSetNamesList.push(this.state.specificSetting.name)
+
+            this.saveDataApi('globalSettings', dataSetData)
         }
-
-        const sumaryString = this.state.specificSetting.periodDSDownload
-        const sumarySettings =
-            this.state.specificSetting.periodDSDownload === undefined
-                ? 0
-                : this.arrangeWord(sumaryString)
-        const newDataSetRow = {
-            name: dataSetNameFilter[0].name,
-            sumarySettings: sumarySettings,
-            periodDSDownload: this.state.specificSetting.periodDSDownload,
-            periodDSDBTrimming: this.state.specificSetting.periodDSDBTrimming,
-            id: specificDataSetNameKey,
-        }
-
-        this.specificSettings = objData
-
-        const dataSetData = {
-            specificSettings: objData,
-        }
-
-        if (this.dataSetToChange !== undefined) {
-            let newRowList = []
-            const rowList = this.specificSettingsRows
-            newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
-            newRowList.push(newDataSetRow)
-            this.specificSettingsRows = newRowList
-
-            const nameList = this.dataSetNamesList
-            const newNameList = nameList.filter(
-                name => name !== this.state.specificSetting.name
-            )
-
-            this.dataSetNamesList = newNameList
-        } else {
-            this.specificSettingsRows.push(newDataSetRow)
-        }
-
-        this.dataSetNamesList.push(this.state.specificSetting.name)
-
-        this.saveDataApi('globalSettings', dataSetData)
 
         this.handleClose()
     }
@@ -372,7 +376,7 @@ class DataSetSettings extends React.Component {
                                                 const sumarySettings =
                                                     dataSet.periodDSDownload ===
                                                     undefined
-                                                        ? 0
+                                                        ? undefined
                                                         : this.arrangeWord(
                                                               sumaryString
                                                           )
