@@ -67,7 +67,10 @@ class GlobalSpecificSettings extends React.Component {
                         <div className={layoutStyles.data__topMargin}>
                             <TableActions
                                 {...this.props.states}
-                                columns={['Name', 'Sumary Settings']}
+                                columns={[
+                                    i18n.t('Name'),
+                                    i18n.t('Sumary Settings'),
+                                ]}
                                 rows={this.props.specificSettingList}
                                 menuActions={this.props.programTableActions}
                             />

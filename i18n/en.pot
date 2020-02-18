@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-17T22:39:42.094Z\n"
-"PO-Revision-Date: 2020-02-17T22:39:42.094Z\n"
+"POT-Creation-Date: 2020-02-18T01:51:52.118Z\n"
+"PO-Revision-Date: 2020-02-18T01:51:52.118Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -45,6 +45,9 @@ msgid "Delete"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+msgid "Values per"
 msgstr ""
 
 msgid "CANCEL"
@@ -88,14 +91,20 @@ msgstr ""
 
 msgid ""
 "Applies to all {{elementPlural}} that an Android user has access to, unless "
-"an specific set of values has been configured for a {{elementSingular}} "
-"(see below)."
+"a specific set of values has been configured for {{elementSingular}} (see "
+"below)."
 msgstr ""
 
 msgid "{{elementPlural}} specific settings"
 msgstr ""
 
 msgid "{{elementPlural}} settings listed below overwrite the global settings above"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Sumary Settings"
 msgstr ""
 
 msgid "ADD"
