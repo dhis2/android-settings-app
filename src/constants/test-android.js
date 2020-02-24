@@ -99,7 +99,7 @@ export const testAndroidDataConstants = [
         load: 'programRuleLoad',
     },
     {
-        title: 'Metadata download size  (KB)',
+        title: 'Metadata download size (KB)',
         description: '',
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
@@ -107,7 +107,7 @@ export const testAndroidDataConstants = [
         load: 'metadataLoad',
     },
     {
-        title: 'Data download size   (KB)',
+        title: 'Data download size (KB)',
         description: '',
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
