@@ -433,11 +433,10 @@ class ProgramSettings extends React.Component {
             }
 
             if (this.programToChange !== undefined) {
-                let newRowList = []
-                const rowList = this.specificSettingsRows
-                newRowList = rowList.filter(row => row.id !== newProgramRow.id)
-                newRowList.push(newProgramRow)
-                this.specificSettingsRows = newRowList
+                this.specificSettingsRows = this.specificSettingsRows.filter(
+                    row => row.id !== newProgramRow.id
+                )
+                this.specificSettingsRows.push(newProgramRow)
 
                 const nameList = this.programNamesList
                 const newNameList = nameList.filter(

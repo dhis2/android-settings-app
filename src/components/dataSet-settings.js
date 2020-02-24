@@ -255,11 +255,10 @@ class DataSetSettings extends React.Component {
             }
 
             if (this.dataSetToChange !== undefined) {
-                let newRowList = []
-                const rowList = this.specificSettingsRows
-                newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
-                newRowList.push(newDataSetRow)
-                this.specificSettingsRows = newRowList
+                this.specificSettingsRows = this.specificSettingsRows.filter(
+                    row => row.id !== newDataSetRow.id
+                )
+                this.specificSettingsRows.push(newDataSetRow)
 
                 const nameList = this.dataSetNamesList
                 const newNameList = nameList.filter(
