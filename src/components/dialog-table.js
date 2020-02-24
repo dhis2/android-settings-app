@@ -29,7 +29,7 @@ class DialogTable extends React.Component {
                 maxWidth="lg"
             >
                 <DialogTitle id="form-dialog-title">
-                    Values per {this.props.title}
+                    {i18n.t('Values per')} {this.props.title}
                 </DialogTitle>
                 <DialogContent>
                     {this.props.dataTitle === undefined ? (

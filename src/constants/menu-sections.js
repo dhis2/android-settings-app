@@ -5,29 +5,30 @@ import {
     DataSetIcon,
     TestRun,
 } from '../components/icons-svg'
+import i18n from '@dhis2/d2-i18n'
 
 const menuSection = [
     {
         key: 'general-setting',
-        label: 'General Setting',
+        label: i18n.t('General Settings'),
         path: '/general-setting',
         icon: <AndroidSettingsIcon />,
     },
     {
         key: 'program-setting',
-        label: 'Programs',
+        label: i18n.t('Programs'),
         path: '/program-setting',
         icon: <ProgramsIcon />,
     },
     {
         key: 'dataset-setting',
-        label: 'Data Sets',
+        label: i18n.t('Data Sets'),
         path: '/dataset-setting',
         icon: <DataSetIcon />,
     },
     {
         key: 'test-android-sync',
-        label: 'Test Android Sync ',
+        label: i18n.t('Test Android Sync'),
         path: '/test-android-sync',
         icon: <TestRun />,
     },
