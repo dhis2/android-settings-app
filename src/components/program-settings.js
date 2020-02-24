@@ -740,7 +740,7 @@ class ProgramSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
-                statesSpecific={this.state.specificSetting}
+                specificSetting={this.state.specificSetting}
             />
         )
     }

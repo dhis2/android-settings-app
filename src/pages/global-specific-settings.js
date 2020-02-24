@@ -111,7 +111,7 @@ class GlobalSpecificSettings extends React.Component {
                         handleClose={this.props.specificSettingDialogClose}
                         dataTitle={this.props.specificSettingDataTitle}
                         dataTitleOptions={this.props.specificSettingOptions}
-                        titleValue={this.props.statesSpecific.name}
+                        titleValue={this.props.specificSetting.name}
                         handleChange={this.props.specificSettingHandleChange}
                         textFieldTitleName="name"
                         data={this.props.specificSettingData}
@@ -119,7 +119,7 @@ class GlobalSpecificSettings extends React.Component {
                         handleSubmitDialog={
                             this.props.specificSettingHandleSubmit
                         }
-                        statesSpecific={this.props.statesSpecific}
+                        specificSetting={this.props.specificSetting}
                     />
                 </div>
             </React.Fragment>

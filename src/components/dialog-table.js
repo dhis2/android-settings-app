@@ -58,7 +58,7 @@ class DialogTable extends React.Component {
 
                     <ProgramTable
                         data={this.props.data}
-                        states={this.props.statesSpecific}
+                        states={this.props.specificSetting}
                         onChange={this.props.handleChange}
                     />
                 </DialogContent>

@@ -496,7 +496,7 @@ class DataSetSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
-                statesSpecific={this.state.specificSetting}
+                specificSetting={this.state.specificSetting}
             />
         )
     }
