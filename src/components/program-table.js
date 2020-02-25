@@ -34,7 +34,6 @@ class ProgramTable extends React.Component {
                             className={
                                 dataTableStyles.dataTable__headers__header
                             }
-                            align="right"
                         >
                             {i18n.t('Download')}
                         </TableCell>
@@ -42,7 +41,6 @@ class ProgramTable extends React.Component {
                             className={
                                 dataTableStyles.dataTable__headers__header
                             }
-                            align="right"
                         >
                             {i18n.t('DB trimming')}
                         </TableCell>
@@ -61,7 +59,6 @@ class ProgramTable extends React.Component {
                                 {row.option}
                             </TableCell>
                             <TableCell
-                                align="right"
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
@@ -105,7 +102,6 @@ class ProgramTable extends React.Component {
                                 )}
                             </TableCell>
                             <TableCell
-                                align="right"
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
@@ -145,6 +141,9 @@ class ProgramTable extends React.Component {
                                             this.props.states[row.keyDBTrimming]
                                         }
                                         onChange={this.props.onChange}
+                                        className={
+                                            dataTableStyles.dataTable__cell_margin
+                                        }
                                     />
                                 )}
                             </TableCell>
