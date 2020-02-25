@@ -7,7 +7,6 @@ import {
     metadataOptions,
     dataOptions,
     androidSettingsDefault,
-    maxValues,
 } from '../constants/android-settings'
 import AndroidSettings from './android-settings'
 
@@ -27,7 +26,6 @@ class AndroidSettingsContainer extends React.Component {
         dataSync: dataSync,
         numberSmsToSend: '',
         numberSmsConfirmation: '',
-        valuesTEI: '',
         encryptDB: encryptDB,
         isUpdated: false,
         loading: true,
@@ -39,12 +37,6 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleChange = e => {
         e.preventDefault()
-        if (e.target.name === 'valuesTEI') {
-            const valueInput = e.target.value
-            e.target.value > maxValues.valuesTEI
-                ? (e.target.value = maxValues.valuesTEI)
-                : (e.target.value = valueInput)
-        }
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -79,7 +71,6 @@ class AndroidSettingsContainer extends React.Component {
             dataSync: this.state.dataSync,
             numberSmsToSend: this.state.numberSmsToSend,
             numberSmsConfirmation: this.state.numberSmsConfirmation,
-            valuesTEI: this.state.valuesTEI,
             encryptDB: this.state.encryptDB,
             lastUpdated: new Date().toJSON(),
         }
@@ -114,7 +105,6 @@ class AndroidSettingsContainer extends React.Component {
             dataSync: dataSync,
             numberSmsToSend: '',
             numberSmsConfirmation: '',
-            valuesTEI: '',
             encryptDB: encryptDB,
             isUpdated: false,
         })
@@ -162,7 +152,6 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
-                                          valuesTEI: '',
                                           encryptDB: encryptDB,
                                       }
                                   )
@@ -172,7 +161,6 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
-                                          valuesTEI: '',
                                           encryptDB: encryptDB,
                                       })
                                   })
@@ -198,7 +186,6 @@ class AndroidSettingsContainer extends React.Component {
                                 dataSync: dataSync,
                                 numberSmsToSend: '',
                                 numberSmsConfirmation: '',
-                                valuesTEI: '',
                                 encryptDB: encryptDB,
                             })
                         })
@@ -229,7 +216,6 @@ class AndroidSettingsContainer extends React.Component {
                 dataOptions={dataOptions}
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
-                maxValues={maxValues}
             />
         )
     }

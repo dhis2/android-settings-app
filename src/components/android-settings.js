@@ -19,7 +19,6 @@ const AndroidSettings = ({
     dataOptions,
     checkMatchingConfirmation,
     handleReset,
-    maxValues,
 }) => {
     return (
         <form>
@@ -92,27 +91,6 @@ const AndroidSettings = ({
                 error={state.errorConfirmation}
             />
 
-            <TextField
-                id="valuesTEI"
-                label={i18n.t('Reserved values downloaded per TEI attribute')}
-                name="valuesTEI"
-                type="number"
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                InputProps={{
-                    inputProps: {
-                        min: 0,
-                        step: 10,
-                        max: maxValues.valuesTEI,
-                    },
-                }}
-                value={state.valuesTEI}
-                onChange={handleChange}
-            />
-
             <div>
                 <p className={styles.mainContent__title}>
                     {i18n.t('Encrypt DB')}
@@ -153,7 +131,6 @@ AndroidSettings.propTypes = {
     dataOptions: PropTypes.array.isRequired,
     checkMatchingConfirmation: PropTypes.func.isRequired,
     handleReset: PropTypes.func.isRequired,
-    maxValues: PropTypes.object.isRequired,
 }
 
 export default AndroidSettings
