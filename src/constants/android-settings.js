@@ -50,5 +50,5 @@ export const androidSettingsDefault = {
     numberSmsToSend: '',
     numberSmsConfirmation: '',
     valuesTEI: '',
-    encryptDB: 'no',
+    encryptDB: false,
 }

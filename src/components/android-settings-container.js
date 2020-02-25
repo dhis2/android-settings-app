@@ -39,15 +39,21 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleChange = e => {
         e.preventDefault()
+        console.log(e, e.target.name, e.target.value)
         if (e.target.name === 'valuesTEI') {
             const valueInput = e.target.value
             e.target.value > maxValues.valuesTEI
                 ? (e.target.value = maxValues.valuesTEI)
                 : (e.target.value = valueInput)
         }
+        let value = e.target.value
+        if (e.target.name === 'encryptDB') {
+            console.log(e.target, e.target.checked)
+            value = e.target.checked
+        }
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value, //e.target.value,
         })
         this.updateGlobal = true
     }

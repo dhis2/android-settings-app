@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Button } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
@@ -117,7 +118,7 @@ const AndroidSettings = ({
                 <p className={styles.mainContent__title}>
                     {i18n.t('Encrypt DB')}
                 </p>
-                <RadioGroup
+                {/* <RadioGroup
                     aria-label={i18n.t('Encrypt')}
                     name="encryptDB"
                     value={state.encryptDB}
@@ -134,7 +135,18 @@ const AndroidSettings = ({
                         control={<Radio color="primary" />}
                         label={i18n.t('Yes')}
                     />
-                </RadioGroup>
+                </RadioGroup> */}
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={state.encryptDB}
+                            onChange={handleChange}
+                            name="encryptDB"
+                            color="primary"
+                        />
+                    }
+                    label={i18n.t('Encrypt DB')}
+                />
             </div>
 
             <div className={buttonStyles.mainContent__button__container}>
