@@ -166,9 +166,9 @@ export const Program = [
         maxValue: 3000,
     },
     {
-        keyDownload: 'eventPeriodDownload',
-        keyDBTrimming: 'eventPeriodDBTrimming',
-        option: 'Event period',
+        keyDownload: 'eventDateDownload',
+        keyDBTrimming: 'eventDateDBTrimming',
+        option: 'Event date',
         download: [
             {
                 label: 'Any',
@@ -360,9 +360,9 @@ export const SpecificProgram = [
         maxValue: 3000,
     },
     {
-        keyDownload: 'eventPeriodDownload',
-        keyDBTrimming: 'eventPeriodDBTrimming',
-        option: 'Event period',
+        keyDownload: 'eventDateDownload',
+        keyDBTrimming: 'eventDateDBTrimming',
+        option: 'Event date',
         download: [
             {
                 label: 'Any',
@@ -426,6 +426,6 @@ export const ProgramSettingsDefault = {
     teReservedDBTrimming: 100,
     eventsDownload: 1000,
     eventsDBTrimming: 1000,
-    eventPeriodDownload: 'ANY',
-    eventPeriodDBTrimming: 'ANY',
+    eventDateDownload: 'ANY',
+    eventDateDBTrimming: 'ANY',
 }
