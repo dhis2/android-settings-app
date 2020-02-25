@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-18T01:51:52.118Z\n"
-"PO-Revision-Date: 2020-02-18T01:51:52.118Z\n"
+"POT-Creation-Date: 2020-02-25T02:13:50.508Z\n"
+"PO-Revision-Date: 2020-02-25T02:13:50.508Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -68,10 +68,28 @@ msgstr ""
 msgid "Test Android Login"
 msgstr ""
 
-msgid " Enter a user to check access to"
+msgid "Enter a user to check access to"
+msgstr ""
+
+msgid "Invoking ..."
 msgstr ""
 
 msgid "RUN TEST"
+msgstr ""
+
+msgid "Periods"
+msgstr ""
+
+msgid "Any"
+msgstr ""
+
+msgid "Last month"
+msgstr ""
+
+msgid "Last 3 months"
+msgstr ""
+
+msgid "Last 12 months"
 msgstr ""
 
 msgid "General Settings"
@@ -84,6 +102,87 @@ msgid "Data Sets"
 msgstr ""
 
 msgid "Test Android Sync"
+msgstr ""
+
+msgid "Setting for"
+msgstr ""
+
+msgid "Global"
+msgstr ""
+
+msgid "Per Org Unit"
+msgstr ""
+
+msgid "Per program"
+msgstr ""
+
+msgid "Per OU and program"
+msgstr ""
+
+msgid "TEI"
+msgstr ""
+
+msgid "TEI Enrollments"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Only Active"
+msgstr ""
+
+msgid "TEI Enrollment date"
+msgstr ""
+
+msgid "TEI last update"
+msgstr ""
+
+msgid "TE reserved values"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "Event period"
+msgstr ""
+
+msgid "All Org Units"
+msgstr ""
+
+msgid "TEI per program"
+msgstr ""
+
+msgid "Org Units capture"
+msgstr ""
+
+msgid "Number of org unit that are available for data capture"
+msgstr ""
+
+msgid "Org Units search"
+msgstr ""
+
+msgid "Data sets associated to OU capture of user"
+msgstr ""
+
+msgid "Number of datasets associated to capture OUs"
+msgstr ""
+
+msgid "Program associated to OU"
+msgstr ""
+
+msgid "Number of program associated to capture OUs"
+msgstr ""
+
+msgid "Program rules associated to OU"
+msgstr ""
+
+msgid "Number of program rules to download"
+msgstr ""
+
+msgid "Metadata download size  (KB)"
+msgstr ""
+
+msgid "Data download size"
 msgstr ""
 
 msgid "{{elementPlural}} global settings"
