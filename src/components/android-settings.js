@@ -8,7 +8,6 @@ import { Button } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 
-import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
 
 const AndroidSettings = ({
