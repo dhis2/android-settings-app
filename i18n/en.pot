@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-25T02:13:50.508Z\n"
-"PO-Revision-Date: 2020-02-25T02:13:50.508Z\n"
+"POT-Creation-Date: 2020-02-25T14:37:26.735Z\n"
+"PO-Revision-Date: 2020-02-25T14:37:26.735Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-msgid "Test Android Login"
+msgid "Test Android Sync"
 msgstr ""
 
 msgid "Enter a user to check access to"
@@ -80,6 +80,9 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
+msgid "Last 12 months"
+msgstr ""
+
 msgid "Any"
 msgstr ""
 
@@ -89,9 +92,6 @@ msgstr ""
 msgid "Last 3 months"
 msgstr ""
 
-msgid "Last 12 months"
-msgstr ""
-
 msgid "General Settings"
 msgstr ""
 
@@ -99,9 +99,6 @@ msgid "Programs"
 msgstr ""
 
 msgid "Data Sets"
-msgstr ""
-
-msgid "Test Android Sync"
 msgstr ""
 
 msgid "Setting for"
@@ -179,10 +176,10 @@ msgstr ""
 msgid "Number of program rules to download"
 msgstr ""
 
-msgid "Metadata download size  (KB)"
+msgid "Metadata download size (KB)"
 msgstr ""
 
-msgid "Data download size"
+msgid "Data download size (KB)"
 msgstr ""
 
 msgid "{{elementPlural}} global settings"

@@ -7,11 +7,7 @@ export const DataSetting = [
         option: i18n.t('Periods'),
         download: [
             {
-                label: i18n.t('Last 12 months'),
-                value: 'Last 12 months',
-            },
-            {
-                label:  i18n.t('Any'),
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
@@ -85,7 +81,7 @@ export const DataSpecificSetting = [
                 value: 'LAST_3_MONTHS',
             },
             {
-                label:  i18n.t('Last 12 months'),
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
