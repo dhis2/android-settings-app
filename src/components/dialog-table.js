@@ -36,7 +36,7 @@ class DialogTable extends React.Component {
                         <Select
                             value={this.props.titleValue}
                             onChange={this.props.handleChange}
-                            id={this.props.textFieldTitleId}
+                            id={this.props.textFieldTitleName}
                             name={this.props.textFieldTitleName}
                             style={{ minWidth: '150px' }}
                         >
@@ -58,7 +58,7 @@ class DialogTable extends React.Component {
 
                     <ProgramTable
                         data={this.props.data}
-                        states={this.props.state}
+                        states={this.props.specificSetting}
                         onChange={this.props.handleChange}
                     />
                 </DialogContent>

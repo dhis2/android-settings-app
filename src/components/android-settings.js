@@ -64,15 +64,15 @@ const AndroidSettings = ({
             </TextField>
 
             <TextField
-                id="numberSmsToSent"
-                name="numberSmsToSent"
+                id="numberSmsToSend"
+                name="numberSmsToSend"
                 label={i18n.t('SMS Gateway Phone number where SMS are sent')}
                 margin="normal"
                 fullWidth
                 InputLabelProps={{
                     shrink: true,
                 }}
-                value={state.numberSmsToSent}
+                value={state.numberSmsToSend}
                 onChange={handleChange}
                 onBlur={checkMatchingConfirmation}
             />
