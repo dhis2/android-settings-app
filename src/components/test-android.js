@@ -26,7 +26,7 @@ class TestAndroid extends React.Component {
                         {i18n.t('Test Android Login')}
                     </p>
                     <p className={titleStyles.mainContent__subtitle}>
-                        {i18n.t(' Enter a user to check access to')}
+                        {i18n.t('Enter a user to check access to')}
                     </p>
                 </div>
 
@@ -66,7 +66,7 @@ class TestAndroid extends React.Component {
                                                         itemStyles.subitemBigitem
                                                     }
                                                 >
-                                                    Invoking ...
+                                                    {i18n.t('Invoking ...')}
                                                 </p>
                                             ) : (
                                                 <Tooltip

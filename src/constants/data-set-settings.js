@@ -1,41 +1,43 @@
+import i18n from '@dhis2/d2-i18n'
+
 export const DataSetting = [
     {
         keyDownload: 'periodDSDownload',
         keyDBTrimming: 'periodDSDBTrimming',
-        option: 'Periods',
+        option: i18n.t('Periods'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'Any',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'Last month',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'Last 3 months',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'Any',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'Last month',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'Last 3 months',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'Last 12 months',
             },
         ],
@@ -46,40 +48,40 @@ export const DataSpecificSetting = [
     {
         keyDownload: 'specificPeriodDSDownload',
         keyDBTrimming: 'specificPeriodDSDBTrimming',
-        option: 'Periods',
+        option: i18n.t('Periods'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'Any',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'Last month',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'Last 3 months',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'Last 12 months',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'Any',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'Last month',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'Last 3 months',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'Last 12 months',
             },
         ],
