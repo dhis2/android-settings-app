@@ -39,11 +39,11 @@ class DataSetSettings extends React.Component {
         periodDSDBTrimming: periodDSDBTrimming,
         specificSetting: {
             openDialog: false,
+            periodDSDBTrimming: '',
+            periodDSDownload: '',
+            name: '',
         },
         isUpdated: false,
-        specificPeriodDSDownload: '',
-        specificPeriodDSDBTrimming: '',
-        specificSettingName: '',
         loading: true,
         deleteDialog: {
             open: false,
@@ -59,11 +59,15 @@ class DataSetSettings extends React.Component {
             this.dataSetToChange = args[0].name
             const argsData = args[0]
             this.setState({
-                specificPeriodDSDownload: argsData.specificPeriodDSDownload,
-                specificPeriodDSDBTrimming: argsData.specificPeriodDSDBTrimming,
-                specificSettingName: argsData.id,
+                specificSetting: {
+                    name: argsData.id,
+                    periodDSDownload: argsData.periodDSDownload,
+                    periodDSDBTrimming: argsData.periodDSDBTrimming,
+                    openDialog: true,
+                },
             })
-            this.handleClickOpen()
+            this.getItemList()
+            this.updateGlobal = false
         },
         delete: (...args) => {
             this.argsRow = args[0]
@@ -92,7 +96,10 @@ class DataSetSettings extends React.Component {
         e.preventDefault()
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            specificSetting: {
+                ...this.state.specificSetting,
+                [e.target.name]: e.target.value,
+            },
         })
         this.updateGlobal = false
     }
@@ -152,11 +159,11 @@ class DataSetSettings extends React.Component {
     }
 
     /**
-     * Open Dialog Table Component
-     * @case edit action: get selected specific setting data and open Dialog Component
-     * @case add specific setting: opens Dialog Component with DataSets specific setting List
+     * Get dataset list not including current data sets with specific settings
+     * @case edit action
+     * @case add specific setting
      */
-    handleClickOpen = () => {
+    getItemList = () => {
         if (this.dataSetNamesList.length > 0) {
             const dataSetListComplete = this.dataSetListComplete
             const dataUsedlist = this.dataSetNamesList
@@ -166,9 +173,18 @@ class DataSetSettings extends React.Component {
             )
             this.dataSetList = dataSetNameFilter
         }
+    }
+
+    /**
+     * Open Dialog Table Component
+     * @case add specific setting: opens Dialog Component with DataSets specific setting List
+     */
+    handleClickOpen = () => {
+        this.getItemList()
 
         this.setState({
             specificSetting: {
+                ...this.state.specificSetting,
                 openDialog: true,
             },
         })
@@ -182,72 +198,82 @@ class DataSetSettings extends React.Component {
         this.setState({
             specificSetting: {
                 openDialog: false,
+                periodDSDownload: '',
+                periodDSDBTrimming: '',
+                name: '',
             },
-            specificPeriodDSDownload: '',
-            specificPeriodDSDBTrimming: '',
-            specificSettingName: '',
         })
 
         this.updateGlobal = false
+    }
+
+    arrangeWord = word => {
+        let newString = word.toUpperCase().split('_')
+        newString = newString.join(' ')
+        return newString
     }
 
     /**
      * Submit Dialog data, specific settings
      */
     handleSubmitDialog = () => {
-        var specificDataSetNameKey = this.state.specificSettingName
+        var specificDataSetNameKey = this.state.specificSetting.name
         var objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetListComplete.filter(
             option => option.id === specificDataSetNameKey
         )
 
-        objData[specificDataSetNameKey] = {
-            id: specificDataSetNameKey,
-            lastUpdated: new Date().toJSON(),
-            name: dataSetNameFilter[0].name,
-            specificPeriodDSDownload: this.state.specificPeriodDSDownload,
-            specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
+        if (dataSetNameFilter.length > 0) {
+            objData[specificDataSetNameKey] = {
+                id: specificDataSetNameKey,
+                lastUpdated: new Date().toJSON(),
+                name: dataSetNameFilter[0].name,
+                periodDSDownload: this.state.specificSetting.periodDSDownload,
+                periodDSDBTrimming: this.state.specificSetting
+                    .periodDSDBTrimming,
+            }
+
+            const sumaryString = this.state.specificSetting.periodDSDownload
+            const sumarySettings =
+                this.state.specificSetting.periodDSDownload === undefined
+                    ? undefined
+                    : this.arrangeWord(sumaryString)
+            const newDataSetRow = {
+                name: dataSetNameFilter[0].name,
+                sumarySettings: sumarySettings,
+                periodDSDownload: this.state.specificSetting.periodDSDownload,
+                periodDSDBTrimming: this.state.specificSetting
+                    .periodDSDBTrimming,
+                id: specificDataSetNameKey,
+            }
+
+            this.specificSettings = objData
+
+            const dataSetData = {
+                specificSettings: objData,
+            }
+
+            if (this.dataSetToChange !== undefined) {
+                this.specificSettingsRows = this.specificSettingsRows.filter(
+                    row => row.id !== newDataSetRow.id
+                )
+                this.specificSettingsRows.push(newDataSetRow)
+
+                const nameList = this.dataSetNamesList
+                const newNameList = nameList.filter(
+                    name => name !== this.state.specificSetting.name
+                )
+
+                this.dataSetNamesList = newNameList
+            } else {
+                this.specificSettingsRows.push(newDataSetRow)
+            }
+
+            this.dataSetNamesList.push(this.state.specificSetting.name)
+
+            this.saveDataApi('globalSettings', dataSetData)
         }
-
-        const sumarySettings =
-            this.state.specificPeriodDSDownload === undefined
-                ? 0
-                : this.state.specificPeriodDSDownload
-        const newDataSetRow = {
-            name: dataSetNameFilter[0].name,
-            sumarySettings: sumarySettings,
-            specificPeriodDSDownload: this.state.specificPeriodDSDownload,
-            specificPeriodDSDBTrimming: this.state.specificPeriodDSDBTrimming,
-            id: specificDataSetNameKey,
-        }
-
-        this.specificSettings = objData
-
-        const dataSetData = {
-            specificSettings: objData,
-        }
-
-        if (this.dataSetToChange !== undefined) {
-            let newRowList = []
-            const rowList = this.specificSettingsRows
-            newRowList = rowList.filter(row => row.id !== newDataSetRow.id)
-            newRowList.push(newDataSetRow)
-            this.specificSettingsRows = newRowList
-
-            const nameList = this.dataSetNamesList
-            const newNameList = nameList.filter(
-                name => name !== this.state.specificSettingName
-            )
-
-            this.dataSetNamesList = newNameList
-        } else {
-            this.specificSettingsRows.push(newDataSetRow)
-        }
-
-        this.dataSetNamesList.push(this.state.specificSettingName)
-
-        this.saveDataApi('globalSettings', dataSetData)
 
         this.handleClose()
     }
@@ -344,18 +370,22 @@ class DataSetSettings extends React.Component {
                                             ) {
                                                 const dataSet = this
                                                     .specificSettings[key]
+                                                const sumaryString =
+                                                    dataSet.periodDSDownload
                                                 const sumarySettings =
-                                                    dataSet.specificPeriodDSDownload ===
+                                                    dataSet.periodDSDownload ===
                                                     undefined
-                                                        ? 0
-                                                        : dataSet.specificPeriodDSDownload
+                                                        ? undefined
+                                                        : this.arrangeWord(
+                                                              sumaryString
+                                                          )
                                                 const newDataSetRow = {
                                                     name: dataSet.name,
                                                     sumarySettings: sumarySettings,
-                                                    specificPeriodDSDownload:
-                                                        dataSet.specificPeriodDSDownload,
-                                                    specificPeriodDSDBTrimming:
-                                                        dataSet.specificPeriodDSDBTrimming,
+                                                    periodDSDownload:
+                                                        dataSet.periodDSDownload,
+                                                    periodDSDBTrimming:
+                                                        dataSet.periodDSDBTrimming,
                                                     id: key,
                                                 }
 
@@ -465,6 +495,7 @@ class DataSetSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
+                specificSetting={this.state.specificSetting}
             />
         )
     }
