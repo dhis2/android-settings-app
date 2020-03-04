@@ -154,12 +154,6 @@ export const Program = [
         ],
     },
     {
-        option: 'TE reserved values',
-        keyDownload: 'teReservedDownload',
-        keyDBTrimming: 'teReservedDBTrimming',
-        maxValue: 1500,
-    },
-    {
         option: 'Events',
         keyDownload: 'eventsDownload',
         keyDBTrimming: 'eventsDBTrimming',
@@ -348,12 +342,6 @@ export const SpecificProgram = [
         ],
     },
     {
-        option: 'TE reserved values',
-        keyDownload: 'teReservedDownload',
-        keyDBTrimming: 'teReservedDBTrimming',
-        maxValue: 1500,
-    },
-    {
         option: 'Events',
         keyDownload: 'eventsDownload',
         keyDBTrimming: 'eventsDBTrimming',
@@ -405,8 +393,6 @@ export const SpecificProgram = [
 export const maxValues = {
     teiDownload: 2000,
     teiDBTrimmming: 2000,
-    teReservedDownload: 1500,
-    teReservedDBTrimming: 1500,
     eventsDownload: 3000,
     eventsDBTrimming: 3000,
 }
@@ -422,8 +408,6 @@ export const ProgramSettingsDefault = {
     enrollmentDateDBTrimming: 'ANY',
     updateDownload: 'ANY',
     updateDBTrimming: 'ANY',
-    teReservedDownload: 100,
-    teReservedDBTrimming: 100,
     eventsDownload: 1000,
     eventsDBTrimming: 1000,
     eventPeriodDownload: 'ANY',
