@@ -41,7 +41,7 @@ export const dataOptions = [
 ]
 
 export const maxValues = {
-    valuesTEI: 50,
+    reservedValues: 50,
 }
 
 export const androidSettingsDefault = {
@@ -50,4 +50,5 @@ export const androidSettingsDefault = {
     numberSmsToSend: '',
     numberSmsConfirmation: '',
     encryptDB: 'no',
+    reservedValues: 0,
 }

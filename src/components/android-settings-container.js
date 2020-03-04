@@ -7,10 +7,16 @@ import {
     metadataOptions,
     dataOptions,
     androidSettingsDefault,
+    maxValues,
 } from '../constants/android-settings'
 import AndroidSettings from './android-settings'
 
-const { metadataSync, dataSync, encryptDB } = androidSettingsDefault
+const {
+    metadataSync,
+    dataSync,
+    encryptDB,
+    reservedValues,
+} = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
     constructor(props) {
@@ -26,6 +32,7 @@ class AndroidSettingsContainer extends React.Component {
         dataSync: dataSync,
         numberSmsToSend: '',
         numberSmsConfirmation: '',
+        reservedValues: reservedValues,
         encryptDB: encryptDB,
         isUpdated: false,
         loading: true,
@@ -37,6 +44,18 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleChange = e => {
         e.preventDefault()
+
+        let { value } = e.target
+        e.target.name === 'encryptDB'
+            ? (value = e.target.checked)
+            : (value = e.target.value)
+
+        if (e.target.name === 'reservedValues') {
+            value > maxValues.reservedValues
+                ? (value = parseInt(maxValues.reservedValues))
+                : (value = parseInt(e.target.value))
+        }
+
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value,
@@ -66,11 +85,20 @@ class AndroidSettingsContainer extends React.Component {
             return true
         }
 
+        let { numberSmsToSend, numberSmsConfirmation } = this.state
+        numberSmsConfirmation == ''
+            ? (numberSmsConfirmation = null)
+            : (numberSmsConfirmation = numberSmsConfirmation)
+        numberSmsToSend == ''
+            ? (numberSmsToSend = null)
+            : (numberSmsToSend = numberSmsToSend)
+
         const androidData = {
             metadataSync: this.state.metadataSync,
             dataSync: this.state.dataSync,
             numberSmsToSend: this.state.numberSmsToSend,
             numberSmsConfirmation: this.state.numberSmsConfirmation,
+            reservedValues: this.state.reservedValues,
             encryptDB: this.state.encryptDB,
             lastUpdated: new Date().toJSON(),
         }
@@ -105,6 +133,7 @@ class AndroidSettingsContainer extends React.Component {
             dataSync: dataSync,
             numberSmsToSend: '',
             numberSmsConfirmation: '',
+            reservedValues: reservedValues,
             encryptDB: encryptDB,
             isUpdated: false,
         })
@@ -152,6 +181,7 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
+                                          reservedValues: reservedValues,
                                           encryptDB: encryptDB,
                                       }
                                   )
@@ -161,6 +191,7 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
+                                          reservedValues: reservedValues,
                                           encryptDB: encryptDB,
                                       })
                                   })
@@ -186,6 +217,7 @@ class AndroidSettingsContainer extends React.Component {
                                 dataSync: dataSync,
                                 numberSmsToSend: '',
                                 numberSmsConfirmation: '',
+                                reservedValues: reservedValues,
                                 encryptDB: encryptDB,
                             })
                         })
@@ -216,6 +248,7 @@ class AndroidSettingsContainer extends React.Component {
                 dataOptions={dataOptions}
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
+                maxValues={maxValues}
             />
         )
     }
