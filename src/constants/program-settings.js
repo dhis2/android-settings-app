@@ -45,13 +45,13 @@ export const Program = [
     {
         keyDownload: 'teiDownload',
         keyDBTrimming: 'teiDBTrimming',
-        option: i18n.t('TEI'),
+        option: i18n.t('TEIs'),
         maxValue: 2000,
     },
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: i18n.t('TEI Enrollments'),
+        option: i18n.t('TEI Enrollments status'),
         download: [
             {
                 label: i18n.t('All'),
@@ -245,7 +245,7 @@ export const SpecificProgram = [
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: i18n.t('TEI Enrollments'),
+        option: i18n.t('TEI Enrollments status'),
         download: [
             {
                 label: i18n.t('All'),
