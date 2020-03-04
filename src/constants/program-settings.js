@@ -51,7 +51,7 @@ export const Program = [
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: i18n.t('TEI Enrollments status'),
+        option: i18n.t('TEI Enrollment status'),
         download: [
             {
                 label: i18n.t('All'),
@@ -245,7 +245,7 @@ export const SpecificProgram = [
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: i18n.t('TEI Enrollments status'),
+        option: i18n.t('TEI Enrollment status'),
         download: [
             {
                 label: i18n.t('All'),
