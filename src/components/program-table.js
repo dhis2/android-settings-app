@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import InputBase from '@material-ui/core/InputBase'
 import InputNumber from './input-number'
 
 import i18n from '@dhis2/d2-i18n'
