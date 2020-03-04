@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputBase from '@material-ui/core/InputBase'
+import InputNumber from './input-number'
 
 import i18n from '@dhis2/d2-i18n'
 import dataTableStyles from '../styles/DataTable.module.css'
@@ -34,6 +35,7 @@ class ProgramTable extends React.Component {
                             className={
                                 dataTableStyles.dataTable__headers__header
                             }
+                            align="right"
                         >
                             {i18n.t('Download')}
                         </TableCell>
@@ -41,6 +43,7 @@ class ProgramTable extends React.Component {
                             className={
                                 dataTableStyles.dataTable__headers__header
                             }
+                            align="right"
                         >
                             {i18n.t('DB trimming')}
                         </TableCell>
@@ -55,6 +58,7 @@ class ProgramTable extends React.Component {
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
+                                align="right"
                             >
                                 {row.option}
                             </TableCell>
@@ -62,6 +66,7 @@ class ProgramTable extends React.Component {
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
+                                align="right"
                             >
                                 {Array.isArray(row.download) === true ? (
                                     <Select
@@ -84,16 +89,9 @@ class ProgramTable extends React.Component {
                                         ))}
                                     </Select>
                                 ) : (
-                                    <InputBase
-                                        id={row.keyDownload}
+                                    <InputNumber
                                         name={row.keyDownload}
-                                        type="number"
-                                        inputProps={{
-                                            'aria-label': 'naked',
-                                            min: 0,
-                                            step: 10,
-                                            max: row.maxValue,
-                                        }}
+                                        max={row.maxValue}
                                         value={
                                             this.props.states[row.keyDownload]
                                         }
@@ -105,6 +103,7 @@ class ProgramTable extends React.Component {
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
+                                align="right"
                             >
                                 {Array.isArray(row.DBTrimming) === true ? (
                                     <Select
@@ -127,23 +126,13 @@ class ProgramTable extends React.Component {
                                         ))}
                                     </Select>
                                 ) : (
-                                    <InputBase
-                                        id={row.keyDBTrimming}
+                                    <InputNumber
                                         name={row.keyDBTrimming}
-                                        type="number"
-                                        inputProps={{
-                                            'aria-label': 'naked',
-                                            min: 0,
-                                            step: 10,
-                                            max: row.maxValue,
-                                        }}
+                                        max={row.maxValue}
                                         value={
                                             this.props.states[row.keyDBTrimming]
                                         }
                                         onChange={this.props.onChange}
-                                        className={
-                                            dataTableStyles.dataTable__cell_margin
-                                        }
                                     />
                                 )}
                             </TableCell>
