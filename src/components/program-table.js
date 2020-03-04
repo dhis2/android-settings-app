@@ -57,7 +57,6 @@ class ProgramTable extends React.Component {
                                 className={
                                     dataTableStyles.dataTable__rows__row__column
                                 }
-                                align="right"
                             >
                                 {row.option}
                             </TableCell>
