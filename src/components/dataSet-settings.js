@@ -83,22 +83,42 @@ class DataSetSettings extends React.Component {
         },
     }
 
+    chooseSetting = (name, value) => {
+        switch (name) {
+            case 'periodDSDownload':
+                value = parseInt(value)
+                break
+            case 'periodDSDBTrimming':
+                value = parseInt(value)
+                break
+            default:
+                break
+        }
+        return value
+    }
+
     handleChange = e => {
         e.preventDefault()
+        let { value } = e.target
+
+        value = this.chooseSetting(e.target.name, value)
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         })
         this.updateGlobal = true
     }
 
     handleChangeDialog = e => {
         e.preventDefault()
+        let { value } = e.target
+        value = this.chooseSetting(e.target.name, value)
+
         this.setState({
             ...this.state,
             specificSetting: {
                 ...this.state.specificSetting,
-                [e.target.name]: e.target.value,
+                [e.target.name]: value,
             },
         })
         this.updateGlobal = false
@@ -234,11 +254,11 @@ class DataSetSettings extends React.Component {
                     .periodDSDBTrimming,
             }
 
-            const sumaryString = this.state.specificSetting.periodDSDownload
+            //const sumaryString = this.state.specificSetting.periodDSDownload
             const sumarySettings =
                 this.state.specificSetting.periodDSDownload === undefined
                     ? undefined
-                    : this.arrangeWord(sumaryString)
+                    : this.state.specificSetting.periodDSDownload
             const newDataSetRow = {
                 name: dataSetNameFilter[0].name,
                 sumarySettings: sumarySettings,
@@ -370,15 +390,12 @@ class DataSetSettings extends React.Component {
                                             ) {
                                                 const dataSet = this
                                                     .specificSettings[key]
-                                                const sumaryString =
-                                                    dataSet.periodDSDownload
                                                 const sumarySettings =
                                                     dataSet.periodDSDownload ===
                                                     undefined
                                                         ? undefined
-                                                        : this.arrangeWord(
-                                                              sumaryString
-                                                          )
+                                                        : dataSet.periodDSDownload
+
                                                 const newDataSetRow = {
                                                     name: dataSet.name,
                                                     sumarySettings: sumarySettings,
