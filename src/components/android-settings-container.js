@@ -149,7 +149,7 @@ class AndroidSettingsContainer extends React.Component {
                                       })
                                   })
                             : api
-                                  .createValue(NAMESPACE, GENERAL_SETTINGS, {
+                                  .updateValue(NAMESPACE, GENERAL_SETTINGS, {
                                       metadataSync: metadataSync,
                                       dataSync: dataSync,
                                       numberSmsToSend: '',
@@ -165,8 +165,6 @@ class AndroidSettingsContainer extends React.Component {
                                           numberSmsConfirmation: '',
                                           valuesTEI: '',
                                           encryptDB: encryptDB,
-                                          isUpdated: true,
-                                          loading: false,
                                       })
                                   })
                     })
