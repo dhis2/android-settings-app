@@ -8,6 +8,7 @@ import {
 } from '../constants/test-android'
 import TestAndroid from './test-android'
 import { memorySizeOf, formatByteSize } from '../utils/memory-size'
+import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import api from '../utils/api'
 
@@ -1112,7 +1113,7 @@ class TestAndroidContainer extends React.Component {
                 })
             })
 
-        api.getValue('ANDROID_SETTING_APP', 'program_settings')
+        api.getValue(NAMESPACE, PROGRAM_SETTINGS)
             .then(res => {
                 this.globalSettings = res.value.globalSettings
                 this.specificSettings = res.value.specificSettings
