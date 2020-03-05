@@ -4,7 +4,7 @@ export const DataSetting = [
     {
         keyDownload: 'periodDSDownload',
         keyDBTrimming: 'periodDSDBTrimming',
-        option: i18n.t('Periods'),
+        option: i18n.t('Number of Periods'),
         download: [
             {
                 label: i18n.t('Any'),
@@ -48,7 +48,7 @@ export const DataSpecificSetting = [
     {
         keyDownload: 'periodDSDownload',
         keyDBTrimming: 'periodDSDBTrimming',
-        option: i18n.t('Periods'),
+        option: i18n.t('Number of Periods'),
         download: [
             {
                 label: i18n.t('Any'),
