@@ -1,41 +1,43 @@
+import i18n from '@dhis2/d2-i18n'
+
 export const Program = [
     {
         keyDownload: 'settingDownload',
         keyDBTrimming: 'settingDBTrimming',
-        option: 'Setting for',
+        option: i18n.t('Setting for'),
         download: [
             {
-                label: 'Global',
+                label: i18n.t('Global'),
                 value: 'GLOBAL',
             },
             {
-                label: 'Per Org Unit',
+                label: i18n.t('Per Org Unit'),
                 value: 'PER_ORG_UNIT',
             },
             {
-                label: 'Per program',
+                label: i18n.t('Per program'),
                 value: 'PER_PROGRAM',
             },
             {
-                label: 'Per OU and program',
+                label: i18n.t('Per OU and program'),
                 value: 'PER_OU_AND_PROGRAM',
             },
         ],
         DBTrimming: [
             {
-                label: 'Global',
+                label: i18n.t('Global'),
                 value: 'GLOBAL',
             },
             {
-                label: 'Per Org Unit',
+                label: i18n.t('Per Org Unit'),
                 value: 'PER_ORG_UNIT',
             },
             {
-                label: 'Per program',
+                label: i18n.t('Per program'),
                 value: 'PER_PROGRAM',
             },
             {
-                label: 'Per OU and program',
+                label: i18n.t('Per OU and program'),
                 value: 'PER_OU_AND_PROGRAM',
             },
         ],
@@ -43,30 +45,30 @@ export const Program = [
     {
         keyDownload: 'teiDownload',
         keyDBTrimming: 'teiDBTrimming',
-        option: 'TEI',
+        option: i18n.t('TEIs'),
         maxValue: 2000,
     },
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: 'TEI Enrollments',
+        option: i18n.t('TEI Enrollment status'),
         download: [
             {
-                label: 'All',
+                label: i18n.t('All'),
                 value: 'ALL',
             },
             {
-                label: 'Only Active',
+                label: i18n.t('Only Active'),
                 value: 'ONLY_ACTIVE',
             },
         ],
         DBTrimming: [
             {
-                label: 'All',
+                label: i18n.t('All'),
                 value: 'ALL',
             },
             {
-                label: 'Only Active',
+                label: i18n.t('Only Active'),
                 value: 'ONLY_ACTIVE',
             },
         ],
@@ -74,40 +76,40 @@ export const Program = [
     {
         keyDownload: 'enrollmentDateDownload',
         keyDBTrimming: 'enrollmentDateDBTrimming',
-        option: 'TEI Enrollment date',
+        option: i18n.t('TEI Enrollment date'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
@@ -115,87 +117,87 @@ export const Program = [
     {
         keyDownload: 'updateDownload',
         keyDBTrimming: 'updateDBTrimming',
-        option: 'TEI last update',
+        option: i18n.t('TEI last update'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
     },
     {
-        option: 'Events',
+        option: i18n.t('Events'),
         keyDownload: 'eventsDownload',
         keyDBTrimming: 'eventsDBTrimming',
         maxValue: 3000,
     },
     {
-        keyDownload: 'eventPeriodDownload',
-        keyDBTrimming: 'eventPeriodDBTrimming',
-        option: 'Event period',
+        keyDownload: 'eventDateDownload',
+        keyDBTrimming: 'eventDateDBTrimming',
+        option: i18n.t('Event date'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
@@ -206,30 +208,30 @@ export const SpecificProgram = [
     {
         keyDownload: 'settingDownload',
         keyDBTrimming: 'settingDBTrimming',
-        option: 'Setting for',
+        option: i18n.t('Setting for'),
         download: [
             {
-                label: 'All Org Units',
+                label: i18n.t('All Org Units'),
                 value: 'ALL_ORG_UNITS',
             },
             {
-                label: 'Per Org Unit',
+                label: i18n.t('Per Org Unit'),
                 value: 'PER_ORG_UNIT',
             },
         ],
         DBTrimming: [
             {
-                label: 'All Org Units',
+                label: i18n.t('All Org Units'),
                 value: 'ALL_ORG_UNITS',
             },
             {
-                label: 'Per Org Unit',
+                label: i18n.t('Per Org Unit'),
                 value: 'PER_ORG_UNIT',
             },
         ],
     },
     {
-        option: 'TEI per program',
+        option: i18n.t('TEI per program'),
         keyDownload: 'teiDownload',
         keyDBTrimming: 'teiDBTrimming',
         maxValue: 2000,
@@ -237,24 +239,24 @@ export const SpecificProgram = [
     {
         keyDownload: 'enrollmentDownload',
         keyDBTrimming: 'enrollmentDBTrimming',
-        option: 'TEI Enrollments',
+        option: i18n.t('TEI Enrollment status'),
         download: [
             {
-                label: 'All',
+                label: i18n.t('All'),
                 value: 'ALL',
             },
             {
-                label: 'Only Active',
+                label: i18n.t('Only Active'),
                 value: 'ONLY_ACTIVE',
             },
         ],
         DBTrimming: [
             {
-                label: 'All',
+                label: i18n.t('All'),
                 value: 'ALL',
             },
             {
-                label: 'Only Active',
+                label: i18n.t('Only Active'),
                 value: 'ONLY_ACTIVE',
             },
         ],
@@ -262,40 +264,40 @@ export const SpecificProgram = [
     {
         keyDownload: 'enrollmentDateDownload',
         keyDBTrimming: 'enrollmentDateDBTrimming',
-        option: 'TEI Enrollment date',
+        option: i18n.t('TEI Enrollment date'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
@@ -303,87 +305,87 @@ export const SpecificProgram = [
     {
         keyDownload: 'updateDownload',
         keyDBTrimming: 'updateDBTrimming',
-        option: 'TEI last update',
+        option: i18n.t('TEI last update'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
     },
     {
-        option: 'Events',
+        option: i18n.t('Events'),
         keyDownload: 'eventsDownload',
         keyDBTrimming: 'eventsDBTrimming',
         maxValue: 3000,
     },
     {
-        keyDownload: 'eventPeriodDownload',
-        keyDBTrimming: 'eventPeriodDBTrimming',
-        option: 'Event period',
+        keyDownload: 'eventDateDownload',
+        keyDBTrimming: 'eventDateDBTrimming',
+        option: i18n.t('Event date'),
         download: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
         DBTrimming: [
             {
-                label: 'Any',
+                label: i18n.t('Any'),
                 value: 'ANY',
             },
             {
-                label: 'Last month',
+                label: i18n.t('Last month'),
                 value: 'LAST_MONTH',
             },
             {
-                label: 'Last 3 months',
+                label: i18n.t('Last 3 months'),
                 value: 'LAST_3_MONTHS',
             },
             {
-                label: 'Last 12 months',
+                label: i18n.t('Last 12 months'),
                 value: 'LAST_12_MONTHS',
             },
         ],
@@ -410,6 +412,6 @@ export const ProgramSettingsDefault = {
     updateDBTrimming: 'ANY',
     eventsDownload: 1000,
     eventsDBTrimming: 1000,
-    eventPeriodDownload: 'ANY',
-    eventPeriodDBTrimming: 'ANY',
+    eventDateDownload: 'ANY',
+    eventDateDBTrimming: 'ANY',
 }
