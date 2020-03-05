@@ -1,3 +1,5 @@
+import i18n from '@dhis2/d2-i18n'
+
 export const testAndroidConstants = [
     {
         value: 'tooltipOUCapture',
@@ -59,47 +61,51 @@ export const testAndroidConstants = [
 
 export const testAndroidDataConstants = [
     {
-        title: 'Org Units capture',
-        description: 'Number of org unit that are available for data capture',
+        title: i18n.t('Org Units capture'),
+        description: i18n.t(
+            'Number of org unit that are available for data capture'
+        ),
         tooltipTitle: 'tooltipOUCapture',
         state: 'organisationUnitsNumber',
         maxValueState: 'maxValueOUCapture',
         load: 'orgUnitLoad',
     },
     {
-        title: 'Org Units search',
-        description: 'Number of org unit that are available for data capture',
+        title: i18n.t('Org Units search'),
+        description: i18n.t(
+            'Number of org unit that are available for data capture'
+        ),
         tooltipTitle: 'tooltipOUSearch',
         state: 'organisationUnitSearchNumber',
         maxValueState: 'maxValueOUSearch',
         load: 'orgUnitLoad',
     },
     {
-        title: 'Data sets associated to OU capture of user',
-        description: 'Number of datasets associated to capture OUs',
+        title: i18n.t('Data sets associated to OU capture of user'),
+        description: i18n.t('Number of datasets associated to capture OUs'),
         tooltipTitle: 'tooltipDataSet',
         state: 'datasetNumber',
         maxValueState: 'maxValueDataSet',
         load: 'dataSetLoad',
     },
     {
-        title: 'Program associated to OU',
-        description: 'Number of program associated to capture OUs',
+        title: i18n.t('Program associated to OU'),
+        description: i18n.t('Number of program associated to capture OUs'),
         tooltipTitle: 'tooltipProgram',
         state: 'programNumber',
         maxValueState: 'maxValueProgram',
         load: 'programLoad',
     },
     {
-        title: 'Program rules associated to OU',
-        description: 'Number of program rules to download',
+        title: i18n.t('Program rules associated to OU'),
+        description: i18n.t('Number of program rules to download'),
         tooltipTitle: 'tooltipProgramRule',
         state: 'programRuleNumber',
         maxValueState: 'maxValueProgramRule',
         load: 'programRuleLoad',
     },
     {
-        title: 'Metadata download size (KB)',
+        title: i18n.t('Metadata download size (KB)'),
         description: '',
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
@@ -107,7 +113,7 @@ export const testAndroidDataConstants = [
         load: 'metadataLoad',
     },
     {
-        title: 'Data download size (KB)',
+        title: i18n.t('Data download size (KB)'),
         description: '',
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
