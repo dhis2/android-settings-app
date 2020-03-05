@@ -31,8 +31,8 @@ const {
     teReservedDBTrimming,
     eventsDownload,
     eventsDBTrimming,
-    eventPeriodDownload,
-    eventPeriodDBTrimming,
+    eventDateDownload,
+    eventDateDBTrimming,
 } = ProgramSettingsDefault
 
 class ProgramSettings extends React.Component {
@@ -68,8 +68,8 @@ class ProgramSettings extends React.Component {
         teReservedDBTrimming: teReservedDBTrimming,
         eventsDownload: eventsDownload,
         eventsDBTrimming: eventsDBTrimming,
-        eventPeriodDownload: eventPeriodDownload,
-        eventPeriodDBTrimming: eventPeriodDBTrimming,
+        eventDateDownload: eventDateDownload,
+        eventDateDBTrimming: eventDateDBTrimming,
         specificSetting: {
             openDialog: false,
             name: '',
@@ -87,8 +87,8 @@ class ProgramSettings extends React.Component {
             teReservedDBTrimming: '',
             eventsDownload: '',
             eventsDBTrimming: '',
-            eventPeriodDownload: '',
-            eventPeriodDBTrimming: '',
+            eventDateDownload: '',
+            eventDateDBTrimming: '',
         },
         loading: true,
         isUpdated: false,
@@ -117,8 +117,8 @@ class ProgramSettings extends React.Component {
                     teReservedDBTrimming: argsData.teReservedDBTrimming,
                     eventsDownload: argsData.eventsDownload,
                     eventsDBTrimming: argsData.eventsDBTrimming,
-                    eventPeriodDownload: argsData.eventPeriodDownload,
-                    eventPeriodDBTrimming: argsData.eventPeriodDBTrimming,
+                    eventDateDownload: argsData.eventDateDownload,
+                    eventDateDBTrimming: argsData.eventDateDBTrimming,
                     name: argsData.id,
                     openDialog: true,
                 },
@@ -269,8 +269,8 @@ class ProgramSettings extends React.Component {
             teReservedDBTrimming: this.state.teReservedDBTrimming,
             eventsDownload: this.state.eventsDownload,
             eventsDBTrimming: this.state.eventsDBTrimming,
-            eventPeriodDownload: this.state.eventPeriodDownload,
-            eventPeriodDBTrimming: this.state.eventPeriodDBTrimming,
+            eventDateDownload: this.state.eventDateDownload,
+            eventDateDBTrimming: this.state.eventDateDBTrimming,
         }
 
         this.globalSettings = globalSettings
@@ -328,8 +328,8 @@ class ProgramSettings extends React.Component {
                 teReservedDBTrimming: '',
                 eventsDownload: '',
                 eventsDBTrimming: '',
-                eventPeriodDownload: '',
-                eventPeriodDBTrimming: '',
+                eventDateDownload: '',
+                eventDateDBTrimming: '',
                 name: '',
             },
         })
@@ -370,10 +370,9 @@ class ProgramSettings extends React.Component {
                     .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-                eventPeriodDownload: this.state.specificSetting
-                    .eventPeriodDownload,
-                eventPeriodDBTrimming: this.state.specificSetting
-                    .eventPeriodDBTrimming,
+                eventDateDownload: this.state.specificSetting.eventDateDownload,
+                eventDateDBTrimming: this.state.specificSetting
+                    .eventDateDBTrimming,
             }
 
             const sumarySettings =
@@ -413,10 +412,9 @@ class ProgramSettings extends React.Component {
                     .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-                eventPeriodDownload: this.state.specificSetting
-                    .eventPeriodDownload,
-                eventPeriodDBTrimming: this.state.specificSetting
-                    .eventPeriodDBTrimming,
+                eventDateDownload: this.state.specificSetting.eventDateDownload,
+                eventDateDBTrimming: this.state.specificSetting
+                    .eventDateDBTrimming,
             }
 
             this.specificSettings = objData
@@ -464,8 +462,8 @@ class ProgramSettings extends React.Component {
             teReservedDBTrimming: teReservedDBTrimming,
             eventsDownload: eventsDownload,
             eventsDBTrimming: eventsDBTrimming,
-            eventPeriodDownload: eventPeriodDownload,
-            eventPeriodDBTrimming: eventPeriodDBTrimming,
+            eventDateDownload: eventDateDownload,
+            eventDateDBTrimming: eventDateDBTrimming,
         })
 
         this.updateGlobal = true
@@ -605,10 +603,10 @@ class ProgramSettings extends React.Component {
                                                         program.eventsDownload,
                                                     eventsDBTrimming:
                                                         program.eventsDBTrimming,
-                                                    eventPeriodDownload:
-                                                        program.eventPeriodDownload,
-                                                    eventPeriodDBTrimming:
-                                                        program.eventPeriodDBTrimming,
+                                                    eventDateDownload:
+                                                        program.eventDateDownload,
+                                                    eventDateDBTrimming:
+                                                        program.eventDateDBTrimming,
                                                 }
                                                 this.specificSettingsRows.push(
                                                     newProgramRow
@@ -647,8 +645,8 @@ class ProgramSettings extends React.Component {
                                 teReservedDBTrimming: teReservedDBTrimming,
                                 eventsDownload: eventsDownload,
                                 eventsDBTrimming: eventsDBTrimming,
-                                eventPeriodDownload: eventPeriodDownload,
-                                eventPeriodDBTrimming: eventPeriodDBTrimming,
+                                eventDateDownload: eventDateDownload,
+                                eventDateDBTrimming: eventDateDBTrimming,
                             }
 
                             const data = {
