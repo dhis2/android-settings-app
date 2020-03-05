@@ -86,39 +86,35 @@ class DataSetSettings extends React.Component {
     chooseSetting = (name, value) => {
         switch (name) {
             case 'periodDSDownload':
-                value = parseInt(value)
-                break
+                return parseInt(value)
             case 'periodDSDBTrimming':
-                value = parseInt(value)
-                break
+                return parseInt(value)
             default:
-                break
+                return value
         }
-        return value
     }
 
     handleChange = e => {
         e.preventDefault()
-        let { value } = e.target
 
-        value = this.chooseSetting(e.target.name, value)
         this.setState({
             ...this.state,
-            [e.target.name]: value,
+            [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
         })
         this.updateGlobal = true
     }
 
     handleChangeDialog = e => {
         e.preventDefault()
-        let { value } = e.target
-        value = this.chooseSetting(e.target.name, value)
 
         this.setState({
             ...this.state,
             specificSetting: {
                 ...this.state.specificSetting,
-                [e.target.name]: value,
+                [e.target.name]: this.chooseSetting(
+                    e.target.name,
+                    e.target.value
+                ),
             },
         })
         this.updateGlobal = false
