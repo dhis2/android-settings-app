@@ -227,10 +227,11 @@ class DataSetSettings extends React.Component {
                     .periodDSDBTrimming,
             }
 
+            const sumaryString = this.state.specificSetting.periodDSDownload
             const sumarySettings =
                 this.state.specificSetting.periodDSDownload === undefined
                     ? undefined
-                    : this.state.specificSetting.periodDSDownload
+                    : this.arrangeWord(sumaryString)
             const newDataSetRow = {
                 name: dataSetNameFilter[0].name,
                 sumarySettings: sumarySettings,
@@ -360,11 +361,15 @@ class DataSetSettings extends React.Component {
                                             ) {
                                                 const dataSet = this
                                                     .specificSettings[key]
+                                                const sumaryString =
+                                                    dataSet.periodDSDownload
                                                 const sumarySettings =
                                                     dataSet.periodDSDownload ===
                                                     undefined
                                                         ? undefined
-                                                        : dataSet.periodDSDownload
+                                                        : this.arrangeWord(
+                                                              sumaryString
+                                                          )
 
                                                 const newDataSetRow = {
                                                     name: dataSet.name,
