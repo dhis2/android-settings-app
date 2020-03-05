@@ -46,9 +46,10 @@ class AndroidSettingsContainer extends React.Component {
                 : (e.target.value = valueInput)
         }
         let value = e.target.value
-        e.target.name === 'encryptDB'
-            ? (value = e.target.checked)
-            : (value = e.target.value)
+
+        if (e.target.name === 'encryptDB') {
+            value = e.target.checked
+        }
 
         this.setState({
             ...this.state,
