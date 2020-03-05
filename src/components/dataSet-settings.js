@@ -227,12 +227,6 @@ class DataSetSettings extends React.Component {
         this.updateGlobal = false
     }
 
-    arrangeWord = word => {
-        let newString = word.toUpperCase().split('_')
-        newString = newString.join(' ')
-        return newString
-    }
-
     /**
      * Submit Dialog data, specific settings
      */
@@ -254,7 +248,6 @@ class DataSetSettings extends React.Component {
                     .periodDSDBTrimming,
             }
 
-            //const sumaryString = this.state.specificSetting.periodDSDownload
             const sumarySettings =
                 this.state.specificSetting.periodDSDownload === undefined
                     ? undefined
