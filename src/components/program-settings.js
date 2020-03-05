@@ -139,94 +139,64 @@ class ProgramSettings extends React.Component {
         },
     }
 
-    handleChange = e => {
-        e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
+    chooseSetting = (name, value) => {
+        switch (name) {
             case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
+                value > maxValues.teiDownload
+                    ? (value = parseInt(maxValues.teiDownload))
+                    : (value = parseInt(value))
                 break
             case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
+                value > maxValues.teiDBTrimming
+                    ? (value = parseInt(maxValues.teiDBTrimming))
+                    : (value = parseInt(value))
                 break
             case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
+                value > maxValues.teReservedDownload
+                    ? (value = parseInt(maxValues.teReservedDownload))
+                    : (value = parseInt(value))
                 break
             case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
-                    : (e.target.value = valueInput)
+                value > maxValues.teReservedDBTrimming
+                    ? (value = parseInt(maxValues.teReservedDBTrimming))
+                    : (value = parseInt(value))
                 break
             case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
+                value > maxValues.eventsDownload
+                    ? (value = parseInt(maxValues.eventsDownload))
+                    : (value = parseInt(value))
                 break
             case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
+                value > maxValues.eventsDBTrimming
+                    ? (value = parseInt(maxValues.eventsDBTrimming))
+                    : (value = parseInt(value))
                 break
             default:
                 break
         }
+        return value
+    }
 
+    handleChange = e => {
+        e.preventDefault()
+        let { value } = e.target
+        value = this.chooseSetting(e.target.name, value)
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         })
         this.updateGlobal = true
     }
 
     handleChangeDialog = e => {
         e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
-            case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            default:
-                break
-        }
-
+        let { value } = e.target
+        value = this.chooseSetting(e.target.name, value)
         this.setState({
             ...this.state,
             specificSetting: {
                 ...this.state.specificSetting,
-                [e.target.name]: e.target.value,
+                [e.target.name]: value,
             },
         })
         this.updateGlobal = false
