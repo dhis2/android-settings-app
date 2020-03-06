@@ -142,34 +142,25 @@ class ProgramSettings extends React.Component {
     chooseSetting = (name, value) => {
         switch (name) {
             case 'teiDownload':
-                value > maxValues.teiDownload
-                    ? (value = parseInt(maxValues.teiDownload))
-                    : (value = parseInt(value))
+                value = Math.min(maxValues.teiDownload, parseInt(value))
                 break
             case 'teiDBTrimming':
-                value > maxValues.teiDBTrimming
-                    ? (value = parseInt(maxValues.teiDBTrimming))
-                    : (value = parseInt(value))
+                value = Math.min(maxValues.teiDBTrimming, parseInt(value))
                 break
             case 'teReservedDownload':
-                value > maxValues.teReservedDownload
-                    ? (value = parseInt(maxValues.teReservedDownload))
-                    : (value = parseInt(value))
+                value = Math.min(maxValues.teReservedDownload, parseInt(value))
                 break
             case 'teReservedDBTrimming':
-                value > maxValues.teReservedDBTrimming
-                    ? (value = parseInt(maxValues.teReservedDBTrimming))
-                    : (value = parseInt(value))
+                value = Math.min(
+                    maxValues.teReservedDBTrimming,
+                    parseInt(value)
+                )
                 break
             case 'eventsDownload':
-                value > maxValues.eventsDownload
-                    ? (value = parseInt(maxValues.eventsDownload))
-                    : (value = parseInt(value))
+                value = Math.min(maxValues.eventsDownload, parseInt(value))
                 break
             case 'eventsDBTrimming':
-                value > maxValues.eventsDBTrimming
-                    ? (value = parseInt(maxValues.eventsDBTrimming))
-                    : (value = parseInt(value))
+                value = Math.min(maxValues.eventsDBTrimming, parseInt(value))
                 break
             default:
                 break
