@@ -51,14 +51,12 @@ class AndroidSettingsContainer extends React.Component {
             : (value = e.target.value)
 
         if (e.target.name === 'reservedValues') {
-            value > maxValues.reservedValues
-                ? (value = parseInt(maxValues.reservedValues))
-                : (value = parseInt(e.target.value))
+            value = Math.min(maxValues.reservedValues, parseInt(value))
         }
 
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         })
         this.updateGlobal = true
     }
