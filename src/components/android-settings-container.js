@@ -83,13 +83,13 @@ class AndroidSettingsContainer extends React.Component {
             return true
         }
 
-        let { numberSmsToSend, numberSmsConfirmation } = this.state
-        numberSmsConfirmation == ''
-            ? (numberSmsConfirmation = null)
-            : (numberSmsConfirmation = numberSmsConfirmation)
-        numberSmsToSend == ''
-            ? (numberSmsToSend = null)
-            : (numberSmsToSend = numberSmsToSend)
+        if (this.state.numberSmsToSend === '') {
+            this.state.numberSmsToSend = null
+        }
+
+        if (this.state.numberSmsConfirmation === '') {
+            this.state.numberSmsConfirmation = null
+        }
 
         const androidData = {
             metadataSync: this.state.metadataSync,
