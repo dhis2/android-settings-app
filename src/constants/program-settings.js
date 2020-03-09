@@ -415,3 +415,6 @@ export const ProgramSettingsDefault = {
     eventDateDownload: 'ANY',
     eventDateDBTrimming: 'ANY',
 }
+
+export const WITH_REGISTRATION = 'WITH_REGISTRATION'
+export const WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION'
