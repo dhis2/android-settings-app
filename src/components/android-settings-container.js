@@ -10,6 +10,7 @@ import {
     maxValues,
 } from '../constants/android-settings'
 import AndroidSettings from './android-settings'
+import { NAMESPACE, GENERAL_SETTINGS } from '../constants/data-store'
 
 const {
     metadataSync,
@@ -106,19 +107,15 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     saveDataApi = data => {
-        this.keyName === 'android_settings'
+        this.keyName === GENERAL_SETTINGS
             ? api
-                  .updateValue('ANDROID_SETTING_APP', 'android_settings', data)
+                  .updateValue(NAMESPACE, GENERAL_SETTINGS, data)
                   .then(res => res)
             : api
-                  .getKeys('ANDROID_SETTING_APP')
+                  .getKeys(NAMESPACE)
                   .then(
                       api
-                          .createValue(
-                              'ANDROID_SETTING_APP',
-                              'android_settings',
-                              data
-                          )
+                          .createValue(NAMESPACE, GENERAL_SETTINGS, data)
                           .then(res => res)
                   )
     }
@@ -143,19 +140,17 @@ class AndroidSettingsContainer extends React.Component {
         await api
             .getNamespaces()
             .then(res => {
-                const nameSpace = res.filter(
-                    name => name === 'ANDROID_SETTING_APP'
-                )
+                const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
                 this.nameSpace !== undefined
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
-                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
-                            name => name === 'android_settings'
+                            name => name === GENERAL_SETTINGS
                         )
                         keyName.length === 0
                             ? (this.keyName = undefined)
@@ -172,18 +167,14 @@ class AndroidSettingsContainer extends React.Component {
                                       })
                                   })
                             : api
-                                  .updateValue(
-                                      'ANDROID_SETTING_APP',
-                                      'android_settings',
-                                      {
-                                          metadataSync: metadataSync,
-                                          dataSync: dataSync,
-                                          numberSmsToSend: '',
-                                          numberSmsConfirmation: '',
-                                          reservedValues: reservedValues,
-                                          encryptDB: encryptDB,
-                                      }
-                                  )
+                                  .updateValue(NAMESPACE, GENERAL_SETTINGS, {
+                                      metadataSync: metadataSync,
+                                      dataSync: dataSync,
+                                      numberSmsToSend: '',
+                                      numberSmsConfirmation: '',
+                                      reservedValues: reservedValues,,
+                                      encryptDB: encryptDB,
+                                  })          
                                   .then(res => {
                                       this.setState({
                                           metadataSync: metadataSync,
@@ -196,12 +187,9 @@ class AndroidSettingsContainer extends React.Component {
                                   })
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(
-                        'ANDROID_SETTING_APP',
-                        'android_settings'
-                    )
+                    api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
                         .then(res => {
-                            this.keyName = 'android_settings'
+                            this.keyName = GENERAL_SETTINGS
                             this.setState({
                                 isUpdated: true,
                                 loading: false,

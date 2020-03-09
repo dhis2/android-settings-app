@@ -9,6 +9,7 @@ import {
     ProgramSettingsDefault,
     maxValues,
 } from '../constants/program-settings'
+import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { getInstance } from 'd2'
@@ -205,24 +206,16 @@ class ProgramSettings extends React.Component {
     }
 
     saveDataApi = (settingType, data) => {
-        if (this.keyName === 'program_settings') {
+        if (this.keyName === PROGRAM_SETTINGS) {
             if (Object.keys(this[settingType]).length) {
                 data[settingType] = this[settingType]
             }
 
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'program_settings',
-                data
-            ).then(res => res)
+            api.updateValue(NAMESPACE, PROGRAM_SETTINGS, data).then(res => res)
         } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
+            api.getKeys(NAMESPACE).then(
                 api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'program_settings',
-                        data
-                    )
+                    .createValue(NAMESPACE, PROGRAM_SETTINGS, data)
                     .then(data => data)
             )
         }
@@ -483,19 +476,17 @@ class ProgramSettings extends React.Component {
         await api
             .getNamespaces()
             .then(res => {
-                const nameSpace = res.filter(
-                    name => name === 'ANDROID_SETTING_APP'
-                )
+                const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
                 this.nameSpace !== undefined
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
-                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
-                            name => name === 'program_settings'
+                            name => name === PROGRAM_SETTINGS
                         )
                         keyName.length === 0
                             ? (this.keyName = undefined)
@@ -611,8 +602,8 @@ class ProgramSettings extends React.Component {
 
                             this.saveDataApi('specificSettings', data)
 
-                            this.nameSpace = 'ANDROID_SETTING_APP'
-                            this.keyName = 'program_settings'
+                            this.nameSpace = NAMESPACE
+                            this.keyName = PROGRAM_SETTINGS
 
                             this.setState({
                                 isUpdated: true,
@@ -621,10 +612,9 @@ class ProgramSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(
-                        'ANDROID_SETTING_APP',
-                        'program_settings'
-                    ).catch(e => console.error(e))
+                    api.createNamespace(NAMESPACE, PROGRAM_SETTINGS).catch(e =>
+                        console.error(e)
+                    )
                 }
             })
             .catch(e => {
