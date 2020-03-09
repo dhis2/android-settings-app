@@ -9,6 +9,7 @@ import {
     ProgramSettingsDefault,
     maxValues,
 } from '../constants/program-settings'
+import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { getInstance } from 'd2'
@@ -26,8 +27,6 @@ const {
     enrollmentDateDBTrimming,
     updateDownload,
     updateDBTrimming,
-    teReservedDownload,
-    teReservedDBTrimming,
     eventsDownload,
     eventsDBTrimming,
     eventDateDownload,
@@ -63,8 +62,6 @@ class ProgramSettings extends React.Component {
         enrollmentDateDBTrimming: enrollmentDateDBTrimming,
         updateDownload: updateDownload,
         updateDBTrimming: updateDBTrimming,
-        teReservedDownload: teReservedDownload,
-        teReservedDBTrimming: teReservedDBTrimming,
         eventsDownload: eventsDownload,
         eventsDBTrimming: eventsDBTrimming,
         eventDateDownload: eventDateDownload,
@@ -82,8 +79,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: '',
             updateDownload: '',
             updateDBTrimming: '',
-            teReservedDownload: '',
-            teReservedDBTrimming: '',
             eventsDownload: '',
             eventsDBTrimming: '',
             eventDateDownload: '',
@@ -112,8 +107,6 @@ class ProgramSettings extends React.Component {
                     enrollmentDateDBTrimming: argsData.enrollmentDateDBTrimming,
                     updateDownload: argsData.updateDownload,
                     updateDBTrimming: argsData.updateDBTrimming,
-                    teReservedDownload: argsData.teReservedDownload,
-                    teReservedDBTrimming: argsData.teReservedDBTrimming,
                     eventsDownload: argsData.eventsDownload,
                     eventsDBTrimming: argsData.eventsDBTrimming,
                     eventDateDownload: argsData.eventDateDownload,
@@ -139,118 +132,61 @@ class ProgramSettings extends React.Component {
         },
     }
 
-    handleChange = e => {
-        e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
+    chooseSetting = (name, value) => {
+        switch (name) {
             case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.teiDownload, parseInt(value))
                 break
             case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.teiDBTrimming, parseInt(value))
                 break
             case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.eventsDownload, parseInt(value))
                 break
             case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.eventsDBTrimming, parseInt(value))
                 break
             default:
                 break
         }
+        return value
+    }
 
+    handleChange = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
         })
         this.updateGlobal = true
     }
 
     handleChangeDialog = e => {
         e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
-            case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            default:
-                break
-        }
-
         this.setState({
             ...this.state,
             specificSetting: {
                 ...this.state.specificSetting,
-                [e.target.name]: e.target.value,
+                [e.target.name]: this.chooseSetting(
+                    e.target.name,
+                    e.target.value
+                ),
             },
         })
         this.updateGlobal = false
     }
 
     saveDataApi = (settingType, data) => {
-        if (this.keyName === 'program_settings') {
+        if (this.keyName === PROGRAM_SETTINGS) {
             if (Object.keys(this[settingType]).length) {
                 data[settingType] = this[settingType]
             }
 
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'program_settings',
-                data
-            ).then(res => res)
+            api.updateValue(NAMESPACE, PROGRAM_SETTINGS, data).then(res => res)
         } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
+            api.getKeys(NAMESPACE).then(
                 api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'program_settings',
-                        data
-                    )
+                    .createValue(NAMESPACE, PROGRAM_SETTINGS, data)
                     .then(data => data)
             )
         }
@@ -272,8 +208,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
             updateDownload: this.state.updateDownload,
             updateDBTrimming: this.state.updateDBTrimming,
-            teReservedDownload: this.state.teReservedDownload,
-            teReservedDBTrimming: this.state.teReservedDBTrimming,
             eventsDownload: this.state.eventsDownload,
             eventsDBTrimming: this.state.eventsDBTrimming,
             eventDateDownload: this.state.eventDateDownload,
@@ -331,8 +265,6 @@ class ProgramSettings extends React.Component {
                 enrollmentDateDBTrimming: '',
                 updateDownload: '',
                 updateDBTrimming: '',
-                teReservedDownload: '',
-                teReservedDBTrimming: '',
                 eventsDownload: '',
                 eventsDBTrimming: '',
                 eventDateDownload: '',
@@ -371,10 +303,6 @@ class ProgramSettings extends React.Component {
                     .enrollmentDateDBTrimming,
                 updateDownload: this.state.specificSetting.updateDownload,
                 updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                teReservedDownload: this.state.specificSetting
-                    .teReservedDownload,
-                teReservedDBTrimming: this.state.specificSetting
-                    .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
                 eventDateDownload: this.state.specificSetting.eventDateDownload,
@@ -390,11 +318,8 @@ class ProgramSettings extends React.Component {
                 (this.state.specificSetting.eventsDownload === undefined
                     ? 0
                     : this.state.specificSetting.eventsDownload) +
-                ' events per OU, ' +
-                (this.state.specificSetting.teReservedDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.teReservedDownload) +
-                ' reserved values'
+                ' events per OU'
+
             const newProgramRow = {
                 name: programNameFilter[0].name,
                 sumarySettings: sumarySettings,
@@ -413,10 +338,6 @@ class ProgramSettings extends React.Component {
                     .enrollmentDateDBTrimming,
                 updateDownload: this.state.specificSetting.updateDownload,
                 updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                teReservedDownload: this.state.specificSetting
-                    .teReservedDownload,
-                teReservedDBTrimming: this.state.specificSetting
-                    .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
                 eventDateDownload: this.state.specificSetting.eventDateDownload,
@@ -465,8 +386,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: enrollmentDateDBTrimming,
             updateDownload: updateDownload,
             updateDBTrimming: updateDBTrimming,
-            teReservedDownload: teReservedDownload,
-            teReservedDBTrimming: teReservedDBTrimming,
             eventsDownload: eventsDownload,
             eventsDBTrimming: eventsDBTrimming,
             eventDateDownload: eventDateDownload,
@@ -528,19 +447,17 @@ class ProgramSettings extends React.Component {
         await api
             .getNamespaces()
             .then(res => {
-                const nameSpace = res.filter(
-                    name => name === 'ANDROID_SETTING_APP'
-                )
+                const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
                 this.nameSpace !== undefined
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
-                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
-                            name => name === 'program_settings'
+                            name => name === PROGRAM_SETTINGS
                         )
                         keyName.length === 0
                             ? (this.keyName = undefined)
@@ -574,12 +491,8 @@ class ProgramSettings extends React.Component {
                                                     undefined
                                                         ? 0
                                                         : program.eventsDownload) +
-                                                    ' events per OU, ' +
-                                                    (program.teReservedDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.teReservedDownload) +
-                                                    ' reserved values'
+                                                    ' events per OU'
+
                                                 const newProgramRow = {
                                                     name: program.name,
                                                     sumarySettings: sumarySettings,
@@ -604,10 +517,6 @@ class ProgramSettings extends React.Component {
                                                         program.updateDownload,
                                                     updateDBTrimming:
                                                         program.updateDBTrimming,
-                                                    teReservedDownload:
-                                                        program.teReservedDownload,
-                                                    teReservedDBTrimming:
-                                                        program.teReservedDBTrimming,
                                                     eventsDownload:
                                                         program.eventsDownload,
                                                     eventsDBTrimming:
@@ -650,8 +559,6 @@ class ProgramSettings extends React.Component {
                                 enrollmentDateDBTrimming: enrollmentDateDBTrimming,
                                 updateDownload: updateDownload,
                                 updateDBTrimming: updateDBTrimming,
-                                teReservedDownload: teReservedDownload,
-                                teReservedDBTrimming: teReservedDBTrimming,
                                 eventsDownload: eventsDownload,
                                 eventsDBTrimming: eventsDBTrimming,
                                 eventDateDownload: eventDateDownload,
@@ -666,8 +573,8 @@ class ProgramSettings extends React.Component {
 
                             this.saveDataApi('specificSettings', data)
 
-                            this.nameSpace = 'ANDROID_SETTING_APP'
-                            this.keyName = 'program_settings'
+                            this.nameSpace = NAMESPACE
+                            this.keyName = PROGRAM_SETTINGS
 
                             this.setState({
                                 isUpdated: true,
@@ -676,10 +583,9 @@ class ProgramSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(
-                        'ANDROID_SETTING_APP',
-                        'program_settings'
-                    ).catch(e => console.error(e))
+                    api.createNamespace(NAMESPACE, PROGRAM_SETTINGS).catch(e =>
+                        console.error(e)
+                    )
                 }
             })
             .catch(e => {

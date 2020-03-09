@@ -9,6 +9,7 @@ import {
     DataSetSettingsDefault,
 } from '../constants/data-set-settings'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
+import { NAMESPACE, DATASET_SETTINGS } from '../constants/data-store'
 import { getInstance } from 'd2'
 
 const dataSetSettings = DataSetting
@@ -126,24 +127,16 @@ class DataSetSettings extends React.Component {
      * @param data (object data)
      */
     saveDataApi = (settingType, data) => {
-        if (this.keyName === 'dataSet_settings') {
+        if (this.keyName === DATASET_SETTINGS) {
             if (Object.keys(this[settingType]).length) {
                 data[settingType] = this[settingType]
             }
 
-            api.updateValue(
-                'ANDROID_SETTING_APP',
-                'dataSet_settings',
-                data
-            ).then(res => res)
+            api.updateValue(NAMESPACE, DATASET_SETTINGS, data).then(res => res)
         } else {
-            api.getKeys('ANDROID_SETTING_APP').then(
+            api.getKeys(NAMESPACE).then(
                 api
-                    .createValue(
-                        'ANDROID_SETTING_APP',
-                        'dataSet_settings',
-                        data
-                    )
+                    .createValue(NAMESPACE, DATASET_SETTINGS, data)
                     .then(data => data)
             )
         }
@@ -344,19 +337,17 @@ class DataSetSettings extends React.Component {
         await api
             .getNamespaces()
             .then(res => {
-                const nameSpace = res.filter(
-                    name => name === 'ANDROID_SETTING_APP'
-                )
+                const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
                 this.nameSpace !== undefined
                     ? this.setState({ isUpdated: true })
                     : this.setState({ isUpdated: false })
-                if (this.nameSpace === 'ANDROID_SETTING_APP') {
+                if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
-                            name => name === 'dataSet_settings'
+                            name => name === DATASET_SETTINGS
                         )
                         keyName.length === 0
                             ? (this.keyName = undefined)
@@ -430,8 +421,8 @@ class DataSetSettings extends React.Component {
 
                             this.saveDataApi('specificSettings', data)
 
-                            this.nameSpace = 'ANDROID_SETTING_APP'
-                            this.keyName = 'dataSet_settings'
+                            this.nameSpace = NAMESPACE
+                            this.keyName = DATASET_SETTINGS
 
                             this.setState({
                                 isUpdated: true,
@@ -440,10 +431,9 @@ class DataSetSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(
-                        'ANDROID_SETTING_APP',
-                        'dataSet_settings'
-                    ).catch(e => console.error(e))
+                    api.createNamespace(NAMESPACE, DATASET_SETTINGS).catch(e =>
+                        console.error(e)
+                    )
                 }
             })
             .catch(e => {
