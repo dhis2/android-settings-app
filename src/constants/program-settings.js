@@ -415,3 +415,20 @@ export const ProgramSettingsDefault = {
     eventDateDownload: 'ANY',
     eventDateDBTrimming: 'ANY',
 }
+
+export const SpecificSettingsDefault = {
+    settingDownload: 'ALL_ORG_UNITS',
+    settingDBTrimming: 'ALL_ORG_UNITS',
+    teiDownload: 500,
+    teiDBTrimming: 500,
+    enrollmentDownload: 'ALL',
+    enrollmentDBTrimming: 'ALL',
+    enrollmentDateDownload: 'ANY',
+    enrollmentDateDBTrimming: 'ANY',
+    updateDownload: 'ANY',
+    updateDBTrimming: 'ANY',
+    eventsDownload: 1000,
+    eventsDBTrimming: 1000,
+    eventDateDownload: 'ANY',
+    eventDateDBTrimming: 'ANY',
+}
