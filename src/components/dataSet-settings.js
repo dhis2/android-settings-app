@@ -431,9 +431,27 @@ class DataSetSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, DATASET_SETTINGS).catch(e =>
-                        console.error(e)
-                    )
+                    this.globalSettings = {
+                        periodDSDownload: periodDSDownload,
+                        periodDSDBTrimming: periodDSDBTrimming,
+                    }
+
+                    const data = {
+                        globalSettings: {
+                            ...this.globalSettings,
+                        },
+                    }
+
+                    api.createNamespace(NAMESPACE, DATASET_SETTINGS, data)
+                        .then(res => {
+                            this.keyName = DATASET_SETTINGS
+
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                            })
+                        })
+                        .catch(e => console.error(e))
                 }
             })
             .catch(e => {

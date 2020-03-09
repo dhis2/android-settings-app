@@ -583,9 +583,39 @@ class ProgramSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, PROGRAM_SETTINGS).catch(e =>
-                        console.error(e)
-                    )
+                    this.globalSettings = {
+                        settingDownload: settingDownload,
+                        settingDBTrimming: settingDBTrimming,
+                        teiDownload: teiDownload,
+                        teiDBTrimming: teiDBTrimming,
+                        enrollmentDownload: enrollmentDownload,
+                        enrollmentDBTrimming: enrollmentDBTrimming,
+                        enrollmentDateDownload: enrollmentDateDownload,
+                        enrollmentDateDBTrimming: enrollmentDateDBTrimming,
+                        updateDownload: updateDownload,
+                        updateDBTrimming: updateDBTrimming,
+                        eventsDownload: eventsDownload,
+                        eventsDBTrimming: eventsDBTrimming,
+                        eventDateDownload: eventDateDownload,
+                        eventDateDBTrimming: eventDateDBTrimming,
+                    }
+
+                    const data = {
+                        globalSettings: {
+                            ...this.globalSettings,
+                        },
+                    }
+
+                    api.createNamespace(NAMESPACE, PROGRAM_SETTINGS, data)
+                        .then(res => {
+                            this.keyName = PROGRAM_SETTINGS
+
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                            })
+                        })
+                        .catch(e => console.error(e))
                 }
             })
             .catch(e => {
@@ -607,6 +637,7 @@ class ProgramSettings extends React.Component {
                     const programList = collection.toArray()
                     this.programList = programList
                     this.programListComplete = programList
+                    //console.log('programs json', collection.json())
                 })
         })
     }
