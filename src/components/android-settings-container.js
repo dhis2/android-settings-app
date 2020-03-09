@@ -46,12 +46,13 @@ class AndroidSettingsContainer extends React.Component {
         e.preventDefault()
 
         let { value } = e.target
-        e.target.name === 'encryptDB'
-            ? (value = e.target.checked)
-            : (value = e.target.value)
-
+        
         if (e.target.name === 'reservedValues') {
             value = Math.min(maxValues.reservedValues, parseInt(value))
+        }
+      
+        if (e.target.name === 'encryptDB') {
+            value = e.target.checked
         }
 
         this.setState({

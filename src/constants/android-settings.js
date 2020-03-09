@@ -49,6 +49,6 @@ export const androidSettingsDefault = {
     dataSync: '24h',
     numberSmsToSend: '',
     numberSmsConfirmation: '',
-    encryptDB: 'no',
     reservedValues: 0,
+    encryptDB: false,
 }

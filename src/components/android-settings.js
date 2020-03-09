@@ -2,14 +2,12 @@ import React from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
+import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Button } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 
-import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
 
 const AndroidSettings = ({
@@ -113,29 +111,17 @@ const AndroidSettings = ({
                 onChange={handleChange}
             />
 
-            <div>
-                <p className={styles.mainContent__title}>
-                    {i18n.t('Encrypt DB')}
-                </p>
-                <RadioGroup
-                    aria-label={i18n.t('Encrypt')}
-                    name="encryptDB"
-                    value={state.encryptDB}
-                    onChange={handleChange}
-                    row
-                >
-                    <FormControlLabel
-                        value="no"
-                        control={<Radio color="primary" />}
-                        label={i18n.t('No')}
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={state.encryptDB}
+                        onChange={handleChange}
+                        name="encryptDB"
+                        color="primary"
                     />
-                    <FormControlLabel
-                        value="yes"
-                        control={<Radio color="primary" />}
-                        label={i18n.t('Yes')}
-                    />
-                </RadioGroup>
-            </div>
+                }
+                label={i18n.t('Encrypt DB')}
+            />
 
             <div className={buttonStyles.mainContent__button__container}>
                 <Button onClick={handleReset} primary>
