@@ -228,26 +228,32 @@ class DataSetSettings extends React.Component {
         )
 
         if (dataSetNameFilter.length > 0) {
-            objData[specificDataSetNameKey] = {
-                id: specificDataSetNameKey,
-                lastUpdated: new Date().toJSON(),
-                name: dataSetNameFilter[0].name,
-                periodDSDownload: this.state.specificSetting.periodDSDownload,
-                periodDSDBTrimming: this.state.specificSetting
-                    .periodDSDBTrimming,
+            if (this.state.specificSetting.periodDSDownload) {
+                objData[specificDataSetNameKey] = {
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                    periodDSDownload: this.state.specificSetting
+                        .periodDSDownload,
+                    periodDSDBTrimming: this.state.specificSetting
+                        .periodDSDBTrimming,
+                }
+            } else {
+                objData[specificDataSetNameKey] = {
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                    periodDSDownload: periodDSDownload,
+                    periodDSDBTrimming: periodDSDBTrimming,
+                }
             }
 
-            const sumarySettings =
-                this.state.specificSetting.periodDSDownload === undefined
-                    ? undefined
-                    : this.state.specificSetting.periodDSDownload
+            const sumarySettings = this.state.specificSetting.periodDSDownload
+                ? this.state.specificSetting.periodDSDownload
+                : periodDSDownload
             const newDataSetRow = {
-                name: dataSetNameFilter[0].name,
+                ...objData[specificDataSetNameKey],
                 sumarySettings: sumarySettings,
-                periodDSDownload: this.state.specificSetting.periodDSDownload,
-                periodDSDBTrimming: this.state.specificSetting
-                    .periodDSDBTrimming,
-                id: specificDataSetNameKey,
             }
 
             this.specificSettings = objData
