@@ -91,9 +91,9 @@ const AndroidSettings = ({
             />
 
             <TextField
-                id="valuesTEI"
+                id="reservedValues"
                 label={i18n.t('Reserved values downloaded per TEI attribute')}
-                name="valuesTEI"
+                name="reservedValues"
                 type="number"
                 margin="normal"
                 fullWidth
@@ -104,10 +104,10 @@ const AndroidSettings = ({
                     inputProps: {
                         min: 0,
                         step: 10,
-                        max: maxValues.valuesTEI,
+                        max: maxValues.reservedValues,
                     },
                 }}
-                value={state.valuesTEI}
+                value={state.reservedValues}
                 onChange={handleChange}
             />
 

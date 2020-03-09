@@ -41,7 +41,7 @@ export const dataOptions = [
 ]
 
 export const maxValues = {
-    valuesTEI: 50,
+    reservedValues: 50,
 }
 
 export const androidSettingsDefault = {
@@ -49,6 +49,6 @@ export const androidSettingsDefault = {
     dataSync: '24h',
     numberSmsToSend: '',
     numberSmsConfirmation: '',
-    valuesTEI: '',
+    reservedValues: 0,
     encryptDB: false,
 }

@@ -1,0 +1,31 @@
+.inputContainer {
+    color: #000000;
+    cursor: text;
+    display: inline-flex;
+    font-size: 1rem;
+    font-family: Roboto, sans-serif;
+    line-height: 1.1875em;
+    align-items: center;
+}
+
+.inputBase {
+    text-align: end;
+    font-weight: 400;
+    height: 1.1875em;
+    width: 100%;
+    border: 0;
+    margin: 0;
+    padding: 6px 0 7px;
+    min-width: 0;
+    box-sizing: content-box;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.inputBase:focus{
+    outline-offset: -2px;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button, 
+input::-webkit-inner-spin-button { margin-left: 10px; } 

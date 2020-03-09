@@ -11,7 +11,12 @@ import {
 } from '../constants/android-settings'
 import AndroidSettings from './android-settings'
 
-const { metadataSync, dataSync, encryptDB } = androidSettingsDefault
+const {
+    metadataSync,
+    dataSync,
+    encryptDB,
+    reservedValues,
+} = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
     constructor(props) {
@@ -27,7 +32,7 @@ class AndroidSettingsContainer extends React.Component {
         dataSync: dataSync,
         numberSmsToSend: '',
         numberSmsConfirmation: '',
-        valuesTEI: '',
+        reservedValues: reservedValues,
         encryptDB: encryptDB,
         isUpdated: false,
         loading: true,
@@ -39,14 +44,13 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleChange = e => {
         e.preventDefault()
-        if (e.target.name === 'valuesTEI') {
-            const valueInput = e.target.value
-            e.target.value > maxValues.valuesTEI
-                ? (e.target.value = maxValues.valuesTEI)
-                : (e.target.value = valueInput)
-        }
-        let value = e.target.value
 
+        let { value } = e.target
+        
+        if (e.target.name === 'reservedValues') {
+            value = Math.min(maxValues.reservedValues, parseInt(value))
+        }
+      
         if (e.target.name === 'encryptDB') {
             value = e.target.checked
         }
@@ -80,12 +84,20 @@ class AndroidSettingsContainer extends React.Component {
             return true
         }
 
+        if (this.state.numberSmsToSend === '') {
+            this.state.numberSmsToSend = null
+        }
+
+        if (this.state.numberSmsConfirmation === '') {
+            this.state.numberSmsConfirmation = null
+        }
+
         const androidData = {
             metadataSync: this.state.metadataSync,
             dataSync: this.state.dataSync,
             numberSmsToSend: this.state.numberSmsToSend,
             numberSmsConfirmation: this.state.numberSmsConfirmation,
-            valuesTEI: this.state.valuesTEI,
+            reservedValues: this.state.reservedValues,
             encryptDB: this.state.encryptDB,
             lastUpdated: new Date().toJSON(),
         }
@@ -120,7 +132,7 @@ class AndroidSettingsContainer extends React.Component {
             dataSync: dataSync,
             numberSmsToSend: '',
             numberSmsConfirmation: '',
-            valuesTEI: '',
+            reservedValues: reservedValues,
             encryptDB: encryptDB,
             isUpdated: false,
         })
@@ -168,7 +180,7 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
-                                          valuesTEI: '',
+                                          reservedValues: reservedValues,
                                           encryptDB: encryptDB,
                                       }
                                   )
@@ -178,7 +190,7 @@ class AndroidSettingsContainer extends React.Component {
                                           dataSync: dataSync,
                                           numberSmsToSend: '',
                                           numberSmsConfirmation: '',
-                                          valuesTEI: '',
+                                          reservedValues: reservedValues,
                                           encryptDB: encryptDB,
                                       })
                                   })
@@ -204,7 +216,7 @@ class AndroidSettingsContainer extends React.Component {
                                 dataSync: dataSync,
                                 numberSmsToSend: '',
                                 numberSmsConfirmation: '',
-                                valuesTEI: '',
+                                reservedValues: reservedValues,
                                 encryptDB: encryptDB,
                             })
                         })
