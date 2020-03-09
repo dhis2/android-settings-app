@@ -41,19 +41,13 @@ class ProgramTable extends React.Component {
 
     componentDidUpdate() {
         if (this.props.programSelected !== '') {
-            if (
-                this.state.programSelected == '' ||
-                this.state.programSelected == undefined
-            ) {
+            if (!this.state.programSelected) {
                 this.checkProgramType()
             } else if (
                 this.state.programSelected !== this.props.programSelected
             ) {
                 this.checkProgramType()
-            } else if (
-                this.state.programType == '' ||
-                this.state.programType == undefined
-            ) {
+            } else if (!this.state.programType) {
                 this.checkProgramType()
             }
         }
@@ -64,12 +58,7 @@ class ProgramTable extends React.Component {
             return null
         }
 
-        if (
-            this.state.programSelected !== undefined ||
-            this.state.programSelected !== '' ||
-            this.state.programType !== undefined ||
-            this.state.programType !== ''
-        ) {
+        if (this.state.programSelected || this.state.programType) {
             return (
                 <Table className={dataTableStyles.dataTable}>
                     <TableHead>
@@ -187,10 +176,7 @@ class ProgramTable extends React.Component {
                                                               }
                                                           >
                                                               <em>
-                                                                  {' '}
-                                                                  {
-                                                                      option.label
-                                                                  }{' '}
+                                                                  {option.label}
                                                               </em>
                                                           </MenuItem>
                                                       )
@@ -297,10 +283,7 @@ class ProgramTable extends React.Component {
                                                               }
                                                           >
                                                               <em>
-                                                                  {' '}
-                                                                  {
-                                                                      option.label
-                                                                  }{' '}
+                                                                  {option.label}
                                                               </em>
                                                           </MenuItem>
                                                       )
@@ -330,124 +313,3 @@ class ProgramTable extends React.Component {
 }
 
 export default ProgramTable
-
-/*
-<Table className={dataTableStyles.dataTable}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell
-                            className={
-                                dataTableStyles.dataTable__headers__header
-                            }
-                        >
-                            {' '}
-                        </TableCell>
-                        <TableCell
-                            className={
-                                dataTableStyles.dataTable__headers__header
-                            }
-                            align="right"
-                        >
-                            {i18n.t('Download')}
-                        </TableCell>
-                        <TableCell
-                            className={
-                                dataTableStyles.dataTable__headers__header
-                            }
-                            align="right"
-                        >
-                            {i18n.t('DB trimming')}
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody className="data-table__rows">
-                    {this.props.data.map(row => (
-                        <TableRow key={row.option}>
-                            <TableCell
-                                component="th"
-                                scope="row"
-                                className={
-                                    dataTableStyles.dataTable__rows__row__column
-                                }
-                            >
-                                {row.option}
-                            </TableCell>
-                            <TableCell
-                                className={
-                                    dataTableStyles.dataTable__rows__row__column
-                                }
-                                align="right"
-                            >
-                                {Array.isArray(row.download) === true ? (
-                                    <Select
-                                        key={row.keyDownload}
-                                        value={
-                                            this.props.states[row.keyDownload]
-                                        }
-                                        onChange={this.props.onChange}
-                                        id={row.keyDownload}
-                                        name={row.keyDownload}
-                                    >
-                                        {row.download.map(option => (
-                                            <MenuItem
-                                                value={option.value}
-                                                key={option.value}
-                                                name={option.value}
-                                            >
-                                                <em> {option.label} </em>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                ) : (
-                                    <InputNumber
-                                        name={row.keyDownload}
-                                        max={row.maxValue}
-                                        value={
-                                            this.props.states[row.keyDownload]
-                                        }
-                                        onChange={this.props.onChange}
-                                    />
-                                )}
-                            </TableCell>
-                            <TableCell
-                                className={
-                                    dataTableStyles.dataTable__rows__row__column
-                                }
-                                align="right"
-                            >
-                                {Array.isArray(row.DBTrimming) === true ? (
-                                    <Select
-                                        key={row.keyDBTrimming}
-                                        value={
-                                            this.props.states[row.keyDBTrimming]
-                                        }
-                                        onChange={this.props.onChange}
-                                        id={row.keyDBTrimming}
-                                        name={row.keyDBTrimming}
-                                    >
-                                        {row.DBTrimming.map(option => (
-                                            <MenuItem
-                                                value={option.value}
-                                                key={option.value}
-                                                name={option.value}
-                                            >
-                                                <em> {option.label} </em>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                ) : (
-                                    <InputNumber
-                                        name={row.keyDBTrimming}
-                                        max={row.maxValue}
-                                        value={
-                                            this.props.states[row.keyDBTrimming]
-                                        }
-                                        onChange={this.props.onChange}
-                                    />
-                                )}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-*/
