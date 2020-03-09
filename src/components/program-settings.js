@@ -132,74 +132,45 @@ class ProgramSettings extends React.Component {
         },
     }
 
-    handleChange = e => {
-        e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
+    chooseSetting = (name, value) => {
+        switch (name) {
             case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.teiDownload, parseInt(value))
                 break
             case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.teiDBTrimming, parseInt(value))
                 break
             case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.eventsDownload, parseInt(value))
                 break
             case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
+                value = Math.min(maxValues.eventsDBTrimming, parseInt(value))
                 break
             default:
                 break
         }
+        return value
+    }
 
+    handleChange = e => {
+        e.preventDefault()
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value,
+            [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
         })
         this.updateGlobal = true
     }
 
     handleChangeDialog = e => {
         e.preventDefault()
-        const valueInput = e.target.value
-        switch (e.target.name) {
-            case 'teiDownload':
-                e.target.value > maxValues.teiDownload
-                    ? (e.target.value = maxValues.teiDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teiDBTrimming':
-                e.target.value > maxValues.teiDBTrimming
-                    ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDownload':
-                e.target.value > maxValues.eventsDownload
-                    ? (e.target.value = maxValues.eventsDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'eventsDBTrimming':
-                e.target.value > maxValues.eventsDBTrimming
-                    ? (e.target.value = maxValues.eventsDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            default:
-                break
-        }
-
         this.setState({
             ...this.state,
             specificSetting: {
                 ...this.state.specificSetting,
-                [e.target.name]: e.target.value,
+                [e.target.name]: this.chooseSetting(
+                    e.target.name,
+                    e.target.value
+                ),
             },
         })
         this.updateGlobal = false

@@ -394,7 +394,7 @@ export const SpecificProgram = [
 
 export const maxValues = {
     teiDownload: 2000,
-    teiDBTrimmming: 2000,
+    teiDBTrimming: 2000,
     eventsDownload: 3000,
     eventsDBTrimming: 3000,
 }
