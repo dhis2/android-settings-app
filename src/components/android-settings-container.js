@@ -189,9 +189,18 @@ class AndroidSettingsContainer extends React.Component {
                                   })
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
+                    return api
+                        .createNamespace(NAMESPACE, GENERAL_SETTINGS, {
+                            metadataSync: metadataSync,
+                            dataSync: dataSync,
+                            numberSmsToSend: '',
+                            numberSmsConfirmation: '',
+                            reservedValues: reservedValues,
+                            encryptDB: encryptDB,
+                        })
                         .then(res => {
                             this.keyName = GENERAL_SETTINGS
+
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
