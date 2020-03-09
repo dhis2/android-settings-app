@@ -27,8 +27,6 @@ const {
     enrollmentDateDBTrimming,
     updateDownload,
     updateDBTrimming,
-    teReservedDownload,
-    teReservedDBTrimming,
     eventsDownload,
     eventsDBTrimming,
     eventDateDownload,
@@ -64,8 +62,6 @@ class ProgramSettings extends React.Component {
         enrollmentDateDBTrimming: enrollmentDateDBTrimming,
         updateDownload: updateDownload,
         updateDBTrimming: updateDBTrimming,
-        teReservedDownload: teReservedDownload,
-        teReservedDBTrimming: teReservedDBTrimming,
         eventsDownload: eventsDownload,
         eventsDBTrimming: eventsDBTrimming,
         eventDateDownload: eventDateDownload,
@@ -83,8 +79,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: '',
             updateDownload: '',
             updateDBTrimming: '',
-            teReservedDownload: '',
-            teReservedDBTrimming: '',
             eventsDownload: '',
             eventsDBTrimming: '',
             eventDateDownload: '',
@@ -113,8 +107,6 @@ class ProgramSettings extends React.Component {
                     enrollmentDateDBTrimming: argsData.enrollmentDateDBTrimming,
                     updateDownload: argsData.updateDownload,
                     updateDBTrimming: argsData.updateDBTrimming,
-                    teReservedDownload: argsData.teReservedDownload,
-                    teReservedDBTrimming: argsData.teReservedDBTrimming,
                     eventsDownload: argsData.eventsDownload,
                     eventsDBTrimming: argsData.eventsDBTrimming,
                     eventDateDownload: argsData.eventDateDownload,
@@ -154,16 +146,6 @@ class ProgramSettings extends React.Component {
                     ? (e.target.value = maxValues.teiDBTrimming)
                     : (e.target.value = valueInput)
                 break
-            case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
-                    : (e.target.value = valueInput)
-                break
             case 'eventsDownload':
                 e.target.value > maxValues.eventsDownload
                     ? (e.target.value = maxValues.eventsDownload)
@@ -197,16 +179,6 @@ class ProgramSettings extends React.Component {
             case 'teiDBTrimming':
                 e.target.value > maxValues.teiDBTrimming
                     ? (e.target.value = maxValues.teiDBTrimming)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDownload':
-                e.target.value > maxValues.teReservedDownload
-                    ? (e.target.value = maxValues.teReservedDownload)
-                    : (e.target.value = valueInput)
-                break
-            case 'teReservedDBTrimming':
-                e.target.value > maxValues.teReservedDBTrimming
-                    ? (e.target.value = maxValues.teReservedDBTrimming)
                     : (e.target.value = valueInput)
                 break
             case 'eventsDownload':
@@ -265,8 +237,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
             updateDownload: this.state.updateDownload,
             updateDBTrimming: this.state.updateDBTrimming,
-            teReservedDownload: this.state.teReservedDownload,
-            teReservedDBTrimming: this.state.teReservedDBTrimming,
             eventsDownload: this.state.eventsDownload,
             eventsDBTrimming: this.state.eventsDBTrimming,
             eventDateDownload: this.state.eventDateDownload,
@@ -324,8 +294,6 @@ class ProgramSettings extends React.Component {
                 enrollmentDateDBTrimming: '',
                 updateDownload: '',
                 updateDBTrimming: '',
-                teReservedDownload: '',
-                teReservedDBTrimming: '',
                 eventsDownload: '',
                 eventsDBTrimming: '',
                 eventDateDownload: '',
@@ -364,10 +332,6 @@ class ProgramSettings extends React.Component {
                     .enrollmentDateDBTrimming,
                 updateDownload: this.state.specificSetting.updateDownload,
                 updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                teReservedDownload: this.state.specificSetting
-                    .teReservedDownload,
-                teReservedDBTrimming: this.state.specificSetting
-                    .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
                 eventDateDownload: this.state.specificSetting.eventDateDownload,
@@ -383,11 +347,8 @@ class ProgramSettings extends React.Component {
                 (this.state.specificSetting.eventsDownload === undefined
                     ? 0
                     : this.state.specificSetting.eventsDownload) +
-                ' events per OU, ' +
-                (this.state.specificSetting.teReservedDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.teReservedDownload) +
-                ' reserved values'
+                ' events per OU'
+
             const newProgramRow = {
                 name: programNameFilter[0].name,
                 sumarySettings: sumarySettings,
@@ -406,10 +367,6 @@ class ProgramSettings extends React.Component {
                     .enrollmentDateDBTrimming,
                 updateDownload: this.state.specificSetting.updateDownload,
                 updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                teReservedDownload: this.state.specificSetting
-                    .teReservedDownload,
-                teReservedDBTrimming: this.state.specificSetting
-                    .teReservedDBTrimming,
                 eventsDownload: this.state.specificSetting.eventsDownload,
                 eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
                 eventDateDownload: this.state.specificSetting.eventDateDownload,
@@ -458,8 +415,6 @@ class ProgramSettings extends React.Component {
             enrollmentDateDBTrimming: enrollmentDateDBTrimming,
             updateDownload: updateDownload,
             updateDBTrimming: updateDBTrimming,
-            teReservedDownload: teReservedDownload,
-            teReservedDBTrimming: teReservedDBTrimming,
             eventsDownload: eventsDownload,
             eventsDBTrimming: eventsDBTrimming,
             eventDateDownload: eventDateDownload,
@@ -565,12 +520,8 @@ class ProgramSettings extends React.Component {
                                                     undefined
                                                         ? 0
                                                         : program.eventsDownload) +
-                                                    ' events per OU, ' +
-                                                    (program.teReservedDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.teReservedDownload) +
-                                                    ' reserved values'
+                                                    ' events per OU'
+
                                                 const newProgramRow = {
                                                     name: program.name,
                                                     sumarySettings: sumarySettings,
@@ -595,10 +546,6 @@ class ProgramSettings extends React.Component {
                                                         program.updateDownload,
                                                     updateDBTrimming:
                                                         program.updateDBTrimming,
-                                                    teReservedDownload:
-                                                        program.teReservedDownload,
-                                                    teReservedDBTrimming:
-                                                        program.teReservedDBTrimming,
                                                     eventsDownload:
                                                         program.eventsDownload,
                                                     eventsDBTrimming:
@@ -641,8 +588,6 @@ class ProgramSettings extends React.Component {
                                 enrollmentDateDBTrimming: enrollmentDateDBTrimming,
                                 updateDownload: updateDownload,
                                 updateDBTrimming: updateDBTrimming,
-                                teReservedDownload: teReservedDownload,
-                                teReservedDBTrimming: teReservedDBTrimming,
                                 eventsDownload: eventsDownload,
                                 eventsDBTrimming: eventsDBTrimming,
                                 eventDateDownload: eventDateDownload,
