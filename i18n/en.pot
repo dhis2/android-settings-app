@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-25T14:37:26.735Z\n"
-"PO-Revision-Date: 2020-02-25T14:37:26.735Z\n"
+"POT-Creation-Date: 2020-03-05T19:05:24.542Z\n"
+"PO-Revision-Date: 2020-03-05T19:05:24.542Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -24,15 +24,6 @@ msgid "Reserved values downloaded per TEI attribute"
 msgstr ""
 
 msgid "Encrypt DB"
-msgstr ""
-
-msgid "Encrypt"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Yes"
 msgstr ""
 
 msgid "SET TO DEFAULT"
@@ -77,10 +68,7 @@ msgstr ""
 msgid "RUN TEST"
 msgstr ""
 
-msgid "Periods"
-msgstr ""
-
-msgid "Last 12 months"
+msgid "Number of Periods"
 msgstr ""
 
 msgid "Any"
@@ -90,6 +78,9 @@ msgid "Last month"
 msgstr ""
 
 msgid "Last 3 months"
+msgstr ""
+
+msgid "Last 12 months"
 msgstr ""
 
 msgid "General Settings"
@@ -116,10 +107,10 @@ msgstr ""
 msgid "Per OU and program"
 msgstr ""
 
-msgid "TEI"
+msgid "TEIs"
 msgstr ""
 
-msgid "TEI Enrollments"
+msgid "TEI Enrollment status"
 msgstr ""
 
 msgid "All"
