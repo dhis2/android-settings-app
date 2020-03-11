@@ -1,9 +1,5 @@
 export const metadataOptions = [
     {
-        value: '12h',
-        label: '12h',
-    },
-    {
         value: '24h',
         label: '24h',
     },
@@ -15,8 +11,8 @@ export const metadataOptions = [
 
 export const dataOptions = [
     {
-        value: '15m',
-        label: '15m',
+        value: '30m',
+        label: '30m',
     },
     {
         value: '1h',
