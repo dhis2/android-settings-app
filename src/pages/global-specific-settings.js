@@ -120,6 +120,7 @@ class GlobalSpecificSettings extends React.Component {
                             this.props.specificSettingHandleSubmit
                         }
                         specificSetting={this.props.specificSetting}
+                        completeListOptions={this.props.completeListOptions}
                     />
                 </div>
             </React.Fragment>
