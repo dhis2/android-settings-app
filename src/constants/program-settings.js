@@ -553,3 +553,6 @@ export const ProgramSettingsDefault = {
     eventDateDownload: 'ANY',
     eventDateDBTrimming: 'ANY',
 }
+
+export const GLOBAL = 'GLOBAL'
+export const PER_ORG_UNIT = 'PER_ORG_UNIT'

@@ -9,6 +9,8 @@ import {
     SpecificProgram,
     ProgramSettingsDefault,
     maxValues,
+    GLOBAL,
+    PER_ORG_UNIT,
 } from '../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
@@ -157,10 +159,7 @@ class ProgramSettings extends React.Component {
         e.preventDefault()
 
         if (e.target.name === 'settingDownload') {
-            if (
-                e.target.value === 'GLOBAL' ||
-                e.target.value === 'PER_ORG_UNIT'
-            ) {
+            if (e.target.value === GLOBAL || e.target.value === PER_ORG_UNIT) {
                 programData = GlobalProgramSpecial
             } else {
                 programData = GlobalProgram
@@ -213,8 +212,8 @@ class ProgramSettings extends React.Component {
         let globalSettings
 
         if (
-            this.state.settingDownload == 'GLOBAL' ||
-            this.state.settingDownload == 'PER_ORG_UNIT'
+            this.state.settingDownload == GLOBAL ||
+            this.state.settingDownload == PER_ORG_UNIT
         ) {
             globalSettings = {
                 lastUpdated: new Date().toJSON(),
@@ -577,10 +576,9 @@ class ProgramSettings extends React.Component {
 
                                         if (
                                             this.globalSettings
-                                                .settingDownload == 'GLOBAL' ||
+                                                .settingDownload == GLOBAL ||
                                             this.globalSettings
-                                                .settingDownload ==
-                                                'PER_ORG_UNIT'
+                                                .settingDownload == PER_ORG_UNIT
                                         ) {
                                             programData = GlobalProgramSpecial
                                         } else {
