@@ -4,7 +4,8 @@ import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
-    Program,
+    GlobalProgram,
+    GlobalProgramSpecial,
     SpecificProgram,
     ProgramSettingsDefault,
     maxValues,
@@ -14,7 +15,7 @@ import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { getInstance } from 'd2'
 
-const programData = Program
+let programData = GlobalProgram
 const specificProgramData = SpecificProgram
 const {
     settingDownload,
@@ -154,6 +155,18 @@ class ProgramSettings extends React.Component {
 
     handleChange = e => {
         e.preventDefault()
+
+        if (e.target.name === 'settingDownload') {
+            if (
+                e.target.value === 'GLOBAL' ||
+                e.target.value === 'PER_ORG_UNIT'
+            ) {
+                programData = GlobalProgramSpecial
+            } else {
+                programData = GlobalProgram
+            }
+        }
+
         this.setState({
             ...this.state,
             [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
@@ -196,22 +209,44 @@ class ProgramSettings extends React.Component {
         if (!this.updateGlobal) {
             return true
         }
-        const globalSettings = {
-            lastUpdated: new Date().toJSON(),
-            settingDownload: this.state.settingDownload,
-            settingDBTrimming: this.state.settingDBTrimming,
-            teiDownload: this.state.teiDownload,
-            teiDBTrimming: this.state.teiDBTrimming,
-            enrollmentDownload: this.state.enrollmentDownload,
-            enrollmentDBTrimming: this.state.enrollmentDBTrimming,
-            enrollmentDateDownload: this.state.enrollmentDateDownload,
-            enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
-            updateDownload: this.state.updateDownload,
-            updateDBTrimming: this.state.updateDBTrimming,
-            eventsDownload: this.state.eventsDownload,
-            eventsDBTrimming: this.state.eventsDBTrimming,
-            eventDateDownload: this.state.eventDateDownload,
-            eventDateDBTrimming: this.state.eventDateDBTrimming,
+
+        let globalSettings
+
+        if (
+            this.state.settingDownload == 'GLOBAL' ||
+            this.state.settingDownload == 'PER_ORG_UNIT'
+        ) {
+            globalSettings = {
+                lastUpdated: new Date().toJSON(),
+                settingDownload: this.state.settingDownload,
+                settingDBTrimming: this.state.settingDBTrimming,
+                teiDownload: this.state.teiDownload,
+                teiDBTrimming: this.state.teiDBTrimming,
+                updateDownload: this.state.updateDownload,
+                updateDBTrimming: this.state.updateDBTrimming,
+                eventsDownload: this.state.eventsDownload,
+                eventsDBTrimming: this.state.eventsDBTrimming,
+                eventDateDownload: this.state.eventDateDownload,
+                eventDateDBTrimming: this.state.eventDateDBTrimming,
+            }
+        } else {
+            globalSettings = {
+                lastUpdated: new Date().toJSON(),
+                settingDownload: this.state.settingDownload,
+                settingDBTrimming: this.state.settingDBTrimming,
+                teiDownload: this.state.teiDownload,
+                teiDBTrimming: this.state.teiDBTrimming,
+                enrollmentDownload: this.state.enrollmentDownload,
+                enrollmentDBTrimming: this.state.enrollmentDBTrimming,
+                enrollmentDateDownload: this.state.enrollmentDateDownload,
+                enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
+                updateDownload: this.state.updateDownload,
+                updateDBTrimming: this.state.updateDBTrimming,
+                eventsDownload: this.state.eventsDownload,
+                eventsDBTrimming: this.state.eventsDBTrimming,
+                eventDateDownload: this.state.eventDateDownload,
+                eventDateDBTrimming: this.state.eventDateDBTrimming,
+            }
         }
 
         this.globalSettings = globalSettings
@@ -537,13 +572,26 @@ class ProgramSettings extends React.Component {
                                     }
 
                                     if (res.value.globalSettings) {
+                                        this.globalSettings =
+                                            res.value.globalSettings
+
+                                        if (
+                                            this.globalSettings
+                                                .settingDownload == 'GLOBAL' ||
+                                            this.globalSettings
+                                                .settingDownload ==
+                                                'PER_ORG_UNIT'
+                                        ) {
+                                            programData = GlobalProgramSpecial
+                                        } else {
+                                            programData = GlobalProgram
+                                        }
+
                                         this.setState({
                                             ...res.value.globalSettings,
                                             isUpdated: true,
                                             loading: false,
                                         })
-                                        this.globalSettings =
-                                            res.value.globalSettings
                                     }
                                 }
                             )
