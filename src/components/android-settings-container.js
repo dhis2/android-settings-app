@@ -47,18 +47,22 @@ class AndroidSettingsContainer extends React.Component {
         e.preventDefault()
 
         let { value } = e.target
-        
+
         if (e.target.name === 'reservedValues') {
             value = Math.min(maxValues.reservedValues, parseInt(value))
-        }
-      
-        if (e.target.name === 'encryptDB') {
-            value = e.target.checked
         }
 
         this.setState({
             ...this.state,
             [e.target.name]: value,
+        })
+        this.updateGlobal = true
+    }
+
+    handleChangeSwitch = e => {
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.checked,
         })
         this.updateGlobal = true
     }
@@ -172,9 +176,9 @@ class AndroidSettingsContainer extends React.Component {
                                       dataSync: dataSync,
                                       numberSmsToSend: '',
                                       numberSmsConfirmation: '',
-                                      reservedValues: reservedValues,,
+                                      reservedValues: reservedValues,
                                       encryptDB: encryptDB,
-                                  })          
+                                  })
                                   .then(res => {
                                       this.setState({
                                           metadataSync: metadataSync,
@@ -236,6 +240,7 @@ class AndroidSettingsContainer extends React.Component {
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
                 maxValues={maxValues}
+                handleChangeSwitch={this.handleChangeSwitch}
             />
         )
     }

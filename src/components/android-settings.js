@@ -18,6 +18,7 @@ const AndroidSettings = ({
     checkMatchingConfirmation,
     handleReset,
     maxValues,
+    handleChangeSwitch,
 }) => {
     return (
         <form>
@@ -115,7 +116,7 @@ const AndroidSettings = ({
                 control={
                     <Switch
                         checked={state.encryptDB}
-                        onChange={handleChange}
+                        onChange={handleChangeSwitch}
                         name="encryptDB"
                         color="primary"
                     />
@@ -140,6 +141,7 @@ AndroidSettings.propTypes = {
     checkMatchingConfirmation: PropTypes.func.isRequired,
     handleReset: PropTypes.func.isRequired,
     maxValues: PropTypes.object.isRequired,
+    handleChangeSwitch: PropTypes.func.isRequired,
 }
 
 export default AndroidSettings
