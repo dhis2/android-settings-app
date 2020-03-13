@@ -409,6 +409,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleReset = () => {
+        programData = GlobalProgramSpecial
         this.setState({
             settingDownload: settingDownload,
             settingDBTrimming: settingDBTrimming,
