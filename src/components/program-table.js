@@ -38,14 +38,6 @@ class ProgramTable extends React.Component {
                         >
                             {i18n.t('Download')}
                         </TableCell>
-                        <TableCell
-                            className={
-                                dataTableStyles.dataTable__headers__header
-                            }
-                            align="right"
-                        >
-                            {i18n.t('DB trimming')}
-                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody className="data-table__rows">
@@ -92,43 +84,6 @@ class ProgramTable extends React.Component {
                                         max={row.maxValue}
                                         value={
                                             this.props.states[row.keyDownload]
-                                        }
-                                        onChange={this.props.onChange}
-                                    />
-                                )}
-                            </TableCell>
-                            <TableCell
-                                className={
-                                    dataTableStyles.dataTable__rows__row__column
-                                }
-                                align="right"
-                            >
-                                {Array.isArray(row.DBTrimming) === true ? (
-                                    <Select
-                                        key={row.keyDBTrimming}
-                                        value={
-                                            this.props.states[row.keyDBTrimming]
-                                        }
-                                        onChange={this.props.onChange}
-                                        id={row.keyDBTrimming}
-                                        name={row.keyDBTrimming}
-                                    >
-                                        {row.DBTrimming.map(option => (
-                                            <MenuItem
-                                                value={option.value}
-                                                key={option.value}
-                                                name={option.value}
-                                            >
-                                                <em> {option.label} </em>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                ) : (
-                                    <InputNumber
-                                        name={row.keyDBTrimming}
-                                        max={row.maxValue}
-                                        value={
-                                            this.props.states[row.keyDBTrimming]
                                         }
                                         onChange={this.props.onChange}
                                     />
