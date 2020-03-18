@@ -17,8 +17,8 @@ export const DataSpecificSetting = [
 ]
 
 export const DataSetSettingsDefault = {
-    periodDSDownload: 12,
-    periodDSDBTrimming: 12,
+    periodDSDownload: 11,
+    periodDSDBTrimming: 11,
 }
 
 export const periodTypeConstants = {
