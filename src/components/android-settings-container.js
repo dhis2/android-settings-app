@@ -47,11 +47,11 @@ class AndroidSettingsContainer extends React.Component {
         e.preventDefault()
 
         let { value } = e.target
-        
+
         if (e.target.name === 'reservedValues') {
             value = Math.min(maxValues.reservedValues, parseInt(value))
         }
-      
+
         if (e.target.name === 'encryptDB') {
             value = e.target.checked
         }
@@ -172,9 +172,9 @@ class AndroidSettingsContainer extends React.Component {
                                       dataSync: dataSync,
                                       numberSmsToSend: '',
                                       numberSmsConfirmation: '',
-                                      reservedValues: reservedValues,,
+                                      reservedValues: reservedValues,
                                       encryptDB: encryptDB,
-                                  })          
+                                  })
                                   .then(res => {
                                       this.setState({
                                           metadataSync: metadataSync,
