@@ -38,6 +38,7 @@ class AndroidSettingsContainer extends React.Component {
         isUpdated: false,
         loading: true,
         errorConfirmation: false,
+        openDialog: false,
     }
 
     /**
@@ -59,10 +60,36 @@ class AndroidSettingsContainer extends React.Component {
         this.updateGlobal = true
     }
 
-    handleChangeSwitch = e => {
+    /**
+     * When Switch is click open Dialog alert
+     */
+    handleChangeSwitch = () => {
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.checked,
+            openDialog: true,
+        })
+        this.updateGlobal = true
+    }
+
+    /**
+     * Close Dialog alert
+     */
+    handleCloseDialog = () => {
+        this.setState({
+            ...this.state,
+            openDialog: false,
+        })
+        this.updateGlobal = true
+    }
+
+    /**
+     * Handle EncryptDB switch state and close dialog
+     */
+    handleEncryptSwitch = isChecked => {
+        this.setState({
+            ...this.state,
+            encryptDB: !isChecked,
+            openDialog: false,
         })
         this.updateGlobal = true
     }
@@ -136,6 +163,7 @@ class AndroidSettingsContainer extends React.Component {
             reservedValues: reservedValues,
             encryptDB: encryptDB,
             isUpdated: false,
+            openDialog: false,
         })
         this.updateGlobal = true
     }
@@ -241,6 +269,8 @@ class AndroidSettingsContainer extends React.Component {
                 handleReset={this.handleReset}
                 maxValues={maxValues}
                 handleChangeSwitch={this.handleChangeSwitch}
+                handleClose={this.handleCloseDialog}
+                handleEncrypt={this.handleEncryptSwitch}
             />
         )
     }
