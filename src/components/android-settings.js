@@ -158,6 +158,8 @@ AndroidSettings.propTypes = {
     handleReset: PropTypes.func.isRequired,
     maxValues: PropTypes.object.isRequired,
     handleChangeSwitch: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    handleEncrypt: PropTypes.func.isRequired,
 }
 
 export default AndroidSettings
