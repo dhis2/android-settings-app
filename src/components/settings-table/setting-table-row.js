@@ -4,9 +4,9 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import InputNumber from './input-number'
+import InputNumber from '../input-number'
 
-import dataTableStyles from '../styles/DataTable.module.css'
+import dataTableStyles from '../../styles/DataTable.module.css'
 
 const SettingsTableRow = ({ dataRow, states, onChange }) => {
     return (

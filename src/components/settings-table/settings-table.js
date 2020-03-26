@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow'
 import SettingsTableRow from './setting-table-row'
 
 import i18n from '@dhis2/d2-i18n'
-import dataTableStyles from '../styles/DataTable.module.css'
+import dataTableStyles from '../../styles/DataTable.module.css'
 
 const SettingsTable = ({ data, states, onChange }) => {
     return (
