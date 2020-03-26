@@ -2,16 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 
 export const metadataOptions = [
     {
-        value: '1h',
-        label: '1h',
-    },
-    {
-        value: '12h',
-        label: '12h',
-    },
-    {
-        value: '1d',
-        label: '1d',
+        value: '24h',
+        label: '24h',
     },
     {
         value: '7d',
@@ -52,7 +44,7 @@ export const encryptTitles = {
 }
 
 export const androidSettingsDefault = {
-    metadataSync: '1d',
+    metadataSync: '24h',
     dataSync: '24h',
     numberSmsToSend: null,
     numberSmsConfirmation: null,
