@@ -695,7 +695,6 @@ class ProgramSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
-                specificSetting={this.state.specificSetting}
                 tableActionsTitles={[
                     i18n.t('Name'),
                     i18n.t('Summary Settings'),

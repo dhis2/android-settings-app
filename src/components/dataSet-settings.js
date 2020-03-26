@@ -541,7 +541,6 @@ class DataSetSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
-                specificSetting={this.state.specificSetting}
                 tableActionsTitles={[
                     i18n.t('Name'),
                     i18n.t('Number of Periods'),
