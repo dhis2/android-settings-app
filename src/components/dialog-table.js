@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { Button } from '@dhis2/ui-core'
 
 import ProgramTable from './program-table'
-import SettingsTable from './settings-table'
+import DataSetTable from './settings-table/dataset-table'
 import i18n from '@dhis2/d2-i18n'
 import titleStyles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
@@ -75,10 +75,14 @@ const DialogTable = ({
                         completeListOptions={completeListOptions}
                     />
                 ) : (
-                    <SettingsTable
+                    <DataSetTable
                         data={data}
                         states={specificSetting}
                         onChange={handleChange}
+                        dataSetTitle={dataTitle}
+                        dataSetOptions={dataTitleOptions}
+                        dataSetSelected={titleValue}
+                        completeListOptions={completeListOptions}
                     />
                 )}
             </DialogContent>
