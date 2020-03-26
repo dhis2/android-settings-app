@@ -4,17 +4,23 @@ import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
-    Program,
+    GlobalProgram,
+    GlobalProgramSpecial,
     SpecificProgram,
     ProgramSettingsDefault,
     maxValues,
+    GLOBAL,
+    PER_ORG_UNIT,
+    //SpecificSettingsDefault,
+    WITH_REGISTRATION,
+    WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { getInstance } from 'd2'
 
-const programData = Program
+let programData = GlobalProgram
 const specificProgramData = SpecificProgram
 const {
     settingDownload,
@@ -142,6 +148,15 @@ class ProgramSettings extends React.Component {
 
     handleChange = e => {
         e.preventDefault()
+
+        if (e.target.name === 'settingDownload') {
+            if (e.target.value === GLOBAL || e.target.value === PER_ORG_UNIT) {
+                programData = GlobalProgramSpecial
+            } else {
+                programData = GlobalProgram
+            }
+        }
+
         this.setState({
             ...this.state,
             [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
@@ -184,10 +199,24 @@ class ProgramSettings extends React.Component {
         if (!this.updateGlobal) {
             return true
         }
-        const settings = this.populateObject('GLOBAL', this.state)
-        const globalSettings = {
-            ...settings,
-            lastUpdated: new Date().toJSON(),
+
+        let globalSettings
+
+        if (
+            this.state.settingDownload == GLOBAL ||
+            this.state.settingDownload == PER_ORG_UNIT
+        ) {
+          const settings = this.populateObject('GLOBAL_SPECIAL', this.state)
+          globalSettings = {
+              ...settings,
+              lastUpdated: new Date().toJSON(),
+          }
+        } else {          
+          const settings = this.populateObject('GLOBAL', this.state)
+          globalSettings = {
+              ...settings,
+              lastUpdated: new Date().toJSON(),
+          }
         }
 
         this.globalSettings = globalSettings
@@ -316,26 +345,63 @@ class ProgramSettings extends React.Component {
         )
 
         if (programNameFilter.length > 0) {
-            const programObject = this.populateObject(
-                'FULL_SPECIFIC',
-                this.state.specificSetting
-            )
+            let programObject
+            let sumarySettings
+            if (programNameFilter[0].programType === WITH_REGISTRATION) {
+                if (
+                    this.state.specificSetting.settingDownload ||
+                    this.state.specificSetting.teiDownload ||
+                    this.state.specificSetting.enrollmentDownload ||
+                    this.state.specificSetting.enrollmentDateDownload ||
+                    this.state.specificSetting.updateDownload
+                ) {
+                    programObject = this.populateObject(
+                        WITH_REGISTRATION,
+                        this.state.specificSetting
+                    )
+                } else {
+                    programObject = this.populateObject(
+                        WITH_REGISTRATION,
+                        SpecificSettingsDefault
+                    )
+                }
+
+                sumarySettings =
+                    (this.state.specificSetting.teiDownload
+                        ? this.state.specificSetting.teiDownload
+                        : SpecificSettingsDefault.teiDownload) + ' TEI'
+            } else if (
+                programNameFilter[0].programType === WITHOUT_REGISTRATION
+            ) {
+                if (
+                    this.state.specificSetting.settingDownload ||
+                    this.state.specificSetting.eventsDownload ||
+                    this.state.specificSetting.eventDateDownload
+                ) {
+                    programObject = this.populateObject(
+                        WITHOUT_REGISTRATION,
+                        this.state.specificSetting
+                    )
+                } else {
+                    programObject = this.populateObject(
+                        WITHOUT_REGISTRATION,
+                        SpecificSettingsDefault
+                    )
+                }
+
+                sumarySettings =
+                    (this.state.specificSetting.eventsDownload
+                        ? this.state.specificSetting.eventsDownload
+                        : SpecificSettingsDefault.eventsDownload) +
+                    ' events per OU'
+            }
+
             objData[specificProgramNameKey] = {
                 ...programObject,
                 id: specificProgramNameKey,
                 lastUpdated: new Date().toJSON(),
                 name: programNameFilter[0].name,
             }
-
-            const sumarySettings =
-                (this.state.specificSetting.teiDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.teiDownload) +
-                ' TEI/ ' +
-                (this.state.specificSetting.eventsDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.eventsDownload) +
-                ' events per OU'
 
             const newProgramRow = {
                 ...objData[specificProgramNameKey],
@@ -372,6 +438,7 @@ class ProgramSettings extends React.Component {
     }
 
     handleReset = () => {
+        programData = GlobalProgramSpecial
         const settings = this.populateObject('DEFAULT')
         this.setState({
             ...settings,
@@ -466,22 +533,37 @@ class ProgramSettings extends React.Component {
                                             ) {
                                                 const program = this
                                                     .specificSettings[key]
-                                                const sumarySettings =
-                                                    (program.teiDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.teiDownload) +
-                                                    ' TEI/ ' +
-                                                    (program.eventsDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.eventsDownload) +
-                                                    ' events per OU'
+
+                                                let filter = this.programListComplete.filter(
+                                                    prog =>
+                                                        prog.id == program.id
+                                                )
+                                                filter = filter[0]
+
+                                                let sumarySettings
+
+                                                if (
+                                                    filter.programType ==
+                                                    WITH_REGISTRATION
+                                                ) {
+                                                    sumarySettings =
+                                                        (program.teiDownload
+                                                            ? program.teiDownload
+                                                            : SpecificSettingsDefault.teiDownload) +
+                                                        ' TEI'
+                                                } else {
+                                                    sumarySettings =
+                                                        (program.eventsDownload
+                                                            ? program.eventsDownload
+                                                            : SpecificSettingsDefault.eventsDownload) +
+                                                        ' events per OU'
+                                                }
 
                                                 const newProgramRow = {
                                                     ...program,
                                                     sumarySettings,
                                                 }
+
                                                 this.specificSettingsRows.push(
                                                     newProgramRow
                                                 )
@@ -493,13 +575,25 @@ class ProgramSettings extends React.Component {
                                     }
 
                                     if (res.value.globalSettings) {
+                                        this.globalSettings =
+                                            res.value.globalSettings
+
+                                        if (
+                                            this.globalSettings
+                                                .settingDownload == GLOBAL ||
+                                            this.globalSettings
+                                                .settingDownload == PER_ORG_UNIT
+                                        ) {
+                                            programData = GlobalProgramSpecial
+                                        } else {
+                                            programData = GlobalProgram
+                                        }
+
                                         this.setState({
                                             ...res.value.globalSettings,
                                             isUpdated: true,
                                             loading: false,
                                         })
-                                        this.globalSettings =
-                                            res.value.globalSettings
                                     }
                                 }
                             )
@@ -544,7 +638,7 @@ class ProgramSettings extends React.Component {
                 .list({
                     paging: false,
                     level: 1,
-                    fields: 'id,name',
+                    fields: 'id,name,programType',
                     filter: 'access.data.write:eq:true',
                 })
                 .then(collection => {
@@ -588,6 +682,7 @@ class ProgramSettings extends React.Component {
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
                 specificSetting={this.state.specificSetting}
+                completeListOptions={this.programListComplete}
             />
         )
     }

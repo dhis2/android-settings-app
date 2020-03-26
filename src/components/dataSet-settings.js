@@ -469,7 +469,7 @@ class DataSetSettings extends React.Component {
                 .list({
                     paging: false,
                     level: 1,
-                    fields: 'id,name',
+                    fields: 'id,name,periodType',
                     filter: 'access.data.write:eq:true',
                 })
                 .then(collection => {
@@ -513,6 +513,7 @@ class DataSetSettings extends React.Component {
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
                 specificSetting={this.state.specificSetting}
+                completeListOptions={this.dataSetListComplete}
             />
         )
     }
