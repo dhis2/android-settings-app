@@ -3,7 +3,7 @@ import React from 'react'
 import { Button } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 
-import ProgramTable from '../components/program-table'
+import SettingsTable from '../components/settings-table'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
 import TableActions from '../components/table-actions'
@@ -40,7 +40,7 @@ class GlobalSpecificSettings extends React.Component {
                         )}
                     </p>
 
-                    <ProgramTable
+                    <SettingsTable
                         data={this.props.programTableData}
                         states={this.props.states}
                         onChange={this.props.handleTableChange}
@@ -115,7 +115,6 @@ class GlobalSpecificSettings extends React.Component {
                         handleChange={this.props.specificSettingHandleChange}
                         textFieldTitleName="name"
                         data={this.props.specificSettingData}
-                        state={this.props.states}
                         handleSubmitDialog={
                             this.props.specificSettingHandleSubmit
                         }
