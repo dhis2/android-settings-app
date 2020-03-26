@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
+import i18n from '@dhis2/d2-i18n'
 import api from '../utils/api'
 
 import {
@@ -12,7 +13,6 @@ import {
     maxValues,
     GLOBAL,
     PER_ORG_UNIT,
-    //SpecificSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
@@ -734,6 +734,7 @@ class ProgramSettings extends React.Component {
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
                 specificSetting={this.state.specificSetting}
+                tableActionsTitles={[i18n.t('Name'), i18n.t('Summary Settings')]}
                 completeListOptions={this.programListComplete}
             />
         )
