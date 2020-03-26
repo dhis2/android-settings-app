@@ -5,9 +5,6 @@ import { Paper } from '@material-ui/core'
 import { Route, Link, Switch, HashRouter } from 'react-router-dom'
 
 import AndroidSettingsContainer from '../components/android-settings-container'
-import ProgramSettings from '../components/program-settings'
-import DataSetSettings from '../components/dataSet-settings'
-import TestAndroidContainer from '../components/test-android-container'
 import menuSection from '../constants/menu-sections'
 import i18n from '@dhis2/d2-i18n'
 
