@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-11T16:30:04.435Z\n"
-"PO-Revision-Date: 2020-03-11T16:30:04.435Z\n"
+"POT-Creation-Date: 2020-03-19T19:12:24.698Z\n"
+"PO-Revision-Date: 2020-03-19T19:12:24.698Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -38,6 +38,17 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "{{encrypt}} DB"
+msgstr ""
+
+msgid ""
+"{{encrypt}} data base is a critical action that could have very serious "
+"consequences. Are you sure you want to {{encrypt}} DB?"
+msgstr ""
+
+msgid "Decrypt DB"
+msgstr ""
+
 msgid "Values per"
 msgstr ""
 
@@ -66,6 +77,12 @@ msgid "Invoking ..."
 msgstr ""
 
 msgid "RUN TEST"
+msgstr ""
+
+msgid "Encrypt"
+msgstr ""
+
+msgid "Decrypt"
 msgstr ""
 
 msgid "Number of Periods"
