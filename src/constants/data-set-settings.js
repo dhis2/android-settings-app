@@ -17,6 +17,81 @@ export const DataSpecificSetting = [
 ]
 
 export const DataSetSettingsDefault = {
-    periodDSDownload: 12,
-    periodDSDBTrimming: 12,
+    periodDSDownload: 11,
+    periodDSDBTrimming: 11,
+}
+
+export const periodTypeConstants = {
+    Daily: {
+        type: 'Daily',
+        default: 59,
+    },
+    Weekly: {
+        type: 'Weekly',
+        default: 12,
+    },
+    WeeklyWednesday: {
+        type: 'WeeklyWednesday',
+        default: 12,
+    },
+    WeeklyThursday: {
+        type: 'WeeklyThursday',
+        default: 12,
+    },
+    WeeklySaturday: {
+        type: 'WeeklySaturday',
+        default: 12,
+    },
+    WeeklySunday: {
+        type: 'WeeklySunday',
+        default: 12,
+    },
+    BiWeekly: {
+        type: 'BiWeekly',
+        default: 12,
+    },
+    Monthly: {
+        type: 'Monthly',
+        default: 11,
+    },
+    BiMonthly: {
+        type: 'BiMonthly',
+        default: 5,
+    },
+    Quarterly: {
+        type: 'Quarterly',
+        default: 4,
+    },
+    SixMonthly: {
+        type: 'SixMonthly',
+        default: 4,
+    },
+    SixMonthlyApril: {
+        type: 'SixMonthlyApril',
+        default: 4,
+    },
+    SixMonthlyNov: {
+        type: 'SixMonthlyNov',
+        default: 4,
+    },
+    Yearly: {
+        type: 'Yearly',
+        default: 4,
+    },
+    FinancialApril: {
+        type: 'FinancialApril',
+        default: 4,
+    },
+    FinancialJuly: {
+        type: 'FinancialJuly',
+        default: 4,
+    },
+    FinancialOct: {
+        type: 'FinancialOct',
+        default: 4,
+    },
+    FinancialNov: {
+        type: 'FinancialNov',
+        default: 4,
+    },
 }

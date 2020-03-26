@@ -170,12 +170,12 @@ class AndroidSettingsContainer extends React.Component {
                                   })
                             : api
                                   .updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                                      metadataSync: metadataSync,
-                                      dataSync: dataSync,
-                                      numberSmsToSend: numberSmsToSend,
-                                      numberSmsConfirmation: numberSmsConfirmation,
-                                      reservedValues: reservedValues,
-                                      encryptDB: encryptDB,
+                                      metadataSync,
+                                      dataSync,
+                                      numberSmsToSend,
+                                      numberSmsConfirmation,
+                                      reservedValues,
+                                      encryptDB,
                                   })
                                   .then(res => {
                                       this.setState({
