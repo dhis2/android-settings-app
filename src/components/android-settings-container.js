@@ -17,6 +17,8 @@ const {
     dataSync,
     encryptDB,
     reservedValues,
+    numberSmsToSend,
+    numberSmsConfirmation,
 } = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
@@ -29,12 +31,12 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     state = {
-        metadataSync: metadataSync,
-        dataSync: dataSync,
-        numberSmsToSend: '',
-        numberSmsConfirmation: '',
-        reservedValues: reservedValues,
-        encryptDB: encryptDB,
+        metadataSync,
+        dataSync,
+        numberSmsToSend,
+        numberSmsConfirmation,
+        reservedValues,
+        encryptDB,
         isUpdated: false,
         loading: true,
         errorConfirmation: false,
@@ -156,12 +158,12 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleReset = () => {
         this.setState({
-            metadataSync: metadataSync,
-            dataSync: dataSync,
-            numberSmsToSend: '',
-            numberSmsConfirmation: '',
-            reservedValues: reservedValues,
-            encryptDB: encryptDB,
+            metadataSync,
+            dataSync,
+            numberSmsToSend,
+            numberSmsConfirmation,
+            reservedValues,
+            encryptDB,
             isUpdated: false,
             openDialog: false,
         })
@@ -199,29 +201,40 @@ class AndroidSettingsContainer extends React.Component {
                                       })
                                   })
                             : api
-                                  .updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                                      metadataSync: metadataSync,
-                                      dataSync: dataSync,
-                                      numberSmsToSend: '',
-                                      numberSmsConfirmation: '',
-                                      reservedValues: reservedValues,
-                                      encryptDB: encryptDB,
+                                  .createValue(NAMESPACE, GENERAL_SETTINGS, {
+                                      metadataSync,
+                                      dataSync,
+                                      numberSmsToSend,
+                                      numberSmsConfirmation,
+                                      reservedValues,
+                                      encryptDB,
                                   })
                                   .then(res => {
                                       this.setState({
-                                          metadataSync: metadataSync,
-                                          dataSync: dataSync,
-                                          numberSmsToSend: '',
-                                          numberSmsConfirmation: '',
-                                          reservedValues: reservedValues,
-                                          encryptDB: encryptDB,
+                                          metadataSync,
+                                          dataSync,
+                                          numberSmsToSend,
+                                          numberSmsConfirmation,
+                                          reservedValues,
+                                          encryptDB,
+                                          isUpdated: true,
+                                          loading: false,
                                       })
                                   })
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
+                    return api
+                        .createNamespace(NAMESPACE, GENERAL_SETTINGS, {
+                            metadataSync,
+                            dataSync,
+                            numberSmsToSend,
+                            numberSmsConfirmation,
+                            reservedValues,
+                            encryptDB,
+                        })
                         .then(res => {
                             this.keyName = GENERAL_SETTINGS
+
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
@@ -232,12 +245,12 @@ class AndroidSettingsContainer extends React.Component {
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
-                                metadataSync: metadataSync,
-                                dataSync: dataSync,
-                                numberSmsToSend: '',
-                                numberSmsConfirmation: '',
-                                reservedValues: reservedValues,
-                                encryptDB: encryptDB,
+                                metadataSync,
+                                dataSync,
+                                numberSmsToSend,
+                                numberSmsConfirmation,
+                                reservedValues,
+                                encryptDB,
                             })
                         })
                 }
