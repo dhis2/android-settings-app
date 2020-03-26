@@ -20,9 +20,16 @@ const styles = {
     },
 }
 
-function Layout(props) {
+const Layout = props => {
     const currentSection = useRef()
     const sidebarRef = useRef()
+
+    const routeSections = menuSection
+    routeSections.push({
+        key: 'home',
+        path: '/',
+        component: <AndroidSettingsContainer />,
+    })
 
     const changeSectionHandler = key => {
         currentSection.current = key
@@ -60,47 +67,15 @@ function Layout(props) {
                     <Paper className={layoutStyles.paper__layout}>
                         <D2Shim>
                             <Switch>
-                                <Route
-                                    path="/"
-                                    exact
-                                    render={() => (
-                                        <D2Shim>
-                                            <AndroidSettingsContainer />
-                                        </D2Shim>
-                                    )}
-                                />
-                                <Route
-                                    path="/general-setting"
-                                    render={() => (
-                                        <D2Shim>
-                                            <AndroidSettingsContainer />
-                                        </D2Shim>
-                                    )}
-                                />
-                                <Route
-                                    path="/program-setting"
-                                    render={() => (
-                                        <D2Shim>
-                                            <ProgramSettings />
-                                        </D2Shim>
-                                    )}
-                                />
-                                <Route
-                                    path="/dataset-setting"
-                                    render={() => (
-                                        <D2Shim>
-                                            <DataSetSettings />
-                                        </D2Shim>
-                                    )}
-                                />
-                                <Route
-                                    path="/test-android-sync"
-                                    render={() => (
-                                        <D2Shim>
-                                            <TestAndroidContainer />
-                                        </D2Shim>
-                                    )}
-                                />
+                                {routeSections.map(section => (
+                                    <Route
+                                        key={section.key}
+                                        path={section.path}
+                                        render={() => (
+                                            <D2Shim>{section.component}</D2Shim>
+                                        )}
+                                    />
+                                ))}
                             </Switch>
                         </D2Shim>
                     </Paper>
