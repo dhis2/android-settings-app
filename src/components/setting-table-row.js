@@ -49,37 +49,6 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => {
                     />
                 )}
             </TableCell>
-            <TableCell
-                className={dataTableStyles.dataTable__rows__row__column}
-                align="right"
-            >
-                {Array.isArray(dataRow.DBTrimming) === true ? (
-                    <Select
-                        key={dataRow.keyDBTrimming}
-                        value={states[dataRow.keyDBTrimming]}
-                        onChange={onChange}
-                        id={dataRow.keyDBTrimming}
-                        name={dataRow.keyDBTrimming}
-                    >
-                        {dataRow.download.map(option => (
-                            <MenuItem
-                                value={option.value}
-                                key={option.value}
-                                name={option.value}
-                            >
-                                <em> {option.label} </em>
-                            </MenuItem>
-                        ))}
-                    </Select>
-                ) : (
-                    <InputNumber
-                        name={dataRow.keyDBTrimming}
-                        max={dataRow.maxValue}
-                        value={states[dataRow.keyDBTrimming]}
-                        onChange={onChange}
-                    />
-                )}
-            </TableCell>
         </TableRow>
     )
 }

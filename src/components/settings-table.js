@@ -26,12 +26,6 @@ const SettingsTable = ({ data, states, onChange }) => {
                     >
                         {i18n.t('Download')}
                     </TableCell>
-                    <TableCell
-                        className={dataTableStyles.dataTable__headers__header}
-                        align="right"
-                    >
-                        {i18n.t('DB trimming')}
-                    </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody className="data-table__rows">
