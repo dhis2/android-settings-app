@@ -36,8 +36,8 @@ class DataSetSettings extends React.Component {
     }
 
     state = {
-        periodDSDownload: periodDSDownload,
-        periodDSDBTrimming: periodDSDBTrimming,
+        periodDSDownload,
+        periodDSDBTrimming,
         specificSetting: {
             openDialog: false,
             periodDSDBTrimming: '',
@@ -242,12 +242,8 @@ class DataSetSettings extends React.Component {
                     ? undefined
                     : this.state.specificSetting.periodDSDownload
             const newDataSetRow = {
-                name: dataSetNameFilter[0].name,
-                sumarySettings: sumarySettings,
-                periodDSDownload: this.state.specificSetting.periodDSDownload,
-                periodDSDBTrimming: this.state.specificSetting
-                    .periodDSDBTrimming,
-                id: specificDataSetNameKey,
+                ...objData[specificDataSetNameKey],
+                sumarySettings,
             }
 
             this.specificSettings = objData
@@ -282,8 +278,8 @@ class DataSetSettings extends React.Component {
 
     handleReset = () => {
         this.setState({
-            periodDSDownload: periodDSDownload,
-            periodDSDBTrimming: periodDSDBTrimming,
+            periodDSDownload,
+            periodDSDBTrimming,
         })
         this.updateGlobal = true
     }
@@ -377,13 +373,8 @@ class DataSetSettings extends React.Component {
                                                         : dataSet.periodDSDownload
 
                                                 const newDataSetRow = {
-                                                    name: dataSet.name,
-                                                    sumarySettings: sumarySettings,
-                                                    periodDSDownload:
-                                                        dataSet.periodDSDownload,
-                                                    periodDSDBTrimming:
-                                                        dataSet.periodDSDBTrimming,
-                                                    id: key,
+                                                    ...dataSet,
+                                                    sumarySettings,
                                                 }
 
                                                 this.specificSettingsRows.push(
@@ -409,8 +400,8 @@ class DataSetSettings extends React.Component {
                             )
                         } else {
                             this.globalSettings = {
-                                periodDSDownload: periodDSDownload,
-                                periodDSDBTrimming: periodDSDBTrimming,
+                                periodDSDownload,
+                                periodDSDBTrimming,
                             }
 
                             const data = {

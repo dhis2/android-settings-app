@@ -11,6 +11,9 @@ import {
     maxValues,
     GLOBAL,
     PER_ORG_UNIT,
+    SpecificSettingsDefault,
+    WITH_REGISTRATION,
+    WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
@@ -55,20 +58,20 @@ class ProgramSettings extends React.Component {
     }
 
     state = {
-        settingDownload: settingDownload,
-        settingDBTrimming: settingDBTrimming,
-        teiDownload: teiDownload,
-        teiDBTrimming: teiDBTrimming,
-        enrollmentDownload: enrollmentDownload,
-        enrollmentDBTrimming: enrollmentDBTrimming,
-        enrollmentDateDownload: enrollmentDateDownload,
-        enrollmentDateDBTrimming: enrollmentDateDBTrimming,
-        updateDownload: updateDownload,
-        updateDBTrimming: updateDBTrimming,
-        eventsDownload: eventsDownload,
-        eventsDBTrimming: eventsDBTrimming,
-        eventDateDownload: eventDateDownload,
-        eventDateDBTrimming: eventDateDBTrimming,
+        settingDownload,
+        settingDBTrimming,
+        teiDownload,
+        teiDBTrimming,
+        enrollmentDownload,
+        enrollmentDBTrimming,
+        enrollmentDateDownload,
+        enrollmentDateDBTrimming,
+        updateDownload,
+        updateDBTrimming,
+        eventsDownload,
+        eventsDBTrimming,
+        eventDateDownload,
+        eventDateDBTrimming,
         specificSetting: {
             openDialog: false,
             name: '',
@@ -310,6 +313,34 @@ class ProgramSettings extends React.Component {
         this.updateGlobal = false
     }
 
+    populateObject = (programType, settingsList) => {
+        if (programType == WITH_REGISTRATION) {
+            const withRegistration = {
+                settingDownload: settingsList.settingDownload,
+                settingDBTrimming: settingsList.settingDBTrimming,
+                teiDownload: settingsList.teiDownload,
+                teiDBTrimming: settingsList.teiDBTrimming,
+                enrollmentDownload: settingsList.enrollmentDownload,
+                enrollmentDBTrimming: settingsList.enrollmentDBTrimming,
+                enrollmentDateDownload: settingsList.enrollmentDateDownload,
+                enrollmentDateDBTrimming: settingsList.enrollmentDateDBTrimming,
+                updateDownload: settingsList.updateDownload,
+                updateDBTrimming: settingsList.updateDBTrimming,
+            }
+            return withRegistration
+        } else if (programType == WITHOUT_REGISTRATION) {
+            const withoutRegistration = {
+                settingDownload: settingsList.settingDownload,
+                settingDBTrimming: settingsList.settingDBTrimming,
+                eventsDownload: settingsList.eventsDownload,
+                eventsDBTrimming: settingsList.eventsDBTrimming,
+                eventDateDownload: settingsList.eventDateDownload,
+                eventDateDBTrimming: settingsList.eventDateDBTrimming,
+            }
+            return withoutRegistration
+        }
+    }
+
     handleSubmitDialog = async () => {
         var specificProgramNameKey = this.state.specificSetting.name
         var objData = this.specificSettings
@@ -319,64 +350,75 @@ class ProgramSettings extends React.Component {
         )
 
         if (programNameFilter.length > 0) {
+            let programObject
+            let sumarySettings
+            if (programNameFilter[0].programType === WITH_REGISTRATION) {
+                if (
+                    this.state.specificSetting.settingDownload ||
+                    this.state.specificSetting.settingDBTrimming ||
+                    this.state.specificSetting.teiDownload ||
+                    this.state.specificSetting.teiDBTrimming ||
+                    this.state.specificSetting.enrollmentDownload ||
+                    this.state.specificSetting.enrollmentDBTrimming ||
+                    this.state.specificSetting.enrollmentDateDownload ||
+                    this.state.specificSetting.enrollmentDateDBTrimming ||
+                    this.state.specificSetting.updateDownload ||
+                    this.state.specificSetting.updateDBTrimming
+                ) {
+                    programObject = this.populateObject(
+                        WITH_REGISTRATION,
+                        this.state.specificSetting
+                    )
+                } else {
+                    programObject = this.populateObject(
+                        WITH_REGISTRATION,
+                        SpecificSettingsDefault
+                    )
+                }
+
+                sumarySettings =
+                    (this.state.specificSetting.teiDownload
+                        ? this.state.specificSetting.teiDownload
+                        : SpecificSettingsDefault.teiDownload) + ' TEI'
+            } else if (
+                programNameFilter[0].programType === WITHOUT_REGISTRATION
+            ) {
+                if (
+                    this.state.specificSetting.settingDownload ||
+                    this.state.specificSetting.settingDBTrimming ||
+                    this.state.specificSetting.eventsDownload ||
+                    this.state.specificSetting.eventsDBTrimming ||
+                    this.state.specificSetting.eventDateDownload ||
+                    this.state.specificSetting.eventDateDBTrimming
+                ) {
+                    programObject = this.populateObject(
+                        WITHOUT_REGISTRATION,
+                        this.state.specificSetting
+                    )
+                } else {
+                    programObject = this.populateObject(
+                        WITHOUT_REGISTRATION,
+                        SpecificSettingsDefault
+                    )
+                }
+
+                sumarySettings =
+                    (this.state.specificSetting.eventsDownload
+                        ? this.state.specificSetting.eventsDownload
+                        : SpecificSettingsDefault.eventsDownload) +
+                    ' events per OU'
+            }
+
             objData[specificProgramNameKey] = {
+                ...programObject,
                 id: specificProgramNameKey,
                 lastUpdated: new Date().toJSON(),
                 name: programNameFilter[0].name,
-                settingDownload: this.state.specificSetting.settingDownload,
-                settingDBTrimming: this.state.specificSetting.settingDBTrimming,
-                teiDownload: this.state.specificSetting.teiDownload,
-                teiDBTrimming: this.state.specificSetting.teiDBTrimming,
-                enrollmentDownload: this.state.specificSetting
-                    .enrollmentDownload,
-                enrollmentDBTrimming: this.state.specificSetting
-                    .enrollmentDBTrimming,
-                enrollmentDateDownload: this.state.specificSetting
-                    .enrollmentDateDownload,
-                enrollmentDateDBTrimming: this.state.specificSetting
-                    .enrollmentDateDBTrimming,
-                updateDownload: this.state.specificSetting.updateDownload,
-                updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                eventsDownload: this.state.specificSetting.eventsDownload,
-                eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-                eventDateDownload: this.state.specificSetting.eventDateDownload,
-                eventDateDBTrimming: this.state.specificSetting
-                    .eventDateDBTrimming,
             }
 
-            const sumarySettings =
-                (this.state.specificSetting.teiDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.teiDownload) +
-                ' TEI/ ' +
-                (this.state.specificSetting.eventsDownload === undefined
-                    ? 0
-                    : this.state.specificSetting.eventsDownload) +
-                ' events per OU'
-
             const newProgramRow = {
-                name: programNameFilter[0].name,
-                sumarySettings: sumarySettings,
-                id: specificProgramNameKey,
-                settingDownload: this.state.specificSetting.settingDownload,
-                settingDBTrimming: this.state.specificSetting.settingDBTrimming,
-                teiDownload: this.state.specificSetting.teiDownload,
-                teiDBTrimming: this.state.specificSetting.teiDBTrimming,
-                enrollmentDownload: this.state.specificSetting
-                    .enrollmentDownload,
-                enrollmentDBTrimming: this.state.specificSetting
-                    .enrollmentDBTrimming,
-                enrollmentDateDownload: this.state.specificSetting
-                    .enrollmentDateDownload,
-                enrollmentDateDBTrimming: this.state.specificSetting
-                    .enrollmentDateDBTrimming,
-                updateDownload: this.state.specificSetting.updateDownload,
-                updateDBTrimming: this.state.specificSetting.updateDBTrimming,
-                eventsDownload: this.state.specificSetting.eventsDownload,
-                eventsDBTrimming: this.state.specificSetting.eventsDBTrimming,
-                eventDateDownload: this.state.specificSetting.eventDateDownload,
-                eventDateDBTrimming: this.state.specificSetting
-                    .eventDateDBTrimming,
+                ...objData[specificProgramNameKey],
+                sumarySettings,
             }
 
             this.specificSettings = objData
@@ -411,20 +453,20 @@ class ProgramSettings extends React.Component {
     handleReset = () => {
         programData = GlobalProgramSpecial
         this.setState({
-            settingDownload: settingDownload,
-            settingDBTrimming: settingDBTrimming,
-            teiDownload: teiDownload,
-            teiDBTrimming: teiDBTrimming,
-            enrollmentDownload: enrollmentDownload,
-            enrollmentDBTrimming: enrollmentDBTrimming,
-            enrollmentDateDownload: enrollmentDateDownload,
-            enrollmentDateDBTrimming: enrollmentDateDBTrimming,
-            updateDownload: updateDownload,
-            updateDBTrimming: updateDBTrimming,
-            eventsDownload: eventsDownload,
-            eventsDBTrimming: eventsDBTrimming,
-            eventDateDownload: eventDateDownload,
-            eventDateDBTrimming: eventDateDBTrimming,
+            settingDownload,
+            settingDBTrimming,
+            teiDownload,
+            teiDBTrimming,
+            enrollmentDownload,
+            enrollmentDBTrimming,
+            enrollmentDateDownload,
+            enrollmentDateDBTrimming,
+            updateDownload,
+            updateDBTrimming,
+            eventsDownload,
+            eventsDBTrimming,
+            eventDateDownload,
+            eventDateDBTrimming,
         })
 
         this.updateGlobal = true
@@ -516,51 +558,37 @@ class ProgramSettings extends React.Component {
                                             ) {
                                                 const program = this
                                                     .specificSettings[key]
-                                                const sumarySettings =
-                                                    (program.teiDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.teiDownload) +
-                                                    ' TEI/ ' +
-                                                    (program.eventsDownload ===
-                                                    undefined
-                                                        ? 0
-                                                        : program.eventsDownload) +
-                                                    ' events per OU'
+
+                                                let filter = this.programListComplete.filter(
+                                                    prog =>
+                                                        prog.id == program.id
+                                                )
+                                                filter = filter[0]
+
+                                                let sumarySettings
+
+                                                if (
+                                                    filter.programType ==
+                                                    WITH_REGISTRATION
+                                                ) {
+                                                    sumarySettings =
+                                                        (program.teiDownload
+                                                            ? program.teiDownload
+                                                            : SpecificSettingsDefault.teiDownload) +
+                                                        ' TEI'
+                                                } else {
+                                                    sumarySettings =
+                                                        (program.eventsDownload
+                                                            ? program.eventsDownload
+                                                            : SpecificSettingsDefault.eventsDownload) +
+                                                        ' events per OU'
+                                                }
 
                                                 const newProgramRow = {
-                                                    name: program.name,
-                                                    sumarySettings: sumarySettings,
-                                                    id: key,
-                                                    settingDownload:
-                                                        program.settingDownload,
-                                                    settingDBTrimming:
-                                                        program.settingDBTrimming,
-                                                    teiDownload:
-                                                        program.teiDownload,
-                                                    teiDBTrimming:
-                                                        program.teiDBTrimming,
-                                                    enrollmentDownload:
-                                                        program.enrollmentDownload,
-                                                    enrollmentDBTrimming:
-                                                        program.enrollmentDBTrimming,
-                                                    enrollmentDateDownload:
-                                                        program.enrollmentDateDownload,
-                                                    enrollmentDateDBTrimming:
-                                                        program.enrollmentDateDBTrimming,
-                                                    updateDownload:
-                                                        program.updateDownload,
-                                                    updateDBTrimming:
-                                                        program.updateDBTrimming,
-                                                    eventsDownload:
-                                                        program.eventsDownload,
-                                                    eventsDBTrimming:
-                                                        program.eventsDBTrimming,
-                                                    eventDateDownload:
-                                                        program.eventDateDownload,
-                                                    eventDateDBTrimming:
-                                                        program.eventDateDBTrimming,
+                                                    ...program,
+                                                    sumarySettings,
                                                 }
+
                                                 this.specificSettingsRows.push(
                                                     newProgramRow
                                                 )
@@ -596,20 +624,20 @@ class ProgramSettings extends React.Component {
                             )
                         } else {
                             this.globalSettings = {
-                                settingDownload: settingDownload,
-                                settingDBTrimming: settingDBTrimming,
-                                teiDownload: teiDownload,
-                                teiDBTrimming: teiDBTrimming,
-                                enrollmentDownload: enrollmentDownload,
-                                enrollmentDBTrimming: enrollmentDBTrimming,
-                                enrollmentDateDownload: enrollmentDateDownload,
-                                enrollmentDateDBTrimming: enrollmentDateDBTrimming,
-                                updateDownload: updateDownload,
-                                updateDBTrimming: updateDBTrimming,
-                                eventsDownload: eventsDownload,
-                                eventsDBTrimming: eventsDBTrimming,
-                                eventDateDownload: eventDateDownload,
-                                eventDateDBTrimming: eventDateDBTrimming,
+                                settingDownload,
+                                settingDBTrimming,
+                                teiDownload,
+                                teiDBTrimming,
+                                enrollmentDownload,
+                                enrollmentDBTrimming,
+                                enrollmentDateDownload,
+                                enrollmentDateDBTrimming,
+                                updateDownload,
+                                updateDBTrimming,
+                                eventsDownload,
+                                eventsDBTrimming,
+                                eventDateDownload,
+                                eventDateDBTrimming,
                             }
 
                             const data = {
@@ -647,7 +675,7 @@ class ProgramSettings extends React.Component {
                 .list({
                     paging: false,
                     level: 1,
-                    fields: 'id,name',
+                    fields: 'id,name,programType',
                     filter: 'access.data.write:eq:true',
                 })
                 .then(collection => {
@@ -691,6 +719,7 @@ class ProgramSettings extends React.Component {
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
                 specificSetting={this.state.specificSetting}
+                completeListOptions={this.programListComplete}
             />
         )
     }
