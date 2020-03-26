@@ -74,24 +74,9 @@ class ProgramSettings extends React.Component {
         eventDateDownload,
         eventDateDBTrimming,
         specificSetting: {
+            ...SpecificSettingsDefault,
             openDialog: false,
             name: '',
-            settingDownload: SpecificSettingsDefault.settingDownload,
-            settingDBTrimming: SpecificSettingsDefault.settingDBTrimming,
-            teiDownload: SpecificSettingsDefault.teiDownload,
-            teiDBTrimming: SpecificSettingsDefault.teiDBTrimming,
-            enrollmentDownload: SpecificSettingsDefault.enrollmentDownload,
-            enrollmentDBTrimming: SpecificSettingsDefault.enrollmentDBTrimming,
-            enrollmentDateDownload:
-                SpecificSettingsDefault.enrollmentDateDownload,
-            enrollmentDateDBTrimming:
-                SpecificSettingsDefault.enrollmentDateDBTrimming,
-            updateDownload: SpecificSettingsDefault.updateDownload,
-            updateDBTrimming: SpecificSettingsDefault.updateDBTrimming,
-            eventsDownload: SpecificSettingsDefault.eventsDownload,
-            eventsDBTrimming: SpecificSettingsDefault.eventsDBTrimming,
-            eventDateDownload: SpecificSettingsDefault.eventDateDownload,
-            eventDateDBTrimming: SpecificSettingsDefault.eventDateDBTrimming,
         },
         loading: true,
         isUpdated: false,
@@ -209,17 +194,17 @@ class ProgramSettings extends React.Component {
             this.state.settingDownload == GLOBAL ||
             this.state.settingDownload == PER_ORG_UNIT
         ) {
-          const settings = this.populateObject('GLOBAL_SPECIAL', this.state)
-          globalSettings = {
-              ...settings,
-              lastUpdated: new Date().toJSON(),
-          }
-        } else {          
-          const settings = this.populateObject('GLOBAL', this.state)
-          globalSettings = {
-              ...settings,
-              lastUpdated: new Date().toJSON(),
-          }
+            const settings = this.populateObject('GLOBAL_SPECIAL', this.state)
+            globalSettings = {
+                ...settings,
+                lastUpdated: new Date().toJSON(),
+            }
+        } else {
+            const settings = this.populateObject('GLOBAL', this.state)
+            globalSettings = {
+                ...settings,
+                lastUpdated: new Date().toJSON(),
+            }
         }
 
         this.globalSettings = globalSettings
@@ -259,31 +244,16 @@ class ProgramSettings extends React.Component {
 
     handleClose = () => {
         this.programToChange = undefined
-        const settings = this.populateObject('DEFAULT') //'FULL_SPECIFIC',SpecificSettingsDefault
+        const settings = this.populateObject(
+            'FULL_SPECIFIC',
+            SpecificSettingsDefault
+        )
 
         this.setState({
             specificSetting: {
                 ...settings,
                 openDialog: false,
                 name: '',
-                settingDownload: SpecificSettingsDefault.settingDownload,
-                settingDBTrimming: SpecificSettingsDefault.settingDBTrimming,
-                teiDownload: SpecificSettingsDefault.teiDownload,
-                teiDBTrimming: SpecificSettingsDefault.teiDBTrimming,
-                enrollmentDownload: SpecificSettingsDefault.enrollmentDownload,
-                enrollmentDBTrimming:
-                    SpecificSettingsDefault.enrollmentDBTrimming,
-                enrollmentDateDownload:
-                    SpecificSettingsDefault.enrollmentDateDownload,
-                enrollmentDateDBTrimming:
-                    SpecificSettingsDefault.enrollmentDateDBTrimming,
-                updateDownload: SpecificSettingsDefault.updateDownload,
-                updateDBTrimming: SpecificSettingsDefault.updateDBTrimming,
-                eventsDownload: SpecificSettingsDefault.eventsDownload,
-                eventsDBTrimming: SpecificSettingsDefault.eventsDBTrimming,
-                eventDateDownload: SpecificSettingsDefault.eventDateDownload,
-                eventDateDBTrimming:
-                    SpecificSettingsDefault.eventDateDBTrimming,
             },
         })
 
@@ -643,20 +613,13 @@ class ProgramSettings extends React.Component {
                     })
                 } else if (this.nameSpace === undefined) {
                     this.globalSettings = {
-                        settingDownload: settingDownload,
-                        settingDBTrimming: settingDBTrimming,
-                        teiDownload: teiDownload,
-                        teiDBTrimming: teiDBTrimming,
-                        enrollmentDownload: enrollmentDownload,
-                        enrollmentDBTrimming: enrollmentDBTrimming,
-                        enrollmentDateDownload: enrollmentDateDownload,
-                        enrollmentDateDBTrimming: enrollmentDateDBTrimming,
-                        updateDownload: updateDownload,
-                        updateDBTrimming: updateDBTrimming,
-                        eventsDownload: eventsDownload,
-                        eventsDBTrimming: eventsDBTrimming,
-                        eventDateDownload: eventDateDownload,
-                        eventDateDBTrimming: eventDateDBTrimming,
+                        settingDownload,
+                        teiDownload,
+                        enrollmentDownload,
+                        enrollmentDateDownload,
+                        updateDownload,
+                        eventsDownload,
+                        eventDateDownload,
                     }
 
                     const data = {
@@ -696,7 +659,6 @@ class ProgramSettings extends React.Component {
                     const programList = collection.toArray()
                     this.programList = programList
                     this.programListComplete = programList
-                    //console.log('programs json', collection.json())
                 })
         })
     }
@@ -734,7 +696,10 @@ class ProgramSettings extends React.Component {
                 specificSettingData={specificProgramData}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
                 specificSetting={this.state.specificSetting}
-                tableActionsTitles={[i18n.t('Name'), i18n.t('Summary Settings')]}
+                tableActionsTitles={[
+                    i18n.t('Name'),
+                    i18n.t('Summary Settings'),
+                ]}
                 completeListOptions={this.programListComplete}
             />
         )
