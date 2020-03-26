@@ -11,7 +11,7 @@ import {
     maxValues,
     GLOBAL,
     PER_ORG_UNIT,
-    SpecificSettingsDefault,
+    //SpecificSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
@@ -101,22 +101,10 @@ class ProgramSettings extends React.Component {
         edit: (...args) => {
             this.programToChange = args[0].name
             const argsData = args[0]
+            const settings = this.populateObject('FULL_SPECIFIC', argsData)
             this.setState({
                 specificSetting: {
-                    settingDownload: argsData.settingDownload,
-                    settingDBTrimming: argsData.settingDBTrimming,
-                    teiDownload: argsData.teiDownload,
-                    teiDBTrimming: argsData.teiDBTrimming,
-                    enrollmentDownload: argsData.enrollmentDownload,
-                    enrollmentDBTrimming: argsData.enrollmentDBTrimming,
-                    enrollmentDateDownload: argsData.enrollmentDateDownload,
-                    enrollmentDateDBTrimming: argsData.enrollmentDateDBTrimming,
-                    updateDownload: argsData.updateDownload,
-                    updateDBTrimming: argsData.updateDBTrimming,
-                    eventsDownload: argsData.eventsDownload,
-                    eventsDBTrimming: argsData.eventsDBTrimming,
-                    eventDateDownload: argsData.eventDateDownload,
-                    eventDateDBTrimming: argsData.eventDateDBTrimming,
+                    ...settings,
                     name: argsData.id,
                     openDialog: true,
                 },
@@ -218,37 +206,17 @@ class ProgramSettings extends React.Component {
             this.state.settingDownload == GLOBAL ||
             this.state.settingDownload == PER_ORG_UNIT
         ) {
-            globalSettings = {
-                lastUpdated: new Date().toJSON(),
-                settingDownload: this.state.settingDownload,
-                settingDBTrimming: this.state.settingDBTrimming,
-                teiDownload: this.state.teiDownload,
-                teiDBTrimming: this.state.teiDBTrimming,
-                updateDownload: this.state.updateDownload,
-                updateDBTrimming: this.state.updateDBTrimming,
-                eventsDownload: this.state.eventsDownload,
-                eventsDBTrimming: this.state.eventsDBTrimming,
-                eventDateDownload: this.state.eventDateDownload,
-                eventDateDBTrimming: this.state.eventDateDBTrimming,
-            }
-        } else {
-            globalSettings = {
-                lastUpdated: new Date().toJSON(),
-                settingDownload: this.state.settingDownload,
-                settingDBTrimming: this.state.settingDBTrimming,
-                teiDownload: this.state.teiDownload,
-                teiDBTrimming: this.state.teiDBTrimming,
-                enrollmentDownload: this.state.enrollmentDownload,
-                enrollmentDBTrimming: this.state.enrollmentDBTrimming,
-                enrollmentDateDownload: this.state.enrollmentDateDownload,
-                enrollmentDateDBTrimming: this.state.enrollmentDateDBTrimming,
-                updateDownload: this.state.updateDownload,
-                updateDBTrimming: this.state.updateDBTrimming,
-                eventsDownload: this.state.eventsDownload,
-                eventsDBTrimming: this.state.eventsDBTrimming,
-                eventDateDownload: this.state.eventDateDownload,
-                eventDateDBTrimming: this.state.eventDateDBTrimming,
-            }
+          const settings = this.populateObject('GLOBAL_SPECIAL', this.state)
+          globalSettings = {
+              ...settings,
+              lastUpdated: new Date().toJSON(),
+          }
+        } else {          
+          const settings = this.populateObject('GLOBAL', this.state)
+          globalSettings = {
+              ...settings,
+              lastUpdated: new Date().toJSON(),
+          }
         }
 
         this.globalSettings = globalSettings
@@ -288,24 +256,12 @@ class ProgramSettings extends React.Component {
 
     handleClose = () => {
         this.programToChange = undefined
+        const settings = this.populateObject('DEFAULT') //'FULL_SPECIFIC',SpecificSettingsDefault
 
         this.setState({
             specificSetting: {
+                ...settings,
                 openDialog: false,
-                settingDownload: '',
-                settingDBTrimming: '',
-                teiDownload: '',
-                teiDBTrimming: '',
-                enrollmentDownload: '',
-                enrollmentDBTrimming: '',
-                enrollmentDateDownload: '',
-                enrollmentDateDBTrimming: '',
-                updateDownload: '',
-                updateDBTrimming: '',
-                eventsDownload: '',
-                eventsDBTrimming: '',
-                eventDateDownload: '',
-                eventDateDBTrimming: '',
                 name: '',
             },
         })
@@ -314,31 +270,70 @@ class ProgramSettings extends React.Component {
     }
 
     populateObject = (programType, settingsList) => {
-        if (programType == WITH_REGISTRATION) {
-            const withRegistration = {
-                settingDownload: settingsList.settingDownload,
-                settingDBTrimming: settingsList.settingDBTrimming,
-                teiDownload: settingsList.teiDownload,
-                teiDBTrimming: settingsList.teiDBTrimming,
-                enrollmentDownload: settingsList.enrollmentDownload,
-                enrollmentDBTrimming: settingsList.enrollmentDBTrimming,
-                enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                enrollmentDateDBTrimming: settingsList.enrollmentDateDBTrimming,
-                updateDownload: settingsList.updateDownload,
-                updateDBTrimming: settingsList.updateDBTrimming,
-            }
-            return withRegistration
-        } else if (programType == WITHOUT_REGISTRATION) {
-            const withoutRegistration = {
-                settingDownload: settingsList.settingDownload,
-                settingDBTrimming: settingsList.settingDBTrimming,
-                eventsDownload: settingsList.eventsDownload,
-                eventsDBTrimming: settingsList.eventsDBTrimming,
-                eventDateDownload: settingsList.eventDateDownload,
-                eventDateDBTrimming: settingsList.eventDateDBTrimming,
-            }
-            return withoutRegistration
+        let object
+        switch (programType) {
+            case 'WITH_REGISTRATION':
+                object = {
+                    settingDownload: settingsList.settingDownload,
+                    teiDownload: settingsList.teiDownload,
+                    enrollmentDownload: settingsList.enrollmentDownload,
+                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
+                    updateDownload: settingsList.updateDownload,
+                }
+                break
+            case 'WITHOUT_REGISTRATION':
+                object = {
+                    settingDownload: settingsList.settingDownload,
+                    eventsDownload: settingsList.eventsDownload,
+                    eventDateDownload: settingsList.eventDateDownload,
+                }
+                break
+            case 'GLOBAL':
+                object = {
+                    settingDownload: settingsList.settingDownload,
+                    teiDownload: settingsList.teiDownload,
+                    enrollmentDownload: settingsList.enrollmentDownload,
+                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
+                    updateDownload: settingsList.updateDownload,
+                    eventsDownload: settingsList.eventsDownload,
+                    eventDateDownload: settingsList.eventDateDownload,
+                }
+                break
+            case 'GLOBAL_SPECIAL':
+                object = {
+                    settingDownload: settingsList.settingDownload,
+                    teiDownload: settingsList.teiDownload,
+                    updateDownload: settingsList.updateDownload,
+                    eventsDownload: settingsList.eventsDownload,
+                    eventDateDownload: settingsList.eventDateDownload,
+                }
+                break
+            case 'DEFAULT':
+                object = {
+                    settingDownload,
+                    teiDownload,
+                    enrollmentDownload,
+                    enrollmentDateDownload,
+                    updateDownload,
+                    eventsDownload,
+                    eventDateDownload,
+                }
+                break
+            case 'FULL_SPECIFIC':
+                object = {
+                    settingDownload: settingsList.settingDownload,
+                    teiDownload: settingsList.teiDownload,
+                    enrollmentDownload: settingsList.enrollmentDownload,
+                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
+                    updateDownload: settingsList.updateDownload,
+                    eventsDownload: settingsList.eventsDownload,
+                    eventDateDownload: settingsList.eventDateDownload,
+                }
+                break
+            default:
+                break
         }
+        return object
     }
 
     handleSubmitDialog = async () => {
@@ -355,15 +350,10 @@ class ProgramSettings extends React.Component {
             if (programNameFilter[0].programType === WITH_REGISTRATION) {
                 if (
                     this.state.specificSetting.settingDownload ||
-                    this.state.specificSetting.settingDBTrimming ||
                     this.state.specificSetting.teiDownload ||
-                    this.state.specificSetting.teiDBTrimming ||
                     this.state.specificSetting.enrollmentDownload ||
-                    this.state.specificSetting.enrollmentDBTrimming ||
                     this.state.specificSetting.enrollmentDateDownload ||
-                    this.state.specificSetting.enrollmentDateDBTrimming ||
-                    this.state.specificSetting.updateDownload ||
-                    this.state.specificSetting.updateDBTrimming
+                    this.state.specificSetting.updateDownload
                 ) {
                     programObject = this.populateObject(
                         WITH_REGISTRATION,
@@ -385,11 +375,8 @@ class ProgramSettings extends React.Component {
             ) {
                 if (
                     this.state.specificSetting.settingDownload ||
-                    this.state.specificSetting.settingDBTrimming ||
                     this.state.specificSetting.eventsDownload ||
-                    this.state.specificSetting.eventsDBTrimming ||
-                    this.state.specificSetting.eventDateDownload ||
-                    this.state.specificSetting.eventDateDBTrimming
+                    this.state.specificSetting.eventDateDownload
                 ) {
                     programObject = this.populateObject(
                         WITHOUT_REGISTRATION,
@@ -452,21 +439,9 @@ class ProgramSettings extends React.Component {
 
     handleReset = () => {
         programData = GlobalProgramSpecial
+        const settings = this.populateObject('DEFAULT')
         this.setState({
-            settingDownload,
-            settingDBTrimming,
-            teiDownload,
-            teiDBTrimming,
-            enrollmentDownload,
-            enrollmentDBTrimming,
-            enrollmentDateDownload,
-            enrollmentDateDBTrimming,
-            updateDownload,
-            updateDBTrimming,
-            eventsDownload,
-            eventsDBTrimming,
-            eventDateDownload,
-            eventDateDBTrimming,
+            ...settings,
         })
 
         this.updateGlobal = true
@@ -623,21 +598,9 @@ class ProgramSettings extends React.Component {
                                 }
                             )
                         } else {
+                            const settings = this.populateObject('DEFAULT')
                             this.globalSettings = {
-                                settingDownload,
-                                settingDBTrimming,
-                                teiDownload,
-                                teiDBTrimming,
-                                enrollmentDownload,
-                                enrollmentDBTrimming,
-                                enrollmentDateDownload,
-                                enrollmentDateDBTrimming,
-                                updateDownload,
-                                updateDBTrimming,
-                                eventsDownload,
-                                eventsDBTrimming,
-                                eventDateDownload,
-                                eventDateDBTrimming,
+                                ...settings,
                             }
 
                             const data = {
