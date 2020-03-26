@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-05T19:05:24.542Z\n"
-"PO-Revision-Date: 2020-03-05T19:05:24.542Z\n"
+"POT-Creation-Date: 2020-03-09T21:07:09.277Z\n"
+"PO-Revision-Date: 2020-03-09T21:07:09.277Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -71,18 +71,6 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
-msgid "Any"
-msgstr ""
-
-msgid "Last month"
-msgstr ""
-
-msgid "Last 3 months"
-msgstr ""
-
-msgid "Last 12 months"
-msgstr ""
-
 msgid "General Settings"
 msgstr ""
 
@@ -122,16 +110,25 @@ msgstr ""
 msgid "TEI Enrollment date"
 msgstr ""
 
-msgid "TEI last update"
+msgid "Any"
 msgstr ""
 
-msgid "TE reserved values"
+msgid "Last month"
+msgstr ""
+
+msgid "Last 3 months"
+msgstr ""
+
+msgid "Last 12 months"
+msgstr ""
+
+msgid "TEI last update"
 msgstr ""
 
 msgid "Events"
 msgstr ""
 
-msgid "Event period"
+msgid "Event date"
 msgstr ""
 
 msgid "All Org Units"
