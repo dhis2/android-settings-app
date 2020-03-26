@@ -17,6 +17,8 @@ const {
     dataSync,
     encryptDB,
     reservedValues,
+    numberSmsToSend,
+    numberSmsConfirmation,
 } = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
@@ -29,15 +31,16 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     state = {
-        metadataSync: metadataSync,
-        dataSync: dataSync,
-        numberSmsToSend: '',
-        numberSmsConfirmation: '',
-        reservedValues: reservedValues,
-        encryptDB: encryptDB,
+        metadataSync,
+        dataSync,
+        numberSmsToSend,
+        numberSmsConfirmation,
+        reservedValues,
+        encryptDB,
         isUpdated: false,
         loading: true,
         errorConfirmation: false,
+        openDialog: false,
     }
 
     /**
@@ -47,18 +50,48 @@ class AndroidSettingsContainer extends React.Component {
         e.preventDefault()
 
         let { value } = e.target
-        
+
         if (e.target.name === 'reservedValues') {
             value = Math.min(maxValues.reservedValues, parseInt(value))
-        }
-      
-        if (e.target.name === 'encryptDB') {
-            value = e.target.checked
         }
 
         this.setState({
             ...this.state,
             [e.target.name]: value,
+        })
+        this.updateGlobal = true
+    }
+
+    /**
+     * When Switch is click open Dialog alert
+     */
+    handleChangeSwitch = () => {
+        this.setState({
+            ...this.state,
+            openDialog: true,
+        })
+        this.updateGlobal = true
+    }
+
+    /**
+     * Close Dialog alert
+     */
+    handleCloseDialog = () => {
+        this.setState({
+            ...this.state,
+            openDialog: false,
+        })
+        this.updateGlobal = true
+    }
+
+    /**
+     * Handle EncryptDB switch state and close dialog
+     */
+    handleEncryptSwitch = isChecked => {
+        this.setState({
+            ...this.state,
+            encryptDB: !isChecked,
+            openDialog: false,
         })
         this.updateGlobal = true
     }
@@ -125,13 +158,14 @@ class AndroidSettingsContainer extends React.Component {
      */
     handleReset = () => {
         this.setState({
-            metadataSync: metadataSync,
-            dataSync: dataSync,
-            numberSmsToSend: '',
-            numberSmsConfirmation: '',
-            reservedValues: reservedValues,
-            encryptDB: encryptDB,
+            metadataSync,
+            dataSync,
+            numberSmsToSend,
+            numberSmsConfirmation,
+            reservedValues,
+            encryptDB,
             isUpdated: false,
+            openDialog: false,
         })
         this.updateGlobal = true
     }
@@ -167,29 +201,40 @@ class AndroidSettingsContainer extends React.Component {
                                       })
                                   })
                             : api
-                                  .updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                                      metadataSync: metadataSync,
-                                      dataSync: dataSync,
-                                      numberSmsToSend: '',
-                                      numberSmsConfirmation: '',
-                                      reservedValues: reservedValues,,
-                                      encryptDB: encryptDB,
-                                  })          
+                                  .createValue(NAMESPACE, GENERAL_SETTINGS, {
+                                      metadataSync,
+                                      dataSync,
+                                      numberSmsToSend,
+                                      numberSmsConfirmation,
+                                      reservedValues,
+                                      encryptDB,
+                                  })
                                   .then(res => {
                                       this.setState({
-                                          metadataSync: metadataSync,
-                                          dataSync: dataSync,
-                                          numberSmsToSend: '',
-                                          numberSmsConfirmation: '',
-                                          reservedValues: reservedValues,
-                                          encryptDB: encryptDB,
+                                          metadataSync,
+                                          dataSync,
+                                          numberSmsToSend,
+                                          numberSmsConfirmation,
+                                          reservedValues,
+                                          encryptDB,
+                                          isUpdated: true,
+                                          loading: false,
                                       })
                                   })
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
+                    return api
+                        .createNamespace(NAMESPACE, GENERAL_SETTINGS, {
+                            metadataSync,
+                            dataSync,
+                            numberSmsToSend,
+                            numberSmsConfirmation,
+                            reservedValues,
+                            encryptDB,
+                        })
                         .then(res => {
                             this.keyName = GENERAL_SETTINGS
+
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
@@ -200,12 +245,12 @@ class AndroidSettingsContainer extends React.Component {
                             this.setState({
                                 isUpdated: true,
                                 loading: false,
-                                metadataSync: metadataSync,
-                                dataSync: dataSync,
-                                numberSmsToSend: '',
-                                numberSmsConfirmation: '',
-                                reservedValues: reservedValues,
-                                encryptDB: encryptDB,
+                                metadataSync,
+                                dataSync,
+                                numberSmsToSend,
+                                numberSmsConfirmation,
+                                reservedValues,
+                                encryptDB,
                             })
                         })
                 }
@@ -236,6 +281,9 @@ class AndroidSettingsContainer extends React.Component {
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
                 maxValues={maxValues}
+                handleChangeSwitch={this.handleChangeSwitch}
+                handleClose={this.handleCloseDialog}
+                handleEncrypt={this.handleEncryptSwitch}
             />
         )
     }
