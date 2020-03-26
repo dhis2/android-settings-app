@@ -37,8 +37,8 @@ class DataSetSettings extends React.Component {
     }
 
     state = {
-        periodDSDownload: periodDSDownload,
-        periodDSDBTrimming: periodDSDBTrimming,
+        periodDSDownload,
+        periodDSDBTrimming,
         specificSetting: {
             openDialog: false,
             periodDSDBTrimming: '',
@@ -60,11 +60,11 @@ class DataSetSettings extends React.Component {
         edit: (...args) => {
             this.dataSetToChange = args[0].name
             const argsData = args[0]
+            const settings = this.populateObject('SPECIFIC', argsData)
             this.setState({
                 specificSetting: {
+                    ...settings,
                     name: argsData.id,
-                    periodDSDownload: argsData.periodDSDownload,
-                    periodDSDBTrimming: argsData.periodDSDBTrimming,
                     openDialog: true,
                 },
             })
@@ -143,6 +143,35 @@ class DataSetSettings extends React.Component {
         }
     }
 
+    populateObject = (type, settingsList) => {
+        let object
+        switch (type) {
+            case 'GLOBAL':
+                object = {
+                    periodDSDownload: settingsList.periodDSDownload,
+                }
+                break
+            case 'SPECIFIC':
+                object = {
+                    periodDSDownload: settingsList.periodDSDownload,
+                }
+                break
+            case 'DEFAULT':
+                object = {
+                    periodDSDownload,
+                }
+                break
+            case 'CLEAN':
+                object = {
+                    periodDSDownload: '',
+                }
+                break
+            default:
+                break
+        }
+        return object
+    }
+
     /**
      * Updates global settings on Fly
      */
@@ -151,10 +180,10 @@ class DataSetSettings extends React.Component {
             return true
         }
 
+        const settings = this.populateObject('GLOBAL', this.state)
         const globalSettings = {
+            ...settings,
             lastUpdated: new Date().toJSON(),
-            periodDSDownload: this.state.periodDSDownload,
-            periodDSDBTrimming: this.state.periodDSDBTrimming,
         }
 
         this.globalSettings = globalSettings
@@ -204,12 +233,11 @@ class DataSetSettings extends React.Component {
 
     handleClose = () => {
         this.dataSetToChange = undefined
-
+        const settings = this.populateObject('CLEAN')
         this.setState({
             specificSetting: {
+                ...settings,
                 openDialog: false,
-                periodDSDownload: '',
-                periodDSDBTrimming: '',
                 name: '',
             },
         })
@@ -229,26 +257,33 @@ class DataSetSettings extends React.Component {
         )
 
         if (dataSetNameFilter.length > 0) {
-            objData[specificDataSetNameKey] = {
-                id: specificDataSetNameKey,
-                lastUpdated: new Date().toJSON(),
-                name: dataSetNameFilter[0].name,
-                periodDSDownload: this.state.specificSetting.periodDSDownload,
-                periodDSDBTrimming: this.state.specificSetting
-                    .periodDSDBTrimming,
+            if (this.state.specificSetting.periodDSDownload) {
+                const settings = this.populateObject('DEFAULT')
+                objData[specificDataSetNameKey] = {
+                    ...settings,
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                }
+            } else {
+                const settings = this.populateObject(
+                    'SPECIFIC',
+                    this.state.specificSetting
+                )
+                objData[specificDataSetNameKey] = {
+                    ...settings,
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                }
             }
 
-            const sumarySettings =
-                this.state.specificSetting.periodDSDownload === undefined
-                    ? undefined
-                    : this.state.specificSetting.periodDSDownload
+            const sumarySettings = this.state.specificSetting.periodDSDownload
+                ? this.state.specificSetting.periodDSDownload
+                : periodDSDownload
             const newDataSetRow = {
-                name: dataSetNameFilter[0].name,
-                sumarySettings: sumarySettings,
-                periodDSDownload: this.state.specificSetting.periodDSDownload,
-                periodDSDBTrimming: this.state.specificSetting
-                    .periodDSDBTrimming,
-                id: specificDataSetNameKey,
+                ...objData[specificDataSetNameKey],
+                sumarySettings,
             }
 
             this.specificSettings = objData
@@ -282,9 +317,9 @@ class DataSetSettings extends React.Component {
     }
 
     handleReset = () => {
+        const settings = this.populateObject('DEFAULT')
         this.setState({
-            periodDSDownload: periodDSDownload,
-            periodDSDBTrimming: periodDSDBTrimming,
+            ...settings,
         })
         this.updateGlobal = true
     }
@@ -378,13 +413,8 @@ class DataSetSettings extends React.Component {
                                                         : dataSet.periodDSDownload
 
                                                 const newDataSetRow = {
-                                                    name: dataSet.name,
-                                                    sumarySettings: sumarySettings,
-                                                    periodDSDownload:
-                                                        dataSet.periodDSDownload,
-                                                    periodDSDBTrimming:
-                                                        dataSet.periodDSDBTrimming,
-                                                    id: key,
+                                                    ...dataSet,
+                                                    sumarySettings,
                                                 }
 
                                                 this.specificSettingsRows.push(
@@ -409,9 +439,9 @@ class DataSetSettings extends React.Component {
                                 }
                             )
                         } else {
+                            const settings = this.populateObject('DEFAULT')
                             this.globalSettings = {
-                                periodDSDownload: periodDSDownload,
-                                periodDSDBTrimming: periodDSDBTrimming,
+                                ...settings,
                             }
 
                             const data = {
@@ -432,9 +462,27 @@ class DataSetSettings extends React.Component {
                         }
                     })
                 } else if (this.nameSpace === undefined) {
-                    api.createNamespace(NAMESPACE, DATASET_SETTINGS).catch(e =>
-                        console.error(e)
-                    )
+                    this.globalSettings = {
+                        periodDSDownload: periodDSDownload,
+                        periodDSDBTrimming: periodDSDBTrimming,
+                    }
+
+                    const data = {
+                        globalSettings: {
+                            ...this.globalSettings,
+                        },
+                    }
+
+                    api.createNamespace(NAMESPACE, DATASET_SETTINGS, data)
+                        .then(res => {
+                            this.keyName = DATASET_SETTINGS
+
+                            this.setState({
+                                isUpdated: true,
+                                loading: false,
+                            })
+                        })
+                        .catch(e => console.error(e))
                 }
             })
             .catch(e => {
@@ -449,7 +497,7 @@ class DataSetSettings extends React.Component {
                 .list({
                     paging: false,
                     level: 1,
-                    fields: 'id,name',
+                    fields: 'id,name,periodType',
                     filter: 'access.data.write:eq:true',
                 })
                 .then(collection => {
@@ -497,6 +545,7 @@ class DataSetSettings extends React.Component {
                     i18n.t('Name'),
                     i18n.t('Number of Periods'),
                 ]}
+                completeListOptions={this.dataSetListComplete}
             />
         )
     }
