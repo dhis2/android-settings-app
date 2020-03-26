@@ -256,21 +256,30 @@ class DataSetSettings extends React.Component {
         )
 
         if (dataSetNameFilter.length > 0) {
-            const settings = this.populateObject(
-                'SPECIFIC',
-                this.state.specificSetting
-            )
-            objData[specificDataSetNameKey] = {
-                ...settings,
-                id: specificDataSetNameKey,
-                lastUpdated: new Date().toJSON(),
-                name: dataSetNameFilter[0].name,
+            if (this.state.specificSetting.periodDSDownload) {
+                const settings = this.populateObject('DEFAULT')
+                objData[specificDataSetNameKey] = {
+                    ...settings,
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                }
+            } else {
+                const settings = this.populateObject(
+                    'SPECIFIC',
+                    this.state.specificSetting
+                )
+                objData[specificDataSetNameKey] = {
+                    ...settings,
+                    id: specificDataSetNameKey,
+                    lastUpdated: new Date().toJSON(),
+                    name: dataSetNameFilter[0].name,
+                }
             }
 
-            const sumarySettings =
-                this.state.specificSetting.periodDSDownload === undefined
-                    ? undefined
-                    : this.state.specificSetting.periodDSDownload
+            const sumarySettings = this.state.specificSetting.periodDSDownload
+                ? this.state.specificSetting.periodDSDownload
+                : periodDSDownload
             const newDataSetRow = {
                 ...objData[specificDataSetNameKey],
                 sumarySettings,
