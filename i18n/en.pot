@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-19T19:12:24.698Z\n"
-"PO-Revision-Date: 2020-03-19T19:12:24.698Z\n"
+"POT-Creation-Date: 2020-03-26T06:47:39.999Z\n"
+"PO-Revision-Date: 2020-03-26T06:47:39.999Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -27,6 +27,12 @@ msgid "Encrypt DB"
 msgstr ""
 
 msgid "SET TO DEFAULT"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Number of Periods"
 msgstr ""
 
 msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
@@ -58,10 +64,10 @@ msgstr ""
 msgid "ADD/SAVE"
 msgstr ""
 
-msgid "Download"
+msgid "Summary Settings"
 msgstr ""
 
-msgid "DB trimming"
+msgid "Download"
 msgstr ""
 
 msgid "Actions"
@@ -83,9 +89,6 @@ msgid "Encrypt"
 msgstr ""
 
 msgid "Decrypt"
-msgstr ""
-
-msgid "Number of Periods"
 msgstr ""
 
 msgid "General Settings"
@@ -200,12 +203,6 @@ msgid "{{elementPlural}} specific settings"
 msgstr ""
 
 msgid "{{elementPlural}} settings listed below overwrite the global settings above"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Sumary Settings"
 msgstr ""
 
 msgid "ADD"

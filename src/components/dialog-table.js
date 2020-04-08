@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { Button } from '@dhis2/ui-core'
 
-import ProgramTable from './program-table'
+import ProgramTable from './settings-table/program-table'
 import DataSetTable from './settings-table/dataset-table'
 import i18n from '@dhis2/d2-i18n'
 import titleStyles from '../styles/LayoutTitles.module.css'

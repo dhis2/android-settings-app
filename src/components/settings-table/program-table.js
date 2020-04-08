@@ -6,10 +6,10 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import SettingsTableRow from './setting-table-row'
-import { WITH_REGISTRATION } from '../constants/program-settings'
+import { WITH_REGISTRATION } from '../../constants/program-settings'
 
 import i18n from '@dhis2/d2-i18n'
-import dataTableStyles from '../styles/DataTable.module.css'
+import dataTableStyles from '../../styles/DataTable.module.css'
 
 class ProgramTable extends React.Component {
     constructor(props) {

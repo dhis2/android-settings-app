@@ -258,7 +258,10 @@ class DataSetSettings extends React.Component {
 
         if (dataSetNameFilter.length > 0) {
             if (this.state.specificSetting.periodDSDownload) {
-                const settings = this.populateObject('DEFAULT')
+                const settings = this.populateObject(
+                    'SPECIFIC',
+                    this.state.specificSetting
+                )
                 objData[specificDataSetNameKey] = {
                     ...settings,
                     id: specificDataSetNameKey,
@@ -266,10 +269,7 @@ class DataSetSettings extends React.Component {
                     name: dataSetNameFilter[0].name,
                 }
             } else {
-                const settings = this.populateObject(
-                    'SPECIFIC',
-                    this.state.specificSetting
-                )
+                const settings = this.populateObject('DEFAULT')
                 objData[specificDataSetNameKey] = {
                     ...settings,
                     id: specificDataSetNameKey,
@@ -281,6 +281,7 @@ class DataSetSettings extends React.Component {
             const sumarySettings = this.state.specificSetting.periodDSDownload
                 ? this.state.specificSetting.periodDSDownload
                 : periodDSDownload
+
             const newDataSetRow = {
                 ...objData[specificDataSetNameKey],
                 sumarySettings,
@@ -463,8 +464,8 @@ class DataSetSettings extends React.Component {
                     })
                 } else if (this.nameSpace === undefined) {
                     this.globalSettings = {
-                        periodDSDownload: periodDSDownload,
-                        periodDSDBTrimming: periodDSDBTrimming,
+                        periodDSDownload,
+                        periodDSDBTrimming,
                     }
 
                     const data = {
@@ -540,7 +541,6 @@ class DataSetSettings extends React.Component {
                 specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
                 specificSettingHandleSubmit={this.handleSubmitDialog}
-                specificSetting={this.state.specificSetting}
                 tableActionsTitles={[
                     i18n.t('Name'),
                     i18n.t('Number of Periods'),
