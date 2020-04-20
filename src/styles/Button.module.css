@@ -1,3 +1,11 @@
+.container__padding {
+    padding: 3.5rem 0 0;
+}
+
+.button_marginLeft {
+    margin-left: 0 !important;
+}
+
 .mainContent__button__container {
     font-family: Roboto, sans-serif;
     display: flex;
@@ -14,7 +22,7 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     text-decoration: none;
-    padding: 0px;
+    padding: 0;
     outline: none;
     font-size: inherit;
     font-weight: inherit;
@@ -28,7 +36,7 @@
 
 .main-content__button__save {
     font-family: Roboto, sans-serif;
-    margin: 0px;
+    margin: 0;
     width: 100%;
     background-color: rgb(33, 150, 243);
     color: #ffffff;
@@ -36,7 +44,7 @@
 
 .main-content__button__cancel {
     font-family: Roboto, sans-serif;
-    margin: 0px 0px 0px 1rem;
+    margin: 0 0 0 1rem;
     min-width: 88px;
     color: rgb(255, 152, 0);
     user-select: none;
@@ -50,7 +58,7 @@
 }
 
 .button__add {    
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
 }
 
 .mainContent__dialog__button {
