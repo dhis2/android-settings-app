@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { Button } from '@dhis2/ui-core'
+import { Button, ButtonStrip } from '@dhis2/ui-core'
 
 import ProgramTable from './settings-table/program-table'
 import DataSetTable from './settings-table/dataset-table'
@@ -87,15 +87,17 @@ const DialogTable = ({
                 )}
             </DialogContent>
             <DialogActions>
-                <Button
-                    onClick={handleClose}
-                    className={buttonStyles.mainContent__dialog__button}
-                >
-                    {i18n.t('CANCEL')}
-                </Button>
-                <Button onClick={handleSubmitDialog}>
-                    {i18n.t('ADD/SAVE')}
-                </Button>
+                <ButtonStrip end>
+                    <Button
+                        onClick={handleClose}
+                        className={buttonStyles.mainContent__dialog__button}
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                    <Button onClick={handleSubmitDialog}>
+                        {i18n.t('Add/Save')}
+                    </Button>
+                </ButtonStrip>
             </DialogActions>
         </Dialog>
     )

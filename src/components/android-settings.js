@@ -2,14 +2,13 @@ import React from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import Switch from '@material-ui/core/Switch'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { Button } from '@dhis2/ui-core'
+import { Button, ButtonStrip, CheckboxField } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import DialogEncrypt from './dialog-encrypt'
 
 import buttonStyles from '../styles/Button.module.css'
+import styles from '../styles/LayoutTitles.module.css'
 
 const AndroidSettings = ({
     state,
@@ -25,11 +24,20 @@ const AndroidSettings = ({
 }) => {
     return (
         <>
+            <div>
+                <p className={styles.mainContent__title_headerBar}>
+                    {i18n.t('General settings')}
+                </p>
+                <p className={styles.mainContent__subtitle}>
+                    {i18n.t('These settings apply to all Android users.')}
+                </p>
+            </div>
+
             <form>
                 <TextField
                     id="metadataSync"
                     name="metadataSync"
-                    label={i18n.t('Metadata Sync')}
+                    label={i18n.t('How often should metadata sync?')}
                     margin="normal"
                     select
                     fullWidth
@@ -49,7 +57,7 @@ const AndroidSettings = ({
                 <TextField
                     id="dataSync"
                     name="dataSync"
-                    label={i18n.t('Data Sync')}
+                    label={i18n.t('How often should data sync?')}
                     margin="normal"
                     select
                     fullWidth
@@ -69,8 +77,9 @@ const AndroidSettings = ({
                 <TextField
                     id="numberSmsToSend"
                     name="numberSmsToSend"
-                    label={i18n.t(
-                        'SMS Gateway Phone number where SMS are sent'
+                    label={i18n.t('SMS Gateway Phone number')}
+                    helperText={i18n.t(
+                        'Phone number that receives all SMS messages'
                     )}
                     margin="normal"
                     fullWidth
@@ -120,23 +129,27 @@ const AndroidSettings = ({
                     onChange={handleChange}
                 />
 
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={state.encryptDB}
-                            onChange={handleChangeSwitch}
-                            name="encryptDB"
-                            color="primary"
-                        />
-                    }
-                    label={i18n.t('Encrypt DB')}
-                />
-
-                <div className={buttonStyles.mainContent__button__container}>
-                    <Button onClick={handleReset} primary>
-                        {i18n.t('SET TO DEFAULT')}
-                    </Button>
+                <div className={styles.field__form__container}>
+                    <CheckboxField
+                        name="encryptDB"
+                        checked={state.encryptDB}
+                        onChange={handleChangeSwitch}
+                        label={i18n.t(
+                            'Data can be lost if there are problems with an encrypted database'
+                        )}
+                        helpText={i18n.t('Encrypt Database')}
+                    />
                 </div>
+
+                <ButtonStrip className={buttonStyles.container__padding}>
+                    <Button className={buttonStyles.button_marginLeft} primary>
+                        {i18n.t('Save')}
+                    </Button>
+                    <Button onClick={handleReset}>
+                        {' '}
+                        {i18n.t('Reset all values to default')}{' '}
+                    </Button>
+                </ButtonStrip>
             </form>
 
             <DialogEncrypt
