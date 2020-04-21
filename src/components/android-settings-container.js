@@ -4,8 +4,6 @@ import { CircularLoader } from '@dhis2/ui-core'
 import api from '../utils/api'
 
 import {
-    metadataOptions,
-    dataOptions,
     androidSettingsDefault,
     maxValues,
 } from '../constants/android-settings'
@@ -27,7 +25,6 @@ class AndroidSettingsContainer extends React.Component {
 
         this.nameSpace = undefined
         this.keyName = undefined
-        this.updateGlobal = false
     }
 
     state = {
@@ -37,10 +34,15 @@ class AndroidSettingsContainer extends React.Component {
         numberSmsConfirmation,
         reservedValues,
         encryptDB,
-        isUpdated: false,
         loading: true,
         errorConfirmation: false,
         openDialog: false,
+        openDialogSaveData: false,
+        disableSave: true,
+        submitDataStore: {
+            success: false,
+            error: false,
+        },
     }
 
     /**
@@ -57,43 +59,47 @@ class AndroidSettingsContainer extends React.Component {
 
         this.setState({
             ...this.state,
+            disableSave: false,
+            submitDataStore: {
+                success: false,
+                error: false,
+            },
             [e.target.name]: value,
         })
-        this.updateGlobal = true
     }
 
     /**
-     * When Switch is click open Dialog alert
+     * When using checkbox for Encrypt DB should open dialog
+     * onChange: When Checkbox is checked or not opens dialog
+     * onClose: close Encrypt DB dialog
+     * handleEncrypt: Changes value for encryptDB state
      */
-    handleChangeSwitch = () => {
-        this.setState({
-            ...this.state,
-            openDialog: true,
-        })
-        this.updateGlobal = true
-    }
 
-    /**
-     * Close Dialog alert
-     */
-    handleCloseDialog = () => {
-        this.setState({
-            ...this.state,
-            openDialog: false,
-        })
-        this.updateGlobal = true
-    }
-
-    /**
-     * Handle EncryptDB switch state and close dialog
-     */
-    handleEncryptSwitch = isChecked => {
-        this.setState({
-            ...this.state,
-            encryptDB: !isChecked,
-            openDialog: false,
-        })
-        this.updateGlobal = true
+    handleCheckbox = {
+        onChange: () => {
+            this.setState({
+                ...this.state,
+                openDialog: true,
+                submitDataStore: {
+                    success: false,
+                    error: false,
+                },
+            })
+        },
+        onClose: () => {
+            this.setState({
+                ...this.state,
+                openDialog: false,
+            })
+        },
+        handleEncrypt: isChecked => {
+            this.setState({
+                ...this.state,
+                encryptDB: !isChecked,
+                openDialog: false,
+                disableSave: false,
+            })
+        },
     }
 
     /**
@@ -114,10 +120,6 @@ class AndroidSettingsContainer extends React.Component {
      * Updates Settings calling update api
      */
     submitData = () => {
-        if (!this.updateGlobal) {
-            return true
-        }
-
         if (this.state.numberSmsToSend === '') {
             this.state.numberSmsToSend = null
         }
@@ -139,48 +141,84 @@ class AndroidSettingsContainer extends React.Component {
         this.saveDataApi(androidData)
     }
 
+    /**
+     * Handle update api method to save settings in dataStore also shows alertBar for success and error
+     * */
     saveDataApi = data => {
-        this.keyName === GENERAL_SETTINGS
-            ? api
-                  .updateValue(NAMESPACE, GENERAL_SETTINGS, data)
-                  .then(res => res)
-            : api
-                  .getKeys(NAMESPACE)
-                  .then(
-                      api
-                          .createValue(NAMESPACE, GENERAL_SETTINGS, data)
-                          .then(res => res)
-                  )
+        api.updateValue(NAMESPACE, GENERAL_SETTINGS, data)
+            .then(() => {
+                this.setState({
+                    submitDataStore: {
+                        success: true,
+                        error: false,
+                    },
+                })
+            })
+            .catch(e => {
+                console.error(e)
+                this.setState({
+                    submitDataStore: {
+                        success: false,
+                        error: true,
+                    },
+                })
+            })
     }
 
     /**
-     * Resets values to default
+     * Sets values to default
      */
     handleReset = () => {
         this.setState({
             metadataSync,
             dataSync,
-            numberSmsToSend,
-            numberSmsConfirmation,
+            numberSmsToSend: '',
+            numberSmsConfirmation: '',
             reservedValues,
             encryptDB,
-            isUpdated: false,
             openDialog: false,
+            disableSave: false,
+            submitDataStore: {
+                success: false,
+                error: false,
+            },
         })
-        this.updateGlobal = true
     }
 
-    async componentDidMount() {
-        await api
-            .getNamespaces()
+    /**
+     * Handle save DataStore dialog
+     * */
+    handleSaveDataDialog = {
+        open: () => {
+            this.setState({
+                openDialogSaveData: true,
+            })
+        },
+        close: () => {
+            this.setState({
+                openDialogSaveData: false,
+            })
+        },
+        save: () => {
+            this.submitData()
+            this.setState({
+                openDialogSaveData: false,
+                disableSave: true,
+            })
+        },
+    }
+
+    /**
+     * When component mount, get namespace and keys from dataStore
+     */
+    componentDidMount() {
+        api.getNamespaces()
             .then(res => {
                 const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
-                this.nameSpace !== undefined
-                    ? this.setState({ isUpdated: true })
-                    : this.setState({ isUpdated: false })
+
                 if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
@@ -196,75 +234,22 @@ class AndroidSettingsContainer extends React.Component {
                                   .then(res => {
                                       this.setState({
                                           ...res.value,
-                                          isUpdated: true,
                                           loading: false,
+                                          disableSave: true,
                                       })
                                   })
-                            : api
-                                  .createValue(NAMESPACE, GENERAL_SETTINGS, {
-                                      metadataSync,
-                                      dataSync,
-                                      numberSmsToSend,
-                                      numberSmsConfirmation,
-                                      reservedValues,
-                                      encryptDB,
-                                  })
-                                  .then(res => {
-                                      this.setState({
-                                          metadataSync,
-                                          dataSync,
-                                          numberSmsToSend,
-                                          numberSmsConfirmation,
-                                          reservedValues,
-                                          encryptDB,
-                                          isUpdated: true,
-                                          loading: false,
-                                      })
-                                  })
+                            : this.setState({
+                                  loading: false,
+                              })
                     })
-                } else if (this.nameSpace === undefined) {
-                    return api
-                        .createNamespace(NAMESPACE, GENERAL_SETTINGS, {
-                            metadataSync,
-                            dataSync,
-                            numberSmsToSend,
-                            numberSmsConfirmation,
-                            reservedValues,
-                            encryptDB,
-                        })
-                        .then(res => {
-                            this.keyName = GENERAL_SETTINGS
-
-                            this.setState({
-                                isUpdated: true,
-                                loading: false,
-                            })
-                        })
-                        .catch(e => {
-                            console.error('no namespace error', e)
-                            this.setState({
-                                isUpdated: true,
-                                loading: false,
-                                metadataSync,
-                                dataSync,
-                                numberSmsToSend,
-                                numberSmsConfirmation,
-                                reservedValues,
-                                encryptDB,
-                            })
-                        })
                 }
             })
             .catch(e => {
+                console.error(e)
                 this.setState({
-                    isUpdated: false,
                     loading: false,
                 })
             })
-    }
-
-    componentDidUpdate() {
-        this.submitData()
     }
 
     render() {
@@ -276,14 +261,10 @@ class AndroidSettingsContainer extends React.Component {
             <AndroidSettings
                 state={this.state}
                 handleChange={this.handleChange}
-                metadataOptions={metadataOptions}
-                dataOptions={dataOptions}
                 checkMatchingConfirmation={this.checkMatchingConfirmation}
                 handleReset={this.handleReset}
-                maxValues={maxValues}
-                handleChangeSwitch={this.handleChangeSwitch}
-                handleClose={this.handleCloseDialog}
-                handleEncrypt={this.handleEncryptSwitch}
+                handleEncryptCheckbox={this.handleCheckbox}
+                handleSaveDialog={this.handleSaveDataDialog}
             />
         )
     }

@@ -6,6 +6,14 @@ import { Button, ButtonStrip, CheckboxField } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import DialogEncrypt from './dialog-encrypt'
+import DialogSaveData from './dialog/dialog-save-data'
+import SuccessAlert from './alert-bar/success-alert'
+import SaveErrorAlert from './alert-bar/save-error-alert'
+import {
+    metadataOptions,
+    dataOptions,
+    maxValues,
+} from '../constants/android-settings'
 
 import buttonStyles from '../styles/Button.module.css'
 import styles from '../styles/LayoutTitles.module.css'
@@ -13,14 +21,10 @@ import styles from '../styles/LayoutTitles.module.css'
 const AndroidSettings = ({
     state,
     handleChange,
-    metadataOptions,
-    dataOptions,
     checkMatchingConfirmation,
     handleReset,
-    maxValues,
-    handleChangeSwitch,
-    handleClose,
-    handleEncrypt,
+    handleEncryptCheckbox,
+    handleSaveDialog,
 }) => {
     return (
         <>
@@ -133,21 +137,25 @@ const AndroidSettings = ({
                     <CheckboxField
                         name="encryptDB"
                         checked={state.encryptDB}
-                        onChange={handleChangeSwitch}
-                        label={i18n.t(
+                        onChange={handleEncryptCheckbox.onChange}
+                        label={i18n.t('Encrypt Database')}
+                        helpText={i18n.t(
                             'Data can be lost if there are problems with an encrypted database'
                         )}
-                        helpText={i18n.t('Encrypt Database')}
                     />
                 </div>
 
                 <ButtonStrip className={buttonStyles.container__padding}>
-                    <Button className={buttonStyles.button_marginLeft} primary>
+                    <Button
+                        primary
+                        className={buttonStyles.button_marginLeft}
+                        onClick={handleSaveDialog.open}
+                        disabled={state.disableSave}
+                    >
                         {i18n.t('Save')}
                     </Button>
                     <Button onClick={handleReset}>
-                        {' '}
-                        {i18n.t('Reset all values to default')}{' '}
+                        {i18n.t('Reset all values to default')}
                     </Button>
                 </ButtonStrip>
             </form>
@@ -155,8 +163,28 @@ const AndroidSettings = ({
             <DialogEncrypt
                 openDialog={state.openDialog}
                 checked={state.encryptDB}
-                onClose={handleClose}
-                handleEncrypt={handleEncrypt}
+                onClose={handleEncryptCheckbox.onClose}
+                handleEncrypt={handleEncryptCheckbox.handleEncrypt}
+            />
+
+            <DialogSaveData
+                openDialog={state.openDialogSaveData}
+                onClose={handleSaveDialog.close}
+                saveDataStore={handleSaveDialog.save}
+            />
+
+            <SuccessAlert
+                show={
+                    state.submitDataStore.success &&
+                    !state.submitDataStore.error
+                }
+            />
+
+            <SaveErrorAlert
+                show={
+                    state.submitDataStore.error &&
+                    !state.submitDataStore.success
+                }
             />
         </>
     )
@@ -165,14 +193,10 @@ const AndroidSettings = ({
 AndroidSettings.propTypes = {
     state: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
-    metadataOptions: PropTypes.array.isRequired,
-    dataOptions: PropTypes.array.isRequired,
     checkMatchingConfirmation: PropTypes.func.isRequired,
     handleReset: PropTypes.func.isRequired,
-    maxValues: PropTypes.object.isRequired,
-    handleChangeSwitch: PropTypes.func.isRequired,
-    handleClose: PropTypes.func.isRequired,
-    handleEncrypt: PropTypes.func.isRequired,
+    handleEncryptCheckbox: PropTypes.object.isRequired,
+    handleSaveDialog: PropTypes.object.isRequired,
 }
 
 export default AndroidSettings
