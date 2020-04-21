@@ -81,7 +81,7 @@ export const GlobalProgram = [
         option: i18n.t('Download TEI with enrollment date within'),
         download: [
             {
-                label: i18n.t('Any ime period'),
+                label: i18n.t('Any time period'),
                 value: 'ANY',
             },
             {
@@ -316,7 +316,7 @@ export const SpecificProgram = {
             option: i18n.t('Download TEI that have been updated within'),
             download: [
                 {
-                    label: i18n.t('Any'),
+                    label: i18n.t('Any time period'),
                     value: 'ANY',
                 },
                 {

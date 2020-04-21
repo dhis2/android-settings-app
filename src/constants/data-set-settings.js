@@ -95,3 +95,18 @@ export const periodTypeConstants = {
         default: 4,
     },
 }
+
+export const DataSetTitles = {
+    typeName: 'Data Set Name',
+    type: 'Data Set',
+    typePlural: 'Data Sets',
+    typeLowercase: 'data set',
+}
+
+export const SPECIFIC = 'SPECIFIC'
+export const GLOBAL = 'GLOBAL'
+export const DEFAULT = 'DEFAULT'
+export const CLEAN = 'CLEAN'
+
+export const PERIOD_DS_DOWNLOAD = 'periodDSDownload'
+export const PERIOD_DS_DB_TRIMMING = 'periodDSDBTrimming'
