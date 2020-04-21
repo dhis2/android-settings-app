@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { Button } from '@dhis2/ui-core'
+import { Button, CircularLoader } from '@dhis2/ui-core'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import Tooltip from '@material-ui/core/Tooltip'
 
 import TextFieldSearch from './text-field-search'
 import i18n from '@dhis2/d2-i18n'
@@ -11,6 +10,7 @@ import titleStyles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
 import itemStyles from '../styles/TestAndroidTable.module.css'
 import layoutStyles from '../styles/Layout.module.css'
+import { testAndroidDataConstants } from '../constants/test-android'
 
 class TestAndroid extends React.Component {
     constructor(props) {
@@ -23,10 +23,12 @@ class TestAndroid extends React.Component {
             <div>
                 <div>
                     <p className={titleStyles.mainContent__title__main}>
-                        {i18n.t('Test Android Sync')}
+                        {i18n.t('User sync test')}
                     </p>
                     <p className={titleStyles.mainContent__subtitle}>
-                        {i18n.t('Enter a user to check access to')}
+                        {i18n.t(
+                            'Check the amount of data a user would sync to their device.'
+                        )}
                     </p>
                 </div>
 
@@ -40,66 +42,68 @@ class TestAndroid extends React.Component {
 
                     {this.props.runTest && (
                         <div className={layoutStyles.data__topMargin}>
-                            {this.props.dataConstants.map(test => (
+                            {testAndroidDataConstants.map(test => (
                                 <div key={test.state}>
                                     <Grid container>
-                                        <Grid item xs={10}>
-                                            <small
-                                                className={
-                                                    itemStyles.subitemTitle
-                                                }
-                                            >
-                                                {test.title}
-                                            </small>
-                                            <p
-                                                className={
-                                                    itemStyles.subitemItem
-                                                }
-                                            >
-                                                {test.description}
-                                            </p>
-                                        </Grid>
                                         <Grid item xs={2}>
                                             {this.props[test.load] === true ? (
-                                                <p
-                                                    className={
-                                                        itemStyles.subitemBigitem
-                                                    }
-                                                >
-                                                    {i18n.t('Invoking ...')}
-                                                </p>
+                                                <CircularLoader small />
                                             ) : (
-                                                <Tooltip
-                                                    title={
+                                                <p
+                                                    className={`${
+                                                        itemStyles.subItemBigItem
+                                                    } ${
                                                         this.props.states[
-                                                            test.tooltipTitle
+                                                            test.state
+                                                        ] >=
+                                                        this.props.states[
+                                                            test.maxValueState
+                                                        ]
+                                                            ? itemStyles.maxValue
+                                                            : ''
+                                                    }`}
+                                                >
+                                                    {
+                                                        this.props.states[
+                                                            test.state
                                                         ]
                                                     }
-                                                    placement="bottom"
-                                                >
-                                                    <p
-                                                        className={`${
-                                                            itemStyles.subitemBigitem
-                                                        } ${
-                                                            this.props.states[
-                                                                test.state
-                                                            ] >=
-                                                            this.props.states[
-                                                                test
-                                                                    .maxValueState
-                                                            ]
-                                                                ? itemStyles.maxValue
-                                                                : ''
-                                                        }`}
-                                                    >
-                                                        {
-                                                            this.props.states[
-                                                                test.state
-                                                            ]
-                                                        }
-                                                    </p>
-                                                </Tooltip>
+                                                </p>
                                             )}
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            xs={10}
+                                            className={
+                                                itemStyles.container_center
+                                            }
+                                        >
+                                            <div
+                                                className={
+                                                    itemStyles.container_items
+                                                }
+                                            >
+                                                <p
+                                                    className={
+                                                        itemStyles.subItemTitle
+                                                    }
+                                                >
+                                                    {test.title}
+                                                </p>
+                                                <p
+                                                    className={
+                                                        itemStyles.subItemItem
+                                                    }
+                                                >
+                                                    {i18n.t(
+                                                        'Recommended maximum: {{maxValue}}',
+                                                        {
+                                                            maxValue:
+                                                                test.maxValue,
+                                                        }
+                                                    )}
+                                                </p>
+                                            </div>
                                         </Grid>
                                     </Grid>
                                     <Divider />
@@ -108,15 +112,13 @@ class TestAndroid extends React.Component {
                         </div>
                     )}
 
-                    <div className={buttonStyles.container_button__add}>
-                        <Button
-                            className={buttonStyles.button__add}
-                            onClick={this.props.handleRun}
-                            disabled={this.props.disabledTest}
-                        >
-                            {i18n.t('RUN TEST')}
-                        </Button>
-                    </div>
+                    <Button
+                        className={buttonStyles.button__add}
+                        onClick={this.props.handleRun}
+                        disabled={this.props.disabledTest}
+                    >
+                        {i18n.t('Run test')}
+                    </Button>
                 </div>
             </div>
         )

@@ -2,12 +2,8 @@ import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
 
-import {
-    testAndroidConstants,
-    testAndroidDataConstants,
-} from '../constants/test-android'
 import TestAndroid from './test-android'
-import { memorySizeOf, formatByteSize } from '../utils/memory-size'
+import { formatByteSize, memorySizeOf } from '../utils/memory-size'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import api from '../utils/api'
@@ -37,7 +33,6 @@ class TestAndroidContainer extends React.Component {
         loading: true,
         disabled: true,
         loadData: false,
-        completed: '...',
         errorUsername: false,
         organisationUnitsNumber: 0,
         organisationUnitSearchNumber: 0,
@@ -46,20 +41,6 @@ class TestAndroidContainer extends React.Component {
         programRuleNumber: 0,
         metadataSize: 0,
         dataSize: 0,
-        tooltipOUCapture: undefined,
-        tooltipOUSearch: undefined,
-        tooltipDataSet: undefined,
-        tooltipProgram: undefined,
-        tooltipProgramRule: undefined,
-        tooltipMetadata: undefined,
-        tooltipData: undefined,
-        maxValueOUCapture: undefined,
-        maxValueOUSearch: undefined,
-        maxValueDataSet: undefined,
-        maxValueProgram: undefined,
-        maxValueProgramRule: undefined,
-        maxValueMetadata: undefined,
-        maxValueData: undefined,
         orgUnitLoad: false,
         dataSetLoad: false,
         programLoad: false,
@@ -94,20 +75,6 @@ class TestAndroidContainer extends React.Component {
             programRuleLoad: false,
             metadataLoad: false,
             dataLoad: false,
-        })
-    }
-
-    createTooltipText = () => {
-        testAndroidConstants.forEach(test => {
-            const tooltip = `Min: ${test.min} 
-            Normal: ${test.normal}
-            Max: ${test.max}`
-
-            this.setState({
-                [test.value]: tooltip,
-                [test.maxValueState]: test.max,
-            })
-            //this[test.value] = tooltip
         })
     }
 
@@ -181,13 +148,11 @@ class TestAndroidContainer extends React.Component {
         let dataSetList = []
         let programsList = []
         let programsValuesList = []
-        const programsIdAccess = []
         const organisationUnitSearchList = []
         const promisesOrganisationUnits = []
         const organisationUnitCapture = []
         const promisesOrganisationUnitsSearch = []
         const organisationUnitSearchCollection = []
-        const datasetsIdAccess = []
         let trackedEntityTypeListId = []
         let optionSetListId = []
         let dataSetValuesList = []
@@ -274,15 +239,13 @@ class TestAndroidContainer extends React.Component {
                                 oucapture.programs.valuesContainerMap.forEach(
                                     (value, key) => {
                                         if (programsList.length >= 1) {
-                                            const programIds = programsList.filter(
+                                            programsList = programsList.filter(
                                                 program => program !== key
                                             )
-                                            programsList = programIds
                                             programsList.push(key)
-                                            const programVIds = programsValuesList.filter(
+                                            programsValuesList = programsValuesList.filter(
                                                 program => program.id !== key
                                             )
-                                            programsValuesList = programVIds
                                             programsValuesList.push(value)
                                         } else {
                                             programsList.push(key)
@@ -304,15 +267,13 @@ class TestAndroidContainer extends React.Component {
                                 oucapture.dataSets.valuesContainerMap.forEach(
                                     (value, key) => {
                                         if (dataSetList.length >= 1) {
-                                            const datasetIds = dataSetList.filter(
+                                            dataSetList = dataSetList.filter(
                                                 dataset => dataset !== key
                                             )
-                                            dataSetList = datasetIds
                                             dataSetList.push(key)
-                                            const datasetVIds = dataSetValuesList.filter(
+                                            dataSetValuesList = dataSetValuesList.filter(
                                                 dataset => dataset.id !== key
                                             )
-                                            dataSetValuesList = datasetVIds
                                             dataSetValuesList.push(value)
                                         } else {
                                             dataSetList.push(key)
@@ -337,12 +298,11 @@ class TestAndroidContainer extends React.Component {
                                                     dataElementListId.length >=
                                                     1
                                                 ) {
-                                                    const dataElements = dataElementListId.filter(
+                                                    dataElementListId = dataElementListId.filter(
                                                         dataElement =>
                                                             dataElement !==
                                                             value.dataElement.id
                                                     )
-                                                    dataElementListId = dataElements
                                                     dataElementListId.push(
                                                         value.dataElement.id
                                                     )
@@ -362,11 +322,10 @@ class TestAndroidContainer extends React.Component {
                                                 if (
                                                     indicatorListId.length >= 1
                                                 ) {
-                                                    const indicators = indicatorListId.filter(
+                                                    indicatorListId = indicatorListId.filter(
                                                         indicator =>
                                                             indicator !== key
                                                     )
-                                                    indicatorListId = indicators
                                                     indicatorListId.push(key)
                                                     indicatorValuesList.push(
                                                         value
@@ -383,12 +342,11 @@ class TestAndroidContainer extends React.Component {
                                     const categoryCombos = value.categoryCombo
                                     if (categoryCombos !== undefined) {
                                         if (categoryComboListId.length >= 1) {
-                                            const categoryComboL = categoryComboListId.filter(
+                                            categoryComboListId = categoryComboListId.filter(
                                                 categoryCombo =>
                                                     categoryCombo !==
                                                     categoryCombos.id
                                             )
-                                            categoryComboListId = categoryComboL
                                             categoryComboListId.push(
                                                 categoryCombos.id
                                             )
@@ -408,12 +366,11 @@ class TestAndroidContainer extends React.Component {
                                                         categoryListId.length >=
                                                         1
                                                     ) {
-                                                        const categoryL = categoryListId.filter(
+                                                        categoryListId = categoryListId.filter(
                                                             category =>
                                                                 category !==
                                                                 categoryValue.id
                                                         )
-                                                        categoryListId = categoryL
                                                         categoryListId.push(
                                                             categoryValue.id
                                                         )
@@ -438,14 +395,13 @@ class TestAndroidContainer extends React.Component {
                                                             indicatorTypeListId.length >=
                                                             1
                                                         ) {
-                                                            const indicatorType = indicatorTypeListId.filter(
+                                                            indicatorTypeListId = indicatorTypeListId.filter(
                                                                 indicatorT =>
                                                                     indicatorT !==
                                                                     value
                                                                         .indicatorType
                                                                         .id
                                                             )
-                                                            indicatorTypeListId = indicatorType
                                                             indicatorTypeListId.push(
                                                                 value
                                                                     .indicatorType
@@ -473,12 +429,11 @@ class TestAndroidContainer extends React.Component {
                                         if (
                                             trackedEntityTypeListId.length >= 1
                                         ) {
-                                            const trackedEntityTypes = trackedEntityTypeListId.filter(
+                                            trackedEntityTypeListId = trackedEntityTypeListId.filter(
                                                 trackedEntity =>
                                                     trackedEntity !==
                                                     trackedEntityT.id
                                             )
-                                            trackedEntityTypeListId = trackedEntityTypes
                                             trackedEntityTypeListId.push(
                                                 trackedEntityT.id
                                             )
@@ -504,14 +459,13 @@ class TestAndroidContainer extends React.Component {
                                                 if (
                                                     optionSetListId.length >= 1
                                                 ) {
-                                                    const optionSets = optionSetListId.filter(
+                                                    optionSetListId = optionSetListId.filter(
                                                         optionSet =>
                                                             optionSet !==
                                                             value
                                                                 .trackedEntityAttribute
                                                                 .optionSet.id
                                                     )
-                                                    optionSetListId = optionSets
                                                     optionSetListId.push(
                                                         value
                                                             .trackedEntityAttribute
@@ -547,7 +501,7 @@ class TestAndroidContainer extends React.Component {
                     })
                 }
 
-                if ((dataSetList.length > 0) & (programsList.length > 0)) {
+                if (dataSetList.length > 0 && programsList.length > 0) {
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
@@ -726,11 +680,9 @@ class TestAndroidContainer extends React.Component {
                         }
                     )
 
-                    const orgUnitParent = organisationUnitList
-                    const orgUnitCompleteList = organisationUnitIDList
                     this.getData(
-                        orgUnitCompleteList,
-                        orgUnitParent,
+                        organisationUnitIDList,
+                        organisationUnitList,
                         programsList
                     )
                 }
@@ -1063,8 +1015,7 @@ class TestAndroidContainer extends React.Component {
                 this.props.d2.models.users
                     .get(`${foundUser.id}`, { paging: false })
                     .then(collection => {
-                        const user = collection
-                        this.userSelected = user
+                        this.userSelected = collection
                         this.userSelectedId = foundUser.id
                     })
 
@@ -1095,9 +1046,7 @@ class TestAndroidContainer extends React.Component {
         this.getUserData()
     }
 
-    async componentDidMount() {
-        this.createTooltipText()
-
+    componentDidMount() {
         this.props.d2.models.users
             .list({
                 paging: false,
@@ -1118,7 +1067,7 @@ class TestAndroidContainer extends React.Component {
                 this.globalSettings = res.value.globalSettings
                 this.specificSettings = res.value.specificSettings
             })
-            .catch(e => console.error('error', e))
+            .catch(e => console.error(e))
     }
 
     render() {
@@ -1133,7 +1082,6 @@ class TestAndroidContainer extends React.Component {
                 clearSearchField={this.clearFields}
                 searchFieldValue={this.state.username}
                 runTest={this.state.runTest}
-                dataConstants={testAndroidDataConstants}
                 states={this.state}
                 handleRun={this.handleRun}
                 disabledTest={this.state.disabled}
