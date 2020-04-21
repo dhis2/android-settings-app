@@ -37,7 +37,7 @@ const TableActions = ({ columns, rows, menuActions }) => {
                         <TableCell
                             className={dataTableStyles.dataTable_row_title}
                         >
-                            {row.sumarySettings}
+                            {row.summarySettings}
                         </TableCell>
 
                         <TableCell dense>
