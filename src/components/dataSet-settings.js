@@ -5,12 +5,13 @@ import i18n from '@dhis2/d2-i18n'
 import api from '../utils/api'
 
 import {
-    DataSetting,
-    DataSpecificSetting,
     DataSetSettingsDefault,
+    DataSetting,
+    DataSetTitles,
+    DataSpecificSetting,
 } from '../constants/data-set-settings'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
-import { NAMESPACE, DATASET_SETTINGS } from '../constants/data-store'
+import { DATASET_SETTINGS, NAMESPACE } from '../constants/data-store'
 import { getInstance } from 'd2'
 
 const dataSetSettings = DataSetting
@@ -27,7 +28,6 @@ class DataSetSettings extends React.Component {
         this.dataSetNamesList = []
         this.globalSettings = {}
         this.specificSettings = {}
-        this.updateGlobal = false
         this.specificSettingsRows = []
         this.dataSetList = []
         this.dataSetListComplete = []
@@ -45,10 +45,17 @@ class DataSetSettings extends React.Component {
             periodDSDownload: '',
             name: '',
         },
-        isUpdated: false,
         loading: true,
         deleteDialog: {
             open: false,
+        },
+        disableSave: true,
+        saveDataDialog: {
+            open: false,
+        },
+        submitDataStore: {
+            success: false,
+            error: false,
         },
     }
 
@@ -69,7 +76,6 @@ class DataSetSettings extends React.Component {
                 },
             })
             this.getItemList()
-            this.updateGlobal = false
         },
         delete: (...args) => {
             this.argsRow = args[0]
@@ -79,9 +85,7 @@ class DataSetSettings extends React.Component {
                 deleteDialog: {
                     open: true,
                 },
-                isUpdated: true,
             })
-            this.updateGlobal = false
         },
     }
 
@@ -96,51 +100,42 @@ class DataSetSettings extends React.Component {
         }
     }
 
+    /**
+     * Handle change for global settings
+     * */
     handleChange = e => {
         e.preventDefault()
 
         this.setState({
             ...this.state,
+            disableSave: false,
             [e.target.name]: this.chooseSetting(e.target.name, e.target.value),
         })
-        this.updateGlobal = true
-    }
-
-    handleChangeDialog = e => {
-        e.preventDefault()
-
-        this.setState({
-            ...this.state,
-            specificSetting: {
-                ...this.state.specificSetting,
-                [e.target.name]: this.chooseSetting(
-                    e.target.name,
-                    e.target.value
-                ),
-            },
-        })
-        this.updateGlobal = false
     }
 
     /**
-     * Updates data using Api, checks if keyname exists before updating or creating keyname
-     * @param settingType (global or specific setting)
+     * Updates data using Api
      * @param data (object data)
      */
-    saveDataApi = (settingType, data) => {
-        if (this.keyName === DATASET_SETTINGS) {
-            if (Object.keys(this[settingType]).length) {
-                data[settingType] = this[settingType]
-            }
-
-            api.updateValue(NAMESPACE, DATASET_SETTINGS, data).then(res => res)
-        } else {
-            api.getKeys(NAMESPACE).then(
-                api
-                    .createValue(NAMESPACE, DATASET_SETTINGS, data)
-                    .then(data => data)
-            )
-        }
+    saveDataApi = data => {
+        api.updateValue(NAMESPACE, DATASET_SETTINGS, data)
+            .then(() => {
+                this.setState({
+                    submitDataStore: {
+                        success: true,
+                        error: false,
+                    },
+                })
+            })
+            .catch(e => {
+                console.error(e)
+                this.setState({
+                    submitDataStore: {
+                        success: false,
+                        error: true,
+                    },
+                })
+            })
     }
 
     populateObject = (type, settingsList) => {
@@ -176,17 +171,11 @@ class DataSetSettings extends React.Component {
      * Updates global settings on Fly
      */
     submitData = () => {
-        if (!this.updateGlobal) {
-            return true
-        }
-
         const settings = this.populateObject('GLOBAL', this.state)
-        const globalSettings = {
+        this.globalSettings = {
             ...settings,
             lastUpdated: new Date().toJSON(),
         }
-
-        this.globalSettings = globalSettings
 
         const dataSetData = {
             globalSettings: {
@@ -194,7 +183,13 @@ class DataSetSettings extends React.Component {
             },
         }
 
-        this.saveDataApi('specificSettings', dataSetData)
+        if (this.specificSettings) {
+            dataSetData.specificSettings = {
+                ...this.specificSettings,
+            }
+        }
+
+        this.saveDataApi(dataSetData)
     }
 
     /**
@@ -205,32 +200,17 @@ class DataSetSettings extends React.Component {
     getItemList = () => {
         if (this.dataSetNamesList.length > 0) {
             const dataSetListComplete = this.dataSetListComplete
-            const dataUsedlist = this.dataSetNamesList
+            const dataSetUsedIdList = this.dataSetNamesList
 
-            const dataSetNameFilter = dataSetListComplete.filter(
-                item => !dataUsedlist.includes(item.id)
+            this.dataSetList = dataSetListComplete.filter(
+                item => !dataSetUsedIdList.includes(item.id)
             )
-            this.dataSetList = dataSetNameFilter
         }
     }
 
     /**
-     * Open Dialog Table Component
-     * @case add specific setting: opens Dialog Component with DataSets specific setting List
+     * When close Specific Settings Dialog
      */
-    handleClickOpen = () => {
-        this.getItemList()
-
-        this.setState({
-            specificSetting: {
-                ...this.state.specificSetting,
-                openDialog: true,
-            },
-        })
-
-        this.updateGlobal = false
-    }
-
     handleClose = () => {
         this.dataSetToChange = undefined
         const settings = this.populateObject('CLEAN')
@@ -241,16 +221,14 @@ class DataSetSettings extends React.Component {
                 name: '',
             },
         })
-
-        this.updateGlobal = false
     }
 
     /**
      * Submit Dialog data, specific settings
      */
     handleSubmitDialog = () => {
-        var specificDataSetNameKey = this.state.specificSetting.name
-        var objData = this.specificSettings
+        const specificDataSetNameKey = this.state.specificSetting.name
+        const objData = this.specificSettings
 
         const dataSetNameFilter = this.dataSetListComplete.filter(
             option => option.id === specificDataSetNameKey
@@ -278,20 +256,16 @@ class DataSetSettings extends React.Component {
                 }
             }
 
-            const sumarySettings = this.state.specificSetting.periodDSDownload
-                ? this.state.specificSetting.periodDSDownload
+            const summarySettings = this.state.specificSetting.periodDSDownload
+                ? `${this.state.specificSetting.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
                 : periodDSDownload
 
             const newDataSetRow = {
                 ...objData[specificDataSetNameKey],
-                sumarySettings,
+                summarySettings,
             }
 
             this.specificSettings = objData
-
-            const dataSetData = {
-                specificSettings: objData,
-            }
 
             if (this.dataSetToChange !== undefined) {
                 this.specificSettingsRows = this.specificSettingsRows.filter(
@@ -300,87 +274,187 @@ class DataSetSettings extends React.Component {
                 this.specificSettingsRows.push(newDataSetRow)
 
                 const nameList = this.dataSetNamesList
-                const newNameList = nameList.filter(
+                this.dataSetNamesList = nameList.filter(
                     name => name !== this.state.specificSetting.name
                 )
-
-                this.dataSetNamesList = newNameList
             } else {
                 this.specificSettingsRows.push(newDataSetRow)
             }
 
             this.dataSetNamesList.push(this.state.specificSetting.name)
-
-            this.saveDataApi('globalSettings', dataSetData)
         }
 
         this.handleClose()
     }
 
+    /**
+     * Set to default values
+     * Global settings: initial/default values
+     * Specific settings: no specific settings for datasets
+     * */
     handleReset = () => {
         const settings = this.populateObject('DEFAULT')
+        this.specificSettings = {}
+        this.specificSettingsRows = []
+        this.dataSetNamesList = []
         this.setState({
             ...settings,
+            disableSave: false,
         })
-        this.updateGlobal = true
     }
 
+    /**
+     * When close delete specific settings dialog, should remove it from specific settings list
+     * */
     handleCloseDelete = () => {
         const data = this.argsRow
         const oldList = this.specificSettings
         const rowList = this.specificSettingsRows
         const dataNamesUsed = this.dataSetNamesList
 
-        const dataListNew = dataNamesUsed.filter(dataSet => dataSet !== data.id)
-        this.dataSetNamesList = dataListNew
+        this.dataSetNamesList = dataNamesUsed.filter(
+            dataSet => dataSet !== data.id
+        )
 
         const newList = {}
-        let newRowList = []
 
         for (const key in oldList) {
             if (key !== data.id) {
-                const dataSet = this.specificSettings[key]
-                newList[key] = dataSet
+                newList[key] = this.specificSettings[key]
             }
         }
 
-        newRowList = rowList.filter(row => row.id !== data.id)
-
-        this.specificSettingsRows = newRowList
+        this.specificSettingsRows = rowList.filter(row => row.id !== data.id)
         this.specificSettings = newList
-
-        this.setState({
-            isUpdated: true,
-            deleteDialog: {
-                open: false,
-            },
-        })
-        this.updateGlobal = true
     }
 
-    handleCancelDialog = () => {
-        this.argsRow = undefined
-        this.dataSetName = undefined
-        this.setState({
-            isUpdated: true,
-            deleteDialog: {
-                open: false,
-            },
-        })
-        this.updateGlobal = false
+    /**
+     * Methods to handle Delete Dialog
+     * */
+    handleDeleteDialog = {
+        onClose: () => {
+            this.argsRow = undefined
+            this.dataSetName = undefined
+            this.setState({
+                deleteDialog: {
+                    open: false,
+                },
+            })
+        },
+        delete: () => {
+            this.handleCloseDelete()
+            this.setState({
+                deleteDialog: {
+                    open: false,
+                },
+                disableSave: false,
+            })
+        },
+        titleName: this.dataSetName,
     }
 
-    async componentDidMount() {
-        await api
-            .getNamespaces()
+    /**
+     * Methods to handle Specific Settings Table Actions
+     */
+    handleSpecificSetting = {
+        handleActions: this.tableActions,
+        columnsTitle: [i18n.t('Name'), i18n.t('Number of Periods')],
+    }
+
+    /**
+     * Methods to handle Specific Setting Dialog
+     * */
+    handleSpecificSettingDialog = {
+        handleOpen: () => {
+            this.getItemList()
+            this.setState({
+                specificSetting: {
+                    ...this.state.specificSetting,
+                    openDialog: true,
+                },
+            })
+        },
+        onClose: () => {
+            this.handleClose()
+        },
+        onSave: () => {
+            this.handleSubmitDialog()
+            this.setState({
+                disableSave: false,
+            })
+        },
+        onInputChange: e => {
+            e.preventDefault()
+
+            this.setState({
+                ...this.state,
+                specificSetting: {
+                    ...this.state.specificSetting,
+                    [e.target.name]: this.chooseSetting(
+                        e.target.name,
+                        e.target.value
+                    ),
+                },
+            })
+        },
+    }
+
+    /**
+     * Handle save DataStore dialog
+     * */
+    handleSaveDataDialog = {
+        open: () => {
+            this.setState({
+                saveDataDialog: {
+                    open: true,
+                },
+            })
+        },
+        close: () => {
+            this.setState({
+                saveDataDialog: {
+                    open: false,
+                },
+            })
+        },
+        save: () => {
+            this.submitData()
+            this.setState({
+                disableSave: true,
+                saveDataDialog: {
+                    open: false,
+                },
+                submitDataStore: {
+                    success: false,
+                    error: false,
+                },
+            })
+        },
+    }
+
+    componentDidMount() {
+        getInstance().then(d2 => {
+            d2.models.dataSet
+                .list({
+                    paging: false,
+                    level: 1,
+                    fields: 'id,name,periodType',
+                    filter: 'access.data.write:eq:true',
+                })
+                .then(collection => {
+                    const dataSetList = collection.toArray()
+                    this.dataSetList = dataSetList
+                    this.dataSetListComplete = dataSetList
+                })
+        })
+
+        api.getNamespaces()
             .then(res => {
                 const nameSpace = res.filter(name => name === NAMESPACE)
                 nameSpace.length === 0
                     ? (this.nameSpace = undefined)
                     : (this.nameSpace = nameSpace[0])
-                this.nameSpace !== undefined
-                    ? this.setState({ isUpdated: true })
-                    : this.setState({ isUpdated: false })
+
                 if (this.nameSpace === NAMESPACE) {
                     api.getKeys(this.nameSpace).then(res => {
                         const keyName = res.filter(
@@ -405,17 +479,22 @@ class DataSetSettings extends React.Component {
                                                     key
                                                 )
                                             ) {
+                                                const dataSetNameFilter = this.dataSetListComplete.filter(
+                                                    option => option.id === key
+                                                )
+
                                                 const dataSet = this
                                                     .specificSettings[key]
-                                                const sumarySettings =
+
+                                                const summarySettings =
                                                     dataSet.periodDSDownload ===
                                                     undefined
                                                         ? undefined
-                                                        : dataSet.periodDSDownload
+                                                        : `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
 
                                                 const newDataSetRow = {
                                                     ...dataSet,
-                                                    sumarySettings,
+                                                    summarySettings,
                                                 }
 
                                                 this.specificSettingsRows.push(
@@ -431,7 +510,6 @@ class DataSetSettings extends React.Component {
                                     if (res.value.globalSettings) {
                                         this.setState({
                                             ...res.value.globalSettings,
-                                            isUpdated: true,
                                             loading: false,
                                         })
                                         this.globalSettings =
@@ -439,78 +517,16 @@ class DataSetSettings extends React.Component {
                                     }
                                 }
                             )
-                        } else {
-                            const settings = this.populateObject('DEFAULT')
-                            this.globalSettings = {
-                                ...settings,
-                            }
-
-                            const data = {
-                                globalSettings: {
-                                    ...this.globalSettings,
-                                },
-                            }
-
-                            this.saveDataApi('specificSettings', data)
-
-                            this.nameSpace = NAMESPACE
-                            this.keyName = DATASET_SETTINGS
-
-                            this.setState({
-                                isUpdated: true,
-                                loading: false,
-                            })
                         }
                     })
-                } else if (this.nameSpace === undefined) {
-                    this.globalSettings = {
-                        periodDSDownload,
-                        periodDSDBTrimming,
-                    }
-
-                    const data = {
-                        globalSettings: {
-                            ...this.globalSettings,
-                        },
-                    }
-
-                    api.createNamespace(NAMESPACE, DATASET_SETTINGS, data)
-                        .then(res => {
-                            this.keyName = DATASET_SETTINGS
-
-                            this.setState({
-                                isUpdated: true,
-                                loading: false,
-                            })
-                        })
-                        .catch(e => console.error(e))
                 }
             })
             .catch(e => {
+                console.error(e)
                 this.setState({
-                    isUpdated: false,
                     loading: false,
                 })
             })
-
-        getInstance().then(d2 => {
-            d2.models.dataSet
-                .list({
-                    paging: false,
-                    level: 1,
-                    fields: 'id,name,periodType',
-                    filter: 'access.data.write:eq:true',
-                })
-                .then(collection => {
-                    const dataSetList = collection.toArray()
-                    this.dataSetList = dataSetList
-                    this.dataSetListComplete = dataSetList
-                })
-        })
-    }
-
-    componentDidUpdate() {
-        this.submitData()
     }
 
     render() {
@@ -520,32 +536,22 @@ class DataSetSettings extends React.Component {
 
         return (
             <GlobalSpecificSettings
-                tableNameProperty="Data Set Name"
-                componentSubtitleSingular="Data Set"
-                componentSubtitlePlural="Data Sets"
                 programTableData={dataSetSettings}
                 states={this.state}
                 handleTableChange={this.handleChange}
                 specificSettings={this.dataSetNamesList}
                 specificSettingList={this.specificSettingsRows}
-                programTableActions={this.tableActions}
-                addSpecificSetting={this.handleClickOpen}
-                deleteDialogDelete={this.handleCloseDelete}
-                closeDialogDelete={this.handleCancelDialog}
-                typeNameDialogDelete="data set"
                 dialogDeleteName={this.dataSetName}
-                handleResetGlobalSettings={this.handleReset}
-                specificSettingDialogClose={this.handleClose}
+                handleSetDefaultValues={this.handleReset}
                 specificSettingDataTitle={this.dataSetToChange}
                 specificSettingOptions={this.dataSetList}
-                specificSettingHandleChange={this.handleChangeDialog}
                 specificSettingData={dataSpecificSetting}
-                specificSettingHandleSubmit={this.handleSubmitDialog}
-                tableActionsTitles={[
-                    i18n.t('Name'),
-                    i18n.t('Number of Periods'),
-                ]}
                 completeListOptions={this.dataSetListComplete}
+                handleSaveDialog={this.handleSaveDataDialog}
+                deleteDialog={this.handleDeleteDialog}
+                specificSettingDialog={this.handleSpecificSettingDialog}
+                specificSettingTable={this.handleSpecificSetting}
+                settingType={DataSetTitles}
             />
         )
     }

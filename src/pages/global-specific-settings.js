@@ -1,11 +1,15 @@
 import React from 'react'
 
-import { Button } from '@dhis2/ui-core'
+import { Button, ButtonStrip } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import SettingsTable from '../components/settings-table/settings-table'
+import ProgramGlobalSettings from '../components/settings-table/program-global-settings'
 import DialogDelete from '../components/dialog-delete'
 import DialogTable from '../components/dialog-table'
 import TableActions from '../components/table-actions'
+import DialogSaveData from '../components/dialog/dialog-save-data'
+import SuccessAlert from '../components/alert-bar/success-alert'
+import SaveErrorAlert from '../components/alert-bar/save-error-alert'
 
 import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
@@ -14,65 +18,68 @@ import layoutStyles from '../styles/Layout.module.css'
 import '@dhis2/d2-ui-core/css/Table.css'
 
 const GlobalSpecificSettings = ({
-    componentSubtitleSingular,
-    componentSubtitlePlural,
     programTableData,
     states,
     handleTableChange,
     specificSettings,
     specificSettingList,
-    programTableActions,
-    addSpecificSetting,
-    deleteDialogDelete,
-    closeDialogDelete,
-    typeNameDialogDelete,
     dialogDeleteName,
-    handleResetGlobalSettings,
-    specificSettingDialogClose,
+    handleSetDefaultValues,
     specificSettingDataTitle,
     specificSettingOptions,
-    specificSettingHandleChange,
     specificSettingData,
-    specificSettingHandleSubmit,
-    tableActionsTitles,
     completeListOptions,
+    handleSaveDialog,
+    deleteDialog,
+    specificSettingDialog,
+    specificSettingTable,
+    settingType,
 }) => {
     return (
         <React.Fragment>
             <div>
-                <p className={styles.mainContent__title__main}>
+                <p className={styles.mainContent__title_headerBar}>
                     {i18n.t('{{elementPlural}} global settings', {
-                        elementPlural: componentSubtitlePlural,
+                        elementPlural: settingType.typePlural,
                     })}
                 </p>
                 <p className={styles.mainContent__subtitle}>
                     {i18n.t(
-                        'Applies to all {{elementPlural}} that an Android user has access to, unless a specific set of values has been configured for {{elementSingular}} (see below).',
+                        'Applies to all {{elementPlural}} an Android user has access to. Specific {{elementSingular}} settings can be defined in the section below.',
                         {
-                            elementPlural: componentSubtitlePlural,
-                            elementSingular: componentSubtitleSingular,
+                            elementPlural: settingType.typePlural,
+                            elementSingular: settingType.type,
                         }
                     )}
                 </p>
 
-                <SettingsTable
-                    data={programTableData}
-                    states={states}
-                    onChange={handleTableChange}
-                />
+                {settingType.type === 'Program' ? (
+                    <ProgramGlobalSettings
+                        states={states}
+                        data={programTableData}
+                        handleChange={handleTableChange}
+                    />
+                ) : (
+                    <SettingsTable
+                        data={programTableData}
+                        states={states}
+                        onChange={handleTableChange}
+                    />
+                )}
             </div>
 
             <div>
-                <p className={styles.mainContent__title__main}>
+                <p className={styles.mainContent__title_headerBar}>
                     {i18n.t('{{elementPlural}} specific settings', {
-                        elementPlural: componentSubtitlePlural,
+                        elementPlural: settingType.typePlural,
                     })}
                 </p>
                 <p className={styles.mainContent__subtitle}>
                     {i18n.t(
-                        '{{elementPlural}} settings listed below overwrite the global settings above',
+                        'Applies only to the assigned {{elementLowerCase}}. {{elementSingular}} specific settings will overwrite the global settings above.',
                         {
-                            elementPlural: componentSubtitlePlural,
+                            elementLowerCase: settingType.typeLowercase,
+                            elementSingular: settingType.type,
                         }
                     )}
                 </p>
@@ -81,51 +88,78 @@ const GlobalSpecificSettings = ({
                     <div className={layoutStyles.data__topMargin}>
                         <TableActions
                             {...states}
-                            columns={tableActionsTitles}
+                            columns={specificSettingTable.columnsTitle}
                             rows={specificSettingList}
-                            menuActions={programTableActions}
+                            menuActions={specificSettingTable.handleActions}
                         />
                     </div>
                 )}
 
-                <div className={buttonStyles.container_button__add}>
+                <Button
+                    className={buttonStyles.button__add}
+                    onClick={specificSettingDialog.handleOpen}
+                >
+                    {i18n.t('Add a {{elementSingular}} specific setting', {
+                        elementSingular: settingType.type,
+                    })}
+                </Button>
+
+                <ButtonStrip className={buttonStyles.container__padding}>
                     <Button
-                        className={buttonStyles.button__add}
-                        onClick={addSpecificSetting}
+                        primary
+                        onClick={handleSaveDialog.open}
+                        disabled={states.disableSave}
+                        className={buttonStyles.button_marginLeft}
                     >
-                        {i18n.t('ADD')}
+                        {i18n.t('Save')}
                     </Button>
-                </div>
+                    <Button onClick={handleSetDefaultValues}>
+                        {i18n.t('Reset all values to default')}
+                    </Button>
+                </ButtonStrip>
 
                 <DialogDelete
                     open={states.deleteDialog.open}
-                    onHandleDelete={deleteDialogDelete}
-                    onHandleClose={closeDialogDelete}
-                    typeName={typeNameDialogDelete}
+                    onHandleDelete={deleteDialog.delete}
+                    onHandleClose={deleteDialog.onClose}
+                    typeName={settingType.typeLowercase}
                     name={dialogDeleteName}
                 />
 
-                <div className={buttonStyles.mainContent__button__container}>
-                    <Button onClick={handleResetGlobalSettings} primary>
-                        {i18n.t('SET TO DEFAULT')}
-                    </Button>
-                </div>
-
                 <DialogTable
                     open={states.specificSetting.openDialog}
-                    title={componentSubtitlePlural}
-                    handleClose={specificSettingDialogClose}
+                    title={settingType.typePlural}
+                    handleClose={specificSettingDialog.onClose}
                     dataTitle={specificSettingDataTitle}
                     dataTitleOptions={specificSettingOptions}
                     titleValue={states.specificSetting.name}
-                    handleChange={specificSettingHandleChange}
-                    textFieldTitleName="name"
+                    handleChange={specificSettingDialog.onInputChange}
                     data={specificSettingData}
-                    handleSubmitDialog={specificSettingHandleSubmit}
+                    handleSubmitDialog={specificSettingDialog.onSave}
                     specificSetting={states.specificSetting}
                     completeListOptions={completeListOptions}
                 />
+
+                <DialogSaveData
+                    openDialog={states.saveDataDialog.open}
+                    onClose={handleSaveDialog.close}
+                    saveDataStore={handleSaveDialog.save}
+                />
             </div>
+
+            <SuccessAlert
+                show={
+                    states.submitDataStore.success &&
+                    !states.submitDataStore.error
+                }
+            />
+
+            <SaveErrorAlert
+                show={
+                    states.submitDataStore.error &&
+                    !states.submitDataStore.success
+                }
+            />
         </React.Fragment>
     )
 }
