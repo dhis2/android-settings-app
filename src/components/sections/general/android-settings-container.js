@@ -1,14 +1,15 @@
 import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
-import api from '../utils/api'
+import api from '../../../utils/api'
 
 import {
     androidSettingsDefault,
     maxValues,
-} from '../constants/android-settings'
-import AndroidSettings from './android-settings'
-import { NAMESPACE, GENERAL_SETTINGS } from '../constants/data-store'
+    RESERVED_VALUES,
+} from '../../../constants/android-settings'
+import GeneralSettings from './general-settings'
+import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 
 const {
     metadataSync,
@@ -43,6 +44,7 @@ class AndroidSettingsContainer extends React.Component {
             success: false,
             error: false,
         },
+        openErrorAlert: false,
     }
 
     /**
@@ -53,7 +55,7 @@ class AndroidSettingsContainer extends React.Component {
 
         let { value } = e.target
 
-        if (e.target.name === 'reservedValues') {
+        if (e.target.name === RESERVED_VALUES) {
             value = Math.min(maxValues.reservedValues, parseInt(value))
         }
 
@@ -182,6 +184,7 @@ class AndroidSettingsContainer extends React.Component {
                 success: false,
                 error: false,
             },
+            openErrorAlert: false,
         })
     }
 
@@ -220,34 +223,44 @@ class AndroidSettingsContainer extends React.Component {
                     : (this.nameSpace = nameSpace[0])
 
                 if (this.nameSpace === NAMESPACE) {
-                    api.getKeys(this.nameSpace).then(res => {
-                        const keyName = res.filter(
-                            name => name === GENERAL_SETTINGS
-                        )
-                        keyName.length === 0
-                            ? (this.keyName = undefined)
-                            : (this.keyName = keyName[0])
+                    api.getKeys(this.nameSpace)
+                        .then(res => {
+                            const keyName = res.filter(
+                                name => name === GENERAL_SETTINGS
+                            )
+                            keyName.length === 0
+                                ? (this.keyName = undefined)
+                                : (this.keyName = keyName[0])
 
-                        this.keyName !== undefined
-                            ? api
-                                  .getValue(this.nameSpace, this.keyName)
-                                  .then(res => {
-                                      this.setState({
-                                          ...res.value,
-                                          loading: false,
-                                          disableSave: true,
+                            this.keyName !== undefined
+                                ? api
+                                      .getValue(this.nameSpace, this.keyName)
+                                      .then(res => {
+                                          this.setState({
+                                              ...res.value,
+                                              loading: false,
+                                              disableSave: true,
+                                          })
                                       })
+                                : this.setState({
+                                      loading: false,
+                                      openErrorAlert: true,
                                   })
-                            : this.setState({
-                                  loading: false,
-                              })
-                    })
+                        })
+                        .catch(e => {
+                            console.error(e)
+                            this.setState({
+                                loading: false,
+                                openErrorAlert: true,
+                            })
+                        })
                 }
             })
             .catch(e => {
                 console.error(e)
                 this.setState({
                     loading: false,
+                    openErrorAlert: true,
                 })
             })
     }
@@ -258,7 +271,7 @@ class AndroidSettingsContainer extends React.Component {
         }
 
         return (
-            <AndroidSettings
+            <GeneralSettings
                 state={this.state}
                 handleChange={this.handleChange}
                 checkMatchingConfirmation={this.checkMatchingConfirmation}

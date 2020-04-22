@@ -51,3 +51,5 @@ export const androidSettingsDefault = {
     reservedValues: 0,
     encryptDB: false,
 }
+
+export const RESERVED_VALUES = 'reservedValues'
