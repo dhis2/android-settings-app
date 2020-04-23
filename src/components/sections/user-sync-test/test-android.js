@@ -4,13 +4,13 @@ import { Button, CircularLoader } from '@dhis2/ui-core'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 
-import TextFieldSearch from './text-field-search'
+import TextFieldSearch from '../../text-field-search'
 import i18n from '@dhis2/d2-i18n'
-import titleStyles from '../styles/LayoutTitles.module.css'
-import buttonStyles from '../styles/Button.module.css'
-import itemStyles from '../styles/TestAndroidTable.module.css'
-import layoutStyles from '../styles/Layout.module.css'
-import { testAndroidDataConstants } from '../constants/test-android'
+import titleStyles from '../../../styles/LayoutTitles.module.css'
+import buttonStyles from '../../../styles/Button.module.css'
+import itemStyles from '../../../styles/TestAndroidTable.module.css'
+import layoutStyles from '../../../styles/Layout.module.css'
+import { testAndroidDataConstants } from '../../../constants/test-android'
 
 class TestAndroid extends React.Component {
     constructor(props) {

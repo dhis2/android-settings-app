@@ -5,10 +5,10 @@ import {
     DataSetIcon,
     TestRun,
 } from '../components/icons-svg'
-import AndroidSettingsContainer from '../components/android-settings-container'
-import ProgramSettings from '../components/program-settings'
-import DataSetSettings from '../components/dataSet-settings'
-import TestAndroidContainer from '../components/test-android-container'
+import AndroidSettingsContainer from '../components/sections/general/android-settings-container'
+import ProgramSettings from '../components/sections/program/program-settings'
+import DataSetSettings from '../components/sections/dataset/dataSet-settings'
+import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 
 import i18n from '@dhis2/d2-i18n'
 
@@ -39,7 +39,7 @@ const menuSection = [
         label: i18n.t('Test Android Sync'),
         path: '/test-android-sync',
         icon: <TestRun />,
-        component: <TestAndroidContainer />,
+        component: <UserSyncTestContainer />,
     },
 ]
 

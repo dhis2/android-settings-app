@@ -3,12 +3,12 @@ import React from 'react'
 import { CircularLoader } from '@dhis2/ui-core'
 
 import TestAndroid from './test-android'
-import { formatByteSize, memorySizeOf } from '../utils/memory-size'
-import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
+import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
+import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
 
-import api from '../utils/api'
+import api from '../../../utils/api'
 
-class TestAndroidContainer extends React.Component {
+class UserSyncTestContainer extends React.Component {
     constructor(props) {
         super(props)
         this.usersOptions = []
@@ -1097,4 +1097,4 @@ class TestAndroidContainer extends React.Component {
     }
 }
 
-export default TestAndroidContainer
+export default UserSyncTestContainer

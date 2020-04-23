@@ -7,7 +7,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui-core'
-import { encryptTitles } from '../constants/android-settings'
+import { encryptTitles } from '../../constants/android-settings'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 
@@ -24,7 +24,7 @@ const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
         <>
             {openDialog && (
                 <Modal small onClose={onClose} position="middle">
-                    <ModalTitle dataTest="dhis2-uicore-modaltitle">
+                    <ModalTitle>
                         {i18n.t('{{encrypt}} DB', { encrypt })}
                     </ModalTitle>
                     <ModalContent>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import DialogEncrypt from '../../dialog-encrypt'
+import DialogEncrypt from '../../dialog/dialog-encrypt'
 import DialogSaveData from '../../dialog/dialog-save-data'
 import SuccessAlert from '../../alert-bar/success-alert'
 import SaveErrorAlert from '../../alert-bar/save-error-alert'

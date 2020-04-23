@@ -4,7 +4,7 @@ import { TwoPanel, Sidebar, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
 import { Route, Link, Switch, HashRouter } from 'react-router-dom'
 
-import AndroidSettingsContainer from '../components/android-settings-container'
+import AndroidSettingsContainer from '../components/sections/general/android-settings-container'
 import menuSection from '../constants/menu-sections'
 import i18n from '@dhis2/d2-i18n'
 

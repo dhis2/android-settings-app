@@ -2,89 +2,57 @@ import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
-import api from '../utils/api'
+import api from '../../../utils/api'
 
 import {
+    CLEAN,
+    DATA_SET,
+    DataSetSettingsDefault,
+    DataSetting,
+    DataSetTitles,
+    DataSpecificSetting,
     DEFAULT,
-    ENROLLMENT_DOWNLOAD,
-    FULL_SPECIFIC,
-    GLOBAL,
-    GlobalProgram,
-    GlobalProgramSpecial,
-    PER_ORG_UNIT,
-    PROGRAM,
-    ProgramSettingsDefault,
-    ProgramTitles,
-    SETTING_DOWNLOAD,
-    SpecificProgram,
-    SpecificSettingsDefault,
-    WITH_REGISTRATION,
-} from '../constants/program-settings'
-import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
-
-import GlobalSpecificSettings from '../pages/global-specific-settings'
+    SPECIFIC,
+} from '../../../constants/data-set-settings'
+import GlobalSpecificSettings from '../../../pages/global-specific-settings'
+import { DATASET_SETTINGS, NAMESPACE } from '../../../constants/data-store'
 import { getInstance } from 'd2'
-import { parseValueByType } from '../modules/programs/parseValueBySettingType'
-import { populateProgramObject } from '../modules/programs/populateProgramObject'
-import { getItemFromList } from '../modules/getItemFromList'
-import { prepareDataToSubmit } from '../modules/prepareDataToSubmit'
-import { prepareSpecificSettingsToSave } from '../modules/prepareSpecificSettingToSave'
-import { removeSettingFromList } from '../modules/removeSettingFromList'
+import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
+import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
+import { getItemFromList } from '../../../modules/getItemFromList'
+import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
+import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
+import { removeSettingFromList } from '../../../modules/removeSettingFromList'
 
-let programData = GlobalProgram
-const specificProgramData = SpecificProgram
-const {
-    settingDownload,
-    settingDBTrimming,
-    teiDownload,
-    teiDBTrimming,
-    enrollmentDownload,
-    enrollmentDBTrimming,
-    enrollmentDateDownload,
-    enrollmentDateDBTrimming,
-    updateDownload,
-    updateDBTrimming,
-    eventsDownload,
-    eventsDBTrimming,
-    eventDateDownload,
-    eventDateDBTrimming,
-} = ProgramSettingsDefault
+const dataSetSettings = DataSetting
+const dataSpecificSetting = DataSpecificSetting
 
-class ProgramSettings extends React.Component {
+const { periodDSDownload, periodDSDBTrimming } = DataSetSettingsDefault
+
+class DataSetSettings extends React.Component {
     constructor(props) {
         super(props)
 
         this.nameSpace = undefined
         this.keyName = undefined
-        this.programNamesList = []
+        this.dataSetNamesList = []
         this.globalSettings = {}
         this.specificSettings = {}
         this.specificSettingsRows = []
-        this.programList = []
-        this.programListComplete = []
-        this.programToChange = undefined
+        this.dataSetList = []
+        this.dataSetListComplete = []
+        this.dataSetToChange = undefined
         this.argsRow = undefined
-        this.programName = undefined
+        this.dataSetName = undefined
     }
 
     state = {
-        settingDownload,
-        settingDBTrimming,
-        teiDownload,
-        teiDBTrimming,
-        enrollmentDownload,
-        enrollmentDBTrimming,
-        enrollmentDateDownload,
-        enrollmentDateDBTrimming,
-        updateDownload,
-        updateDBTrimming,
-        eventsDownload,
-        eventsDBTrimming,
-        eventDateDownload,
-        eventDateDBTrimming,
+        periodDSDownload,
+        periodDSDBTrimming,
         specificSetting: {
-            ...SpecificSettingsDefault,
             openDialog: false,
+            periodDSDBTrimming: '',
+            periodDSDownload: '',
             name: '',
         },
         loading: true,
@@ -108,9 +76,9 @@ class ProgramSettings extends React.Component {
      */
     tableActions = {
         edit: (...args) => {
-            this.programToChange = args[0].name
+            this.dataSetToChange = args[0].name
             const argsData = args[0]
-            const settings = populateProgramObject(FULL_SPECIFIC, argsData)
+            const settings = populateSettingObject(SPECIFIC, argsData)
             this.setState({
                 specificSetting: {
                     ...settings,
@@ -118,15 +86,15 @@ class ProgramSettings extends React.Component {
                     openDialog: true,
                 },
             })
-            this.programList = getItemFromList(
-                this.programNamesList,
-                this.programListComplete,
-                this.programList
+            this.dataSetList = getItemFromList(
+                this.dataSetNamesList,
+                this.dataSetListComplete,
+                this.dataSetList
             )
         },
         delete: (...args) => {
             this.argsRow = args[0]
-            this.programName = args[0].name
+            this.dataSetName = args[0].name
 
             this.setState({
                 deleteDialog: {
@@ -137,38 +105,19 @@ class ProgramSettings extends React.Component {
     }
 
     /**
-     * handle onChange for global settings
+     * Handle change for global settings
      * */
     handleChange = e => {
-        if (e.name === ENROLLMENT_DOWNLOAD) {
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.name]: e.value,
-            })
-        } else {
-            e.preventDefault()
+        e.preventDefault()
 
-            if (e.target.name === SETTING_DOWNLOAD) {
-                if (
-                    e.target.value === GLOBAL ||
-                    e.target.value === PER_ORG_UNIT
-                ) {
-                    programData = GlobalProgramSpecial
-                } else {
-                    programData = GlobalProgram
-                }
-            }
-
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.target.name]: parseValueByType(
-                    e.target.name,
-                    e.target.value
-                ),
-            })
-        }
+        this.setState({
+            ...this.state,
+            disableSave: false,
+            [e.target.name]: parseValueBySettingType(
+                e.target.name,
+                e.target.value
+            ),
+        })
     }
 
     /**
@@ -176,7 +125,7 @@ class ProgramSettings extends React.Component {
      * @param data (object data)
      */
     saveDataApi = data => {
-        api.updateValue(NAMESPACE, PROGRAM_SETTINGS, data)
+        api.updateValue(NAMESPACE, DATASET_SETTINGS, data)
             .then(() => {
                 this.setState({
                     submitDataStore: {
@@ -197,15 +146,11 @@ class ProgramSettings extends React.Component {
     }
 
     /**
-     * Updates global settings on Fly
+     * When close Specific Settings Dialog
      */
     handleClose = () => {
-        this.programToChange = undefined
-        const settings = populateProgramObject(
-            FULL_SPECIFIC,
-            SpecificSettingsDefault
-        )
-
+        this.dataSetToChange = undefined
+        const settings = populateSettingObject(CLEAN)
         this.setState({
             specificSetting: {
                 ...settings,
@@ -218,15 +163,14 @@ class ProgramSettings extends React.Component {
     /**
      * Set to default values
      * Global settings: initial/default values
-     * Specific settings: no specific settings
-     */
+     * Specific settings: no specific settings for datasets
+     * */
     handleReset = () => {
-        programData = GlobalProgramSpecial
-        const settings = populateProgramObject(DEFAULT)
+        const settings = populateSettingObject(DEFAULT)
         this.specificSettings = {}
         this.specificSettingsRows = []
-        this.programNamesList = []
-        this.programList = this.programListComplete
+        this.dataSetNamesList = []
+        this.dataSetList = this.dataSetListComplete
 
         this.setState({
             ...settings,
@@ -240,7 +184,7 @@ class ProgramSettings extends React.Component {
     handleDeleteDialog = {
         onClose: () => {
             this.argsRow = undefined
-            this.programName = undefined
+            this.dataSetName = undefined
             this.setState({
                 deleteDialog: {
                     open: false,
@@ -256,11 +200,11 @@ class ProgramSettings extends React.Component {
                 row: this.argsRow,
                 specificSettings: this.specificSettings,
                 rowSettings: this.specificSettingsRows,
-                nameList: this.programNamesList,
+                nameList: this.dataSetNamesList,
             })
             this.specificSettings = specificSettings
             this.specificSettingsRows = rowSettings
-            this.programNamesList = nameList
+            this.dataSetNamesList = nameList
             this.setState({
                 deleteDialog: {
                     open: false,
@@ -268,16 +212,15 @@ class ProgramSettings extends React.Component {
                 disableSave: false,
             })
         },
-        titleName: this.programName,
+        titleName: this.dataSetName,
     }
 
     /**
-     * Handle Specific settings Table Actions
-     * @type {{columnsTitle: [*, *], handleActions: {edit: ProgramSettings.tableActions.edit, delete: ProgramSettings.tableActions.delete}}}
+     * Methods to handle Specific Settings Table Actions
      */
     handleSpecificSetting = {
         handleActions: this.tableActions,
-        columnsTitle: [i18n.t('Name'), i18n.t('Summary Settings')],
+        columnsTitle: [i18n.t('Name'), i18n.t('Number of Periods')],
     }
 
     /**
@@ -285,10 +228,10 @@ class ProgramSettings extends React.Component {
      * */
     handleSpecificSettingDialog = {
         handleOpen: () => {
-            this.programList = getItemFromList(
-                this.programNamesList,
-                this.programListComplete,
-                this.programList
+            this.dataSetList = getItemFromList(
+                this.dataSetNamesList,
+                this.dataSetListComplete,
+                this.dataSetList
             )
             this.setState({
                 specificSetting: {
@@ -306,17 +249,17 @@ class ProgramSettings extends React.Component {
                 specificSettingsRows,
                 specificSettingsNameList,
             } = prepareSpecificSettingsToSave({
-                settingType: PROGRAM,
+                settingType: DATA_SET,
                 states: this.state,
                 specificSettings: this.specificSettings,
-                specificSettingToChange: this.programToChange,
+                specificSettingToChange: this.dataSetToChange,
                 specificSettingsRows: this.specificSettingsRows,
-                specificSettingsNameList: this.programNamesList,
-                settingsCompleteList: this.programListComplete,
+                specificSettingsNameList: this.dataSetNamesList,
+                settingsCompleteList: this.dataSetListComplete,
             })
             this.specificSettings = specificSettings
             this.specificSettingsRows = specificSettingsRows
-            this.programNamesList = specificSettingsNameList
+            this.dataSetNamesList = specificSettingsNameList
 
             this.handleClose()
             this.setState({
@@ -325,11 +268,12 @@ class ProgramSettings extends React.Component {
         },
         onInputChange: e => {
             e.preventDefault()
+
             this.setState({
                 ...this.state,
                 specificSetting: {
                     ...this.state.specificSetting,
-                    [e.target.name]: parseValueByType(
+                    [e.target.name]: parseValueBySettingType(
                         e.target.name,
                         e.target.value
                     ),
@@ -339,17 +283,13 @@ class ProgramSettings extends React.Component {
     }
 
     /**
-     * Methods to handle DataStore dialog
+     * Handle save DataStore dialog
      * */
     handleSaveDataDialog = {
         open: () => {
             this.setState({
                 saveDataDialog: {
                     open: true,
-                },
-                submitDataStore: {
-                    success: false,
-                    error: false,
                 },
             })
         },
@@ -362,7 +302,7 @@ class ProgramSettings extends React.Component {
         },
         save: () => {
             const { globalSettings, settingsToSubmit } = prepareDataToSubmit({
-                settingType: PROGRAM,
+                settingType: DATA_SET,
                 states: this.state,
                 globalSettingsObject: this.globalSettings,
                 specificSettings: this.specificSettings,
@@ -384,17 +324,17 @@ class ProgramSettings extends React.Component {
 
     componentDidMount() {
         getInstance().then(d2 => {
-            d2.models.program
+            d2.models.dataSet
                 .list({
                     paging: false,
                     level: 1,
-                    fields: 'id,name,programType',
+                    fields: 'id,name,periodType',
                     filter: 'access.data.write:eq:true',
                 })
                 .then(collection => {
-                    const programList = collection.toArray()
-                    this.programList = programList
-                    this.programListComplete = programList
+                    const dataSetList = collection.toArray()
+                    this.dataSetList = dataSetList
+                    this.dataSetListComplete = dataSetList
                 })
         })
 
@@ -409,7 +349,7 @@ class ProgramSettings extends React.Component {
                     api.getKeys(this.nameSpace)
                         .then(res => {
                             const keyName = res.filter(
-                                name => name === PROGRAM_SETTINGS
+                                name => name === DATASET_SETTINGS
                             )
                             keyName.length === 0
                                 ? (this.keyName = undefined)
@@ -420,10 +360,9 @@ class ProgramSettings extends React.Component {
                                         if (res.value.specificSettings) {
                                             this.specificSettings =
                                                 res.value.specificSettings
-                                            this.programNamesList = Object.keys(
+                                            this.dataSetNamesList = Object.keys(
                                                 this.specificSettings
                                             )
-
                                             for (const key in this
                                                 .specificSettings) {
                                                 if (
@@ -431,42 +370,27 @@ class ProgramSettings extends React.Component {
                                                         key
                                                     )
                                                 ) {
-                                                    const program = this
+                                                    const dataSetNameFilter = this.dataSetListComplete.filter(
+                                                        option =>
+                                                            option.id === key
+                                                    )
+
+                                                    const dataSet = this
                                                         .specificSettings[key]
 
-                                                    let filter = this.programListComplete.filter(
-                                                        listItem =>
-                                                            listItem.id ===
-                                                            program.id
-                                                    )
-                                                    filter = filter[0]
+                                                    const summarySettings =
+                                                        dataSet.periodDSDownload ===
+                                                        undefined
+                                                            ? undefined
+                                                            : `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
 
-                                                    let summarySettings
-
-                                                    if (
-                                                        filter.programType ===
-                                                        WITH_REGISTRATION
-                                                    ) {
-                                                        summarySettings =
-                                                            (program.teiDownload
-                                                                ? program.teiDownload
-                                                                : SpecificSettingsDefault.teiDownload) +
-                                                            ' TEI'
-                                                    } else {
-                                                        summarySettings =
-                                                            (program.eventsDownload
-                                                                ? program.eventsDownload
-                                                                : SpecificSettingsDefault.eventsDownload) +
-                                                            ' events per OU'
-                                                    }
-
-                                                    const newProgramRow = {
-                                                        ...program,
+                                                    const newDataSetRow = {
+                                                        ...dataSet,
                                                         summarySettings,
                                                     }
 
                                                     this.specificSettingsRows.push(
-                                                        newProgramRow
+                                                        newDataSetRow
                                                     )
                                                 }
                                             }
@@ -476,26 +400,12 @@ class ProgramSettings extends React.Component {
                                         }
 
                                         if (res.value.globalSettings) {
-                                            this.globalSettings =
-                                                res.value.globalSettings
-
-                                            if (
-                                                this.globalSettings
-                                                    .settingDownload ===
-                                                    GLOBAL ||
-                                                this.globalSettings
-                                                    .settingDownload ===
-                                                    PER_ORG_UNIT
-                                            ) {
-                                                programData = GlobalProgramSpecial
-                                            } else {
-                                                programData = GlobalProgram
-                                            }
-
                                             this.setState({
                                                 ...res.value.globalSettings,
                                                 loading: false,
                                             })
+                                            this.globalSettings =
+                                                res.value.globalSettings
                                         }
                                     })
                                     .catch(e => {
@@ -532,25 +442,25 @@ class ProgramSettings extends React.Component {
 
         return (
             <GlobalSpecificSettings
-                programTableData={programData}
+                programTableData={dataSetSettings}
                 states={this.state}
                 handleTableChange={this.handleChange}
-                specificSettings={this.programNamesList}
+                specificSettings={this.dataSetNamesList}
                 specificSettingList={this.specificSettingsRows}
-                dialogDeleteName={this.programName}
+                dialogDeleteName={this.dataSetName}
                 handleSetDefaultValues={this.handleReset}
-                specificSettingDataTitle={this.programToChange}
-                specificSettingOptions={this.programList}
-                specificSettingData={specificProgramData}
-                completeListOptions={this.programListComplete}
+                specificSettingDataTitle={this.dataSetToChange}
+                specificSettingOptions={this.dataSetList}
+                specificSettingData={dataSpecificSetting}
+                completeListOptions={this.dataSetListComplete}
                 handleSaveDialog={this.handleSaveDataDialog}
                 deleteDialog={this.handleDeleteDialog}
                 specificSettingDialog={this.handleSpecificSettingDialog}
                 specificSettingTable={this.handleSpecificSetting}
-                settingType={ProgramTitles}
+                settingType={DataSetTitles}
             />
         )
     }
 }
 
-export default ProgramSettings
+export default DataSetSettings
