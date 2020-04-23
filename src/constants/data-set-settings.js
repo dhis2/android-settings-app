@@ -110,3 +110,5 @@ export const CLEAN = 'CLEAN'
 
 export const PERIOD_DS_DOWNLOAD = 'periodDSDownload'
 export const PERIOD_DS_DB_TRIMMING = 'periodDSDBTrimming'
+
+export const DATA_SET = 'DATA_SET'

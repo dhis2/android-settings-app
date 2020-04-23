@@ -5,23 +5,31 @@ import i18n from '@dhis2/d2-i18n'
 import api from '../utils/api'
 
 import {
+    DEFAULT,
     ENROLLMENT_DOWNLOAD,
+    FULL_SPECIFIC,
     GLOBAL,
     GlobalProgram,
     GlobalProgramSpecial,
-    maxValues,
     PER_ORG_UNIT,
+    PROGRAM,
     ProgramSettingsDefault,
     ProgramTitles,
+    SETTING_DOWNLOAD,
     SpecificProgram,
     SpecificSettingsDefault,
     WITH_REGISTRATION,
-    WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../constants/data-store'
 
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { getInstance } from 'd2'
+import { parseValueByType } from '../modules/programs/parseValueBySettingType'
+import { populateProgramObject } from '../modules/programs/populateProgramObject'
+import { getItemFromList } from '../modules/getItemFromList'
+import { prepareDataToSubmit } from '../modules/prepareDataToSubmit'
+import { prepareSpecificSettingsToSave } from '../modules/prepareSpecificSettingToSave'
+import { removeSettingFromList } from '../modules/removeSettingFromList'
 
 let programData = GlobalProgram
 const specificProgramData = SpecificProgram
@@ -91,6 +99,7 @@ class ProgramSettings extends React.Component {
             success: false,
             error: false,
         },
+        openErrorAlert: false,
     }
 
     /**
@@ -101,7 +110,7 @@ class ProgramSettings extends React.Component {
         edit: (...args) => {
             this.programToChange = args[0].name
             const argsData = args[0]
-            const settings = this.populateObject('FULL_SPECIFIC', argsData)
+            const settings = populateProgramObject(FULL_SPECIFIC, argsData)
             this.setState({
                 specificSetting: {
                     ...settings,
@@ -109,7 +118,11 @@ class ProgramSettings extends React.Component {
                     openDialog: true,
                 },
             })
-            this.getItemList()
+            this.programList = getItemFromList(
+                this.programNamesList,
+                this.programListComplete,
+                this.programList
+            )
         },
         delete: (...args) => {
             this.argsRow = args[0]
@@ -121,26 +134,6 @@ class ProgramSettings extends React.Component {
                 },
             })
         },
-    }
-
-    chooseSetting = (name, value) => {
-        switch (name) {
-            case 'teiDownload':
-                value = Math.min(maxValues.teiDownload, parseInt(value))
-                break
-            case 'teiDBTrimming':
-                value = Math.min(maxValues.teiDBTrimming, parseInt(value))
-                break
-            case 'eventsDownload':
-                value = Math.min(maxValues.eventsDownload, parseInt(value))
-                break
-            case 'eventsDBTrimming':
-                value = Math.min(maxValues.eventsDBTrimming, parseInt(value))
-                break
-            default:
-                break
-        }
-        return value
     }
 
     /**
@@ -156,7 +149,7 @@ class ProgramSettings extends React.Component {
         } else {
             e.preventDefault()
 
-            if (e.target.name === 'settingDownload') {
+            if (e.target.name === SETTING_DOWNLOAD) {
                 if (
                     e.target.value === GLOBAL ||
                     e.target.value === PER_ORG_UNIT
@@ -170,7 +163,7 @@ class ProgramSettings extends React.Component {
             this.setState({
                 ...this.state,
                 disableSave: false,
-                [e.target.name]: this.chooseSetting(
+                [e.target.name]: parseValueByType(
                     e.target.name,
                     e.target.value
                 ),
@@ -204,66 +197,12 @@ class ProgramSettings extends React.Component {
     }
 
     /**
-     * Updates global and specific settings only when click on save btn
-     * */
-    submitData = () => {
-        let globalSettings
-
-        if (
-            this.state.settingDownload === GLOBAL ||
-            this.state.settingDownload === PER_ORG_UNIT
-        ) {
-            const settings = this.populateObject('GLOBAL_SPECIAL', this.state)
-            globalSettings = {
-                ...settings,
-                lastUpdated: new Date().toJSON(),
-            }
-        } else {
-            const settings = this.populateObject('GLOBAL', this.state)
-            globalSettings = {
-                ...settings,
-                lastUpdated: new Date().toJSON(),
-            }
-        }
-
-        this.globalSettings = globalSettings
-
-        const programSettingData = {
-            globalSettings: {
-                ...this.globalSettings,
-            },
-        }
-
-        if (this.specificSettings) {
-            programSettingData.specificSettings = {
-                ...this.specificSettings,
-            }
-        }
-
-        this.saveDataApi(programSettingData)
-    }
-
-    /**
-     * get program list including current program with specific settings
-     * */
-    getItemList = () => {
-        if (this.programNamesList.length > 0) {
-            const programListComplete = this.programListComplete
-            const programUsedIdList = this.programNamesList
-
-            this.programList = programListComplete.filter(
-                item => !programUsedIdList.includes(item.id)
-            )
-        }
-    }
-
-    /**
      * Updates global settings on Fly
      */
     handleClose = () => {
         this.programToChange = undefined
-        const settings = this.populateObject(
-            'FULL_SPECIFIC',
+        const settings = populateProgramObject(
+            FULL_SPECIFIC,
             SpecificSettingsDefault
         )
 
@@ -276,169 +215,6 @@ class ProgramSettings extends React.Component {
         })
     }
 
-    populateObject = (programType, settingsList) => {
-        let object
-        switch (programType) {
-            case 'WITH_REGISTRATION':
-                object = {
-                    settingDownload: settingsList.settingDownload,
-                    teiDownload: settingsList.teiDownload,
-                    enrollmentDownload: settingsList.enrollmentDownload,
-                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                    updateDownload: settingsList.updateDownload,
-                }
-                break
-            case 'WITHOUT_REGISTRATION':
-                object = {
-                    settingDownload: settingsList.settingDownload,
-                    eventsDownload: settingsList.eventsDownload,
-                    eventDateDownload: settingsList.eventDateDownload,
-                }
-                break
-            case 'GLOBAL':
-                object = {
-                    settingDownload: settingsList.settingDownload,
-                    teiDownload: settingsList.teiDownload,
-                    enrollmentDownload: settingsList.enrollmentDownload,
-                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                    updateDownload: settingsList.updateDownload,
-                    eventsDownload: settingsList.eventsDownload,
-                    eventDateDownload: settingsList.eventDateDownload,
-                }
-                break
-            case 'GLOBAL_SPECIAL':
-                object = {
-                    settingDownload: settingsList.settingDownload,
-                    teiDownload: settingsList.teiDownload,
-                    updateDownload: settingsList.updateDownload,
-                    eventsDownload: settingsList.eventsDownload,
-                    eventDateDownload: settingsList.eventDateDownload,
-                }
-                break
-            case 'DEFAULT':
-                object = {
-                    settingDownload,
-                    teiDownload,
-                    enrollmentDownload,
-                    enrollmentDateDownload,
-                    updateDownload,
-                    eventsDownload,
-                    eventDateDownload,
-                }
-                break
-            case 'FULL_SPECIFIC':
-                object = {
-                    settingDownload: settingsList.settingDownload,
-                    teiDownload: settingsList.teiDownload,
-                    enrollmentDownload: settingsList.enrollmentDownload,
-                    enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                    updateDownload: settingsList.updateDownload,
-                    eventsDownload: settingsList.eventsDownload,
-                    eventDateDownload: settingsList.eventDateDownload,
-                }
-                break
-            default:
-                break
-        }
-        return object
-    }
-
-    /**
-     * Saves specific settings
-     * */
-    handleSubmitDialog = () => {
-        const specificProgramNameKey = this.state.specificSetting.name
-        const objData = this.specificSettings
-
-        const programNameFilter = this.programListComplete.filter(
-            option => option.id === specificProgramNameKey
-        )
-
-        if (programNameFilter.length > 0) {
-            let programObject
-            let summarySettings
-            if (programNameFilter[0].programType === WITH_REGISTRATION) {
-                if (
-                    this.state.specificSetting.settingDownload ||
-                    this.state.specificSetting.teiDownload ||
-                    this.state.specificSetting.enrollmentDownload ||
-                    this.state.specificSetting.enrollmentDateDownload ||
-                    this.state.specificSetting.updateDownload
-                ) {
-                    programObject = this.populateObject(
-                        WITH_REGISTRATION,
-                        this.state.specificSetting
-                    )
-                } else {
-                    programObject = this.populateObject(
-                        WITH_REGISTRATION,
-                        SpecificSettingsDefault
-                    )
-                }
-
-                summarySettings =
-                    (this.state.specificSetting.teiDownload
-                        ? this.state.specificSetting.teiDownload
-                        : SpecificSettingsDefault.teiDownload) + ' TEI'
-            } else if (
-                programNameFilter[0].programType === WITHOUT_REGISTRATION
-            ) {
-                if (
-                    this.state.specificSetting.settingDownload ||
-                    this.state.specificSetting.eventsDownload ||
-                    this.state.specificSetting.eventDateDownload
-                ) {
-                    programObject = this.populateObject(
-                        WITHOUT_REGISTRATION,
-                        this.state.specificSetting
-                    )
-                } else {
-                    programObject = this.populateObject(
-                        WITHOUT_REGISTRATION,
-                        SpecificSettingsDefault
-                    )
-                }
-
-                summarySettings =
-                    (this.state.specificSetting.eventsDownload
-                        ? this.state.specificSetting.eventsDownload
-                        : SpecificSettingsDefault.eventsDownload) +
-                    ' events per OU'
-            }
-
-            objData[specificProgramNameKey] = {
-                ...programObject,
-                id: specificProgramNameKey,
-                lastUpdated: new Date().toJSON(),
-                name: programNameFilter[0].name,
-            }
-
-            const newProgramRow = {
-                ...objData[specificProgramNameKey],
-                summarySettings,
-            }
-
-            this.specificSettings = objData
-
-            if (this.programToChange !== undefined) {
-                this.specificSettingsRows = this.specificSettingsRows.filter(
-                    row => row.id !== newProgramRow.id
-                )
-                this.specificSettingsRows.push(newProgramRow)
-
-                const nameList = this.programNamesList
-                this.programNamesList = nameList.filter(
-                    name => name !== this.state.specificSetting.name
-                )
-            } else {
-                this.specificSettingsRows.push(newProgramRow)
-            }
-
-            this.programNamesList.push(this.state.specificSetting.name)
-        }
-        this.handleClose()
-    }
-
     /**
      * Set to default values
      * Global settings: initial/default values
@@ -446,39 +222,16 @@ class ProgramSettings extends React.Component {
      */
     handleReset = () => {
         programData = GlobalProgramSpecial
-        const settings = this.populateObject('DEFAULT')
+        const settings = populateProgramObject(DEFAULT)
         this.specificSettings = {}
         this.specificSettingsRows = []
         this.programNamesList = []
+        this.programList = this.programListComplete
+
         this.setState({
             ...settings,
             disableSave: false,
         })
-    }
-
-    /**
-     * After click on Delete Dialog will remove a specific settings
-     * */
-    handleCloseDelete = () => {
-        const data = this.argsRow
-        const oldList = this.specificSettings
-        const rowList = this.specificSettingsRows
-        const programNamesUsed = this.programNamesList
-
-        this.programNamesList = programNamesUsed.filter(
-            program => program !== data.id
-        )
-
-        const newList = {}
-
-        for (const key in oldList) {
-            if (key !== data.id) {
-                newList[key] = this.specificSettings[key]
-            }
-        }
-
-        this.specificSettingsRows = rowList.filter(row => row.id !== data.id)
-        this.specificSettings = newList
     }
 
     /**
@@ -495,7 +248,19 @@ class ProgramSettings extends React.Component {
             })
         },
         delete: () => {
-            this.handleCloseDelete()
+            const {
+                specificSettings,
+                rowSettings,
+                nameList,
+            } = removeSettingFromList({
+                row: this.argsRow,
+                specificSettings: this.specificSettings,
+                rowSettings: this.specificSettingsRows,
+                nameList: this.programNamesList,
+            })
+            this.specificSettings = specificSettings
+            this.specificSettingsRows = rowSettings
+            this.programNamesList = nameList
             this.setState({
                 deleteDialog: {
                     open: false,
@@ -520,7 +285,11 @@ class ProgramSettings extends React.Component {
      * */
     handleSpecificSettingDialog = {
         handleOpen: () => {
-            this.getItemList()
+            this.programList = getItemFromList(
+                this.programNamesList,
+                this.programListComplete,
+                this.programList
+            )
             this.setState({
                 specificSetting: {
                     ...this.state.specificSetting,
@@ -532,7 +301,24 @@ class ProgramSettings extends React.Component {
             this.handleClose()
         },
         onSave: () => {
-            this.handleSubmitDialog()
+            const {
+                specificSettings,
+                specificSettingsRows,
+                specificSettingsNameList,
+            } = prepareSpecificSettingsToSave({
+                settingType: PROGRAM,
+                states: this.state,
+                specificSettings: this.specificSettings,
+                specificSettingToChange: this.programToChange,
+                specificSettingsRows: this.specificSettingsRows,
+                specificSettingsNameList: this.programNamesList,
+                settingsCompleteList: this.programListComplete,
+            })
+            this.specificSettings = specificSettings
+            this.specificSettingsRows = specificSettingsRows
+            this.programNamesList = specificSettingsNameList
+
+            this.handleClose()
             this.setState({
                 disableSave: false,
             })
@@ -543,7 +329,7 @@ class ProgramSettings extends React.Component {
                 ...this.state,
                 specificSetting: {
                     ...this.state.specificSetting,
-                    [e.target.name]: this.chooseSetting(
+                    [e.target.name]: parseValueByType(
                         e.target.name,
                         e.target.value
                     ),
@@ -575,7 +361,14 @@ class ProgramSettings extends React.Component {
             })
         },
         save: () => {
-            this.submitData()
+            const { globalSettings, settingsToSubmit } = prepareDataToSubmit({
+                settingType: PROGRAM,
+                states: this.state,
+                globalSettingsObject: this.globalSettings,
+                specificSettings: this.specificSettings,
+            })
+            this.globalSettings = globalSettings
+            this.saveDataApi(settingsToSubmit)
             this.setState({
                 disableSave: true,
                 saveDataDialog: {
@@ -613,105 +406,121 @@ class ProgramSettings extends React.Component {
                     : (this.nameSpace = nameSpace[0])
 
                 if (this.nameSpace === NAMESPACE) {
-                    api.getKeys(this.nameSpace).then(res => {
-                        const keyName = res.filter(
-                            name => name === PROGRAM_SETTINGS
-                        )
-                        keyName.length === 0
-                            ? (this.keyName = undefined)
-                            : (this.keyName = keyName[0])
-                        if (this.keyName !== undefined) {
-                            api.getValue(this.nameSpace, this.keyName).then(
-                                res => {
-                                    if (res.value.specificSettings) {
-                                        this.specificSettings =
-                                            res.value.specificSettings
-                                        this.programNamesList = Object.keys(
-                                            this.specificSettings
-                                        )
-
-                                        for (const key in this
-                                            .specificSettings) {
-                                            if (
-                                                this.specificSettings.hasOwnProperty(
-                                                    key
-                                                )
-                                            ) {
-                                                const program = this
-                                                    .specificSettings[key]
-
-                                                let filter = this.programListComplete.filter(
-                                                    listItem =>
-                                                        listItem.id ===
-                                                        program.id
-                                                )
-                                                filter = filter[0]
-
-                                                let summarySettings
-
-                                                if (
-                                                    filter.programType ===
-                                                    WITH_REGISTRATION
-                                                ) {
-                                                    summarySettings =
-                                                        (program.teiDownload
-                                                            ? program.teiDownload
-                                                            : SpecificSettingsDefault.teiDownload) +
-                                                        ' TEI'
-                                                } else {
-                                                    summarySettings =
-                                                        (program.eventsDownload
-                                                            ? program.eventsDownload
-                                                            : SpecificSettingsDefault.eventsDownload) +
-                                                        ' events per OU'
-                                                }
-
-                                                const newProgramRow = {
-                                                    ...program,
-                                                    summarySettings,
-                                                }
-
-                                                this.specificSettingsRows.push(
-                                                    newProgramRow
-                                                )
-                                            }
-                                        }
-                                        this.setState({
-                                            loading: false,
-                                        })
-                                    }
-
-                                    if (res.value.globalSettings) {
-                                        this.globalSettings =
-                                            res.value.globalSettings
-
-                                        if (
-                                            this.globalSettings
-                                                .settingDownload === GLOBAL ||
-                                            this.globalSettings
-                                                .settingDownload ===
-                                                PER_ORG_UNIT
-                                        ) {
-                                            programData = GlobalProgramSpecial
-                                        } else {
-                                            programData = GlobalProgram
-                                        }
-
-                                        this.setState({
-                                            ...res.value.globalSettings,
-                                            loading: false,
-                                        })
-                                    }
-                                }
+                    api.getKeys(this.nameSpace)
+                        .then(res => {
+                            const keyName = res.filter(
+                                name => name === PROGRAM_SETTINGS
                             )
-                        }
-                    })
+                            keyName.length === 0
+                                ? (this.keyName = undefined)
+                                : (this.keyName = keyName[0])
+                            if (this.keyName !== undefined) {
+                                api.getValue(this.nameSpace, this.keyName)
+                                    .then(res => {
+                                        if (res.value.specificSettings) {
+                                            this.specificSettings =
+                                                res.value.specificSettings
+                                            this.programNamesList = Object.keys(
+                                                this.specificSettings
+                                            )
+
+                                            for (const key in this
+                                                .specificSettings) {
+                                                if (
+                                                    this.specificSettings.hasOwnProperty(
+                                                        key
+                                                    )
+                                                ) {
+                                                    const program = this
+                                                        .specificSettings[key]
+
+                                                    let filter = this.programListComplete.filter(
+                                                        listItem =>
+                                                            listItem.id ===
+                                                            program.id
+                                                    )
+                                                    filter = filter[0]
+
+                                                    let summarySettings
+
+                                                    if (
+                                                        filter.programType ===
+                                                        WITH_REGISTRATION
+                                                    ) {
+                                                        summarySettings =
+                                                            (program.teiDownload
+                                                                ? program.teiDownload
+                                                                : SpecificSettingsDefault.teiDownload) +
+                                                            ' TEI'
+                                                    } else {
+                                                        summarySettings =
+                                                            (program.eventsDownload
+                                                                ? program.eventsDownload
+                                                                : SpecificSettingsDefault.eventsDownload) +
+                                                            ' events per OU'
+                                                    }
+
+                                                    const newProgramRow = {
+                                                        ...program,
+                                                        summarySettings,
+                                                    }
+
+                                                    this.specificSettingsRows.push(
+                                                        newProgramRow
+                                                    )
+                                                }
+                                            }
+                                            this.setState({
+                                                loading: false,
+                                            })
+                                        }
+
+                                        if (res.value.globalSettings) {
+                                            this.globalSettings =
+                                                res.value.globalSettings
+
+                                            if (
+                                                this.globalSettings
+                                                    .settingDownload ===
+                                                    GLOBAL ||
+                                                this.globalSettings
+                                                    .settingDownload ===
+                                                    PER_ORG_UNIT
+                                            ) {
+                                                programData = GlobalProgramSpecial
+                                            } else {
+                                                programData = GlobalProgram
+                                            }
+
+                                            this.setState({
+                                                ...res.value.globalSettings,
+                                                loading: false,
+                                            })
+                                        }
+                                    })
+                                    .catch(e => {
+                                        console.error(e)
+                                        this.setState({
+                                            loading: false,
+                                            openErrorAlert: true,
+                                        })
+                                    })
+                            }
+                        })
+                        .catch(e => {
+                            console.error(e)
+                            this.setState({
+                                loading: false,
+                                openErrorAlert: true,
+                            })
+                        })
                 }
             })
             .catch(e => {
                 console.error(e)
                 this.setState({
                     loading: false,
+                    openErrorAlert: true,
                 })
             })
     }

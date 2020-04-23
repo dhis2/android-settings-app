@@ -492,3 +492,4 @@ export const EVENTS_DB_TRIMMING = 'eventsDBTrimming'
 export const SETTING_DOWNLOAD = 'settingDownload'
 
 export const ENROLLMENT_DOWNLOAD = 'enrollmentDownload'
+export const PROGRAM = 'PROGRAM'
