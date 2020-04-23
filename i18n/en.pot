@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-26T06:47:39.999Z\n"
-"PO-Revision-Date: 2020-03-26T06:47:39.999Z\n"
+"POT-Creation-Date: 2020-04-23T06:49:33.682Z\n"
+"PO-Revision-Date: 2020-04-23T06:49:33.682Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -35,13 +35,19 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
+msgid "Values per"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Add/Save"
+msgstr ""
+
 msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "{{encrypt}} DB"
@@ -53,9 +59,6 @@ msgid ""
 msgstr ""
 
 msgid "Decrypt DB"
-msgstr ""
-
-msgid "Values per"
 msgstr ""
 
 msgid "CANCEL"
