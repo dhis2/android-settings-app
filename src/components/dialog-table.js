@@ -22,7 +22,6 @@ const DialogTable = ({
     dataTitleOptions,
     titleValue,
     handleChange,
-    textFieldTitleName,
     data,
     handleSubmitDialog,
     specificSetting,
@@ -44,8 +43,8 @@ const DialogTable = ({
                     <Select
                         value={titleValue}
                         onChange={handleChange}
-                        id={textFieldTitleName}
-                        name={textFieldTitleName}
+                        id="name"
+                        name="name"
                         style={{ minWidth: '150px' }}
                     >
                         {dataTitleOptions.map(option => (

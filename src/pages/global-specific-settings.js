@@ -16,6 +16,7 @@ import buttonStyles from '../styles/Button.module.css'
 import layoutStyles from '../styles/Layout.module.css'
 
 import '@dhis2/d2-ui-core/css/Table.css'
+import ErrorAlert from '../components/alert-bar/error-alert'
 
 const GlobalSpecificSettings = ({
     programTableData,
@@ -160,6 +161,8 @@ const GlobalSpecificSettings = ({
                     !states.submitDataStore.success
                 }
             />
+
+            <ErrorAlert show={states.openErrorAlert} />
         </React.Fragment>
     )
 }
