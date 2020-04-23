@@ -96,12 +96,9 @@ class TestAndroid extends React.Component {
                                                     }
                                                 >
                                                     {i18n.t(
-                                                        'Recommended maximum: {{maxValue}}',
-                                                        {
-                                                            maxValue:
-                                                                test.maxValue,
-                                                        }
-                                                    )}
+                                                        'Recommended maximum: '
+                                                    )}{' '}
+                                                    {test.maxValue}
                                                 </p>
                                             </div>
                                         </Grid>

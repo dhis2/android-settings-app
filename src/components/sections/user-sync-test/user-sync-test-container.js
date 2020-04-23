@@ -7,6 +7,11 @@ import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
 
 import api from '../../../utils/api'
+import { getDownloadSize } from '../../../modules/userSyncTest/downloadSize'
+import { splitArray } from '../../../modules/splitArray'
+import { prepareDataSizeRequest } from '../../../modules/userSyncTest/prepareDataSizeRequest'
+import { testAndroidDataConstants } from '../../../constants/test-android'
+import { prepareMetadataRequest } from '../../../modules/userSyncTest/prepareMetadataSizeRequest'
 
 class UserSyncTestContainer extends React.Component {
     constructor(props) {
@@ -41,12 +46,27 @@ class UserSyncTestContainer extends React.Component {
         programRuleNumber: 0,
         metadataSize: 0,
         dataSize: 0,
+        maxValueOUCapture: undefined,
+        maxValueOUSearch: undefined,
+        maxValueDataSet: undefined,
+        maxValueProgram: undefined,
+        maxValueProgramRule: undefined,
+        maxValueMetadata: undefined,
+        maxValueData: undefined,
         orgUnitLoad: false,
         dataSetLoad: false,
         programLoad: false,
         programRuleLoad: false,
         metadataLoad: false,
         dataLoad: false,
+    }
+
+    updateRecommendedValue = () => {
+        testAndroidDataConstants.forEach(test => {
+            this.setState({
+                [test.maxValueState]: test.maxValue,
+            })
+        })
     }
 
     clearFields = () => {
@@ -76,18 +96,6 @@ class UserSyncTestContainer extends React.Component {
             metadataLoad: false,
             dataLoad: false,
         })
-    }
-
-    getDownloadSize = dataArray => {
-        let downloadSize = 0
-        dataArray.forEach(dataElement => {
-            const dataSize = parseFloat(
-                memorySizeOf(JSON.stringify(dataElement.toArray()))
-            )
-
-            downloadSize += dataSize
-        })
-        return downloadSize
     }
 
     checkAccess = (elementArray, accessIDList) => {
@@ -125,18 +133,6 @@ class UserSyncTestContainer extends React.Component {
         return accessIDList
     }
 
-    splitArray = (list, howMany) => {
-        let idx = 0
-        const result = []
-
-        while (idx < list.length) {
-            if (idx % howMany === 0) result.push([])
-            result[result.length - 1].push(list[idx++])
-        }
-
-        return result
-    }
-
     getUserData = async () => {
         const organisationUnits = this.userSelected.organisationUnits
             .valuesContainerMap
@@ -150,7 +146,7 @@ class UserSyncTestContainer extends React.Component {
         let programsValuesList = []
         const organisationUnitSearchList = []
         const promisesOrganisationUnits = []
-        const organisationUnitCapture = []
+        let organisationUnitCapture = []
         const promisesOrganisationUnitsSearch = []
         const organisationUnitSearchCollection = []
         let trackedEntityTypeListId = []
@@ -158,11 +154,11 @@ class UserSyncTestContainer extends React.Component {
         let dataSetValuesList = []
         let dataElementListId = []
         let indicatorListId = []
-        const indicatorValuesList = []
+        let indicatorValuesList = []
         let indicatorTypeListId = []
         let categoryComboListId = []
         let categoryListId = []
-        const organisationUnitIDList = []
+        let organisationUnitIDList = []
 
         organisationUnits.forEach((value, key) => {
             organisationUnitList.push(key)
@@ -185,8 +181,8 @@ class UserSyncTestContainer extends React.Component {
             await Promise.all(promisesOrganisationUnitsSearch).then(data => {
                 if (data.length > 0) {
                     data.forEach(orgUnitData => {
-                        orgUnitData.toArray().forEach(ousearch => {
-                            organisationUnitSearchCollection.push(ousearch)
+                        orgUnitData.toArray().forEach(ouSearch => {
+                            organisationUnitSearchCollection.push(ouSearch)
                         })
                     })
                     this.organisationUnitSearchNumber =
@@ -222,269 +218,38 @@ class UserSyncTestContainer extends React.Component {
 
             await Promise.all(promisesOrganisationUnits).then(data => {
                 if (data.length > 0) {
-                    data.forEach(orgUnitData => {
-                        orgUnitData.toArray().forEach(oucapture => {
-                            organisationUnitCapture.push(oucapture)
-                            organisationUnitIDList.push(oucapture.id)
-                            const programPerOU = []
-                            const datasetPerOU = []
-                            if (
-                                oucapture.programs.valuesContainerMap.size > 0
-                            ) {
-                                oucapture.programs.valuesContainerMap.forEach(
-                                    key => {
-                                        programPerOU.push(key)
-                                    }
-                                )
-                                oucapture.programs.valuesContainerMap.forEach(
-                                    (value, key) => {
-                                        if (programsList.length >= 1) {
-                                            programsList = programsList.filter(
-                                                program => program !== key
-                                            )
-                                            programsList.push(key)
-                                            programsValuesList = programsValuesList.filter(
-                                                program => program.id !== key
-                                            )
-                                            programsValuesList.push(value)
-                                        } else {
-                                            programsList.push(key)
-                                            programsValuesList.push(value)
-                                        }
-                                    }
-                                )
-                            }
+                    const {
+                        datasetIdList,
+                        programIdList,
+                        programDataList,
+                        trackedEntityTypeIdList,
+                        optionSetIdList,
+                        datasetDataList,
+                        dataElementIdList,
+                        indicatorIdList,
+                        indicatorTypeIdList,
+                        categoryComboIdList,
+                        categoryIdList,
+                        orgUnitCaptureDataList,
+                        orgUnitCaptureIdList,
+                        indicatorDataList,
+                    } = prepareMetadataRequest(data)
 
-                            if (
-                                oucapture.dataSets.valuesContainerMap.size > 0
-                            ) {
-                                oucapture.dataSets.valuesContainerMap.forEach(
-                                    key => {
-                                        datasetPerOU.push(key)
-                                    }
-                                )
+                    dataSetList = datasetIdList
+                    programsList = programIdList
+                    programsValuesList = programDataList
+                    trackedEntityTypeListId = trackedEntityTypeIdList
+                    optionSetListId = optionSetIdList
+                    dataSetValuesList = datasetDataList
+                    dataElementListId = dataElementIdList
+                    indicatorListId = indicatorIdList
+                    indicatorTypeListId = indicatorTypeIdList
+                    categoryComboListId = categoryComboIdList
+                    categoryListId = categoryIdList
+                    organisationUnitCapture = orgUnitCaptureDataList
+                    organisationUnitIDList = orgUnitCaptureIdList
+                    indicatorValuesList = indicatorDataList
 
-                                oucapture.dataSets.valuesContainerMap.forEach(
-                                    (value, key) => {
-                                        if (dataSetList.length >= 1) {
-                                            dataSetList = dataSetList.filter(
-                                                dataset => dataset !== key
-                                            )
-                                            dataSetList.push(key)
-                                            dataSetValuesList = dataSetValuesList.filter(
-                                                dataset => dataset.id !== key
-                                            )
-                                            dataSetValuesList.push(value)
-                                        } else {
-                                            dataSetList.push(key)
-                                            dataSetValuesList.push(value)
-                                        }
-                                    }
-                                )
-                            }
-                            if (dataSetValuesList.length > 0) {
-                                dataSetValuesList.forEach(value => {
-                                    const dataSetElement = value.dataSetElements
-                                    if (
-                                        dataSetElement !== undefined &&
-                                        dataSetElement.length > 0
-                                    ) {
-                                        dataSetElement.forEach(value => {
-                                            if (
-                                                Object.keys(value.dataElement)
-                                                    .length !== 0
-                                            ) {
-                                                if (
-                                                    dataElementListId.length >=
-                                                    1
-                                                ) {
-                                                    dataElementListId = dataElementListId.filter(
-                                                        dataElement =>
-                                                            dataElement !==
-                                                            value.dataElement.id
-                                                    )
-                                                    dataElementListId.push(
-                                                        value.dataElement.id
-                                                    )
-                                                } else {
-                                                    dataElementListId.push(
-                                                        value.dataElement.id
-                                                    )
-                                                }
-                                            }
-                                        })
-                                    }
-                                    const indicators =
-                                        value.indicators.valuesContainerMap
-                                    if (indicators.size > 0) {
-                                        value.indicators.valuesContainerMap.forEach(
-                                            (value, key) => {
-                                                if (
-                                                    indicatorListId.length >= 1
-                                                ) {
-                                                    indicatorListId = indicatorListId.filter(
-                                                        indicator =>
-                                                            indicator !== key
-                                                    )
-                                                    indicatorListId.push(key)
-                                                    indicatorValuesList.push(
-                                                        value
-                                                    )
-                                                } else {
-                                                    indicatorListId.push(key)
-                                                    indicatorValuesList.push(
-                                                        value
-                                                    )
-                                                }
-                                            }
-                                        )
-                                    }
-                                    const categoryCombos = value.categoryCombo
-                                    if (categoryCombos !== undefined) {
-                                        if (categoryComboListId.length >= 1) {
-                                            categoryComboListId = categoryComboListId.filter(
-                                                categoryCombo =>
-                                                    categoryCombo !==
-                                                    categoryCombos.id
-                                            )
-                                            categoryComboListId.push(
-                                                categoryCombos.id
-                                            )
-                                        } else {
-                                            categoryComboListId.push(
-                                                categoryCombos.id
-                                            )
-                                        }
-
-                                        if (
-                                            value.categoryCombo.categories
-                                                .length > 0
-                                        ) {
-                                            value.categoryCombo.categories.forEach(
-                                                categoryValue => {
-                                                    if (
-                                                        categoryListId.length >=
-                                                        1
-                                                    ) {
-                                                        categoryListId = categoryListId.filter(
-                                                            category =>
-                                                                category !==
-                                                                categoryValue.id
-                                                        )
-                                                        categoryListId.push(
-                                                            categoryValue.id
-                                                        )
-                                                    } else {
-                                                        categoryListId.push(
-                                                            categoryValue.id
-                                                        )
-                                                    }
-                                                }
-                                            )
-                                        }
-
-                                        if (indicatorValuesList.length > 0) {
-                                            indicatorValuesList.forEach(
-                                                value => {
-                                                    if (
-                                                        Object.keys(
-                                                            value.indicatorType
-                                                        ).length !== 0
-                                                    ) {
-                                                        if (
-                                                            indicatorTypeListId.length >=
-                                                            1
-                                                        ) {
-                                                            indicatorTypeListId = indicatorTypeListId.filter(
-                                                                indicatorT =>
-                                                                    indicatorT !==
-                                                                    value
-                                                                        .indicatorType
-                                                                        .id
-                                                            )
-                                                            indicatorTypeListId.push(
-                                                                value
-                                                                    .indicatorType
-                                                                    .id
-                                                            )
-                                                        } else {
-                                                            indicatorTypeListId.push(
-                                                                value
-                                                                    .indicatorType
-                                                                    .id
-                                                            )
-                                                        }
-                                                    }
-                                                }
-                                            )
-                                        }
-                                    }
-                                })
-                            }
-                            if (programsValuesList.length > 0) {
-                                programsValuesList.forEach((value, key) => {
-                                    const trackedEntityT =
-                                        value.trackedEntityType
-                                    if (trackedEntityT !== undefined) {
-                                        if (
-                                            trackedEntityTypeListId.length >= 1
-                                        ) {
-                                            trackedEntityTypeListId = trackedEntityTypeListId.filter(
-                                                trackedEntity =>
-                                                    trackedEntity !==
-                                                    trackedEntityT.id
-                                            )
-                                            trackedEntityTypeListId.push(
-                                                trackedEntityT.id
-                                            )
-                                        } else {
-                                            trackedEntityTypeListId.push(
-                                                trackedEntityT.id
-                                            )
-                                        }
-                                    }
-
-                                    const programTEA =
-                                        value.programTrackedEntityAttributes
-                                    if (
-                                        programTEA !== undefined &&
-                                        programTEA.length > 0
-                                    ) {
-                                        programTEA.forEach(value => {
-                                            if (
-                                                Object.keys(
-                                                    value.trackedEntityAttribute
-                                                ).length !== 0
-                                            ) {
-                                                if (
-                                                    optionSetListId.length >= 1
-                                                ) {
-                                                    optionSetListId = optionSetListId.filter(
-                                                        optionSet =>
-                                                            optionSet !==
-                                                            value
-                                                                .trackedEntityAttribute
-                                                                .optionSet.id
-                                                    )
-                                                    optionSetListId.push(
-                                                        value
-                                                            .trackedEntityAttribute
-                                                            .optionSet.id
-                                                    )
-                                                } else {
-                                                    optionSetListId.push(
-                                                        value
-                                                            .trackedEntityAttribute
-                                                            .optionSet.id
-                                                    )
-                                                }
-                                            }
-                                        })
-                                    }
-                                })
-                            }
-                        })
-                    })
                     this.organisationUnitsNumber =
                         organisationUnitCapture.length
 
@@ -502,6 +267,12 @@ class UserSyncTestContainer extends React.Component {
                 }
 
                 if (dataSetList.length > 0 && programsList.length > 0) {
+                    this.getData(
+                        organisationUnitIDList,
+                        organisationUnitList,
+                        programsList
+                    )
+
                     let dataSetResult = []
                     let programResult = []
                     let programRuleResult = []
@@ -520,7 +291,7 @@ class UserSyncTestContainer extends React.Component {
                         })
 
                         const dataElementCollection = dataElementListId.slice()
-                        const splitCollection = this.splitArray(
+                        const splitCollection = splitArray(
                             dataElementCollection,
                             100
                         )
@@ -537,7 +308,7 @@ class UserSyncTestContainer extends React.Component {
                         })
 
                         Promise.all(dataElementList).then(data => {
-                            dataElementResult = this.getDownloadSize(data)
+                            dataElementResult = getDownloadSize(data)
                         })
                     }
 
@@ -640,7 +411,7 @@ class UserSyncTestContainer extends React.Component {
                             categoryCombos,
                             categories,
                         ]) => {
-                            let metadata = this.getDownloadSize([
+                            let metadata = getDownloadSize([
                                 programResult,
                                 dataSetResult,
                                 programRuleResult,
@@ -679,323 +450,21 @@ class UserSyncTestContainer extends React.Component {
                             })
                         }
                     )
-
-                    this.getData(
-                        organisationUnitIDList,
-                        organisationUnitList,
-                        programsList
-                    )
                 }
             })
         }
     }
 
-    getDataPerSettingType = (settingType, orgUnitList, programList) => {
-        // after checking setting type, get promise data
-
-        const teiPromises = []
-        const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
-        const _event = (parseInt(settingType.sizeEvent) / 50).toFixed()
-        const _teiProgram = (parseInt(settingType.sizeTEI) / 25).toFixed()
-        const _eventProgrm = (parseInt(settingType.sizeEvent) / 25).toFixed()
-
-        switch (settingType.type) {
-            case undefined:
-                // if it's global or doesn't have specific settings
-                // with ou Parents and "DESCENDENT"
-
-                orgUnitList.orgUnitParents.forEach(orgUnit => {
-                    for (let i = 1; i <= _tei; i++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get(
-                                'trackedEntityInstances',
-                                {
-                                    page: `${i}`,
-                                    pageSize: 50,
-                                    ou: `${orgUnit}`,
-                                    ouMode: 'DESCENDANTS',
-                                    fields:
-                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                }
-                            )
-                        )
-                    }
-
-                    for (let j = 1; j <= _event; j++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 50,
-                                orgUnit: `${orgUnit}`,
-                                ouMode: 'DESCENDANTS',
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
-                        )
-                    }
-                })
-
-                break
-            case 'global':
-                // if it's global or doesn't have specific settings
-                // with ou Parents and "DESCENDENT"
-
-                orgUnitList.orgUnitParents.forEach(orgUnit => {
-                    for (let i = 1; i <= _tei; i++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get(
-                                'trackedEntityInstances',
-                                {
-                                    page: `${i}`,
-                                    pageSize: 50,
-                                    ou: `${orgUnit}`,
-                                    ouMode: 'DESCENDANTS',
-                                    fields:
-                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                }
-                            )
-                        )
-                    }
-
-                    for (let j = 1; j <= _event; j++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 50,
-                                orgUnit: `${orgUnit}`,
-                                ouMode: 'DESCENDANTS',
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
-                        )
-                    }
-                })
-
-                break
-            case 'ou':
-                // per ou
-                // should put every single ou capture by itself with no ouMode
-
-                orgUnitList.orgUnit.forEach(orgUnit => {
-                    for (let i = 1; i <= _tei; i++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get(
-                                'trackedEntityInstances',
-                                {
-                                    page: `${i}`,
-                                    pageSize: 50,
-                                    ou: `${orgUnit}`,
-                                    fields:
-                                        'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                }
-                            )
-                        )
-                    }
-
-                    for (let j = 1; j <= _event; j++) {
-                        teiPromises.push(
-                            this.props.d2.Api.getApi().get('events', {
-                                page: `${j}`,
-                                pageSize: 50,
-                                orgUnit: `${orgUnit}`,
-                                includeAllAttributes: true,
-                                includeDeleted: true,
-                            })
-                        )
-                    }
-                })
-
-                break
-            case 'program':
-                // per program
-                // I should get programTEI also if OUPrograms have specificSettings
-                // should add a for programs
-
-                programList.forEach(program => {
-                    orgUnitList.orgUnitParents.forEach(orgUnit => {
-                        for (let i = 1; i <= _teiProgram; i++) {
-                            teiPromises.push(
-                                this.props.d2.Api.getApi().get(
-                                    'trackedEntityInstances',
-                                    {
-                                        page: `${i}`,
-                                        pageSize: 25,
-                                        ou: `${orgUnit}`,
-                                        ouMode: 'DESCENDANTS',
-                                        programs: `${program}`,
-                                        fields:
-                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                        includeAllAttributes: true,
-                                        includeDeleted: true,
-                                    }
-                                )
-                            )
-                        }
-
-                        for (let j = 1; j <= _eventProgrm; j++) {
-                            teiPromises.push(
-                                this.props.d2.Api.getApi().get('events', {
-                                    page: `${j}`,
-                                    pageSize: 25,
-                                    orgUnit: `${orgUnit}`,
-                                    ouMode: 'DESCENDANTS',
-                                    programs: `${program}`,
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                })
-                            )
-                        }
-                    })
-                })
-                break
-            case 'ouProgram':
-                // per program & per ou
-
-                orgUnitList.orgUnit.forEach(orgUnit => {
-                    programList.forEach(program => {
-                        for (let i = 1; i <= _tei; i++) {
-                            teiPromises.push(
-                                this.props.d2.Api.getApi().get(
-                                    'trackedEntityInstances',
-                                    {
-                                        page: `${i}`,
-                                        pageSize: 25,
-                                        ou: `${orgUnit}`,
-                                        programs: `${program}`,
-                                        fields:
-                                            'trackedEntityInstance,created,lastUpdated,orgUnit,trackedEntityType,coordinates,featureType,deleted,attributes[attribute,value,created,lastUpdated],relationships[trackedEntityInstanceA,trackedEntityInstanceB,relationship,relationshipName,relationshipType,created,lastUpdated,from[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],to[trackedEntityInstance[trackedEntityInstance],enrollment[enrollment],event[event]],relative],enrollments[enrollment,created,lastUpdated,orgUnit,program,enrollmentDate,incidentDate,followup,status,deleted,trackedEntityInstance,coordinate,events[event,enrollment,created,lastUpdated,status,coordinate,program,programStage,orgUnit,eventDate,completedDate,deleted,dueDate,attributeOptionCombo,dataValues[dataElement,storedBy,value,created,lastUpdated,providedElsewhere]],notes[note,value,storedBy,storedDate]]',
-                                        includeAllAttributes: true,
-                                        includeDeleted: true,
-                                    }
-                                )
-                            )
-                        }
-
-                        for (let j = 1; j <= _event; j++) {
-                            teiPromises.push(
-                                this.props.d2.Api.getApi().get('events', {
-                                    page: `${j}`,
-                                    pageSize: 25,
-                                    orgUnit: `${orgUnit}`,
-                                    programs: `${program}`,
-                                    includeAllAttributes: true,
-                                    includeDeleted: true,
-                                })
-                            )
-                        }
-                    })
-                })
-
-                break
-            default:
-                break
-        }
-
-        return teiPromises
-    }
-
-    checkType = (type, settingType) => {
-        switch (type) {
-            case 'Global':
-                settingType = 'global'
-                break
-            case 'Per Org Unit':
-                settingType = 'ou'
-                break
-            case 'Per program':
-                settingType = 'program'
-                break
-            case 'Per OU and program':
-                settingType = 'ouProgram'
-                break
-            case 'All Org Units':
-                settingType = 'global'
-                break
-            default:
-                break
-        }
-
-        return settingType
-    }
-
-    getSettingsID = array => {
-        array[1].id = array[0]
-        return array[1]
-    }
-
-    getData = (orgUnitCompleteList, orgUnitParent, programList) => {
-        const teiPromises = []
-        const settingTypeArray = []
-        const organisationUnitIDLists = {
-            orgUnit: orgUnitCompleteList,
-            orgUnitParents: orgUnitParent,
-        }
-        let temporalType = undefined
-        let _settingType = undefined
-        let _temporalObject = {}
-        const _tempPromises = []
-
-        temporalType = this.checkType(
-            this.globalSettings.settingDownload,
-            _settingType
-        )
-        _temporalObject = {
-            type: temporalType,
-            sizeTEI: this.globalSettings.teiDownload,
-            sizeEvent: this.globalSettings.eventsDownload,
-        }
-
-        settingTypeArray.push(_temporalObject)
-
-        if (this.specificSettings !== undefined) {
-            _temporalObject = {}
-            _settingType = undefined
-            temporalType = undefined
-            const _temporalSettingsArray = Object.entries(this.specificSettings)
-            const _specificSettingArray = []
-            _temporalSettingsArray.forEach(array => {
-                const tempt = this.getSettingsID(array)
-                _specificSettingArray.push(tempt)
-            })
-
-            _specificSettingArray.forEach(specificSetting => {
-                temporalType = this.checkType(
-                    specificSetting.specificSettingDownload,
-                    _settingType
-                )
-                _temporalObject = {
-                    id: specificSetting.id,
-                    type: temporalType,
-                    sizeTEI: specificSetting.specificTeiDownload,
-                    sizeEvent: specificSetting.specificEventsDownload,
-                }
-                settingTypeArray.push(_temporalObject)
-            })
-        }
-
-        // should check every program (program associated to OU)
-        settingTypeArray.forEach(settingType => {
-            const _tempSettingType = this.getDataPerSettingType(
-                settingType,
-                organisationUnitIDLists,
-                programList
-            )
-            _tempPromises.push(_tempSettingType)
+    getData = async (orgUnitCompleteList, orgUnitParent, programList) => {
+        const dataSizeRequests = prepareDataSizeRequest({
+            props: this.props,
+            orgUnitCompleteList,
+            orgUnitParent,
+            programList,
+            globalSettings: this.globalSettings,
+            specificSettings: this.specificSettings,
         })
-
-        _tempPromises.forEach(promise => {
-            promise.forEach(prom => {
-                teiPromises.push(prom)
-            })
-        })
-
-        Promise.all(teiPromises).then(data => {
+        await Promise.all(dataSizeRequests).then(data => {
             const dataSizeDownload = formatByteSize(memorySizeOf(data))
             this.setState({
                 dataLoad: false,
@@ -1047,6 +516,7 @@ class UserSyncTestContainer extends React.Component {
     }
 
     componentDidMount() {
+        this.updateRecommendedValue()
         this.props.d2.models.users
             .list({
                 paging: false,
@@ -1067,7 +537,9 @@ class UserSyncTestContainer extends React.Component {
                 this.globalSettings = res.value.globalSettings
                 this.specificSettings = res.value.specificSettings
             })
-            .catch(e => console.error(e))
+            .catch(e => {
+                console.error(e)
+            })
     }
 
     render() {
