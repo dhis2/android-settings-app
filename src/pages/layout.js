@@ -18,8 +18,8 @@ import {
     PROGRAM_SETTINGS,
 } from '../constants/data-store'
 import { androidSettingsDefault } from '../constants/android-settings'
-import { SpecificSettingsDefault } from '../constants/program-settings'
-import { DataSetSettingsDefault } from '../constants/data-set-settings'
+import { programSettingsDefault } from '../constants/program-settings'
+import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 
 const styles = {
@@ -31,23 +31,24 @@ const styles = {
 const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
 const DEFAULT_DATASET = 'DEFAULT_DATASET'
 
-const populateObject = (type, settingsList) => {
-    let object
+const populateObject = type => {
+    let object = {}
     switch (type) {
         case DEFAULT_PROGRAM:
             object = {
-                settingDownload: settingsList.settingDownload,
-                teiDownload: settingsList.teiDownload,
-                enrollmentDownload: settingsList.enrollmentDownload,
-                enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                updateDownload: settingsList.updateDownload,
-                eventsDownload: settingsList.eventsDownload,
-                eventDateDownload: settingsList.eventDateDownload,
+                settingDownload: programSettingsDefault.settingDownload,
+                teiDownload: programSettingsDefault.teiDownload,
+                enrollmentDownload: programSettingsDefault.enrollmentDownload,
+                enrollmentDateDownload:
+                    programSettingsDefault.enrollmentDateDownload,
+                updateDownload: programSettingsDefault.updateDownload,
+                eventsDownload: programSettingsDefault.eventsDownload,
+                eventDateDownload: programSettingsDefault.eventDateDownload,
             }
             break
         case DEFAULT_DATASET:
             object = {
-                periodDSDownload: settingsList.periodDSDownload,
+                periodDSDownload: dataSetSettingsDefault.periodDSDownload,
             }
             break
         default:
@@ -70,29 +71,21 @@ class Layout extends React.Component {
     }
 
     handleSave = () => {
-        Promise.all([
-            api.createNamespace(NAMESPACE, GENERAL_SETTINGS, {
-                ...androidSettingsDefault,
-            }),
-        ]).then(() => {
-            return Promise.all([
-                api.createValue(NAMESPACE, GENERAL_SETTINGS, {
-                    ...androidSettingsDefault,
-                }),
-                api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
-                    globalSettings: populateObject(
-                        DEFAULT_PROGRAM,
-                        SpecificSettingsDefault
-                    ),
-                }),
-                api.createValue(NAMESPACE, DATASET_SETTINGS, {
-                    globalSettings: populateObject(
-                        DEFAULT_DATASET,
-                        DataSetSettingsDefault
-                    ),
-                }),
-            ])
-        })
+        Promise.all([api.createNamespace(NAMESPACE, GENERAL_SETTINGS)]).then(
+            () => {
+                return Promise.all([
+                    api.createValue(NAMESPACE, GENERAL_SETTINGS, {
+                        ...androidSettingsDefault,
+                    }),
+                    api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
+                        globalSettings: populateObject(DEFAULT_PROGRAM),
+                    }),
+                    api.createValue(NAMESPACE, DATASET_SETTINGS, {
+                        globalSettings: populateObject(DEFAULT_DATASET),
+                    }),
+                ])
+            }
+        )
 
         this.setState({
             openFirstLaunch: false,

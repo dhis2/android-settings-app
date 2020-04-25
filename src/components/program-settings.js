@@ -8,8 +8,8 @@ import {
     GlobalProgram,
     GlobalProgramSpecial,
     SpecificProgram,
-    ProgramSettingsDefault,
-    SpecificSettingsDefault,
+    programSettingsDefault,
+    specificSettingsDefault,
     maxValues,
     GLOBAL,
     PER_ORG_UNIT,
@@ -38,7 +38,7 @@ const {
     eventsDBTrimming,
     eventDateDownload,
     eventDateDBTrimming,
-} = ProgramSettingsDefault
+} = programSettingsDefault
 
 class ProgramSettings extends React.Component {
     constructor(props) {
@@ -74,7 +74,7 @@ class ProgramSettings extends React.Component {
         eventDateDownload,
         eventDateDBTrimming,
         specificSetting: {
-            ...SpecificSettingsDefault,
+            ...specificSettingsDefault,
             openDialog: false,
             name: '',
         },
@@ -246,7 +246,7 @@ class ProgramSettings extends React.Component {
         this.programToChange = undefined
         const settings = this.populateObject(
             'FULL_SPECIFIC',
-            SpecificSettingsDefault
+            specificSettingsDefault
         )
 
         this.setState({
@@ -353,14 +353,14 @@ class ProgramSettings extends React.Component {
                 } else {
                     programObject = this.populateObject(
                         WITH_REGISTRATION,
-                        SpecificSettingsDefault
+                        specificSettingsDefault
                     )
                 }
 
                 sumarySettings =
                     (this.state.specificSetting.teiDownload
                         ? this.state.specificSetting.teiDownload
-                        : SpecificSettingsDefault.teiDownload) + ' TEI'
+                        : specificSettingsDefault.teiDownload) + ' TEI'
             } else if (
                 programNameFilter[0].programType === WITHOUT_REGISTRATION
             ) {
@@ -376,14 +376,14 @@ class ProgramSettings extends React.Component {
                 } else {
                     programObject = this.populateObject(
                         WITHOUT_REGISTRATION,
-                        SpecificSettingsDefault
+                        specificSettingsDefault
                     )
                 }
 
                 sumarySettings =
                     (this.state.specificSetting.eventsDownload
                         ? this.state.specificSetting.eventsDownload
-                        : SpecificSettingsDefault.eventsDownload) +
+                        : specificSettingsDefault.eventsDownload) +
                     ' events per OU'
             }
 
@@ -540,13 +540,13 @@ class ProgramSettings extends React.Component {
                                                     sumarySettings =
                                                         (program.teiDownload
                                                             ? program.teiDownload
-                                                            : SpecificSettingsDefault.teiDownload) +
+                                                            : specificSettingsDefault.teiDownload) +
                                                         ' TEI'
                                                 } else {
                                                     sumarySettings =
                                                         (program.eventsDownload
                                                             ? program.eventsDownload
-                                                            : SpecificSettingsDefault.eventsDownload) +
+                                                            : specificSettingsDefault.eventsDownload) +
                                                         ' events per OU'
                                                 }
 
