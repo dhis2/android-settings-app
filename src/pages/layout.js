@@ -24,29 +24,23 @@ const Layout = () => {
                 <SideBar />
                 <MainContent>
                     <Paper className={layoutStyles.paper__layout}>
-                        <D2Shim>
-                            <Switch>
+                        <Switch>
+                            <Route
+                                path="/"
+                                exact
+                                render={() => <AndroidSettingsContainer />}
+                            />
+
+                            {menuSection.map(section => (
                                 <Route
-                                    path="/"
-                                    exact
+                                    key={section.key}
+                                    path={section.path}
                                     render={() => (
-                                        <D2Shim>
-                                            <AndroidSettingsContainer />
-                                        </D2Shim>
+                                        <D2Shim>{section.component}</D2Shim>
                                     )}
                                 />
-
-                                {menuSection.map(section => (
-                                    <Route
-                                        key={section.key}
-                                        path={section.path}
-                                        render={() => (
-                                            <D2Shim>{section.component}</D2Shim>
-                                        )}
-                                    />
-                                ))}
-                            </Switch>
-                        </D2Shim>
+                            ))}
+                        </Switch>
                     </Paper>
                 </MainContent>
             </TwoPanel>
