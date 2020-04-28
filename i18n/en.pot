@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-22T12:50:52.572Z\n"
-"PO-Revision-Date: 2020-04-22T12:50:52.572Z\n"
+"POT-Creation-Date: 2020-04-28T00:49:58.680Z\n"
+"PO-Revision-Date: 2020-04-28T00:49:58.680Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -17,37 +17,13 @@ msgstr ""
 msgid "Settings were successfully saved"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Number of Periods"
-msgstr ""
-
-msgid "Save in DataStore"
-msgstr ""
-
-msgid ""
-"Saving settings in DataStore is a critical action that could have very "
-"serious consequences. Are you sure you want to save these settings in "
-"DataStore?"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Values per"
-msgstr ""
-
-msgid "Add/Save"
-msgstr ""
-
 msgid "Delete {{typeName}}"
 msgstr ""
 
 msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Delete"
@@ -67,7 +43,28 @@ msgstr ""
 msgid "Encrypt DB"
 msgstr ""
 
-msgid "Summary Settings"
+msgid "Save in DataStore"
+msgstr ""
+
+msgid ""
+"Saving settings in DataStore is a critical action that could have very "
+"serious consequences. Are you sure you want to save these settings in "
+"DataStore?"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Values per"
+msgstr ""
+
+msgid "Add/Save"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Number of Periods"
 msgstr ""
 
 msgid "How often should metadata sync?"
@@ -103,13 +100,7 @@ msgstr ""
 msgid "These settings apply to all Android users."
 msgstr ""
 
-msgid "Download"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Edit"
+msgid "Summary Settings"
 msgstr ""
 
 msgid "User sync test"
@@ -119,6 +110,20 @@ msgid "Check the amount of data a user would sync to their device."
 msgstr ""
 
 msgid "Run test"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
 msgstr ""
 
 msgid "Encrypt"

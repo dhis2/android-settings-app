@@ -30,6 +30,7 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
+import UnsavedChangesAlert from '../../unsaved-changes-alert'
 
 let programData = GlobalProgram
 const specificProgramData = SpecificProgram
@@ -531,24 +532,28 @@ class ProgramSettings extends React.Component {
         }
 
         return (
-            <GlobalSpecificSettings
-                programTableData={programData}
-                states={this.state}
-                handleTableChange={this.handleChange}
-                specificSettings={this.programNamesList}
-                specificSettingList={this.specificSettingsRows}
-                dialogDeleteName={this.programName}
-                handleSetDefaultValues={this.handleReset}
-                specificSettingDataTitle={this.programToChange}
-                specificSettingOptions={this.programList}
-                specificSettingData={specificProgramData}
-                completeListOptions={this.programListComplete}
-                handleSaveDialog={this.handleSaveDataDialog}
-                deleteDialog={this.handleDeleteDialog}
-                specificSettingDialog={this.handleSpecificSettingDialog}
-                specificSettingTable={this.handleSpecificSetting}
-                settingType={ProgramTitles}
-            />
+            <>
+                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
+
+                <GlobalSpecificSettings
+                    programTableData={programData}
+                    states={this.state}
+                    handleTableChange={this.handleChange}
+                    specificSettings={this.programNamesList}
+                    specificSettingList={this.specificSettingsRows}
+                    dialogDeleteName={this.programName}
+                    handleSetDefaultValues={this.handleReset}
+                    specificSettingDataTitle={this.programToChange}
+                    specificSettingOptions={this.programList}
+                    specificSettingData={specificProgramData}
+                    completeListOptions={this.programListComplete}
+                    handleSaveDialog={this.handleSaveDataDialog}
+                    deleteDialog={this.handleDeleteDialog}
+                    specificSettingDialog={this.handleSpecificSettingDialog}
+                    specificSettingTable={this.handleSpecificSetting}
+                    settingType={ProgramTitles}
+                />
+            </>
         )
     }
 }

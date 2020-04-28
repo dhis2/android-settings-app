@@ -23,6 +23,7 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
+import UnsavedChangesAlert from '../../unsaved-changes-alert'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -441,24 +442,28 @@ class DataSetSettings extends React.Component {
         }
 
         return (
-            <GlobalSpecificSettings
-                programTableData={dataSetSettings}
-                states={this.state}
-                handleTableChange={this.handleChange}
-                specificSettings={this.dataSetNamesList}
-                specificSettingList={this.specificSettingsRows}
-                dialogDeleteName={this.dataSetName}
-                handleSetDefaultValues={this.handleReset}
-                specificSettingDataTitle={this.dataSetToChange}
-                specificSettingOptions={this.dataSetList}
-                specificSettingData={dataSpecificSetting}
-                completeListOptions={this.dataSetListComplete}
-                handleSaveDialog={this.handleSaveDataDialog}
-                deleteDialog={this.handleDeleteDialog}
-                specificSettingDialog={this.handleSpecificSettingDialog}
-                specificSettingTable={this.handleSpecificSetting}
-                settingType={DataSetTitles}
-            />
+            <>
+                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
+
+                <GlobalSpecificSettings
+                    programTableData={dataSetSettings}
+                    states={this.state}
+                    handleTableChange={this.handleChange}
+                    specificSettings={this.dataSetNamesList}
+                    specificSettingList={this.specificSettingsRows}
+                    dialogDeleteName={this.dataSetName}
+                    handleSetDefaultValues={this.handleReset}
+                    specificSettingDataTitle={this.dataSetToChange}
+                    specificSettingOptions={this.dataSetList}
+                    specificSettingData={dataSpecificSetting}
+                    completeListOptions={this.dataSetListComplete}
+                    handleSaveDialog={this.handleSaveDataDialog}
+                    deleteDialog={this.handleDeleteDialog}
+                    specificSettingDialog={this.handleSpecificSettingDialog}
+                    specificSettingTable={this.handleSpecificSetting}
+                    settingType={DataSetTitles}
+                />
+            </>
         )
     }
 }

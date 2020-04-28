@@ -10,6 +10,7 @@ import {
 } from '../../../constants/android-settings'
 import GeneralSettings from './general-settings'
 import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
+import UnsavedChangesAlert from '../../unsaved-changes-alert'
 
 const {
     metadataSync,
@@ -271,14 +272,18 @@ class AndroidSettingsContainer extends React.Component {
         }
 
         return (
-            <GeneralSettings
-                state={this.state}
-                handleChange={this.handleChange}
-                checkMatchingConfirmation={this.checkMatchingConfirmation}
-                handleReset={this.handleReset}
-                handleEncryptCheckbox={this.handleCheckbox}
-                handleSaveDialog={this.handleSaveDataDialog}
-            />
+            <>
+                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
+
+                <GeneralSettings
+                    state={this.state}
+                    handleChange={this.handleChange}
+                    checkMatchingConfirmation={this.checkMatchingConfirmation}
+                    handleReset={this.handleReset}
+                    handleEncryptCheckbox={this.handleCheckbox}
+                    handleSaveDialog={this.handleSaveDataDialog}
+                />
+            </>
         )
     }
 }
