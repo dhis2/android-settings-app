@@ -27,7 +27,7 @@ class Api {
     createNamespace(namespace, key, value = {}) {
         return getInstance()
             .then(d2 => {
-                d2.dataStore.create(namespace).then(namespace => {
+                return d2.dataStore.create(namespace).then(namespace => {
                     return namespace.set(key, value)
                 })
             })

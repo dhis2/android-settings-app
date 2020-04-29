@@ -71,10 +71,10 @@ class Layout extends React.Component {
     }
 
     handleSave = () => {
-        Promise.all([api.createNamespace(NAMESPACE, GENERAL_SETTINGS)]).then(
-            () => {
+        api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
+            .then(() => {
                 return Promise.all([
-                    api.createValue(NAMESPACE, GENERAL_SETTINGS, {
+                    api.updateValue(NAMESPACE, GENERAL_SETTINGS, {
                         ...androidSettingsDefault,
                     }),
                     api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
@@ -84,13 +84,13 @@ class Layout extends React.Component {
                         globalSettings: populateObject(DEFAULT_DATASET),
                     }),
                 ])
-            }
-        )
-
-        this.setState({
-            openFirstLaunch: false,
-            isSaved: true,
-        })
+            })
+            .then(() => {
+                this.setState({
+                    openFirstLaunch: false,
+                    isSaved: true,
+                })
+            })
     }
 
     componentDidMount() {
