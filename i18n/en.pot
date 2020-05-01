@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-28T00:49:58.680Z\n"
-"PO-Revision-Date: 2020-04-28T00:49:58.680Z\n"
+"POT-Creation-Date: 2020-05-01T20:23:49.777Z\n"
+"PO-Revision-Date: 2020-05-01T20:23:49.777Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -135,16 +135,13 @@ msgstr ""
 msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
-msgid "General Settings"
+msgid "General"
 msgstr ""
 
 msgid "Programs"
 msgstr ""
 
 msgid "Data Sets"
-msgstr ""
-
-msgid "Test Android Sync"
 msgstr ""
 
 msgid "Setting level"
@@ -263,7 +260,4 @@ msgid ""
 msgstr ""
 
 msgid "Add a {{elementSingular}} specific setting"
-msgstr ""
-
-msgid "Android settings"
 msgstr ""

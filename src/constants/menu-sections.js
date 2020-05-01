@@ -15,7 +15,7 @@ import i18n from '@dhis2/d2-i18n'
 const menuSection = [
     {
         key: 'general-setting',
-        label: i18n.t('General Settings'),
+        label: i18n.t('General'),
         path: '/general-setting',
         icon: <AndroidSettingsIcon />,
         component: <AndroidSettingsContainer />,
@@ -35,9 +35,9 @@ const menuSection = [
         component: <DataSetSettings />,
     },
     {
-        key: 'test-android-sync',
-        label: i18n.t('Test Android Sync'),
-        path: '/test-android-sync',
+        key: 'user-sync-test',
+        label: i18n.t('User sync test'),
+        path: '/user-sync-test',
         icon: <TestRun />,
         component: <UserSyncTestContainer />,
     },
