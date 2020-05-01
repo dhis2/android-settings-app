@@ -56,7 +56,13 @@ msgstr ""
 msgid "Set defaults and save"
 msgstr ""
 
-msgid "Cancel"
+msgid "Add/Save"
+msgstr ""
+
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr ""
+
+msgid "Delete"
 msgstr ""
 
 msgid "Values per"
@@ -115,13 +121,16 @@ msgstr ""
 msgid "Decrypt"
 msgstr ""
 
-msgid "General Settings"
+msgid "General"
 msgstr ""
 
 msgid "Programs"
 msgstr ""
 
 msgid "Data Sets"
+msgstr ""
+
+msgid "User sync test"
 msgstr ""
 
 msgid "Setting for"
@@ -230,7 +239,4 @@ msgid "{{elementPlural}} settings listed below overwrite the global settings abo
 msgstr ""
 
 msgid "ADD"
-msgstr ""
-
-msgid "Android settings"
 msgstr ""

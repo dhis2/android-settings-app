@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { TwoPanel, Sidebar, MainContent } from '@dhis2/d2-ui-core'
+import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
-import { Route, Link, Switch, HashRouter } from 'react-router-dom'
+import { Route, Switch, HashRouter } from 'react-router-dom'
 
 import AndroidSettingsContainer from '../components/android-settings-container'
 import menuSection from '../constants/menu-sections'
-import i18n from '@dhis2/d2-i18n'
 
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
@@ -21,6 +20,7 @@ import { androidSettingsDefault } from '../constants/android-settings'
 import { programSettingsDefault } from '../constants/program-settings'
 import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
+import SideBar from '../components/sidebar'
 
 const styles = {
     twoPanelMain: {
@@ -112,19 +112,6 @@ class Layout extends React.Component {
     }
 
     render() {
-        const currentSection = {}
-
-        const routeSections = menuSection
-        routeSections.push({
-            key: 'home',
-            path: '/',
-            component: <AndroidSettingsContainer />,
-        })
-
-        const changeSectionHandler = key => {
-            currentSection.current = key
-        }
-
         if (this.state.openFirstLaunch === true) {
             return (
                 <DialogFirstLaunch
@@ -138,48 +125,26 @@ class Layout extends React.Component {
         return (
             <HashRouter>
                 <TwoPanel mainStyle={styles.twoPanelMain}>
-                    <div className={layoutStyles.paper__twoPanel__sideBar}>
-                        <Sidebar
-                            sections={menuSection.map(
-                                ({ key, label, path, icon }, i) => ({
-                                    key,
-                                    label,
-                                    icon,
-                                    containerElement: (
-                                        <Link to={path}> {label} </Link>
-                                    ),
-                                })
-                            )}
-                            onChangeSection={changeSectionHandler}
-                            currentSection={currentSection}
-                        />
-                    </div>
+                    <SideBar />
                     <MainContent>
-                        <header>
-                            <h1
-                                className={
-                                    layoutStyles.paper__twoPanel__mainTitle
-                                }
-                            >
-                                {i18n.t('Android settings')}
-                            </h1>
-                        </header>
                         <Paper className={layoutStyles.paper__layout}>
-                            <D2Shim>
-                                <Switch>
-                                    {routeSections.map(section => (
-                                        <Route
-                                            key={section.key}
-                                            path={section.path}
-                                            render={() => (
-                                                <D2Shim>
-                                                    {section.component}
-                                                </D2Shim>
-                                            )}
-                                        />
-                                    ))}
-                                </Switch>
-                            </D2Shim>
+                            <Switch>
+                                <Route
+                                    path="/"
+                                    exact
+                                    render={() => <AndroidSettingsContainer />}
+                                />
+
+                                {menuSection.map(section => (
+                                    <Route
+                                        key={section.key}
+                                        path={section.path}
+                                        render={() => (
+                                            <D2Shim>{section.component}</D2Shim>
+                                        )}
+                                    />
+                                ))}
+                            </Switch>
                         </Paper>
                     </MainContent>
                 </TwoPanel>
