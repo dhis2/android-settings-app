@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-20T17:44:27.790Z\n"
-"PO-Revision-Date: 2020-04-20T17:44:27.790Z\n"
+"POT-Creation-Date: 2020-04-29T18:01:38.639Z\n"
+"PO-Revision-Date: 2020-04-29T18:01:38.639Z\n"
 
 msgid "Metadata Sync"
 msgstr ""
@@ -35,10 +35,37 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
-msgid "Values per"
+msgid "First time setup"
 msgstr ""
 
-msgid "Cancel"
+msgid ""
+"Using the Android Settings app will apply default settings to all Android "
+"devices connected to this instance."
+msgstr ""
+
+msgid ""
+"Any settings or configuration on a users device will be overwritten by "
+"settings applied here."
+msgstr ""
+
+msgid ""
+"To set up the default settings and apply to all devices, click \"Set "
+"default and save\""
+msgstr ""
+
+msgid "Set defaults and save"
+msgstr ""
+
+msgid "Add/Save"
+msgstr ""
+
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Values per"
 msgstr ""
 
 msgid "Add/Save"

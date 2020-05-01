@@ -7,7 +7,7 @@ import api from '../utils/api'
 import {
     DataSetting,
     DataSpecificSetting,
-    DataSetSettingsDefault,
+    dataSetSettingsDefault,
 } from '../constants/data-set-settings'
 import GlobalSpecificSettings from '../pages/global-specific-settings'
 import { NAMESPACE, DATASET_SETTINGS } from '../constants/data-store'
@@ -16,7 +16,7 @@ import { getInstance } from 'd2'
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
 
-const { periodDSDownload, periodDSDBTrimming } = DataSetSettingsDefault
+const { periodDSDownload, periodDSDBTrimming } = dataSetSettingsDefault
 
 class DataSetSettings extends React.Component {
     constructor(props) {
