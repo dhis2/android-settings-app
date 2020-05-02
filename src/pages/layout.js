@@ -132,7 +132,11 @@ class Layout extends React.Component {
                                 <Route
                                     path="/"
                                     exact
-                                    render={() => <AndroidSettingsContainer />}
+                                    render={() => (
+                                        <D2Shim>
+                                            <AndroidSettingsContainer />
+                                        </D2Shim>
+                                    )}
                                 />
 
                                 {menuSection.map(section => (
