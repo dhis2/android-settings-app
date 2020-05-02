@@ -1,11 +1,11 @@
 import {
     CLEAN,
-    DataSetSettingsDefault,
+    dataSetSettingsDefault,
     DEFAULT,
     GLOBAL,
     SPECIFIC,
 } from '../../constants/data-set-settings'
-const { periodDSDownload } = DataSetSettingsDefault
+const { periodDSDownload } = dataSetSettingsDefault
 
 export const populateSettingObject = (type, settingsList) => {
     let object

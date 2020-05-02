@@ -24,17 +24,13 @@ class Api {
         )
     }
 
-    createNamespace(namespace, key, value) {
+    createNamespace(namespace, key, value = {}) {
         return getInstance()
             .then(d2 => {
-                console.log(d2.dataStore)
-                d2.dataStore.create(namespace).then(namespace => {
-                    value == undefined
-                        ? namespace.set(key, {})
-                        : namespace.set(key, value)
+                return d2.dataStore.create(namespace).then(namespace => {
+                    return namespace.set(key, value)
                 })
             })
-            .then(name => console.log(name))
             .catch(error => Promise.reject(error))
     }
 

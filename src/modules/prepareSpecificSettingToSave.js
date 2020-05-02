@@ -2,7 +2,7 @@ import { populateSettingObject } from './dataset/populateSettingObject'
 import { DATA_SET, DEFAULT, SPECIFIC } from '../constants/data-set-settings'
 import {
     PROGRAM,
-    SpecificSettingsDefault,
+    specificSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
@@ -46,14 +46,14 @@ export const prepareSpecificSettingsToSave = ({
                 } else {
                     settings = populateProgramObject(
                         WITH_REGISTRATION,
-                        SpecificSettingsDefault
+                        specificSettingsDefault
                     )
                 }
 
                 summarySettings =
                     (states.specificSetting.teiDownload
                         ? states.specificSetting.teiDownload
-                        : SpecificSettingsDefault.teiDownload) + ' TEI'
+                        : specificSettingsDefault.teiDownload) + ' TEI'
             } else if (
                 settingNameFilter[0].programType === WITHOUT_REGISTRATION
             ) {
@@ -69,14 +69,14 @@ export const prepareSpecificSettingsToSave = ({
                 } else {
                     settings = populateProgramObject(
                         WITHOUT_REGISTRATION,
-                        SpecificSettingsDefault
+                        specificSettingsDefault
                     )
                 }
 
                 summarySettings =
                     (states.specificSetting.eventsDownload
                         ? states.specificSetting.eventsDownload
-                        : SpecificSettingsDefault.eventsDownload) +
+                        : specificSettingsDefault.eventsDownload) +
                     ' events per OU'
             }
         } else if (settingType === DATA_SET) {

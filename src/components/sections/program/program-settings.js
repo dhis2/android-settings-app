@@ -13,11 +13,11 @@ import {
     GlobalProgramSpecial,
     PER_ORG_UNIT,
     PROGRAM,
-    ProgramSettingsDefault,
+    programSettingsDefault,
     ProgramTitles,
     SETTING_DOWNLOAD,
     SpecificProgram,
-    SpecificSettingsDefault,
+    specificSettingsDefault,
     WITH_REGISTRATION,
 } from '../../../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
@@ -49,7 +49,7 @@ const {
     eventsDBTrimming,
     eventDateDownload,
     eventDateDBTrimming,
-} = ProgramSettingsDefault
+} = programSettingsDefault
 
 class ProgramSettings extends React.Component {
     constructor(props) {
@@ -84,7 +84,7 @@ class ProgramSettings extends React.Component {
         eventDateDownload,
         eventDateDBTrimming,
         specificSetting: {
-            ...SpecificSettingsDefault,
+            ...specificSettingsDefault,
             openDialog: false,
             name: '',
         },
@@ -204,7 +204,7 @@ class ProgramSettings extends React.Component {
         this.programToChange = undefined
         const settings = populateProgramObject(
             FULL_SPECIFIC,
-            SpecificSettingsDefault
+            specificSettingsDefault
         )
 
         this.setState({
@@ -451,13 +451,13 @@ class ProgramSettings extends React.Component {
                                                         summarySettings =
                                                             (program.teiDownload
                                                                 ? program.teiDownload
-                                                                : SpecificSettingsDefault.teiDownload) +
+                                                                : specificSettingsDefault.teiDownload) +
                                                             ' TEI'
                                                     } else {
                                                         summarySettings =
                                                             (program.eventsDownload
                                                                 ? program.eventsDownload
-                                                                : SpecificSettingsDefault.eventsDownload) +
+                                                                : specificSettingsDefault.eventsDownload) +
                                                             ' events per OU'
                                                     }
 

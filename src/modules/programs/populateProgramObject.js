@@ -3,7 +3,7 @@ import {
     FULL_SPECIFIC,
     GLOBAL,
     GLOBAL_SPECIAL,
-    ProgramSettingsDefault,
+    programSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
 } from '../../constants/program-settings'
@@ -16,7 +16,7 @@ const {
     updateDownload,
     eventsDownload,
     eventDateDownload,
-} = ProgramSettingsDefault
+} = programSettingsDefault
 
 export const populateProgramObject = (programType, settingsList) => {
     let object

@@ -65,3 +65,8 @@
     font-family: Roboto, sans-serif;
     margin-right: 10px;
 }
+
+.button_redirect {
+    text-decoration: none !important;
+    color: initial !important;
+}

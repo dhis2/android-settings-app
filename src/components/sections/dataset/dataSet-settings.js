@@ -7,7 +7,7 @@ import api from '../../../utils/api'
 import {
     CLEAN,
     DATA_SET,
-    DataSetSettingsDefault,
+    dataSetSettingsDefault,
     DataSetting,
     DataSetTitles,
     DataSpecificSetting,
@@ -28,7 +28,7 @@ import UnsavedChangesAlert from '../../unsaved-changes-alert'
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
 
-const { periodDSDownload, periodDSDBTrimming } = DataSetSettingsDefault
+const { periodDSDownload, periodDSDBTrimming } = dataSetSettingsDefault
 
 class DataSetSettings extends React.Component {
     constructor(props) {

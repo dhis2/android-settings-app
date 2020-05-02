@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-01T20:23:49.777Z\n"
-"PO-Revision-Date: 2020-05-01T20:23:49.777Z\n"
+"POT-Creation-Date: 2020-05-02T00:00:10.790Z\n"
+"PO-Revision-Date: 2020-05-02T00:00:10.790Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -43,6 +43,27 @@ msgstr ""
 msgid "Encrypt DB"
 msgstr ""
 
+msgid "First time setup"
+msgstr ""
+
+msgid ""
+"Using the Android Settings app will apply default settings to all Android "
+"devices connected to this instance."
+msgstr ""
+
+msgid ""
+"Any settings or configuration on a users device will be overwritten by "
+"settings applied here."
+msgstr ""
+
+msgid ""
+"To set up the default settings and apply to all devices, click \"Set "
+"default and save\""
+msgstr ""
+
+msgid "Set defaults and save"
+msgstr ""
+
 msgid "Save in DataStore"
 msgstr ""
 
@@ -62,6 +83,9 @@ msgid "Add/Save"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "Summary Settings"
 msgstr ""
 
 msgid "Number of Periods"
@@ -98,9 +122,6 @@ msgid "General settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
-msgstr ""
-
-msgid "Summary Settings"
 msgstr ""
 
 msgid "User sync test"

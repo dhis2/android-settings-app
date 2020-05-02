@@ -435,7 +435,7 @@ export const maxValues = {
     eventsDBTrimming: 3000,
 }
 
-export const ProgramSettingsDefault = {
+export const programSettingsDefault = {
     settingDownload: 'GLOBAL',
     settingDBTrimming: 'GLOBAL',
     teiDownload: 500,
@@ -452,7 +452,7 @@ export const ProgramSettingsDefault = {
     eventDateDBTrimming: 'ANY',
 }
 
-export const SpecificSettingsDefault = {
+export const specificSettingsDefault = {
     settingDownload: 'ALL_ORG_UNITS',
     settingDBTrimming: 'ALL_ORG_UNITS',
     teiDownload: 500,
