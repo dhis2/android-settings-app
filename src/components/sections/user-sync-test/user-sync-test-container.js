@@ -100,33 +100,8 @@ class UserSyncTestContainer extends React.Component {
 
     checkAccess = (elementArray, accessIDList) => {
         elementArray.forEach(element => {
-            switch (element.publicAccess) {
-                case 'r-------':
-                    // if user userGroupAccess, if user userAccess
-                    break
-                case 'rw------':
-                    accessIDList.push(element)
-                    break
-                case 'rwr-----':
-                    accessIDList.push(element)
-                    break
-                case 'rwrw----':
-                    accessIDList.push(element)
-                    break
-                case 'rwrwr---':
-                    accessIDList.push(element)
-                    break
-                case 'rwrwrw--':
-                    accessIDList.push(element)
-                    break
-                case 'rwrwrwr-':
-                    accessIDList.push(element)
-                    break
-                case 'rwrwrwrw':
-                    accessIDList.push(element)
-                    break
-                default:
-                    break
+            if (element.publicAccess.includes('rw')) {
+                accessIDList.push(element)
             }
         })
 
