@@ -1,6 +1,6 @@
 import { checkSettingType } from './checkSettingType'
 import { getDataPerProgramSettingType } from './dataPerProgramType'
-import { getSettingsId } from './getSettingsId'
+import { addSettingsId } from './addSettingsId'
 
 export const prepareDataSizeRequest = ({
     props,
@@ -40,7 +40,7 @@ export const prepareDataSizeRequest = ({
         const _temporalSettingsArray = Object.entries(specificSettings)
         const _specificSettingArray = []
         _temporalSettingsArray.forEach(array => {
-            const tempt = getSettingsId(array)
+            const tempt = addSettingsId(array)
             _specificSettingArray.push(tempt)
         })
 

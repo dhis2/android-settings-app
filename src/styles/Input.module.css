@@ -7,9 +7,6 @@
 }
 
 .container_content_inline {
-    /*display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-evenly;*/
     display: inline-flex !important;
     flex-direction: row !important;
     text-align: start;

@@ -23,15 +23,15 @@ export const prepareSpecificSettingsToSave = ({
     const specificNameKey = states.specificSetting.name
     const objData = specificSettings
 
-    const settingNameFilter = settingsCompleteList.filter(
+    const settingNameFilter = settingsCompleteList.find(
         option => option.id === specificNameKey
     )
 
-    if (settingNameFilter.length > 0) {
+    if (settingNameFilter) {
         let settings
         let summarySettings
         if (settingType === PROGRAM) {
-            if (settingNameFilter[0].programType === WITH_REGISTRATION) {
+            if (settingNameFilter.programType === WITH_REGISTRATION) {
                 if (
                     states.specificSetting.settingDownload ||
                     states.specificSetting.teiDownload ||
@@ -54,9 +54,7 @@ export const prepareSpecificSettingsToSave = ({
                     (states.specificSetting.teiDownload
                         ? states.specificSetting.teiDownload
                         : specificSettingsDefault.teiDownload) + ' TEI'
-            } else if (
-                settingNameFilter[0].programType === WITHOUT_REGISTRATION
-            ) {
+            } else if (settingNameFilter.programType === WITHOUT_REGISTRATION) {
                 if (
                     states.specificSetting.settingDownload ||
                     states.specificSetting.eventsDownload ||
@@ -90,7 +88,7 @@ export const prepareSpecificSettingsToSave = ({
             }
 
             summarySettings = states.specificSetting.periodDSDownload
-                ? `${states.specificSetting.periodDSDownload} ${settingNameFilter[0].periodType} period`
+                ? `${states.specificSetting.periodDSDownload} ${settingNameFilter.periodType} period`
                 : periodDSDownload
         }
 
@@ -98,7 +96,7 @@ export const prepareSpecificSettingsToSave = ({
             ...settings,
             id: specificNameKey,
             lastUpdated: new Date().toJSON(),
-            name: settingNameFilter[0].name,
+            name: settingNameFilter.name,
         }
 
         const newSpecificSettingRow = {
