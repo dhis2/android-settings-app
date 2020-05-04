@@ -11,6 +11,7 @@ import {
 import GeneralSettings from './general-settings'
 import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
+import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 
 const {
     metadataSync,
@@ -24,9 +25,6 @@ const {
 class AndroidSettingsContainer extends React.Component {
     constructor(props) {
         super(props)
-
-        this.nameSpace = undefined
-        this.keyName = undefined
     }
 
     state = {
@@ -216,46 +214,13 @@ class AndroidSettingsContainer extends React.Component {
      * When component mount, get namespace and keys from dataStore
      */
     componentDidMount() {
-        api.getNamespaces()
-            .then(res => {
-                const nameSpace = res.filter(name => name === NAMESPACE)
-                nameSpace.length === 0
-                    ? (this.nameSpace = undefined)
-                    : (this.nameSpace = nameSpace[0])
-
-                if (this.nameSpace === NAMESPACE) {
-                    api.getKeys(this.nameSpace)
-                        .then(res => {
-                            const keyName = res.filter(
-                                name => name === GENERAL_SETTINGS
-                            )
-                            keyName.length === 0
-                                ? (this.keyName = undefined)
-                                : (this.keyName = keyName[0])
-
-                            this.keyName !== undefined
-                                ? api
-                                      .getValue(this.nameSpace, this.keyName)
-                                      .then(res => {
-                                          this.setState({
-                                              ...res.value,
-                                              loading: false,
-                                              disableSave: true,
-                                          })
-                                      })
-                                : this.setState({
-                                      loading: false,
-                                      openErrorAlert: true,
-                                  })
-                        })
-                        .catch(e => {
-                            console.error(e)
-                            this.setState({
-                                loading: false,
-                                openErrorAlert: true,
-                            })
-                        })
-                }
+        apiLoadGeneralSettings()
+            .then(generalSettings => {
+                this.setState({
+                    ...generalSettings,
+                    loading: false,
+                    disableSave: true,
+                })
             })
             .catch(e => {
                 console.error(e)

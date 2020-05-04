@@ -18,7 +18,6 @@ import {
     SETTING_DOWNLOAD,
     SpecificProgram,
     specificSettingsDefault,
-    WITH_REGISTRATION,
 } from '../../../constants/program-settings'
 import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
 
@@ -31,6 +30,7 @@ import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
+import { apiLoadProgramSettings } from '../../../modules/programs/apiLoadSettings'
 
 let programData = GlobalProgram
 const specificProgramData = SpecificProgram
@@ -55,8 +55,6 @@ class ProgramSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        this.nameSpace = undefined
-        this.keyName = undefined
         this.programNamesList = []
         this.globalSettings = {}
         this.specificSettings = {}
@@ -384,145 +382,60 @@ class ProgramSettings extends React.Component {
     }
 
     componentDidMount() {
-        getInstance().then(d2 => {
-            d2.models.program
-                .list({
-                    paging: false,
-                    level: 1,
-                    fields: 'id,name,programType',
-                    filter: 'access.data.write:eq:true',
-                })
-                .then(collection => {
-                    const programList = collection.toArray()
-                    this.programList = programList
-                    this.programListComplete = programList
-                })
-        })
-
-        api.getNamespaces()
-            .then(res => {
-                const nameSpace = res.filter(name => name === NAMESPACE)
-                nameSpace.length === 0
-                    ? (this.nameSpace = undefined)
-                    : (this.nameSpace = nameSpace[0])
-
-                if (this.nameSpace === NAMESPACE) {
-                    api.getKeys(this.nameSpace)
-                        .then(res => {
-                            const keyName = res.filter(
-                                name => name === PROGRAM_SETTINGS
-                            )
-                            keyName.length === 0
-                                ? (this.keyName = undefined)
-                                : (this.keyName = keyName[0])
-                            if (this.keyName !== undefined) {
-                                api.getValue(this.nameSpace, this.keyName)
-                                    .then(res => {
-                                        if (res.value.specificSettings) {
-                                            this.specificSettings =
-                                                res.value.specificSettings
-                                            this.programNamesList = Object.keys(
-                                                this.specificSettings
-                                            )
-
-                                            for (const key in this
-                                                .specificSettings) {
-                                                if (
-                                                    this.specificSettings.hasOwnProperty(
-                                                        key
-                                                    )
-                                                ) {
-                                                    const program = this
-                                                        .specificSettings[key]
-
-                                                    let filter = this.programListComplete.filter(
-                                                        listItem =>
-                                                            listItem.id ===
-                                                            program.id
-                                                    )
-                                                    filter = filter[0]
-
-                                                    let summarySettings
-
-                                                    if (
-                                                        filter.programType ===
-                                                        WITH_REGISTRATION
-                                                    ) {
-                                                        summarySettings =
-                                                            (program.teiDownload
-                                                                ? program.teiDownload
-                                                                : specificSettingsDefault.teiDownload) +
-                                                            ' TEI'
-                                                    } else {
-                                                        summarySettings =
-                                                            (program.eventsDownload
-                                                                ? program.eventsDownload
-                                                                : specificSettingsDefault.eventsDownload) +
-                                                            ' events per OU'
-                                                    }
-
-                                                    const newProgramRow = {
-                                                        ...program,
-                                                        summarySettings,
-                                                    }
-
-                                                    this.specificSettingsRows.push(
-                                                        newProgramRow
-                                                    )
-                                                }
-                                            }
-                                            this.setState({
-                                                loading: false,
-                                            })
-                                        }
-
-                                        if (res.value.globalSettings) {
-                                            this.globalSettings =
-                                                res.value.globalSettings
-
-                                            if (
-                                                this.globalSettings
-                                                    .settingDownload ===
-                                                    GLOBAL ||
-                                                this.globalSettings
-                                                    .settingDownload ===
-                                                    PER_ORG_UNIT
-                                            ) {
-                                                programData = GlobalProgramSpecial
-                                            } else {
-                                                programData = GlobalProgram
-                                            }
-
-                                            this.setState({
-                                                ...res.value.globalSettings,
-                                                loading: false,
-                                            })
-                                        }
-                                    })
-                                    .catch(e => {
-                                        console.error(e)
-                                        this.setState({
-                                            loading: false,
-                                            openErrorAlert: true,
-                                        })
-                                    })
-                            }
-                        })
-                        .catch(e => {
-                            console.error(e)
-                            this.setState({
-                                loading: false,
-                                openErrorAlert: true,
-                            })
-                        })
-                }
+        getInstance()
+            .then(d2 => {
+                return d2.models.program
+                    .list({
+                        paging: false,
+                        level: 1,
+                        fields: 'id,name,programType',
+                        filter: 'access.data.write:eq:true',
+                    })
+                    .then(collection => {
+                        const programList = collection.toArray()
+                        this.programList = programList
+                        this.programListComplete = programList
+                    })
             })
-            .catch(e => {
-                console.error(e)
-                this.setState({
-                    loading: false,
-                    openErrorAlert: true,
+            .then(() => {
+                apiLoadProgramSettings({
+                    specificSettings: this.specificSettings,
+                    programNameList: this.programNamesList,
+                    programListComplete: this.programListComplete,
+                    specificSettingsRows: this.specificSettingsRows,
+                    globalSettings: this.globalSettings,
+                    globalDefaultValues: programData,
                 })
+                    .then(res => {
+                        const {
+                            settings,
+                            specificSettings,
+                            programNameList,
+                            programListComplete,
+                            specificSettingsRows,
+                            globalSettings,
+                            globalDefaultValues,
+                        } = res
+
+                        this.specificSettings = specificSettings
+                        this.programNamesList = programNameList
+                        this.programListComplete = programListComplete
+                        this.specificSettingsRows = specificSettingsRows
+                        this.globalSettings = globalSettings
+                        programData = globalDefaultValues
+
+                        this.setState({
+                            ...settings.globalSettings,
+                            loading: false,
+                        })
+                    })
+                    .catch(e => {
+                        console.error(e)
+                        this.setState({
+                            loading: false,
+                            openErrorAlert: true,
+                        })
+                    })
             })
     }
 

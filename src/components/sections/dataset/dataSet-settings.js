@@ -24,6 +24,7 @@ import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
+import { apiLoadDatasetSettings } from '../../../modules/dataset/apiLoadSettings'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -34,8 +35,6 @@ class DataSetSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        this.nameSpace = undefined
-        this.keyName = undefined
         this.dataSetNamesList = []
         this.globalSettings = {}
         this.specificSettings = {}
@@ -324,115 +323,57 @@ class DataSetSettings extends React.Component {
     }
 
     componentDidMount() {
-        getInstance().then(d2 => {
-            d2.models.dataSet
-                .list({
-                    paging: false,
-                    level: 1,
-                    fields: 'id,name,periodType',
-                    filter: 'access.data.write:eq:true',
-                })
-                .then(collection => {
-                    const dataSetList = collection.toArray()
-                    this.dataSetList = dataSetList
-                    this.dataSetListComplete = dataSetList
-                })
-        })
-
-        api.getNamespaces()
-            .then(res => {
-                const nameSpace = res.filter(name => name === NAMESPACE)
-                nameSpace.length === 0
-                    ? (this.nameSpace = undefined)
-                    : (this.nameSpace = nameSpace[0])
-
-                if (this.nameSpace === NAMESPACE) {
-                    api.getKeys(this.nameSpace)
-                        .then(res => {
-                            const keyName = res.filter(
-                                name => name === DATASET_SETTINGS
-                            )
-                            keyName.length === 0
-                                ? (this.keyName = undefined)
-                                : (this.keyName = keyName[0])
-                            if (this.keyName !== undefined) {
-                                api.getValue(this.nameSpace, this.keyName)
-                                    .then(res => {
-                                        if (res.value.specificSettings) {
-                                            this.specificSettings =
-                                                res.value.specificSettings
-                                            this.dataSetNamesList = Object.keys(
-                                                this.specificSettings
-                                            )
-                                            for (const key in this
-                                                .specificSettings) {
-                                                if (
-                                                    this.specificSettings.hasOwnProperty(
-                                                        key
-                                                    )
-                                                ) {
-                                                    const dataSetNameFilter = this.dataSetListComplete.filter(
-                                                        option =>
-                                                            option.id === key
-                                                    )
-
-                                                    const dataSet = this
-                                                        .specificSettings[key]
-
-                                                    const summarySettings =
-                                                        dataSet.periodDSDownload ===
-                                                        undefined
-                                                            ? undefined
-                                                            : `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
-
-                                                    const newDataSetRow = {
-                                                        ...dataSet,
-                                                        summarySettings,
-                                                    }
-
-                                                    this.specificSettingsRows.push(
-                                                        newDataSetRow
-                                                    )
-                                                }
-                                            }
-                                            this.setState({
-                                                loading: false,
-                                            })
-                                        }
-
-                                        if (res.value.globalSettings) {
-                                            this.setState({
-                                                ...res.value.globalSettings,
-                                                loading: false,
-                                            })
-                                            this.globalSettings =
-                                                res.value.globalSettings
-                                        }
-                                    })
-                                    .catch(e => {
-                                        console.error(e)
-                                        this.setState({
-                                            loading: false,
-                                            openErrorAlert: true,
-                                        })
-                                    })
-                            }
-                        })
-                        .catch(e => {
-                            console.error(e)
-                            this.setState({
-                                loading: false,
-                                openErrorAlert: true,
-                            })
-                        })
-                }
+        getInstance()
+            .then(d2 => {
+                return d2.models.dataSet
+                    .list({
+                        paging: false,
+                        level: 1,
+                        fields: 'id,name,periodType',
+                        filter: 'access.data.write:eq:true',
+                    })
+                    .then(collection => {
+                        const dataSetList = collection.toArray()
+                        this.dataSetList = dataSetList
+                        this.dataSetListComplete = dataSetList
+                    })
             })
-            .catch(e => {
-                console.error(e)
-                this.setState({
-                    loading: false,
-                    openErrorAlert: true,
+            .then(() => {
+                apiLoadDatasetSettings({
+                    specificSettings: this.specificSettings,
+                    datasetNameList: this.dataSetNamesList,
+                    datasetListComplete: this.dataSetListComplete,
+                    specificSettingsRows: this.specificSettingsRows,
+                    globalSettings: this.globalSettings,
                 })
+                    .then(res => {
+                        const {
+                            settings,
+                            specificSettings,
+                            datasetNameList,
+                            datasetListComplete,
+                            specificSettingsRows,
+                            globalSettings,
+                        } = res
+
+                        this.specificSettings = specificSettings
+                        this.dataSetNamesList = datasetNameList
+                        this.dataSetListComplete = datasetListComplete
+                        this.specificSettingsRows = specificSettingsRows
+                        this.globalSettings = globalSettings
+
+                        this.setState({
+                            ...settings.globalSettings,
+                            loading: false,
+                        })
+                    })
+                    .catch(e => {
+                        console.error(e)
+                        this.setState({
+                            loading: false,
+                            openErrorAlert: true,
+                        })
+                    })
             })
     }
 
