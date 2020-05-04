@@ -557,13 +557,6 @@ class UserSyncTestContainer extends React.Component {
                 states={this.state}
                 handleRun={this.handleRun}
                 disabledTest={this.state.disabled}
-                loadData={this.state.loadData}
-                orgUnitLoad={this.state.orgUnitLoad}
-                dataSetLoad={this.state.dataSetLoad}
-                programLoad={this.state.programLoad}
-                programRuleLoad={this.state.programRuleLoad}
-                metadataLoad={this.state.metadataLoad}
-                dataLoad={this.state.dataLoad}
             />
         )
     }
