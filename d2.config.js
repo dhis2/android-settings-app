@@ -1,4 +1,5 @@
 const config = {
+    title: 'Android Settings',
     type: 'app',
 
     entryPoints: {
