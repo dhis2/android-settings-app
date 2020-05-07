@@ -8,9 +8,9 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    ButtonStrip,
+    Button,
 } from '@dhis2/ui-core'
-import IconButton from '@material-ui/core/IconButton'
-import { DeleteOutlined, CreateOutlined } from '@material-ui/icons'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import dataTableStyles from '../styles/DataTable.module.css'
@@ -37,24 +37,30 @@ const TableActions = ({ columns, rows, menuActions }) => {
                         <TableCell
                             className={dataTableStyles.dataTable_row_title}
                         >
-                            {row.sumarySettings}
+                            {row.summarySettings}
                         </TableCell>
 
                         <TableCell dense>
-                            <IconButton
-                                onClick={() => {
-                                    menuActions.edit(row)
-                                }}
-                            >
-                                <CreateOutlined fontSize="small" />
-                            </IconButton>
-                            <IconButton
-                                onClick={() => {
-                                    menuActions.delete(row)
-                                }}
-                            >
-                                <DeleteOutlined fontSize="small" />
-                            </IconButton>
+                            <ButtonStrip>
+                                <Button
+                                    small
+                                    secondary
+                                    onClick={() => {
+                                        menuActions.edit(row)
+                                    }}
+                                >
+                                    {i18n.t('Edit')}
+                                </Button>
+                                <Button
+                                    small
+                                    secondary
+                                    onClick={() => {
+                                        menuActions.delete(row)
+                                    }}
+                                >
+                                    {i18n.t('Delete')}
+                                </Button>
+                            </ButtonStrip>
                         </TableCell>
                     </TableRow>
                 ))}

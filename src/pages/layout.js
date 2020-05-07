@@ -4,7 +4,7 @@ import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
 import { Route, Switch, HashRouter } from 'react-router-dom'
 
-import AndroidSettingsContainer from '../components/android-settings-container'
+import AndroidSettingsContainer from '../components/sections/general/android-settings-container'
 import menuSection from '../constants/menu-sections'
 
 import { D2Shim } from '../utils/D2Shim'
@@ -132,7 +132,11 @@ class Layout extends React.Component {
                                 <Route
                                     path="/"
                                     exact
-                                    render={() => <AndroidSettingsContainer />}
+                                    render={() => (
+                                        <D2Shim>
+                                            <AndroidSettingsContainer />
+                                        </D2Shim>
+                                    )}
                                 />
 
                                 {menuSection.map(section => (

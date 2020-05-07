@@ -1,0 +1,5 @@
+.container_bottom {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}

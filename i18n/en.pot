@@ -5,34 +5,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-29T18:01:38.639Z\n"
-"PO-Revision-Date: 2020-04-29T18:01:38.639Z\n"
+"POT-Creation-Date: 2020-05-02T00:00:10.790Z\n"
+"PO-Revision-Date: 2020-05-02T00:00:10.790Z\n"
 
-msgid "Metadata Sync"
+msgid "Failed to get data from Data Store"
 msgstr ""
 
-msgid "Data Sync"
+msgid "Error when saving data"
 msgstr ""
 
-msgid "SMS Gateway Phone number where SMS are sent"
+msgid "Settings were successfully saved"
 msgstr ""
 
-msgid "Confirm SMS Gateway Phone number"
+msgid "Delete {{typeName}}"
 msgstr ""
 
-msgid "Reserved values downloaded per TEI attribute"
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "{{encrypt}} DB"
+msgstr ""
+
+msgid ""
+"{{encrypt}} data base is a critical action that could have very serious "
+"consequences. Are you sure you want to {{encrypt}} DB?"
+msgstr ""
+
+msgid "Decrypt DB"
 msgstr ""
 
 msgid "Encrypt DB"
-msgstr ""
-
-msgid "SET TO DEFAULT"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Number of Periods"
 msgstr ""
 
 msgid "First time setup"
@@ -56,13 +64,16 @@ msgstr ""
 msgid "Set defaults and save"
 msgstr ""
 
-msgid "Add/Save"
+msgid "Save in DataStore"
 msgstr ""
 
-msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgid ""
+"Saving settings in DataStore is a critical action that could have very "
+"serious consequences. Are you sure you want to save these settings in "
+"DataStore?"
 msgstr ""
 
-msgid "Delete"
+msgid "Save"
 msgstr ""
 
 msgid "Values per"
@@ -71,30 +82,55 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
-msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "{{encrypt}} DB"
-msgstr ""
-
-msgid ""
-"{{encrypt}} data base is a critical action that could have very serious "
-"consequences. Are you sure you want to {{encrypt}} DB?"
-msgstr ""
-
-msgid "Decrypt DB"
-msgstr ""
-
-msgid "CANCEL"
-msgstr ""
-
-msgid "ADD/SAVE"
+msgid "Name"
 msgstr ""
 
 msgid "Summary Settings"
+msgstr ""
+
+msgid "Number of Periods"
+msgstr ""
+
+msgid "How often should metadata sync?"
+msgstr ""
+
+msgid "How often should data sync?"
+msgstr ""
+
+msgid "SMS Gateway Phone number"
+msgstr ""
+
+msgid "Phone number that receives all SMS messages"
+msgstr ""
+
+msgid "Confirm SMS Gateway Phone number"
+msgstr ""
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "Encrypt Database"
+msgstr ""
+
+msgid "Data can be lost if there are problems with an encrypted database"
+msgstr ""
+
+msgid "Reset all values to default"
+msgstr ""
+
+msgid "General settings"
+msgstr ""
+
+msgid "These settings apply to all Android users."
+msgstr ""
+
+msgid "User sync test"
+msgstr ""
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr ""
+
+msgid "Run test"
 msgstr ""
 
 msgid "Download"
@@ -103,22 +139,21 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-msgid "Test Android Sync"
+msgid "Edit"
 msgstr ""
 
-msgid "Enter a user to check access to"
-msgstr ""
-
-msgid "Invoking ..."
-msgstr ""
-
-msgid "RUN TEST"
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
 msgstr ""
 
 msgid "Encrypt"
 msgstr ""
 
 msgid "Decrypt"
+msgstr ""
+
+msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
 msgid "General"
@@ -130,10 +165,7 @@ msgstr ""
 msgid "Data Sets"
 msgstr ""
 
-msgid "User sync test"
-msgstr ""
-
-msgid "Setting for"
+msgid "Setting level"
 msgstr ""
 
 msgid "Global"
@@ -148,10 +180,16 @@ msgstr ""
 msgid "Per OU and program"
 msgstr ""
 
-msgid "TEIs"
+msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr ""
 
-msgid "TEI Enrollment status"
+msgid "Download TEI with status"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Active Only"
 msgstr ""
 
 msgid "All"
@@ -160,10 +198,10 @@ msgstr ""
 msgid "Only Active"
 msgstr ""
 
-msgid "TEI Enrollment date"
+msgid "Download TEI with enrollment date within"
 msgstr ""
 
-msgid "Any"
+msgid "Any time period"
 msgstr ""
 
 msgid "Last month"
@@ -175,68 +213,72 @@ msgstr ""
 msgid "Last 12 months"
 msgstr ""
 
-msgid "TEI last update"
+msgid "Any"
 msgstr ""
 
-msgid "Events"
+msgid "Download TEI that have been updated within"
 msgstr ""
 
-msgid "Event date"
+msgid "Maximum Event downloads"
+msgstr ""
+
+msgid "Download Events with event date within"
 msgstr ""
 
 msgid "All Org Units"
 msgstr ""
 
-msgid "TEI per program"
+msgid "Maximum Tracked Entity Instance (TEI) download per program"
 msgstr ""
 
-msgid "Org Units capture"
+msgid "org units available for data capture"
 msgstr ""
 
 msgid "Number of org unit that are available for data capture"
 msgstr ""
 
-msgid "Org Units search"
+msgid "org units available for data search"
 msgstr ""
 
-msgid "Data sets associated to OU capture of user"
+msgid "data sets linked to capture org units"
 msgstr ""
 
 msgid "Number of datasets associated to capture OUs"
 msgstr ""
 
-msgid "Program associated to OU"
+msgid "programs linked to org units"
 msgstr ""
 
 msgid "Number of program associated to capture OUs"
 msgstr ""
 
-msgid "Program rules associated to OU"
+msgid "program rules linked to org units"
 msgstr ""
 
 msgid "Number of program rules to download"
 msgstr ""
 
-msgid "Metadata download size (KB)"
+msgid "metadata download size"
 msgstr ""
 
-msgid "Data download size (KB)"
+msgid "data download size"
 msgstr ""
 
 msgid "{{elementPlural}} global settings"
 msgstr ""
 
 msgid ""
-"Applies to all {{elementPlural}} that an Android user has access to, unless "
-"a specific set of values has been configured for {{elementSingular}} (see "
-"below)."
+"Applies to all {{elementPlural}} an Android user has access to. Specific "
+"{{elementSingular}} settings can be defined in the section below."
 msgstr ""
 
 msgid "{{elementPlural}} specific settings"
 msgstr ""
 
-msgid "{{elementPlural}} settings listed below overwrite the global settings above"
+msgid ""
+"Applies only to the assigned {{elementLowerCase}}. {{elementSingular}} "
+"specific settings will overwrite the global settings above."
 msgstr ""
 
-msgid "ADD"
+msgid "Add a {{elementSingular}} specific setting"
 msgstr ""

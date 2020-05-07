@@ -1,0 +1,13 @@
+.container__initial {
+    margin: 20px 0 30px;
+}
+
+.container_minWidth {
+    min-width: 100px !important;
+}
+
+.container_content_inline {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    text-align: start;
+}
