@@ -12,6 +12,7 @@ import GeneralSettings from './general-settings'
 import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
+import { removeNamespace } from '../../../modules/general/removeNamespace'
 
 const {
     metadataSync,
@@ -211,6 +212,16 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     /**
+     * Remove namespaces and keynames
+     * */
+
+    removeNamespace = () => {
+        removeNamespace().then(() => {
+            console.info('remove namespace')
+        })
+    }
+
+    /**
      * When component mount, get namespace and keys from dataStore
      */
     componentDidMount() {
@@ -247,6 +258,7 @@ class AndroidSettingsContainer extends React.Component {
                     handleReset={this.handleReset}
                     handleEncryptCheckbox={this.handleCheckbox}
                     handleSaveDialog={this.handleSaveDataDialog}
+                    removeNamespace={this.removeNamespace}
                 />
             </>
         )
