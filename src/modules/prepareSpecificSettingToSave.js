@@ -50,10 +50,7 @@ export const prepareSpecificSettingsToSave = ({
                     )
                 }
 
-                summarySettings =
-                    (states.specificSetting.teiDownload
-                        ? states.specificSetting.teiDownload
-                        : specificSettingsDefault.teiDownload) + ' TEI'
+                summarySettings = `${states.specificSetting.teiDownload} TEI`
             } else if (settingNameFilter.programType === WITHOUT_REGISTRATION) {
                 if (
                     states.specificSetting.settingDownload ||
@@ -71,14 +68,10 @@ export const prepareSpecificSettingsToSave = ({
                     )
                 }
 
-                summarySettings =
-                    (states.specificSetting.eventsDownload
-                        ? states.specificSetting.eventsDownload
-                        : specificSettingsDefault.eventsDownload) +
-                    ' events per OU'
+                summarySettings = `${states.specificSetting.eventsDownload} events per OU`
             }
         } else if (settingType === DATA_SET) {
-            if (states.specificSetting.periodDSDownload) {
+            if (states.specificSetting.periodDSDownload >= 0) {
                 settings = populateSettingObject(
                     SPECIFIC,
                     states.specificSetting
@@ -87,9 +80,7 @@ export const prepareSpecificSettingsToSave = ({
                 settings = populateSettingObject(DEFAULT)
             }
 
-            summarySettings = states.specificSetting.periodDSDownload
-                ? `${states.specificSetting.periodDSDownload} ${settingNameFilter.periodType} period`
-                : periodDSDownload
+            summarySettings = `${states.specificSetting.periodDSDownload} ${settingNameFilter.periodType} period`
         }
 
         objData[specificNameKey] = {
