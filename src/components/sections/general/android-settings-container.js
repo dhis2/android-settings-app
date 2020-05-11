@@ -216,9 +216,14 @@ class AndroidSettingsContainer extends React.Component {
      * */
 
     removeNamespace = () => {
-        removeNamespace().then(() => {
-            console.info('remove namespace')
-        })
+        removeNamespace()
+            .then(() => {
+                console.info('remove namespace')
+                location.replace('/')
+            })
+            .catch(e => {
+                console.error(e)
+            })
     }
 
     /**
