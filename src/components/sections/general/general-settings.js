@@ -23,7 +23,7 @@ const GeneralSettings = ({
         <>
             <div>
                 <p className={styles.mainContent__title_headerBar}>
-                    {i18n.t('General settings')}
+                    {i18n.t('General download sync settings')}
                 </p>
                 <p className={styles.mainContent__subtitle}>
                     {i18n.t('These settings apply to all Android users.')}
