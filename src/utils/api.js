@@ -1,4 +1,4 @@
-import { init, getInstance, getManifest } from 'd2'
+import { getInstance } from 'd2'
 
 const CREATED = 'CREATED'
 const DELETED = 'DELETED'
@@ -74,7 +74,6 @@ class Api {
                     length: jsonLength,
                     value: val,
                 }
-                cache[namespace][key] = ret
 
                 return ret
             })
