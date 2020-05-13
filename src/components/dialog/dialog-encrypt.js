@@ -28,10 +28,15 @@ const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
                         {i18n.t('{{encrypt}} DB', { encrypt })}
                     </ModalTitle>
                     <ModalContent>
-                        {i18n.t(
-                            '{{encrypt}} data base is a critical action that could have very serious consequences. Are you sure you want to {{encrypt}} DB?',
-                            { encrypt }
-                        )}
+                        {checked
+                            ? i18n.t(
+                                  '{{encrypt}} data base is a critical action that will reduce the level of protection of your data. Are you sure you want to {{encrypt}} DB?',
+                                  { encrypt }
+                              )
+                            : i18n.t(
+                                  '{{encrypt}} data base is a critical action that could have impact in the database volume and performance. Are you sure you want to {{encrypt}} DB?',
+                                  { encrypt }
+                              )}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>

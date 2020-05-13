@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-02T00:00:10.790Z\n"
-"PO-Revision-Date: 2020-05-02T00:00:10.790Z\n"
+"POT-Creation-Date: 2020-05-13T00:10:05.171Z\n"
+"PO-Revision-Date: 2020-05-13T00:10:05.171Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -33,8 +33,13 @@ msgid "{{encrypt}} DB"
 msgstr ""
 
 msgid ""
-"{{encrypt}} data base is a critical action that could have very serious "
-"consequences. Are you sure you want to {{encrypt}} DB?"
+"{{encrypt}} data base is a critical action that could have impact in the "
+"database volume and performance. Are you sure you want to {{encrypt}} DB?"
+msgstr ""
+
+msgid ""
+"{{encrypt}} data base is a critical action that will reduce the level of "
+"protection of your data. Are you sure you want to {{encrypt}} DB?"
 msgstr ""
 
 msgid "Decrypt DB"
@@ -85,9 +90,6 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "Summary Settings"
-msgstr ""
-
 msgid "Number of Periods"
 msgstr ""
 
@@ -109,19 +111,25 @@ msgstr ""
 msgid "Reserved values downloaded per TEI attribute"
 msgstr ""
 
-msgid "Encrypt Database"
+msgid "Encrypt device database"
 msgstr ""
 
-msgid "Data can be lost if there are problems with an encrypted database"
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
 msgstr ""
 
 msgid "Reset all values to default"
 msgstr ""
 
-msgid "General settings"
+msgid "General download sync settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
+msgstr ""
+
+msgid "Summary Settings"
 msgstr ""
 
 msgid "User sync test"
@@ -264,7 +272,7 @@ msgstr ""
 msgid "data download size"
 msgstr ""
 
-msgid "{{elementPlural}} global settings"
+msgid "{{elementPlural}} global download sync settings"
 msgstr ""
 
 msgid ""
@@ -272,7 +280,7 @@ msgid ""
 "{{elementSingular}} settings can be defined in the section below."
 msgstr ""
 
-msgid "{{elementPlural}} specific settings"
+msgid "{{elementPlural}} specific download sync settings"
 msgstr ""
 
 msgid ""
