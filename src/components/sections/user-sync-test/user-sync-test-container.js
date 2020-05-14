@@ -524,7 +524,7 @@ class UserSyncTestContainer extends React.Component {
 
         return (
             <TestAndroid
-                suggestionsSearch={this.usersOptionsComplete}
+                d2={this.props.d2}
                 checkUsername={this.checkUsername}
                 clearSearchField={this.clearFields}
                 searchFieldValue={this.state.username}

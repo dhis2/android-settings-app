@@ -1,7 +1,7 @@
 import React from 'react'
 import Downshift from 'downshift'
 import deburr from 'lodash/deburr'
-
+import i18n from '@dhis2/d2-i18n'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
@@ -34,11 +34,12 @@ const classes = {
 export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
-        this.suggestions = this.props.suggestions
+        this.suggestions = []
     }
 
     state = {
         suggestionSelected: undefined,
+        suggestionsList: [],
     }
 
     handleChangeSelect = selection => {
@@ -102,23 +103,10 @@ export default class TextFieldSearch extends React.Component {
         return inputLength === 0 && !showEmpty
             ? []
             : this.suggestions.filter(suggestion => {
-                  let keep =
-                      count < 5 &&
-                      suggestion.name.slice(0, inputLength).toLowerCase() ===
-                          inputValue
+                  const keep = count < 5 && suggestion
 
                   if (keep) {
                       count += 1
-                  } else {
-                      keep =
-                          count < 5 &&
-                          suggestion.userCredentials.username
-                              .slice(0, inputLength)
-                              .toLowerCase() === inputValue
-
-                      if (keep) {
-                          count += 1
-                      }
                   }
                   return keep
               })
@@ -150,11 +138,26 @@ export default class TextFieldSearch extends React.Component {
                             onChange,
                             ...inputProps
                         } = getInputProps({
-                            placeholder: 'Search for a user',
+                            placeholder: i18n.t('Search for a user'),
                             onChange: event => {
                                 this.props.clearFields()
                                 if (event.target.value === '') {
                                     clearSelection()
+                                } else {
+                                    this.props.d2.models.users
+                                        .list({
+                                            paging: false,
+                                            level: 1,
+                                            fields: 'id,name',
+                                            query: `${event.target.value}`,
+                                        })
+                                        .then(users => {
+                                            const usersOptions = users.toArray()
+                                            this.suggestions = usersOptions
+                                            this.setState({
+                                                suggestionsList: usersOptions,
+                                            })
+                                        })
                                 }
                             },
                         })
@@ -163,7 +166,7 @@ export default class TextFieldSearch extends React.Component {
                             <div style={classes.container}>
                                 {this.renderInput({
                                     fullWidth: true,
-                                    label: 'User',
+                                    label: i18n.t('User'),
                                     InputLabelProps: getLabelProps({
                                         shrink: true,
                                     }),

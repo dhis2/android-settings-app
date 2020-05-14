@@ -9,7 +9,7 @@ import buttonStyles from '../../../styles/Button.module.css'
 import RunTest from './run-test'
 
 const TestAndroid = ({
-    suggestionsSearch,
+    d2,
     checkUsername,
     clearSearchField,
     searchFieldValue,
@@ -33,7 +33,7 @@ const TestAndroid = ({
 
             <div>
                 <TextFieldSearch
-                    suggestions={suggestionsSearch}
+                    d2={d2}
                     checkUsername={checkUsername}
                     clearFields={clearSearchField}
                     suggestionPreSelected={searchFieldValue}
@@ -54,7 +54,7 @@ const TestAndroid = ({
 }
 
 TestAndroid.propTypes = {
-    suggestionsSearch: PropTypes.array.isRequired,
+    d2: PropTypes.object.isRequired,
     checkUsername: PropTypes.func.isRequired,
     clearSearchField: PropTypes.func.isRequired,
     searchFieldValue: PropTypes.string.isRequired,
