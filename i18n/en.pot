@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-02T00:00:10.790Z\n"
-"PO-Revision-Date: 2020-05-02T00:00:10.790Z\n"
+"POT-Creation-Date: 2020-05-14T01:07:47.515Z\n"
+"PO-Revision-Date: 2020-05-14T01:07:47.515Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -85,9 +85,6 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "Summary Settings"
-msgstr ""
-
 msgid "Number of Periods"
 msgstr ""
 
@@ -97,13 +94,16 @@ msgstr ""
 msgid "How often should data sync?"
 msgstr ""
 
-msgid "SMS Gateway Phone number"
+msgid "SMS Gateway phone number"
+msgstr ""
+
+msgid "Incorrect phone number"
 msgstr ""
 
 msgid "Phone number that receives all SMS messages"
 msgstr ""
 
-msgid "Confirm SMS Gateway Phone number"
+msgid "SMS Result Sender phone number"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -122,6 +122,9 @@ msgid "General settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
+msgstr ""
+
+msgid "Summary Settings"
 msgstr ""
 
 msgid "User sync test"

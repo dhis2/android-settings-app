@@ -12,6 +12,7 @@ import GeneralSettings from './general-settings'
 import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
+import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 
 const {
     metadataSync,
@@ -44,6 +45,7 @@ class AndroidSettingsContainer extends React.Component {
             error: false,
         },
         openErrorAlert: false,
+        errorGateway: false,
     }
 
     /**
@@ -104,17 +106,31 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     /**
-     * Checks if sms number and confirm number match
+     * Checks if sms number or confirmation number is valid
      */
-    checkMatchingConfirmation = () => {
-        if (
-            this.state.numberSmsToSend !== '' &&
-            this.state.numberSmsConfirmation !== ''
-        ) {
-            this.state.numberSmsToSend !== this.state.numberSmsConfirmation
-                ? this.setState({ errorConfirmation: true })
-                : this.setState({ errorConfirmation: false })
-        }
+    validatePhoneNumber = {
+        gatewayNumber: () => {
+            if (![null, '', false].includes(this.state.numberSmsToSend)) {
+                const validInput = validateNumber(this.state.numberSmsToSend)
+                !validInput
+                    ? this.setState({ errorGateway: true })
+                    : this.setState({ errorGateway: false })
+            } else {
+                this.setState({ errorGateway: false })
+            }
+        },
+        confirmationNumber: () => {
+            if (![null, '', false].includes(this.state.numberSmsConfirmation)) {
+                const validInput = validateNumber(
+                    this.state.numberSmsConfirmation
+                )
+                !validInput
+                    ? this.setState({ errorConfirmation: true })
+                    : this.setState({ errorConfirmation: false })
+            } else {
+                this.setState({ errorConfirmation: false })
+            }
+        },
     }
 
     /**
@@ -243,7 +259,7 @@ class AndroidSettingsContainer extends React.Component {
                 <GeneralSettings
                     state={this.state}
                     handleChange={this.handleChange}
-                    checkMatchingConfirmation={this.checkMatchingConfirmation}
+                    validatePhoneNumber={this.validatePhoneNumber}
                     handleReset={this.handleReset}
                     handleEncryptCheckbox={this.handleCheckbox}
                     handleSaveDialog={this.handleSaveDataDialog}
