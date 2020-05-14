@@ -134,25 +134,25 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     /**
-     * Updates Settings calling update api
+     * Updates Settings calling update api,
+     * check if gateway and confirmation number are not empty
+     * Prevent null console warning
      */
     submitData = () => {
-        if (this.state.numberSmsToSend === '') {
-            this.state.numberSmsToSend = null
-        }
-
-        if (this.state.numberSmsConfirmation === '') {
-            this.state.numberSmsConfirmation = null
-        }
-
         const androidData = {
             metadataSync: this.state.metadataSync,
             dataSync: this.state.dataSync,
-            numberSmsToSend: this.state.numberSmsToSend,
-            numberSmsConfirmation: this.state.numberSmsConfirmation,
             reservedValues: this.state.reservedValues,
             encryptDB: this.state.encryptDB,
             lastUpdated: new Date().toJSON(),
+        }
+
+        if (!['', null, undefined].includes(this.state.numberSmsToSend)) {
+            androidData.numberSmsToSend = this.state.numberSmsToSend
+        }
+
+        if (!['', null, undefined].includes(this.state.numberSmsConfirmation)) {
+            androidData.numberSmsConfirmation = this.state.numberSmsConfirmation
         }
 
         this.saveDataApi(androidData)
@@ -189,8 +189,8 @@ class AndroidSettingsContainer extends React.Component {
         this.setState({
             metadataSync,
             dataSync,
-            numberSmsToSend: '',
-            numberSmsConfirmation: '',
+            numberSmsToSend,
+            numberSmsConfirmation,
             reservedValues,
             encryptDB,
             openDialog: false,
