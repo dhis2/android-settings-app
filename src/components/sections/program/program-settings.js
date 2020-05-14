@@ -324,16 +324,34 @@ class ProgramSettings extends React.Component {
         },
         onInputChange: e => {
             e.preventDefault()
-            this.setState({
-                ...this.state,
-                specificSetting: {
-                    ...this.state.specificSetting,
-                    [e.target.name]: parseValueByType(
-                        e.target.name,
-                        e.target.value
-                    ),
-                },
-            })
+            if (e.target.name === 'name') {
+                const settings = populateProgramObject(
+                    FULL_SPECIFIC,
+                    specificSettingsDefault
+                )
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        ...settings,
+                        [e.target.name]: parseValueByType(
+                            e.target.name,
+                            e.target.value
+                        ),
+                    },
+                })
+            } else {
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        [e.target.name]: parseValueByType(
+                            e.target.name,
+                            e.target.value
+                        ),
+                    },
+                })
+            }
         },
     }
 
