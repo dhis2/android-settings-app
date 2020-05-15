@@ -2,9 +2,7 @@ import React from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
-import { Route, Switch, HashRouter } from 'react-router-dom'
-
-import AndroidSettingsContainer from '../components/sections/general/android-settings-container'
+import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
 
 import { D2Shim } from '../utils/D2Shim'
@@ -59,13 +57,12 @@ const populateObject = type => {
 
 class Layout extends React.Component {
     state = {
-        openFirstLaunch: false,
+        openFirstLaunch: true,
         isSaved: false,
     }
 
     handleClose = () => {
         this.setState({
-            openFirstLaunch: false,
             isSaved: false,
         })
     }
@@ -96,15 +93,12 @@ class Layout extends React.Component {
     componentDidMount() {
         api.getNamespaces()
             .then(res => {
-                const nameSpace = res.filter(name => name === NAMESPACE)
-                nameSpace.length === 0
-                    ? this.setState({
-                          openFirstLaunch: true,
-                      })
-                    : this.setState({
-                          openFirstLaunch: false,
-                          isSaved: true,
-                      })
+                if (res.includes(NAMESPACE)) {
+                    this.setState({
+                        openFirstLaunch: false,
+                        isSaved: true,
+                    })
+                }
             })
             .catch(e => {
                 console.error(e)
@@ -112,16 +106,6 @@ class Layout extends React.Component {
     }
 
     render() {
-        if (this.state.openFirstLaunch === true) {
-            return (
-                <DialogFirstLaunch
-                    openDialog={this.state.openFirstLaunch}
-                    onClose={this.handleClose}
-                    handleSave={this.handleSave}
-                />
-            )
-        }
-
         return (
             <HashRouter>
                 <TwoPanel mainStyle={styles.twoPanelMain}>
@@ -129,15 +113,20 @@ class Layout extends React.Component {
                     <MainContent>
                         <Paper className={layoutStyles.paper__layout}>
                             <Switch>
-                                <Route
-                                    path="/"
-                                    exact
-                                    render={() => (
-                                        <D2Shim>
-                                            <AndroidSettingsContainer />
-                                        </D2Shim>
-                                    )}
-                                />
+                                <Route path="/" exact>
+                                    <D2Shim>
+                                        {this.state.openFirstLaunch === true ? (
+                                            <DialogFirstLaunch
+                                                handleSave={this.handleSave}
+                                                onClose={this.handleClose}
+                                            />
+                                        ) : (
+                                            <Redirect
+                                                to={menuSection[0].path}
+                                            />
+                                        )}
+                                    </D2Shim>
+                                </Route>
 
                                 {menuSection.map(section => (
                                     <Route

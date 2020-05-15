@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-02T00:00:10.790Z\n"
-"PO-Revision-Date: 2020-05-02T00:00:10.790Z\n"
+"POT-Creation-Date: 2020-05-11T20:45:38.410Z\n"
+"PO-Revision-Date: 2020-05-11T20:45:38.410Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -61,6 +61,9 @@ msgid ""
 "default and save\""
 msgstr ""
 
+msgid "Exit, do not apply settings"
+msgstr ""
+
 msgid "Set defaults and save"
 msgstr ""
 
@@ -83,9 +86,6 @@ msgid "Add/Save"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Summary Settings"
 msgstr ""
 
 msgid "Number of Periods"
@@ -118,10 +118,16 @@ msgstr ""
 msgid "Reset all values to default"
 msgstr ""
 
+msgid "Remove settings"
+msgstr ""
+
 msgid "General settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
+msgstr ""
+
+msgid "Summary Settings"
 msgstr ""
 
 msgid "User sync test"
