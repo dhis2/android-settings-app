@@ -196,15 +196,19 @@ class DataSetSettings extends React.Component {
                 specificSettings,
                 rowSettings,
                 nameList,
+                optionList,
             } = removeSettingFromList({
                 row: this.argsRow,
                 specificSettings: this.specificSettings,
                 rowSettings: this.specificSettingsRows,
                 nameList: this.dataSetNamesList,
+                optionList: this.dataSetList,
+                listComplete: this.dataSetListComplete,
             })
             this.specificSettings = specificSettings
             this.specificSettingsRows = rowSettings
             this.dataSetNamesList = nameList
+            this.dataSetList = optionList
             this.setState({
                 deleteDialog: {
                     open: false,

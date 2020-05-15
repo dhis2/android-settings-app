@@ -21,6 +21,7 @@ const GeneralForm = ({
     handleEncryptCheckbox,
     handleSaveDialog,
     handleReset,
+    removeNamespace,
 }) => {
     return (
         <form>
@@ -140,6 +141,9 @@ const GeneralForm = ({
                 </Button>
                 <Button onClick={handleReset}>
                     {i18n.t('Reset all values to default')}
+                </Button>
+                <Button onClick={removeNamespace}>
+                    {i18n.t('Remove settings')}
                 </Button>
             </ButtonStrip>
         </form>
