@@ -61,6 +61,9 @@ msgid ""
 "default and save\""
 msgstr ""
 
+msgid "Exit, do not apply settings"
+msgstr ""
+
 msgid "Set defaults and save"
 msgstr ""
 
@@ -116,6 +119,9 @@ msgid "Data can be lost if there are problems with an encrypted database"
 msgstr ""
 
 msgid "Reset all values to default"
+msgstr ""
+
+msgid "Remove settings"
 msgstr ""
 
 msgid "General settings"

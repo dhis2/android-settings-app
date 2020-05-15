@@ -18,6 +18,7 @@ const GeneralSettings = ({
     handleReset,
     handleEncryptCheckbox,
     handleSaveDialog,
+    removeNamespace,
 }) => {
     return (
         <>
@@ -37,6 +38,7 @@ const GeneralSettings = ({
                 handleReset={handleReset}
                 handleEncryptCheckbox={handleEncryptCheckbox}
                 handleSaveDialog={handleSaveDialog}
+                removeNamespace={removeNamespace}
             />
 
             <DialogEncrypt
