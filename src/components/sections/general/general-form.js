@@ -143,7 +143,7 @@ const GeneralForm = ({
                     {i18n.t('Reset all values to default')}
                 </Button>
                 <Button onClick={removeNamespace}>
-                    {i18n.t('Remove settings')}
+                    {i18n.t('Disable settings')}
                 </Button>
             </ButtonStrip>
         </form>
