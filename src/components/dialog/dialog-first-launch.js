@@ -33,7 +33,7 @@ const DialogFirstLaunch = ({ onClose, handleSave }) => {
 
                     <strong>
                         {i18n.t(
-                            'Any settings or configuration on a users device will be overwritten by settings applied here.'
+                            "Any settings or configuration on a user's device will be overwritten by settings applied here."
                         )}
                     </strong>
 

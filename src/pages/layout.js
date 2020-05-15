@@ -114,20 +114,18 @@ class Layout extends React.Component {
                         <Paper className={layoutStyles.paper__layout}>
                             <Switch>
                                 <Route path="/" exact>
-                                    {this.state.openFirstLaunch === true ? (
-                                        <D2Shim>
+                                    <D2Shim>
+                                        {this.state.openFirstLaunch === true ? (
                                             <DialogFirstLaunch
                                                 handleSave={this.handleSave}
                                                 onClose={this.handleClose}
                                             />
-                                        </D2Shim>
-                                    ) : (
-                                        <D2Shim>
+                                        ) : (
                                             <Redirect
                                                 to={menuSection[0].path}
                                             />
-                                        </D2Shim>
-                                    )}
+                                        )}
+                                    </D2Shim>
                                 </Route>
 
                                 {menuSection.map(section => (
