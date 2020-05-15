@@ -44,7 +44,7 @@ const RunTest = ({ states }) => {
                                         {test.title}
                                     </p>
                                     <p className={itemStyles.subItemItem}>
-                                        {i18n.t('Recommended maximum: ')}
+                                        {i18n.t('Recommended maximum:')}{' '}
                                         {test.maxValue}
                                     </p>
                                 </div>
