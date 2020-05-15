@@ -66,6 +66,9 @@ msgid ""
 "default and save\""
 msgstr ""
 
+msgid "Exit, do not apply settings"
+msgstr ""
+
 msgid "Set defaults and save"
 msgstr ""
 
@@ -121,6 +124,9 @@ msgid ""
 msgstr ""
 
 msgid "Reset all values to default"
+msgstr ""
+
+msgid "Remove settings"
 msgstr ""
 
 msgid "General download sync settings"
