@@ -12,6 +12,8 @@ export const getItemFromList = (usedList, completeList, updatedList) => {
         updatedList = settingCompleteList.filter(
             item => !usedIdList.includes(item.id)
         )
+    } else {
+        updatedList = completeList
     }
 
     return updatedList

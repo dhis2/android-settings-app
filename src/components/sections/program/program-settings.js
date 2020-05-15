@@ -251,15 +251,19 @@ class ProgramSettings extends React.Component {
                 specificSettings,
                 rowSettings,
                 nameList,
+                optionList,
             } = removeSettingFromList({
                 row: this.argsRow,
                 specificSettings: this.specificSettings,
                 rowSettings: this.specificSettingsRows,
                 nameList: this.programNamesList,
+                optionList: this.programList,
+                listComplete: this.programListComplete,
             })
             this.specificSettings = specificSettings
             this.specificSettingsRows = rowSettings
             this.programNamesList = nameList
+            this.programList = optionList
             this.setState({
                 deleteDialog: {
                     open: false,
