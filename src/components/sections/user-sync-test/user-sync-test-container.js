@@ -100,7 +100,7 @@ class UserSyncTestContainer extends React.Component {
 
     checkAccess = (elementArray, accessIDList) => {
         elementArray.forEach(element => {
-            if (element.publicAccess.includes('rw')) {
+            if (element.publicAccess.indexOf('rw') === 0) {
                 accessIDList.push(element)
             }
         })
