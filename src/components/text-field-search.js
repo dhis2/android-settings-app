@@ -35,6 +35,7 @@ export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
         this.suggestions = []
+        this.d2 = this.props.d2
     }
 
     state = {
@@ -95,6 +96,28 @@ export default class TextFieldSearch extends React.Component {
         )
     }
 
+    handleFilter = (event, clearSelection) => {
+        this.props.clearFields()
+        if (event.target.value === '') {
+            clearSelection()
+        } else {
+            this.d2.models.users
+                .list({
+                    paging: false,
+                    level: 1,
+                    fields: 'id,name',
+                    query: `${event.target.value}`,
+                })
+                .then(users => {
+                    const usersOptions = users.toArray()
+                    this.suggestions = usersOptions
+                    this.setState({
+                        suggestionsList: usersOptions,
+                    })
+                })
+        }
+    }
+
     getSuggestions = (value, { showEmpty = false } = {}) => {
         const inputValue = deburr(value.trim()).toLowerCase()
         const inputLength = inputValue.length
@@ -140,25 +163,7 @@ export default class TextFieldSearch extends React.Component {
                         } = getInputProps({
                             placeholder: i18n.t('Search for a user'),
                             onChange: event => {
-                                this.props.clearFields()
-                                if (event.target.value === '') {
-                                    clearSelection()
-                                } else {
-                                    this.props.d2.models.users
-                                        .list({
-                                            paging: false,
-                                            level: 1,
-                                            fields: 'id,name',
-                                            query: `${event.target.value}`,
-                                        })
-                                        .then(users => {
-                                            const usersOptions = users.toArray()
-                                            this.suggestions = usersOptions
-                                            this.setState({
-                                                suggestionsList: usersOptions,
-                                            })
-                                        })
-                                }
+                                this.handleFilter(event, clearSelection)
                             },
                         })
 

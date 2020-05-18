@@ -7,9 +7,9 @@ import i18n from '@dhis2/d2-i18n'
 import titleStyles from '../../../styles/LayoutTitles.module.css'
 import buttonStyles from '../../../styles/Button.module.css'
 import RunTest from './run-test'
+import { D2Shim } from '../../../utils/D2Shim'
 
 const TestAndroid = ({
-    d2,
     checkUsername,
     clearSearchField,
     searchFieldValue,
@@ -32,12 +32,13 @@ const TestAndroid = ({
             </div>
 
             <div>
-                <TextFieldSearch
-                    d2={d2}
-                    checkUsername={checkUsername}
-                    clearFields={clearSearchField}
-                    suggestionPreSelected={searchFieldValue}
-                />
+                <D2Shim>
+                    <TextFieldSearch
+                        checkUsername={checkUsername}
+                        clearFields={clearSearchField}
+                        suggestionPreSelected={searchFieldValue}
+                    />
+                </D2Shim>
 
                 {runTest && <RunTest states={states} />}
 
@@ -54,7 +55,6 @@ const TestAndroid = ({
 }
 
 TestAndroid.propTypes = {
-    d2: PropTypes.object.isRequired,
     checkUsername: PropTypes.func.isRequired,
     clearSearchField: PropTypes.func.isRequired,
     searchFieldValue: PropTypes.string.isRequired,

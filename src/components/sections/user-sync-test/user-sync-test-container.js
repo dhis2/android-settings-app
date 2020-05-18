@@ -412,7 +412,6 @@ class UserSyncTestContainer extends React.Component {
                                 programLoad: false,
                                 programRuleLoad: false,
                                 metadataLoad: false,
-                                dataLoad: false,
                                 organisationUnitSearchNumber: this
                                     .organisationUnitSearchNumber,
                                 organisationUnitsNumber: this
@@ -524,7 +523,6 @@ class UserSyncTestContainer extends React.Component {
 
         return (
             <TestAndroid
-                d2={this.props.d2}
                 checkUsername={this.checkUsername}
                 clearSearchField={this.clearFields}
                 searchFieldValue={this.state.username}
