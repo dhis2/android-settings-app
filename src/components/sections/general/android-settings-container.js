@@ -20,8 +20,6 @@ const {
     dataSync,
     encryptDB,
     reservedValues,
-    numberSmsToSend,
-    numberSmsConfirmation,
 } = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
@@ -32,8 +30,8 @@ class AndroidSettingsContainer extends React.Component {
     state = {
         metadataSync,
         dataSync,
-        numberSmsToSend,
-        numberSmsConfirmation,
+        numberSmsToSend: '',
+        numberSmsConfirmation: '',
         reservedValues,
         encryptDB,
         loading: true,
@@ -63,7 +61,8 @@ class AndroidSettingsContainer extends React.Component {
 
         this.setState({
             ...this.state,
-            disableSave: false,
+            disableSave:
+                this.state.errorGateway || this.state.errorConfirmation,
             submitDataStore: {
                 success: false,
                 error: false,
@@ -114,7 +113,7 @@ class AndroidSettingsContainer extends React.Component {
             if (![null, '', false].includes(this.state.numberSmsToSend)) {
                 const validInput = validateNumber(this.state.numberSmsToSend)
                 !validInput
-                    ? this.setState({ errorGateway: true })
+                    ? this.setState({ errorGateway: true, disableSave: true })
                     : this.setState({ errorGateway: false })
             } else {
                 this.setState({ errorGateway: false })
@@ -126,7 +125,10 @@ class AndroidSettingsContainer extends React.Component {
                     this.state.numberSmsConfirmation
                 )
                 !validInput
-                    ? this.setState({ errorConfirmation: true })
+                    ? this.setState({
+                          errorConfirmation: true,
+                          disableSave: true,
+                      })
                     : this.setState({ errorConfirmation: false })
             } else {
                 this.setState({ errorConfirmation: false })
@@ -190,8 +192,8 @@ class AndroidSettingsContainer extends React.Component {
         this.setState({
             metadataSync,
             dataSync,
-            numberSmsToSend,
-            numberSmsConfirmation,
+            numberSmsToSend: '',
+            numberSmsConfirmation: '',
             reservedValues,
             encryptDB,
             openDialog: false,

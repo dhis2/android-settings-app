@@ -68,11 +68,21 @@ const GeneralForm = ({
             <TextField
                 id="numberSmsToSend"
                 name="numberSmsToSend"
+                type="tel"
+                InputProps={{
+                    inputProps: {
+                        minLength: '3',
+                    },
+                }}
                 label={i18n.t('SMS Gateway phone number')}
                 helperText={
                     state.errorGateway
-                        ? i18n.t('Incorrect phone number')
-                        : i18n.t('Phone number that receives all SMS messages')
+                        ? i18n.t(
+                              'This phone number is not valid. Must start with + and be at least 3 characters long.'
+                          )
+                        : i18n.t(
+                              'Must start with + and be at least 3 characters long.'
+                          )
                 }
                 margin="normal"
                 fullWidth
@@ -88,11 +98,21 @@ const GeneralForm = ({
             <TextField
                 id="numberSmsConfirmation"
                 name="numberSmsConfirmation"
+                type="tel"
+                InputProps={{
+                    inputProps: {
+                        minLength: '3',
+                    },
+                }}
                 label={i18n.t('SMS Result Sender phone number')}
                 helperText={
                     state.errorConfirmation
-                        ? i18n.t('Incorrect phone number')
-                        : ''
+                        ? i18n.t(
+                              'This phone number is not valid. Must start with + and be at least 3 characters long.'
+                          )
+                        : i18n.t(
+                              'Must start with + and be at least 3 characters long.'
+                          )
                 }
                 margin="normal"
                 fullWidth

@@ -46,8 +46,6 @@ export const encryptTitles = {
 export const androidSettingsDefault = {
     metadataSync: '24h',
     dataSync: '24h',
-    numberSmsToSend: '',
-    numberSmsConfirmation: '',
     reservedValues: 0,
     encryptDB: false,
 }
