@@ -100,6 +100,10 @@ export default class TextFieldSearch extends React.Component {
         this.props.clearFields()
         if (event.target.value === '') {
             clearSelection()
+            this.suggestions = []
+            this.setState({
+                suggestionsList: [],
+            })
         } else {
             this.d2.models.users
                 .list({
