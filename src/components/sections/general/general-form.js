@@ -123,9 +123,9 @@ const GeneralForm = ({
                     name="encryptDB"
                     checked={state.encryptDB}
                     onChange={handleEncryptCheckbox.onChange}
-                    label={i18n.t('Encrypt Database')}
+                    label={i18n.t('Encrypt device database')}
                     helpText={i18n.t(
-                        'Data can be lost if there are problems with an encrypted database'
+                        'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.'
                     )}
                 />
             </div>
@@ -143,7 +143,7 @@ const GeneralForm = ({
                     {i18n.t('Reset all values to default')}
                 </Button>
                 <Button onClick={removeNamespace}>
-                    {i18n.t('Remove settings')}
+                    {i18n.t('Disable settings')}
                 </Button>
             </ButtonStrip>
         </form>

@@ -40,7 +40,7 @@ const GlobalSpecificSettings = ({
         <React.Fragment>
             <div>
                 <p className={styles.mainContent__title_headerBar}>
-                    {i18n.t('{{elementPlural}} global settings', {
+                    {i18n.t('{{elementPlural}} global download sync settings', {
                         elementPlural: settingType.typePlural,
                     })}
                 </p>
@@ -71,9 +71,12 @@ const GlobalSpecificSettings = ({
 
             <div>
                 <p className={styles.mainContent__title_headerBar}>
-                    {i18n.t('{{elementPlural}} specific settings', {
-                        elementPlural: settingType.typePlural,
-                    })}
+                    {i18n.t(
+                        '{{elementPlural}} specific download sync settings',
+                        {
+                            elementPlural: settingType.typePlural,
+                        }
+                    )}
                 </p>
                 <p className={styles.mainContent__subtitle}>
                     {i18n.t(
