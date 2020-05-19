@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-15T19:13:48.581Z\n"
-"PO-Revision-Date: 2020-05-15T19:13:48.581Z\n"
+"POT-Creation-Date: 2020-05-19T18:08:39.949Z\n"
+"PO-Revision-Date: 2020-05-19T18:08:39.949Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Reset all values to default"
 msgstr ""
 
-msgid "Remove settings"
+msgid "Disable settings"
 msgstr ""
 
 msgid "General download sync settings"
@@ -147,6 +147,12 @@ msgid "Check the amount of data a user would sync to their device."
 msgstr ""
 
 msgid "Run test"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "{{defaultValue}}"
 msgstr ""
 
 msgid "Download"
@@ -272,6 +278,15 @@ msgid "metadata download size"
 msgstr ""
 
 msgid "data download size"
+msgstr ""
+
+msgid "{{teiDownload}} TEI"
+msgstr ""
+
+msgid "{{eventsDownload}} events per OU"
+msgstr ""
+
+msgid "{{periodDSDownload}} {{periodType}} period"
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"

@@ -7,6 +7,7 @@ import {
     WITHOUT_REGISTRATION,
 } from '../constants/program-settings'
 import { populateProgramObject } from './programs/populateProgramObject'
+import i18n from '@dhis2/d2-i18n'
 
 /**
  * Prepare specific settings to be save
@@ -49,8 +50,9 @@ export const prepareSpecificSettingsToSave = ({
                         specificSettingsDefault
                     )
                 }
-
-                summarySettings = `${states.specificSetting.teiDownload} TEI`
+                summarySettings = i18n.t('{{teiDownload}} TEI', {
+                    teiDownload: states.specificSetting.teiDownload,
+                })
             } else if (settingNameFilter.programType === WITHOUT_REGISTRATION) {
                 if (
                     states.specificSetting.settingDownload ||
@@ -67,8 +69,9 @@ export const prepareSpecificSettingsToSave = ({
                         specificSettingsDefault
                     )
                 }
-
-                summarySettings = `${states.specificSetting.eventsDownload} events per OU`
+                summarySettings = i18n.t('{{eventsDownload}} events per OU', {
+                    eventsDownload: states.specificSetting.eventsDownload,
+                })
             }
         } else if (settingType === DATA_SET) {
             if (states.specificSetting.periodDSDownload >= 0) {
@@ -79,8 +82,13 @@ export const prepareSpecificSettingsToSave = ({
             } else {
                 settings = populateSettingObject(DEFAULT)
             }
-
-            summarySettings = `${states.specificSetting.periodDSDownload} ${settingNameFilter.periodType} period`
+            summarySettings = i18n.t(
+                '{{periodDSDownload}} {{periodType}} period',
+                {
+                    periodDSDownload: states.specificSetting.periodDSDownload,
+                    periodType: settingNameFilter.periodType,
+                }
+            )
         }
 
         objData[specificNameKey] = {
