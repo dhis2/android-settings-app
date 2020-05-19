@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-11T20:45:38.410Z\n"
-"PO-Revision-Date: 2020-05-11T20:45:38.410Z\n"
+"POT-Creation-Date: 2020-05-15T19:13:48.581Z\n"
+"PO-Revision-Date: 2020-05-15T19:13:48.581Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -29,18 +29,25 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "{{encrypt}} DB"
+msgid "{{encrypt}} the device database"
 msgstr ""
 
 msgid ""
-"{{encrypt}} data base is a critical action that could have very serious "
-"consequences. Are you sure you want to {{encrypt}} DB?"
+"Decrypting the device database is a critical action that will reduce the "
+"level of protection of your data. Are you sure you want to decrypt the "
+"device database?"
 msgstr ""
 
-msgid "Decrypt DB"
+msgid ""
+"Encrypting the device database is a critical action that could have an "
+"impact on the database volume and performance. Are you sure you want to "
+"encrypt the device database?"
 msgstr ""
 
-msgid "Encrypt DB"
+msgid "Decrypt"
+msgstr ""
+
+msgid "Encrypt"
 msgstr ""
 
 msgid "First time setup"
@@ -52,7 +59,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Any settings or configuration on a users device will be overwritten by "
+"Any settings or configuration on a user's device will be overwritten by "
 "settings applied here."
 msgstr ""
 
@@ -109,10 +116,13 @@ msgstr ""
 msgid "Reserved values downloaded per TEI attribute"
 msgstr ""
 
-msgid "Encrypt Database"
+msgid "Encrypt device database"
 msgstr ""
 
-msgid "Data can be lost if there are problems with an encrypted database"
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
 msgstr ""
 
 msgid "Reset all values to default"
@@ -121,7 +131,7 @@ msgstr ""
 msgid "Remove settings"
 msgstr ""
 
-msgid "General settings"
+msgid "General download sync settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
@@ -151,12 +161,6 @@ msgstr ""
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
-msgstr ""
-
-msgid "Encrypt"
-msgstr ""
-
-msgid "Decrypt"
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
@@ -270,7 +274,7 @@ msgstr ""
 msgid "data download size"
 msgstr ""
 
-msgid "{{elementPlural}} global settings"
+msgid "{{elementPlural}} global download sync settings"
 msgstr ""
 
 msgid ""
@@ -278,7 +282,7 @@ msgid ""
 "{{elementSingular}} settings can be defined in the section below."
 msgstr ""
 
-msgid "{{elementPlural}} specific settings"
+msgid "{{elementPlural}} specific download sync settings"
 msgstr ""
 
 msgid ""
