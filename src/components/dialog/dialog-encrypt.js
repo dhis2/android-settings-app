@@ -25,13 +25,16 @@ const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
             {openDialog && (
                 <Modal small onClose={onClose} position="middle">
                     <ModalTitle>
-                        {i18n.t('{{encrypt}} DB', { encrypt })}
+                        {i18n.t('{{encrypt}} the device database', { encrypt })}
                     </ModalTitle>
                     <ModalContent>
-                        {i18n.t(
-                            '{{encrypt}} data base is a critical action that could have very serious consequences. Are you sure you want to {{encrypt}} DB?',
-                            { encrypt }
-                        )}
+                        {checked
+                            ? i18n.t(
+                                  'Decrypting the device database is a critical action that will reduce the level of protection of your data. Are you sure you want to decrypt the device database?'
+                              )
+                            : i18n.t(
+                                  'Encrypting the device database is a critical action that could have an impact on the database volume and performance. Are you sure you want to encrypt the device database?'
+                              )}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
@@ -45,7 +48,7 @@ const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
                                     }}
                                     primary
                                 >
-                                    {i18n.t('Decrypt DB')}
+                                    {i18n.t('Decrypt')}
                                 </Button>
                             ) : (
                                 <Button
@@ -54,7 +57,7 @@ const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
                                     }}
                                     destructive
                                 >
-                                    {i18n.t('Encrypt DB')}
+                                    {i18n.t('Encrypt')}
                                 </Button>
                             )}
                         </ButtonStrip>
