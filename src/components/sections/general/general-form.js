@@ -71,17 +71,18 @@ const GeneralForm = ({
                 type="tel"
                 InputProps={{
                     inputProps: {
-                        minLength: '3',
+                        minLength: '4',
+                        pattern: '^\\+[1-9][0-9]{3,16}$',
                     },
                 }}
                 label={i18n.t('SMS Gateway phone number')}
                 helperText={
                     state.errorGateway
                         ? i18n.t(
-                              'This phone number is not valid. Must start with + and be at least 3 characters long.'
+                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
                           )
                         : i18n.t(
-                              'Must start with + and be at least 3 characters long.'
+                              'Must start with + and be at least 4 characters long.'
                           )
                 }
                 margin="normal"
@@ -101,17 +102,18 @@ const GeneralForm = ({
                 type="tel"
                 InputProps={{
                     inputProps: {
-                        minLength: '3',
+                        minLength: '4',
+                        pattern: '^\\+[1-9][0-9]{3,16}$',
                     },
                 }}
                 label={i18n.t('SMS Result Sender phone number')}
                 helperText={
                     state.errorConfirmation
                         ? i18n.t(
-                              'This phone number is not valid. Must start with + and be at least 3 characters long.'
+                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
                           )
                         : i18n.t(
-                              'Must start with + and be at least 3 characters long.'
+                              'Must start with + and be at least 4 characters long.'
                           )
                 }
                 margin="normal"
