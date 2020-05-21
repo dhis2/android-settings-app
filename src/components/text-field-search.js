@@ -34,7 +34,6 @@ const classes = {
 export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
-        this.suggestions = []
         this.d2 = this.props.d2
     }
 
@@ -100,7 +99,6 @@ export default class TextFieldSearch extends React.Component {
         this.props.clearFields()
         if (event.target.value === '') {
             clearSelection()
-            this.suggestions = []
             this.setState({
                 suggestionsList: [],
             })
@@ -114,7 +112,6 @@ export default class TextFieldSearch extends React.Component {
                 })
                 .then(users => {
                     const usersOptions = users.toArray()
-                    this.suggestions = usersOptions
                     this.setState({
                         suggestionsList: usersOptions,
                     })
@@ -129,7 +126,7 @@ export default class TextFieldSearch extends React.Component {
 
         return inputLength === 0 && !showEmpty
             ? []
-            : this.suggestions.filter(suggestion => {
+            : this.state.suggestionsList.filter(suggestion => {
                   const keep = count < 5 && suggestion
 
                   if (keep) {
