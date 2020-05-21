@@ -12,6 +12,7 @@ import GeneralSettings from './general-settings'
 import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
+import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
 
 const {
@@ -19,8 +20,6 @@ const {
     dataSync,
     encryptDB,
     reservedValues,
-    numberSmsToSend,
-    numberSmsConfirmation,
 } = androidSettingsDefault
 
 class AndroidSettingsContainer extends React.Component {
@@ -31,8 +30,8 @@ class AndroidSettingsContainer extends React.Component {
     state = {
         metadataSync,
         dataSync,
-        numberSmsToSend,
-        numberSmsConfirmation,
+        numberSmsToSend: '',
+        numberSmsConfirmation: '',
         reservedValues,
         encryptDB,
         loading: true,
@@ -45,6 +44,7 @@ class AndroidSettingsContainer extends React.Component {
             error: false,
         },
         openErrorAlert: false,
+        errorGateway: false,
     }
 
     /**
@@ -61,7 +61,8 @@ class AndroidSettingsContainer extends React.Component {
 
         this.setState({
             ...this.state,
-            disableSave: false,
+            disableSave:
+                this.state.errorGateway || this.state.errorConfirmation,
             submitDataStore: {
                 success: false,
                 error: false,
@@ -105,39 +106,56 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     /**
-     * Checks if sms number and confirm number match
+     * Checks if sms number or confirmation number is valid
      */
-    checkMatchingConfirmation = () => {
-        if (
-            this.state.numberSmsToSend !== '' &&
-            this.state.numberSmsConfirmation !== ''
-        ) {
-            this.state.numberSmsToSend !== this.state.numberSmsConfirmation
-                ? this.setState({ errorConfirmation: true })
-                : this.setState({ errorConfirmation: false })
-        }
+    validatePhoneNumber = {
+        gatewayNumber: () => {
+            if (![null, '', false].includes(this.state.numberSmsToSend)) {
+                const validInput = validateNumber(this.state.numberSmsToSend)
+                !validInput
+                    ? this.setState({ errorGateway: true, disableSave: true })
+                    : this.setState({ errorGateway: false })
+            } else {
+                this.setState({ errorGateway: false })
+            }
+        },
+        confirmationNumber: () => {
+            if (![null, '', false].includes(this.state.numberSmsConfirmation)) {
+                const validInput = validateNumber(
+                    this.state.numberSmsConfirmation
+                )
+                !validInput
+                    ? this.setState({
+                          errorConfirmation: true,
+                          disableSave: true,
+                      })
+                    : this.setState({ errorConfirmation: false })
+            } else {
+                this.setState({ errorConfirmation: false })
+            }
+        },
     }
 
     /**
-     * Updates Settings calling update api
+     * Updates Settings calling update api,
+     * check if gateway and confirmation number are not empty
+     * Prevent null console warning
      */
     submitData = () => {
-        if (this.state.numberSmsToSend === '') {
-            this.state.numberSmsToSend = null
-        }
-
-        if (this.state.numberSmsConfirmation === '') {
-            this.state.numberSmsConfirmation = null
-        }
-
         const androidData = {
             metadataSync: this.state.metadataSync,
             dataSync: this.state.dataSync,
-            numberSmsToSend: this.state.numberSmsToSend,
-            numberSmsConfirmation: this.state.numberSmsConfirmation,
             reservedValues: this.state.reservedValues,
             encryptDB: this.state.encryptDB,
             lastUpdated: new Date().toJSON(),
+        }
+
+        if (!['', null, undefined].includes(this.state.numberSmsToSend)) {
+            androidData.numberSmsToSend = this.state.numberSmsToSend
+        }
+
+        if (!['', null, undefined].includes(this.state.numberSmsConfirmation)) {
+            androidData.numberSmsConfirmation = this.state.numberSmsConfirmation
         }
 
         this.saveDataApi(androidData)
@@ -259,7 +277,7 @@ class AndroidSettingsContainer extends React.Component {
                 <GeneralSettings
                     state={this.state}
                     handleChange={this.handleChange}
-                    checkMatchingConfirmation={this.checkMatchingConfirmation}
+                    validatePhoneNumber={this.validatePhoneNumber}
                     handleReset={this.handleReset}
                     handleEncryptCheckbox={this.handleCheckbox}
                     handleSaveDialog={this.handleSaveDataDialog}

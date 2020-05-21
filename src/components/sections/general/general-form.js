@@ -17,7 +17,7 @@ import buttonStyles from '../../../styles/Button.module.css'
 const GeneralForm = ({
     state,
     handleChange,
-    checkMatchingConfirmation,
+    validatePhoneNumber,
     handleEncryptCheckbox,
     handleSaveDialog,
     handleReset,
@@ -68,10 +68,23 @@ const GeneralForm = ({
             <TextField
                 id="numberSmsToSend"
                 name="numberSmsToSend"
-                label={i18n.t('SMS Gateway Phone number')}
-                helperText={i18n.t(
-                    'Phone number that receives all SMS messages'
-                )}
+                type="tel"
+                InputProps={{
+                    inputProps: {
+                        minLength: '4',
+                        pattern: '^\\+[1-9][0-9]{3,16}$',
+                    },
+                }}
+                label={i18n.t('SMS Gateway phone number')}
+                helperText={
+                    state.errorGateway
+                        ? i18n.t(
+                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
+                          )
+                        : i18n.t(
+                              'Must start with + and be at least 4 characters long.'
+                          )
+                }
                 margin="normal"
                 fullWidth
                 InputLabelProps={{
@@ -79,13 +92,30 @@ const GeneralForm = ({
                 }}
                 value={state.numberSmsToSend}
                 onChange={handleChange}
-                onBlur={checkMatchingConfirmation}
+                onKeyUp={validatePhoneNumber.gatewayNumber}
+                error={state.errorGateway}
             />
 
             <TextField
                 id="numberSmsConfirmation"
                 name="numberSmsConfirmation"
-                label={i18n.t('Confirm SMS Gateway Phone number')}
+                type="tel"
+                InputProps={{
+                    inputProps: {
+                        minLength: '4',
+                        pattern: '^\\+[1-9][0-9]{3,16}$',
+                    },
+                }}
+                label={i18n.t('SMS Result Sender phone number')}
+                helperText={
+                    state.errorConfirmation
+                        ? i18n.t(
+                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
+                          )
+                        : i18n.t(
+                              'Must start with + and be at least 4 characters long.'
+                          )
+                }
                 margin="normal"
                 fullWidth
                 InputLabelProps={{
@@ -93,7 +123,7 @@ const GeneralForm = ({
                 }}
                 value={state.numberSmsConfirmation}
                 onChange={handleChange}
-                onBlur={checkMatchingConfirmation}
+                onKeyUp={validatePhoneNumber.confirmationNumber}
                 error={state.errorConfirmation}
             />
 
@@ -153,7 +183,7 @@ const GeneralForm = ({
 GeneralForm.propTypes = {
     state: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
-    checkMatchingConfirmation: PropTypes.func.isRequired,
+    validatePhoneNumber: PropTypes.object.isRequired,
     handleReset: PropTypes.func.isRequired,
     handleEncryptCheckbox: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
