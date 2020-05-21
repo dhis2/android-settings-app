@@ -104,13 +104,16 @@ msgstr ""
 msgid "How often should data sync?"
 msgstr ""
 
-msgid "SMS Gateway Phone number"
+msgid "SMS Gateway phone number"
+msgstr ""
+
+msgid "Incorrect phone number"
 msgstr ""
 
 msgid "Phone number that receives all SMS messages"
 msgstr ""
 
-msgid "Confirm SMS Gateway Phone number"
+msgid "SMS Result Sender phone number"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"

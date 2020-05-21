@@ -14,7 +14,7 @@ import styles from '../../../styles/LayoutTitles.module.css'
 const GeneralSettings = ({
     state,
     handleChange,
-    checkMatchingConfirmation,
+    validatePhoneNumber,
     handleReset,
     handleEncryptCheckbox,
     handleSaveDialog,
@@ -34,7 +34,7 @@ const GeneralSettings = ({
             <GeneralForm
                 state={state}
                 handleChange={handleChange}
-                checkMatchingConfirmation={checkMatchingConfirmation}
+                validatePhoneNumber={validatePhoneNumber}
                 handleReset={handleReset}
                 handleEncryptCheckbox={handleEncryptCheckbox}
                 handleSaveDialog={handleSaveDialog}
@@ -76,7 +76,7 @@ const GeneralSettings = ({
 GeneralSettings.propTypes = {
     state: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
-    checkMatchingConfirmation: PropTypes.func.isRequired,
+    validatePhoneNumber: PropTypes.object.isRequired,
     handleReset: PropTypes.func.isRequired,
     handleEncryptCheckbox: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
