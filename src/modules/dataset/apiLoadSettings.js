@@ -26,11 +26,7 @@ export const apiLoadDatasetSettings = async ({
 
                                         const dataSet = specificSettings[key]
 
-                                        const summarySettings =
-                                            dataSet.periodDSDownload ===
-                                            undefined
-                                                ? undefined
-                                                : `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
+                                        const summarySettings = `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
 
                                         const newDataSetRow = {
                                             ...dataSet,

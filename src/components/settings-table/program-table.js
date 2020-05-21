@@ -5,11 +5,11 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import SettingsTableRow from './setting-table-row'
 import { WITH_REGISTRATION } from '../../constants/program-settings'
 
 import i18n from '@dhis2/d2-i18n'
 import dataTableStyles from '../../styles/DataTable.module.css'
+import ProgramTableRow from './program-table-row'
 
 class ProgramTable extends React.Component {
     constructor(props) {
@@ -81,7 +81,7 @@ class ProgramTable extends React.Component {
                     <TableBody className="data-table__rows">
                         {this.state.programType === WITH_REGISTRATION
                             ? this.props.data.withRegistration.map(row => (
-                                  <SettingsTableRow
+                                  <ProgramTableRow
                                       key={row.option}
                                       dataRow={row}
                                       states={this.props.states}
@@ -89,7 +89,7 @@ class ProgramTable extends React.Component {
                                   />
                               ))
                             : this.props.data.withoutRegistration.map(row => (
-                                  <SettingsTableRow
+                                  <ProgramTableRow
                                       key={row.option}
                                       dataRow={row}
                                       states={this.props.states}

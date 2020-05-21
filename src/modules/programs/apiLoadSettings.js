@@ -5,7 +5,6 @@ import {
     GlobalProgram,
     GlobalProgramSpecial,
     PER_ORG_UNIT,
-    specificSettingsDefault,
     WITH_REGISTRATION,
 } from '../../constants/program-settings'
 
@@ -44,17 +43,9 @@ export const apiLoadProgramSettings = async ({
                                             filter.programType ===
                                             WITH_REGISTRATION
                                         ) {
-                                            summarySettings =
-                                                (program.teiDownload
-                                                    ? program.teiDownload
-                                                    : specificSettingsDefault.teiDownload) +
-                                                ' TEI'
+                                            summarySettings = `${program.teiDownload} TEI`
                                         } else {
-                                            summarySettings =
-                                                (program.eventsDownload
-                                                    ? program.eventsDownload
-                                                    : specificSettingsDefault.eventsDownload) +
-                                                ' events per OU'
+                                            summarySettings = `${program.eventsDownload} events per OU`
                                         }
 
                                         const newProgramRow = {
