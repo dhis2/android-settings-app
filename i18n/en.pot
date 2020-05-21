@@ -158,6 +158,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "Search for a user"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
