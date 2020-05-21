@@ -25,8 +25,7 @@ const DataSetTableRow = ({
                     {dataRow.option} ({periodType})
                 </p>
                 <em className={tableTitleStyles.attributeLabel}>
-                    {i18n.t('Default')} :{' '}
-                    {i18n.t('{{defaultValue}}', { defaultValue })}
+                    {i18n.t('Default')} : {defaultValue}
                 </em>
             </TableCell>
             <TableCell
