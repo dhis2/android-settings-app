@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Sidebar } from '@dhis2/d2-ui-core'
 import { Link, useLocation } from 'react-router-dom'
@@ -12,10 +12,16 @@ const SideBar = () => {
         section => section.path === location.pathname
     )
 
-    const sectionKey = sectionForPath ? sectionForPath.key : null
+    const newSectionKey = sectionForPath ? sectionForPath.key : null
+    const [currentSectionKey, setCurrentSectionKey] = useState(newSectionKey)
+
+    if (newSectionKey !== currentSectionKey) {
+        setCurrentSectionKey(newSectionKey)
+    }
 
     const changeSectionHandler = key => {
         const section = menuSection.find(section => section.key === key)
+        setCurrentSectionKey(section.key)
     }
 
     return (
@@ -28,7 +34,7 @@ const SideBar = () => {
                     containerElement: <Link to={path}> {label} </Link>,
                 }))}
                 onChangeSection={changeSectionHandler}
-                currentSection={sectionKey}
+                currentSection={currentSectionKey}
             />
         </div>
     )
