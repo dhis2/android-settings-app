@@ -1,5 +1,6 @@
 import api from '../../utils/api'
 import { GENERAL_SETTINGS, NAMESPACE } from '../../constants/data-store'
+import { navigateTo } from '../../utils/routes/navigateTo'
 
 /**
  * When general settings component mount, get namespace and keys from dataStore and return value
@@ -16,6 +17,8 @@ export const apiLoadGeneralSettings = async () => {
                         })
                 }
             })
+        } else {
+            navigateTo('/')
         }
     })
 }

@@ -14,6 +14,7 @@ import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
+import { reloadPage } from '../../../utils/routes/navigateTo'
 
 const {
     metadataSync,
@@ -237,7 +238,7 @@ class AndroidSettingsContainer extends React.Component {
         removeNamespace()
             .then(() => {
                 console.info('remove namespace')
-                location.replace('/')
+                reloadPage()
             })
             .catch(e => {
                 console.error(e)

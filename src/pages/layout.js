@@ -2,7 +2,7 @@ import React from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
-import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, Router } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
 
 import { D2Shim } from '../utils/D2Shim'
@@ -15,44 +15,19 @@ import {
     PROGRAM_SETTINGS,
 } from '../constants/data-store'
 import { androidSettingsDefault } from '../constants/android-settings'
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
+import hashHistory from '../utils/routes/history'
+import {
+    DEFAULT_DATASET,
+    DEFAULT_PROGRAM,
+    populateObject,
+} from '../modules/populateDefaultSettings'
 
 const styles = {
     twoPanelMain: {
         marginTop: '0rem',
     },
-}
-
-const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
-const DEFAULT_DATASET = 'DEFAULT_DATASET'
-
-const populateObject = type => {
-    let object = {}
-    switch (type) {
-        case DEFAULT_PROGRAM:
-            object = {
-                settingDownload: programSettingsDefault.settingDownload,
-                teiDownload: programSettingsDefault.teiDownload,
-                enrollmentDownload: programSettingsDefault.enrollmentDownload,
-                enrollmentDateDownload:
-                    programSettingsDefault.enrollmentDateDownload,
-                updateDownload: programSettingsDefault.updateDownload,
-                eventsDownload: programSettingsDefault.eventsDownload,
-                eventDateDownload: programSettingsDefault.eventDateDownload,
-            }
-            break
-        case DEFAULT_DATASET:
-            object = {
-                periodDSDownload: dataSetSettingsDefault.periodDSDownload,
-            }
-            break
-        default:
-            break
-    }
-    return object
 }
 
 class Layout extends React.Component {
@@ -107,7 +82,7 @@ class Layout extends React.Component {
 
     render() {
         return (
-            <HashRouter>
+            <Router history={hashHistory}>
                 <TwoPanel mainStyle={styles.twoPanelMain}>
                     <SideBar />
                     <MainContent>
@@ -130,6 +105,7 @@ class Layout extends React.Component {
 
                                 {menuSection.map(section => (
                                     <Route
+                                        exact
                                         key={section.key}
                                         path={section.path}
                                         render={() => (
@@ -141,7 +117,7 @@ class Layout extends React.Component {
                         </Paper>
                     </MainContent>
                 </TwoPanel>
-            </HashRouter>
+            </Router>
         )
     }
 }
