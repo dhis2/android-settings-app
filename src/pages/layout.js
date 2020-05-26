@@ -23,6 +23,7 @@ import {
     DEFAULT_PROGRAM,
     populateObject,
 } from '../modules/populateDefaultSettings'
+import PageNotFound from '../components/page-not-found'
 
 const styles = {
     twoPanelMain: {
@@ -113,6 +114,10 @@ class Layout extends React.Component {
                                         )}
                                     />
                                 ))}
+
+                                <Route path="*">
+                                    <PageNotFound />
+                                </Route>
                             </Switch>
                         </Paper>
                     </MainContent>
