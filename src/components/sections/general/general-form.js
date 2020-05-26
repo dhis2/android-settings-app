@@ -6,7 +6,7 @@ import {
     maxValues,
     metadataOptions,
 } from '../../../constants/android-settings'
-import { Button, ButtonStrip, CheckboxField } from '@dhis2/ui-core'
+import { Button, ButtonStrip, CheckboxField, Help } from '@dhis2/ui-core'
 import MenuItem from '@material-ui/core/MenuItem'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
@@ -21,7 +21,7 @@ const GeneralForm = ({
     handleEncryptCheckbox,
     handleSaveDialog,
     handleReset,
-    removeNamespace,
+    handleDisableSettings,
 }) => {
     return (
         <form>
@@ -160,6 +160,17 @@ const GeneralForm = ({
                 />
             </div>
 
+            <div>
+                <Button onClick={handleDisableSettings.open}>
+                    {i18n.t('Disable all settings')}
+                </Button>
+                <Help>
+                    {i18n.t(
+                        'This will disable and remove all General, Program and Data set settings.'
+                    )}
+                </Help>
+            </div>
+
             <ButtonStrip className={buttonStyles.container__padding}>
                 <Button
                     primary
@@ -171,9 +182,6 @@ const GeneralForm = ({
                 </Button>
                 <Button onClick={handleReset}>
                     {i18n.t('Reset all values to default')}
-                </Button>
-                <Button onClick={removeNamespace}>
-                    {i18n.t('Disable settings')}
                 </Button>
             </ButtonStrip>
         </form>
@@ -187,6 +195,7 @@ GeneralForm.propTypes = {
     handleReset: PropTypes.func.isRequired,
     handleEncryptCheckbox: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
+    handleDisableSettings: PropTypes.object.isRequired,
 }
 
 export default GeneralForm

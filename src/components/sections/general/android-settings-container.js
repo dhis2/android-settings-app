@@ -46,6 +46,7 @@ class AndroidSettingsContainer extends React.Component {
         },
         openErrorAlert: false,
         errorGateway: false,
+        openDisableDialog: false,
     }
 
     /**
@@ -231,18 +232,33 @@ class AndroidSettingsContainer extends React.Component {
     }
 
     /**
-     * Remove namespaces and keynames
+     * Methods to handle Dialog that disable/remove settings
+     * open: flag to open dialog
+     * cancel: flag to close dialog
+     * disableSettings: method to remove namespace and keyNames
      * */
 
-    removeNamespace = () => {
-        removeNamespace()
-            .then(() => {
-                console.info('remove namespace')
-                reloadPage()
+    handleDisableSettings = {
+        open: () => {
+            this.setState({
+                openDisableDialog: true,
             })
-            .catch(e => {
-                console.error(e)
+        },
+        cancel: () => {
+            this.setState({
+                openDisableDialog: false,
             })
+        },
+        disableSettings: () => {
+            removeNamespace()
+                .then(() => {
+                    console.info('remove namespace')
+                    reloadPage()
+                })
+                .catch(e => {
+                    console.error(e)
+                })
+        },
     }
 
     /**
@@ -282,7 +298,7 @@ class AndroidSettingsContainer extends React.Component {
                     handleReset={this.handleReset}
                     handleEncryptCheckbox={this.handleCheckbox}
                     handleSaveDialog={this.handleSaveDataDialog}
-                    removeNamespace={this.removeNamespace}
+                    handleDisableSettings={this.handleDisableSettings}
                 />
             </>
         )

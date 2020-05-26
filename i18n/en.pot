@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-21T20:09:14.574Z\n"
-"PO-Revision-Date: 2020-05-21T20:09:14.574Z\n"
+"POT-Creation-Date: 2020-05-25T23:59:56.153Z\n"
+"PO-Revision-Date: 2020-05-25T23:59:56.153Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -27,6 +27,17 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Disable all settings"
+msgstr ""
+
+msgid ""
+"This action will disable and remove all General, Program and Data set "
+"settings. Are you sure you want to disable all settings?"
+msgstr ""
+
+msgid "Disable"
 msgstr ""
 
 msgid "{{encrypt}} the device database"
@@ -92,6 +103,15 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "404 Page not found."
+msgstr ""
+
+msgid "No match for"
+msgstr ""
+
+msgid "Go back to General settings"
+msgstr ""
+
 msgid "Name"
 msgstr ""
 
@@ -107,10 +127,12 @@ msgstr ""
 msgid "SMS Gateway phone number"
 msgstr ""
 
-msgid "Incorrect phone number"
+msgid ""
+"This phone number is not valid. Must start with + and be at least 4 "
+"characters long."
 msgstr ""
 
-msgid "Phone number that receives all SMS messages"
+msgid "Must start with + and be at least 4 characters long."
 msgstr ""
 
 msgid "SMS Result Sender phone number"
@@ -128,10 +150,10 @@ msgid ""
 "on an external server."
 msgstr ""
 
-msgid "Reset all values to default"
+msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
-msgid "Disable settings"
+msgid "Reset all values to default"
 msgstr ""
 
 msgid "General download sync settings"

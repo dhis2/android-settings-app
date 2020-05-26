@@ -8,7 +8,7 @@ import SuccessAlert from '../../alert-bar/success-alert'
 import SaveErrorAlert from '../../alert-bar/save-error-alert'
 import ErrorAlert from '../../alert-bar/error-alert'
 import GeneralForm from './general-form'
-
+import DialogDisableSettings from '../../dialog/dialog-disable-settings'
 import styles from '../../../styles/LayoutTitles.module.css'
 
 const GeneralSettings = ({
@@ -18,7 +18,7 @@ const GeneralSettings = ({
     handleReset,
     handleEncryptCheckbox,
     handleSaveDialog,
-    removeNamespace,
+    handleDisableSettings,
 }) => {
     return (
         <>
@@ -38,7 +38,7 @@ const GeneralSettings = ({
                 handleReset={handleReset}
                 handleEncryptCheckbox={handleEncryptCheckbox}
                 handleSaveDialog={handleSaveDialog}
-                removeNamespace={removeNamespace}
+                handleDisableSettings={handleDisableSettings}
             />
 
             <DialogEncrypt
@@ -52,6 +52,12 @@ const GeneralSettings = ({
                 openDialog={state.openDialogSaveData}
                 onClose={handleSaveDialog.close}
                 saveDataStore={handleSaveDialog.save}
+            />
+
+            <DialogDisableSettings
+                openDialog={state.openDisableDialog}
+                onClose={handleDisableSettings.cancel}
+                disableSettings={handleDisableSettings.disableSettings}
             />
 
             <SuccessAlert
@@ -80,6 +86,7 @@ GeneralSettings.propTypes = {
     handleReset: PropTypes.func.isRequired,
     handleEncryptCheckbox: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
+    handleDisableSettings: PropTypes.object.isRequired,
 }
 
 export default GeneralSettings
