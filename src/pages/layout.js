@@ -8,51 +8,16 @@ import menuSection from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
 import api from '../utils/api'
-import {
-    DATASET_SETTINGS,
-    GENERAL_SETTINGS,
-    NAMESPACE,
-    PROGRAM_SETTINGS,
-} from '../constants/data-store'
-import { androidSettingsDefault } from '../constants/android-settings'
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
+import { NAMESPACE } from '../constants/data-store'
+
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
+import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 
 const styles = {
     twoPanelMain: {
         marginTop: '0rem',
     },
-}
-
-const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
-const DEFAULT_DATASET = 'DEFAULT_DATASET'
-
-const populateObject = type => {
-    let object = {}
-    switch (type) {
-        case DEFAULT_PROGRAM:
-            object = {
-                settingDownload: programSettingsDefault.settingDownload,
-                teiDownload: programSettingsDefault.teiDownload,
-                enrollmentDownload: programSettingsDefault.enrollmentDownload,
-                enrollmentDateDownload:
-                    programSettingsDefault.enrollmentDateDownload,
-                updateDownload: programSettingsDefault.updateDownload,
-                eventsDownload: programSettingsDefault.eventsDownload,
-                eventDateDownload: programSettingsDefault.eventDateDownload,
-            }
-            break
-        case DEFAULT_DATASET:
-            object = {
-                periodDSDownload: dataSetSettingsDefault.periodDSDownload,
-            }
-            break
-        default:
-            break
-    }
-    return object
 }
 
 class Layout extends React.Component {
@@ -68,26 +33,12 @@ class Layout extends React.Component {
     }
 
     handleSave = () => {
-        api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
-            .then(() => {
-                return Promise.all([
-                    api.updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                        ...androidSettingsDefault,
-                    }),
-                    api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
-                        globalSettings: populateObject(DEFAULT_PROGRAM),
-                    }),
-                    api.createValue(NAMESPACE, DATASET_SETTINGS, {
-                        globalSettings: populateObject(DEFAULT_DATASET),
-                    }),
-                ])
+        apiCreateFirstSetup().then(() => {
+            this.setState({
+                openFirstLaunch: false,
+                isSaved: true,
             })
-            .then(() => {
-                this.setState({
-                    openFirstLaunch: false,
-                    isSaved: true,
-                })
-            })
+        })
     }
 
     componentDidMount() {
