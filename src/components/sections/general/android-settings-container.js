@@ -42,6 +42,7 @@ class AndroidSettingsContainer extends React.Component {
         submitDataStore: {
             success: false,
             error: false,
+            message: undefined,
         },
         openErrorAlert: false,
         errorGateway: false,
@@ -180,6 +181,7 @@ class AndroidSettingsContainer extends React.Component {
                     submitDataStore: {
                         success: false,
                         error: true,
+                        message: e.message,
                     },
                 })
             })
@@ -201,6 +203,7 @@ class AndroidSettingsContainer extends React.Component {
             submitDataStore: {
                 success: false,
                 error: false,
+                message: undefined,
             },
             openErrorAlert: false,
         })
