@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
-import api from '../../../utils/api'
 
 import {
     androidSettingsDefault,
@@ -9,11 +8,11 @@ import {
     RESERVED_VALUES,
 } from '../../../constants/android-settings'
 import GeneralSettings from './general-settings'
-import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
+import { apiUpdateDataStore } from '../../../modules/general/apiUpdateDataStore'
 
 const {
     metadataSync,
@@ -166,7 +165,7 @@ class AndroidSettingsContainer extends React.Component {
      * Handle update api method to save settings in dataStore also shows alertBar for success and error
      * */
     saveDataApi = data => {
-        api.updateValue(NAMESPACE, GENERAL_SETTINGS, data)
+        apiUpdateDataStore(data)
             .then(() => {
                 this.setState({
                     submitDataStore: {
