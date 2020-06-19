@@ -163,6 +163,7 @@ const GlobalSpecificSettings = ({
                     states.submitDataStore.error &&
                     !states.submitDataStore.success
                 }
+                message={states.submitDataStore.message}
             />
 
             <ErrorAlert show={states.openErrorAlert} />

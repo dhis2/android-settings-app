@@ -12,7 +12,8 @@ import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
-import { apiUpdateDataStore } from '../../../modules/general/apiUpdateDataStore'
+import { GENERAL_SETTINGS } from '../../../constants/data-store'
+import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
 
 const {
     metadataSync,
@@ -165,7 +166,7 @@ class AndroidSettingsContainer extends React.Component {
      * Handle update api method to save settings in dataStore also shows alertBar for success and error
      * */
     saveDataApi = data => {
-        apiUpdateDataStore(data)
+        apiUpdateDataStore(data, GENERAL_SETTINGS)
             .then(() => {
                 this.setState({
                     submitDataStore: {

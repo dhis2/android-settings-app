@@ -1,6 +1,6 @@
-import api from '../../utils/api'
-import { GENERAL_SETTINGS, NAMESPACE } from '../../constants/data-store'
+import api from '../utils/api'
 import { getInstance } from 'd2'
+import { NAMESPACE } from '../constants/data-store'
 
 const getAuthority = () => {
     return getInstance().then(d2 => {
@@ -9,10 +9,10 @@ const getAuthority = () => {
     })
 }
 
-export const apiUpdateDataStore = async data => {
+export const apiUpdateDataStore = async (data, keyName) => {
     const hasAuthority = await getAuthority()
     if (hasAuthority) {
-        return await api.updateValue(NAMESPACE, GENERAL_SETTINGS, data)
+        return await api.updateValue(NAMESPACE, keyName, data)
     } else {
         throw new Error(
             'You do not have the authority to update the current section'
