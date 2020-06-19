@@ -14,35 +14,17 @@ const AndroidSettingsContainer = () => {
         success: false,
         error: false,
     })
-    const [openDialog, setOpenDialog] = useState({
-        encryptDB: false,
-        saveData: false,
-        disableSettings: false,
-    })
+
     const [loading, setLoading] = useState(true)
     const [openErrorAlert, setOpenErrorAlert] = useState(false)
     const { reloadPage, navigateTo } = useNavigation()
+    const form = useGeneralForm({ setSubmitDataStore })
     const {
-        handleChange,
-        handleReset,
-        handleCheckbox,
-        validatePhoneNumber,
-        generalParameters,
-        setGeneralParameters,
-        errorNumber,
-        disableSave,
-        setDisableSave,
-    } = useGeneralForm({
+        handleSaveDataDialog,
         setOpenDialog,
-        setOpenErrorAlert,
         openDialog,
-        setSubmitDataStore,
-    })
-    const handleSaveDataDialog = useSaveGeneralSettings({
-        generalParameters,
-        openDialog,
-        setOpenDialog,
-        setDisableSave,
+    } = useSaveGeneralSettings({
+        form,
         setSubmitDataStore,
     })
 
@@ -53,9 +35,8 @@ const AndroidSettingsContainer = () => {
         apiLoadGeneralSettings()
             .then(generalSettings => {
                 if (generalSettings) {
-                    setGeneralParameters(generalSettings)
+                    form.setInitialData(generalSettings)
                     setLoading(false)
-                    setDisableSave(true)
                 } else {
                     navigateTo('/')
                 }
@@ -105,22 +86,15 @@ const AndroidSettingsContainer = () => {
 
     return (
         <>
-            <UnsavedChangesAlert unsavedChanges={!disableSave} />
+            <UnsavedChangesAlert unsavedChanges={!form.disableSave} />
 
             <GeneralSettings
                 state={{
-                    generalParameters,
-                    loading,
-                    errorNumber,
                     openDialog,
-                    disableSave,
                     submitDataStore,
                     openErrorAlert,
                 }}
-                handleChange={handleChange}
-                validatePhoneNumber={validatePhoneNumber}
-                handleReset={handleReset}
-                handleEncryptCheckbox={handleCheckbox}
+                generalForm={form}
                 handleSaveDialog={handleSaveDataDialog}
                 handleDisableSettings={handleDisableSettings}
             />

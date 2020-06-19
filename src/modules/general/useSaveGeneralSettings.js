@@ -1,14 +1,14 @@
 import api from '../../utils/api'
 import { GENERAL_SETTINGS, NAMESPACE } from '../../constants/data-store'
-import { useCallback } from 'react'
+import { useState } from 'react'
 
-export const useSaveGeneralSettings = ({
-    generalParameters,
-    openDialog,
-    setOpenDialog,
-    setDisableSave,
-    setSubmitDataStore,
-}) => {
+export const useSaveGeneralSettings = ({ form, setSubmitDataStore }) => {
+    const { fields, setDisableSave } = form
+    const [openDialog, setOpenDialog] = useState({
+        saveData: false,
+        disableSettings: false,
+    })
+
     /**
      * Handle update api method to save settings in dataStore also shows alertBar for success and error
      * */
@@ -36,51 +36,48 @@ export const useSaveGeneralSettings = ({
      */
     const submitData = () => {
         const androidData = {
-            metadataSync: generalParameters.metadataSync,
-            dataSync: generalParameters.dataSync,
-            reservedValues: generalParameters.reservedValues,
-            encryptDB: generalParameters.encryptDB,
+            metadataSync: fields.metadataSync,
+            dataSync: fields.dataSync,
+            reservedValues: fields.reservedValues,
+            encryptDB: fields.encryptDB,
             lastUpdated: new Date().toJSON(),
         }
 
-        if (
-            !['', null, undefined].includes(generalParameters.numberSmsToSend)
-        ) {
-            androidData.numberSmsToSend = generalParameters.numberSmsToSend
+        if (!['', null, undefined].includes(fields.numberSmsToSend)) {
+            androidData.numberSmsToSend = fields.numberSmsToSend
         }
 
-        if (
-            !['', null, undefined].includes(
-                generalParameters.numberSmsConfirmation
-            )
-        ) {
-            androidData.numberSmsConfirmation =
-                generalParameters.numberSmsConfirmation
+        if (!['', null, undefined].includes(fields.numberSmsConfirmation)) {
+            androidData.numberSmsConfirmation = fields.numberSmsConfirmation
         }
 
         saveDataApi(androidData)
     }
 
     return {
-        open: useCallback(() => {
-            setOpenDialog({
-                ...openDialog,
-                saveData: true,
-            })
-        }),
-        close: useCallback(() => {
-            setOpenDialog({
-                ...openDialog,
-                saveData: false,
-            })
-        }),
-        save: useCallback(() => {
-            submitData()
-            setOpenDialog({
-                ...openDialog,
-                saveData: false,
-            })
-            setDisableSave(true)
-        }),
+        handleSaveDataDialog: {
+            open: () => {
+                setOpenDialog({
+                    ...openDialog,
+                    saveData: true,
+                })
+            },
+            close: () => {
+                setOpenDialog({
+                    ...openDialog,
+                    saveData: false,
+                })
+            },
+            save: () => {
+                submitData()
+                setOpenDialog({
+                    ...openDialog,
+                    saveData: false,
+                })
+                setDisableSave(true)
+            },
+        },
+        setOpenDialog,
+        openDialog,
     }
 }

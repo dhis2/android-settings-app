@@ -14,10 +14,7 @@ import DialogDisableSettings from '../../dialog/dialog-disable-settings'
 
 const GeneralSettings = ({
     state,
-    handleChange,
-    validatePhoneNumber,
-    handleReset,
-    handleEncryptCheckbox,
+    generalForm,
     handleSaveDialog,
     handleDisableSettings,
 }) => {
@@ -33,20 +30,16 @@ const GeneralSettings = ({
             </div>
 
             <GeneralForm
-                state={state}
-                handleChange={handleChange}
-                validatePhoneNumber={validatePhoneNumber}
-                handleReset={handleReset}
-                handleEncryptCheckbox={handleEncryptCheckbox}
+                handleForm={generalForm}
                 handleSaveDialog={handleSaveDialog}
                 handleDisableSettings={handleDisableSettings}
             />
 
             <DialogEncrypt
-                openDialog={state.openDialog.encryptDB}
-                checked={state.generalParameters.encryptDB}
-                onClose={handleEncryptCheckbox.onClose}
-                handleEncrypt={handleEncryptCheckbox.handleEncrypt}
+                openDialog={generalForm.openEncryptDialog}
+                checked={generalForm.fields.encryptDB}
+                onClose={generalForm.handleEncryptDialog.onClose}
+                handleEncrypt={generalForm.handleEncryptDialog.handleEncrypt}
             />
 
             <DialogSaveData
@@ -82,10 +75,7 @@ const GeneralSettings = ({
 
 GeneralSettings.propTypes = {
     state: PropTypes.object.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    validatePhoneNumber: PropTypes.object.isRequired,
-    handleReset: PropTypes.func.isRequired,
-    handleEncryptCheckbox: PropTypes.object.isRequired,
+    generalForm: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
     handleDisableSettings: PropTypes.object.isRequired,
 }
