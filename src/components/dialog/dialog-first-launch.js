@@ -14,7 +14,7 @@ import PropTypes from '@dhis2/prop-types'
 import { useConfig } from '@dhis2/app-runtime'
 import buttonStyle from '../../styles/Button.module.css'
 
-const DialogFirstLaunch = ({ onClose, handleSave }) => {
+const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
     const { baseUrl } = useConfig()
 
     const path = '/dhis-web-commons-about/redirect.action'
@@ -53,7 +53,7 @@ const DialogFirstLaunch = ({ onClose, handleSave }) => {
                                 {i18n.t('Exit, do not apply settings')}
                             </a>
                         </Button>
-                        <Button primary onClick={handleSave}>
+                        <Button primary onClick={handleSave} disabled={disable}>
                             {i18n.t('Set defaults and save')}
                         </Button>
                     </ButtonStrip>

@@ -4,15 +4,16 @@ import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
-
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
-import api from '../utils/api'
-import { NAMESPACE } from '../constants/data-store'
-
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
+import {
+    apiFirstLoad,
+    NO_AUTHORITY,
+    WITH_NAMESPACE,
+} from '../modules/apiLoadFirstSetup'
 
 const styles = {
     twoPanelMain: {
@@ -24,6 +25,7 @@ class Layout extends React.Component {
     state = {
         openFirstLaunch: true,
         isSaved: false,
+        disableAuthority: false,
     }
 
     handleClose = () => {
@@ -42,12 +44,18 @@ class Layout extends React.Component {
     }
 
     componentDidMount() {
-        api.getNamespaces()
-            .then(res => {
-                if (res.includes(NAMESPACE)) {
+        apiFirstLoad()
+            .then(result => {
+                if (result === WITH_NAMESPACE) {
                     this.setState({
                         openFirstLaunch: false,
                         isSaved: true,
+                    })
+                } else if (result === NO_AUTHORITY) {
+                    this.setState({
+                        openFirstLaunch: true,
+                        isSaved: false,
+                        disableAuthority: true,
                     })
                 }
             })
@@ -70,6 +78,9 @@ class Layout extends React.Component {
                                             <DialogFirstLaunch
                                                 handleSave={this.handleSave}
                                                 onClose={this.handleClose}
+                                                disable={
+                                                    this.state.disableAuthority
+                                                }
                                             />
                                         ) : (
                                             <Redirect
