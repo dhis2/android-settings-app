@@ -24,6 +24,7 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => {
                             onChange={onChange}
                             value={states[dataRow.keyDownload]}
                             className={radioStyles.container_content_inline}
+                            disabled={states.disableAll}
                         >
                             {dataRow.download.map(option => (
                                 <Radio
@@ -40,6 +41,7 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => {
                             onChange={onChange}
                             id={dataRow.keyDownload}
                             name={dataRow.keyDownload}
+                            disabled={states.disableAll}
                         >
                             {dataRow.download.map(option => (
                                 <MenuItem
@@ -58,6 +60,7 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => {
                         max={dataRow.maxValue}
                         value={states[dataRow.keyDownload]}
                         onChange={onChange}
+                        disabled={states.disableAll}
                     />
                 )}
             </TableCell>

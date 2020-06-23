@@ -68,6 +68,7 @@ class DataSetSettings extends React.Component {
             message: undefined,
         },
         openErrorAlert: false,
+        disableAll: false,
     }
 
     /**
