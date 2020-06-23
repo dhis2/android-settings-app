@@ -15,7 +15,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import dataTableStyles from '../styles/DataTable.module.css'
 
-const TableActions = ({ columns, rows, menuActions }) => {
+const TableActions = ({ columns, rows, menuActions, states }) => {
     return (
         <Table>
             <TableHead>
@@ -48,6 +48,7 @@ const TableActions = ({ columns, rows, menuActions }) => {
                                     onClick={() => {
                                         menuActions.edit(row)
                                     }}
+                                    disabled={states.disableAll}
                                 >
                                     {i18n.t('Edit')}
                                 </Button>
@@ -57,6 +58,7 @@ const TableActions = ({ columns, rows, menuActions }) => {
                                     onClick={() => {
                                         menuActions.delete(row)
                                     }}
+                                    disabled={states.disableAll}
                                 >
                                     {i18n.t('Delete')}
                                 </Button>

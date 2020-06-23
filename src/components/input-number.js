@@ -1,7 +1,7 @@
 import React from 'react'
 import inputNumberStyles from '../styles/InputNumber.module.css'
 
-const InputNumber = ({ name, max, value, onChange }) => {
+const InputNumber = ({ name, max, value, onChange, disabled }) => {
     return (
         <div className={inputNumberStyles.inputContainer}>
             <input
@@ -14,6 +14,7 @@ const InputNumber = ({ name, max, value, onChange }) => {
                 value={value}
                 onChange={onChange}
                 className={inputNumberStyles.inputBase}
+                disabled={disabled}
             />
         </div>
     )
