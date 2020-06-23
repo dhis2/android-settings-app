@@ -37,6 +37,7 @@ const GeneralForm = ({
                 }}
                 value={state.metadataSync}
                 onChange={handleChange}
+                disabled={state.disableAll}
             >
                 {metadataOptions.map(option => (
                     <MenuItem key={option.value} value={option.value}>
@@ -57,6 +58,7 @@ const GeneralForm = ({
                 }}
                 value={state.dataSync}
                 onChange={handleChange}
+                disabled={state.disableAll}
             >
                 {dataOptions.map(option => (
                     <MenuItem key={option.value} value={option.value}>
@@ -94,6 +96,7 @@ const GeneralForm = ({
                 onChange={handleChange}
                 onKeyUp={validatePhoneNumber.gatewayNumber}
                 error={state.errorGateway}
+                disabled={state.disableAll}
             />
 
             <TextField
@@ -125,6 +128,7 @@ const GeneralForm = ({
                 onChange={handleChange}
                 onKeyUp={validatePhoneNumber.confirmationNumber}
                 error={state.errorConfirmation}
+                disabled={state.disableAll}
             />
 
             <TextField
@@ -146,6 +150,7 @@ const GeneralForm = ({
                 }}
                 value={state.reservedValues}
                 onChange={handleChange}
+                disabled={state.disableAll}
             />
 
             <div className={styles.field__form__container}>
@@ -153,6 +158,7 @@ const GeneralForm = ({
                     name="encryptDB"
                     checked={state.encryptDB}
                     onChange={handleEncryptCheckbox.onChange}
+                    disabled={state.disableAll}
                     label={i18n.t('Encrypt device database')}
                     helpText={i18n.t(
                         'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.'
@@ -169,10 +175,10 @@ const GeneralForm = ({
                 >
                     {i18n.t('Save')}
                 </Button>
-                <Button onClick={handleReset}>
+                <Button onClick={handleReset} disabled={state.disableAll}>
                     {i18n.t('Reset all values to default')}
                 </Button>
-                <Button onClick={removeNamespace}>
+                <Button onClick={removeNamespace} disabled={state.disableAll}>
                     {i18n.t('Disable settings')}
                 </Button>
             </ButtonStrip>

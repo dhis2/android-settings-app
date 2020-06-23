@@ -46,6 +46,7 @@ class AndroidSettingsContainer extends React.Component {
         },
         openErrorAlert: false,
         errorGateway: false,
+        disableAll: false,
     }
 
     /**
