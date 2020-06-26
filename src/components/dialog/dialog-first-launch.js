@@ -13,6 +13,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { useConfig } from '@dhis2/app-runtime'
 import buttonStyle from '../../styles/Button.module.css'
+import warning from '../../styles/Warning.module.css'
 
 const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
     const { baseUrl } = useConfig()
@@ -37,10 +38,14 @@ const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
                         )}
                     </strong>
 
-                    <p>
-                        {i18n.t(
-                            'To set up the default settings and apply to all devices, click "Set default and save"'
-                        )}
+                    <p className={disable ? warning.warning_color : undefined}>
+                        {disable
+                            ? i18n.t(
+                                  "You don't have the authority to set up the android settings to this instance"
+                              )
+                            : i18n.t(
+                                  'To set up the default settings and apply to all devices, click "Set default and save"'
+                              )}
                     </p>
                 </ModalContent>
                 <ModalActions>
@@ -64,6 +69,7 @@ const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
 }
 
 DialogFirstLaunch.propTypes = {
+    disable: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     handleSave: PropTypes.func.isRequired,
 }

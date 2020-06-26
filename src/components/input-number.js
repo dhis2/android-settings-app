@@ -1,5 +1,6 @@
 import React from 'react'
 import inputNumberStyles from '../styles/InputNumber.module.css'
+import disableStyle from '../styles/Disable.module.css'
 
 const InputNumber = ({ name, max, value, onChange, disabled }) => {
     return (
@@ -13,7 +14,8 @@ const InputNumber = ({ name, max, value, onChange, disabled }) => {
                 max={max}
                 value={value}
                 onChange={onChange}
-                className={inputNumberStyles.inputBase}
+                className={`${inputNumberStyles.inputBase} ${disabled &&
+                    disableStyle.disable_input}`}
                 disabled={disabled}
             />
         </div>

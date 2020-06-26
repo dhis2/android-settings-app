@@ -1,0 +1,8 @@
+.disable_label {
+    color: rgb(110, 122, 138);
+}
+
+.disable_input {
+    cursor: not-allowed;
+    color: rgb(110, 122, 138)
+}

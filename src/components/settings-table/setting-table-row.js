@@ -6,11 +6,18 @@ import { TableRow, TableCell, RadioGroup, Radio } from '@dhis2/ui-core'
 import InputNumber from '../input-number'
 import dataTableStyles from '../../styles/DataTable.module.css'
 import radioStyles from '../../styles/Input.module.css'
+import disable from '../../styles/Disable.module.css'
 
 const SettingsTableRow = ({ dataRow, states, onChange }) => {
     return (
         <TableRow>
-            <TableCell> {dataRow.option} </TableCell>
+            <TableCell
+                className={
+                    states.disableAll ? disable.disable_label : undefined
+                }
+            >
+                {dataRow.option}
+            </TableCell>
             <TableCell
                 className={`${dataTableStyles.dataTable__rows__row__column} ${dataTableStyles.dataTable_align_end}`}
                 align="right"

@@ -14,6 +14,7 @@ import {
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import dataTableStyles from '../styles/DataTable.module.css'
+import disableStyle from '../styles/Disable.module.css'
 
 const TableActions = ({ columns, rows, menuActions, states }) => {
     return (
@@ -30,12 +31,18 @@ const TableActions = ({ columns, rows, menuActions, states }) => {
                 {rows.map(row => (
                     <TableRow key={row.id}>
                         <TableCell
-                            className={dataTableStyles.dataTable_row_title}
+                            className={`${
+                                dataTableStyles.dataTable_row_title
+                            } ${states.disableAll &&
+                                disableStyle.disable_label}`}
                         >
                             {row.name}
                         </TableCell>
                         <TableCell
-                            className={dataTableStyles.dataTable_row_title}
+                            className={`${
+                                dataTableStyles.dataTable_row_title
+                            } ${states.disableAll &&
+                                disableStyle.disable_label}`}
                         >
                             {row.summarySettings}
                         </TableCell>
