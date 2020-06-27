@@ -31,19 +31,21 @@ export const apiLoadDatasetSettings = async ({
                                                 option => option.id === key
                                             )
 
-                                            const dataSet =
-                                                specificSettings[key]
+                                            if (dataSetNameFilter.length > 0) {
+                                                const dataSet =
+                                                    specificSettings[key]
 
-                                            const summarySettings = `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
+                                                const summarySettings = `${dataSet.periodDSDownload} ${dataSetNameFilter[0].periodType} period`
 
-                                            const newDataSetRow = {
-                                                ...dataSet,
-                                                summarySettings,
+                                                const newDataSetRow = {
+                                                    ...dataSet,
+                                                    summarySettings,
+                                                }
+
+                                                specificSettingsRows.push(
+                                                    newDataSetRow
+                                                )
                                             }
-
-                                            specificSettingsRows.push(
-                                                newDataSetRow
-                                            )
                                         }
                                     }
                                 }

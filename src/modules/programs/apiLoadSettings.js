@@ -43,27 +43,30 @@ export const apiLoadProgramSettings = async ({
                                                 listItem =>
                                                     listItem.id === program.id
                                             )
-                                            filter = filter[0]
 
-                                            let summarySettings
+                                            if (filter.length > 0) {
+                                                filter = filter[0]
 
-                                            if (
-                                                filter.programType ===
-                                                WITH_REGISTRATION
-                                            ) {
-                                                summarySettings = `${program.teiDownload} TEI`
-                                            } else {
-                                                summarySettings = `${program.eventsDownload} events per OU`
+                                                let summarySettings
+
+                                                if (
+                                                    filter.programType ===
+                                                    WITH_REGISTRATION
+                                                ) {
+                                                    summarySettings = `${program.teiDownload} TEI`
+                                                } else {
+                                                    summarySettings = `${program.eventsDownload} events per OU`
+                                                }
+
+                                                const newProgramRow = {
+                                                    ...program,
+                                                    summarySettings,
+                                                }
+
+                                                specificSettingsRows.push(
+                                                    newProgramRow
+                                                )
                                             }
-
-                                            const newProgramRow = {
-                                                ...program,
-                                                summarySettings,
-                                            }
-
-                                            specificSettingsRows.push(
-                                                newProgramRow
-                                            )
                                         }
                                     }
                                 }
