@@ -5,10 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-26T17:41:51.388Z\n"
-"PO-Revision-Date: 2020-06-26T17:41:51.388Z\n"
+"POT-Creation-Date: 2020-06-18T06:56:04.402Z\n"
+"PO-Revision-Date: 2020-06-18T06:56:04.402Z\n"
 
 msgid "Failed to get data from Data Store"
+msgstr ""
+
+msgid "Error when saving data"
 msgstr ""
 
 msgid "Settings were successfully saved"
@@ -24,6 +27,17 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Disable all settings"
+msgstr ""
+
+msgid ""
+"This action will disable and remove all General, Program and Data set "
+"settings. Are you sure you want to disable all settings?"
+msgstr ""
+
+msgid "Disable"
 msgstr ""
 
 msgid "{{encrypt}} the device database"
@@ -60,9 +74,6 @@ msgid ""
 "settings applied here."
 msgstr ""
 
-msgid "You don't have the authority to set up the android settings to this instance"
-msgstr ""
-
 msgid ""
 "To set up the default settings and apply to all devices, click \"Set "
 "default and save\""
@@ -90,6 +101,15 @@ msgid "Values per"
 msgstr ""
 
 msgid "Add/Save"
+msgstr ""
+
+msgid "404 Page not found."
+msgstr ""
+
+msgid "No match for"
+msgstr ""
+
+msgid "Go back to General settings"
 msgstr ""
 
 msgid "Name"
@@ -130,10 +150,10 @@ msgid ""
 "on an external server."
 msgstr ""
 
-msgid "Reset all values to default"
+msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
-msgid "Disable settings"
+msgid "Reset all values to default"
 msgstr ""
 
 msgid "General download sync settings"

@@ -10,15 +10,13 @@ import ErrorAlert from '../../alert-bar/error-alert'
 import GeneralForm from './general-form'
 
 import styles from '../../../styles/LayoutTitles.module.css'
+import DialogDisableSettings from '../../dialog/dialog-disable-settings'
 
 const GeneralSettings = ({
     state,
-    handleChange,
-    validatePhoneNumber,
-    handleReset,
-    handleEncryptCheckbox,
+    generalForm,
     handleSaveDialog,
-    removeNamespace,
+    handleDisableSettings,
 }) => {
     return (
         <>
@@ -32,26 +30,28 @@ const GeneralSettings = ({
             </div>
 
             <GeneralForm
-                state={state}
-                handleChange={handleChange}
-                validatePhoneNumber={validatePhoneNumber}
-                handleReset={handleReset}
-                handleEncryptCheckbox={handleEncryptCheckbox}
+                handleForm={generalForm}
                 handleSaveDialog={handleSaveDialog}
-                removeNamespace={removeNamespace}
+                handleDisableSettings={handleDisableSettings}
             />
 
             <DialogEncrypt
-                openDialog={state.openDialog}
-                checked={state.encryptDB}
-                onClose={handleEncryptCheckbox.onClose}
-                handleEncrypt={handleEncryptCheckbox.handleEncrypt}
+                openDialog={generalForm.openEncryptDialog}
+                checked={generalForm.fields.encryptDB}
+                onClose={generalForm.handleEncryptDialog.onClose}
+                handleEncrypt={generalForm.handleEncryptDialog.handleEncrypt}
             />
 
             <DialogSaveData
-                openDialog={state.openDialogSaveData}
+                openDialog={state.openDialog.saveData}
                 onClose={handleSaveDialog.close}
                 saveDataStore={handleSaveDialog.save}
+            />
+
+            <DialogDisableSettings
+                openDialog={state.openDialog.disableSettings}
+                onClose={handleDisableSettings.cancel}
+                disableSettings={handleDisableSettings.disableSettings}
             />
 
             <SuccessAlert
@@ -76,11 +76,9 @@ const GeneralSettings = ({
 
 GeneralSettings.propTypes = {
     state: PropTypes.object.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    validatePhoneNumber: PropTypes.object.isRequired,
-    handleReset: PropTypes.func.isRequired,
-    handleEncryptCheckbox: PropTypes.object.isRequired,
+    generalForm: PropTypes.object.isRequired,
     handleSaveDialog: PropTypes.object.isRequired,
+    handleDisableSettings: PropTypes.object.isRequired,
 }
 
 export default GeneralSettings

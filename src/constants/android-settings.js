@@ -35,7 +35,7 @@ export const dataOptions = [
 ]
 
 export const maxValues = {
-    reservedValues: 50,
+    reservedValues: 500,
 }
 
 export const encryptTitles = {
@@ -46,7 +46,7 @@ export const encryptTitles = {
 export const androidSettingsDefault = {
     metadataSync: '24h',
     dataSync: '24h',
-    reservedValues: 0,
+    reservedValues: 100,
     encryptDB: false,
 }
 

@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
+
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
+import api from '../utils/api'
+import {
+    DATASET_SETTINGS,
+    GENERAL_SETTINGS,
+    NAMESPACE,
+    PROGRAM_SETTINGS,
+} from '../constants/data-store'
+import { androidSettingsDefault } from '../constants/android-settings'
+import { programSettingsDefault } from '../constants/program-settings'
+import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
+import PageNotFound from '../components/page-not-found'
+import {
+    DEFAULT_DATASET,
+    DEFAULT_PROGRAM,
+    populateObject,
+} from '../modules/populateDefaultSettings'
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import {
     apiFirstLoad,
@@ -21,91 +38,80 @@ const styles = {
     },
 }
 
-class Layout extends React.Component {
-    state = {
-        openFirstLaunch: true,
-        isSaved: false,
-        disableAuthority: false,
-    }
+const Layout = () => {
+    const [openFirstLaunch, setFirstLaunch] = useState(true)
+    const [isSaved, setSaved] = useState(false)
+    const [isDisabledAuthority, disableAuthority] = useState(false)
 
-    handleClose = () => {
-        this.setState({
-            isSaved: false,
-        })
-    }
-
-    handleSave = () => {
-        apiCreateFirstSetup().then(() => {
-            this.setState({
-                openFirstLaunch: false,
-                isSaved: true,
-            })
-        })
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         apiFirstLoad()
             .then(result => {
                 if (result === WITH_NAMESPACE) {
-                    this.setState({
-                        openFirstLaunch: false,
-                        isSaved: true,
-                    })
+                    setFirstLaunch(false)
+                    setSaved(true)
                 } else if (result === NO_AUTHORITY) {
-                    this.setState({
-                        openFirstLaunch: true,
-                        isSaved: false,
-                        disableAuthority: true,
-                    })
+                    setFirstLaunch(true)
+                    setSaved(false)
+                    disableAuthority(true)
                 }
             })
             .catch(e => {
                 console.error(e)
             })
+    }, [])
+
+    const handleClose = () => {
+        setSaved(false)
     }
 
-    render() {
-        return (
-            <HashRouter>
-                <TwoPanel mainStyle={styles.twoPanelMain}>
-                    <SideBar />
-                    <MainContent>
-                        <Paper className={layoutStyles.paper__layout}>
-                            <Switch>
-                                <Route path="/" exact>
-                                    <D2Shim>
-                                        {this.state.openFirstLaunch === true ? (
-                                            <DialogFirstLaunch
-                                                handleSave={this.handleSave}
-                                                onClose={this.handleClose}
-                                                disable={
-                                                    this.state.disableAuthority
-                                                }
-                                            />
-                                        ) : (
-                                            <Redirect
-                                                to={menuSection[0].path}
-                                            />
-                                        )}
-                                    </D2Shim>
-                                </Route>
-
-                                {menuSection.map(section => (
-                                    <Route
-                                        key={section.key}
-                                        path={section.path}
-                                        render={() => (
-                                            <D2Shim>{section.component}</D2Shim>
-                                        )}
-                                    />
-                                ))}
-                            </Switch>
-                        </Paper>
-                    </MainContent>
-                </TwoPanel>
-            </HashRouter>
-        )
+    const handleSave = () => {
+        apiCreateFirstSetup().then(() => {
+            setFirstLaunch(false)
+            setSaved(true)
+        })
     }
+
+    return (
+        <HashRouter>
+            <TwoPanel mainStyle={styles.twoPanelMain}>
+                <SideBar />
+                <MainContent>
+                    <Paper className={layoutStyles.paper__layout}>
+                        <Switch>
+                            <Route path="/" exact>
+                                <D2Shim>
+                                    {openFirstLaunch === true ? (
+                                        <DialogFirstLaunch
+                                            handleSave={handleSave}
+                                            onClose={handleClose}
+                                            disable={isDisabledAuthority}
+                                        />
+                                    ) : (
+                                        <Redirect to={menuSection[0].path} />
+                                    )}
+                                </D2Shim>
+                            </Route>
+
+                            {menuSection.map(section => (
+                                <Route
+                                    exact
+                                    key={section.key}
+                                    path={section.path}
+                                    render={() => (
+                                        <D2Shim>{section.component}</D2Shim>
+                                    )}
+                                />
+                            ))}
+
+                            <Route path="*">
+                                <PageNotFound />
+                            </Route>
+                        </Switch>
+                    </Paper>
+                </MainContent>
+            </TwoPanel>
+        </HashRouter>
+    )
 }
 
 export default Layout

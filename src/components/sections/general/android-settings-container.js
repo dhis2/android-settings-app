@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
+import api from '../../../utils/api'
 
 import {
     androidSettingsDefault,
@@ -8,12 +9,16 @@ import {
     RESERVED_VALUES,
 } from '../../../constants/android-settings'
 import GeneralSettings from './general-settings'
+import { NAMESPACE, GENERAL_SETTINGS } from '../../../constants/data-store'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 import { validateNumber } from '../../../modules/general/validatePhoneNumber'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
-import { GENERAL_SETTINGS } from '../../../constants/data-store'
+//import { GENERAL_SETTINGS } from '../../../constants/data-store'
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
+import { useNavigation } from '../../../utils/useNavigation'
+import { useGeneralForm } from '../../../modules/general/useGeneralForm'
+import { useSaveGeneralSettings } from '../../../modules/general/useSaveGeneralSettings'
 
 const {
     metadataSync,
@@ -22,37 +27,53 @@ const {
     reservedValues,
 } = androidSettingsDefault
 
-class AndroidSettingsContainer extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+const AndroidSettingsContainer = () => {
+    const [submitDataStore, setSubmitDataStore] = useState({
+        success: false,
+        error: false,
+    })
 
-    state = {
-        metadataSync,
-        dataSync,
-        numberSmsToSend: '',
-        numberSmsConfirmation: '',
-        reservedValues,
-        encryptDB,
-        loading: true,
-        errorConfirmation: false,
-        openDialog: false,
-        openDialogSaveData: false,
-        disableSave: true,
-        submitDataStore: {
-            success: false,
-            error: false,
-            message: undefined,
-        },
-        openErrorAlert: false,
-        errorGateway: false,
-        disableAll: false,
-    }
+    const [loading, setLoading] = useState(true)
+    const [openErrorAlert, setOpenErrorAlert] = useState(false)
+    const { reloadPage, navigateTo } = useNavigation()
+    const form = useGeneralForm({ setSubmitDataStore })
+    const {
+        handleSaveDataDialog,
+        setOpenDialog,
+        openDialog,
+    } = useSaveGeneralSettings({
+        form,
+        setSubmitDataStore,
+    })
+
+    //disableAll: false,
+
+    /**
+     * When component mount, get namespace and keys from dataStore
+     */
+
+    useEffect(() => {
+        apiLoadGeneralSettings()
+            .then(generalSettings => {
+                if (generalSettings) {
+                    form.setInitialData(generalSettings)
+                    setLoading(false)
+                    // disableSave: true,
+                } else {
+                    navigateTo('/')
+                }
+            })
+            .catch(e => {
+                console.error(e)
+                setLoading(false)
+                setOpenErrorAlert(true)
+            })
+    }, [])
 
     /**
      * Updates global settings on fly
      */
-    handleChange = e => {
+    /*const handleChange = e => {
         e.preventDefault()
 
         let { value } = e.target
@@ -71,46 +92,12 @@ class AndroidSettingsContainer extends React.Component {
             },
             [e.target.name]: value,
         })
-    }
-
-    /**
-     * When using checkbox for Encrypt DB should open dialog
-     * onChange: When Checkbox is checked or not opens dialog
-     * onClose: close Encrypt DB dialog
-     * handleEncrypt: Changes value for encryptDB state
-     */
-
-    handleCheckbox = {
-        onChange: () => {
-            this.setState({
-                ...this.state,
-                openDialog: true,
-                submitDataStore: {
-                    success: false,
-                    error: false,
-                },
-            })
-        },
-        onClose: () => {
-            this.setState({
-                ...this.state,
-                openDialog: false,
-            })
-        },
-        handleEncrypt: isChecked => {
-            this.setState({
-                ...this.state,
-                encryptDB: !isChecked,
-                openDialog: false,
-                disableSave: false,
-            })
-        },
-    }
+    }*/
 
     /**
      * Checks if sms number or confirmation number is valid
      */
-    validatePhoneNumber = {
+    /*const validatePhoneNumber = {
         gatewayNumber: () => {
             if (![null, '', false].includes(this.state.numberSmsToSend)) {
                 const validInput = validateNumber(this.state.numberSmsToSend)
@@ -136,14 +123,14 @@ class AndroidSettingsContainer extends React.Component {
                 this.setState({ errorConfirmation: false })
             }
         },
-    }
+    }*/
 
     /**
      * Updates Settings calling update api,
      * check if gateway and confirmation number are not empty
      * Prevent null console warning
      */
-    submitData = () => {
+    /*const submitData = () => {
         const androidData = {
             metadataSync: this.state.metadataSync,
             dataSync: this.state.dataSync,
@@ -161,12 +148,13 @@ class AndroidSettingsContainer extends React.Component {
         }
 
         this.saveDataApi(androidData)
-    }
+    }*/
 
     /**
      * Handle update api method to save settings in dataStore also shows alertBar for success and error
      * */
-    saveDataApi = data => {
+    /*const saveDataApi = data => {
+        //api.updateValue(NAMESPACE, GENERAL_SETTINGS, data)
         apiUpdateDataStore(data, GENERAL_SETTINGS)
             .then(() => {
                 this.setState({
@@ -186,34 +174,41 @@ class AndroidSettingsContainer extends React.Component {
                     },
                 })
             })
-    }
+    }*/
 
     /**
-     * Sets values to default
-     */
-    handleReset = () => {
-        this.setState({
-            metadataSync,
-            dataSync,
-            numberSmsToSend: '',
-            numberSmsConfirmation: '',
-            reservedValues,
-            encryptDB,
-            openDialog: false,
-            disableSave: false,
-            submitDataStore: {
-                success: false,
-                error: false,
-                message: undefined,
-            },
-            openErrorAlert: false,
-        })
-    }
-
-    /**
-     * Handle save DataStore dialog
+     * Methods to handle Dialog that disable/remove settings
+     * open: flag to open dialog
+     * cancel: flag to close dialog
+     * disableSettings: method to remove namespace and keyNames
      * */
-    handleSaveDataDialog = {
+
+    const handleDisableSettings = {
+        open: () => {
+            setOpenDialog({
+                ...openDialog,
+                disableSettings: true,
+            })
+        },
+        cancel: () => {
+            setOpenDialog({
+                ...openDialog,
+                disableSettings: false,
+            })
+        },
+        disableSettings: () => {
+            removeNamespace()
+                .then(() => {
+                    console.info('remove namespace')
+                    reloadPage()
+                })
+                .catch(e => {
+                    console.error(e)
+                })
+        },
+    }
+
+    /*const handleSaveDataDialog = {
         open: () => {
             this.setState({
                 openDialogSaveData: true,
@@ -231,13 +226,13 @@ class AndroidSettingsContainer extends React.Component {
                 disableSave: true,
             })
         },
-    }
+    }*/
 
     /**
      * Remove namespaces and keynames
      * */
 
-    removeNamespace = () => {
+    const removeNamespace = () => {
         removeNamespace()
             .then(() => {
                 console.info('remove namespace')
@@ -248,48 +243,26 @@ class AndroidSettingsContainer extends React.Component {
             })
     }
 
-    /**
-     * When component mount, get namespace and keys from dataStore
-     */
-    componentDidMount() {
-        apiLoadGeneralSettings()
-            .then(generalSettings => {
-                this.setState({
-                    ...generalSettings,
-                    loading: false,
-                    disableSave: true,
-                })
-            })
-            .catch(e => {
-                console.error(e)
-                this.setState({
-                    loading: false,
-                    openErrorAlert: true,
-                })
-            })
+    if (loading === true) {
+        return <CircularLoader small />
     }
 
-    render() {
-        if (this.state.loading === true) {
-            return <CircularLoader small />
-        }
+    return (
+        <>
+            <UnsavedChangesAlert unsavedChanges={!form.disableSave} />
 
-        return (
-            <>
-                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
-
-                <GeneralSettings
-                    state={this.state}
-                    handleChange={this.handleChange}
-                    validatePhoneNumber={this.validatePhoneNumber}
-                    handleReset={this.handleReset}
-                    handleEncryptCheckbox={this.handleCheckbox}
-                    handleSaveDialog={this.handleSaveDataDialog}
-                    removeNamespace={this.removeNamespace}
-                />
-            </>
-        )
-    }
+            <GeneralSettings
+                state={{
+                    openDialog,
+                    submitDataStore,
+                    openErrorAlert,
+                }}
+                generalForm={form}
+                handleSaveDialog={handleSaveDataDialog}
+                handleDisableSettings={handleDisableSettings}
+            />
+        </>
+    )
 }
 
 export default AndroidSettingsContainer
