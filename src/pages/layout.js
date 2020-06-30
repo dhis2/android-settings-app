@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
 import { Paper } from '@material-ui/core'
@@ -15,10 +15,14 @@ import {
     PROGRAM_SETTINGS,
 } from '../constants/data-store'
 import { androidSettingsDefault } from '../constants/android-settings'
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
+import PageNotFound from '../components/page-not-found'
+import {
+    DEFAULT_DATASET,
+    DEFAULT_PROGRAM,
+    populateObject,
+} from '../modules/populateDefaultSettings'
 
 const styles = {
     twoPanelMain: {
@@ -26,48 +30,28 @@ const styles = {
     },
 }
 
-const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
-const DEFAULT_DATASET = 'DEFAULT_DATASET'
+const Layout = () => {
+    const [openFirstLaunch, setFirstLaunch] = useState(true)
+    const [isSaved, setSaved] = useState(false)
 
-const populateObject = type => {
-    let object = {}
-    switch (type) {
-        case DEFAULT_PROGRAM:
-            object = {
-                settingDownload: programSettingsDefault.settingDownload,
-                teiDownload: programSettingsDefault.teiDownload,
-                enrollmentDownload: programSettingsDefault.enrollmentDownload,
-                enrollmentDateDownload:
-                    programSettingsDefault.enrollmentDateDownload,
-                updateDownload: programSettingsDefault.updateDownload,
-                eventsDownload: programSettingsDefault.eventsDownload,
-                eventDateDownload: programSettingsDefault.eventDateDownload,
-            }
-            break
-        case DEFAULT_DATASET:
-            object = {
-                periodDSDownload: dataSetSettingsDefault.periodDSDownload,
-            }
-            break
-        default:
-            break
-    }
-    return object
-}
+    useEffect(() => {
+        api.getNamespaces()
+            .then(res => {
+                if (res.includes(NAMESPACE)) {
+                    setFirstLaunch(false)
+                    setSaved(true)
+                }
+            })
+            .catch(e => {
+                console.error(e)
+            })
+    }, [])
 
-class Layout extends React.Component {
-    state = {
-        openFirstLaunch: true,
-        isSaved: false,
+    const handleClose = () => {
+        setSaved(false)
     }
 
-    handleClose = () => {
-        this.setState({
-            isSaved: false,
-        })
-    }
-
-    handleSave = () => {
+    const handleSave = () => {
         api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
             .then(() => {
                 return Promise.all([
@@ -83,67 +67,51 @@ class Layout extends React.Component {
                 ])
             })
             .then(() => {
-                this.setState({
-                    openFirstLaunch: false,
-                    isSaved: true,
-                })
+                setSaved(true)
+                setFirstLaunch(false)
             })
     }
 
-    componentDidMount() {
-        api.getNamespaces()
-            .then(res => {
-                if (res.includes(NAMESPACE)) {
-                    this.setState({
-                        openFirstLaunch: false,
-                        isSaved: true,
-                    })
-                }
-            })
-            .catch(e => {
-                console.error(e)
-            })
-    }
+    return (
+        <HashRouter>
+            <TwoPanel mainStyle={styles.twoPanelMain}>
+                <SideBar />
+                <MainContent>
+                    <Paper className={layoutStyles.paper__layout}>
+                        <Switch>
+                            <Route path="/" exact>
+                                <D2Shim>
+                                    {openFirstLaunch === true ? (
+                                        <DialogFirstLaunch
+                                            handleSave={handleSave}
+                                            onClose={handleClose}
+                                        />
+                                    ) : (
+                                        <Redirect to={menuSection[0].path} />
+                                    )}
+                                </D2Shim>
+                            </Route>
 
-    render() {
-        return (
-            <HashRouter>
-                <TwoPanel mainStyle={styles.twoPanelMain}>
-                    <SideBar />
-                    <MainContent>
-                        <Paper className={layoutStyles.paper__layout}>
-                            <Switch>
-                                <Route path="/" exact>
-                                    <D2Shim>
-                                        {this.state.openFirstLaunch === true ? (
-                                            <DialogFirstLaunch
-                                                handleSave={this.handleSave}
-                                                onClose={this.handleClose}
-                                            />
-                                        ) : (
-                                            <Redirect
-                                                to={menuSection[0].path}
-                                            />
-                                        )}
-                                    </D2Shim>
-                                </Route>
+                            {menuSection.map(section => (
+                                <Route
+                                    exact
+                                    key={section.key}
+                                    path={section.path}
+                                    render={() => (
+                                        <D2Shim>{section.component}</D2Shim>
+                                    )}
+                                />
+                            ))}
 
-                                {menuSection.map(section => (
-                                    <Route
-                                        key={section.key}
-                                        path={section.path}
-                                        render={() => (
-                                            <D2Shim>{section.component}</D2Shim>
-                                        )}
-                                    />
-                                ))}
-                            </Switch>
-                        </Paper>
-                    </MainContent>
-                </TwoPanel>
-            </HashRouter>
-        )
-    }
+                            <Route path="*">
+                                <PageNotFound />
+                            </Route>
+                        </Switch>
+                    </Paper>
+                </MainContent>
+            </TwoPanel>
+        </HashRouter>
+    )
 }
 
 export default Layout
