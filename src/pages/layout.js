@@ -7,24 +7,9 @@ import menuSection from '../constants/menu-sections'
 
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
-import api from '../utils/api'
-import {
-    DATASET_SETTINGS,
-    GENERAL_SETTINGS,
-    NAMESPACE,
-    PROGRAM_SETTINGS,
-} from '../constants/data-store'
-import { androidSettingsDefault } from '../constants/android-settings'
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
 import PageNotFound from '../components/page-not-found'
-import {
-    DEFAULT_DATASET,
-    DEFAULT_PROGRAM,
-    populateObject,
-} from '../modules/populateDefaultSettings'
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import {
     apiFirstLoad,

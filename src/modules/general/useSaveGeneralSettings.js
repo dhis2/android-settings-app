@@ -1,6 +1,6 @@
-import api from '../../utils/api'
-import { GENERAL_SETTINGS, NAMESPACE } from '../../constants/data-store'
+import { GENERAL_SETTINGS } from '../../constants/data-store'
 import { useState } from 'react'
+import { apiUpdateDataStore } from '../apiUpdateDataStore'
 
 export const useSaveGeneralSettings = ({ form, setSubmitDataStore }) => {
     const { fields, setDisableSave } = form
@@ -13,7 +13,7 @@ export const useSaveGeneralSettings = ({ form, setSubmitDataStore }) => {
      * Handle update api method to save settings in dataStore also shows alertBar for success and error
      * */
     const saveDataApi = data => {
-        api.updateValue(NAMESPACE, GENERAL_SETTINGS, data)
+        apiUpdateDataStore(data, GENERAL_SETTINGS)
             .then(() => {
                 setSubmitDataStore({
                     success: true,
