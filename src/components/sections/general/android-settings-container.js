@@ -37,7 +37,6 @@ const AndroidSettingsContainer = () => {
                 if (generalSettings) {
                     form.setInitialData(generalSettings)
                     setLoading(false)
-                    // disableSave: true,
                 } else {
                     navigateTo('/')
                 }
