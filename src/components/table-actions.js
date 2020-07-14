@@ -13,6 +13,7 @@ import {
 } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
+import cx from 'classnames'
 import dataTableStyles from '../styles/DataTable.module.css'
 import disableStyle from '../styles/Disable.module.css'
 
@@ -31,18 +32,16 @@ const TableActions = ({ columns, rows, menuActions, states }) => {
                 {rows.map(row => (
                     <TableRow key={row.id}>
                         <TableCell
-                            className={`${
-                                dataTableStyles.dataTable_row_title
-                            } ${states.disableAll &&
-                                disableStyle.disable_label}`}
+                            className={cx(dataTableStyles.dataTable_row_title, {
+                                [disableStyle.disable_label]: states.disableAll,
+                            })}
                         >
                             {row.name}
                         </TableCell>
                         <TableCell
-                            className={`${
-                                dataTableStyles.dataTable_row_title
-                            } ${states.disableAll &&
-                                disableStyle.disable_label}`}
+                            className={cx(dataTableStyles.dataTable_row_title, {
+                                [disableStyle.disable_label]: states.disableAll,
+                            })}
                         >
                             {row.summarySettings}
                         </TableCell>

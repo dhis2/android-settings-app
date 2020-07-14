@@ -4,6 +4,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { TableRow, TableCell, RadioGroup, Radio } from '@dhis2/ui-core'
 import InputNumber from '../input-number'
+import cx from 'classnames'
 import dataTableStyles from '../../styles/DataTable.module.css'
 import radioStyles from '../../styles/Input.module.css'
 import disable from '../../styles/Disable.module.css'
@@ -12,14 +13,15 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => {
     return (
         <TableRow>
             <TableCell
-                className={
-                    states.disableAll ? disable.disable_label : undefined
-                }
+                className={cx({ [disable.disable_label]: states.disableAll })}
             >
                 {dataRow.option}
             </TableCell>
             <TableCell
-                className={`${dataTableStyles.dataTable__rows__row__column} ${dataTableStyles.dataTable_align_end}`}
+                className={cx(
+                    dataTableStyles.dataTable__rows__row__column,
+                    dataTableStyles.dataTable_align_end
+                )}
                 align="right"
             >
                 {Array.isArray(dataRow.download) === true ? (

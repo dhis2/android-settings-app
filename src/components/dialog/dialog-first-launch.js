@@ -12,6 +12,7 @@ import {
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { useConfig } from '@dhis2/app-runtime'
+import cx from 'classnames'
 import buttonStyle from '../../styles/Button.module.css'
 import warning from '../../styles/Warning.module.css'
 
@@ -38,7 +39,7 @@ const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
                         )}
                     </strong>
 
-                    <p className={disable ? warning.warning_color : undefined}>
+                    <p className={cx({ [warning.warning_color]: disable })}>
                         {disable
                             ? i18n.t(
                                   "You don't have the authority to set up the android settings to this instance"
