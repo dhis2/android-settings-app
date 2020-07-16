@@ -2,8 +2,6 @@ import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
-import api from '../../../utils/api'
-
 import {
     DEFAULT,
     ENROLLMENT_DOWNLOAD,
@@ -19,8 +17,7 @@ import {
     SpecificProgram,
     specificSettingsDefault,
 } from '../../../constants/program-settings'
-import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
-
+import { PROGRAM_SETTINGS } from '../../../constants/data-store'
 import GlobalSpecificSettings from '../../../pages/global-specific-settings'
 import { getInstance } from 'd2'
 import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
@@ -31,6 +28,7 @@ import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificS
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadProgramSettings } from '../../../modules/programs/apiLoadSettings'
+import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
 
 let programData = GlobalProgram
 const specificProgramData = SpecificProgram
@@ -97,8 +95,10 @@ class ProgramSettings extends React.Component {
         submitDataStore: {
             success: false,
             error: false,
+            message: undefined,
         },
         openErrorAlert: false,
+        disableAll: false,
     }
 
     /**
@@ -175,7 +175,7 @@ class ProgramSettings extends React.Component {
      * @param data (object data)
      */
     saveDataApi = data => {
-        api.updateValue(NAMESPACE, PROGRAM_SETTINGS, data)
+        apiUpdateDataStore(data, PROGRAM_SETTINGS)
             .then(() => {
                 this.setState({
                     submitDataStore: {
@@ -190,6 +190,7 @@ class ProgramSettings extends React.Component {
                     submitDataStore: {
                         success: false,
                         error: true,
+                        message: e.message,
                     },
                 })
             })
@@ -230,6 +231,11 @@ class ProgramSettings extends React.Component {
         this.setState({
             ...settings,
             disableSave: false,
+            submitDataStore: {
+                success: false,
+                error: false,
+                message: undefined,
+            },
         })
     }
 

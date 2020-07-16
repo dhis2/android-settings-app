@@ -21,6 +21,7 @@ const ProgramGlobalSettings = ({ states, data, handleChange }) => {
                     value={states[GlobalSettingLevel.keyDownload]}
                     onChange={handleChange}
                     className={inputStyles.container_minWidth}
+                    disabled={states.disableAll}
                 >
                     {GlobalSettingLevel.download.map(option => (
                         <MenuItem key={option.value} value={option.value}>

@@ -91,7 +91,7 @@ const GlobalSpecificSettings = ({
                 {specificSettings.length > 0 && (
                     <div className={layoutStyles.data__topMargin}>
                         <TableActions
-                            {...states}
+                            states={states}
                             columns={specificSettingTable.columnsTitle}
                             rows={specificSettingList}
                             menuActions={specificSettingTable.handleActions}
@@ -102,6 +102,7 @@ const GlobalSpecificSettings = ({
                 <Button
                     className={buttonStyles.button__add}
                     onClick={specificSettingDialog.handleOpen}
+                    disabled={states.disableAll}
                 >
                     {i18n.t('Add a {{elementSingular}} specific setting', {
                         elementSingular: settingType.type,
@@ -117,7 +118,10 @@ const GlobalSpecificSettings = ({
                     >
                         {i18n.t('Save')}
                     </Button>
-                    <Button onClick={handleSetDefaultValues}>
+                    <Button
+                        onClick={handleSetDefaultValues}
+                        disabled={states.disableAll}
+                    >
                         {i18n.t('Reset all values to default')}
                     </Button>
                 </ButtonStrip>
@@ -163,6 +167,7 @@ const GlobalSpecificSettings = ({
                     states.submitDataStore.error &&
                     !states.submitDataStore.success
                 }
+                message={states.submitDataStore.message}
             />
 
             <ErrorAlert show={states.openErrorAlert} />

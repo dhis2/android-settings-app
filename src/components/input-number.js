@@ -1,7 +1,9 @@
 import React from 'react'
+import cx from 'classnames'
 import inputNumberStyles from '../styles/InputNumber.module.css'
+import disableStyle from '../styles/Disable.module.css'
 
-const InputNumber = ({ name, max, value, onChange }) => {
+const InputNumber = ({ name, max, value, onChange, disabled }) => {
     return (
         <div className={inputNumberStyles.inputContainer}>
             <input
@@ -13,7 +15,10 @@ const InputNumber = ({ name, max, value, onChange }) => {
                 max={max}
                 value={value}
                 onChange={onChange}
-                className={inputNumberStyles.inputBase}
+                className={cx(inputNumberStyles.inputBase, {
+                    [disableStyle.disable_input]: disabled,
+                })}
+                disabled={disabled}
             />
         </div>
     )

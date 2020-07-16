@@ -2,8 +2,6 @@ import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
-import api from '../../../utils/api'
-
 import {
     CLEAN,
     DATA_SET,
@@ -15,7 +13,7 @@ import {
     SPECIFIC,
 } from '../../../constants/data-set-settings'
 import GlobalSpecificSettings from '../../../pages/global-specific-settings'
-import { DATASET_SETTINGS, NAMESPACE } from '../../../constants/data-store'
+import { DATASET_SETTINGS } from '../../../constants/data-store'
 import { getInstance } from 'd2'
 import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
 import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
@@ -25,6 +23,7 @@ import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificS
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadDatasetSettings } from '../../../modules/dataset/apiLoadSettings'
+import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -66,8 +65,10 @@ class DataSetSettings extends React.Component {
         submitDataStore: {
             success: false,
             error: false,
+            message: undefined,
         },
         openErrorAlert: false,
+        disableAll: false,
     }
 
     /**
@@ -125,7 +126,7 @@ class DataSetSettings extends React.Component {
      * @param data (object data)
      */
     saveDataApi = data => {
-        api.updateValue(NAMESPACE, DATASET_SETTINGS, data)
+        apiUpdateDataStore(data, DATASET_SETTINGS)
             .then(() => {
                 this.setState({
                     submitDataStore: {
@@ -140,6 +141,7 @@ class DataSetSettings extends React.Component {
                     submitDataStore: {
                         success: false,
                         error: true,
+                        message: e.message,
                     },
                 })
             })
@@ -175,6 +177,11 @@ class DataSetSettings extends React.Component {
         this.setState({
             ...settings,
             disableSave: false,
+            submitDataStore: {
+                success: false,
+                error: false,
+                message: undefined,
+            },
         })
     }
 

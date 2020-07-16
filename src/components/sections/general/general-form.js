@@ -136,7 +136,10 @@ const GeneralForm = ({
             </div>
 
             <div>
-                <Button onClick={handleDisableSettings.open}>
+                <Button
+                    onClick={handleDisableSettings.open}
+                    disabled={handleForm.fields.disableAll}
+                >
                     {i18n.t('Disable all settings')}
                 </Button>
                 <Help>
@@ -155,7 +158,10 @@ const GeneralForm = ({
                 >
                     {i18n.t('Save')}
                 </Button>
-                <Button onClick={handleForm.handleReset}>
+                <Button
+                    onClick={handleForm.handleReset}
+                    disabled={handleForm.fields.disableAll}
+                >
                     {i18n.t('Reset all values to default')}
                 </Button>
             </ButtonStrip>

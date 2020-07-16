@@ -7,22 +7,15 @@ import menuSection from '../constants/menu-sections'
 
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
-import api from '../utils/api'
-import {
-    DATASET_SETTINGS,
-    GENERAL_SETTINGS,
-    NAMESPACE,
-    PROGRAM_SETTINGS,
-} from '../constants/data-store'
-import { androidSettingsDefault } from '../constants/android-settings'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
 import SideBar from '../components/sidebar'
 import PageNotFound from '../components/page-not-found'
+import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import {
-    DEFAULT_DATASET,
-    DEFAULT_PROGRAM,
-    populateObject,
-} from '../modules/populateDefaultSettings'
+    apiFirstLoad,
+    NO_AUTHORITY,
+    WITH_NAMESPACE,
+} from '../modules/apiLoadFirstSetup'
 
 const styles = {
     twoPanelMain: {
@@ -33,13 +26,18 @@ const styles = {
 const Layout = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
     const [isSaved, setSaved] = useState(false)
+    const [isDisabledAuthority, disableAuthority] = useState(false)
 
     useEffect(() => {
-        api.getNamespaces()
-            .then(res => {
-                if (res.includes(NAMESPACE)) {
+        apiFirstLoad()
+            .then(result => {
+                if (result === WITH_NAMESPACE) {
                     setFirstLaunch(false)
                     setSaved(true)
+                } else if (result === NO_AUTHORITY) {
+                    setFirstLaunch(true)
+                    setSaved(false)
+                    disableAuthority(true)
                 }
             })
             .catch(e => {
@@ -52,24 +50,10 @@ const Layout = () => {
     }
 
     const handleSave = () => {
-        api.createNamespace(NAMESPACE, GENERAL_SETTINGS)
-            .then(() => {
-                return Promise.all([
-                    api.updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                        ...androidSettingsDefault,
-                    }),
-                    api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
-                        globalSettings: populateObject(DEFAULT_PROGRAM),
-                    }),
-                    api.createValue(NAMESPACE, DATASET_SETTINGS, {
-                        globalSettings: populateObject(DEFAULT_DATASET),
-                    }),
-                ])
-            })
-            .then(() => {
-                setSaved(true)
-                setFirstLaunch(false)
-            })
+        apiCreateFirstSetup().then(() => {
+            setFirstLaunch(false)
+            setSaved(true)
+        })
     }
 
     return (
@@ -85,6 +69,7 @@ const Layout = () => {
                                         <DialogFirstLaunch
                                             handleSave={handleSave}
                                             onClose={handleClose}
+                                            disable={isDisabledAuthority}
                                         />
                                     ) : (
                                         <Redirect to={menuSection[0].path} />

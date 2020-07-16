@@ -13,9 +13,11 @@ import {
 } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
+import cx from 'classnames'
 import dataTableStyles from '../styles/DataTable.module.css'
+import disableStyle from '../styles/Disable.module.css'
 
-const TableActions = ({ columns, rows, menuActions }) => {
+const TableActions = ({ columns, rows, menuActions, states }) => {
     return (
         <Table>
             <TableHead>
@@ -30,12 +32,16 @@ const TableActions = ({ columns, rows, menuActions }) => {
                 {rows.map(row => (
                     <TableRow key={row.id}>
                         <TableCell
-                            className={dataTableStyles.dataTable_row_title}
+                            className={cx(dataTableStyles.dataTable_row_title, {
+                                [disableStyle.disable_label]: states.disableAll,
+                            })}
                         >
                             {row.name}
                         </TableCell>
                         <TableCell
-                            className={dataTableStyles.dataTable_row_title}
+                            className={cx(dataTableStyles.dataTable_row_title, {
+                                [disableStyle.disable_label]: states.disableAll,
+                            })}
                         >
                             {row.summarySettings}
                         </TableCell>
@@ -48,6 +54,7 @@ const TableActions = ({ columns, rows, menuActions }) => {
                                     onClick={() => {
                                         menuActions.edit(row)
                                     }}
+                                    disabled={states.disableAll}
                                 >
                                     {i18n.t('Edit')}
                                 </Button>
@@ -57,6 +64,7 @@ const TableActions = ({ columns, rows, menuActions }) => {
                                     onClick={() => {
                                         menuActions.delete(row)
                                     }}
+                                    disabled={states.disableAll}
                                 >
                                     {i18n.t('Delete')}
                                 </Button>

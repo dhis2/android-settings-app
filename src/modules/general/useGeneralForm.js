@@ -35,6 +35,10 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
         setFields({ ...fields, [e.target.name]: value })
         setDisableSave(errorNumber.gateway || errorNumber.confirmation)
+        setSubmitDataStore({
+            success: false,
+            error: false,
+        })
     }
 
     const onCheckboxChange = event => {
@@ -114,6 +118,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         getInput: name => ({
             name,
             value: fields[name],
+            disabled: fields.disableAll,
             onChange,
         }),
         getPhoneNumber: name => ({
@@ -122,16 +127,19 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             onChange,
             onKeyUp: validatePhoneNumber,
             error: errorNumber[name],
+            disabled: fields.disableAll,
         }),
         getSelect: name => ({
             name,
             value: fields[name],
+            disabled: fields.disableAll,
             onChange,
         }),
         getCheckbox: name => ({
             name,
             checked: fields[name],
             onChange: handleEncryptDialog.onChange,
+            disabled: fields.disableAll,
         }),
     }
 }

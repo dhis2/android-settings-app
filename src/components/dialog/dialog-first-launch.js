@@ -12,9 +12,11 @@ import {
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { useConfig } from '@dhis2/app-runtime'
+import cx from 'classnames'
 import buttonStyle from '../../styles/Button.module.css'
+import warning from '../../styles/Warning.module.css'
 
-const DialogFirstLaunch = ({ onClose, handleSave }) => {
+const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
     const { baseUrl } = useConfig()
 
     const path = '/dhis-web-commons-about/redirect.action'
@@ -37,10 +39,14 @@ const DialogFirstLaunch = ({ onClose, handleSave }) => {
                         )}
                     </strong>
 
-                    <p>
-                        {i18n.t(
-                            'To set up the default settings and apply to all devices, click "Set default and save"'
-                        )}
+                    <p className={cx({ [warning.warning_color]: disable })}>
+                        {disable
+                            ? i18n.t(
+                                  "You don't have the authority to set up the android settings to this instance"
+                              )
+                            : i18n.t(
+                                  'To set up the default settings and apply to all devices, click "Set default and save"'
+                              )}
                     </p>
                 </ModalContent>
                 <ModalActions>
@@ -53,7 +59,7 @@ const DialogFirstLaunch = ({ onClose, handleSave }) => {
                                 {i18n.t('Exit, do not apply settings')}
                             </a>
                         </Button>
-                        <Button primary onClick={handleSave}>
+                        <Button primary onClick={handleSave} disabled={disable}>
                             {i18n.t('Set defaults and save')}
                         </Button>
                     </ButtonStrip>
@@ -64,6 +70,7 @@ const DialogFirstLaunch = ({ onClose, handleSave }) => {
 }
 
 DialogFirstLaunch.propTypes = {
+    disable: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     handleSave: PropTypes.func.isRequired,
 }

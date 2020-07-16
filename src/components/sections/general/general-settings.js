@@ -66,6 +66,7 @@ const GeneralSettings = ({
                     state.submitDataStore.error &&
                     !state.submitDataStore.success
                 }
+                message={state.submitDataStore.message}
             />
 
             <ErrorAlert show={state.openErrorAlert} />

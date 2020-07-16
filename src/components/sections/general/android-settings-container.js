@@ -4,7 +4,6 @@ import { CircularLoader } from '@dhis2/ui-core'
 import GeneralSettings from './general-settings'
 import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
-import { removeNamespace } from '../../../modules/general/removeNamespace'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useGeneralForm } from '../../../modules/general/useGeneralForm'
 import { useSaveGeneralSettings } from '../../../modules/general/useSaveGeneralSettings'
@@ -31,6 +30,7 @@ const AndroidSettingsContainer = () => {
     /**
      * When component mount, get namespace and keys from dataStore
      */
+
     useEffect(() => {
         apiLoadGeneralSettings()
             .then(generalSettings => {
@@ -78,6 +78,21 @@ const AndroidSettingsContainer = () => {
                     console.error(e)
                 })
         },
+    }
+
+    /**
+     * Remove namespaces and keynames
+     * */
+
+    const removeNamespace = () => {
+        removeNamespace()
+            .then(() => {
+                console.info('remove namespace')
+                location.replace('/')
+            })
+            .catch(e => {
+                console.error(e)
+            })
     }
 
     if (loading === true) {
