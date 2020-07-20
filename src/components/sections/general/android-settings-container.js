@@ -7,6 +7,7 @@ import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings
 import { useNavigation } from '../../../utils/useNavigation'
 import { useGeneralForm } from '../../../modules/general/useGeneralForm'
 import { useSaveGeneralSettings } from '../../../modules/general/useSaveGeneralSettings'
+import { removeNamespace } from '../../../modules/general/removeNamespace'
 
 const AndroidSettingsContainer = () => {
     const [submitDataStore, setSubmitDataStore] = useState({
@@ -69,7 +70,7 @@ const AndroidSettingsContainer = () => {
             })
         },
         disableSettings: () => {
-            removeNamespace()
+            removeNamespaceFromDataStore()
                 .then(() => {
                     console.info('remove namespace')
                     reloadPage()
@@ -84,7 +85,7 @@ const AndroidSettingsContainer = () => {
      * Remove namespaces and keynames
      * */
 
-    const removeNamespace = () => {
+    const removeNamespaceFromDataStore = () => {
         removeNamespace()
             .then(() => {
                 console.info('remove namespace')
