@@ -70,7 +70,7 @@ const AndroidSettingsContainer = () => {
             })
         },
         disableSettings: () => {
-            removeNamespaceFromDataStore()
+            removeNamespace()
                 .then(() => {
                     console.info('remove namespace')
                     reloadPage()
@@ -79,21 +79,6 @@ const AndroidSettingsContainer = () => {
                     console.error(e)
                 })
         },
-    }
-
-    /**
-     * Remove namespaces and keynames
-     * */
-
-    const removeNamespaceFromDataStore = () => {
-        removeNamespace()
-            .then(() => {
-                console.info('remove namespace')
-                location.replace('/')
-            })
-            .catch(e => {
-                console.error(e)
-            })
     }
 
     if (loading === true) {
