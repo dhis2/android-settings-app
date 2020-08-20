@@ -1,18 +1,22 @@
 import React from 'react'
 
-import TextField from '@material-ui/core/TextField'
 import {
     dataOptions,
-    maxValues,
     metadataOptions,
 } from '../../../constants/android-settings'
-import { Button, ButtonStrip, CheckboxField, Help } from '@dhis2/ui-core'
-import MenuItem from '@material-ui/core/MenuItem'
+import {
+    Button,
+    ButtonStrip,
+    CheckboxField,
+    Help,
+    SingleSelectField,
+    SingleSelectOption,
+    InputField,
+} from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-
-import styles from '../../../styles/LayoutTitles.module.css'
 import buttonStyles from '../../../styles/Button.module.css'
+import formStyles from '../../../styles/Form.module.css'
 
 const GeneralForm = ({
     handleSaveDialog,
@@ -21,111 +25,74 @@ const GeneralForm = ({
 }) => {
     return (
         <form>
-            <TextField
-                label={i18n.t('How often should metadata sync?')}
-                margin="normal"
-                select
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                {...handleForm.getSelect('metadataSync')}
-            >
-                {metadataOptions.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
+            <div className={formStyles.row}>
+                <SingleSelectField
+                    label={i18n.t('How often should data sync?')}
+                    onChange={payload =>
+                        handleForm.onChangeSelect(payload, 'metadataSync')
+                    }
+                    {...handleForm.getSelect('metadataSync')}
+                >
+                    {metadataOptions.map(option => (
+                        <SingleSelectOption
+                            key={option.value}
+                            label={option.label}
+                            value={option.value}
+                        />
+                    ))}
+                </SingleSelectField>
+            </div>
 
-            <TextField
-                label={i18n.t('How often should data sync?')}
-                margin="normal"
-                select
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                {...handleForm.getSelect('dataSync')}
-            >
-                {dataOptions.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
+            <div className={formStyles.row}>
+                <SingleSelectField
+                    label={i18n.t('How often should data sync?')}
+                    onChange={payload =>
+                        handleForm.onChangeSelect(payload, 'dataSync')
+                    }
+                    {...handleForm.getSelect('dataSync')}
+                >
+                    {dataOptions.map(option => (
+                        <SingleSelectOption
+                            key={option.value}
+                            label={option.label}
+                            value={option.value}
+                        />
+                    ))}
+                </SingleSelectField>
+            </div>
 
-            <TextField
-                type="tel"
-                InputProps={{
-                    inputProps: {
-                        minLength: '4',
-                        pattern: '^\\+[1-9][0-9]{3,16}$',
-                    },
-                }}
-                label={i18n.t('SMS Gateway phone number')}
-                helperText={
-                    handleForm.errorNumber.numberSmsToSend
-                        ? i18n.t(
-                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
-                          )
-                        : i18n.t(
-                              'Must start with + and be at least 4 characters long.'
-                          )
-                }
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                {...handleForm.getPhoneNumber('numberSmsToSend')}
-            />
+            <div className={formStyles.row}>
+                <InputField
+                    type="tel"
+                    helpText={i18n.t(
+                        'Must start with + and be at least 4 characters long.'
+                    )}
+                    label={i18n.t('SMS Gateway phone number')}
+                    {...handleForm.getPhoneNumber('numberSmsToSend')}
+                />
+            </div>
 
-            <TextField
-                type="tel"
-                InputProps={{
-                    inputProps: {
-                        minLength: '4',
-                        pattern: '^\\+[1-9][0-9]{3,16}$',
-                    },
-                }}
-                label={i18n.t('SMS Result Sender phone number')}
-                helperText={
-                    handleForm.errorNumber.numberSmsConfirmation
-                        ? i18n.t(
-                              'This phone number is not valid. Must start with + and be at least 4 characters long.'
-                          )
-                        : i18n.t(
-                              'Must start with + and be at least 4 characters long.'
-                          )
-                }
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                {...handleForm.getPhoneNumber('numberSmsConfirmation')}
-            />
+            <div className={formStyles.row}>
+                <InputField
+                    type="tel"
+                    helpText={i18n.t(
+                        'Must start with + and be at least 4 characters long.'
+                    )}
+                    label={i18n.t('SMS Result Sender phone number')}
+                    {...handleForm.getPhoneNumber('numberSmsConfirmation')}
+                />
+            </div>
 
-            <TextField
-                label={i18n.t('Reserved values downloaded per TEI attribute')}
-                type="number"
-                margin="normal"
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                InputProps={{
-                    inputProps: {
-                        min: 0,
-                        step: 10,
-                        max: maxValues.reservedValues,
-                    },
-                }}
-                {...handleForm.getInput('reservedValues')}
-            />
+            <div className={formStyles.row}>
+                <InputField
+                    label={i18n.t(
+                        'Reserved values downloaded per TEI attribute'
+                    )}
+                    {...handleForm.getInputNumber('reservedValues')}
+                />
+            </div>
 
-            <div className={styles.field__form__container}>
+            <div className={formStyles.row}>
                 <CheckboxField
                     label={i18n.t('Encrypt device database')}
                     helpText={i18n.t(
@@ -135,7 +102,7 @@ const GeneralForm = ({
                 />
             </div>
 
-            <div>
+            <div className={formStyles.rowMargin}>
                 <Button
                     onClick={handleDisableSettings.open}
                     disabled={handleForm.fields.disableAll}
