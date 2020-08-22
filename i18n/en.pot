@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-18T06:56:04.402Z\n"
-"PO-Revision-Date: 2020-06-18T06:56:04.402Z\n"
+"POT-Creation-Date: 2020-08-22T02:50:32.289Z\n"
+"PO-Revision-Date: 2020-08-22T02:50:32.289Z\n"
 
 msgid "Failed to get data from Data Store"
-msgstr ""
-
-msgid "Error when saving data"
 msgstr ""
 
 msgid "Settings were successfully saved"
@@ -72,6 +69,9 @@ msgstr ""
 msgid ""
 "Any settings or configuration on a user's device will be overwritten by "
 "settings applied here."
+msgstr ""
+
+msgid "You don't have the authority to set up the android settings to this instance"
 msgstr ""
 
 msgid ""
