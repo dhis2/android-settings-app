@@ -51,3 +51,54 @@ export const androidSettingsDefault = {
 }
 
 export const RESERVED_VALUES = 'reservedValues'
+
+export const generalSettings = {
+    metadata: {
+        syncType: 'metadataSync',
+        label: 'How often should metadata sync?',
+        options: metadataOptions,
+        helpText: '',
+    },
+    data: {
+        syncType: 'dataSync',
+        label: 'How often should data sync?',
+        options: dataOptions,
+        helpText: '',
+    },
+    smsToSend: {
+        syncType: 'numberSmsToSend',
+        label: 'SMS Gateway phone number',
+        options: '',
+        helpText: 'Must start with + and be at least 4 characters long.',
+        validationText:
+            'This phone number is not valid. Must start with + and be at least 4 characters long.',
+    },
+    smsConfirmation: {
+        syncType: 'numberSmsConfirmation',
+        label: 'SMS Result Sender phone number',
+        options: '',
+        helpText: 'Must start with + and be at least 4 characters long.',
+        validationText:
+            'This phone number is not valid. Must start with + and be at least 4 characters long.',
+    },
+    reservedValues: {
+        syncType: 'reservedValues',
+        label: 'Reserved values downloaded per TEI attribute',
+        options: '',
+        helpText: '',
+    },
+    encryptDB: {
+        syncType: 'encryptDB',
+        label: 'Encrypt device database',
+        options: '',
+        helpText:
+            'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.',
+    },
+    disableSettings: {
+        syncType: 'disableSettings',
+        label: 'Disable all settings',
+        options: '',
+        helpText:
+            'This will disable and remove all General, Program and Data set settings.',
+    },
+}
