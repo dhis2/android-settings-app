@@ -9,6 +9,10 @@ export const metadataOptions = [
         value: '7d',
         label: '7d',
     },
+    {
+        value: 'manual',
+        label: 'Manual',
+    },
 ]
 
 export const dataOptions = [
@@ -31,6 +35,10 @@ export const dataOptions = [
     {
         value: '24h',
         label: '24h',
+    },
+    {
+        value: 'manual',
+        label: 'Manual',
     },
 ]
 
