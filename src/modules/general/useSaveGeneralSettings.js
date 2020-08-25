@@ -38,7 +38,7 @@ export const useSaveGeneralSettings = ({ form, setSubmitDataStore }) => {
         const androidData = {
             metadataSync: fields.metadataSync,
             dataSync: fields.dataSync,
-            reservedValues: fields.reservedValues,
+            reservedValues: parseInt(fields.reservedValues),
             encryptDB: fields.encryptDB,
             lastUpdated: new Date().toJSON(),
         }

@@ -86,6 +86,7 @@ export const generalSettings = {
         label: 'Reserved values downloaded per TEI attribute',
         options: '',
         helpText: '',
+        maxValues: maxValues.reservedValues,
     },
     encryptDB: {
         syncType: 'encryptDB',

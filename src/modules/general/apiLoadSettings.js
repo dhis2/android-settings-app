@@ -33,6 +33,7 @@ const getGeneralSettings = async authority => {
 const getSettingsFromDataStore = hasAuthority =>
     api.getValue(NAMESPACE, GENERAL_SETTINGS).then(settings => {
         const generalSettings = settings.value
+        generalSettings.reservedValues = generalSettings.reservedValues.toString()
         generalSettings.disableAll = !hasAuthority
         return generalSettings
     })
