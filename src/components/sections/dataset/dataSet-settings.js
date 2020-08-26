@@ -109,15 +109,10 @@ class DataSetSettings extends React.Component {
      * Handle change for global settings
      * */
     handleChange = e => {
-        e.preventDefault()
-
         this.setState({
             ...this.state,
             disableSave: false,
-            [e.target.name]: parseValueBySettingType(
-                e.target.name,
-                e.target.value
-            ),
+            [e.name]: parseValueBySettingType(e.name, e.value),
         })
     }
 

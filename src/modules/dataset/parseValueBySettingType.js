@@ -7,7 +7,12 @@ export const parseValueBySettingType = (name, value) => {
     switch (name) {
         case PERIOD_DS_DOWNLOAD:
         case PERIOD_DS_DB_TRIMMING:
-            return value ? parseInt(value) : 0
+            return (!(
+                ['', null, false, undefined].includes(value) || value <= 0
+            )
+                ? value
+                : 0
+            ).toString()
         default:
             return value
     }

@@ -52,6 +52,7 @@ export const apiLoadDatasetSettings = async ({
 
                                 if (res.value.globalSettings) {
                                     globalSettings = res.value.globalSettings
+                                    globalSettings.periodDSDownload = globalSettings.periodDSDownload.toString()
                                 }
 
                                 res.value.globalSettings.disableAll = !hasAuthority

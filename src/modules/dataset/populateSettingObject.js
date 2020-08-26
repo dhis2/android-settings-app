@@ -12,12 +12,12 @@ export const populateSettingObject = (type, settingsList) => {
     switch (type) {
         case GLOBAL:
             object = {
-                periodDSDownload: settingsList.periodDSDownload,
+                periodDSDownload: parseInt(settingsList.periodDSDownload),
             }
             break
         case SPECIFIC:
             object = {
-                periodDSDownload: settingsList.periodDSDownload,
+                periodDSDownload: parseInt(settingsList.periodDSDownload),
             }
             break
         case DEFAULT:
