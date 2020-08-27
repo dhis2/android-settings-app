@@ -13,7 +13,6 @@ import SaveErrorAlert from '../components/alert-bar/save-error-alert'
 
 import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
-import layoutStyles from '../styles/Layout.module.css'
 
 import '@dhis2/d2-ui-core/css/Table.css'
 import ErrorAlert from '../components/alert-bar/error-alert'
@@ -89,14 +88,12 @@ const GlobalSpecificSettings = ({
                 </p>
 
                 {specificSettings.length > 0 && (
-                    <div className={layoutStyles.data__topMargin}>
-                        <TableActions
-                            states={states}
-                            columns={specificSettingTable.columnsTitle}
-                            rows={specificSettingList}
-                            menuActions={specificSettingTable.handleActions}
-                        />
-                    </div>
+                    <TableActions
+                        states={states}
+                        columns={specificSettingTable.columnsTitle}
+                        rows={specificSettingList}
+                        menuActions={specificSettingTable.handleActions}
+                    />
                 )}
 
                 <Button
