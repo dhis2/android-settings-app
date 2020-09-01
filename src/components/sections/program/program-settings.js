@@ -4,7 +4,6 @@ import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import {
     DEFAULT,
-    ENROLLMENT_DOWNLOAD,
     FULL_SPECIFIC,
     GLOBAL,
     GlobalProgram,
@@ -138,36 +137,26 @@ class ProgramSettings extends React.Component {
     /**
      * handle onChange for global settings
      * */
-    handleChange = e => {
-        if (e.name === ENROLLMENT_DOWNLOAD) {
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.name]: e.value,
-            })
-        } else {
-            e.preventDefault()
+    handleChange = (e, key) => {
+        let name, value
 
-            if (e.target.name === SETTING_DOWNLOAD) {
-                if (
-                    e.target.value === GLOBAL ||
-                    e.target.value === PER_ORG_UNIT
-                ) {
-                    programData = GlobalProgramSpecial
-                } else {
-                    programData = GlobalProgram
-                }
+        typeof key === 'string'
+            ? ((name = key), (value = e.selected))
+            : ((name = e.name), (value = e.value))
+
+        if (name === SETTING_DOWNLOAD) {
+            if (value === GLOBAL || value === PER_ORG_UNIT) {
+                programData = GlobalProgramSpecial
+            } else {
+                programData = GlobalProgram
             }
-
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.target.name]: parseValueByType(
-                    e.target.name,
-                    e.target.value
-                ),
-            })
         }
+
+        this.setState({
+            ...this.state,
+            disableSave: false,
+            [name]: parseValueByType(name, value),
+        })
     }
 
     /**

@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-18T06:56:04.402Z\n"
-"PO-Revision-Date: 2020-06-18T06:56:04.402Z\n"
+"POT-Creation-Date: 2020-08-31T22:27:51.956Z\n"
+"PO-Revision-Date: 2020-08-31T22:27:51.956Z\n"
 
 msgid "Failed to get data from Data Store"
-msgstr ""
-
-msgid "Error when saving data"
 msgstr ""
 
 msgid "Settings were successfully saved"
@@ -74,6 +71,9 @@ msgid ""
 "settings applied here."
 msgstr ""
 
+msgid "You don't have the authority to set up the android settings to this instance"
+msgstr ""
+
 msgid ""
 "To set up the default settings and apply to all devices, click \"Set "
 "default and save\""
@@ -103,6 +103,9 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "Reset all values to default"
+msgstr ""
+
 msgid "404 Page not found."
 msgstr ""
 
@@ -118,6 +121,12 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
+msgid "{{label}}"
+msgstr ""
+
+msgid "{{helpText}}"
+msgstr ""
+
 msgid "How often should metadata sync?"
 msgstr ""
 
@@ -125,11 +134,6 @@ msgid "How often should data sync?"
 msgstr ""
 
 msgid "SMS Gateway phone number"
-msgstr ""
-
-msgid ""
-"This phone number is not valid. Must start with + and be at least 4 "
-"characters long."
 msgstr ""
 
 msgid "Must start with + and be at least 4 characters long."
@@ -151,9 +155,6 @@ msgid ""
 msgstr ""
 
 msgid "This will disable and remove all General, Program and Data set settings."
-msgstr ""
-
-msgid "Reset all values to default"
 msgstr ""
 
 msgid "General download sync settings"
@@ -178,9 +179,6 @@ msgid "Default"
 msgstr ""
 
 msgid "Download"
-msgstr ""
-
-msgid "Actions"
 msgstr ""
 
 msgid "Edit"
