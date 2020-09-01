@@ -27,10 +27,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
     const onChange = e => {
         let { value } = e
         if (e.name === RESERVED_VALUES) {
-            value = ([null, '', false, undefined].includes(value) || value <= 0
-                ? 0
-                : Math.min(maxValues.reservedValues, value)
-            ).toString()
+            value = value <= 0 ? 0 : Math.min(maxValues.reservedValues, value)
         }
 
         setFields({ ...fields, [e.name]: value })
@@ -157,7 +154,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         }),
         getInputNumber: name => ({
             name,
-            value: fields[name],
+            value: fields[name].toString(),
             type: 'number',
             disableSave: fields.disableAll,
             onChange,
