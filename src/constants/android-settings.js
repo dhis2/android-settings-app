@@ -51,6 +51,8 @@ export const androidSettingsDefault = {
 }
 
 export const RESERVED_VALUES = 'reservedValues'
+export const SMS_TO_SEND = 'numberSmsToSend'
+export const SMS_CONFIRMATION = 'numberSmsConfirmation'
 
 export const generalSettings = {
     metadata: {
