@@ -2,9 +2,9 @@ import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
-import FormSection from './form-section'
+import { FormSection } from './form-section'
 
-const SyncInputNumberField = ({ syncElement, handleForm }) => {
+export const SyncInputNumberField = ({ syncElement, handleForm }) => {
     const { label, syncType } = syncElement
     return (
         <FormSection>
@@ -24,5 +24,3 @@ SyncInputNumberField.propTypes = {
     }),
     handleForm: PropTypes.object,
 }
-
-export default SyncInputNumberField

@@ -4,7 +4,11 @@ import PropTypes from '@dhis2/prop-types'
 import formStyles from '../../../../styles/Form.module.css'
 import { Button, Field } from '@dhis2/ui'
 
-const ButtonField = ({ handleForm, handleDisableSettings, syncElement }) => {
+export const ButtonField = ({
+    handleForm,
+    handleDisableSettings,
+    syncElement,
+}) => {
     const { label, helpText } = syncElement
 
     return (
@@ -29,5 +33,3 @@ ButtonField.propTypes = {
     handleForm: PropTypes.object,
     handleDisableSettings: PropTypes.object,
 }
-
-export default ButtonField
