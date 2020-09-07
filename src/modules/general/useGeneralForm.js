@@ -2,6 +2,8 @@ import {
     androidSettingsDefault,
     maxValues,
     RESERVED_VALUES,
+    SMS_CONFIRMATION,
+    SMS_TO_SEND,
 } from '../../constants/android-settings'
 import { useState } from 'react'
 import { validateNumber } from './validatePhoneNumber'
@@ -27,7 +29,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
     const onChange = e => {
         let { value } = e
         if (e.name === RESERVED_VALUES) {
-            value = Math.min(maxValues.reservedValues, parseInt(value))
+            value = value <= 0 ? 0 : Math.min(maxValues.reservedValues, value)
         }
 
         setFields({ ...fields, [e.name]: value })
@@ -38,6 +40,10 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             success: false,
             error: false,
         })
+
+        if (e.name === SMS_TO_SEND || e.name === SMS_CONFIRMATION) {
+            validatePhoneNumber(e)
+        }
     }
 
     const onChangeSelect = (e, name) => {
@@ -95,28 +101,25 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
     /**
      * Checks if sms number or confirmation number is valid
-     * validates number onBlur
+     * validates number
      */
     const validatePhoneNumber = e => {
-        const { name } = e
-
-        if (![null, '', false, undefined].includes(fields[name])) {
-            const validInput = validateNumber(fields[name])
+        const { name, value } = e
+        const errorKeyName = Object.keys(errorNumber).filter(
+            errorName => errorName !== e.name
+        )[0]
+        if (![null, '', false, undefined].includes(value)) {
+            const validInput = validateNumber(value)
             if (!validInput) {
                 setErrorNumber({ ...errorNumber, [name]: true })
                 setDisableSave(true)
             } else {
                 setErrorNumber({ ...errorNumber, [name]: false })
-                setDisableSave(
-                    errorNumber.numberSmsToSend ||
-                        errorNumber.numberSmsConfirmation
-                )
+                setDisableSave(errorNumber[errorKeyName])
             }
         } else {
             setErrorNumber({ ...errorNumber, [name]: false })
-            setDisableSave(
-                errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
-            )
+            setDisableSave(errorNumber[errorKeyName])
         }
     }
 
@@ -135,8 +138,6 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             name,
             value: fields[name],
             onChange,
-            //  onKeyUp: validatePhoneNumber,
-            onBlur: validatePhoneNumber,
             error: errorNumber[name],
             disabled: fields.disableAll,
         }),
@@ -154,7 +155,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         }),
         getInputNumber: name => ({
             name,
-            value: fields[name],
+            value: fields[name].toString(),
             type: 'number',
             disableSave: fields.disableAll,
             onChange,
