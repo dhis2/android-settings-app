@@ -51,7 +51,7 @@ export const testAndroidDataConstants = [
         maxValue: 50,
     },
     {
-        title: i18n.t('metadata download size'),
+        title: i18n.t('metadata download size (KB)'),
         description: '',
         tooltipTitle: 'tooltipMetadata',
         state: 'metadataSize',
@@ -60,7 +60,7 @@ export const testAndroidDataConstants = [
         maxValue: 1000,
     },
     {
-        title: i18n.t('data download size'),
+        title: i18n.t('data download size (KB)'),
         description: '',
         tooltipTitle: 'tooltipData',
         state: 'dataSize',
