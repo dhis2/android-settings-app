@@ -1,10 +1,9 @@
 import React from 'react'
-
 import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
 import disable from '../../styles/Disable.module.css'
+import { InputNumber, RadioField, SelectSettings } from '../inputs'
 import TableRow from './table-row'
-import { InputNumber, RadioField, Select } from '../inputs'
 
 const InputChoice = ({ dataRow, states, onChange }) => (
     <>
@@ -16,7 +15,11 @@ const InputChoice = ({ dataRow, states, onChange }) => (
                     states={states}
                 />
             ) : (
-                <Select data={dataRow} states={states} onChange={onChange} />
+                <SelectSettings
+                    data={dataRow}
+                    states={states}
+                    onChange={onChange}
+                />
             )
         ) : (
             <InputNumber data={dataRow} states={states} onChange={onChange} />

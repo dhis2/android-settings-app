@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import {
     CLEAN,
@@ -21,9 +20,9 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
-import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadDatasetSettings } from '../../../modules/dataset/apiLoadSettings'
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
+import SectionWrapper from '../section-wrapper'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -272,17 +271,18 @@ class DataSetSettings extends React.Component {
                 disableSave: false,
             })
         },
-        onInputChange: e => {
-            e.preventDefault()
+        onInputChange: (e, key) => {
+            let name, value
+
+            typeof key === 'string'
+                ? ((name = key), (value = e.selected))
+                : ((name = e.name), (value = e.value))
 
             this.setState({
                 ...this.state,
                 specificSetting: {
                     ...this.state.specificSetting,
-                    [e.target.name]: parseValueBySettingType(
-                        e.target.name,
-                        e.target.value
-                    ),
+                    [name]: parseValueBySettingType(name, value),
                 },
             })
         },
@@ -384,14 +384,11 @@ class DataSetSettings extends React.Component {
     }
 
     render() {
-        if (this.state.loading === true) {
-            return <CircularLoader small />
-        }
-
         return (
-            <>
-                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
-
+            <SectionWrapper
+                loading={this.state.loading}
+                unsavedChanges={!this.state.disableSave}
+            >
                 <GlobalSpecificSettings
                     programTableData={dataSetSettings}
                     states={this.state}
@@ -410,7 +407,7 @@ class DataSetSettings extends React.Component {
                     specificSettingTable={this.handleSpecificSetting}
                     settingType={DataSetTitles}
                 />
-            </>
+            </SectionWrapper>
         )
     }
 }

@@ -4,6 +4,10 @@
     margin-top: 20px;
 }
 
+.fullContainer {
+    grid-template-columns: 2fr;
+}
+
 .wrapper {
     box-shadow: 0 0 1px 0 rgba(64, 75, 90, 0.6) !important;
 }
