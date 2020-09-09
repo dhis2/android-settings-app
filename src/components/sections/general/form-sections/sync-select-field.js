@@ -1,5 +1,4 @@
 import React from 'react'
-import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import { FormSection } from './form-section'
@@ -10,7 +9,7 @@ export const SyncSelectField = ({ syncElement, handleForm }) => {
         <FormSection>
             <SingleSelectField
                 inputWidth="250px"
-                label={i18n.t('{{label}}', { label })}
+                label={label}
                 onChange={payload =>
                     handleForm.onChangeSelect(payload, syncType)
                 }

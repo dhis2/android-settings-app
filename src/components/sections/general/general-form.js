@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
-import { generalSettings } from '../../../constants/android-settings'
+import { generalSettingsFormSections } from '../../../constants/android-settings'
 import {
     SyncSelectField,
     SyncInputPhoneField,
@@ -17,37 +17,37 @@ const GeneralForm = ({
 }) => (
     <form>
         <SyncSelectField
-            syncElement={generalSettings.metadata}
+            syncElement={generalSettingsFormSections.metadata}
             handleForm={handleForm}
         />
 
         <SyncSelectField
-            syncElement={generalSettings.data}
+            syncElement={generalSettingsFormSections.data}
             handleForm={handleForm}
         />
 
         <SyncInputPhoneField
-            syncElement={generalSettings.smsToSend}
+            syncElement={generalSettingsFormSections.smsToSend}
             handleForm={handleForm}
         />
 
         <SyncInputPhoneField
-            syncElement={generalSettings.smsConfirmation}
+            syncElement={generalSettingsFormSections.smsConfirmation}
             handleForm={handleForm}
         />
 
         <SyncInputNumberField
-            syncElement={generalSettings.reservedValues}
+            syncElement={generalSettingsFormSections.reservedValues}
             handleForm={handleForm}
         />
 
         <SyncCheckboxField
-            syncElement={generalSettings.encryptDB}
+            syncElement={generalSettingsFormSections.encryptDB}
             handleForm={handleForm}
         />
 
         <ButtonField
-            syncElement={generalSettings.disableSettings}
+            syncElement={generalSettingsFormSections.disableSettings}
             handleForm={handleForm}
             handleDisableSettings={handleDisableSettings}
         />

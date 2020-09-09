@@ -1,5 +1,4 @@
 import React from 'react'
-import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
 import { FormSection } from './form-section'
@@ -10,7 +9,7 @@ export const SyncInputNumberField = ({ syncElement, handleForm }) => {
         <FormSection>
             <InputField
                 inputWidth="100px"
-                label={i18n.t('{{label}}', { label })}
+                label={label}
                 {...handleForm.getInputNumber(syncType)}
             />
         </FormSection>
