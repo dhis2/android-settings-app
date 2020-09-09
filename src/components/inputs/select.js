@@ -1,22 +1,30 @@
 import React from 'react'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 
-export const Select = ({ data, onChange, states, label }) => (
+export const Select = ({
+    onChange,
+    label,
+    name,
+    value,
+    disabled,
+    options,
+    inputWidth,
+}) => (
     <SingleSelectField
-        inputWidth="200px"
-        key={data.keyDownload}
+        inputWidth={inputWidth}
+        key={name}
         label={label}
-        selected={states[data.keyDownload]}
-        onChange={e => onChange(e, data.keyDownload)}
-        id={data.keyDownload}
-        name={data.keyDownload}
-        disabled={states.disableAll}
+        selected={value}
+        id={name}
+        name={name}
+        onChange={e => onChange(e, name)}
+        disabled={disabled}
     >
-        {data.download.map(option => (
+        {options.map(option => (
             <SingleSelectOption
-                key={option.value}
-                label={option.label}
-                value={option.value}
+                key={option.value || option.id}
+                label={option.label || option.name}
+                value={option.value || option.id}
             />
         ))}
     </SingleSelectField>
