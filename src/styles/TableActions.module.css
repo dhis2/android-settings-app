@@ -1,0 +1,39 @@
+.container {
+    display: grid;
+    grid-template-columns: 2fr 0.3fr;
+    margin-top: 20px;
+}
+
+.fullContainer {
+    grid-template-columns: 2fr;
+}
+
+.wrapper {
+    box-shadow: 0 0 1px 0 rgba(64, 75, 90, 0.6) !important;
+}
+
+.wrapper + .wrapper {
+    margin-top: 20px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 15px;
+}
+
+.parent > div:last-child {
+    justify-self: end;
+    align-self: center;
+}
+
+.title {
+    color: var(--colors-grey900);
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--colors-grey700);
+}

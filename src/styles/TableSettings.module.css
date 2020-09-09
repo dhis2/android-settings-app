@@ -1,0 +1,20 @@
+
+.parent {
+    display: grid;
+    grid-template-columns: 1fr minmax(100px, 20%);
+}
+
+.parent > div{
+    align-self: center;
+}
+
+.parent > div:first-child{
+    align-self: center;
+    font-weight: normal;
+    font-size: 0.9rem;
+    color: var(--colors-grey900);
+}
+
+.parent > div:last-child {
+    justify-self: end;
+}
