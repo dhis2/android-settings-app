@@ -1,10 +1,8 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import {
     DEFAULT,
-    ENROLLMENT_DOWNLOAD,
     FULL_SPECIFIC,
     GLOBAL,
     GlobalProgram,
@@ -26,9 +24,9 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
-import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadProgramSettings } from '../../../modules/programs/apiLoadSettings'
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
+import SectionWrapper from '../section-wrapper'
 
 let programData = GlobalProgram
 const specificProgramData = SpecificProgram
@@ -138,36 +136,26 @@ class ProgramSettings extends React.Component {
     /**
      * handle onChange for global settings
      * */
-    handleChange = e => {
-        if (e.name === ENROLLMENT_DOWNLOAD) {
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.name]: e.value,
-            })
-        } else {
-            e.preventDefault()
+    handleChange = (e, key) => {
+        let name, value
 
-            if (e.target.name === SETTING_DOWNLOAD) {
-                if (
-                    e.target.value === GLOBAL ||
-                    e.target.value === PER_ORG_UNIT
-                ) {
-                    programData = GlobalProgramSpecial
-                } else {
-                    programData = GlobalProgram
-                }
+        typeof key === 'string'
+            ? ((name = key), (value = e.selected))
+            : ((name = e.name), (value = e.value))
+
+        if (name === SETTING_DOWNLOAD) {
+            if (value === GLOBAL || value === PER_ORG_UNIT) {
+                programData = GlobalProgramSpecial
+            } else {
+                programData = GlobalProgram
             }
-
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.target.name]: parseValueByType(
-                    e.target.name,
-                    e.target.value
-                ),
-            })
         }
+
+        this.setState({
+            ...this.state,
+            disableSave: false,
+            [name]: parseValueByType(name, value),
+        })
     }
 
     /**
@@ -332,9 +320,8 @@ class ProgramSettings extends React.Component {
                 disableSave: false,
             })
         },
-        onInputChange: e => {
-            e.preventDefault()
-            if (e.target.name === 'name') {
+        onInputChange: (e, key) => {
+            if (key === 'name') {
                 const settings = populateProgramObject(
                     FULL_SPECIFIC,
                     specificSettingsDefault
@@ -344,21 +331,21 @@ class ProgramSettings extends React.Component {
                     specificSetting: {
                         ...this.state.specificSetting,
                         ...settings,
-                        [e.target.name]: parseValueByType(
-                            e.target.name,
-                            e.target.value
-                        ),
+                        [key]: parseValueByType(key, e.selected),
                     },
                 })
             } else {
+                let name, value
+
+                typeof key === 'string'
+                    ? ((name = key), (value = e.selected))
+                    : ((name = e.name), (value = e.value))
+
                 this.setState({
                     ...this.state,
                     specificSetting: {
                         ...this.state.specificSetting,
-                        [e.target.name]: parseValueByType(
-                            e.target.name,
-                            e.target.value
-                        ),
+                        [name]: parseValueByType(name, value),
                     },
                 })
             }
@@ -468,14 +455,11 @@ class ProgramSettings extends React.Component {
     }
 
     render() {
-        if (this.state.loading === true) {
-            return <CircularLoader small />
-        }
-
         return (
-            <>
-                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
-
+            <SectionWrapper
+                loading={this.state.loading}
+                unsavedChanges={!this.state.disableSave}
+            >
                 <GlobalSpecificSettings
                     programTableData={programData}
                     states={this.state}
@@ -494,7 +478,7 @@ class ProgramSettings extends React.Component {
                     specificSettingTable={this.handleSpecificSetting}
                     settingType={ProgramTitles}
                 />
-            </>
+            </SectionWrapper>
         )
     }
 }
