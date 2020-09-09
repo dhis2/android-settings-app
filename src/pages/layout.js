@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
-import { Card, CssVariables } from '@dhis2/ui'
+import { Card } from '@dhis2/ui'
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
@@ -56,50 +56,45 @@ const Layout = () => {
     }
 
     return (
-        <>
-            <CssVariables colors spacers />
-            <HashRouter>
-                <TwoPanel mainStyle={styles.twoPanelMain}>
-                    <SideBar />
-                    <MainContent>
-                        <Card className={layoutStyles.paper__layout}>
-                            <Switch>
-                                <Route path="/" exact>
-                                    <D2Shim>
-                                        {openFirstLaunch === true ? (
-                                            <DialogFirstLaunch
-                                                handleSave={handleSave}
-                                                onClose={handleClose}
-                                                disable={isDisabledAuthority}
-                                            />
-                                        ) : (
-                                            <Redirect
-                                                to={menuSection[0].path}
-                                            />
-                                        )}
-                                    </D2Shim>
-                                </Route>
+        <HashRouter>
+            <TwoPanel mainStyle={styles.twoPanelMain}>
+                <SideBar />
+                <MainContent>
+                    <Card className={layoutStyles.paper__layout}>
+                        <Switch>
+                            <Route path="/" exact>
+                                <D2Shim>
+                                    {openFirstLaunch === true ? (
+                                        <DialogFirstLaunch
+                                            handleSave={handleSave}
+                                            onClose={handleClose}
+                                            disable={isDisabledAuthority}
+                                        />
+                                    ) : (
+                                        <Redirect to={menuSection[0].path} />
+                                    )}
+                                </D2Shim>
+                            </Route>
 
-                                {menuSection.map(section => (
-                                    <Route
-                                        exact
-                                        key={section.key}
-                                        path={section.path}
-                                        render={() => (
-                                            <D2Shim>{section.component}</D2Shim>
-                                        )}
-                                    />
-                                ))}
+                            {menuSection.map(section => (
+                                <Route
+                                    exact
+                                    key={section.key}
+                                    path={section.path}
+                                    render={() => (
+                                        <D2Shim>{section.component}</D2Shim>
+                                    )}
+                                />
+                            ))}
 
-                                <Route path="*">
-                                    <PageNotFound />
-                                </Route>
-                            </Switch>
-                        </Card>
-                    </MainContent>
-                </TwoPanel>
-            </HashRouter>
-        </>
+                            <Route path="*">
+                                <PageNotFound />
+                            </Route>
+                        </Switch>
+                    </Card>
+                </MainContent>
+            </TwoPanel>
+        </HashRouter>
     )
 }
 
