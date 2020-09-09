@@ -101,7 +101,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
     /**
      * Checks if sms number or confirmation number is valid
-     * validates number onBlur
+     * validates number
      */
     const validatePhoneNumber = e => {
         const { name, value } = e

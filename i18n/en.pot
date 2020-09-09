@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-31T22:27:51.956Z\n"
-"PO-Revision-Date: 2020-08-31T22:27:51.956Z\n"
+"POT-Creation-Date: 2020-09-09T09:45:26.215Z\n"
+"PO-Revision-Date: 2020-09-09T09:45:26.215Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -121,12 +121,6 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
-msgid "{{label}}"
-msgstr ""
-
-msgid "{{helpText}}"
-msgstr ""
-
 msgid "How often should metadata sync?"
 msgstr ""
 
@@ -181,6 +175,9 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
+msgid "Actions"
+msgstr ""
+
 msgid "Edit"
 msgstr ""
 
@@ -193,6 +190,29 @@ msgstr ""
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
+msgid ""
+"This phone number is not valid. Must start with + and be at least 4 "
+"characters long."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
