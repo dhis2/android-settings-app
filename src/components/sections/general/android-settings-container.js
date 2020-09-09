@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
 import GeneralSettings from './general-settings'
-import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadGeneralSettings } from '../../../modules/general/apiLoadSettings'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useGeneralForm } from '../../../modules/general/useGeneralForm'
 import { useSaveGeneralSettings } from '../../../modules/general/useSaveGeneralSettings'
 import { removeNamespace } from '../../../modules/general/removeNamespace'
+import SectionWrapper from '../section-wrapper'
 
 const AndroidSettingsContainer = () => {
     const [submitDataStore, setSubmitDataStore] = useState({
@@ -81,14 +80,8 @@ const AndroidSettingsContainer = () => {
         },
     }
 
-    if (loading === true) {
-        return <CircularLoader small />
-    }
-
     return (
-        <>
-            <UnsavedChangesAlert unsavedChanges={!form.disableSave} />
-
+        <SectionWrapper loading={loading} unsavedChanges={!form.disableSave}>
             <GeneralSettings
                 state={{
                     openDialog,
@@ -99,7 +92,7 @@ const AndroidSettingsContainer = () => {
                 handleSaveDialog={handleSaveDataDialog}
                 handleDisableSettings={handleDisableSettings}
             />
-        </>
+        </SectionWrapper>
     )
 }
 
