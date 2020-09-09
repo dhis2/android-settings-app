@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-09T09:19:42.288Z\n"
-"PO-Revision-Date: 2020-09-09T09:19:42.288Z\n"
+"POT-Creation-Date: 2020-09-09T18:40:06.175Z\n"
+"PO-Revision-Date: 2020-09-09T18:40:06.175Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Values per {{title}}"
+msgid "Values per"
 msgstr ""
 
 msgid "Add/Save"
@@ -175,6 +175,12 @@ msgid "Run test"
 msgstr ""
 
 msgid "Default"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Actions"
 msgstr ""
 
 msgid "Edit"
@@ -294,6 +300,12 @@ msgid "program rules linked to org units"
 msgstr ""
 
 msgid "Number of program rules to download"
+msgstr ""
+
+msgid "reserved values per TEI"
+msgstr ""
+
+msgid "Number of reserved values downloaded per TEI attribute"
 msgstr ""
 
 msgid "metadata download size"
