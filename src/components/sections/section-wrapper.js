@@ -9,7 +9,7 @@ const SectionWrapper = ({ loading, unsavedChanges, ...props }) => {
 
     return (
         <>
-            <UnsavedChangesAlert unsavedChanges={unsavedChanges} />
+            <UnsavedChangesAlert unsavedChanges={unsavedChanges || null} />
             {props.children}
         </>
     )

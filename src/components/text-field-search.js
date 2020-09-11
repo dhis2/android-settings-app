@@ -1,12 +1,13 @@
-import React from 'react'
-import Downshift from 'downshift'
-import deburr from 'lodash/deburr'
+import React, { useState } from 'react'
+/*import Downshift from 'downshift'
+import deburr from 'lodash/deburr'*/
 import i18n from '@dhis2/d2-i18n'
-import MenuItem from '@material-ui/core/MenuItem'
+/*import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper'*/
+import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 
-const classes = {
+/*const classes = {
     root: {
         flexGrow: 1,
         height: 60,
@@ -29,9 +30,74 @@ const classes = {
         width: 'auto',
         flexGrow: 1,
     },
+}*/
+
+const TextFieldSearch = props => {
+    //console.log({props})
+    const d2 = props.d2
+    const [suggestionSelected, setSelection] = useState(undefined)
+    const [suggestionsList, setSuggestionsList] = useState([])
+
+    const handleChangeSelect = selection => {
+        if (selection !== null) {
+            props.checkUsername(selection.selected)
+            setSelection(selection.selected)
+        }
+        console.log({ selection: selection.selected, props })
+    }
+
+    const handleFilter = (event, clearSelection) => {
+        console.log({ event, clearSelection })
+        /*props.clearFields()
+        if (event.target.value === '') {
+            clearSelection()
+            setSuggestionsList([])
+        } else {
+            d2.models.users
+                .list({
+                    paging: false,
+                    level: 1,
+                    fields: 'id,name',
+                    query: `${event.target.value}`,
+                })
+                .then(users => {
+                    const usersOptions = users.toArray()
+                    console.log({usersOptions})
+                    setSuggestionsList(usersOptions)
+                })
+        }*/
+    }
+    return (
+        <div>
+            <SingleSelectField
+                className="select"
+                clearable
+                label={i18n.t('User')}
+                filterable
+                inputWidth="250px"
+                placeholder={i18n.t('Search for a user')}
+                onChange={handleChangeSelect}
+                selected={suggestionSelected}
+            >
+                {props.options.map(user => (
+                    <SingleSelectOption
+                        key={user.id}
+                        label={user.name}
+                        value={user.name}
+                    />
+                ))}
+            </SingleSelectField>
+            <style jsx>{`
+                :global(#root) {
+                    margin-bottom: 2000px;
+                }
+            `}</style>
+        </div>
+    )
 }
 
-export default class TextFieldSearch extends React.Component {
+export default TextFieldSearch
+/*export default class TextFieldSearch extends React.Component {
     constructor(props) {
         super(props)
         this.d2 = this.props.d2
@@ -206,4 +272,4 @@ export default class TextFieldSearch extends React.Component {
             </div>
         )
     }
-}
+}*/

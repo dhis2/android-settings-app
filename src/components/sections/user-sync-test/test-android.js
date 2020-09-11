@@ -17,42 +17,49 @@ const TestAndroid = ({
     states,
     handleRun,
     disabledTest,
-}) => {
-    return (
+    options,
+}) => (
+    <>
         <div>
-            <div>
-                <p className={titleStyles.mainContent__title__main}>
-                    {i18n.t('User sync test')}
-                </p>
-                <p className={titleStyles.mainContent__subtitle}>
-                    {i18n.t(
-                        'Check the amount of data a user would sync to their device.'
-                    )}
-                </p>
-            </div>
-
-            <div>
-                <D2Shim>
-                    <TextFieldSearch
-                        checkUsername={checkUsername}
-                        clearFields={clearSearchField}
-                        suggestionPreSelected={searchFieldValue}
-                    />
-                </D2Shim>
-
-                {runTest && <RunTest states={states} />}
-
-                <Button
-                    className={buttonStyles.button__add}
-                    onClick={handleRun}
-                    disabled={disabledTest}
-                >
-                    {i18n.t('Run test')}
-                </Button>
-            </div>
+            <p className={titleStyles.mainContent__title__main}>
+                {i18n.t('User sync test')}
+            </p>
+            <p className={titleStyles.mainContent__subtitle}>
+                {i18n.t(
+                    'Check the amount of data a user would sync to their device.'
+                )}
+            </p>
         </div>
-    )
-}
+
+        <div>
+            {/*<D2Shim>
+                <TextFieldSearch
+                    checkUsername={checkUsername}
+                    clearFields={clearSearchField}
+                    suggestionPreSelected={searchFieldValue}
+                    options={options}
+                />
+            </D2Shim>*/}
+
+            <TextFieldSearch
+                checkUsername={checkUsername}
+                clearFields={clearSearchField}
+                suggestionPreSelected={searchFieldValue}
+                options={options}
+            />
+
+            {runTest && <RunTest states={states} />}
+
+            <Button
+                className={buttonStyles.button__add}
+                onClick={handleRun}
+                disabled={disabledTest}
+            >
+                {i18n.t('Run test')}
+            </Button>
+        </div>
+    </>
+)
 
 TestAndroid.propTypes = {
     checkUsername: PropTypes.func.isRequired,

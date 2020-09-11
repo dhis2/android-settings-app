@@ -16,6 +16,9 @@ import { splitArray } from '../../../modules/splitArray'
 import { prepareDataSizeRequest } from '../../../modules/userSyncTest/prepareDataSizeRequest'
 import { testAndroidDataConstants } from '../../../constants/test-android'
 import { prepareMetadataRequest } from '../../../modules/userSyncTest/prepareMetadataSizeRequest'
+import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import { Select } from '../../inputs'
+import SectionWrapper from '../section-wrapper'
 
 class UserSyncTestContainer extends React.Component {
     constructor(props) {
@@ -532,20 +535,23 @@ class UserSyncTestContainer extends React.Component {
     }
 
     render() {
-        if (this.state.loading === true) {
+        /*if (this.state.loading === true) {
             return <CircularLoader small />
-        }
+        }*/
 
         return (
-            <TestAndroid
-                checkUsername={this.checkUsername}
-                clearSearchField={this.clearFields}
-                searchFieldValue={this.state.username}
-                runTest={this.state.runTest}
-                states={this.state}
-                handleRun={this.handleRun}
-                disabledTest={this.state.disabled}
-            />
+            <SectionWrapper loading={this.state.loading}>
+                <TestAndroid
+                    checkUsername={this.checkUsername}
+                    clearSearchField={this.clearFields}
+                    searchFieldValue={this.state.username}
+                    runTest={this.state.runTest}
+                    states={this.state}
+                    handleRun={this.handleRun}
+                    disabledTest={this.state.disabled}
+                    options={this.usersOptionsComplete}
+                />
+            </SectionWrapper>
         )
     }
 }
