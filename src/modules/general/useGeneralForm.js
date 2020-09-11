@@ -1,5 +1,6 @@
 import {
     androidSettingsDefault,
+    manual,
     maxValues,
     RESERVED_VALUES,
     SMS_CONFIRMATION,
@@ -19,6 +20,10 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         ...androidSettingsDefault,
         numberSmsToSend: '',
         numberSmsConfirmation: '',
+    })
+    const [manualAlertDialog, setManualAlert] = useState({
+        open: false,
+        selection: {},
     })
 
     const setInitialData = settings => {
@@ -47,14 +52,48 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
     }
 
     const onChangeSelect = (e, name) => {
-        setFields({ ...fields, [name]: e.selected })
-        setDisableSave(
-            errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
-        )
-        setSubmitDataStore({
-            success: false,
-            error: false,
-        })
+        if (e.selected === manual) {
+            manualAlert.open(e.selected, name)
+        } else {
+            setFields({ ...fields, [name]: e.selected })
+            setDisableSave(
+                errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
+            )
+            setSubmitDataStore({
+                success: false,
+                error: false,
+            })
+        }
+    }
+
+    /**
+     * When Manual option is selected, an alert (dialog) should pop up
+     * */
+    const manualAlert = {
+        open: (selection, name) => {
+            setManualAlert({
+                selection: { name, value: selection },
+                open: true,
+            })
+        },
+        close: () => {
+            setManualAlert({ ...manualAlertDialog, open: false })
+        },
+        save: () => {
+            const { name, value } = manualAlertDialog.selection
+            setFields({ ...fields, [name]: value })
+            setDisableSave(
+                errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
+            )
+            setSubmitDataStore({
+                success: false,
+                error: false,
+            })
+            setManualAlert({
+                open: false,
+                selection: {},
+            })
+        },
     }
 
     /**
@@ -133,6 +172,8 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         disableSave,
         setDisableSave,
         handleEncryptDialog,
+        manualAlertDialog,
+        manualAlert,
         onChangeSelect,
         getPhoneNumber: name => ({
             name,

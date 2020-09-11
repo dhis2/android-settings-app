@@ -9,6 +9,10 @@ export const metadataOptions = [
         value: '7d',
         label: i18n.t('1 Week'),
     },
+    {
+        value: 'manual',
+        label: i18n.t('Manual'),
+    },
 ]
 
 export const dataOptions = [
@@ -31,6 +35,10 @@ export const dataOptions = [
     {
         value: '24h',
         label: i18n.t('1 Day'),
+    },
+    {
+        value: 'manual',
+        label: i18n.t('Manual'),
     },
 ]
 
@@ -59,13 +67,13 @@ export const generalSettingsFormSections = {
         syncType: 'metadataSync',
         label: i18n.t('How often should metadata sync?'),
         options: metadataOptions,
-        helpText: '',
+        //helpText: i18n.t('Manual option is only available from android app version 2.3.0 onwards'),
     },
     data: {
         syncType: 'dataSync',
         label: i18n.t('How often should data sync?'),
         options: dataOptions,
-        helpText: '',
+        //helpText: i18n.t('Manual option is only available from android app version 2.3.0 onwards'),
     },
     smsToSend: {
         syncType: 'numberSmsToSend',
@@ -113,3 +121,10 @@ export const generalSettingsFormSections = {
         ),
     },
 }
+
+export const manualOptionAlert = i18n.t(
+    'By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of data. Your users will need to sync manually for data to be sent to the server.\n' +
+        'Do you want to select this option?'
+)
+
+export const manual = 'manual'
