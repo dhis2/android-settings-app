@@ -198,7 +198,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             name,
             value: fields[name].toString(),
             type: 'number',
-            disableSave: fields.disableAll,
+            disabled: fields.disableAll,
             onChange,
         }),
     }
