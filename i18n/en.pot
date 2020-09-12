@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-22T21:37:33.990Z\n"
-"PO-Revision-Date: 2020-08-22T21:37:33.990Z\n"
+"POT-Creation-Date: 2020-09-12T01:09:55.979Z\n"
+"PO-Revision-Date: 2020-09-12T01:09:55.979Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -83,6 +83,21 @@ msgid "Exit, do not apply settings"
 msgstr ""
 
 msgid "Set defaults and save"
+msgstr ""
+
+msgid "Select Manual option"
+msgstr ""
+
+msgid ""
+"By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
+"data. Your users will need to sync manually for data to be sent to the "
+"server."
+msgstr ""
+
+msgid "Do you want to select this option?"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid "Save in DataStore"
@@ -162,6 +177,14 @@ msgstr ""
 msgid "These settings apply to all Android users."
 msgstr ""
 
+msgid "Manual options"
+msgstr ""
+
+msgid ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+msgstr ""
+
 msgid "Summary Settings"
 msgstr ""
 
@@ -195,6 +218,9 @@ msgstr ""
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
+msgstr ""
+
+msgid "Manual"
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
