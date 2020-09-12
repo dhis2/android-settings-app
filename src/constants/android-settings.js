@@ -11,7 +11,7 @@ export const metadataOptions = [
     },
     {
         value: 'manual',
-        label: 'Manual',
+        label: i18n.t('Manual'),
     },
 ]
 
@@ -38,7 +38,7 @@ export const dataOptions = [
     },
     {
         value: 'manual',
-        label: 'Manual',
+        label: i18n.t('Manual'),
     },
 ]
 
@@ -59,3 +59,4 @@ export const androidSettingsDefault = {
 }
 
 export const RESERVED_VALUES = 'reservedValues'
+export const manual = 'manual'

@@ -11,6 +11,8 @@ import GeneralForm from './general-form'
 
 import styles from '../../../styles/LayoutTitles.module.css'
 import DialogDisableSettings from '../../dialog/dialog-disable-settings'
+import NoticeAlert from '../../notice-alert'
+import DialogManualAlert from '../../dialog/dialog-manual-alert'
 
 const GeneralSettings = ({
     state,
@@ -29,10 +31,23 @@ const GeneralSettings = ({
                 </p>
             </div>
 
+            <NoticeAlert
+                title={i18n.t('Manual options')}
+                notice={i18n.t(
+                    'Manual options for data and metadata sync are only available from android app version 2.3.0 onwards.'
+                )}
+            />
+
             <GeneralForm
                 handleForm={generalForm}
                 handleSaveDialog={handleSaveDialog}
                 handleDisableSettings={handleDisableSettings}
+            />
+
+            <DialogManualAlert
+                openDialog={generalForm.manualAlertDialog.open}
+                chooseOption={generalForm.handleManualAlert.save}
+                onClose={generalForm.handleManualAlert.close}
             />
 
             <DialogEncrypt

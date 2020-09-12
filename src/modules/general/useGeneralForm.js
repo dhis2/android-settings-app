@@ -1,5 +1,6 @@
 import {
     androidSettingsDefault,
+    manual,
     maxValues,
     RESERVED_VALUES,
 } from '../../constants/android-settings'
@@ -18,6 +19,10 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         numberSmsToSend: '',
         numberSmsConfirmation: '',
     })
+    const [manualAlertDialog, setManualAlert] = useState({
+        open: false,
+        selection: {},
+    })
 
     const setInitialData = settings => {
         setFields(settings)
@@ -29,16 +34,50 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
         let { value } = e.target
 
-        if (e.target.name === RESERVED_VALUES) {
-            value = Math.min(maxValues.reservedValues, parseInt(value))
-        }
+        if (value === manual) {
+            handleManualAlert.open(value, e.target.name)
+        } else {
+            if (e.target.name === RESERVED_VALUES) {
+                value = Math.min(maxValues.reservedValues, parseInt(value))
+            }
 
-        setFields({ ...fields, [e.target.name]: value })
-        setDisableSave(errorNumber.gateway || errorNumber.confirmation)
-        setSubmitDataStore({
-            success: false,
-            error: false,
-        })
+            setFields({ ...fields, [e.target.name]: value })
+            setDisableSave(errorNumber.gateway || errorNumber.confirmation)
+            setSubmitDataStore({
+                success: false,
+                error: false,
+            })
+        }
+    }
+
+    /**
+     * When Manual option is selected, an alert (dialog) should pop up
+     * */
+    const handleManualAlert = {
+        open: (selection, name) => {
+            setManualAlert({
+                selection: { name, value: selection },
+                open: true,
+            })
+        },
+        close: () => {
+            setManualAlert({ ...manualAlertDialog, open: false })
+        },
+        save: () => {
+            const { name, value } = manualAlertDialog.selection
+            setFields({ ...fields, [name]: value })
+            setDisableSave(
+                errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
+            )
+            setSubmitDataStore({
+                success: false,
+                error: false,
+            })
+            setManualAlert({
+                open: false,
+                selection: {},
+            })
+        },
     }
 
     const onCheckboxChange = event => {
@@ -115,6 +154,8 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         disableSave,
         setDisableSave,
         handleEncryptDialog,
+        handleManualAlert,
+        manualAlertDialog,
         getInput: name => ({
             name,
             value: fields[name],
