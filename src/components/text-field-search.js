@@ -87,11 +87,6 @@ const TextFieldSearch = props => {
                     />
                 ))}
             </SingleSelectField>
-            <style jsx>{`
-                :global(#root) {
-                    margin-bottom: 2000px;
-                }
-            `}</style>
         </div>
     )
 }

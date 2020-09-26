@@ -105,6 +105,8 @@ class UserSyncTestContainer extends React.Component {
             programRuleLoad: false,
             metadataLoad: false,
             dataLoad: false,
+            reservedValueNumber: 0,
+            reservedValuesLoad: false,
         })
     }
 
