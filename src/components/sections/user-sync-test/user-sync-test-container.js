@@ -37,6 +37,7 @@ class UserSyncTestContainer extends React.Component {
         this.globalSettings = undefined
         this.specificSettings = undefined
         this.organisationUnitsCapture = undefined
+        this.reservedValues = 0
     }
 
     state = {
@@ -433,6 +434,8 @@ class UserSyncTestContainer extends React.Component {
                                 programRuleNumber: programRuleResult.toArray()
                                     .length,
                                 metadataSize: metadata,
+                                reservedValueNumber: this.reservedValues,
+                                reservedValuesLoad: false,
                             })
                         }
                     )
@@ -525,11 +528,7 @@ class UserSyncTestContainer extends React.Component {
             .then(res => {
                 this.globalSettings = res[0].value.globalSettings
                 this.specificSettings = res[0].value.specificSettings
-
-                this.setState({
-                    reservedValueNumber: res[1].value.reservedValues,
-                    reservedValuesLoad: false,
-                })
+                this.reservedValues = res[1].value.reservedValues
             })
             .catch(e => {
                 console.error(e)
