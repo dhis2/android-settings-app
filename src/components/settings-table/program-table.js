@@ -32,7 +32,7 @@ const ProgramTable = props => {
         }
     })
 
-    if (!(programSelected && programType)) {
+    if (!programSelected || !programType) {
         return null
     } else {
         return (

@@ -41,7 +41,7 @@ const DataSetTable = props => {
         }
     })
 
-    if (!(dataSetSelected && periodType)) {
+    if (!dataSetSelected || !periodType) {
         return null
     } else {
         return (
