@@ -272,11 +272,8 @@ class DataSetSettings extends React.Component {
             })
         },
         onInputChange: (e, key) => {
-            let name, value
-
-            typeof key === 'string'
-                ? ((name = key), (value = e.selected))
-                : ((name = e.name), (value = e.value))
+            const name = typeof key === 'string' ? key : e.name
+            const value = typeof key === 'string' ? e.selected : e.value
 
             this.setState({
                 ...this.state,

@@ -137,11 +137,8 @@ class ProgramSettings extends React.Component {
      * handle onChange for global settings
      * */
     handleChange = (e, key) => {
-        let name, value
-
-        typeof key === 'string'
-            ? ((name = key), (value = e.selected))
-            : ((name = e.name), (value = e.value))
+        const name = typeof key === 'string' ? key : e.name
+        const value = typeof key === 'string' ? e.selected : e.value
 
         if (name === SETTING_DOWNLOAD) {
             if (value === GLOBAL || value === PER_ORG_UNIT) {
@@ -335,11 +332,8 @@ class ProgramSettings extends React.Component {
                     },
                 })
             } else {
-                let name, value
-
-                typeof key === 'string'
-                    ? ((name = key), (value = e.selected))
-                    : ((name = e.name), (value = e.value))
+                const name = typeof key === 'string' ? key : e.name
+                const value = typeof key === 'string' ? e.selected : e.value
 
                 this.setState({
                     ...this.state,
