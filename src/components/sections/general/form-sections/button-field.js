@@ -3,32 +3,19 @@ import PropTypes from '@dhis2/prop-types'
 import formStyles from '../../../../styles/Form.module.css'
 import { Button, Field } from '@dhis2/ui'
 
-export const ButtonField = ({
-    handleForm,
-    handleDisableSettings,
-    syncElement,
-}) => {
-    const { label, helpText } = syncElement
-
-    return (
-        <div className={formStyles.rowMargin}>
-            <Field helpText={helpText}>
-                <Button
-                    onClick={handleDisableSettings.open}
-                    disabled={handleForm.fields.disableAll}
-                >
-                    {label}
-                </Button>
-            </Field>
-        </div>
-    )
-}
+export const ButtonField = ({ label, helpText, onOpen, disabled }) => (
+    <div className={formStyles.rowMargin}>
+        <Field helpText={helpText}>
+            <Button onClick={onOpen} disabled={disabled}>
+                {label}
+            </Button>
+        </Field>
+    </div>
+)
 
 ButtonField.propTypes = {
-    syncElement: PropTypes.shape({
-        label: PropTypes.string,
-        helpText: PropTypes.string,
-    }),
-    handleForm: PropTypes.object,
-    handleDisableSettings: PropTypes.object,
+    label: PropTypes.string,
+    helpText: PropTypes.string,
+    onOpen: PropTypes.func,
+    disabled: PropTypes.bool,
 }

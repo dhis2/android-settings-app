@@ -5,33 +5,31 @@ import buttonStyles from '../styles/Button.module.css'
 import { Button, ButtonStrip } from '@dhis2/ui'
 
 const FooterActionButtons = ({
-    disableSave,
-    disableReset,
-    clickReset,
-    handleSaveDialog,
-}) => {
-    return (
-        <ButtonStrip className={buttonStyles.container__padding}>
-            <Button
-                primary
-                className={buttonStyles.button_marginLeft}
-                onClick={handleSaveDialog.open}
-                disabled={disableSave}
-            >
-                {i18n.t('Save')}
-            </Button>
-            <Button onClick={clickReset} disabled={disableReset}>
-                {i18n.t('Reset all values to default')}
-            </Button>
-        </ButtonStrip>
-    )
-}
+    saveButtonDisabled,
+    resetButtonDisabled,
+    onResetClick,
+    onSave,
+}) => (
+    <ButtonStrip className={buttonStyles.container__padding}>
+        <Button
+            primary
+            className={buttonStyles.button_marginLeft}
+            onClick={onSave}
+            disabled={saveButtonDisabled}
+        >
+            {i18n.t('Save')}
+        </Button>
+        <Button onClick={onResetClick} disabled={resetButtonDisabled}>
+            {i18n.t('Reset all values to default')}
+        </Button>
+    </ButtonStrip>
+)
 
 FooterActionButtons.propTypes = {
-    disableSave: PropTypes.bool,
-    disableReset: PropTypes.bool,
-    clickReset: PropTypes.func,
-    handleSaveDialog: PropTypes.object.isRequired,
+    saveButtonDisabled: PropTypes.bool,
+    resetButtonDisabled: PropTypes.bool,
+    onResetClick: PropTypes.func,
+    onSave: PropTypes.func,
 }
 
 export default FooterActionButtons
