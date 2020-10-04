@@ -25,9 +25,10 @@ const DataSetTableRow = ({
             </div>
             <div>
                 <InputNumber
-                    data={dataRow}
-                    states={states}
                     onChange={onChange}
+                    keyDownload={dataRow.keyDownload}
+                    value={states[dataRow.keyDownload]}
+                    disabled={states.disableAll}
                 />
             </div>
         </TableRow>

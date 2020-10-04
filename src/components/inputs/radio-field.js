@@ -1,16 +1,23 @@
 import React from 'react'
 import { RadioGroup, Radio } from '@dhis2/ui-core'
+import PropTypes from '@dhis2/prop-types'
 
-export const RadioField = ({ data, onChange, states }) => (
+export const RadioField = ({
+    onChange,
+    keyDownload,
+    value,
+    disabled,
+    options,
+}) => (
     <RadioGroup
         dense
-        name={data.keyDownload}
-        id={data.keyDownload}
+        name={keyDownload}
+        id={keyDownload}
         onChange={onChange}
-        value={states[data.keyDownload]}
-        disabled={states.disableAll}
+        value={value}
+        disabled={disabled}
     >
-        {data.download.map(option => (
+        {options.map(option => (
             <Radio
                 key={option.value}
                 label={option.label}
@@ -19,3 +26,11 @@ export const RadioField = ({ data, onChange, states }) => (
         ))}
     </RadioGroup>
 )
+
+RadioField.propTypes = {
+    keyDownload: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+    disabled: PropTypes.bool,
+    options: PropTypes.array,
+}

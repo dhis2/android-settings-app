@@ -1,15 +1,32 @@
 import React from 'react'
 import { Select } from './select'
+import PropTypes from '@dhis2/prop-types'
 
-export const SelectSettings = ({ data, onChange, states, label }) => (
+export const SelectSettings = ({
+    onChange,
+    label,
+    keyDownload,
+    value,
+    disabled,
+    options,
+}) => (
     <Select
-        key={data.keyDownload}
+        key={keyDownload}
         inputWidth="200px"
         label={label}
-        name={data.keyDownload}
-        value={states[data.keyDownload]}
-        disabled={states.disableAll}
+        name={keyDownload}
+        value={value}
+        disabled={disabled}
         onChange={onChange}
-        options={data.download}
+        options={options}
     />
 )
+
+SelectSettings.propTypes = {
+    keyDownload: PropTypes.string,
+    onChange: PropTypes.func,
+    label: PropTypes.string,
+    value: PropTypes.string,
+    disabled: PropTypes.bool,
+    options: PropTypes.array,
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import PropTypes from '@dhis2/prop-types'
 
 export const Select = ({
     onChange,
@@ -29,3 +30,13 @@ export const Select = ({
         ))}
     </SingleSelectField>
 )
+
+Select.propTypes = {
+    onChange: PropTypes.func,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    value: PropTypes.string,
+    disabled: PropTypes.bool,
+    options: PropTypes.array,
+    inputWidth: PropTypes.string,
+}

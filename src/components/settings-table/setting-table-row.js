@@ -10,19 +10,28 @@ const InputChoice = ({ dataRow, states, onChange }) => (
         {Array.isArray(dataRow.download) === true ? (
             dataRow.radioButton === true ? (
                 <RadioField
-                    data={dataRow}
                     onChange={onChange}
-                    states={states}
+                    keyDownload={dataRow.keyDownload}
+                    value={states[dataRow.keyDownload]}
+                    disabled={states.disableAll}
+                    options={dataRow.download}
                 />
             ) : (
                 <SelectSettings
-                    data={dataRow}
-                    states={states}
                     onChange={onChange}
+                    keyDownload={dataRow.keyDownload}
+                    value={states[dataRow.keyDownload]}
+                    disabled={states.disableAll}
+                    options={dataRow.download}
                 />
             )
         ) : (
-            <InputNumber data={dataRow} states={states} onChange={onChange} />
+            <InputNumber
+                onChange={onChange}
+                keyDownload={dataRow.keyDownload}
+                maxValue={dataRow.maxValue}
+                value={states[dataRow.keyDownload]}
+            />
         )}
     </>
 )

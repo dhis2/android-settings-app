@@ -8,9 +8,11 @@ const ProgramGlobalSettings = ({ states, data, handleChange }) => (
     <React.Fragment>
         <div className={inputStyles.container__initial}>
             <SelectSettings
-                data={GlobalSettingLevel}
-                states={states}
                 onChange={handleChange}
+                keyDownload={GlobalSettingLevel.keyDownload}
+                value={states[GlobalSettingLevel.keyDownload]}
+                disabled={states.disableAll}
+                options={GlobalSettingLevel.download}
                 label={GlobalSettingLevel.option}
             />
         </div>

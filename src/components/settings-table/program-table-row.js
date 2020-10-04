@@ -29,15 +29,19 @@ const ProgramTableRow = ({ dataRow, states, onChange }) => (
                 {Array.isArray(dataRow.download) === true ? (
                     <SelectSettings
                         key={dataRow.keyDownload}
-                        data={dataRow}
                         onChange={onChange}
-                        states={states}
+                        keyDownload={dataRow.keyDownload}
+                        value={states[dataRow.keyDownload]}
+                        disabled={states.disableAll}
+                        options={dataRow.download}
                     />
                 ) : (
                     <InputNumber
-                        data={dataRow}
-                        states={states}
                         onChange={onChange}
+                        keyDownload={dataRow.keyDownload}
+                        maxValue={dataRow.maxValue}
+                        value={states[dataRow.keyDownload]}
+                        disabled={states.disableAll}
                     />
                 )}
             </div>
