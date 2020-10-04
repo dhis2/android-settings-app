@@ -42,21 +42,30 @@ const GeneralForm = ({
         />
 
         <SyncCheckboxField
-            syncElement={generalSettingsFormSections.encryptDB}
-            handleForm={handleForm}
+            label={generalSettingsFormSections.encryptDB.label}
+            helpText={generalSettingsFormSections.encryptDB.helpText}
+            name={generalSettingsFormSections.encryptDB.syncType}
+            checked={
+                handleForm.fields[
+                    generalSettingsFormSections.encryptDB.syncType
+                ]
+            }
+            disabled={handleForm.fields.disableAll}
+            onChange={handleForm.handleEncryptDialog.onChange}
         />
 
         <ButtonField
-            syncElement={generalSettingsFormSections.disableSettings}
-            handleForm={handleForm}
-            handleDisableSettings={handleDisableSettings}
+            label={generalSettingsFormSections.disableSettings.label}
+            helpText={generalSettingsFormSections.disableSettings.helpText}
+            onOpen={handleDisableSettings.open}
+            disabled={handleForm.fields.disableAll}
         />
 
         <FooterActionButtons
-            disableSave={handleForm.disableSave}
-            disableReset={handleForm.fields.disableAll}
-            clickReset={handleForm.handleReset}
-            handleSaveDialog={handleSaveDialog}
+            saveButtonDisabled={handleForm.disableSave}
+            resetButtonDisabled={handleForm.fields.disableAll}
+            onResetClick={handleForm.handleReset}
+            onSave={handleSaveDialog.open}
         />
     </form>
 )
