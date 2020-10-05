@@ -31,6 +31,7 @@ const InputChoice = ({ dataRow, states, onChange }) => (
                 keyDownload={dataRow.keyDownload}
                 maxValue={dataRow.maxValue}
                 value={states[dataRow.keyDownload]}
+                disabled={states.disableAll}
             />
         )}
     </>
