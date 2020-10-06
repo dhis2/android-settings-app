@@ -4,22 +4,18 @@ import DataSetTableRow from './dataset-table-row'
 import { periodTypeConstants } from '../../constants/data-set-settings'
 
 const DataSetTable = props => {
-    const [dataSetSelected, setDataset] = useState(props.dataSetSelected)
+    const [dataSet, setDataset] = useState(props.dataSetSelected)
     const [dataSetData, setData] = useState(props.data)
     const [periodType, setPeriodType] = useState('')
     const [defaultValue, setDefault] = useState('')
     const [dataSetFilter, setDataSetFiltered] = useState('')
     const [selected, setSelected] = useState(false)
 
-    const checkPeriodType = edit => {
+    const checkPeriodType = () => {
         if (props.dataSetSelected !== '') {
             const dataSetSelected = props.completeListOptions.filter(
-                dataSet => dataSet.id === props.dataSetSelected
+                dataSetOption => dataSetOption.id === props.dataSetSelected
             )
-            if (!edit) {
-                props.states.periodDSDownload =
-                    periodTypeConstants[dataSetSelected[0].periodType].default
-            }
 
             setDataset(props.dataSetSelected)
             setDataSetFiltered(dataSetSelected)
@@ -33,15 +29,13 @@ const DataSetTable = props => {
 
     useEffect(() => {
         if (props.dataSetSelected !== '') {
-            if (!dataSetSelected || dataSetSelected !== props.dataSetSelected) {
+            if (!dataSet || !periodType || dataSet !== props.dataSetSelected) {
                 checkPeriodType()
-            } else if (!periodType) {
-                checkPeriodType(true)
             }
         }
     })
 
-    if (!dataSetSelected || !periodType) {
+    if (!dataSet || !periodType || props.dataSetSelected === '') {
         return null
     } else {
         return (

@@ -10,6 +10,7 @@ import {
     DataSpecificSetting,
     DEFAULT,
     SPECIFIC,
+    SPECIFIC_SETTINGS,
 } from '../../../constants/data-set-settings'
 import GlobalSpecificSettings from '../../../pages/global-specific-settings'
 import { DATASET_SETTINGS } from '../../../constants/data-store'
@@ -275,13 +276,32 @@ class DataSetSettings extends React.Component {
             const name = typeof key === 'string' ? key : e.name
             const value = typeof key === 'string' ? e.selected : e.value
 
-            this.setState({
-                ...this.state,
-                specificSetting: {
-                    ...this.state.specificSetting,
-                    [name]: parseValueBySettingType(name, value),
-                },
-            })
+            if (name === 'name') {
+                const dataSetSelected = this.dataSetListComplete.filter(
+                    dataSetOption => dataSetOption.id === e.selected
+                )
+                const settings = populateSettingObject(
+                    SPECIFIC_SETTINGS,
+                    dataSetSelected
+                )
+
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        ...settings,
+                        [name]: parseValueBySettingType(name, value),
+                    },
+                })
+            } else {
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        [name]: parseValueBySettingType(name, value),
+                    },
+                })
+            }
         },
     }
 
