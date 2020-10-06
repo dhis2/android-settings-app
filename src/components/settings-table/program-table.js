@@ -4,7 +4,7 @@ import ProgramTableRow from './program-table-row'
 import Wrapper from '../wrapper'
 
 const ProgramTable = props => {
-    const [programSelected, setProgram] = useState(props.programSelected)
+    const [program, setProgram] = useState(props.programSelected)
     const [programData, setData] = useState(props.data)
     const [programFilter, setProgramFiltered] = useState('')
     const [programType, setProgramType] = useState('')
@@ -12,7 +12,7 @@ const ProgramTable = props => {
     const checkProgramType = () => {
         if (props.programSelected !== '') {
             const programSelected = props.completeListOptions.filter(
-                program => program.id === props.programSelected
+                programOption => programOption.id === props.programSelected
             )
             setProgram(props.programSelected)
             setProgramFiltered(programSelected)
@@ -22,17 +22,13 @@ const ProgramTable = props => {
 
     useEffect(() => {
         if (props.programSelected !== '') {
-            if (
-                !programSelected ||
-                !programType ||
-                programSelected !== props.programSelected
-            ) {
+            if (!program || !programType || program !== props.programSelected) {
                 checkProgramType()
             }
         }
     })
 
-    if (!programSelected || !programType) {
+    if (!program || !programType || props.programSelected === '') {
         return null
     } else {
         return (
