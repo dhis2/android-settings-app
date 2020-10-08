@@ -1,15 +1,21 @@
 import React from 'react'
 import cx from 'classnames'
+import PropTypes from '@dhis2/prop-types'
 import styles from '../styles/TableActions.module.css'
 
-const Wrapper = props => (
+const Wrapper = ({ children, fullWidth }) => (
     <div
         className={cx(styles.container, {
-            [styles.fullContainer]: props.fullWidth,
+            [styles.fullContainer]: fullWidth,
         })}
     >
-        {props.children}
+        {children}
     </div>
 )
+
+Wrapper.propTypes = {
+    children: PropTypes.element.isRequired,
+    fullWidth: PropTypes.bool,
+}
 
 export default Wrapper
