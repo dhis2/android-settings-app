@@ -45,8 +45,13 @@ const RunTest = ({ states }) => {
                                         {test.title}
                                     </p>
                                     <p className={itemStyles.subItemItem}>
-                                        {i18n.t('Recommended maximum:')}
-                                        {test.maxValue}
+                                        {i18n.t(
+                                            'Recommended maximum: {{maxValue}}',
+                                            {
+                                                nsSeparator: '---',
+                                                maxValue: test.maxValue,
+                                            }
+                                        )}
                                     </p>
                                 </div>
                             </Grid>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-09T18:40:06.175Z\n"
-"PO-Revision-Date: 2020-09-09T18:40:06.175Z\n"
+"POT-Creation-Date: 2020-10-08T23:47:41.991Z\n"
+"PO-Revision-Date: 2020-10-08T23:47:41.991Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -165,6 +165,9 @@ msgstr ""
 msgid "Summary Settings"
 msgstr ""
 
+msgid "Recommended maximum: {{maxValue}}"
+msgstr ""
+
 msgid "User sync test"
 msgstr ""
 
@@ -308,10 +311,10 @@ msgstr ""
 msgid "Number of reserved values downloaded per TEI attribute"
 msgstr ""
 
-msgid "metadata download size"
+msgid "metadata download size (KB)"
 msgstr ""
 
-msgid "data download size"
+msgid "data download size (KB)"
 msgstr ""
 
 msgid "{{teiDownload}} TEI"
