@@ -28,7 +28,6 @@ import { apiLoadProgramSettings } from '../../../modules/programs/apiLoadSetting
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
 import SectionWrapper from '../section-wrapper'
 
-let programData = GlobalProgram
 const specificProgramData = SpecificProgram
 const {
     settingDownload,
@@ -97,6 +96,7 @@ class ProgramSettings extends React.Component {
         },
         openErrorAlert: false,
         disableAll: false,
+        programDefaultValues: GlobalProgram,
     }
 
     /**
@@ -142,17 +142,27 @@ class ProgramSettings extends React.Component {
 
         if (name === SETTING_DOWNLOAD) {
             if (value === GLOBAL || value === PER_ORG_UNIT) {
-                programData = GlobalProgramSpecial
+                this.setState({
+                    ...this.state,
+                    programDefaultValues: GlobalProgramSpecial,
+                    disableSave: false,
+                    [name]: parseValueByType(name, value),
+                })
             } else {
-                programData = GlobalProgram
+                this.setState({
+                    ...this.state,
+                    programDefaultValues: GlobalProgram,
+                    disableSave: false,
+                    [name]: parseValueByType(name, value),
+                })
             }
+        } else {
+            this.setState({
+                ...this.state,
+                disableSave: false,
+                [name]: parseValueByType(name, value),
+            })
         }
-
-        this.setState({
-            ...this.state,
-            disableSave: false,
-            [name]: parseValueByType(name, value),
-        })
     }
 
     /**
@@ -206,7 +216,6 @@ class ProgramSettings extends React.Component {
      * Specific settings: no specific settings
      */
     handleReset = () => {
-        programData = GlobalProgramSpecial
         const settings = populateProgramObject(DEFAULT)
         this.specificSettings = {}
         this.specificSettingsRows = []
@@ -215,6 +224,7 @@ class ProgramSettings extends React.Component {
 
         this.setState({
             ...settings,
+            programDefaultValues: GlobalProgramSpecial,
             disableSave: false,
             submitDataStore: {
                 success: false,
@@ -413,7 +423,7 @@ class ProgramSettings extends React.Component {
                     programListComplete: this.programListComplete,
                     specificSettingsRows: this.specificSettingsRows,
                     globalSettings: this.globalSettings,
-                    globalDefaultValues: programData,
+                    globalDefaultValues: this.state.programDefaultValues,
                 })
                     .then(res => {
                         const {
@@ -431,10 +441,10 @@ class ProgramSettings extends React.Component {
                         this.programListComplete = programListComplete
                         this.specificSettingsRows = specificSettingsRows
                         this.globalSettings = globalSettings
-                        programData = globalDefaultValues
 
                         this.setState({
                             ...settings.globalSettings,
+                            programDefaultValues: globalDefaultValues,
                             loading: false,
                         })
                     })
@@ -455,7 +465,7 @@ class ProgramSettings extends React.Component {
                 unsavedChanges={!this.state.disableSave}
             >
                 <GlobalSpecificSettings
-                    programTableData={programData}
+                    programTableData={this.state.programDefaultValues}
                     states={this.state}
                     handleTableChange={this.handleChange}
                     specificSettings={this.programNamesList}
