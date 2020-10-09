@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n'
 export const metadataOptions = [
     {
         value: '24h',
-        label: '24h',
+        label: '1 Day',
     },
     {
         value: '7d',
-        label: '7d',
+        label: '1 Week',
     },
     {
         value: 'manual',
@@ -18,23 +18,23 @@ export const metadataOptions = [
 export const dataOptions = [
     {
         value: '30m',
-        label: '30m',
+        label: '30 Minutes',
     },
     {
         value: '1h',
-        label: '1h',
+        label: '1 Hour',
     },
     {
         value: '6h',
-        label: '6h',
+        label: '6 Hours',
     },
     {
         value: '12h',
-        label: '12h',
+        label: '12 Hours',
     },
     {
         value: '24h',
-        label: '24h',
+        label: '1 Day',
     },
     {
         value: 'manual',
