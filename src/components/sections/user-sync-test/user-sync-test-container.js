@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
-
 import TestAndroid from './test-android'
 import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
 import {
@@ -16,9 +14,8 @@ import { splitArray } from '../../../modules/splitArray'
 import { prepareDataSizeRequest } from '../../../modules/userSyncTest/prepareDataSizeRequest'
 import { testAndroidDataConstants } from '../../../constants/test-android'
 import { prepareMetadataRequest } from '../../../modules/userSyncTest/prepareMetadataSizeRequest'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import { Select } from '../../inputs'
 import SectionWrapper from '../section-wrapper'
+import { getRequestDownloadSize } from '../../../utils/getRequestDownloadSize'
 
 class UserSyncTestContainer extends React.Component {
     constructor(props) {
@@ -504,6 +501,27 @@ class UserSyncTestContainer extends React.Component {
         this.getUserData()
     }
 
+    /***/
+
+    /*getRequestDownloadSize= (url) => {
+        var fileSize = '';
+        var http = new XMLHttpRequest();
+        http.open('HEAD', url, true); // false = Synchronous
+
+        http.send(null); // it will stop here until this http request is complete
+
+        // when we are here, we already have a response, b/c we used Synchronous XHR
+
+        if (http.status === 200) {
+            fileSize = http.getResponseHeader('content-length');
+            console.log('fileSize = ' + fileSize);
+        }
+
+        return fileSize;
+    }*/
+
+    /***/
+
     componentDidMount() {
         this.updateRecommendedValue()
         this.props.d2.models.users
@@ -520,6 +538,15 @@ class UserSyncTestContainer extends React.Component {
                     loading: false,
                 })
             })
+
+        const urlDataStore = 'http://localhost:8034/api/31/dataStore'
+        getRequestDownloadSize(urlDataStore).then(r =>
+            console.log({ receivedLength: r })
+        )
+        // this.getRequestDownloadSize("https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/fonts/devicon.woff?-hdf3wh").then(second => console.log('second result:',{second}))
+        getRequestDownloadSize(
+            'http://localhost:8034/api/31/programs?fields=id%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CshortName%2CdisplayShortName%2Cdescription%2CdisplayDescription%2Cversion%2ConlyEnrollOnce%2CenrollmentDateLabel%2CdisplayIncidentDate%2CincidentDateLabel%2Cregistration%2CselectEnrollmentDatesInFuture%2CdataEntryMethod%2CignoreOverdueEvents%2CrelationshipFromA%2CselectIncidentDatesInFuture%2CcaptureCoordinates%2CuseFirstStageDuringRegistration%2CdisplayFrontPageList%2CprogramType%2CrelationshipType%5Bid%5D%2CrelationshipText%2CprogramTrackedEntityAttributes%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CshortName%2CdisplayShortName%2Cdescription%2CdisplayDescription%2Cmandatory%2Cprogram%5Bid%5D%2CallowFutureDate%2CdisplayInList%2CsortOrder%2Csearchable%2CtrackedEntityAttribute%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CshortName%2CdisplayShortName%2Cdescription%2CdisplayDescription%2Cpattern%2CsortOrderInListNoProgram%2CvalueType%2Cexpression%2CprogramScope%2CdisplayInListNoProgram%2Cgenerated%2CdisplayOnVisitSchedule%2CorgunitScope%2Cunique%2Cinherit%2CoptionSet%5Bid%5D%2Cstyle%5Bcolor%2Cicon%5D%2Caccess%5Bread%5D%2CformName%5D%2CrenderType%5D%2CrelatedProgram%5Bid%5D%2CtrackedEntityType%5Bid%5D%2CcategoryCombo%5Bid%5D%2Caccess%5Bdata%5Bwrite%5D%5D%2CprogramIndicators%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CshortName%2CdisplayShortName%2Cdescription%2CdisplayDescription%2CdisplayInForm%2Cexpression%2CdimensionItem%2Cfilter%2Cdecimals%2CaggregationType%2Cprogram%5Bid%5D%2ClegendSets%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2Csymbolizer%2Clegends%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CstartValue%2CendValue%2Ccolor%5D%5D%5D%2CprogramStages%5Bid%5D%2CprogramRuleVariables%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2CuseCodeForOptionSet%2Cprogram%5Bid%5D%2CprogramStage%5Bid%5D%2CdataElement%5Bid%5D%2CtrackedEntityAttribute%5Bid%5D%2CprogramRuleVariableSourceType%5D%2Cstyle%5Bcolor%2Cicon%5D%2CexpiryDays%2CcompleteEventsExpiryDays%2CexpiryPeriodType%2CminAttributesRequiredToSearch%2CmaxTeiCountToReturn%2CfeatureType%2CprogramSections%5Bid%2Ccode%2Cname%2CdisplayName%2Ccreated%2ClastUpdated%2Cdeleted%2Cdescription%2Cprogram%5Bid%5D%2CprogramTrackedEntityAttribute%5Bid%5D%2CsortOrder%2Cdescription%2Cstyle%5Bcolor%2Cicon%5D%2CformName%5D&paging=false&filter=id%3Ain%3A%5Bq04UBOqq3rp%2Ckla3mAPgvCH%2CM3xtLkYBlKI%2Cuy2gU8kT1jF%2CMoUd5BTQ3lY%2CVBqh0ynB2wv%2CeBAyeGv0exc%2CqDkgAbB5Jlk%2CIpHINAT79UW%2ClxAQ7Zs9VYR%2CbMcwwoVnbSR%2CWSGAb5XwJ3Y%2Cur1Edk5Oe2n%2CfDd25txQckK%5D'
+        ).then(forth => console.log({ forth }))
 
         Promise.all([
             api.getValue(NAMESPACE, PROGRAM_SETTINGS),
