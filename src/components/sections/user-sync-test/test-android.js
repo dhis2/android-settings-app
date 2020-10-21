@@ -15,6 +15,9 @@ const TestAndroid = ({
     searchFieldValue,
     runTest,
     states,
+    maxValues,
+    loadValues,
+    testValues,
     handleRun,
     disabledTest,
     options,
@@ -48,7 +51,14 @@ const TestAndroid = ({
                 options={options}
             />
 
-            {runTest && <RunTest states={states} />}
+            {runTest && (
+                <RunTest
+                    //states={states}
+                    maxValues={maxValues}
+                    loadValues={loadValues}
+                    testValues={testValues}
+                />
+            )}
 
             <Button
                 className={buttonStyles.button__add}
@@ -66,7 +76,7 @@ TestAndroid.propTypes = {
     clearSearchField: PropTypes.func.isRequired,
     searchFieldValue: PropTypes.string.isRequired,
     runTest: PropTypes.bool.isRequired,
-    states: PropTypes.object.isRequired,
+    //states: PropTypes.object.isRequired,
     handleRun: PropTypes.func.isRequired,
     disabledTest: PropTypes.bool.isRequired,
 }
