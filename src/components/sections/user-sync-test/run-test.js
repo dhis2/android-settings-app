@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
+import cx from 'classnames'
 
 const RunTest = ({ states }) => {
     return (
@@ -21,14 +22,14 @@ const RunTest = ({ states }) => {
                                     <CircularLoader small />
                                 ) : (
                                     <p
-                                        className={`${
-                                            itemStyles.subItemBigItem
-                                        } ${
-                                            states[test.state] >=
-                                            states[test.maxValueState]
-                                                ? itemStyles.maxValue
-                                                : ''
-                                        }`}
+                                        className={cx(
+                                            itemStyles.subItemBigItem,
+                                            {
+                                                [itemStyles.maxValue]:
+                                                    states[test.state] >=
+                                                    states[test.maxValueState],
+                                            }
+                                        )}
                                     >
                                         {states[test.state]}
                                     </p>
@@ -44,8 +45,13 @@ const RunTest = ({ states }) => {
                                         {test.title}
                                     </p>
                                     <p className={itemStyles.subItemItem}>
-                                        {i18n.t('Recommended maximum:')}{' '}
-                                        {test.maxValue}
+                                        {i18n.t(
+                                            'Recommended maximum: {{maxValue}}',
+                                            {
+                                                nsSeparator: '---',
+                                                maxValue: test.maxValue,
+                                            }
+                                        )}
                                     </p>
                                 </div>
                             </Grid>

@@ -4,7 +4,11 @@ import { CircularLoader } from '@dhis2/ui-core'
 
 import TestAndroid from './test-android'
 import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
-import { NAMESPACE, PROGRAM_SETTINGS } from '../../../constants/data-store'
+import {
+    GENERAL_SETTINGS,
+    NAMESPACE,
+    PROGRAM_SETTINGS,
+} from '../../../constants/data-store'
 
 import api from '../../../utils/api'
 import { getDownloadSize } from '../../../modules/userSyncTest/downloadSize'
@@ -30,6 +34,7 @@ class UserSyncTestContainer extends React.Component {
         this.globalSettings = undefined
         this.specificSettings = undefined
         this.organisationUnitsCapture = undefined
+        this.reservedValues = 0
     }
 
     state = {
@@ -59,6 +64,9 @@ class UserSyncTestContainer extends React.Component {
         programRuleLoad: false,
         metadataLoad: false,
         dataLoad: false,
+        reservedValueNumber: 0,
+        maxValueReservedValue: 0,
+        reservedValuesLoad: false,
     }
 
     updateRecommendedValue = () => {
@@ -88,6 +96,7 @@ class UserSyncTestContainer extends React.Component {
             programRuleNumber: 0,
             metadataSize: 0,
             dataSize: 0,
+            reservedValueNumber: 0,
             loadData: false,
             orgUnitLoad: false,
             dataSetLoad: false,
@@ -95,6 +104,7 @@ class UserSyncTestContainer extends React.Component {
             programRuleLoad: false,
             metadataLoad: false,
             dataLoad: false,
+            reservedValuesLoad: false,
         })
     }
 
@@ -189,6 +199,7 @@ class UserSyncTestContainer extends React.Component {
                 programRuleLoad: false,
                 metadataLoad: false,
                 dataLoad: false,
+                reservedValuesLoad: true,
             })
 
             await Promise.all(promisesOrganisationUnits).then(data => {
@@ -421,6 +432,8 @@ class UserSyncTestContainer extends React.Component {
                                 programRuleNumber: programRuleResult.toArray()
                                     .length,
                                 metadataSize: metadata,
+                                reservedValueNumber: this.reservedValues,
+                                reservedValuesLoad: false,
                             })
                         }
                     )
@@ -506,10 +519,14 @@ class UserSyncTestContainer extends React.Component {
                 })
             })
 
-        api.getValue(NAMESPACE, PROGRAM_SETTINGS)
+        Promise.all([
+            api.getValue(NAMESPACE, PROGRAM_SETTINGS),
+            api.getValue(NAMESPACE, GENERAL_SETTINGS),
+        ])
             .then(res => {
-                this.globalSettings = res.value.globalSettings
-                this.specificSettings = res.value.specificSettings
+                this.globalSettings = res[0].value.globalSettings
+                this.specificSettings = res[0].value.specificSettings
+                this.reservedValues = res[1].value.reservedValues
             })
             .catch(e => {
                 console.error(e)
