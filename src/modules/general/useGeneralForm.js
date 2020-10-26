@@ -33,29 +33,11 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
     const onChange = e => {
         let { value } = e
-        if (value === manual) {
-            handleManualAlert.open(value, e.name)
-        } else {
-            if (e.name === RESERVED_VALUES) {
-                value = Math.min(maxValues.reservedValues, parseInt(value))
-
-                setFields({ ...fields, [e.name]: value })
-                setDisableSave(
-                    errorNumber.numberSmsToSend ||
-                        errorNumber.numberSmsConfirmation
-                )
-                setSubmitDataStore({
-                    success: false,
-                    error: false,
-                })
-            } else if (e.name === SMS_TO_SEND || e.name === SMS_CONFIRMATION) {
-                validatePhoneNumber(e)
-            }
+        if (e.name === RESERVED_VALUES) {
+            value = value <= 0 ? 0 : Math.min(maxValues.reservedValues, value)
         }
-    }
 
-    const onChangeSelect = (e, name) => {
-        setFields({ ...fields, [name]: e.selected })
+        setFields({ ...fields, [e.name]: value })
         setDisableSave(
             errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
         )
@@ -63,6 +45,25 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             success: false,
             error: false,
         })
+
+        if (e.name === SMS_TO_SEND || e.name === SMS_CONFIRMATION) {
+            validatePhoneNumber(e)
+        }
+    }
+
+    const onChangeSelect = (e, name) => {
+        if (e.selected === manual) {
+            handleManualAlert.open(e.selected, name)
+        } else {
+            setFields({ ...fields, [name]: e.selected })
+            setDisableSave(
+                errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
+            )
+            setSubmitDataStore({
+                success: false,
+                error: false,
+            })
+        }
     }
 
     /**
@@ -192,7 +193,6 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
             name,
             selected: fields[name],
             disabled: fields.disableAll,
-            onChange,
         }),
         getCheckbox: name => ({
             name,
