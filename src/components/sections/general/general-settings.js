@@ -17,62 +17,54 @@ const GeneralSettings = ({
     generalForm,
     handleSaveDialog,
     handleDisableSettings,
-}) => {
-    return (
-        <>
-            <div>
-                <p className={styles.mainContent__title_headerBar}>
-                    {i18n.t('General download sync settings')}
-                </p>
-                <p className={styles.mainContent__subtitle}>
-                    {i18n.t('These settings apply to all Android users.')}
-                </p>
-            </div>
+}) => (
+    <>
+        <div>
+            <p className={styles.mainContent__title_headerBar}>
+                {i18n.t('General download sync settings')}
+            </p>
+            <p className={styles.mainContent__subtitle}>
+                {i18n.t('These settings apply to all Android users.')}
+            </p>
+        </div>
 
-            <GeneralForm
-                handleForm={generalForm}
-                handleSaveDialog={handleSaveDialog}
-                handleDisableSettings={handleDisableSettings}
-            />
+        <GeneralForm
+            handleForm={generalForm}
+            handleSaveDialog={handleSaveDialog}
+            handleDisableSettings={handleDisableSettings}
+        />
 
-            <DialogEncrypt
-                openDialog={generalForm.openEncryptDialog}
-                checked={generalForm.fields.encryptDB}
-                onClose={generalForm.handleEncryptDialog.onClose}
-                handleEncrypt={generalForm.handleEncryptDialog.handleEncrypt}
-            />
+        <DialogEncrypt
+            openDialog={generalForm.openEncryptDialog}
+            checked={generalForm.fields.encryptDB}
+            onClose={generalForm.handleEncryptDialog.onClose}
+            handleEncrypt={generalForm.handleEncryptDialog.handleEncrypt}
+        />
 
-            <DialogSaveData
-                openDialog={state.openDialog.saveData}
-                onClose={handleSaveDialog.close}
-                saveDataStore={handleSaveDialog.save}
-            />
+        <DialogSaveData
+            openDialog={state.openDialog.saveData}
+            onClose={handleSaveDialog.close}
+            saveDataStore={handleSaveDialog.save}
+        />
 
-            <DialogDisableSettings
-                openDialog={state.openDialog.disableSettings}
-                onClose={handleDisableSettings.cancel}
-                disableSettings={handleDisableSettings.disableSettings}
-            />
+        <DialogDisableSettings
+            openDialog={state.openDialog.disableSettings}
+            onClose={handleDisableSettings.cancel}
+            disableSettings={handleDisableSettings.disableSettings}
+        />
 
-            <SuccessAlert
-                show={
-                    state.submitDataStore.success &&
-                    !state.submitDataStore.error
-                }
-            />
+        <SuccessAlert
+            show={state.submitDataStore.success && !state.submitDataStore.error}
+        />
 
-            <SaveErrorAlert
-                show={
-                    state.submitDataStore.error &&
-                    !state.submitDataStore.success
-                }
-                message={state.submitDataStore.message}
-            />
+        <SaveErrorAlert
+            show={state.submitDataStore.error && !state.submitDataStore.success}
+            message={state.submitDataStore.message}
+        />
 
-            <ErrorAlert show={state.openErrorAlert} />
-        </>
-    )
-}
+        <ErrorAlert show={state.openErrorAlert} />
+    </>
+)
 
 GeneralSettings.propTypes = {
     state: PropTypes.object.isRequired,

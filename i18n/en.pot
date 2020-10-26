@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-10-08T23:47:41.991Z\n"
-"PO-Revision-Date: 2020-10-08T23:47:41.991Z\n"
+"POT-Creation-Date: 2020-10-21T15:10:29.336Z\n"
+"PO-Revision-Date: 2020-10-21T15:10:29.336Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -103,6 +103,9 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "Reset all values to default"
+msgstr ""
+
 msgid "404 Page not found."
 msgstr ""
 
@@ -127,11 +130,6 @@ msgstr ""
 msgid "SMS Gateway phone number"
 msgstr ""
 
-msgid ""
-"This phone number is not valid. Must start with + and be at least 4 "
-"characters long."
-msgstr ""
-
 msgid "Must start with + and be at least 4 characters long."
 msgstr ""
 
@@ -151,9 +149,6 @@ msgid ""
 msgstr ""
 
 msgid "This will disable and remove all General, Program and Data set settings."
-msgstr ""
-
-msgid "Reset all values to default"
 msgstr ""
 
 msgid "General download sync settings"
@@ -198,6 +193,29 @@ msgstr ""
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
+msgid ""
+"This phone number is not valid. Must start with + and be at least 4 "
+"characters long."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
