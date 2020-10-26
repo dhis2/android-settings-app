@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import { TwoPanel, MainContent } from '@dhis2/d2-ui-core'
-import { Paper } from '@material-ui/core'
+import { Card } from '@dhis2/ui'
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import menuSection from '../constants/menu-sections'
-
 import { D2Shim } from '../utils/D2Shim'
 import layoutStyles from '../styles/Layout.module.css'
 import DialogFirstLaunch from '../components/dialog/dialog-first-launch'
@@ -61,7 +60,7 @@ const Layout = () => {
             <TwoPanel mainStyle={styles.twoPanelMain}>
                 <SideBar />
                 <MainContent>
-                    <Paper className={layoutStyles.paper__layout}>
+                    <Card className={layoutStyles.paper__layout}>
                         <Switch>
                             <Route path="/" exact>
                                 <D2Shim>
@@ -92,7 +91,7 @@ const Layout = () => {
                                 <PageNotFound />
                             </Route>
                         </Switch>
-                    </Paper>
+                    </Card>
                 </MainContent>
             </TwoPanel>
         </HashRouter>
