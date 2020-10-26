@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n'
 export const metadataOptions = [
     {
         value: '24h',
-        label: '1 Day',
+        label: i18n.t('1 Day'),
     },
     {
         value: '7d',
-        label: '1 Week',
+        label: i18n.t('1 Week'),
     },
     {
         value: 'manual',
@@ -18,23 +18,23 @@ export const metadataOptions = [
 export const dataOptions = [
     {
         value: '30m',
-        label: '30 Minutes',
+        label: i18n.t('30 Minutes'),
     },
     {
         value: '1h',
-        label: '1 Hour',
+        label: i18n.t('1 Hour'),
     },
     {
         value: '6h',
-        label: '6 Hours',
+        label: i18n.t('6 Hours'),
     },
     {
         value: '12h',
-        label: '12 Hours',
+        label: i18n.t('12 Hours'),
     },
     {
         value: '24h',
-        label: '1 Day',
+        label: i18n.t('1 Day'),
     },
     {
         value: 'manual',
@@ -60,3 +60,65 @@ export const androidSettingsDefault = {
 
 export const RESERVED_VALUES = 'reservedValues'
 export const manual = 'manual'
+export const SMS_TO_SEND = 'numberSmsToSend'
+export const SMS_CONFIRMATION = 'numberSmsConfirmation'
+
+export const generalSettingsFormSections = {
+    metadata: {
+        syncType: 'metadataSync',
+        label: i18n.t('How often should metadata sync?'),
+        options: metadataOptions,
+        helpText: '',
+    },
+    data: {
+        syncType: 'dataSync',
+        label: i18n.t('How often should data sync?'),
+        options: dataOptions,
+        helpText: '',
+    },
+    smsToSend: {
+        syncType: 'numberSmsToSend',
+        label: i18n.t('SMS Gateway phone number'),
+        options: '',
+        helpText: i18n.t(
+            'Must start with + and be at least 4 characters long.'
+        ),
+        validationText: i18n.t(
+            'This phone number is not valid. Must start with + and be at least 4 characters long.'
+        ),
+    },
+    smsConfirmation: {
+        syncType: 'numberSmsConfirmation',
+        label: i18n.t('SMS Result Sender phone number'),
+        options: '',
+        helpText: i18n.t(
+            'Must start with + and be at least 4 characters long.'
+        ),
+        validationText: i18n.t(
+            'This phone number is not valid. Must start with + and be at least 4 characters long.'
+        ),
+    },
+    reservedValues: {
+        syncType: 'reservedValues',
+        label: i18n.t('Reserved values downloaded per TEI attribute'),
+        options: '',
+        helpText: '',
+        maxValues: maxValues.reservedValues,
+    },
+    encryptDB: {
+        syncType: 'encryptDB',
+        label: i18n.t('Encrypt device database'),
+        options: '',
+        helpText: i18n.t(
+            'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.'
+        ),
+    },
+    disableSettings: {
+        syncType: 'disableSettings',
+        label: i18n.t('Disable all settings'),
+        options: '',
+        helpText: i18n.t(
+            'This will disable and remove all General, Program and Data set settings.'
+        ),
+    },
+}

@@ -3,6 +3,8 @@ import {
     manual,
     maxValues,
     RESERVED_VALUES,
+    SMS_CONFIRMATION,
+    SMS_TO_SEND,
 } from '../../constants/android-settings'
 import { useState } from 'react'
 import { validateNumber } from './validatePhoneNumber'
@@ -30,24 +32,37 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
     }
 
     const onChange = e => {
-        e.preventDefault()
-
-        let { value } = e.target
-
+        let { value } = e
         if (value === manual) {
-            handleManualAlert.open(value, e.target.name)
+            handleManualAlert.open(value, e.name)
         } else {
-            if (e.target.name === RESERVED_VALUES) {
+            if (e.name === RESERVED_VALUES) {
                 value = Math.min(maxValues.reservedValues, parseInt(value))
-            }
 
-            setFields({ ...fields, [e.target.name]: value })
-            setDisableSave(errorNumber.gateway || errorNumber.confirmation)
-            setSubmitDataStore({
-                success: false,
-                error: false,
-            })
+                setFields({ ...fields, [e.name]: value })
+                setDisableSave(
+                    errorNumber.numberSmsToSend ||
+                        errorNumber.numberSmsConfirmation
+                )
+                setSubmitDataStore({
+                    success: false,
+                    error: false,
+                })
+            } else if (e.name === SMS_TO_SEND || e.name === SMS_CONFIRMATION) {
+                validatePhoneNumber(e)
+            }
         }
+    }
+
+    const onChangeSelect = (e, name) => {
+        setFields({ ...fields, [name]: e.selected })
+        setDisableSave(
+            errorNumber.numberSmsToSend || errorNumber.numberSmsConfirmation
+        )
+        setSubmitDataStore({
+            success: false,
+            error: false,
+        })
     }
 
     /**
@@ -78,10 +93,6 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
                 selection: {},
             })
         },
-    }
-
-    const onCheckboxChange = event => {
-        setFields({ ...fields, [event.name]: event.checked })
     }
 
     /**
@@ -128,25 +139,31 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
 
     /**
      * Checks if sms number or confirmation number is valid
+     * validates number
      */
     const validatePhoneNumber = e => {
-        const { name } = e.target
-
-        if (![null, '', false].includes(fields[name])) {
-            const validInput = validateNumber(fields[name])
+        const { name, value } = e
+        const errorKeyName = Object.keys(errorNumber).filter(
+            errorName => errorName !== e.name
+        )[0]
+        if (![null, '', false, undefined].includes(value)) {
+            const validInput = validateNumber(value)
             if (!validInput) {
                 setErrorNumber({ ...errorNumber, [name]: true })
                 setDisableSave(true)
             } else {
                 setErrorNumber({ ...errorNumber, [name]: false })
+                setDisableSave(errorNumber[errorKeyName])
             }
         } else {
             setErrorNumber({ ...errorNumber, [name]: false })
+            setDisableSave(errorNumber[errorKeyName])
         }
     }
 
     return {
         fields,
+        setFields,
         errorNumber,
         openEncryptDialog,
         handleReset,
@@ -154,6 +171,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         disableSave,
         setDisableSave,
         handleEncryptDialog,
+        onChangeSelect,
         handleManualAlert,
         manualAlertDialog,
         getInput: name => ({
@@ -172,15 +190,23 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
         }),
         getSelect: name => ({
             name,
-            value: fields[name],
+            selected: fields[name],
             disabled: fields.disableAll,
             onChange,
         }),
         getCheckbox: name => ({
             name,
             checked: fields[name],
-            onChange: handleEncryptDialog.onChange,
             disabled: fields.disableAll,
+            type: 'checkbox',
+            onChange: handleEncryptDialog.onChange,
+        }),
+        getInputNumber: name => ({
+            name,
+            value: fields[name].toString(),
+            type: 'number',
+            disabled: fields.disableAll,
+            onChange,
         }),
     }
 }

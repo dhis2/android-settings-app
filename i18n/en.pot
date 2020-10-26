@@ -118,6 +118,9 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "Reset all values to default"
+msgstr ""
+
 msgid "404 Page not found."
 msgstr ""
 
@@ -142,11 +145,6 @@ msgstr ""
 msgid "SMS Gateway phone number"
 msgstr ""
 
-msgid ""
-"This phone number is not valid. Must start with + and be at least 4 "
-"characters long."
-msgstr ""
-
 msgid "Must start with + and be at least 4 characters long."
 msgstr ""
 
@@ -168,9 +166,6 @@ msgstr ""
 msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
-msgid "Reset all values to default"
-msgstr ""
-
 msgid "General download sync settings"
 msgstr ""
 
@@ -186,6 +181,9 @@ msgid ""
 msgstr ""
 
 msgid "Summary Settings"
+msgstr ""
+
+msgid "Recommended maximum: {{maxValue}}"
 msgstr ""
 
 msgid "User sync test"
@@ -221,6 +219,29 @@ msgid ""
 msgstr ""
 
 msgid "Manual"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
+msgid ""
+"This phone number is not valid. Must start with + and be at least 4 "
+"characters long."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
@@ -328,10 +349,16 @@ msgstr ""
 msgid "Number of program rules to download"
 msgstr ""
 
-msgid "metadata download size"
+msgid "reserved values per TEI"
 msgstr ""
 
-msgid "data download size"
+msgid "Number of reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "metadata download size (KB)"
+msgstr ""
+
+msgid "data download size (KB)"
 msgstr ""
 
 msgid "{{teiDownload}} TEI"
