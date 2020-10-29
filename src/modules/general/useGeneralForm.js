@@ -1,6 +1,6 @@
 import {
     androidSettingsDefault,
-    manual,
+    MANUAL,
     maxValues,
     RESERVED_VALUES,
     SMS_CONFIRMATION,
@@ -52,7 +52,7 @@ export const useGeneralForm = ({ setSubmitDataStore }) => {
     }
 
     const onChangeSelect = (e, name) => {
-        if (e.selected === manual) {
+        if (e.selected === MANUAL) {
             handleManualAlert.open(e.selected, name)
         } else {
             setFields({ ...fields, [name]: e.selected })
