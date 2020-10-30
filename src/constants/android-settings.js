@@ -1,5 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 
+export const RESERVED_VALUES = 'reservedValues'
+export const MANUAL = 'manual'
+export const SMS_TO_SEND = 'numberSmsToSend'
+export const SMS_CONFIRMATION = 'numberSmsConfirmation'
+
 export const metadataOptions = [
     {
         value: '24h',
@@ -8,6 +13,10 @@ export const metadataOptions = [
     {
         value: '7d',
         label: i18n.t('1 Week'),
+    },
+    {
+        value: MANUAL,
+        label: i18n.t('Manual'),
     },
 ]
 
@@ -32,6 +41,10 @@ export const dataOptions = [
         value: '24h',
         label: i18n.t('1 Day'),
     },
+    {
+        value: MANUAL,
+        label: i18n.t('Manual'),
+    },
 ]
 
 export const maxValues = {
@@ -49,10 +62,6 @@ export const androidSettingsDefault = {
     reservedValues: 100,
     encryptDB: false,
 }
-
-export const RESERVED_VALUES = 'reservedValues'
-export const SMS_TO_SEND = 'numberSmsToSend'
-export const SMS_CONFIRMATION = 'numberSmsConfirmation'
 
 export const generalSettingsFormSections = {
     metadata: {
