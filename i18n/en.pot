@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-12T01:09:55.979Z\n"
-"PO-Revision-Date: 2020-09-12T01:09:55.979Z\n"
+"POT-Creation-Date: 2020-10-30T17:09:59.408Z\n"
+"PO-Revision-Date: 2020-10-30T17:09:59.408Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Values per"
+msgid "Values per {{title}}"
 msgstr ""
 
 msgid "Add/Save"
@@ -198,12 +198,6 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-msgid "Download"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
 msgid "Edit"
 msgstr ""
 
@@ -218,13 +212,13 @@ msgid ""
 "sure you want to leave?"
 msgstr ""
 
-msgid "Manual"
-msgstr ""
-
 msgid "1 Day"
 msgstr ""
 
 msgid "1 Week"
+msgstr ""
+
+msgid "Manual"
 msgstr ""
 
 msgid "30 Minutes"
