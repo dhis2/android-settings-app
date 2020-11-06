@@ -9,22 +9,28 @@ import {
 export const parseValueByType = (name, value) => {
     switch (name) {
         case TEI_DOWNLOAD:
-            value = value ? Math.min(maxValues.teiDownload, parseInt(value)) : 0
+            value =
+                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
+                    ? 0
+                    : Math.min(maxValues.teiDownload, parseInt(value))
             break
         case TEI_DB_TRIMMING:
-            value = value
-                ? Math.min(maxValues.teiDBTrimming, parseInt(value))
-                : 0
+            value =
+                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
+                    ? 0
+                    : Math.min(maxValues.teiDBTrimming, parseInt(value))
             break
         case EVENTS_DOWNLOAD:
-            value = value
-                ? Math.min(maxValues.eventsDownload, parseInt(value))
-                : 0
+            value =
+                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
+                    ? 0
+                    : Math.min(maxValues.eventsDownload, parseInt(value))
             break
         case EVENTS_DB_TRIMMING:
-            value = value
-                ? Math.min(maxValues.eventsDBTrimming, parseInt(value))
-                : 0
+            value =
+                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
+                    ? 0
+                    : Math.min(maxValues.eventsDBTrimming, parseInt(value))
             break
         default:
             break
