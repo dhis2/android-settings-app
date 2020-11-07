@@ -6,31 +6,26 @@ import {
     TEI_DOWNLOAD,
 } from '../../constants/program-settings'
 
+const convertToPositiveInteger = (value, maxValue) => {
+    return Math.min(
+        maxValue,
+        Math.max(0, isNaN(parseInt(value)) ? 0 : parseInt(value))
+    )
+}
+
 export const parseValueByType = (name, value) => {
     switch (name) {
         case TEI_DOWNLOAD:
-            value =
-                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
-                    ? 0
-                    : Math.min(maxValues.teiDownload, parseInt(value))
+            value = convertToPositiveInteger(value, maxValues.teiDownload)
             break
         case TEI_DB_TRIMMING:
-            value =
-                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
-                    ? 0
-                    : Math.min(maxValues.teiDBTrimming, parseInt(value))
+            value = convertToPositiveInteger(value, maxValues.teiDBTrimming)
             break
         case EVENTS_DOWNLOAD:
-            value =
-                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
-                    ? 0
-                    : Math.min(maxValues.eventsDownload, parseInt(value))
+            value = convertToPositiveInteger(value, maxValues.eventsDownload)
             break
         case EVENTS_DB_TRIMMING:
-            value =
-                isNaN(parseInt(value)) || Math.max(0, parseInt(value)) <= 0
-                    ? 0
-                    : Math.min(maxValues.eventsDBTrimming, parseInt(value))
+            value = convertToPositiveInteger(value, maxValues.eventsDBTrimming)
             break
         default:
             break
