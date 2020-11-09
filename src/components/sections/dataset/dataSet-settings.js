@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import {
     CLEAN,
@@ -11,6 +10,7 @@ import {
     DataSpecificSetting,
     DEFAULT,
     SPECIFIC,
+    SPECIFIC_SETTINGS,
 } from '../../../constants/data-set-settings'
 import GlobalSpecificSettings from '../../../pages/global-specific-settings'
 import { DATASET_SETTINGS } from '../../../constants/data-store'
@@ -21,9 +21,9 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
-import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadDatasetSettings } from '../../../modules/dataset/apiLoadSettings'
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
+import SectionWrapper from '../section-wrapper'
 
 const dataSetSettings = DataSetting
 const dataSpecificSetting = DataSpecificSetting
@@ -109,15 +109,10 @@ class DataSetSettings extends React.Component {
      * Handle change for global settings
      * */
     handleChange = e => {
-        e.preventDefault()
-
         this.setState({
             ...this.state,
             disableSave: false,
-            [e.target.name]: parseValueBySettingType(
-                e.target.name,
-                e.target.value
-            ),
+            [e.name]: parseValueBySettingType(e.name, e.value),
         })
     }
 
@@ -277,19 +272,36 @@ class DataSetSettings extends React.Component {
                 disableSave: false,
             })
         },
-        onInputChange: e => {
-            e.preventDefault()
+        onInputChange: (e, key) => {
+            const name = typeof key === 'string' ? key : e.name
+            const value = typeof key === 'string' ? e.selected : e.value
 
-            this.setState({
-                ...this.state,
-                specificSetting: {
-                    ...this.state.specificSetting,
-                    [e.target.name]: parseValueBySettingType(
-                        e.target.name,
-                        e.target.value
-                    ),
-                },
-            })
+            if (name === 'name') {
+                const dataSetSelected = this.dataSetListComplete.filter(
+                    dataSetOption => dataSetOption.id === e.selected
+                )
+                const settings = populateSettingObject(
+                    SPECIFIC_SETTINGS,
+                    dataSetSelected
+                )
+
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        ...settings,
+                        [name]: parseValueBySettingType(name, value),
+                    },
+                })
+            } else {
+                this.setState({
+                    ...this.state,
+                    specificSetting: {
+                        ...this.state.specificSetting,
+                        [name]: parseValueBySettingType(name, value),
+                    },
+                })
+            }
         },
     }
 
@@ -389,14 +401,11 @@ class DataSetSettings extends React.Component {
     }
 
     render() {
-        if (this.state.loading === true) {
-            return <CircularLoader small />
-        }
-
         return (
-            <>
-                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
-
+            <SectionWrapper
+                loading={this.state.loading}
+                unsavedChanges={!this.state.disableSave}
+            >
                 <GlobalSpecificSettings
                     programTableData={dataSetSettings}
                     states={this.state}
@@ -415,7 +424,7 @@ class DataSetSettings extends React.Component {
                     specificSettingTable={this.handleSpecificSetting}
                     settingType={DataSetTitles}
                 />
-            </>
+            </SectionWrapper>
         )
     }
 }

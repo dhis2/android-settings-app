@@ -1,26 +1,18 @@
 import React from 'react'
-
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import InputNumber from '../input-number'
 import i18n from '@dhis2/d2-i18n'
-import dataTableStyles from '../../styles/DataTable.module.css'
 import tableTitleStyles from '../../styles/TableTitle.module.css'
 import {
     specificSettingsDefault,
     TEI_DOWNLOAD,
 } from '../../constants/program-settings'
+import { InputNumber, SelectSettings } from '../inputs'
+import TableRow from './table-row'
+import { Divider } from '@dhis2/ui'
 
-const ProgramTableRow = ({ dataRow, states, onChange }) => {
-    return (
+const ProgramTableRow = ({ dataRow, states, onChange }) => (
+    <div>
         <TableRow>
-            <TableCell
-                component="th"
-                scope="row"
-                className={dataTableStyles.dataTable__rows__row__column}
-            >
+            <div>
                 <p> {dataRow.option} </p>
                 {dataRow.maxValue ? (
                     <em className={tableTitleStyles.attributeLabel}>
@@ -32,40 +24,30 @@ const ProgramTableRow = ({ dataRow, states, onChange }) => {
                 ) : (
                     false
                 )}
-            </TableCell>
-            <TableCell
-                className={`${dataTableStyles.dataTable__rows__row__column} ${dataTableStyles.dataTable_align_end}`}
-                align="right"
-            >
+            </div>
+            <div>
                 {Array.isArray(dataRow.download) === true ? (
-                    <Select
+                    <SelectSettings
                         key={dataRow.keyDownload}
-                        value={states[dataRow.keyDownload]}
                         onChange={onChange}
-                        id={dataRow.keyDownload}
-                        name={dataRow.keyDownload}
-                    >
-                        {dataRow.download.map(option => (
-                            <MenuItem
-                                value={option.value}
-                                key={option.value}
-                                name={option.value}
-                            >
-                                <em> {option.label} </em>
-                            </MenuItem>
-                        ))}
-                    </Select>
+                        keyDownload={dataRow.keyDownload}
+                        value={states[dataRow.keyDownload]}
+                        disabled={states.disableAll}
+                        options={dataRow.download}
+                    />
                 ) : (
                     <InputNumber
-                        name={dataRow.keyDownload}
-                        max={dataRow.maxValue}
-                        value={states[dataRow.keyDownload]}
                         onChange={onChange}
+                        keyDownload={dataRow.keyDownload}
+                        maxValue={dataRow.maxValue}
+                        value={states[dataRow.keyDownload]}
+                        disabled={states.disableAll}
                     />
                 )}
-            </TableCell>
+            </div>
         </TableRow>
-    )
-}
+        <Divider />
+    </div>
+)
 
 export default ProgramTableRow

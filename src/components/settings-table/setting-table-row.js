@@ -1,80 +1,58 @@
 import React from 'react'
-
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import { TableRow, TableCell, RadioGroup, Radio } from '@dhis2/ui-core'
-import InputNumber from '../input-number'
+import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
-import dataTableStyles from '../../styles/DataTable.module.css'
-import radioStyles from '../../styles/Input.module.css'
 import disable from '../../styles/Disable.module.css'
+import { InputNumber, RadioField, SelectSettings } from '../inputs'
+import TableRow from './table-row'
 
-const SettingsTableRow = ({ dataRow, states, onChange }) => {
-    return (
+const InputChoice = ({ dataRow, states, onChange }) => (
+    <>
+        {Array.isArray(dataRow.download) === true ? (
+            dataRow.radioButton === true ? (
+                <RadioField
+                    onChange={onChange}
+                    keyDownload={dataRow.keyDownload}
+                    value={states[dataRow.keyDownload]}
+                    disabled={states.disableAll}
+                    options={dataRow.download}
+                />
+            ) : (
+                <SelectSettings
+                    onChange={onChange}
+                    keyDownload={dataRow.keyDownload}
+                    value={states[dataRow.keyDownload]}
+                    disabled={states.disableAll}
+                    options={dataRow.download}
+                />
+            )
+        ) : (
+            <InputNumber
+                onChange={onChange}
+                keyDownload={dataRow.keyDownload}
+                maxValue={dataRow.maxValue}
+                value={states[dataRow.keyDownload]}
+                disabled={states.disableAll}
+            />
+        )}
+    </>
+)
+
+const SettingsTableRow = ({ dataRow, states, onChange }) => (
+    <div>
         <TableRow>
-            <TableCell
-                className={cx({ [disable.disable_label]: states.disableAll })}
-            >
+            <div className={cx({ [disable.disable_label]: states.disableAll })}>
                 {dataRow.option}
-            </TableCell>
-            <TableCell
-                className={cx(
-                    dataTableStyles.dataTable__rows__row__column,
-                    dataTableStyles.dataTable_align_end
-                )}
-                align="right"
-            >
-                {Array.isArray(dataRow.download) === true ? (
-                    dataRow.radioButton === true ? (
-                        <RadioGroup
-                            dense
-                            name={dataRow.keyDownload}
-                            id={dataRow.keyDownload}
-                            onChange={onChange}
-                            value={states[dataRow.keyDownload]}
-                            className={radioStyles.container_content_inline}
-                            disabled={states.disableAll}
-                        >
-                            {dataRow.download.map(option => (
-                                <Radio
-                                    key={option.value}
-                                    label={option.label}
-                                    value={option.value}
-                                />
-                            ))}
-                        </RadioGroup>
-                    ) : (
-                        <Select
-                            key={dataRow.keyDownload}
-                            value={states[dataRow.keyDownload]}
-                            onChange={onChange}
-                            id={dataRow.keyDownload}
-                            name={dataRow.keyDownload}
-                            disabled={states.disableAll}
-                        >
-                            {dataRow.download.map(option => (
-                                <MenuItem
-                                    value={option.value}
-                                    key={option.value}
-                                    name={option.value}
-                                >
-                                    <em> {option.label} </em>
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    )
-                ) : (
-                    <InputNumber
-                        name={dataRow.keyDownload}
-                        max={dataRow.maxValue}
-                        value={states[dataRow.keyDownload]}
-                        onChange={onChange}
-                        disabled={states.disableAll}
-                    />
-                )}
-            </TableCell>
+            </div>
+            <div>
+                <InputChoice
+                    dataRow={dataRow}
+                    states={states}
+                    onChange={onChange}
+                />
+            </div>
         </TableRow>
-    )
-}
+        <Divider />
+    </div>
+)
 
 export default SettingsTableRow

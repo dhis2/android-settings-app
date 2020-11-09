@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, ButtonStrip } from '@dhis2/ui-core'
+import { Button, ButtonStrip } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 import SettingsTable from '../components/settings-table/settings-table'
 import ProgramGlobalSettings from '../components/settings-table/program-global-settings'
@@ -13,8 +13,6 @@ import SaveErrorAlert from '../components/alert-bar/save-error-alert'
 
 import styles from '../styles/LayoutTitles.module.css'
 import buttonStyles from '../styles/Button.module.css'
-import layoutStyles from '../styles/Layout.module.css'
-
 import '@dhis2/d2-ui-core/css/Table.css'
 import ErrorAlert from '../components/alert-bar/error-alert'
 
@@ -89,14 +87,12 @@ const GlobalSpecificSettings = ({
                 </p>
 
                 {specificSettings.length > 0 && (
-                    <div className={layoutStyles.data__topMargin}>
-                        <TableActions
-                            states={states}
-                            columns={specificSettingTable.columnsTitle}
-                            rows={specificSettingList}
-                            menuActions={specificSettingTable.handleActions}
-                        />
-                    </div>
+                    <TableActions
+                        states={states}
+                        columns={specificSettingTable.columnsTitle}
+                        rows={specificSettingList}
+                        menuActions={specificSettingTable.handleActions}
+                    />
                 )}
 
                 <Button
