@@ -4,6 +4,9 @@ export const RESERVED_VALUES = 'reservedValues'
 export const MANUAL = 'manual'
 export const SMS_TO_SEND = 'numberSmsToSend'
 export const SMS_CONFIRMATION = 'numberSmsConfirmation'
+export const METADATA_SYNC = 'metadataSync'
+export const METADATA = 'metadata'
+export const DATA = 'data'
 
 export const metadataOptions = [
     {
