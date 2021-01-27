@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-10-30T17:09:59.408Z\n"
-"PO-Revision-Date: 2020-10-30T17:09:59.408Z\n"
+"POT-Creation-Date: 2020-12-10T22:46:28.994Z\n"
+"PO-Revision-Date: 2020-12-10T22:46:28.994Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -90,8 +90,7 @@ msgstr ""
 
 msgid ""
 "By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
-"data. Your users will need to sync manually for data to be sent to the "
-"server."
+"{{type}}. Your users will need to download the {{type}} manually."
 msgstr ""
 
 msgid "Do you want to select this option?"
@@ -134,36 +133,6 @@ msgid "Name"
 msgstr ""
 
 msgid "Number of Periods"
-msgstr ""
-
-msgid "How often should metadata sync?"
-msgstr ""
-
-msgid "How often should data sync?"
-msgstr ""
-
-msgid "SMS Gateway phone number"
-msgstr ""
-
-msgid "Must start with + and be at least 4 characters long."
-msgstr ""
-
-msgid "SMS Result Sender phone number"
-msgstr ""
-
-msgid "Reserved values downloaded per TEI attribute"
-msgstr ""
-
-msgid "Encrypt device database"
-msgstr ""
-
-msgid ""
-"Encrypt all data stored on device. Data can be lost if there are problems "
-"with an encrypted database. This will not affect the DHIS2 database stored "
-"on an external server."
-msgstr ""
-
-msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
 msgid "General download sync settings"
@@ -233,9 +202,39 @@ msgstr ""
 msgid "12 Hours"
 msgstr ""
 
+msgid "How often should metadata sync?"
+msgstr ""
+
+msgid "How often should data sync?"
+msgstr ""
+
+msgid "SMS Gateway phone number"
+msgstr ""
+
+msgid "Must start with + and be at least 4 characters long."
+msgstr ""
+
 msgid ""
 "This phone number is not valid. Must start with + and be at least 4 "
 "characters long."
+msgstr ""
+
+msgid "SMS Result Sender phone number"
+msgstr ""
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "Encrypt device database"
+msgstr ""
+
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
+msgstr ""
+
+msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"

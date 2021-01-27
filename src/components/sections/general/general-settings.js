@@ -47,6 +47,7 @@ const GeneralSettings = ({
             openDialog={generalForm.manualAlertDialog.open}
             chooseOption={generalForm.handleManualAlert.save}
             onClose={generalForm.handleManualAlert.close}
+            manualOptionType={generalForm.manualAlertDialog.selection.name}
         />
 
         <DialogEncrypt
