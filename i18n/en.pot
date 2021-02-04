@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-18T06:56:04.402Z\n"
-"PO-Revision-Date: 2020-06-18T06:56:04.402Z\n"
+"POT-Creation-Date: 2020-12-10T22:46:28.994Z\n"
+"PO-Revision-Date: 2020-12-10T22:46:28.994Z\n"
 
 msgid "Failed to get data from Data Store"
-msgstr ""
-
-msgid "Error when saving data"
 msgstr ""
 
 msgid "Settings were successfully saved"
@@ -74,6 +71,9 @@ msgid ""
 "settings applied here."
 msgstr ""
 
+msgid "You don't have the authority to set up the android settings to this instance"
+msgstr ""
+
 msgid ""
 "To set up the default settings and apply to all devices, click \"Set "
 "default and save\""
@@ -83,6 +83,20 @@ msgid "Exit, do not apply settings"
 msgstr ""
 
 msgid "Set defaults and save"
+msgstr ""
+
+msgid "Select Manual option"
+msgstr ""
+
+msgid ""
+"By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
+"{{type}}. Your users will need to download the {{type}} manually."
+msgstr ""
+
+msgid "Do you want to select this option?"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid "Save in DataStore"
@@ -97,10 +111,13 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Values per"
+msgid "Values per {{title}}"
 msgstr ""
 
 msgid "Add/Save"
+msgstr ""
+
+msgid "Reset all values to default"
 msgstr ""
 
 msgid "404 Page not found."
@@ -118,6 +135,73 @@ msgstr ""
 msgid "Number of Periods"
 msgstr ""
 
+msgid "General download sync settings"
+msgstr ""
+
+msgid "These settings apply to all Android users."
+msgstr ""
+
+msgid "Manual options"
+msgstr ""
+
+msgid ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+msgstr ""
+
+msgid "Summary Settings"
+msgstr ""
+
+msgid "Recommended maximum: {{maxValue}}"
+msgstr ""
+
+msgid "User sync test"
+msgstr ""
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr ""
+
+msgid "Run test"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Search for a user"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
 msgid "How often should metadata sync?"
 msgstr ""
 
@@ -127,12 +211,12 @@ msgstr ""
 msgid "SMS Gateway phone number"
 msgstr ""
 
+msgid "Must start with + and be at least 4 characters long."
+msgstr ""
+
 msgid ""
 "This phone number is not valid. Must start with + and be at least 4 "
 "characters long."
-msgstr ""
-
-msgid "Must start with + and be at least 4 characters long."
 msgstr ""
 
 msgid "SMS Result Sender phone number"
@@ -151,50 +235,6 @@ msgid ""
 msgstr ""
 
 msgid "This will disable and remove all General, Program and Data set settings."
-msgstr ""
-
-msgid "Reset all values to default"
-msgstr ""
-
-msgid "General download sync settings"
-msgstr ""
-
-msgid "These settings apply to all Android users."
-msgstr ""
-
-msgid "Summary Settings"
-msgstr ""
-
-msgid "User sync test"
-msgstr ""
-
-msgid "Check the amount of data a user would sync to their device."
-msgstr ""
-
-msgid "Run test"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "Download"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Search for a user"
-msgstr ""
-
-msgid "User"
-msgstr ""
-
-msgid ""
-"You have unsaved changes, if you leave you will lose your changes. Are you "
-"sure you want to leave?"
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
@@ -302,10 +342,16 @@ msgstr ""
 msgid "Number of program rules to download"
 msgstr ""
 
-msgid "metadata download size"
+msgid "reserved values per TEI"
 msgstr ""
 
-msgid "data download size"
+msgid "Number of reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "metadata download size (KB)"
+msgstr ""
+
+msgid "data download size (KB)"
 msgstr ""
 
 msgid "{{teiDownload}} TEI"

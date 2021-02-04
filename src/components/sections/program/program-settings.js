@@ -1,10 +1,8 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
 import i18n from '@dhis2/d2-i18n'
 import {
     DEFAULT,
-    ENROLLMENT_DOWNLOAD,
     FULL_SPECIFIC,
     GLOBAL,
     GlobalProgram,
@@ -26,11 +24,10 @@ import { getItemFromList } from '../../../modules/getItemFromList'
 import { prepareDataToSubmit } from '../../../modules/prepareDataToSubmit'
 import { prepareSpecificSettingsToSave } from '../../../modules/prepareSpecificSettingToSave'
 import { removeSettingFromList } from '../../../modules/removeSettingFromList'
-import UnsavedChangesAlert from '../../unsaved-changes-alert'
 import { apiLoadProgramSettings } from '../../../modules/programs/apiLoadSettings'
 import { apiUpdateDataStore } from '../../../modules/apiUpdateDataStore'
+import SectionWrapper from '../section-wrapper'
 
-let programData = GlobalProgram
 const specificProgramData = SpecificProgram
 const {
     settingDownload,
@@ -99,6 +96,7 @@ class ProgramSettings extends React.Component {
         },
         openErrorAlert: false,
         disableAll: false,
+        programDefaultValues: GlobalProgram,
     }
 
     /**
@@ -138,34 +136,31 @@ class ProgramSettings extends React.Component {
     /**
      * handle onChange for global settings
      * */
-    handleChange = e => {
-        if (e.name === ENROLLMENT_DOWNLOAD) {
-            this.setState({
-                ...this.state,
-                disableSave: false,
-                [e.name]: e.value,
-            })
-        } else {
-            e.preventDefault()
+    handleChange = (e, key) => {
+        const name = typeof key === 'string' ? key : e.name
+        const value = typeof key === 'string' ? e.selected : e.value
 
-            if (e.target.name === SETTING_DOWNLOAD) {
-                if (
-                    e.target.value === GLOBAL ||
-                    e.target.value === PER_ORG_UNIT
-                ) {
-                    programData = GlobalProgramSpecial
-                } else {
-                    programData = GlobalProgram
-                }
+        if (name === SETTING_DOWNLOAD) {
+            if (value === GLOBAL || value === PER_ORG_UNIT) {
+                this.setState({
+                    ...this.state,
+                    programDefaultValues: GlobalProgramSpecial,
+                    disableSave: false,
+                    [name]: parseValueByType(name, value),
+                })
+            } else {
+                this.setState({
+                    ...this.state,
+                    programDefaultValues: GlobalProgram,
+                    disableSave: false,
+                    [name]: parseValueByType(name, value),
+                })
             }
-
+        } else {
             this.setState({
                 ...this.state,
                 disableSave: false,
-                [e.target.name]: parseValueByType(
-                    e.target.name,
-                    e.target.value
-                ),
+                [name]: parseValueByType(name, value),
             })
         }
     }
@@ -221,7 +216,6 @@ class ProgramSettings extends React.Component {
      * Specific settings: no specific settings
      */
     handleReset = () => {
-        programData = GlobalProgramSpecial
         const settings = populateProgramObject(DEFAULT)
         this.specificSettings = {}
         this.specificSettingsRows = []
@@ -230,6 +224,7 @@ class ProgramSettings extends React.Component {
 
         this.setState({
             ...settings,
+            programDefaultValues: GlobalProgramSpecial,
             disableSave: false,
             submitDataStore: {
                 success: false,
@@ -332,9 +327,8 @@ class ProgramSettings extends React.Component {
                 disableSave: false,
             })
         },
-        onInputChange: e => {
-            e.preventDefault()
-            if (e.target.name === 'name') {
+        onInputChange: (e, key) => {
+            if (key === 'name') {
                 const settings = populateProgramObject(
                     FULL_SPECIFIC,
                     specificSettingsDefault
@@ -344,21 +338,18 @@ class ProgramSettings extends React.Component {
                     specificSetting: {
                         ...this.state.specificSetting,
                         ...settings,
-                        [e.target.name]: parseValueByType(
-                            e.target.name,
-                            e.target.value
-                        ),
+                        [key]: parseValueByType(key, e.selected),
                     },
                 })
             } else {
+                const name = typeof key === 'string' ? key : e.name
+                const value = typeof key === 'string' ? e.selected : e.value
+
                 this.setState({
                     ...this.state,
                     specificSetting: {
                         ...this.state.specificSetting,
-                        [e.target.name]: parseValueByType(
-                            e.target.name,
-                            e.target.value
-                        ),
+                        [name]: parseValueByType(name, value),
                     },
                 })
             }
@@ -432,7 +423,7 @@ class ProgramSettings extends React.Component {
                     programListComplete: this.programListComplete,
                     specificSettingsRows: this.specificSettingsRows,
                     globalSettings: this.globalSettings,
-                    globalDefaultValues: programData,
+                    globalDefaultValues: this.state.programDefaultValues,
                 })
                     .then(res => {
                         const {
@@ -450,10 +441,10 @@ class ProgramSettings extends React.Component {
                         this.programListComplete = programListComplete
                         this.specificSettingsRows = specificSettingsRows
                         this.globalSettings = globalSettings
-                        programData = globalDefaultValues
 
                         this.setState({
                             ...settings.globalSettings,
+                            programDefaultValues: globalDefaultValues,
                             loading: false,
                         })
                     })
@@ -468,16 +459,13 @@ class ProgramSettings extends React.Component {
     }
 
     render() {
-        if (this.state.loading === true) {
-            return <CircularLoader small />
-        }
-
         return (
-            <>
-                <UnsavedChangesAlert unsavedChanges={!this.state.disableSave} />
-
+            <SectionWrapper
+                loading={this.state.loading}
+                unsavedChanges={!this.state.disableSave}
+            >
                 <GlobalSpecificSettings
-                    programTableData={programData}
+                    programTableData={this.state.programDefaultValues}
                     states={this.state}
                     handleTableChange={this.handleChange}
                     specificSettings={this.programNamesList}
@@ -494,7 +482,7 @@ class ProgramSettings extends React.Component {
                     specificSettingTable={this.handleSpecificSetting}
                     settingType={ProgramTitles}
                 />
-            </>
+            </SectionWrapper>
         )
     }
 }

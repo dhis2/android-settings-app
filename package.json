@@ -1,12 +1,13 @@
 {
   "name": "android-settings-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Milagros Rodriguez <sharmynrodriguez@gmail.com>",
   "private": true,
   "dependencies": {
     "@dhis2/app-runtime": "^2.0.4",
     "@dhis2/d2-ui-core": "^6.3.0",
     "@dhis2/d2-ui-table": "^6.3.0",
+    "@dhis2/ui": "^5.5.0",
     "@material-ui/core": "^3.9.2",
     "d2": "^31.7",
     "d3-color": "^1.4.0",

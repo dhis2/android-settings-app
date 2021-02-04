@@ -1,106 +1,59 @@
-import React from 'react'
-
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+import React, { useEffect, useState } from 'react'
 import { WITH_REGISTRATION } from '../../constants/program-settings'
-
-import i18n from '@dhis2/d2-i18n'
-import dataTableStyles from '../../styles/DataTable.module.css'
 import ProgramTableRow from './program-table-row'
+import Wrapper from '../wrapper'
 
-class ProgramTable extends React.Component {
-    constructor(props) {
-        super(props)
-        this.programTable = props
+const ProgramTable = props => {
+    const [program, setProgram] = useState(props.programSelected)
+    const [programData, setData] = useState(props.data)
+    const [programFilter, setProgramFiltered] = useState('')
+    const [programType, setProgramType] = useState('')
 
-        this.state = {
-            programSelected: this.props.programSelected,
-            programFilter: '',
-            programType: '',
-        }
-    }
-
-    checkProgramType = () => {
-        if (this.props.programSelected !== '') {
-            const programSelected = this.props.completeListOptions.filter(
-                program => program.id === this.props.programSelected
+    const checkProgramType = () => {
+        if (props.programSelected !== '') {
+            const programSelected = props.completeListOptions.filter(
+                programOption => programOption.id === props.programSelected
             )
-            this.programFilter = programSelected[0]
-            this.setState({
-                programSelected: this.props.programSelected,
-                programFilter: programSelected,
-                programType: this.programFilter.programType,
-            })
+            setProgram(props.programSelected)
+            setProgramFiltered(programSelected)
+            setProgramType(programSelected[0].programType)
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.programSelected !== '') {
-            if (!this.state.programSelected) {
-                this.checkProgramType()
-            } else if (
-                this.state.programSelected !== this.props.programSelected
-            ) {
-                this.checkProgramType()
-            } else if (!this.state.programType) {
-                this.checkProgramType()
+    useEffect(() => {
+        if (props.programSelected !== '') {
+            if (!program || !programType || program !== props.programSelected) {
+                checkProgramType()
             }
         }
-    }
+    })
 
-    render() {
-        if (this.props.programSelected === '') {
-            return null
-        }
-
-        if (this.state.programSelected || this.state.programType) {
-            return (
-                <Table className={dataTableStyles.dataTable}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell
-                                className={
-                                    dataTableStyles.dataTable__headers__header
-                                }
-                            >
-                                {' '}
-                            </TableCell>
-                            <TableCell
-                                className={
-                                    dataTableStyles.dataTable__headers__header
-                                }
-                                align="right"
-                            >
-                                {i18n.t('Download')}
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody className="data-table__rows">
-                        {this.state.programType === WITH_REGISTRATION
-                            ? this.props.data.withRegistration.map(row => (
-                                  <ProgramTableRow
-                                      key={row.option}
-                                      dataRow={row}
-                                      states={this.props.states}
-                                      onChange={this.props.onChange}
-                                  />
-                              ))
-                            : this.props.data.withoutRegistration.map(row => (
-                                  <ProgramTableRow
-                                      key={row.option}
-                                      dataRow={row}
-                                      states={this.props.states}
-                                      onChange={this.props.onChange}
-                                  />
-                              ))}
-                    </TableBody>
-                </Table>
-            )
-        }
+    if (!program || !programType || props.programSelected === '') {
         return null
+    } else {
+        return (
+            <Wrapper fullWidth>
+                <div>
+                    {programType === WITH_REGISTRATION
+                        ? programData.withRegistration.map(row => (
+                              <ProgramTableRow
+                                  key={row.option}
+                                  dataRow={row}
+                                  states={props.states}
+                                  onChange={props.onChange}
+                              />
+                          ))
+                        : programData.withoutRegistration.map(row => (
+                              <ProgramTableRow
+                                  key={row.option}
+                                  dataRow={row}
+                                  states={props.states}
+                                  onChange={props.onChange}
+                              />
+                          ))}
+                </div>
+            </Wrapper>
+        )
     }
 }
 
