@@ -2,34 +2,11 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #222;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-body {
-  background-color: #f3f3f3;
-}
-
 .app-wrapper * {
   font-family: Roboto;
-}
-
-.app__container {
-  background-color: #F3F3F3;
-  font-family: Roboto, sans-serif;
 }
