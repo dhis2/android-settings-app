@@ -24,6 +24,7 @@ const SideBar = () => {
                 path={overviewPage.path}
                 code={overviewPage.code}
                 active={pathname === overviewPage.path}
+                isHeader={true}
             />
 
             <MenuItem
@@ -31,6 +32,7 @@ const SideBar = () => {
                 path={generalPage.path}
                 code={generalPage.code}
                 active={pathname === generalPage.path}
+                isHeader={true}
             />
 
             <MenuSectionHeader label={syncSection} />
@@ -66,6 +68,7 @@ const SideBar = () => {
                 path={analyticsPage.path}
                 code={analyticsPage.code}
                 active={pathname === analyticsPage.path}
+                isHeader={true}
             />
         </Menu>
     )

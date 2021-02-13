@@ -5,7 +5,7 @@ import PropTypes from '@dhis2/prop-types'
 import cx from 'classnames'
 import styles from './Sidebar.module.css'
 
-const MenuItem = ({ label, path, code, active }) => {
+const MenuItem = ({ label, path, code, active, isHeader }) => {
     const history = useHistory()
     const navigateToPath = () => history.push(path)
 
@@ -17,6 +17,7 @@ const MenuItem = ({ label, path, code, active }) => {
             className={cx({
                 [styles.sidebarItem]: !active,
                 [styles.sidebarItemActive]: active,
+                [styles.sidebarHeader]: isHeader,
             })}
             dataTest={`sidebar-link-${code}`}
         />
@@ -28,6 +29,7 @@ MenuItem.propTypes = {
     path: PropTypes.string,
     code: PropTypes.string,
     active: PropTypes.bool,
+    isHeader: PropTypes.bool,
 }
 
 export default MenuItem
