@@ -18,10 +18,13 @@ body {
     grid-column: sidebar;
     background-color: var(--colors-grey200);
     overflow: auto;
-    height: 100%;
+    min-height: calc(100vh - var(--spacers-dp48));
 }
 
 .content {
     grid-column: content;
     background-color: inherit;
+    padding-top: var(--spacers-dp12);
+    padding-right: var(--spacers-dp24);
+    padding-bottom: var(--spacers-dp16);
 }
