@@ -1,0 +1,29 @@
+.sidebarItem {
+    background-color: var(--colors-grey200) !important;
+    padding-left: var(--spacers-dp24) !important;
+}
+
+.sidebarItem:hover {
+    background-color: var(--colors-grey400) !important;
+}
+
+.sidebarItemActive {
+    background-color: var(--colors-grey400) !important;
+    padding-left: var(--spacers-dp24) !important;
+}
+
+.sidebarHeader {
+    padding-left: 0px !important;
+    font-size: 16px !important;
+    font-weight: 500;
+}
+
+.sectionTitle {
+    background-color: var(--colors-grey200) !important;
+}
+
+.sectionTitle h6 {
+    font-size: 16px !important;
+    color: var(--colors-grey900);
+    padding: var(--spacers-dp16) var(--spacers-dp24) var(--spacers-dp12);
+}

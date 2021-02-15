@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-10T22:46:28.994Z\n"
-"PO-Revision-Date: 2020-12-10T22:46:28.994Z\n"
+"POT-Creation-Date: 2021-02-13T17:04:36.552Z\n"
+"PO-Revision-Date: 2021-02-13T17:04:36.552Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -240,19 +240,94 @@ msgstr ""
 msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
+msgid "Overview"
+msgstr ""
+
 msgid "General"
+msgstr ""
+
+msgid "Set General settings"
+msgstr ""
+
+msgid "Defines generic parameters like SMS gateway number and TEI reserved values"
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "Global"
+msgstr ""
+
+msgid "Set Global sync settings"
+msgstr ""
+
+msgid "Set global settings like metadata anda data sync period"
 msgstr ""
 
 msgid "Programs"
 msgstr ""
 
+msgid "Set Programs sync settings"
+msgstr ""
+
+msgid "Define synchronization parameters to tracker and event programs"
+msgstr ""
+
 msgid "Data Sets"
 msgstr ""
 
-msgid "Setting level"
+msgid "Set Data set sync settings"
 msgstr ""
 
-msgid "Global"
+msgid "Define synchronization parameters for datasets"
+msgstr ""
+
+msgid "Run user sync test"
+msgstr ""
+
+msgid "Check how much data a user downloads when syncing"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Home screen"
+msgstr ""
+
+msgid "Set Filters in Home screen"
+msgstr ""
+
+msgid "Manage Home screen"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Set Filters in Programs"
+msgstr ""
+
+msgid "Manage Programs"
+msgstr ""
+
+msgid "Data set"
+msgstr ""
+
+msgid "Set Filters in Data sets"
+msgstr ""
+
+msgid "Manage Data sets"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Set TEI Analytics"
+msgstr ""
+
+msgid "Manage TEI analytics for tracker programs"
+msgstr ""
+
+msgid "Setting level"
 msgstr ""
 
 msgid "Per Org Unit"
