@@ -9,14 +9,14 @@ import AndroidSettingsContainer from '../components/sections/general/android-set
 import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
-
+import Home from '../pages/Home/home'
 import i18n from '@dhis2/d2-i18n'
 
 export const overviewPage = {
     code: 'home',
     label: i18n.t('Overview'),
     path: '/',
-    component: <div> Overview </div>,
+    component: <Home />,
 }
 
 export const generalPage = {

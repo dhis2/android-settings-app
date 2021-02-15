@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { apiFirstLoad } from '../modules/apiLoadFirstSetup'
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import { menuSection } from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
 import DialogFirstLaunch from './dialog/dialog-first-launch'
-import PageNotFound from './page-not-found'
-
-// TODO: change Overview div to Overview component
 
 const Router = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
@@ -53,7 +50,7 @@ const Router = () => {
                             disable={isDisabledAuthority}
                         />
                     ) : (
-                        <div> Overview </div>
+                        menuSection[0].component
                     )}
                 </D2Shim>
             </Route>
@@ -68,7 +65,7 @@ const Router = () => {
             ))}
 
             <Route path="*">
-                <PageNotFound />
+                <Redirect to="/" />
             </Route>
         </Switch>
     )
