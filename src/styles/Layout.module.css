@@ -1,22 +1,27 @@
-.paper__twoPanel__sideBar {
-    position: absolute;
-}
-
-.paper__twoPanel__mainTitle {
-    font-weight: 300;
-    font-family: Roboto, sans-serif;
-    font-size: 24px;
-    color: rgba(0, 0, 0, 0.87);
-    padding: 16px 0px 5px;
-}
-
-.paper__layout {
-    padding: 2rem 2.5rem;
-    min-height: 300px;
-    margin-top: 40px;
-    max-width: 1200px;
-}
-
 .data__topMargin {
     margin-top: 20px;
+}
+
+body {
+    background-color: var(--colors-grey050);
+}
+
+.container {
+    display: grid;
+    height: 100%;
+    grid-gap: 0 var(--spacers-dp24);
+    grid-template-columns: [sidebar] 280px [content] minmax(0, 1fr);
+    color: var(--colors-grey900);
+}
+
+.sidebar {
+    grid-column: sidebar;
+    background-color: var(--colors-grey200);
+    overflow: auto;
+    height: 100%;
+}
+
+.content {
+    grid-column: content;
+    background-color: inherit;
 }
