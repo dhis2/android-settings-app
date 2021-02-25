@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { apiFirstLoad } from '../modules/apiLoadFirstSetup'
+import { useNamespaceDataStore } from '../modules/apiLoadFirstSetup'
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import { menuSection } from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
@@ -9,24 +9,20 @@ import DialogFirstLaunch from './dialog/dialog-first-launch'
 const Router = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
     const [isSaved, setSaved] = useState(false)
-    const [isDisabledAuthority, disableAuthority] = useState(false)
+    const [isDisabledAuthority, setAuthority] = useState(false)
+    const { namespace, authority } = useNamespaceDataStore()
 
     useEffect(() => {
-        apiFirstLoad()
-            .then(({ hasNamespace, hasAuthority }) => {
-                if (hasNamespace) {
-                    setFirstLaunch(false)
-                    setSaved(true)
-                } else {
-                    setFirstLaunch(true)
-                    setSaved(false)
-                    disableAuthority(!hasAuthority)
-                }
-            })
-            .catch(e => {
-                console.error(e)
-            })
-    }, [])
+        if (namespace && authority) {
+            setFirstLaunch(false)
+            setSaved(true)
+            setAuthority(!authority)
+        } else if (namespace === false && authority !== undefined) {
+            setFirstLaunch(true)
+            setSaved(false)
+            setAuthority(!authority)
+        }
+    }, [namespace, authority])
 
     const handleClose = () => {
         setSaved(false)
