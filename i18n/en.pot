@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-13T17:04:36.552Z\n"
-"PO-Revision-Date: 2021-02-13T17:04:36.552Z\n"
+"POT-Creation-Date: 2021-02-25T02:49:50.096Z\n"
+"PO-Revision-Date: 2021-02-25T02:49:50.096Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -118,15 +118,6 @@ msgid "Add/Save"
 msgstr ""
 
 msgid "Reset all values to default"
-msgstr ""
-
-msgid "404 Page not found."
-msgstr ""
-
-msgid "No match for"
-msgstr ""
-
-msgid "Go back to General settings"
 msgstr ""
 
 msgid "Name"
