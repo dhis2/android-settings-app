@@ -10,6 +10,7 @@ import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
+import GeneralSettings from '../pages/General/GeneralSettings'
 import i18n from '@dhis2/d2-i18n'
 
 export const overviewPage = {
@@ -27,7 +28,7 @@ export const generalPage = {
     description: i18n.t(
         'Defines generic parameters like SMS gateway number and TEI reserved values'
     ),
-    component: <div> General </div>,
+    component: <GeneralSettings />,
 }
 
 export const syncSection = i18n.t('Sync')
