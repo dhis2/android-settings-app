@@ -8,30 +8,22 @@ import DialogFirstLaunch from './dialog/dialog-first-launch'
 
 const Router = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
-    const [isSaved, setSaved] = useState(false)
     const [isDisabledAuthority, setAuthority] = useState(false)
     const { namespace, authority } = useNamespaceDataStore()
 
     useEffect(() => {
         if (namespace && authority) {
             setFirstLaunch(false)
-            setSaved(true)
             setAuthority(!authority)
         } else if (namespace === false && authority !== undefined) {
             setFirstLaunch(true)
-            setSaved(false)
             setAuthority(!authority)
         }
     }, [namespace, authority])
 
-    const handleClose = () => {
-        setSaved(false)
-    }
-
     const handleSave = () => {
         apiCreateFirstSetup().then(() => {
             setFirstLaunch(false)
-            setSaved(true)
         })
     }
 
@@ -42,7 +34,6 @@ const Router = () => {
                     {openFirstLaunch === true ? (
                         <DialogFirstLaunch
                             handleSave={handleSave}
-                            onClose={handleClose}
                             disable={isDisabledAuthority}
                         />
                     ) : (

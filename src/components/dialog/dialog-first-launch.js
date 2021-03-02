@@ -16,7 +16,7 @@ import cx from 'classnames'
 import buttonStyle from '../../styles/Button.module.css'
 import warning from '../../styles/Warning.module.css'
 
-const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
+const DialogFirstLaunch = ({ handleSave, disable }) => {
     const { baseUrl } = useConfig()
 
     const path = '/dhis-web-commons-about/redirect.action'
@@ -51,7 +51,7 @@ const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button onClick={onClose}>
+                        <Button>
                             <a
                                 href={initialUrl}
                                 className={buttonStyle.button_redirect}
@@ -71,7 +71,6 @@ const DialogFirstLaunch = ({ onClose, handleSave, disable }) => {
 
 DialogFirstLaunch.propTypes = {
     disable: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
     handleSave: PropTypes.func.isRequired,
 }
 
