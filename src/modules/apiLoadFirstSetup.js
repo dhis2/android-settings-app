@@ -13,21 +13,12 @@ export const authorityQuery = {
     },
 }
 
-const useGetNamespace = () => {
-    const { loading, error, data } = useDataQuery(namespaceDataStoreQuery)
-    return {
-        loadNamespaces: loading,
-        errorNamespace: error,
-        dataNamespace: data,
-    }
-}
-
 export const useNamespaceDataStore = () => {
-    const { loadNamespaces, errorNamespace, dataNamespace } = useGetNamespace()
+    const { loading, error, data } = useDataQuery(namespaceDataStoreQuery)
 
     return {
-        load: loadNamespaces,
-        error: errorNamespace,
-        namespace: dataNamespace && dataNamespace.dataStore.includes(NAMESPACE),
+        loading,
+        error,
+        namespace: data && data.dataStore.includes(NAMESPACE),
     }
 }
