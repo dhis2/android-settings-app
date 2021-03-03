@@ -8,18 +8,11 @@ import DialogFirstLaunch from './dialog/dialog-first-launch'
 
 const Router = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
-    const [isDisabledAuthority, setAuthority] = useState(false)
-    const { namespace, authority } = useNamespaceDataStore()
+    const { namespace } = useNamespaceDataStore()
 
     useEffect(() => {
-        if (namespace && authority) {
-            setFirstLaunch(false)
-            setAuthority(!authority)
-        } else if (namespace === false && authority !== undefined) {
-            setFirstLaunch(true)
-            setAuthority(!authority)
-        }
-    }, [namespace, authority])
+        namespace ? setFirstLaunch(false) : setFirstLaunch(true)
+    }, [namespace])
 
     const handleSave = () => {
         apiCreateFirstSetup().then(() => {
@@ -32,10 +25,7 @@ const Router = () => {
             <Route path="/" exact>
                 <D2Shim>
                     {openFirstLaunch === true ? (
-                        <DialogFirstLaunch
-                            handleSave={handleSave}
-                            disable={isDisabledAuthority}
-                        />
+                        <DialogFirstLaunch handleSave={handleSave} />
                     ) : (
                         menuSection[0].component
                     )}
