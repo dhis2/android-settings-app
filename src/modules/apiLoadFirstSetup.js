@@ -9,7 +9,7 @@ export const namespaceDataStoreQuery = {
 
 export const authorityQuery = {
     authority: {
-        resource: 'me/authorization/ALL',
+        resource: 'me/authorities/ALL',
     },
 }
 
@@ -24,12 +24,10 @@ const useGetNamespace = () => {
 
 export const useNamespaceDataStore = () => {
     const { loadNamespaces, errorNamespace, dataNamespace } = useGetNamespace()
-    const { loading, error, data } = useDataQuery(authorityQuery)
 
     return {
-        load: loadNamespaces || loading,
-        error: errorNamespace || error,
+        load: loadNamespaces,
+        error: errorNamespace,
         namespace: dataNamespace && dataNamespace.dataStore.includes(NAMESPACE),
-        authority: data && data.authority,
     }
 }
