@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { useDataMutation } from '@dhis2/app-runtime'
+import isEqual from 'lodash/isEqual'
 import Page from '../../components/page/Page'
 import {
     EncryptDB,
@@ -13,7 +14,6 @@ import {
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import DisableSettings from './DisableSettings'
 import { useGeneralDataStore } from '../../modules/useDatastore'
-import { objectsAreEqual } from '../../utils/validators/objectsAreEqual'
 import {
     checkValidSettings,
     createInitialValues,
@@ -47,7 +47,7 @@ const GeneralSettings = () => {
     useEffect(() => {
         if (initialValues && settings) {
             const validSettings = checkValidSettings(settings)
-            if (!objectsAreEqual(validSettings, initialValues)) {
+            if (!isEqual(validSettings, initialValues)) {
                 notValidFields(validSettings)
                     ? setDisableSave(true)
                     : setDisableSave(false)
