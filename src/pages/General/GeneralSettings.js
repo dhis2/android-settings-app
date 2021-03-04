@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import { useDataMutation } from '@dhis2/app-runtime'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEqual from 'lodash/isEqual'
 import Page from '../../components/page/Page'
 import {
@@ -13,31 +13,38 @@ import {
 } from '../../components/field'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import DisableSettings from './DisableSettings'
-import { useGeneralDataStore } from '../../modules/useDatastore'
 import {
     checkValidSettings,
     createInitialValues,
     notValidFields,
 } from './helper'
-import { updateGeneralKeyMutation } from './updateGeneralDatastore'
+import {
+    getGeneralKeyQuery,
+    updateGeneralKeyMutation,
+} from './generalDatastoreApi'
 
 const PAGE_NAME = i18n.t('General Settings')
 
 const GeneralSettings = () => {
-    const { load, generalSettings } = useGeneralDataStore()
+    const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
 
-    const [mutate, { error, data }] = useDataMutation(updateGeneralKeyMutation)
+    const [mutate, { error, data: updateResult }] = useDataMutation(
+        updateGeneralKeyMutation
+    )
 
     useEffect(() => {
-        if (generalSettings) {
-            const { lastUpdated, ...initialSettings } = generalSettings
+        if (queryResult) {
+            const {
+                lastUpdated,
+                ...initialSettings
+            } = queryResult.generalSettings
             setInitialValues(initialSettings)
             setSettings(createInitialValues(initialSettings))
         }
-    }, [generalSettings])
+    }, [queryResult])
 
     /**
      * Enable Save button if:
@@ -66,7 +73,7 @@ const GeneralSettings = () => {
     }
 
     return (
-        <Page title={PAGE_NAME} loading={load} unsavedChanges={!disableSave}>
+        <Page title={PAGE_NAME} loading={loading} unsavedChanges={!disableSave}>
             {settings && (
                 <>
                     <MatomoUrl value={settings} onChange={setSettings} />
@@ -88,7 +95,7 @@ const GeneralSettings = () => {
                         onReset={resetSettings}
                         saveButtonDisabled={disableSave}
                         errorRequest={error}
-                        requestResult={data}
+                        requestResult={updateResult}
                         handleDisableSave={setDisableSave}
                     />
                 </>

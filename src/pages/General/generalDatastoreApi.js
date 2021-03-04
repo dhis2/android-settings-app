@@ -12,3 +12,14 @@ export const updateGeneralKeyMutation = {
         lastUpdated: new Date().toJSON(),
     }),
 }
+
+/**
+ * Query to get General Settings from Data store
+ * key: General Settings
+ * */
+
+export const getGeneralKeyQuery = {
+    generalSettings: {
+        resource: `dataStore/${NAMESPACE}/${GENERAL_SETTINGS}`,
+    },
+}
