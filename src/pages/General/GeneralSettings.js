@@ -19,7 +19,7 @@ import {
     createInitialValues,
     notValidFields,
 } from './helper'
-import { saveGeneralKeyMutation } from './queryMutation'
+import { updateGeneralKeyMutation } from './updateGeneralDatastore'
 
 const PAGE_NAME = i18n.t('General Settings')
 
@@ -29,7 +29,7 @@ const GeneralSettings = () => {
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
 
-    const [mutate, { error, data }] = useDataMutation(saveGeneralKeyMutation)
+    const [mutate, { error, data }] = useDataMutation(updateGeneralKeyMutation)
 
     useEffect(() => {
         if (generalSettings) {
