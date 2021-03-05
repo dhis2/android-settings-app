@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-25T20:05:01.411Z\n"
-"PO-Revision-Date: 2021-02-25T20:05:01.411Z\n"
+"POT-Creation-Date: 2021-03-03T17:10:14.009Z\n"
+"PO-Revision-Date: 2021-03-03T17:10:14.009Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -129,7 +129,13 @@ msgstr ""
 msgid "Analytics reporting ID (Matomo)"
 msgstr ""
 
-msgid "Must be at least 1 characters long"
+msgid "Must be at least 1 character long"
+msgstr ""
+
+msgid "Analytics reporting URL (Matomo)"
+msgstr ""
+
+msgid "Must be a valid url"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -433,6 +439,9 @@ msgid "{{eventsDownload}} events per OU"
 msgstr ""
 
 msgid "{{periodDSDownload}} {{periodType}} period"
+msgstr ""
+
+msgid "General Settings"
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"
