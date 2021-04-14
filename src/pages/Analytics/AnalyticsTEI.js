@@ -25,7 +25,7 @@ const AnalyticsTEI = () => {
 
     useEffect(() => {
         if (analytics) {
-            const settings = analytics?.analytics?.tei
+            const settings = analytics.analytics.tei
             setAnalyticSettings(settings)
         }
     }, [analytics])
