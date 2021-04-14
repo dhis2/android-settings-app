@@ -1,4 +1,5 @@
 import React from 'react'
+import i18n from '@dhis2/d2-i18n'
 import {
     AndroidSettingsIcon,
     ProgramsIcon,
@@ -10,7 +11,7 @@ import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
-import i18n from '@dhis2/d2-i18n'
+import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 
 export const overviewPage = {
     code: 'home',
@@ -112,7 +113,7 @@ export const analyticsPage = {
     path: '/analytics',
     linkText: i18n.t('Set TEI Analytics'),
     description: i18n.t('Manage TEI analytics for tracker programs'),
-    component: <div> Analytics </div>,
+    component: <AnalyticsTEI />,
 }
 
 export const menuSection = [
