@@ -5,10 +5,6 @@ import { CheckboxField } from './CheckboxField'
 import DialogEncrypt from '../dialog/dialog-encrypt'
 
 const CODE = 'encryptDB'
-const LABEL = i18n.t('Encrypt device database')
-const HELPTEXT = i18n.t(
-    'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.'
-)
 
 export const defaultEncryptDB = false
 
@@ -32,8 +28,10 @@ export const EncryptDB = ({ value, onChange, ...props }) => {
         <>
             <CheckboxField
                 name={CODE}
-                label={LABEL}
-                helpText={HELPTEXT}
+                label={i18n.t('Encrypt device database')}
+                helpText={i18n.t(
+                    'Encrypt all data stored on device. Data can be lost if there are problems with an encrypted database. This will not affect the DHIS2 database stored on an external server.'
+                )}
                 checked={value[CODE]}
                 onChange={handleCheckbox}
                 {...props}

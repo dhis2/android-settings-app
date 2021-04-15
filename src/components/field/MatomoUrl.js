@@ -6,8 +6,6 @@ import { isValidURL } from '../../utils/validators/isValidURL'
 import { isValidValue } from '../../utils/validators/isValidValue'
 
 const CODE = 'matomoURL'
-const LABEL = i18n.t('Analytics reporting URL (Matomo)')
-const HELPTEXT = i18n.t('Must be a valid url')
 
 export const MatomoUrl = ({ value, onChange }) => {
     const [error, setError] = useState(false)
@@ -30,8 +28,8 @@ export const MatomoUrl = ({ value, onChange }) => {
     return (
         <TextField
             name={CODE}
-            label={LABEL}
-            helpText={HELPTEXT}
+            label={i18n.t('Analytics reporting URL (Matomo)')}
+            helpText={i18n.t('Must be a valid url')}
             value={value[CODE]}
             error={error}
             onChange={onChangeUrl}

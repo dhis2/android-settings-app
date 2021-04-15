@@ -6,12 +6,6 @@ import DialogDisableSettings from '../../components/dialog/dialog-disable-settin
 import { NAMESPACE } from '../../constants/data-store'
 import { useNavigation } from '../../utils/useNavigation'
 
-const CODE = 'disableSettings'
-const LABEL = i18n.t('Disable all settings')
-const HELPTEXT = i18n.t(
-    'This will disable and remove all General, Program and Data set settings.'
-)
-
 const deleteDataStoreMutation = {
     resource: `dataStore/${NAMESPACE}`,
     type: 'delete',
@@ -40,9 +34,11 @@ const DisableSettings = () => {
     return (
         <>
             <ButtonField
-                name={CODE}
-                label={LABEL}
-                helpText={HELPTEXT}
+                name="disableSettings"
+                label={i18n.t('Disable all settings')}
+                helpText={i18n.t(
+                    'This will disable and remove all General, Program and Data set settings.'
+                )}
                 onOpen={onClick}
             />
 

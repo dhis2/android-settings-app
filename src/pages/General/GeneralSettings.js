@@ -23,8 +23,6 @@ import {
     updateGeneralKeyMutation,
 } from './generalDatastoreApi'
 
-const PAGE_NAME = i18n.t('General Settings')
-
 const GeneralSettings = () => {
     const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)
     const [settings, setSettings] = useState()
@@ -73,7 +71,11 @@ const GeneralSettings = () => {
     }
 
     return (
-        <Page title={PAGE_NAME} loading={loading} unsavedChanges={!disableSave}>
+        <Page
+            title={i18n.t('General Settings')}
+            loading={loading}
+            unsavedChanges={!disableSave}
+        >
             {settings && (
                 <>
                     <MatomoUrl value={settings} onChange={setSettings} />

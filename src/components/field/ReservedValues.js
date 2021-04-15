@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n'
 import { NumberField } from './NumberField'
 
 const CODE = 'reservedValues'
-const LABEL = i18n.t('Reserved values downloaded per TEI attribute')
 const MAXVALUE = 500
 
 export const defaultReservedValues = 100
@@ -18,7 +17,7 @@ export const ReservedValues = ({ onChange, value, ...props }) => {
 
     return (
         <NumberField
-            label={LABEL}
+            label={i18n.t('Reserved values downloaded per TEI attribute')}
             name={CODE}
             onChange={handleChange}
             value={value[CODE]}

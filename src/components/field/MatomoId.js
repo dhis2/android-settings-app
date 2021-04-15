@@ -4,8 +4,6 @@ import PropTypes from '@dhis2/prop-types'
 import { NumberField } from './NumberField'
 
 const CODE = 'matomoID'
-const LABEL = i18n.t('Analytics reporting ID (Matomo)')
-const HELPTEXT = i18n.t('Must be at least 1 character long')
 
 export const MatomoId = ({ value, onChange }) => {
     const handleChange = e => {
@@ -16,9 +14,9 @@ export const MatomoId = ({ value, onChange }) => {
 
     return (
         <NumberField
-            label={LABEL}
+            label={i18n.t('Analytics reporting ID (Matomo)')}
             name={CODE}
-            helpText={HELPTEXT}
+            helpText={i18n.t('Must be at least 1 character long')}
             value={value[CODE]}
             onChange={handleChange}
         />
