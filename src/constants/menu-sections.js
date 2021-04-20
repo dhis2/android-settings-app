@@ -11,6 +11,7 @@ import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
 import i18n from '@dhis2/d2-i18n'
+import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 
 export const overviewPage = {
     code: 'home',
@@ -86,7 +87,7 @@ export const appearancePages = [
         path: '/appearance/home-screen',
         linkText: i18n.t('Set Filters in Home screen'),
         description: i18n.t('Manage Home screen'),
-        component: <div> Home screen </div>,
+        component: <HomeAppearance />,
     },
     {
         code: 'program-appearance',
