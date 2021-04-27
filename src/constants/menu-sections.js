@@ -6,12 +6,12 @@ import {
     DataSetIcon,
     TestRun,
 } from '../components/icons-svg'
-import AndroidSettingsContainer from '../components/sections/general/android-settings-container'
 import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
 import GeneralSettings from '../pages/General/GeneralSettings'
+import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 
 export const overviewPage = {
@@ -32,7 +32,7 @@ export const generalPage = {
     component: <GeneralSettings />,
 }
 
-export const syncSection = i18n.t('Sync')
+export const syncSection = i18n.t('Synchronization')
 
 export const syncPages = [
     {
@@ -40,7 +40,7 @@ export const syncPages = [
         label: i18n.t('Global'),
         path: '/sync/global-settings',
         icon: <AndroidSettingsIcon />,
-        component: <AndroidSettingsContainer />,
+        component: <GlobalSettings />,
         linkText: i18n.t('Set Global sync settings'),
         description: i18n.t(
             'Set global settings like metadata anda data sync period'
