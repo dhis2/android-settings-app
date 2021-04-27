@@ -79,19 +79,12 @@ const GeneralSettings = () => {
             {settings && (
                 <>
                     <MatomoUrl value={settings} onChange={setSettings} />
-
                     <MatomoId value={settings} onChange={setSettings} />
-
                     <SmsGateway value={settings} onChange={setSettings} />
-
                     <SmsResultSender value={settings} onChange={setSettings} />
-
                     <ReservedValues value={settings} onChange={setSettings} />
-
                     <EncryptDB value={settings} onChange={setSettings} />
-
                     <DisableSettings />
-
                     <FooterStripButtons
                         onSave={saveSettings}
                         onReset={resetSettings}
