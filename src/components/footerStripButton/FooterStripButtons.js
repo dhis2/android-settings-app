@@ -14,6 +14,7 @@ const FooterStripButtons = ({
     errorRequest,
     requestResult,
     handleDisableSave,
+    disableAll,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
 
@@ -47,7 +48,7 @@ const FooterStripButtons = ({
                 >
                     {i18n.t('Save')}
                 </Button>
-                <Button onClick={onReset}>
+                <Button onClick={onReset} disabled={disableAll}>
                     {i18n.t('Reset all values to default')}
                 </Button>
             </ButtonStrip>
