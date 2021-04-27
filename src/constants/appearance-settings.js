@@ -19,6 +19,10 @@ export const appearanceDefault = {
                 filter: true,
                 sort: true,
             },
+            syncStatus: {
+                filter: true,
+                sort: true,
+            },
         },
         programSettings: {
             globalSettings: {
