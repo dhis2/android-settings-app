@@ -13,9 +13,3 @@ export const apiFirstLoad = () => {
         })
     })
 }
-
-export const authorityQuery = {
-    authority: {
-        resource: 'me/authorities/ALL',
-    },
-}
