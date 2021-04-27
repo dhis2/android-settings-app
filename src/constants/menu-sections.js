@@ -1,4 +1,5 @@
 import React from 'react'
+import i18n from '@dhis2/d2-i18n'
 import {
     AndroidSettingsIcon,
     ProgramsIcon,
@@ -9,8 +10,9 @@ import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
+import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
-import i18n from '@dhis2/d2-i18n'
+import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 
 export const overviewPage = {
     code: 'home',
@@ -27,7 +29,7 @@ export const generalPage = {
     description: i18n.t(
         'Defines generic parameters like SMS gateway number and TEI reserved values'
     ),
-    component: <div> General </div>,
+    component: <GeneralSettings />,
 }
 
 export const syncSection = i18n.t('Synchronization')
@@ -112,7 +114,7 @@ export const analyticsPage = {
     path: '/analytics',
     linkText: i18n.t('Set TEI Analytics'),
     description: i18n.t('Manage TEI analytics for tracker programs'),
-    component: <div> Analytics </div>,
+    component: <AnalyticsTEI />,
 }
 
 export const menuSection = [

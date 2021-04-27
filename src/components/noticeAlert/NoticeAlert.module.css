@@ -1,0 +1,4 @@
+.container {
+    margin-bottom: var(--spacers-dp24);
+    max-width: 800px;
+}

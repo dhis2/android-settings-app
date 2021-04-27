@@ -1,15 +1,24 @@
-import api from '../utils/api'
+import { useDataQuery } from '@dhis2/app-runtime'
 import { NAMESPACE } from '../constants/data-store'
-import { getAuthority } from './getAuthority'
 
-export const apiFirstLoad = () => {
-    return getAuthority().then(hasAuthority => {
-        return api.getNamespaces().then(result => {
-            if (result.includes(NAMESPACE)) {
-                return { hasNamespace: true }
-            } else {
-                return { hasAuthority, hasNamespace: false }
-            }
-        })
-    })
+export const namespaceDataStoreQuery = {
+    dataStore: {
+        resource: 'dataStore',
+    },
+}
+
+export const authorityQuery = {
+    authority: {
+        resource: 'me/authorities/ALL',
+    },
+}
+
+export const useNamespaceDataStore = () => {
+    const { loading, error, data } = useDataQuery(namespaceDataStoreQuery)
+
+    return {
+        loading,
+        error,
+        namespace: data && data.dataStore.includes(NAMESPACE),
+    }
 }
