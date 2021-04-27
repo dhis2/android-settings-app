@@ -1,42 +1,75 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import isEqual from 'lodash/isEqual'
+import Page from '../../../components/page/Page'
 import { DataSync, MetadataSync } from '../../../components/field'
-import { useGetSyncDataStore } from '../SyncDatastoreQuery'
-import NoticeAlert from '../../../components/notice-alert'
-
-const authorityQuery = {
-    authority: {
-        resource: 'me/authorities/ALL',
-    },
-}
+import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { createInitialValues } from './helper'
+import {
+    saveSynchronizationKeyMutation,
+    useGetSyncDataStore,
+} from '../SyncDatastoreQuery'
 
 const GlobalSettings = () => {
-    const { load, syncGlobal, syncSettings } = useGetSyncDataStore()
-    const { data } = useDataQuery(authorityQuery)
+    const {
+        load,
+        syncGlobal,
+        syncSettings,
+        dataSetSettings,
+        programSettings,
+    } = useGetSyncDataStore()
+    const { data: authority } = useDataQuery(authorityQuery)
     const [settings, setSettings] = useState()
+    const [initialValues, setInitialValues] = useState()
     const [disable, setDisable] = useState(false)
+    const [disableSave, setDisableSave] = useState(true)
+
+    const [mutate, { error, data }] = useDataMutation(
+        saveSynchronizationKeyMutation
+    )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        authority && setDisable(!authority.authority)
+    }, [authority])
 
     useEffect(() => {
         if (syncSettings) {
             setSettings(syncGlobal)
+            setInitialValues(syncGlobal)
         }
     }, [syncSettings])
 
+    /**
+     * Enable Save button if the settings are different from the one saved in the data store
+     * */
+    useEffect(() => {
+        initialValues && settings && !isEqual(settings, initialValues)
+            ? setDisableSave(false)
+            : setDisableSave(true)
+    }, [settings])
+
+    const saveSettings = async () => {
+        const settingsToSave = { ...settings, dataSetSettings, programSettings }
+        await mutate({ settings: settingsToSave })
+    }
+
+    const resetSettings = () => {
+        const settingsToReset = createInitialValues('')
+        setSettings(settingsToReset)
+    }
+
     return (
-        <>
-            {settings && !load && (
+        <Page
+            title={i18n.t('Global sync Settings')}
+            loading={load}
+            unsavedChanges={!disableSave}
+        >
+            {settings && (
                 <>
-                    <NoticeAlert
-                        title={i18n.t('Manual options')}
-                        notice={i18n.t(
-                            'Manual options for data and metadata sync are only available from android app version 2.3.0 onwards.'
-                        )}
-                    />
+                    <ManualSyncAlert />
 
                     <MetadataSync
                         value={settings}
@@ -49,9 +82,19 @@ const GlobalSettings = () => {
                         onChange={setSettings}
                         disabled={disable}
                     />
+
+                    <FooterStripButtons
+                        onSave={saveSettings}
+                        onReset={resetSettings}
+                        saveButtonDisabled={disableSave}
+                        errorRequest={error}
+                        requestResult={data}
+                        handleDisableSave={setDisableSave}
+                        disableAll={disable}
+                    />
                 </>
             )}
-        </>
+        </Page>
     )
 }
 
