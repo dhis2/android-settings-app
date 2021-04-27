@@ -3,10 +3,12 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { MANUAL, SyncSelect } from './SyncSelect'
 
+export const defaultMetadataSync = '24h'
+
 const CODE = 'metadataSync'
 const metadataOptions = [
     {
-        value: '24h',
+        value: defaultMetadataSync,
         label: i18n.t('1 Day'),
     },
     {
@@ -18,8 +20,6 @@ const metadataOptions = [
         label: i18n.t('Manual'),
     },
 ]
-
-export const defaultMetadataSync = '24h'
 
 export const MetadataSync = ({ value, onChange, ...props }) => (
     <SyncSelect

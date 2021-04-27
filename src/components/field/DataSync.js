@@ -3,6 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { MANUAL, SyncSelect } from './SyncSelect'
 
+export const defaultDataSync = '24h'
+
 const CODE = 'dataSync'
 const dataOptions = [
     {
@@ -22,7 +24,7 @@ const dataOptions = [
         label: i18n.t('12 Hours'),
     },
     {
-        value: '24h',
+        value: defaultDataSync,
         label: i18n.t('1 Day'),
     },
     {
@@ -30,8 +32,6 @@ const dataOptions = [
         label: i18n.t('Manual'),
     },
 ]
-
-export const defaultDataSync = '24h'
 
 export const DataSync = ({ value, onChange, ...props }) => (
     <SyncSelect
