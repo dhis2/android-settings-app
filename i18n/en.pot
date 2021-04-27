@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-13T17:04:36.552Z\n"
-"PO-Revision-Date: 2021-02-13T17:04:36.552Z\n"
+"POT-Creation-Date: 2021-03-03T17:10:14.009Z\n"
+"PO-Revision-Date: 2021-03-03T17:10:14.009Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -117,16 +117,40 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "Encrypt device database"
+msgstr ""
+
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
+msgstr ""
+
+msgid "Analytics reporting ID (Matomo)"
+msgstr ""
+
+msgid "Must be at least 1 character long"
+msgstr ""
+
+msgid "Analytics reporting URL (Matomo)"
+msgstr ""
+
+msgid "Must be a valid url"
+msgstr ""
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "SMS Gateway phone number"
+msgstr ""
+
+msgid "Must start with + and be at least 4 characters long."
+msgstr ""
+
+msgid "SMS Result Sender phone number"
+msgstr ""
+
 msgid "Reset all values to default"
-msgstr ""
-
-msgid "404 Page not found."
-msgstr ""
-
-msgid "No match for"
-msgstr ""
-
-msgid "Go back to General settings"
 msgstr ""
 
 msgid "Name"
@@ -208,30 +232,9 @@ msgstr ""
 msgid "How often should data sync?"
 msgstr ""
 
-msgid "SMS Gateway phone number"
-msgstr ""
-
-msgid "Must start with + and be at least 4 characters long."
-msgstr ""
-
 msgid ""
 "This phone number is not valid. Must start with + and be at least 4 "
 "characters long."
-msgstr ""
-
-msgid "SMS Result Sender phone number"
-msgstr ""
-
-msgid "Reserved values downloaded per TEI attribute"
-msgstr ""
-
-msgid "Encrypt device database"
-msgstr ""
-
-msgid ""
-"Encrypt all data stored on device. Data can be lost if there are problems "
-"with an encrypted database. This will not affect the DHIS2 database stored "
-"on an external server."
 msgstr ""
 
 msgid "This will disable and remove all General, Program and Data set settings."
@@ -436,6 +439,9 @@ msgid "{{eventsDownload}} events per OU"
 msgstr ""
 
 msgid "{{periodDSDownload}} {{periodType}} period"
+msgstr ""
+
+msgid "General Settings"
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"
