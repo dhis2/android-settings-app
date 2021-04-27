@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-03-03T17:10:14.009Z\n"
-"PO-Revision-Date: 2021-03-03T17:10:14.009Z\n"
+"POT-Creation-Date: 2021-04-27T15:49:51.022Z\n"
+"PO-Revision-Date: 2021-04-27T15:49:51.022Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -151,6 +151,14 @@ msgid "SMS Result Sender phone number"
 msgstr ""
 
 msgid "Reset all values to default"
+msgstr ""
+
+msgid "No TEI Analytics found"
+msgstr ""
+
+msgid ""
+"It looks like there aren't any configured analytics, or they couldn't be "
+"loaded."
 msgstr ""
 
 msgid "Name"
@@ -439,6 +447,14 @@ msgid "{{eventsDownload}} events per OU"
 msgstr ""
 
 msgid "{{periodDSDownload}} {{periodType}} period"
+msgstr ""
+
+msgid "TEI Analytics"
+msgstr ""
+
+msgid ""
+"Manage Tracked Entity Instance (TEI) analytics for tracker programs. The "
+"settings below apply to all tracker programs an Android user has access to."
 msgstr ""
 
 msgid "General Settings"
