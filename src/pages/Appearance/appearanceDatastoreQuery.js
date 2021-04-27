@@ -38,12 +38,12 @@ export const useReadAppearanceDataStore = () => {
     return {
         load: loading,
         error,
-        completionSpinner: data && data?.appearanceSettings?.completionSpinner,
-        filterSorting: data && data?.appearanceSettings?.filterSorting,
-        home: data && data?.appearanceSettings?.filterSorting?.home,
+        completionSpinner: data && data.appearanceSettings.completionSpinner,
+        filterSorting: data && data.appearanceSettings.filterSorting,
+        home: data && data.appearanceSettings.filterSorting.home,
         programSettings:
-            data && data?.appearanceSettings?.filterSorting?.programSettings,
+            data && data.appearanceSettings.filterSorting.programSettings,
         dataSetSettings:
-            data && data?.appearanceSettings?.filterSorting?.dataSetSettings,
+            data && data.appearanceSettings.filterSorting.dataSetSettings,
     }
 }

@@ -34,7 +34,7 @@ export const useGetSyncDataStore = () => {
         errorSync: error,
         syncSettings: data && data.syncSettings,
         syncGlobal: data && createInitialValues(data.syncSettings),
-        programSettings: data && data?.syncSettings?.programSettings,
-        dataSetSettings: data && data?.syncSettings?.dataSetSettings,
+        programSettings: data && data.syncSettings.programSettings,
+        dataSetSettings: data && data.syncSettings.dataSetSettings,
     }
 }
