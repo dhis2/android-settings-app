@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-27T15:49:51.022Z\n"
-"PO-Revision-Date: 2021-04-27T15:49:51.022Z\n"
+"POT-Creation-Date: 2021-04-27T20:17:56.626Z\n"
+"PO-Revision-Date: 2021-04-27T20:17:56.626Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -117,6 +117,27 @@ msgstr ""
 msgid "Add/Save"
 msgstr ""
 
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "How often should data sync?"
+msgstr ""
+
 msgid "Encrypt device database"
 msgstr ""
 
@@ -136,6 +157,12 @@ msgid "Analytics reporting URL (Matomo)"
 msgstr ""
 
 msgid "Must be a valid url"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "How often should metadata sync?"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -161,6 +188,14 @@ msgid ""
 "loaded."
 msgstr ""
 
+msgid "Manual options"
+msgstr ""
+
+msgid ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+msgstr ""
+
 msgid "Name"
 msgstr ""
 
@@ -171,14 +206,6 @@ msgid "General download sync settings"
 msgstr ""
 
 msgid "These settings apply to all Android users."
-msgstr ""
-
-msgid "Manual options"
-msgstr ""
-
-msgid ""
-"Manual options for data and metadata sync are only available from android "
-"app version 2.3.0 onwards."
 msgstr ""
 
 msgid "Summary Settings"
@@ -213,33 +240,6 @@ msgid ""
 "sure you want to leave?"
 msgstr ""
 
-msgid "1 Day"
-msgstr ""
-
-msgid "1 Week"
-msgstr ""
-
-msgid "Manual"
-msgstr ""
-
-msgid "30 Minutes"
-msgstr ""
-
-msgid "1 Hour"
-msgstr ""
-
-msgid "6 Hours"
-msgstr ""
-
-msgid "12 Hours"
-msgstr ""
-
-msgid "How often should metadata sync?"
-msgstr ""
-
-msgid "How often should data sync?"
-msgstr ""
-
 msgid ""
 "This phone number is not valid. Must start with + and be at least 4 "
 "characters long."
@@ -249,6 +249,18 @@ msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Sync status"
+msgstr ""
+
+msgid "Assigned to me"
 msgstr ""
 
 msgid "Overview"
@@ -263,7 +275,7 @@ msgstr ""
 msgid "Defines generic parameters like SMS gateway number and TEI reserved values"
 msgstr ""
 
-msgid "Sync"
+msgid "Synchronization"
 msgstr ""
 
 msgid "Global"
@@ -457,7 +469,21 @@ msgid ""
 "settings below apply to all tracker programs an Android user has access to."
 msgstr ""
 
+msgid "Home Screen"
+msgstr ""
+
+msgid ""
+"Customize the available filters and sorting options for the home screen. "
+"Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid "Show Filter"
+msgstr ""
+
 msgid "General Settings"
+msgstr ""
+
+msgid "Global sync Settings"
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"
