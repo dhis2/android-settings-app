@@ -1,4 +1,4 @@
-export const NAMESPACE = 'ANDROID_SETTING_APP'
+export const NAMESPACE = 'ANDROID_SETTINGS_APP'
 export const INFO = 'info'
 export const GENERAL_SETTINGS = 'generalSettings'
 export const SYNC_SETTINGS = 'synchronization'

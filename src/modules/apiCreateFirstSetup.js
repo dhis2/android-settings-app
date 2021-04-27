@@ -1,28 +1,37 @@
 import api from '../utils/api'
 import {
-    DATASET_SETTINGS,
+    ANALYTICS,
+    APPEARANCE,
     GENERAL_SETTINGS,
+    INFO,
     NAMESPACE,
-    PROGRAM_SETTINGS,
+    SYNC_SETTINGS,
 } from '../constants/data-store'
-import { androidSettingsDefault } from '../constants/android-settings'
-import {
-    DEFAULT_DATASET,
-    DEFAULT_PROGRAM,
-    populateObject,
-} from './populateDefaultSettings'
 import { getInstance } from 'd2'
+import { initialSetup } from '../constants/initial-setup'
+
+const {
+    info,
+    generalSettings,
+    synchronization,
+    appearance,
+    analytics,
+} = initialSetup
 
 const getDataStoreKeyId = () => {
     return Promise.all([
+        api.getMetaData(NAMESPACE, INFO),
         api.getMetaData(NAMESPACE, GENERAL_SETTINGS),
-        api.getMetaData(NAMESPACE, PROGRAM_SETTINGS),
-        api.getMetaData(NAMESPACE, DATASET_SETTINGS),
+        api.getMetaData(NAMESPACE, SYNC_SETTINGS),
+        api.getMetaData(NAMESPACE, APPEARANCE),
+        api.getMetaData(NAMESPACE, ANALYTICS),
     ]).then(data => {
         return {
             [data[0].key]: data[0].id,
             [data[1].key]: data[1].id,
             [data[2].key]: data[2].id,
+            [data[3].key]: data[3].id,
+            [data[4].key]: data[4].id,
         }
     })
 }
@@ -36,7 +45,13 @@ const updateSecurityDataStore = id => {
     }
 
     return getInstance().then(d2 => {
-        const keyNames = [GENERAL_SETTINGS, PROGRAM_SETTINGS, DATASET_SETTINGS]
+        const keyNames = [
+            INFO,
+            GENERAL_SETTINGS,
+            SYNC_SETTINGS,
+            APPEARANCE,
+            ANALYTICS,
+        ]
         const sharingPromises = []
         keyNames.map(keyName => {
             const sharingUrl = `sharing?type=dataStore&id=${id[keyName]}`
@@ -50,17 +65,15 @@ const updateSecurityDataStore = id => {
 }
 
 const apiSetDefaultValues = () => {
-    return api.createNamespace(NAMESPACE, GENERAL_SETTINGS).then(() => {
+    return api.createNamespace(NAMESPACE, INFO).then(() => {
         return Promise.all([
-            api.updateValue(NAMESPACE, GENERAL_SETTINGS, {
-                ...androidSettingsDefault,
+            api.updateValue(NAMESPACE, INFO, { ...info }),
+            api.createValue(NAMESPACE, GENERAL_SETTINGS, {
+                ...generalSettings,
             }),
-            api.createValue(NAMESPACE, PROGRAM_SETTINGS, {
-                globalSettings: populateObject(DEFAULT_PROGRAM),
-            }),
-            api.createValue(NAMESPACE, DATASET_SETTINGS, {
-                globalSettings: populateObject(DEFAULT_DATASET),
-            }),
+            api.createValue(NAMESPACE, SYNC_SETTINGS, { ...synchronization }),
+            api.createValue(NAMESPACE, APPEARANCE, { ...appearance }),
+            api.createValue(NAMESPACE, ANALYTICS, { ...analytics }),
         ])
     })
 }
