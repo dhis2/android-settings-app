@@ -1,8 +1,6 @@
-import { NAMESPACE } from '../../constants/data-store'
+import { NAMESPACE, SYNC_SETTINGS } from '../../constants/data-store'
 import { useDataQuery } from '@dhis2/app-runtime'
 import { createInitialValues } from './Global/helper'
-
-const SYNC_SETTINGS = 'synchronization'
 
 /**
  * update data store
@@ -36,7 +34,7 @@ export const useGetSyncDataStore = () => {
         errorSync: error,
         syncSettings: data && data.syncSettings,
         syncGlobal: data && createInitialValues(data.syncSettings),
-        programSettings: data && data.syncSettings.programSettings,
-        dataSetSettings: data && data.syncSettings.dataSetSettings,
+        programSettings: data && data?.syncSettings?.programSettings,
+        dataSetSettings: data && data?.syncSettings?.dataSetSettings,
     }
 }

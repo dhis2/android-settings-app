@@ -1,11 +1,11 @@
-import { NAMESPACE } from '../../constants/data-store'
+import { ANALYTICS, NAMESPACE } from '../../constants/data-store'
 
 /**
  * update data store
  * key: Analytics
  * */
 export const saveAnalyticsKeyMutation = {
-    resource: `dataStore/${NAMESPACE}/analytics`,
+    resource: `dataStore/${NAMESPACE}/${ANALYTICS}`,
     type: 'update',
     data: ({ settings }) => ({
         ...settings,
