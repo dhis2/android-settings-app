@@ -13,8 +13,16 @@
     font-weight: normal;
     font-size: 0.9rem;
     color: var(--colors-grey900);
+    padding: 10px 20px;
 }
 
 .parent > div:last-child {
     justify-self: end;
+    padding-right: 25px;
+}
+
+.parent > .title {
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

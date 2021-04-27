@@ -1,8 +1,6 @@
-import { NAMESPACE } from '../../constants/data-store'
+import { NAMESPACE, SYNC_SETTINGS } from '../../constants/data-store'
 import { useDataQuery } from '@dhis2/app-runtime'
 import { createInitialValues } from './Global/helper'
-
-const SYNC_SETTINGS = 'synchronization'
 
 /**
  * update data store

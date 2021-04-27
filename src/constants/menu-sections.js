@@ -12,6 +12,7 @@ import UserSyncTestContainer from '../components/sections/user-sync-test/user-sy
 import Home from '../pages/Home/home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
+import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 
 export const overviewPage = {
@@ -88,7 +89,7 @@ export const appearancePages = [
         path: '/appearance/home-screen',
         linkText: i18n.t('Set Filters in Home screen'),
         description: i18n.t('Manage Home screen'),
-        component: <div> Home screen </div>,
+        component: <HomeAppearance />,
     },
     {
         code: 'program-appearance',
