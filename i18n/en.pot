@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-27T20:17:56.626Z\n"
-"PO-Revision-Date: 2021-04-27T20:17:56.626Z\n"
+"POT-Creation-Date: 2021-04-29T08:11:50.865Z\n"
+"PO-Revision-Date: 2021-04-29T08:11:50.865Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -251,13 +251,19 @@ msgstr ""
 msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
-msgid "Date"
+msgid "Period"
 msgstr ""
 
 msgid "Organisation Unit"
 msgstr ""
 
 msgid "Sync status"
+msgstr ""
+
+msgid "Category Combo"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Assigned to me"
@@ -469,15 +475,24 @@ msgid ""
 "settings below apply to all tracker programs an Android user has access to."
 msgstr ""
 
+msgid "Global settings"
+msgstr ""
+
+msgid "Show Filter"
+msgstr ""
+
+msgid ""
+"Customize filter and sorting options available for data sets. Settings "
+"below apply to all data sets a mobile user has access to. Settings specific "
+"to individual data sets can also be applied."
+msgstr ""
+
 msgid "Home Screen"
 msgstr ""
 
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
-msgstr ""
-
-msgid "Show Filter"
 msgstr ""
 
 msgid "General Settings"
