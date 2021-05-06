@@ -46,10 +46,10 @@ export const useReadProgramQuery = () => {
     const programStagesList = []
     let programList = []
     if (data) {
-        data?.programs?.programs?.map(program =>
+        data.programs.programs.map(program =>
             programStagesList.push(program.programStages)
         )
-        programList = data?.programs?.programs?.filter(
+        programList = data.programs.programs.filter(
             program => program.programType === 'WITH_REGISTRATION'
         )
     }

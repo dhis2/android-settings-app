@@ -73,7 +73,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
     const handleSave = () => {
         const updatedValue = createTEIValues(
             specificSettings,
-            id?.system?.codes[0]
+            id.system.codes[0]
         )
         handleSettings(updateList(updatedValue, settings))
         handleClose()
