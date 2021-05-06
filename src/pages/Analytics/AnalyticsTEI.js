@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
+import isEqual from 'lodash/isEqual'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import {
     getAnalyticsKeyQuery,
@@ -9,11 +10,13 @@ import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 import Page from '../../components/page/Page'
 import AnalyticsInfo from '../../components/noticeAlert/AnalyticsInfo'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
+import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
 
 const AnalyticsTEI = () => {
     const { data: analytics, loading } = useDataQuery(getAnalyticsKeyQuery)
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [analyticSettings, setAnalyticSettings] = useState([])
+    const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
 
@@ -26,9 +29,18 @@ const AnalyticsTEI = () => {
     useEffect(() => {
         if (analytics) {
             const settings = analytics.analytics.tei
+            setInitialValues(settings)
             setAnalyticSettings(settings)
         }
     }, [analytics])
+
+    useEffect(() => {
+        initialValues &&
+        analyticSettings &&
+        !isEqual(analyticSettings, initialValues)
+            ? setDisableSave(false)
+            : setDisableSave(true)
+    }, [analyticSettings])
 
     const saveSettings = async () => {
         const settingsToSave = {
@@ -54,6 +66,12 @@ const AnalyticsTEI = () => {
             {analyticSettings && (
                 <>
                     {analyticSettings.length === 0 && <AnalyticsInfo />}
+
+                    <AnalyticsSpecificTEI
+                        disable={disable}
+                        settings={analyticSettings}
+                        handleSettings={setAnalyticSettings}
+                    />
 
                     <FooterStripButtons
                         onSave={saveSettings}
