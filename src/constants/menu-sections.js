@@ -6,12 +6,12 @@ import {
     DataSetIcon,
     TestRun,
 } from '../components/icons-svg'
-import ProgramSettings from '../components/sections/program/program-settings'
 import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
+import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSettings'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 
@@ -52,7 +52,7 @@ export const syncPages = [
         label: i18n.t('Programs'),
         path: '/sync/program-setting',
         icon: <ProgramsIcon />,
-        component: <ProgramSettings />,
+        component: <ProgramSyncSettings />,
         linkText: i18n.t('Set Programs sync settings'),
         description: i18n.t(
             'Define synchronization parameters to tracker and event programs'
