@@ -14,6 +14,7 @@ import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
+import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
 
 export const overviewPage = {
     code: 'home',
@@ -105,7 +106,7 @@ export const appearancePages = [
         path: '/appearance/dataset',
         linkText: i18n.t('Set Filters in Data sets'),
         description: i18n.t('Manage Data sets'),
-        component: <div> Dataset </div>,
+        component: <DatasetsAppearance />,
     },
 ]
 
