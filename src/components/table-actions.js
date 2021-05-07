@@ -20,7 +20,7 @@ const TableActions = ({ rows, menuActions, states }) => (
 const TableRows = ({ rows, states, menuActions }) => (
     <div>
         {rows.map(row => (
-            <Card key={row.id} className={tableActionStyles.wrapper}>
+            <Card key={row.id || row.uid} className={tableActionStyles.wrapper}>
                 <div className={tableActionStyles.parent}>
                     <div>
                         <div
@@ -75,7 +75,7 @@ const TableRows = ({ rows, states, menuActions }) => (
 )
 
 TableActions.propTypes = {
-    columns: PropTypes.array.isRequired,
+    columns: PropTypes.array,
     rows: PropTypes.array.isRequired,
     menuActions: PropTypes.object.isRequired,
 }
