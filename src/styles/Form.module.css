@@ -9,3 +9,11 @@
 .rowMargin {
     margin-top: 20px;
 }
+
+.rowTMargin32 {
+    margin-top: var(--spacers-dp32);
+}
+
+.rowBMargin24 {
+    margin-bottom: var(--spacers-dp24);
+}
