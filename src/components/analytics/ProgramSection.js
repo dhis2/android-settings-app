@@ -14,7 +14,7 @@ export const ProgramSection = ({ onChange, value }) => {
         if (programList) {
             setProgramStageList(
                 programList.filter(program => program.id === value.program)[0]
-                    .programStages
+                    ?.programStages
             )
         }
     }, [programList])
