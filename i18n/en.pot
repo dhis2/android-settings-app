@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-04T14:37:19.120Z\n"
-"PO-Revision-Date: 2021-05-04T14:37:19.120Z\n"
+"POT-Creation-Date: 2021-05-07T13:58:20.037Z\n"
+"PO-Revision-Date: 2021-05-07T13:58:20.037Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -147,6 +147,9 @@ msgid ""
 "on an external server."
 msgstr ""
 
+msgid "Show percentage (%) complete in Program toolbar"
+msgstr ""
+
 msgid "Analytics reporting ID (Matomo)"
 msgstr ""
 
@@ -251,13 +254,19 @@ msgstr ""
 msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
-msgid "Date"
+msgid "Period"
 msgstr ""
 
 msgid "Organisation Unit"
 msgstr ""
 
 msgid "Sync status"
+msgstr ""
+
+msgid "Category Combo"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Assigned to me"
@@ -348,6 +357,18 @@ msgid "Set TEI Analytics"
 msgstr ""
 
 msgid "Manage TEI analytics for tracker programs"
+msgstr ""
+
+msgid "Enrollment Date"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Event Date"
+msgstr ""
+
+msgid "Event status"
 msgstr ""
 
 msgid "Setting level"
@@ -469,7 +490,16 @@ msgid ""
 "settings below apply to all tracker programs an Android user has access to."
 msgstr ""
 
-msgid "Add TEI Analytics"
+msgid "Global settings"
+msgstr ""
+
+msgid "Show Filter"
+msgstr ""
+
+msgid ""
+"Customize filter and sorting options available for data sets. Settings "
+"below apply to all data sets a mobile user has access to. Settings specific "
+"to individual data sets can also be applied."
 msgstr ""
 
 msgid "Home Screen"
@@ -480,7 +510,10 @@ msgid ""
 "Filters and sorting options set here will only affect the home screen."
 msgstr ""
 
-msgid "Show Filter"
+msgid ""
+"Customize filter and sorting options available for programs. Settings below "
+"apply to all programs a mobile user has access to. Settings specific to "
+"individual programs can also be applied."
 msgstr ""
 
 msgid "General Settings"
