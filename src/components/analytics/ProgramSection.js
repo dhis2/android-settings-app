@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { CircularLoader } from '@dhis2/ui'
 import { Section } from './Section'
@@ -9,15 +9,6 @@ import { useReadProgramQuery } from '../../pages/Analytics/AnalyticsQueries'
 export const ProgramSection = ({ onChange, value }) => {
     const { programList, loading } = useReadProgramQuery()
     const [programStageList, setProgramStageList] = useState([])
-
-    useEffect(() => {
-        if (programList) {
-            setProgramStageList(
-                programList.filter(program => program.id === value.program)[0]
-                    ?.programStages
-            )
-        }
-    }, [programList])
 
     if (loading) return <CircularLoader small />
 
