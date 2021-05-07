@@ -5,118 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-07T14:20:07.933Z\n"
-"PO-Revision-Date: 2021-05-07T14:20:07.933Z\n"
+"POT-Creation-Date: 2021-05-07T14:38:31.954Z\n"
+"PO-Revision-Date: 2021-05-07T14:38:31.954Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
 
 msgid "Settings were successfully saved"
-msgstr ""
-
-msgid "Data Element"
-msgstr ""
-
-msgid "Program Indicator"
-msgstr ""
-
-msgid "Gender Attributes"
-msgstr ""
-
-msgid "Choose attribute"
-msgstr ""
-
-msgid "Female title"
-msgstr ""
-
-msgid "Male title"
-msgstr ""
-
-msgid "Choose element"
-msgstr ""
-
-msgid "Choose element type"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
-msgid "Program Stage"
-msgstr ""
-
-msgid "Title and name"
-msgstr ""
-
-msgid "Analytics chart title"
-msgstr ""
-
-msgid "Short name"
-msgstr ""
-
-msgid "Attribute"
-msgstr ""
-
-msgid "Monthly"
-msgstr ""
-
-msgid "Daily"
-msgstr ""
-
-msgid "Weekly"
-msgstr ""
-
-msgid "Quarterly"
-msgstr ""
-
-msgid "SixMontly"
-msgstr ""
-
-msgid "Yearly"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Choose a period type"
-msgstr ""
-
-msgid "Visualization elements"
-msgstr ""
-
-msgid "Bar chart"
-msgstr ""
-
-msgid "Line chart"
-msgstr ""
-
-msgid "Pivot table"
-msgstr ""
-
-msgid "Single value"
-msgstr ""
-
-msgid "WHO nutrition"
-msgstr ""
-
-msgid "Choose visualization type"
-msgstr ""
-
-msgid "Horizontal (x) axis"
-msgstr ""
-
-msgid "Vertical (y) axis"
-msgstr ""
-
-msgid "Height for age"
-msgstr ""
-
-msgid "Weight for age"
-msgstr ""
-
-msgid "Weight for height"
-msgstr ""
-
-msgid "Choose WHO visualization type"
 msgstr ""
 
 msgid "Delete {{typeName}}"
@@ -437,6 +332,9 @@ msgstr ""
 msgid "Manage Home screen"
 msgstr ""
 
+msgid "Program"
+msgstr ""
+
 msgid "Set Filters in Programs"
 msgstr ""
 
@@ -592,9 +490,6 @@ msgid ""
 "settings below apply to all tracker programs an Android user has access to."
 msgstr ""
 
-msgid "Add TEI Analytics"
-msgstr ""
-
 msgid "Global settings"
 msgstr ""
 
@@ -625,6 +520,14 @@ msgid "General Settings"
 msgstr ""
 
 msgid "Global sync Settings"
+msgstr ""
+
+msgid "Program global download sync settings"
+msgstr ""
+
+msgid ""
+"Applies to all programs an Android user has access to. Specific program "
+"settings can be defined in the section below."
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"
