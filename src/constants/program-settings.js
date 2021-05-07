@@ -74,6 +74,10 @@ export const GlobalProgram = [
                 value: 'ONLY_ACTIVE',
             },
         ],
+        defaultValues: {
+            ALL: true,
+            ONLY_ACTIVE: false,
+        },
     },
     {
         keyDownload: 'enrollmentDateDownload',

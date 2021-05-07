@@ -40,21 +40,26 @@ export const populateProgramObject = (programType, settingsList) => {
         case GLOBAL:
             object = {
                 settingDownload: settingsList.settingDownload,
-                teiDownload: settingsList.teiDownload,
-                enrollmentDownload: settingsList.enrollmentDownload,
-                enrollmentDateDownload: settingsList.enrollmentDateDownload,
-                updateDownload: settingsList.updateDownload,
-                eventsDownload: settingsList.eventsDownload,
-                eventDateDownload: settingsList.eventDateDownload,
+                teiDownload: settingsList.teiDownload || teiDownload,
+                enrollmentDownload:
+                    settingsList.enrollmentDownload || enrollmentDownload,
+                enrollmentDateDownload:
+                    settingsList.enrollmentDateDownload ||
+                    enrollmentDateDownload,
+                updateDownload: settingsList.updateDownload || updateDownload,
+                eventsDownload: settingsList.eventsDownload || eventsDownload,
+                eventDateDownload:
+                    settingsList.eventDateDownload || eventDateDownload,
             }
             break
         case GLOBAL_SPECIAL:
             object = {
                 settingDownload: settingsList.settingDownload,
-                teiDownload: settingsList.teiDownload,
-                updateDownload: settingsList.updateDownload,
-                eventsDownload: settingsList.eventsDownload,
-                eventDateDownload: settingsList.eventDateDownload,
+                teiDownload: settingsList.teiDownload || teiDownload,
+                updateDownload: settingsList.updateDownload || updateDownload,
+                eventsDownload: settingsList.eventsDownload || eventsDownload,
+                eventDateDownload:
+                    settingsList.eventDateDownload || eventDateDownload,
             }
             break
         case DEFAULT:
