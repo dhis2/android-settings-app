@@ -13,6 +13,7 @@ import Home from '../pages/Home/home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
+import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
 
@@ -98,7 +99,7 @@ export const appearancePages = [
         path: '/appearance/program',
         linkText: i18n.t('Set Filters in Programs'),
         description: i18n.t('Manage Programs'),
-        component: <div> Program </div>,
+        component: <ProgramsAppearance />,
     },
     {
         code: 'dataset-appearance',
