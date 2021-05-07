@@ -2,19 +2,20 @@ import React from 'react'
 import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
 import disable from '../../styles/Disable.module.css'
-import { InputNumber, RadioField, SelectSettings } from '../inputs'
+import { InputNumber, RadioGroup, SelectSettings } from '../inputs'
 import TableRow from './table-row'
 
 const InputChoice = ({ dataRow, states, onChange }) => (
     <>
         {Array.isArray(dataRow.download) === true ? (
             dataRow.radioButton === true ? (
-                <RadioField
+                <RadioGroup
                     onChange={onChange}
                     keyDownload={dataRow.keyDownload}
                     value={states[dataRow.keyDownload]}
                     disabled={states.disableAll}
                     options={dataRow.download}
+                    defaultValues={dataRow.defaultValues}
                 />
             ) : (
                 <SelectSettings
