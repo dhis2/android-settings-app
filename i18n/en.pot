@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-29T08:11:50.865Z\n"
-"PO-Revision-Date: 2021-04-29T08:11:50.865Z\n"
+"POT-Creation-Date: 2021-05-07T13:58:20.037Z\n"
+"PO-Revision-Date: 2021-05-07T13:58:20.037Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -145,6 +145,9 @@ msgid ""
 "Encrypt all data stored on device. Data can be lost if there are problems "
 "with an encrypted database. This will not affect the DHIS2 database stored "
 "on an external server."
+msgstr ""
+
+msgid "Show percentage (%) complete in Program toolbar"
 msgstr ""
 
 msgid "Analytics reporting ID (Matomo)"
@@ -356,6 +359,18 @@ msgstr ""
 msgid "Manage TEI analytics for tracker programs"
 msgstr ""
 
+msgid "Enrollment Date"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Event Date"
+msgstr ""
+
+msgid "Event status"
+msgstr ""
+
 msgid "Setting level"
 msgstr ""
 
@@ -493,6 +508,12 @@ msgstr ""
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid ""
+"Customize filter and sorting options available for programs. Settings below "
+"apply to all programs a mobile user has access to. Settings specific to "
+"individual programs can also be applied."
 msgstr ""
 
 msgid "General Settings"
