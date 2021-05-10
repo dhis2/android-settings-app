@@ -41,11 +41,16 @@ const defaultValues = {
     WHO_NUTRITION: false,
 }
 
-export const VisualizationType = ({ onChange, value, handleWHOAttribute }) => {
+export const VisualizationType = ({
+    onChange,
+    value,
+    handleWHOAttribute,
+    edit,
+}) => {
     const { refetch } = useReadAttributesQuery({})
 
     useEffect(() => {
-        if (value.type === WHO_NUTRITION) {
+        if (edit && value.type === WHO_NUTRITION) {
             updateAttributesList({
                 programId: value.program,
                 refetch,
@@ -97,4 +102,5 @@ VisualizationType.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.object,
     handleWHOAttribute: PropTypes.func,
+    edit: PropTypes.bool,
 }

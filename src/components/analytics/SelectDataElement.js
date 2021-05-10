@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
+import { CircularLoader } from '@dhis2/ui'
 import { SelectField } from './SelectField'
+import { isValidValue } from '../../utils/validators/isValidValue'
 
 export const SelectDataElement = ({
     specificSettings,
@@ -9,8 +11,24 @@ export const SelectDataElement = ({
     handleChange,
     options,
     loading,
+    edit,
     ...props
 }) => {
+    const [load, setLoad] = useState(true)
+
+    /**
+     * In Edit mode, Circular loader should be shown when option list is ready
+     * */
+    useEffect(() => {
+        if (edit && options) {
+            options.length === 0 && isValidValue(specificSettings[value])
+                ? setLoad(true)
+                : setLoad(false)
+        }
+    }, [options])
+
+    if (edit && load) return <CircularLoader small />
+
     return (
         <SelectField
             name={value}
@@ -30,4 +48,5 @@ SelectDataElement.propTypes = {
     handleChange: PropTypes.func,
     options: PropTypes.array,
     loading: PropTypes.bool,
+    edit: PropTypes.bool,
 }

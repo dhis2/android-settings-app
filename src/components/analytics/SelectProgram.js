@@ -9,6 +9,7 @@ export const SelectProgram = ({
     value,
     options,
     handleProgramStage,
+    ...props
 }) => {
     const handleSearchProgramStage = id => {
         handleProgramStage(
@@ -32,6 +33,7 @@ export const SelectProgram = ({
             onChange={handleChange}
             value={value.program || ''}
             options={options}
+            {...props}
         />
     )
 }
