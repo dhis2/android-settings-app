@@ -5,7 +5,7 @@ import { NumberField } from './NumberField'
 
 const CODE = 'matomoID'
 
-export const MatomoId = ({ value, onChange }) => {
+export const MatomoId = ({ value, onChange, disabled }) => {
     const handleChange = e => {
         let inputValue = e.value
         inputValue = Math.max(0, inputValue)
@@ -19,6 +19,7 @@ export const MatomoId = ({ value, onChange }) => {
             helpText={i18n.t('Must be at least 1 character long')}
             value={value[CODE]}
             onChange={handleChange}
+            disabled={disabled}
         />
     )
 }
@@ -26,4 +27,5 @@ export const MatomoId = ({ value, onChange }) => {
 MatomoId.propTypes = {
     value: PropTypes.object,
     onChange: PropTypes.func,
+    disabled: PropTypes.bool,
 }
