@@ -54,7 +54,11 @@ const periodType = [
     },
 ]
 
-export const VisualizationElement = ({ handleChange, specificSettings }) => {
+export const VisualizationElement = ({
+    handleChange,
+    specificSettings,
+    edit,
+}) => {
     const [elementList, setElementList] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -92,6 +96,7 @@ export const VisualizationElement = ({ handleChange, specificSettings }) => {
                     options={elementTypeOptions}
                     disabled={!isValidValue(specificSettings.programStage)}
                     handleLoading={setLoading}
+                    edit={edit}
                 />
 
                 <SelectDataElement
@@ -104,6 +109,7 @@ export const VisualizationElement = ({ handleChange, specificSettings }) => {
                         !isValidValue(specificSettings.type)
                     }
                     loading={loading}
+                    edit={edit}
                 />
             </Section>
         </>

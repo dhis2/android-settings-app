@@ -23,6 +23,7 @@ export const AxisSection = ({
     legend,
     axis,
     axisValue,
+    edit,
 }) => {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -53,6 +54,7 @@ export const AxisSection = ({
                 options={elementTypeOptionsWHO}
                 disabled={!isValidValue(specificSettings.programStage)}
                 handleLoading={setLoading}
+                edit={edit}
             />
 
             <SelectDataElement
@@ -62,6 +64,7 @@ export const AxisSection = ({
                 specificSettings={specificSettings}
                 disabled={!isValidValue(specificSettings[axis])}
                 loading={loading}
+                edit={edit}
             />
         </Section>
     )
@@ -73,4 +76,5 @@ AxisSection.propTypes = {
     legend: PropTypes.string,
     axis: PropTypes.string,
     axisValue: PropTypes.string,
+    edit: PropTypes.bool,
 }
