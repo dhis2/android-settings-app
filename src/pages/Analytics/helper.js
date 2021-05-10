@@ -21,6 +21,38 @@ export const createInitialValues = initialValues => ({
     elementValueY: initialValues.elementValueY || '',
 })
 
+export const populateWHOItem = whoItem => {
+    const elementX = Object.keys(whoItem.WHONutrition.x)[0]
+    const elementY = Object.keys(whoItem.WHONutrition.y)[0]
+    const elementValueX = whoItem.WHONutrition.x[elementX]
+    const elementValueY = whoItem.WHONutrition.y[elementY]
+
+    return {
+        ...whoItem,
+        attribute: whoItem.WHONutrition.gender.attribute,
+        male: whoItem.WHONutrition.gender.values.male,
+        female: whoItem.WHONutrition.gender.values.female,
+        chartType: whoItem.WHONutrition.chartType,
+        elementX: elementX,
+        elementValueX: elementValueX.split('.')[1],
+        elementY: elementY,
+        elementValueY: elementValueY.split('.')[1],
+    }
+}
+
+export const populateAnalyticItem = item => {
+    const element = Object.keys(item.data)[0]
+    const elementValue = item.data[element][0]
+    return {
+        ...item,
+        element,
+        elementValue:
+            element === 'attributes'
+                ? elementValue
+                : elementValue.split('.')[1],
+    }
+}
+
 export const updateList = (newEntry, list) => {
     const updatedList = list.filter(element => element.uid !== newEntry.uid)
     updatedList.push(newEntry)
