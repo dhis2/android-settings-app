@@ -34,9 +34,9 @@ export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
     return toArray(settings)
 }
 
-export const datasetHasCategoryCombo = (dataset, datasetList) => {
-    const datasetFilter = datasetList.filter(option => option.id === dataset)
-    return datasetFilter[0].categoryCombo.name !== 'default'
+export const datasetHasCategoryCombo = (datasetId, datasetList) => {
+    const dataset = datasetList.find(option => option.id === datasetId)
+    return dataset.categoryCombo.name !== 'default'
 }
 
 export const updateSettingsList = (settings, settingsList) => {
