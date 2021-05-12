@@ -11,6 +11,7 @@ import { createInitialSpinnerValue, createInitialValues } from './helper'
 import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import ProgramSpecificSettings from './ProgramSpecificSettings'
 
 const ProgramsAppearance = () => {
     const {
@@ -24,8 +25,10 @@ const ProgramsAppearance = () => {
     const [disableSave, setDisableSave] = useState(true)
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
+    const [specificSettings, setSpecificSettings] = useState()
     const [spinnerSettings, setSpinnerSettings] = useState()
     const [spinnerGlobal, setSpinnerGlobal] = useState()
+    const [spinnerSpecific, setSpinnerSpecific] = useState()
     const [disable, setDisable] = useState(false)
 
     const [mutate, { error, data: updateResult }] = useDataMutation(
@@ -38,22 +41,28 @@ const ProgramsAppearance = () => {
 
     useEffect(() => {
         if (programSettings && completionSpinner) {
-            const { globalSettings } = programSettings
-            setInitialValues({ globalSettings })
+            const { globalSettings, specificSettings } = programSettings
+            setInitialValues({ globalSettings, specificSettings })
             setGlobalSettings(createInitialValues(globalSettings))
+            programSettings.specificSettings
+                ? setSpecificSettings(programSettings.specificSettings)
+                : setSpecificSettings({})
             setSpinnerSettings(completionSpinner)
             setSpinnerGlobal(completionSpinner.globalSettings)
+            setSpinnerSpecific(completionSpinner.specificSettings)
         }
     }, [programSettings])
 
     useEffect(() => {
         if (globalSettings) {
             !isEqual(globalSettings, initialValues.globalSettings) ||
-            !isEqual(spinnerGlobal, spinnerSettings.globalSettings)
+            !isEqual(specificSettings, initialValues.specificSettings) ||
+            !isEqual(spinnerGlobal, spinnerSettings.globalSettings) ||
+            !isEqual(spinnerSpecific, spinnerSettings.specificSettings)
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
-    }, [globalSettings, spinnerGlobal])
+    }, [globalSettings, specificSettings, spinnerGlobal, spinnerSpecific])
 
     const saveSettings = async () => {
         const settingsToSave = {
@@ -61,14 +70,16 @@ const ProgramsAppearance = () => {
                 globalSettings: {
                     ...spinnerGlobal,
                 },
-                specificSettings: {},
+                specificSettings: {
+                    ...spinnerSpecific,
+                },
             },
             filterSorting: {
                 home,
                 dataSetSettings,
                 programSettings: {
                     globalSettings,
-                    specificSettings: {},
+                    specificSettings,
                 },
             },
         }
@@ -77,6 +88,7 @@ const ProgramsAppearance = () => {
 
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
+        setSpecificSettings({})
         setSpinnerGlobal(createInitialSpinnerValue(''))
     }
 
@@ -98,7 +110,13 @@ const ProgramsAppearance = () => {
                         onChangeSpinner={setSpinnerGlobal}
                         disableAll={disable}
                     />
-
+                    <ProgramSpecificSettings
+                        onChange={setSpecificSettings}
+                        specificSettings={specificSettings}
+                        spinnerSettings={spinnerSpecific}
+                        onChangeSpinner={setSpinnerSpecific}
+                        disabled={disable}
+                    />
                     <FooterStripButtons
                         onSave={saveSettings}
                         onReset={resetSettings}
