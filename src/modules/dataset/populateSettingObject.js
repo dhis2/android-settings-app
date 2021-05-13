@@ -3,13 +3,13 @@ import {
     dataSetSettingsDefault,
     DEFAULT,
     GLOBAL,
-    periodTypeConstants,
     SPECIFIC,
     SPECIFIC_SETTINGS,
 } from '../../constants/data-set-settings'
+import { getPeriodDefaultValueByType } from '../../pages/Synchronization/Datasets/helper'
 const { periodDSDownload } = dataSetSettingsDefault
 
-export const populateSettingObject = (type, settingsList) => {
+export const populateSettingObject = (type, settingsList, periodType) => {
     let object
     switch (type) {
         case GLOBAL:
@@ -34,8 +34,7 @@ export const populateSettingObject = (type, settingsList) => {
             break
         case SPECIFIC_SETTINGS:
             object = {
-                periodDSDownload:
-                    periodTypeConstants[settingsList[0].periodType].default,
+                periodDSDownload: getPeriodDefaultValueByType(periodType),
             }
             break
         default:
