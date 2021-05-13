@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-07T15:08:26.479Z\n"
-"PO-Revision-Date: 2021-05-07T15:08:26.479Z\n"
+"POT-Creation-Date: 2021-05-13T08:36:57.733Z\n"
+"PO-Revision-Date: 2021-05-13T08:36:57.733Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -622,6 +622,26 @@ msgid ""
 msgstr ""
 
 msgid "General Settings"
+msgstr ""
+
+msgid "Data sets specific download sync settings"
+msgstr ""
+
+msgid ""
+"Applies only to the assigned data set. Data set specific settings will "
+"overwrite the global settings above."
+msgstr ""
+
+msgid "Values per Dataset"
+msgstr ""
+
+msgid "Save Program"
+msgstr ""
+
+msgid "Add a dataset specific setting"
+msgstr ""
+
+msgid "data set"
 msgstr ""
 
 msgid "Global sync Settings"
