@@ -94,7 +94,7 @@ const ProgramsAppearance = () => {
 
     return (
         <Page
-            title={i18n.t('Programs')}
+            title={i18n.t('Program')}
             desc={i18n.t(
                 'Customize filter and sorting options available for programs. Settings below apply to all programs a mobile user has access to. Settings specific to individual programs can also be applied.'
             )}
