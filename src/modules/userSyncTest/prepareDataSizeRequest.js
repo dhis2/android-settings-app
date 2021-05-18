@@ -17,14 +17,10 @@ export const prepareDataSizeRequest = ({
         orgUnitParents: orgUnitParent,
     }
     let temporalType = undefined
-    let _settingType = undefined
     let _temporalObject = {}
     const _tempPromises = []
 
-    temporalType = checkSettingType(
-        globalSettings.settingDownload,
-        _settingType
-    )
+    temporalType = checkSettingType(globalSettings.settingDownload)
     _temporalObject = {
         type: temporalType,
         sizeTEI: globalSettings.teiDownload,
@@ -35,7 +31,6 @@ export const prepareDataSizeRequest = ({
 
     if (specificSettings !== undefined) {
         _temporalObject = {}
-        _settingType = undefined
         temporalType = undefined
         const _temporalSettingsArray = Object.entries(specificSettings)
         const _specificSettingArray = []
@@ -45,15 +40,12 @@ export const prepareDataSizeRequest = ({
         })
 
         _specificSettingArray.forEach(specificSetting => {
-            temporalType = checkSettingType(
-                specificSetting.specificSettingDownload,
-                _settingType
-            )
+            temporalType = checkSettingType(specificSetting.settingDownload)
             _temporalObject = {
                 id: specificSetting.id,
                 type: temporalType,
-                sizeTEI: specificSetting.specificTeiDownload,
-                sizeEvent: specificSetting.specificEventsDownload,
+                sizeTEI: specificSetting.teiDownload || 0,
+                sizeEvent: specificSetting.eventsDownload || 0,
             }
             settingTypeArray.push(_temporalObject)
         })

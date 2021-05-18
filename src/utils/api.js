@@ -55,33 +55,9 @@ class Api {
      * @param key
      */
     getValue(namespace, key) {
-        const cache = this.cache
-
-        // check for cache hit
-        if (
-            cache[namespace] === undefined ||
-            cache[namespace][key] === undefined
-        ) {
-            return this.getMetaData(namespace, key).then(result => {
-                const jsonLength = result.value.length
-                const val = JSON.parse(result.value)
-
-                // cache result
-                if (cache[namespace] === undefined) {
-                    cache[namespace] = []
-                }
-                const ret = {
-                    length: jsonLength,
-                    value: val,
-                }
-
-                return ret
-            })
-        }
-
-        return new Promise(resolve => {
-            console.log('cache resolve')
-            resolve(cache[namespace][key])
+        return getInstance().then(d2 => {
+            const url = `dataStore/${namespace}/${key}`
+            return d2.Api.getApi().get(url)
         })
     }
 
@@ -141,100 +117,6 @@ class Api {
                 this.cache[namespace][key] = ret
                 return response
             })
-    }
-
-    /**
-     * Updates the history of the namespace
-     * @param namespace
-     * @param key
-     * @param historyRecord
-     */
-    updateNamespaceHistory(namespace, key, historyRecord) {
-        const namespaceHistoryRecord = {
-            name: namespace,
-            action: historyRecord.action,
-            date: new Date(),
-            user: historyRecord.user,
-            value: `Key '${key}' was '${historyRecord.action.toLowerCase()}.`,
-        }
-
-        return this.getHistory(namespace)
-            .then(history => {
-                history.unshift(namespaceHistoryRecord)
-
-                if (historyRecord.action === DELETED) {
-                    // special check for delete action
-                    this.getKeys(namespace)
-                        .then(response => {
-                            if (response.length < 1) {
-                                // last key in namespace was deleted, namespace got deleted too
-                                history.unshift({
-                                    name: namespace,
-                                    action: DELETED,
-                                    date: new Date(),
-                                    user: historyRecord.user,
-                                    value: 'Namespace was deleted.',
-                                })
-
-                                delete this.cache[namespace]
-                            }
-
-                            this.updateValue(
-                                'HISTORYSTORE',
-                                namespace,
-                                history,
-                                false
-                            )
-                        })
-                        .catch(e => {
-                            console.log(e)
-                        })
-                } else {
-                    // create or update action
-                    this.updateValue('HISTORYSTORE', namespace, history, false)
-                }
-            })
-            .catch(e => {
-                if (e.httpStatusCode === 404) {
-                    // this history record is first
-                    const value = [
-                        {
-                            name: namespace,
-                            action: CREATED,
-                            date: namespaceHistoryRecord.date,
-                            user: historyRecord.user,
-                            value: 'Namespace was created.',
-                        },
-                    ]
-                    return this.createValue(
-                        'HISTORYSTORE',
-                        namespace,
-                        value,
-                        false
-                    )
-                        .then(
-                            response =>
-                                new Promise((resolve, reject) => resolve(value))
-                        )
-                        .then(history => {
-                            history.unshift(namespaceHistoryRecord)
-                            this.updateValue(
-                                'HISTORYSTORE',
-                                namespace,
-                                history,
-                                false
-                            )
-                        })
-                }
-            })
-    }
-
-    /**
-     * @param namespace
-     * @param key
-     */
-    buildId(namespace, key) {
-        return encodeURIComponent(`${namespace}:${key}`)
     }
 }
 

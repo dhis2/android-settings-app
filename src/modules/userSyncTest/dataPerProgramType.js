@@ -11,10 +11,10 @@ export const getDataPerProgramSettingType = ({
 }) => {
     // after checking setting type, get promise data
     const teiPromises = []
-    const _tei = (parseInt(settingType.sizeTEI) / 50).toFixed()
-    const _event = (parseInt(settingType.sizeEvent) / 50).toFixed()
-    const _teiProgram = (parseInt(settingType.sizeTEI) / 25).toFixed()
-    const _eventProgram = (parseInt(settingType.sizeEvent) / 25).toFixed()
+    const _tei = Math.ceil(settingType.sizeTEI / 50)
+    const _event = Math.ceil(settingType.sizeEvent / 50)
+    const _teiProgram = Math.ceil(settingType.sizeTEI / 25)
+    const _eventProgram = Math.ceil(settingType.sizeEvent / 25)
 
     switch (settingType.type) {
         case undefined:

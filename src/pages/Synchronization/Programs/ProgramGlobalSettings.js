@@ -81,9 +81,8 @@ const ProgramGlobalSettings = ({ settings, handleChange, disable }) => {
 
             <SettingsTable
                 data={defaultValues}
-                states={settings}
+                states={{ ...settings, disableAll: disable }}
                 onChange={handleInputTable}
-                disable={disable}
             />
         </>
     )

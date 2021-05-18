@@ -1,13 +1,12 @@
 import React from 'react'
 
 import { CircularLoader } from '@dhis2/ui-core'
-
 import TestAndroid from './test-android'
 import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
 import {
     GENERAL_SETTINGS,
     NAMESPACE,
-    PROGRAM_SETTINGS,
+    SYNC_SETTINGS,
 } from '../../../constants/data-store'
 
 import api from '../../../utils/api'
@@ -520,13 +519,13 @@ class UserSyncTestContainer extends React.Component {
             })
 
         Promise.all([
-            api.getValue(NAMESPACE, PROGRAM_SETTINGS),
+            api.getValue(NAMESPACE, SYNC_SETTINGS),
             api.getValue(NAMESPACE, GENERAL_SETTINGS),
         ])
             .then(res => {
-                this.globalSettings = res[0].value.globalSettings
-                this.specificSettings = res[0].value.specificSettings
-                this.reservedValues = res[1].value.reservedValues
+                this.globalSettings = res[0].programSettings.globalSettings
+                this.specificSettings = res[0].programSettings.specificSettings
+                this.reservedValues = res[1].reservedValues
             })
             .catch(e => {
                 console.error(e)

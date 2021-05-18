@@ -5,13 +5,15 @@ import style from '../../styles/Disable.module.css'
 import { Divider } from '@dhis2/ui'
 import { TableRow } from './TableRow'
 
-export const TableRowWrapper = ({ row, disable, children }) => (
+export const TableRowWrapper = ({ row, disable, dense, children }) => (
     <>
-        <TableRow>
-            <div className={cx({ [style.disable_label]: disable })}>
-                {row.label}
-            </div>
-            <div>{children}</div>
+        <TableRow dense={dense}>
+            <>
+                <div className={cx({ [style.disable_label]: disable })}>
+                    {row.label}
+                </div>
+                <div>{children}</div>
+            </>
         </TableRow>
         <Divider />
     </>
@@ -20,5 +22,6 @@ export const TableRowWrapper = ({ row, disable, children }) => (
 TableRowWrapper.propTypes = {
     row: PropTypes.object,
     disable: PropTypes.bool,
+    dense: PropTypes.bool,
     children: PropTypes.element,
 }
