@@ -6,12 +6,12 @@ import {
     DataSetIcon,
     TestRun,
 } from '../components/icons-svg'
-import DataSetSettings from '../components/sections/dataset/dataSet-settings'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSettings'
+import DatasetSyncSettings from '../pages/Synchronization/Datasets/DatasetSyncSettings'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
@@ -65,7 +65,7 @@ export const syncPages = [
         label: i18n.t('Data Sets'),
         path: '/sync/dataset-setting',
         icon: <DataSetIcon />,
-        component: <DataSetSettings />,
+        component: <DatasetSyncSettings />,
         linkText: i18n.t('Set Data set sync settings'),
         description: i18n.t('Define synchronization parameters for datasets'),
     },
@@ -127,5 +127,3 @@ export const menuSection = [
     ...appearancePages,
     analyticsPage,
 ]
-
-//TODO: replace div "component" with the real section/Page component
