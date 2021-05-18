@@ -11,6 +11,7 @@ import {
 } from '../appearanceDatastoreQuery'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { createInitialValues } from './helper'
+import DatasetSpecificSettings from './DatasetSpecificSettings'
 
 const DatasetsAppearance = () => {
     const {
@@ -24,6 +25,7 @@ const DatasetsAppearance = () => {
     const [disableSave, setDisableSave] = useState(true)
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
+    const [specificSettings, setSpecificSettings] = useState()
     const [disable, setDisable] = useState(false)
 
     const [mutate, { error, data: updateResult }] = useDataMutation(
@@ -36,21 +38,26 @@ const DatasetsAppearance = () => {
 
     useEffect(() => {
         if (dataSetSettings) {
-            const { globalSettings } = dataSetSettings
+            const { globalSettings, specificSettings } = dataSetSettings
             setInitialValues({
                 globalSettings,
+                specificSettings,
             })
             setGlobalSettings(createInitialValues(globalSettings))
+            dataSetSettings.specificSettings
+                ? setSpecificSettings(dataSetSettings.specificSettings)
+                : setSpecificSettings({})
         }
     }, [dataSetSettings])
 
     useEffect(() => {
         if (globalSettings) {
-            !isEqual(globalSettings, initialValues.globalSettings)
+            !isEqual(globalSettings, initialValues.globalSettings) ||
+            !isEqual(specificSettings, initialValues.specificSettings)
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
-    }, [globalSettings])
+    }, [globalSettings, specificSettings])
 
     const saveSettings = async () => {
         const settingsToSave = {
@@ -60,7 +67,7 @@ const DatasetsAppearance = () => {
                 programSettings,
                 dataSetSettings: {
                     globalSettings,
-                    specificSettings: {},
+                    specificSettings,
                 },
             },
         }
@@ -70,6 +77,7 @@ const DatasetsAppearance = () => {
 
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
+        setSpecificSettings({})
     }
 
     return (
@@ -87,6 +95,12 @@ const DatasetsAppearance = () => {
                         settings={globalSettings}
                         onChange={setGlobalSettings}
                         disable={disable}
+                    />
+
+                    <DatasetSpecificSettings
+                        specificSettings={specificSettings}
+                        onChange={setSpecificSettings}
+                        disabled={disable}
                     />
 
                     <FooterStripButtons

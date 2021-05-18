@@ -2,23 +2,19 @@ import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import Page from '../../../components/page/Page'
-import ProgramGlobalSettings from './ProgramGlobalSettings'
-import ProgramSpecificSettings from './ProgramSpecificSettings'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import {
-    DEFAULT,
-    GLOBAL,
-    GLOBAL_SPECIAL,
-} from '../../../constants/program-settings'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { populateProgramObject } from '../../../modules/programs/populateProgramObject'
+import Page from '../../../components/page/Page'
+import DatasetGlobalSettings from './DatasetGlobalSettings'
+import DatasetSpecificSettings from './DatasetSpecificSettings'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
+import { DEFAULT } from '../../../constants/data-set-settings'
 
-const ProgramSyncSettings = () => {
+const DatasetSyncSettings = () => {
     const {
         load,
         programSettings,
@@ -27,9 +23,9 @@ const ProgramSyncSettings = () => {
     } = useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
+    const [disable, setDisable] = useState(false)
     const [globalSettings, setGlobalSettings] = useState()
     const [specificSettings, setSpecificSettings] = useState()
-    const [disable, setDisable] = useState(false)
 
     const { data: authority } = useDataQuery(authorityQuery)
     const [mutate, { error, data }] = useDataMutation(
@@ -41,35 +37,20 @@ const ProgramSyncSettings = () => {
     }, [authority])
 
     useEffect(() => {
-        if (programSettings) {
+        if (dataSetSettings) {
             const {
-                lastUpdated,
                 specificSettings,
-                ...initialGlobalSettings
-            } = programSettings
-
+                lastUpdated,
+                ...globalSettings
+            } = dataSetSettings
             setInitialValues({
-                ...initialGlobalSettings,
+                ...globalSettings,
                 specificSettings,
             })
-            programSettings.globalSettings.settingDownload === GLOBAL
-                ? setGlobalSettings(
-                      populateProgramObject(
-                          GLOBAL_SPECIAL,
-                          programSettings.globalSettings
-                      )
-                  )
-                : setGlobalSettings(
-                      populateProgramObject(
-                          GLOBAL,
-                          programSettings.globalSettings
-                      )
-                  )
-            programSettings.specificSettings
-                ? setSpecificSettings(programSettings.specificSettings)
-                : setSpecificSettings({})
+            setGlobalSettings(dataSetSettings.globalSettings)
+            setSpecificSettings(dataSetSettings.specificSettings)
         }
-    }, [programSettings])
+    }, [dataSetSettings])
 
     useEffect(() => {
         if (globalSettings && specificSettings) {
@@ -78,46 +59,46 @@ const ProgramSyncSettings = () => {
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
-    }, [globalSettings, specificSettings])
+    }, [globalSettings, initialValues, specificSettings])
+
+    const resetSettings = () => {
+        setGlobalSettings(populateSettingObject(DEFAULT))
+        setSpecificSettings({})
+    }
 
     const saveSettings = async () => {
-        const updatedSettings = {
+        const updateSettings = {
             ...syncGlobal,
-            dataSetSettings,
-            programSettings: {
+            programSettings,
+            dataSetSettings: {
                 globalSettings,
                 specificSettings,
             },
         }
 
-        await mutate({ settings: updatedSettings })
-    }
-
-    const resetSettings = () => {
-        setGlobalSettings(populateProgramObject(DEFAULT))
-        setSpecificSettings({})
+        await mutate({ settings: updateSettings })
     }
 
     return (
         <Page
-            title={i18n.t('Program global download sync settings')}
+            title={i18n.t('Data set global download sync settings')}
             desc={i18n.t(
-                'Applies to all programs an Android user has access to. Specific program settings can be defined in the section below.'
+                'Applies to all Data sets an Android user has access to. Specific data set settings can be defined in the section below.'
             )}
             loading={load}
             unsavedChanges={!disableSave}
         >
             {globalSettings && (
                 <>
-                    <ProgramGlobalSettings
+                    <DatasetGlobalSettings
                         settings={globalSettings}
                         handleChange={setGlobalSettings}
                         disable={disable}
                     />
 
-                    <ProgramSpecificSettings
+                    <DatasetSpecificSettings
                         specificSettings={specificSettings}
-                        changeSpecificSettings={setSpecificSettings}
+                        handleSpecificSettings={setSpecificSettings}
                         disabled={disable}
                     />
 
@@ -136,4 +117,4 @@ const ProgramSyncSettings = () => {
     )
 }
 
-export default ProgramSyncSettings
+export default DatasetSyncSettings

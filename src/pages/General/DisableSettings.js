@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from '@dhis2/prop-types'
 import { ButtonField } from '../../components/sections/general/form-sections'
 import DialogDisableSettings from '../../components/dialog/dialog-disable-settings'
 import { NAMESPACE } from '../../constants/data-store'
@@ -11,7 +12,7 @@ const deleteDataStoreMutation = {
     type: 'delete',
 }
 
-const DisableSettings = () => {
+const DisableSettings = ({ disabled }) => {
     const [mutate] = useDataMutation(deleteDataStoreMutation)
     const [openDialog, setOpenDialog] = useState(false)
     const { reloadPage, navigateTo } = useNavigation()
@@ -40,6 +41,7 @@ const DisableSettings = () => {
                     'This will disable and remove all General, Program and Data set settings.'
                 )}
                 onOpen={onClick}
+                disabled={disabled}
             />
 
             <DialogDisableSettings
@@ -49,6 +51,10 @@ const DisableSettings = () => {
             />
         </>
     )
+}
+
+DisableSettings.propTypes = {
+    disabled: PropTypes.bool,
 }
 
 export default DisableSettings
