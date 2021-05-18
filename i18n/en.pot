@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-18T14:30:37.599Z\n"
-"PO-Revision-Date: 2021-05-18T14:30:37.599Z\n"
+"POT-Creation-Date: 2021-05-18T15:00:27.264Z\n"
+"PO-Revision-Date: 2021-05-18T15:00:27.265Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -619,15 +619,21 @@ msgstr ""
 msgid "Add a Data set Settings"
 msgstr ""
 
-msgid "Dataset"
-msgstr ""
-
 msgid "Home Screen"
 msgstr ""
 
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid "Program specific settings"
+msgstr ""
+
+msgid "Save Program"
+msgstr ""
+
+msgid "Add a Program Settings"
 msgstr ""
 
 msgid ""
