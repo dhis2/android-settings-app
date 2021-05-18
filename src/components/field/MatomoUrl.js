@@ -7,7 +7,7 @@ import { isValidValue } from '../../utils/validators/isValidValue'
 
 const CODE = 'matomoURL'
 
-export const MatomoUrl = ({ value, onChange }) => {
+export const MatomoUrl = ({ value, onChange, disabled }) => {
     const [error, setError] = useState(false)
 
     const validateURL = value => {
@@ -33,6 +33,7 @@ export const MatomoUrl = ({ value, onChange }) => {
             value={value[CODE]}
             error={error}
             onChange={onChangeUrl}
+            disabled={disabled}
         />
     )
 }
@@ -40,4 +41,5 @@ export const MatomoUrl = ({ value, onChange }) => {
 MatomoUrl.propTypes = {
     value: PropTypes.object,
     onChange: PropTypes.func,
+    disabled: PropTypes.bool,
 }
