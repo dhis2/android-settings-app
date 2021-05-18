@@ -62,12 +62,12 @@ export const syncPages = [
     },
     {
         code: 'dataset-setting',
-        label: i18n.t('Data Sets'),
+        label: i18n.t('Data sets'),
         path: '/sync/dataset-setting',
         icon: <DataSetIcon />,
         component: <DatasetSyncSettings />,
         linkText: i18n.t('Set Data set sync settings'),
-        description: i18n.t('Define synchronization parameters for datasets'),
+        description: i18n.t('Define synchronization parameters for data sets'),
     },
     {
         code: 'user-sync-test',

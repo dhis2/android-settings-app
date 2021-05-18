@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-18T15:57:34.669Z\n"
-"PO-Revision-Date: 2021-05-18T15:57:34.669Z\n"
+"POT-Creation-Date: 2021-05-18T16:24:42.009Z\n"
+"PO-Revision-Date: 2021-05-18T16:24:42.009Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -410,7 +410,7 @@ msgstr ""
 msgid "Define synchronization parameters to tracker and event programs"
 msgstr ""
 
-msgid "Data Sets"
+msgid "Data sets"
 msgstr ""
 
 msgid "Set Data set sync settings"
@@ -645,12 +645,29 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
+msgid "Data sets specific download sync settings"
+msgstr ""
+
+msgid ""
+"Applies only to the assigned data set. Data set specific settings will "
+"overwrite the global settings above."
+msgstr ""
+
 msgid "Data set global download sync settings"
 msgstr ""
 
 msgid ""
 "Applies to all Data sets an Android user has access to. Specific data set "
 "settings can be defined in the section below."
+msgstr ""
+
+msgid "Values per Data set"
+msgstr ""
+
+msgid "Add a data set specific setting"
+msgstr ""
+
+msgid "data set"
 msgstr ""
 
 msgid "Global sync Settings"

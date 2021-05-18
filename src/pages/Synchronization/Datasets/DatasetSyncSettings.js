@@ -9,6 +9,7 @@ import {
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import Page from '../../../components/page/Page'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
+import DatasetSpecificSettings from './DatasetSpecificSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
 import { DEFAULT } from '../../../constants/data-set-settings'
@@ -24,6 +25,7 @@ const DatasetSyncSettings = () => {
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
     const [globalSettings, setGlobalSettings] = useState()
+    const [specificSettings, setSpecificSettings] = useState()
 
     const { data: authority } = useDataQuery(authorityQuery)
     const [mutate, { error, data }] = useDataMutation(
@@ -46,19 +48,22 @@ const DatasetSyncSettings = () => {
                 specificSettings,
             })
             setGlobalSettings(dataSetSettings.globalSettings)
+            setSpecificSettings(dataSetSettings.specificSettings)
         }
     }, [dataSetSettings])
 
     useEffect(() => {
-        if (globalSettings) {
-            !isEqual(globalSettings, initialValues.globalSettings)
+        if (globalSettings && specificSettings) {
+            !isEqual(globalSettings, initialValues.globalSettings) ||
+            !isEqual(specificSettings, initialValues.specificSettings)
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
-    }, [globalSettings, initialValues])
+    }, [globalSettings, initialValues, specificSettings])
 
     const resetSettings = () => {
         setGlobalSettings(populateSettingObject(DEFAULT))
+        setSpecificSettings({})
     }
 
     const saveSettings = async () => {
@@ -67,7 +72,7 @@ const DatasetSyncSettings = () => {
             programSettings,
             dataSetSettings: {
                 globalSettings,
-                specificSettings: {},
+                specificSettings,
             },
         }
 
@@ -89,6 +94,12 @@ const DatasetSyncSettings = () => {
                         settings={globalSettings}
                         handleChange={setGlobalSettings}
                         disable={disable}
+                    />
+
+                    <DatasetSpecificSettings
+                        specificSettings={specificSettings}
+                        handleSpecificSettings={setSpecificSettings}
+                        disabled={disable}
                     />
 
                     <FooterStripButtons
