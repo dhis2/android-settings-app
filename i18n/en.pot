@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-07T15:08:26.479Z\n"
-"PO-Revision-Date: 2021-05-07T15:08:26.479Z\n"
+"POT-Creation-Date: 2021-05-07T17:29:50.224Z\n"
+"PO-Revision-Date: 2021-05-07T17:29:50.224Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -622,6 +622,14 @@ msgid ""
 msgstr ""
 
 msgid "General Settings"
+msgstr ""
+
+msgid "Data set global download sync settings"
+msgstr ""
+
+msgid ""
+"Applies to all Data sets an Android user has access to. Specific data set "
+"settings can be defined in the section below."
 msgstr ""
 
 msgid "Global sync Settings"
