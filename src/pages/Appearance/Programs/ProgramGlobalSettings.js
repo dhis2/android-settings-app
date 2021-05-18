@@ -3,10 +3,9 @@ import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import Wrapper from '../../../components/wrapper'
 import PageHeader from '../../../components/page/PageHeader'
-import { CheckboxField } from '../../../components/CheckboxField'
-import { TableHeader, TableRowWrapper } from '../../../components/table'
-import { programAppearanceSettings } from '../../../constants/program-appearance'
+import { TableHeader } from '../../../components/table'
 import { GlobalProgramCompletion } from '../../../components/field'
+import { ProgramGlobalSettings as GlobalSettings } from './TableSettings'
 
 const ProgramGlobalSettings = ({
     settings,
@@ -38,20 +37,12 @@ const ProgramGlobalSettings = ({
             <Wrapper>
                 <div>
                     <TableHeader title={i18n.t('Show Filter')} />
-                    {programAppearanceSettings.map(row => (
-                        <TableRowWrapper
-                            row={row}
-                            disable={disableAll}
-                            key={row.key}
-                        >
-                            <CheckboxField
-                                name={row.key}
-                                onChange={handleChange}
-                                disabled={disableAll}
-                                checked={settings[row.key].filter}
-                            />
-                        </TableRowWrapper>
-                    ))}
+                    <GlobalSettings
+                        states={settings}
+                        handleChange={handleChange}
+                        disabled={disableAll}
+                        dense={false}
+                    />
                 </div>
             </Wrapper>
         </>
