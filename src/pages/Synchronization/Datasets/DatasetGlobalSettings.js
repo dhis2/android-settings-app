@@ -17,9 +17,8 @@ const DatasetGlobalSettings = ({ settings, handleChange, disable }) => {
             {settings && (
                 <SettingsTable
                     data={DataSetting}
-                    states={settings}
+                    states={{ ...settings, disableAll: disable }}
                     onChange={handleInputTable}
-                    disable={disable}
                 />
             )}
         </>

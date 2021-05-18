@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
-import { getPeriodType, updateSettingsList } from './helper'
-import { removeSettingsFromList } from '../../Analytics/helper'
+import {
+    getPeriodType,
+    removeSettingsFromList,
+    updateSettingsList,
+} from './helper'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
 import DialogSpecificSettings from './DialogSpecificSettings'
@@ -50,7 +53,7 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
     const handleDelete = () => {
         const updatedList = removeSettingsFromList(specificSetting, rows)
         changeRows(updatedList)
-        setOpenDialog(false)
+        handleCloseDelete()
     }
 
     return (

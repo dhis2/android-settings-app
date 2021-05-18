@@ -28,7 +28,7 @@ const DialogSpecificSettings = ({
     <>
         {open && (
             <Modal large onClose={handleClose} position="middle">
-                <ModalTitle>{i18n.t('Values per Dataset')}</ModalTitle>
+                <ModalTitle>{i18n.t('Values per Data set')}</ModalTitle>
                 <ModalContent>
                     {datasetTitle ? (
                         <p className={titleStyles.mainContent__title__dialog}>
@@ -64,7 +64,7 @@ const DialogSpecificSettings = ({
                             onClick={handleSubmitDialog}
                             disabled={disableSave}
                         >
-                            {i18n.t('Save Dataset')}
+                            {i18n.t('Save Data set')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>

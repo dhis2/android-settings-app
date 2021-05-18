@@ -64,7 +64,7 @@ const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
     return (
         <>
             <AddNewSetting
-                label={i18n.t('Add a dataset specific setting')}
+                label={i18n.t('Add a data set specific setting')}
                 onClick={handleOpenSettingsDialog}
                 disable={disabled}
             />

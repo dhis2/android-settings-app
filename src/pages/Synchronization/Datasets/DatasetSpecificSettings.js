@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from '@dhis2/prop-types'
 import isEqual from 'lodash/isEqual'
 import keyBy from 'lodash/keyBy'
 import NewDatasetSpecific from './NewDatasetSpecific'
@@ -8,12 +9,15 @@ import PageHeader from '../../../components/page/PageHeader'
 import { useReadDataset } from './datasetQueries'
 import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
 
-const DatasetSpecificSettings = () => {
+const DatasetSpecificSettings = ({
+    specificSettings,
+    handleSpecificSettings,
+    disabled,
+}) => {
     const { datasetList } = useReadDataset()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
-    const [specificSettings, setSpecificSettings] = useState({})
 
     useEffect(() => {
         if (datasetList && specificSettings) {
@@ -29,7 +33,7 @@ const DatasetSpecificSettings = () => {
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {
-            setSpecificSettings(keyBy(rows, 'id'))
+            handleSpecificSettings(keyBy(rows, 'id'))
         }
     }, [rows])
 
@@ -48,6 +52,7 @@ const DatasetSpecificSettings = () => {
                     specificSettingList={specificSettings}
                     changeRows={setRows}
                     datasetList={datasetList}
+                    disableAll={disabled}
                 />
             )}
 
@@ -55,9 +60,16 @@ const DatasetSpecificSettings = () => {
                 datasetList={listName}
                 rows={rows}
                 handleRows={setRows}
+                disabled={disabled}
             />
         </>
     )
+}
+
+DatasetSpecificSettings.propTypes = {
+    specificSettings: PropTypes.object,
+    handleSpecificSettings: PropTypes.func,
+    disabled: PropTypes.bool,
 }
 
 export default DatasetSpecificSettings
