@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-13T08:36:57.733Z\n"
-"PO-Revision-Date: 2021-05-13T08:36:57.733Z\n"
+"POT-Creation-Date: 2021-05-18T15:57:34.669Z\n"
+"PO-Revision-Date: 2021-05-18T15:57:34.669Z\n"
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -601,10 +601,22 @@ msgstr ""
 msgid "Show Filter"
 msgstr ""
 
+msgid "Specific Settings"
+msgstr ""
+
 msgid ""
 "Customize filter and sorting options available for data sets. Settings "
 "below apply to all data sets a mobile user has access to. Settings specific "
 "to individual data sets can also be applied."
+msgstr ""
+
+msgid "Data set specific settings"
+msgstr ""
+
+msgid "Save Data set"
+msgstr ""
+
+msgid "Add a Data set Settings"
 msgstr ""
 
 msgid "Home Screen"
@@ -613,6 +625,15 @@ msgstr ""
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid "Program specific settings"
+msgstr ""
+
+msgid "Save Program"
+msgstr ""
+
+msgid "Add a Program Settings"
 msgstr ""
 
 msgid ""
@@ -624,27 +645,29 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
-msgid "Data sets specific download sync settings"
+msgid "Data set global download sync settings"
 msgstr ""
 
 msgid ""
-"Applies only to the assigned data set. Data set specific settings will "
-"overwrite the global settings above."
-msgstr ""
-
-msgid "Values per Dataset"
-msgstr ""
-
-msgid "Save Program"
-msgstr ""
-
-msgid "Add a dataset specific setting"
-msgstr ""
-
-msgid "data set"
+"Applies to all Data sets an Android user has access to. Specific data set "
+"settings can be defined in the section below."
 msgstr ""
 
 msgid "Global sync Settings"
+msgstr ""
+
+msgid "Values per Program"
+msgstr ""
+
+msgid "Add a program specific setting"
+msgstr ""
+
+msgid "Programs specific download sync settings"
+msgstr ""
+
+msgid ""
+"Applies only to the assigned program. Program specific settings will "
+"overwrite the global settings above."
 msgstr ""
 
 msgid "Program global download sync settings"
@@ -653,6 +676,9 @@ msgstr ""
 msgid ""
 "Applies to all programs an Android user has access to. Specific program "
 "settings can be defined in the section below."
+msgstr ""
+
+msgid "program"
 msgstr ""
 
 msgid "{{elementPlural}} global download sync settings"
