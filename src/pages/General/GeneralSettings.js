@@ -22,16 +22,23 @@ import {
     getGeneralKeyQuery,
     updateGeneralKeyMutation,
 } from './generalDatastoreApi'
+import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 
 const GeneralSettings = () => {
     const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)
+    const { data } = useDataQuery(authorityQuery)
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
+    const [disable, setDisable] = useState(false)
 
     const [mutate, { error, data: updateResult }] = useDataMutation(
         updateGeneralKeyMutation
     )
+
+    useEffect(() => {
+        data && setDisable(!data.authority)
+    }, [data])
 
     useEffect(() => {
         if (queryResult) {
@@ -78,13 +85,37 @@ const GeneralSettings = () => {
         >
             {settings && (
                 <>
-                    <MatomoUrl value={settings} onChange={setSettings} />
-                    <MatomoId value={settings} onChange={setSettings} />
-                    <SmsGateway value={settings} onChange={setSettings} />
-                    <SmsResultSender value={settings} onChange={setSettings} />
-                    <ReservedValues value={settings} onChange={setSettings} />
-                    <EncryptDB value={settings} onChange={setSettings} />
-                    <DisableSettings />
+                    <MatomoUrl
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <MatomoId
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <SmsGateway
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <SmsResultSender
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <ReservedValues
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <EncryptDB
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <DisableSettings disabled={disable} />
                     <FooterStripButtons
                         onSave={saveSettings}
                         onReset={resetSettings}
@@ -92,6 +123,7 @@ const GeneralSettings = () => {
                         errorRequest={error}
                         requestResult={updateResult}
                         handleDisableSave={setDisableSave}
+                        disableAll={disable}
                     />
                 </>
             )}
