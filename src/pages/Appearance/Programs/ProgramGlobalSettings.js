@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import Wrapper from '../../../components/wrapper'
-import PageHeader from '../../../components/page/PageHeader'
+import PageSubtitle from '../../../components/page/PageSubtitle'
 import { TableHeader } from '../../../components/table'
 import { GlobalProgramCompletion } from '../../../components/field'
 import { ProgramGlobalSettings as GlobalSettings } from './TableSettings'
@@ -26,7 +26,7 @@ const ProgramGlobalSettings = ({
 
     return (
         <>
-            <PageHeader title={i18n.t('Global settings')} />
+            <PageSubtitle title={i18n.t('Global settings')} />
 
             <GlobalProgramCompletion
                 settings={spinnerSettings}

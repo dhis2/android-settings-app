@@ -40,3 +40,11 @@
     height: 100%;
     width: 100%;
 }
+
+.subtitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--colors-grey800);
+    margin: var(--spacers-dp12) 0;
+    line-height: 20px;
+}

@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
-import PageHeader from '../../../components/page/PageHeader'
-import { useReadDataset } from './datasetQuery'
-import { prepareSpecificSettingsList } from './helper'
+import PageSubtitle from '../../../components/page/PageSubtitle'
 import SpecificTableAction from './SpecificTableAction'
 import NewDatasetSettings from './NewDatasetSettings'
+import { useReadDataset } from './datasetQuery'
+import { prepareSpecificSettingsList } from './helper'
 
 export const DatasetSpecificSettings = ({
     onChange,
@@ -47,7 +47,7 @@ export const DatasetSpecificSettings = ({
 
     return (
         <>
-            <PageHeader title={i18n.t('Specific Settings')} />
+            <PageSubtitle title={i18n.t('Specific settings')} />
 
             {rows && (
                 <SpecificTableAction
