@@ -72,7 +72,7 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
                         open={openDeleteDialog}
                         onHandleClose={handleDialogClose}
                         onHandleDelete={handleDelete}
-                        typeName={i18n.t('Dataset')}
+                        typeName={i18n.t('Data set')}
                         name={specificSetting.name}
                     />
 

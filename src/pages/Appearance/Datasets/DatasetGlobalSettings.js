@@ -5,6 +5,7 @@ import Wrapper from '../../../components/wrapper'
 import { TableHeader, TableRowWrapper } from '../../../components/table'
 import { CheckboxField } from '../../../components/field'
 import { datasetAppearanceSettings } from '../../../constants/dataset-appearance'
+import PageHeader from '../../../components/page/PageHeader'
 
 const DatasetGlobalSettings = ({ disable, settings, onChange }) => {
     const handleChange = e => {
@@ -19,7 +20,7 @@ const DatasetGlobalSettings = ({ disable, settings, onChange }) => {
 
     return (
         <>
-            <h4> {i18n.t('Global settings')} </h4>
+            <PageHeader title={i18n.t('Global settings')} />
             <Wrapper>
                 <div>
                     <TableHeader title={i18n.t('Show Filter')} />
