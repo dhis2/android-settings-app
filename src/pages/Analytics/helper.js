@@ -1,3 +1,5 @@
+import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
+
 export const WHO_NUTRITION = 'WHO_NUTRITION'
 
 export const createInitialValues = initialValues => ({
@@ -185,4 +187,39 @@ export const updateProgramIndicatorsList = (programId, refetch, updateList) => {
             }))
             updateList(options)
         })
+}
+
+export const validMandatoryFields = specificSettings => {
+    if (specificSettings.type === WHO_NUTRITION) {
+        return !validateObjectByProperty(
+            [
+                'program',
+                'programStage',
+                'name',
+                'type',
+                'chartType',
+                'attribute',
+                'male',
+                'female',
+                'elementX',
+                'elementValueX',
+                'elementY',
+                'elementValueY',
+            ],
+            specificSettings
+        )
+    } else {
+        return !validateObjectByProperty(
+            [
+                'program',
+                'programStage',
+                'name',
+                'type',
+                'period',
+                'element',
+                'elementValue',
+            ],
+            specificSettings
+        )
+    }
 }

@@ -7,10 +7,9 @@ import {
     createInitialValues,
     createTEIValues,
     updateList,
-    WHO_NUTRITION,
+    validMandatoryFields,
 } from './helper'
 import { useReadIdQuery } from './AnalyticsQueries'
-import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
 
 const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
     const { refetch: refetchId, data: id } = useReadIdQuery()
@@ -21,42 +20,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
     const [disableSave, setDisableSave] = useState(true)
 
     useEffect(() => {
-        if (specificSettings.type === WHO_NUTRITION) {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'chartType',
-                    'attribute',
-                    'male',
-                    'female',
-                    'elementX',
-                    'elementValueX',
-                    'elementY',
-                    'elementValueY',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        } else {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'period',
-                    'element',
-                    'elementValue',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        }
+        setDisableSave(validMandatoryFields(specificSettings))
     }, [specificSettings])
 
     const handleOpenDialog = () => {

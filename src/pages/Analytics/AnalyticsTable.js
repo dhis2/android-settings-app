@@ -9,9 +9,8 @@ import {
     populateWHOItem,
     removeSettingsFromList,
     updateList,
-    WHO_NUTRITION,
+    validMandatoryFields,
 } from './helper'
-import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
 import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 
 const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
@@ -21,42 +20,7 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
     const [disableSave, setDisableSave] = useState(false)
 
     useEffect(() => {
-        if (specificSettings.type === WHO_NUTRITION) {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'chartType',
-                    'attribute',
-                    'male',
-                    'female',
-                    'elementX',
-                    'elementValueX',
-                    'elementY',
-                    'elementValueY',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        } else {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'period',
-                    'element',
-                    'elementValue',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        }
+        setDisableSave(validMandatoryFields(specificSettings))
     }, [specificSettings])
 
     const tableActions = {
