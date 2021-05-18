@@ -10,26 +10,17 @@ import {
     program,
 } from './settingType'
 
-export const checkSettingType = (type, settingType) => {
+export const checkSettingType = type => {
     switch (type) {
-        case GLOBAL:
-            settingType = global
-            break
-        case PER_ORG_UNIT:
-            settingType = ORG_UNIT
-            break
-        case PER_PROGRAM:
-            settingType = program
-            break
-        case PER_OU_PROGRAM:
-            settingType = perOuProgram
-            break
-        case ALL_ORG_UNIT:
-            settingType = global
-            break
+        case GLOBAL || global || ALL_ORG_UNIT || 'ALL_ORG_UNITS':
+            return global
+        case PER_ORG_UNIT || 'PER_ORG_UNIT':
+            return ORG_UNIT
+        case PER_PROGRAM || 'PER_PROGRAM':
+            return program
+        case PER_OU_PROGRAM || 'PER_OU_AND_PROGRAM':
+            return perOuProgram
         default:
-            break
+            return global
     }
-
-    return settingType
 }
