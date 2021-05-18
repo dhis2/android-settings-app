@@ -25,7 +25,7 @@ export const SelectDataElement = ({
                 ? setLoad(true)
                 : setLoad(false)
         }
-    }, [options])
+    }, [options, edit])
 
     if (edit && load) return <CircularLoader small />
 

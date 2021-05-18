@@ -17,7 +17,7 @@ export const ProgramSection = ({ onChange, value, edit }) => {
                     .programStages
             )
         }
-    }, [programList])
+    }, [programList, edit])
 
     if (edit && (loading || programStageList.length === 0))
         return <CircularLoader small />
