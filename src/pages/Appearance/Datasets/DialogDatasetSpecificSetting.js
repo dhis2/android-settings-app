@@ -27,7 +27,7 @@ const DialogDatasetSpecificSetting = ({
 }) => (
     <>
         {open && (
-            <Modal large onClose={handleClose}>
+            <Modal large position="middle" onClose={handleClose}>
                 <ModalTitle>{i18n.t('Data set specific settings')}</ModalTitle>
                 <ModalContent>
                     {dataTitle ? (

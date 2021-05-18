@@ -7,7 +7,12 @@ import {
     datasetAppearanceSpecificSettings,
 } from '../../../constants/dataset-appearance'
 
-export const DatasetGlobalSettings = ({ states, handleChange, disabled }) => (
+export const DatasetGlobalSettings = ({
+    states,
+    handleChange,
+    disabled,
+    dense,
+}) => (
     <>
         {datasetAppearanceSettings.map(row => (
             <TableRowWrapper
@@ -15,6 +20,7 @@ export const DatasetGlobalSettings = ({ states, handleChange, disabled }) => (
                 states={states}
                 key={row.key}
                 disable={disabled}
+                dense={dense}
             >
                 <CheckboxField
                     name={row.key}
@@ -41,6 +47,7 @@ export const DatasetCategoryComboSettings = ({
     <>
         {datasetAppearanceSpecificSettings.map(row => (
             <TableRowWrapper
+                dense={true}
                 row={row}
                 states={states}
                 key={row.key}
@@ -71,6 +78,7 @@ export const TableSettings = ({ type, states, handleChange, disabled }) => {
                     states={states}
                     handleChange={handleChange}
                     disabled={disabled}
+                    dense={true}
                 />
             )
         case 'DatasetCategory':

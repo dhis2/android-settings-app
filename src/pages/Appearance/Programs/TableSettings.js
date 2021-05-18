@@ -7,10 +7,20 @@ import {
     programAppearanceSpecificSettings,
 } from '../../../constants/program-appearance'
 
-export const ProgramGlobalSettings = ({ states, handleChange, disabled }) => (
+export const ProgramGlobalSettings = ({
+    states,
+    handleChange,
+    disabled,
+    dense,
+}) => (
     <>
         {programAppearanceSettings.map(row => (
-            <TableRowWrapper row={row} states={states} key={row.key}>
+            <TableRowWrapper
+                row={row}
+                states={states}
+                key={row.key}
+                dense={dense}
+            >
                 <CheckboxField
                     name={row.key}
                     onChange={handleChange}
@@ -26,6 +36,7 @@ ProgramGlobalSettings.propTypes = {
     states: PropTypes.object,
     handleChange: PropTypes.func,
     disabled: PropTypes.bool,
+    dense: PropTypes.bool,
 }
 
 export const ProgramCategoryComboSettings = ({
@@ -35,7 +46,12 @@ export const ProgramCategoryComboSettings = ({
 }) => (
     <>
         {programAppearanceSpecificSettings.map(row => (
-            <TableRowWrapper row={row} states={states} key={row.key}>
+            <TableRowWrapper
+                row={row}
+                states={states}
+                key={row.key}
+                dense={true}
+            >
                 <CheckboxField
                     name={row.key}
                     onChange={handleChange}
@@ -60,6 +76,7 @@ export const TableSettings = ({ type, states, handleChange }) => {
                 <ProgramGlobalSettings
                     states={states}
                     handleChange={handleChange}
+                    dense={true}
                 />
             )
         case 'ProgramCategory':

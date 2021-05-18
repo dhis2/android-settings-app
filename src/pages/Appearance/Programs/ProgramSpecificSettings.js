@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
-import PageHeader from '../../../components/page/PageHeader'
+import PageSubtitle from '../../../components/page/PageSubtitle'
 import NewProgramSpecific from './NewProgramSpecific'
+import SpecificTableAction from './SpecificTableAction'
 import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
 import { useReadProgram } from './programQuery'
-import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
     onChange,
@@ -55,7 +55,7 @@ const ProgramSpecificSettings = ({
 
     return (
         <>
-            <PageHeader title={i18n.t('Specific Settings')} />
+            <PageSubtitle title={i18n.t('Specific settings')} />
 
             {rows && (
                 <SpecificTableAction
