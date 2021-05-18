@@ -8,10 +8,12 @@ import { TableRow } from './TableRow'
 export const TableRowWrapper = ({ row, disable, children }) => (
     <>
         <TableRow>
-            <div className={cx({ [style.disable_label]: disable })}>
-                {row.label}
-            </div>
-            <div>{children}</div>
+            <>
+                <div className={cx({ [style.disable_label]: disable })}>
+                    {row.label}
+                </div>
+                <div>{children}</div>
+            </>
         </TableRow>
         <Divider />
     </>

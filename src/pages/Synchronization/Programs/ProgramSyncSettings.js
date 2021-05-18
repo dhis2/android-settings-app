@@ -4,6 +4,7 @@ import isEqual from 'lodash/isEqual'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
+import ProgramSpecificSettings from './ProgramSpecificSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import {
     DEFAULT,
@@ -27,6 +28,7 @@ const ProgramSyncSettings = () => {
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [globalSettings, setGlobalSettings] = useState()
+    const [specificSettings, setSpecificSettings] = useState()
     const [disable, setDisable] = useState(false)
 
     const { data: authority } = useDataQuery(authorityQuery)
@@ -48,6 +50,7 @@ const ProgramSyncSettings = () => {
 
             setInitialValues({
                 ...initialGlobalSettings,
+                specificSettings,
             })
             programSettings.globalSettings.settingDownload === GLOBAL
                 ? setGlobalSettings(
@@ -62,16 +65,20 @@ const ProgramSyncSettings = () => {
                           programSettings.globalSettings
                       )
                   )
+            programSettings.specificSettings
+                ? setSpecificSettings(programSettings.specificSettings)
+                : setSpecificSettings({})
         }
     }, [programSettings])
 
     useEffect(() => {
-        if (globalSettings) {
-            !isEqual(globalSettings, initialValues.globalSettings)
+        if (globalSettings && specificSettings) {
+            !isEqual(globalSettings, initialValues.globalSettings) ||
+            !isEqual(specificSettings, initialValues.specificSettings)
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
-    }, [globalSettings])
+    }, [globalSettings, specificSettings])
 
     const saveSettings = async () => {
         const updatedSettings = {
@@ -79,7 +86,7 @@ const ProgramSyncSettings = () => {
             dataSetSettings,
             programSettings: {
                 globalSettings,
-                specificSettings: {},
+                specificSettings,
             },
         }
 
@@ -88,6 +95,7 @@ const ProgramSyncSettings = () => {
 
     const resetSettings = () => {
         setGlobalSettings(populateProgramObject(DEFAULT))
+        setSpecificSettings({})
     }
 
     return (
@@ -105,6 +113,12 @@ const ProgramSyncSettings = () => {
                         settings={globalSettings}
                         handleChange={setGlobalSettings}
                         disable={disable}
+                    />
+
+                    <ProgramSpecificSettings
+                        specificSettings={specificSettings}
+                        changeSpecificSettings={setSpecificSettings}
+                        disabled={disable}
                     />
 
                     <FooterStripButtons
