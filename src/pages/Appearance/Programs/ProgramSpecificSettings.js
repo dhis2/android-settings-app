@@ -6,9 +6,11 @@ import isEqual from 'lodash/isEqual'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import NewProgramSpecific from './NewProgramSpecific'
 import SpecificTableAction from './SpecificTableAction'
-import { prepareSpecificSettingsList } from './helper'
 import { useReadProgram } from './programQuery'
-import { filterUnusedElements } from '../../../utils/utils'
+import {
+    filterUnusedElements,
+    prepareSpecificSettingsList,
+} from '../../../utils/utils'
 
 const ProgramSpecificSettings = ({
     onChange,

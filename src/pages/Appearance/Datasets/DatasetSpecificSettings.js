@@ -7,8 +7,10 @@ import PageSubtitle from '../../../components/page/PageSubtitle'
 import SpecificTableAction from './SpecificTableAction'
 import NewDatasetSettings from './NewDatasetSettings'
 import { useReadDataset } from './datasetQuery'
-import { prepareSpecificSettingsList } from './helper'
-import { filterUnusedElements } from '../../../utils/utils'
+import {
+    filterUnusedElements,
+    prepareSpecificSettingsList,
+} from '../../../utils/utils'
 
 export const DatasetSpecificSettings = ({
     onChange,

@@ -12,6 +12,7 @@ import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
+import { removeNameIDFromSettings } from '../../../utils/utils'
 
 const ProgramsAppearance = () => {
     const {
@@ -71,7 +72,7 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...spinnerSpecific,
+                    ...removeNameIDFromSettings(spinnerSpecific),
                 },
             },
             filterSorting: {
@@ -79,7 +80,9 @@ const ProgramsAppearance = () => {
                 dataSetSettings,
                 programSettings: {
                     globalSettings,
-                    specificSettings,
+                    specificSettings: {
+                        ...removeNameIDFromSettings(specificSettings),
+                    },
                 },
             },
         }

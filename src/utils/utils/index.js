@@ -1,3 +1,6 @@
 export * from './filterUnusedElements'
+export * from './prepareSpecificSettingsList'
+export * from './removeNameIDFromSettings'
+export * from './removePropertiesFromObject'
 export * from './removeSettingsFromList'
 export * from './updateSettingsList'
