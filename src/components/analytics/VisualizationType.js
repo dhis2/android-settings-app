@@ -12,7 +12,7 @@ import { useReadAttributesQuery } from '../../pages/Analytics/AnalyticsQueries'
 
 const visualizationOptions = [
     {
-        value: 'CHART',
+        value: 'BAR',
         label: i18n.t('Bar chart'),
     },
     {
