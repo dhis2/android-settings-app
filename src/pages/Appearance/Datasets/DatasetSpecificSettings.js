@@ -19,6 +19,7 @@ export const DatasetSpecificSettings = ({
     const [initialRows, setInitialRows] = useState()
     const [rows, setRows] = useState()
     const [listName, setListName] = useState()
+    const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
         if (specificSettings && datasetList) {
@@ -29,6 +30,7 @@ export const DatasetSpecificSettings = ({
             setInitialRows(updated)
             setRows(updated)
             setListName(filterUnusedElements(datasetList, updated))
+            setLoad(true)
         }
     }, [specificSettings, datasetList])
 
@@ -41,22 +43,25 @@ export const DatasetSpecificSettings = ({
     return (
         <>
             <PageSubtitle title={i18n.t('Specific settings')} />
+            {loadSpecific && (
+                <>
+                    {rows && (
+                        <SpecificTableAction
+                            rows={rows}
+                            changeRows={setRows}
+                            elementList={datasetList}
+                            disableAll={disabled}
+                        />
+                    )}
 
-            {rows && (
-                <SpecificTableAction
-                    rows={rows}
-                    changeRows={setRows}
-                    elementList={datasetList}
-                    disableAll={disabled}
-                />
+                    <NewDatasetSettings
+                        datasetList={listName}
+                        rows={rows}
+                        handleRows={setRows}
+                        disabled={disabled}
+                    />
+                </>
             )}
-
-            <NewDatasetSettings
-                datasetList={listName}
-                rows={rows}
-                handleRows={setRows}
-                disabled={disabled}
-            />
         </>
     )
 }

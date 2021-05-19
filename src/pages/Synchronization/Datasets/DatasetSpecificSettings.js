@@ -19,6 +19,7 @@ const DatasetSpecificSettings = ({
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
+    const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
         if (datasetList && specificSettings) {
@@ -29,6 +30,7 @@ const DatasetSpecificSettings = ({
             setRows(rowList)
             setInitialRows(rowList)
             setListName(filterUnusedElements(datasetList, rowList))
+            setLoad(true)
         }
     }, [specificSettings, datasetList])
 
@@ -46,23 +48,26 @@ const DatasetSpecificSettings = ({
                     'Applies only to the assigned data set. Data set specific settings will overwrite the global settings above.'
                 )}
             />
+            {loadSpecific && (
+                <>
+                    {rows && (
+                        <SpecificTableAction
+                            rows={rows}
+                            specificSettingList={specificSettings}
+                            changeRows={setRows}
+                            datasetList={datasetList}
+                            disableAll={disabled}
+                        />
+                    )}
 
-            {rows && (
-                <SpecificTableAction
-                    rows={rows}
-                    specificSettingList={specificSettings}
-                    changeRows={setRows}
-                    datasetList={datasetList}
-                    disableAll={disabled}
-                />
+                    <NewDatasetSpecific
+                        datasetList={listName}
+                        rows={rows}
+                        handleRows={setRows}
+                        disabled={disabled}
+                    />
+                </>
             )}
-
-            <NewDatasetSpecific
-                datasetList={listName}
-                rows={rows}
-                handleRows={setRows}
-                disabled={disabled}
-            />
         </>
     )
 }
