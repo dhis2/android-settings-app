@@ -19,8 +19,11 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
 
     const tableActions = {
         edit: (...args) => {
+            const periodTypeName =
+                getPeriodType(args[0].id, datasetList).name ||
+                getPeriodType(args[0].id, datasetList)
             setSpecificSetting(args[0])
-            setPeriodType(getPeriodType(args[0].id, datasetList).name)
+            setPeriodType(periodTypeName)
             setOpenEditDialog(true)
         },
         delete: (...args) => {

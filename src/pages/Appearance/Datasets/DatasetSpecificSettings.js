@@ -8,6 +8,7 @@ import SpecificTableAction from './SpecificTableAction'
 import NewDatasetSettings from './NewDatasetSettings'
 import { useReadDataset } from './datasetQuery'
 import { prepareSpecificSettingsList } from './helper'
+import { filterUnusedElements } from '../../../utils/utils'
 
 export const DatasetSpecificSettings = ({
     onChange,
@@ -25,17 +26,9 @@ export const DatasetSpecificSettings = ({
                 specificSettings,
                 datasetList
             )
-            const list = []
-            datasetList.map(dataset => {
-                if (!updated.some(settings => settings.name === dataset.name)) {
-                    list.push(dataset)
-                }
-            })
-            setListName(list)
-            setRows(prepareSpecificSettingsList(specificSettings, datasetList))
-            setInitialRows(
-                prepareSpecificSettingsList(specificSettings, datasetList)
-            )
+            setInitialRows(updated)
+            setRows(updated)
+            setListName(filterUnusedElements(datasetList, updated))
         }
     }, [specificSettings, datasetList])
 

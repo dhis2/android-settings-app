@@ -3,36 +3,41 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { AddNewSetting } from '../../../components/field'
 import DialogSpecificSettings from './DialogSpecificSettings'
-import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
 import {
-    CLEAN,
-    DEFAULT,
-    SPECIFIC_SETTINGS,
-} from '../../../constants/data-set-settings'
-import { findDatasetName, getPeriodType, updateSettingsList } from './helper'
+    createInitialSpecificValues,
+    createInitialValues,
+    findDatasetName,
+    getPeriodType,
+    updateSettingsList,
+} from './helper'
 import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
 
 const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState(
-        populateSettingObject(CLEAN)
+        createInitialValues('')
     )
     const [disableSave, setDisableSave] = useState(true)
     const [periodType, setPeriodType] = useState()
 
+    const handleClose = () => {
+        setSpecificSetting(createInitialValues(''))
+        setOpenDialog(false)
+        setDisableSave(true)
+    }
+
     const handleOpenSettingsDialog = () => {
-        setSpecificSetting(populateSettingObject(DEFAULT))
+        setSpecificSetting(createInitialValues(''))
         setOpenDialog(true)
     }
 
     const handleChange = (e, key) => {
         if (key === 'name') {
-            const settings = populateSettingObject(
-                SPECIFIC_SETTINGS,
-                specificSetting,
-                getPeriodType(e.selected, datasetList).name
-            )
-            setPeriodType(getPeriodType(e.selected, datasetList).name)
+            const periodTypeName =
+                getPeriodType(e.selected, datasetList).name ||
+                getPeriodType(e.selected, datasetList)
+            const settings = createInitialSpecificValues('', periodTypeName)
+            setPeriodType(periodTypeName)
             setSpecificSetting({
                 ...settings,
                 [key]: e.selected,
@@ -53,12 +58,6 @@ const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
         const updatedList = updateSettingsList(settings, rows)
         handleRows(updatedList)
         handleClose()
-    }
-
-    const handleClose = () => {
-        setSpecificSetting(populateSettingObject(CLEAN))
-        setOpenDialog(false)
-        setDisableSave(true)
     }
 
     return (
