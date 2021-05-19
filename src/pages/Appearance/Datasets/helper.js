@@ -38,15 +38,3 @@ export const datasetHasCategoryCombo = (datasetId, datasetList) => {
     const dataset = datasetList.find(option => option.id === datasetId)
     return dataset.categoryCombo.name !== 'default'
 }
-
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
-}
-
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
-}

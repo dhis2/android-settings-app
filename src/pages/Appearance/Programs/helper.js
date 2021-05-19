@@ -36,16 +36,6 @@ export const getProgramName = (program, programList) => {
     return programFilter[0].name
 }
 
-export const filterUnusedElements = (apiElementList, settingList) => {
-    const list = []
-    apiElementList.map(program => {
-        if (!settingList.some(settings => settings.name === program.name)) {
-            list.push(program)
-        }
-    })
-    return list
-}
-
 /**
  * Specific settings, object to array:
  * Add name and id property
@@ -64,16 +54,4 @@ export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
 export const programHasCategoryCombo = (programId, datasetList) => {
     const program = datasetList.find(option => option.id === programId)
     return program.categoryCombo.name !== 'default'
-}
-
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
-}
-
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
 }

@@ -83,31 +83,9 @@ export const prepareSpecificSettingsList = (
     return specificSettingsRowList
 }
 
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
-}
-
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
-}
-
 export const findProgramNameById = (programList, specificProgram) => {
     const program = programList.find(
         program => program.id === specificProgram.id
     )
     return program.name
-}
-
-export const filterUnusedElements = (apiElementList, settingList) => {
-    const list = []
-    apiElementList.map(program => {
-        if (!settingList.some(settings => settings.name === program.name)) {
-            list.push(program)
-        }
-    })
-    return list
 }

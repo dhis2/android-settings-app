@@ -3,15 +3,14 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import TableActions from '../../components/table-actions'
 import DialogDelete from '../../components/dialog/dialog-delete'
+import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createTEIValues,
     populateAnalyticItem,
     populateWHOItem,
-    removeSettingsFromList,
-    updateList,
     validMandatoryFields,
 } from './helper'
-import DialogAnalyticsTEI from './DialogAnalyticsTEI'
+import { removeSettingsFromList, updateSettingsList } from '../../utils/utils'
 
 const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
     const [specificSettings, setSpecificSettings] = useState({})
@@ -54,7 +53,7 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
             specificSettings,
             specificSettings.uid
         )
-        handleRows(updateList(updatedValue, rows))
+        handleRows(updateSettingsList(updatedValue, rows))
         handleCloseEdit()
     }
 

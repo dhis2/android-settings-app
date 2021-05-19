@@ -4,10 +4,11 @@ import PropTypes from '@dhis2/prop-types'
 import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
 import PageHeader from '../../../components/page/PageHeader'
-import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
+import { prepareSpecificSettingsList } from './helper'
 import SpecificTableAction from './SpecificTableAction'
 import NewProgramSpecific from './NewProgramSpecific'
 import { useReadProgram } from './programQueries'
+import { filterUnusedElements } from '../../../utils/utils'
 
 const ProgramSpecificSettings = ({
     specificSettings,

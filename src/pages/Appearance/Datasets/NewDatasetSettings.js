@@ -7,8 +7,8 @@ import {
     createInitialSpecificValues,
     createInitialValues,
     datasetHasCategoryCombo,
-    updateSettingsList,
 } from './helper'
+import { updateSettingsList } from '../../../utils/utils'
 
 const NewDatasetSettings = ({ datasetList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)

@@ -7,7 +7,8 @@ import NewDatasetSpecific from './NewDatasetSpecific'
 import SpecificTableAction from './SpecificTableAction'
 import PageHeader from '../../../components/page/PageHeader'
 import { useReadDataset } from './datasetQueries'
-import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
+import { prepareSpecificSettingsList } from './helper'
+import { filterUnusedElements } from '../../../utils/utils'
 
 const DatasetSpecificSettings = ({
     specificSettings,

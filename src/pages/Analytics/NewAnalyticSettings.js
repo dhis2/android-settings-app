@@ -6,10 +6,10 @@ import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createInitialValues,
     createTEIValues,
-    updateList,
     validMandatoryFields,
 } from './helper'
 import { useReadIdQuery } from './AnalyticsQueries'
+import { updateSettingsList } from '../../utils/utils'
 
 const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
     const { refetch: refetchId, data: id } = useReadIdQuery()
@@ -39,7 +39,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
             specificSettings,
             id.system.codes[0]
         )
-        handleSettings(updateList(updatedValue, settings))
+        handleSettings(updateSettingsList(updatedValue, settings))
         handleClose()
     }
 

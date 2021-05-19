@@ -55,16 +55,6 @@ export const populateAnalyticItem = item => {
     }
 }
 
-export const updateList = (newEntry, list) => {
-    const updatedList = list.filter(element => element.uid !== newEntry.uid)
-    updatedList.push(newEntry)
-    return updatedList
-}
-
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.uid !== setting.uid)
-}
-
 const createWHOValues = values => ({
     x: {
         [values.elementX]: `${values.programStage}.${values.elementValueX}`,

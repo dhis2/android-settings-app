@@ -8,9 +8,9 @@ import {
     createInitialValues,
     findDatasetName,
     getPeriodType,
-    updateSettingsList,
 } from './helper'
 import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
+import { updateSettingsList } from '../../../utils/utils'
 
 const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)

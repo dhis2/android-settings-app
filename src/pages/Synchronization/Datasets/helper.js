@@ -51,27 +51,5 @@ export const findDatasetName = (datasetList, specificProgram) => {
     return dataset.name
 }
 
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(element => element.id !== setting.id)
-}
-
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        element => element.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
-}
-
-export const filterUnusedElements = (apiElementList, settingList) => {
-    const list = []
-    apiElementList.map(element => {
-        if (!settingList.some(settings => settings.name === element.name)) {
-            list.push(element)
-        }
-    })
-    return list
-}
-
 export const getPeriodDefaultValueByType = periodType =>
     periodTypeConstants[periodType].default

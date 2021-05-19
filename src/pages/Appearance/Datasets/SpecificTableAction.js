@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import {
-    datasetHasCategoryCombo,
-    removeSettingsFromList,
-    updateSettingsList,
-} from './helper'
+import { datasetHasCategoryCombo } from './helper'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
 import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
+import {
+    removeSettingsFromList,
+    updateSettingsList,
+} from '../../../utils/utils'
 
 const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
