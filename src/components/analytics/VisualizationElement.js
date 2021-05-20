@@ -41,8 +41,8 @@ const periodType = [
         label: i18n.t('Quarterly'),
     },
     {
-        value: 'SixMontly',
-        label: i18n.t('SixMontly'),
+        value: 'SixMonthly',
+        label: i18n.t('SixMonthly'),
     },
     {
         value: 'Yearly',
