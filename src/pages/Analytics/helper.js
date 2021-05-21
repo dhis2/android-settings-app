@@ -26,9 +26,8 @@ export const createInitialValues = initialValues => ({
 export const populateWHOItem = whoItem => {
     const elementX = Object.keys(whoItem.WHONutrition.x)[0]
     const elementY = Object.keys(whoItem.WHONutrition.y)[0]
-    const elementValueX = whoItem.WHONutrition.x[elementX]
-    const elementValueY = whoItem.WHONutrition.y[elementY]
-
+    const elementValueX = whoItem.WHONutrition.x[elementX][0]
+    const elementValueY = whoItem.WHONutrition.y[elementY][0]
     return {
         ...whoItem,
         attribute: whoItem.WHONutrition.gender.attribute,
@@ -36,9 +35,15 @@ export const populateWHOItem = whoItem => {
         female: whoItem.WHONutrition.gender.values.female,
         chartType: whoItem.WHONutrition.chartType,
         elementX: elementX,
-        elementValueX: elementValueX.split('.')[1],
+        elementValueX:
+            elementX === 'programIndicators'
+                ? elementValueX.split('.')[0]
+                : elementValueX.split('.')[1],
         elementY: elementY,
-        elementValueY: elementValueY.split('.')[1],
+        elementValueY:
+            elementY === 'programIndicators'
+                ? elementValueY.split('.')[0]
+                : elementValueY.split('.')[1],
     }
 }
 
@@ -57,10 +62,18 @@ export const populateAnalyticItem = item => {
 
 const createWHOValues = values => ({
     x: {
-        [values.elementX]: `${values.programStage}.${values.elementValueX}`,
+        [values.elementX]: [
+            values.elementX === 'programIndicators'
+                ? `${values.elementValueX}`
+                : `${values.programStage}.${values.elementValueX}`,
+        ],
     },
     y: {
-        [values.elementY]: `${values.programStage}.${values.elementValueY}`,
+        [values.elementY]: [
+            values.elementY === 'programIndicators'
+                ? `${values.elementValueY}`
+                : `${values.programStage}.${values.elementValueY}`,
+        ],
     },
     gender: {
         values: {
@@ -85,12 +98,12 @@ const createVisualizationValues = values => ({
 
 export const createTEIValues = (values, id) => {
     let teiValues = {
+        uid: id,
         name: values.name,
         shortName: values.shortName,
         program: values.program,
         programStage: values.programStage,
         type: values.type,
-        uid: id,
     }
 
     values.type !== WHO_NUTRITION
