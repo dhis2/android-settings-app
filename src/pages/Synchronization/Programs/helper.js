@@ -1,4 +1,5 @@
 import {
+    PER_ORG_UNIT,
     programSettingsDefault,
     specificSettingsDefault,
     WITH_REGISTRATION,
@@ -66,12 +67,14 @@ export const prepareSpecificSettingsList = (
     for (const key in programSettings) {
         if (programsId.includes(key)) {
             const program = programSettings[key]
+            const settingDownload =
+                program.settingDownload === PER_ORG_UNIT ? 'per OU' : 'all OU'
             const summarySettings = isProgramWithRegistration(
                 apiProgramList,
                 program.id
             )
-                ? `${program.teiDownload} TEI`
-                : `${program.eventsDownload} events per OU`
+                ? `${program.teiDownload} TEI ${settingDownload}`
+                : `${program.eventsDownload} events ${settingDownload}`
 
             const row = {
                 ...program,

@@ -53,7 +53,6 @@ const DatasetSpecificSettings = ({
                     {rows && (
                         <SpecificTableAction
                             rows={rows}
-                            specificSettingList={specificSettings}
                             changeRows={setRows}
                             datasetList={datasetList}
                             disableAll={disabled}

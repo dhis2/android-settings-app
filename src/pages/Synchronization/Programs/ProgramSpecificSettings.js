@@ -53,7 +53,6 @@ const ProgramSpecificSettings = ({
                     {rows && (
                         <SpecificTableAction
                             rows={rows}
-                            specificSettingList={specificSettings}
                             changeRows={setRows}
                             programList={programList}
                             disableAll={disabled}
