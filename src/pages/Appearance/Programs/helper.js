@@ -1,3 +1,6 @@
+import map from 'lodash/map'
+import toArray from 'lodash/toArray'
+
 const filterSortingDefault = {
     filter: true,
     sort: true,
@@ -37,4 +40,51 @@ export const getProgramName = (program, programList) => {
 export const programHasCategoryCombo = (programId, datasetList) => {
     const program = datasetList.find(option => option.id === programId)
     return program.categoryCombo.name !== 'default'
+}
+
+export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
+    const specificSettingsRows = []
+    for (const key in settings) {
+        const result = apiDatasetList.find(dataset => dataset.id === key)
+        if (result) {
+            const filterList = getFilters(settings[key])
+            settings[key].name = result.name
+            settings[key].id = key
+            settings[key].summarySettings = `Filters: ${filterList}`
+            specificSettingsRows.push(settings[key])
+        }
+    }
+    return toArray(specificSettingsRows)
+}
+
+const getFilters = settings => {
+    const filterList = []
+    map(
+        settings,
+        (element, key) =>
+            element.filter === true &&
+            filterList.push(convertFilterKeyToValue(key))
+    )
+    return filterList.join(', ')
+}
+
+const convertFilterKeyToValue = filter => {
+    switch (filter) {
+        case 'assignedToMe':
+            return 'Assigned to me'
+        case 'enrollmentDate':
+            return 'Enrollment Date'
+        case 'enrollmentStatus':
+            return 'Enrollment Status'
+        case 'eventDate':
+            return 'Event Date'
+        case 'eventStatus':
+            return 'Event Status'
+        case 'categoryCombo':
+            return 'Category Combo'
+        case 'organisationUnit':
+            return 'Organisation Unit'
+        case 'syncStatus':
+            return 'Sync Status'
+    }
 }

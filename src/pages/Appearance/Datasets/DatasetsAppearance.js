@@ -12,7 +12,7 @@ import {
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { createInitialValues } from './helper'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import { removeNameIDFromSettings } from '../../../utils/utils'
+import { removeSummaryFromSettings } from '../../../utils/utils'
 
 const DatasetsAppearance = () => {
     const {
@@ -69,7 +69,7 @@ const DatasetsAppearance = () => {
                 dataSetSettings: {
                     globalSettings,
                     specificSettings: {
-                        ...removeNameIDFromSettings(specificSettings),
+                        ...removeSummaryFromSettings(specificSettings),
                     },
                 },
             },

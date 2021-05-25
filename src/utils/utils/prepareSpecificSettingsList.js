@@ -5,10 +5,10 @@ import toArray from 'lodash/toArray'
  * Add name and id property
  * */
 
-export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
+export const prepareSpecificSettingsList = (settings, apiElementList) => {
     const specificSettingsRows = []
     for (const key in settings) {
-        const result = apiDatasetList.find(a => a.id === key)
+        const result = apiElementList.find(element => element.id === key)
         if (result) {
             settings[key].name = result.name
             settings[key].id = key

@@ -8,3 +8,10 @@ import { removePropertiesFromObject } from './removePropertiesFromObject'
 
 export const removeNameIDFromSettings = settingsObject =>
     removePropertiesFromObject(settingsObject, ['name', 'id'])
+
+export const removeSummaryFromSettings = settingsObject =>
+    removePropertiesFromObject(settingsObject, [
+        'name',
+        'id',
+        'summarySettings',
+    ])

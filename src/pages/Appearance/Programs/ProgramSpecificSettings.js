@@ -7,10 +7,8 @@ import PageSubtitle from '../../../components/page/PageSubtitle'
 import NewProgramSpecific from './NewProgramSpecific'
 import SpecificTableAction from './SpecificTableAction'
 import { useReadProgram } from './programQuery'
-import {
-    filterUnusedElements,
-    prepareSpecificSettingsList,
-} from '../../../utils/utils'
+import { filterUnusedElements } from '../../../utils/utils'
+import { prepareSpecificSettingsList } from './helper'
 
 const ProgramSpecificSettings = ({
     onChange,
