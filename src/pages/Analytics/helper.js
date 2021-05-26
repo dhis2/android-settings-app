@@ -1,4 +1,7 @@
+import omit from 'lodash/omit'
+import map from 'lodash/map'
 import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
+import { findProgramNameById } from '../../utils/utils'
 
 export const WHO_NUTRITION = 'WHO_NUTRITION'
 
@@ -225,4 +228,25 @@ export const validMandatoryFields = specificSettings => {
             specificSettings
         )
     }
+}
+
+export const prepareItemsList = (itemList, apiProgramList) => {
+    const teiItemRows = []
+    for (const key in itemList) {
+        const result = apiProgramList.find(
+            program => program.id === itemList[key].program
+        )
+        if (result) {
+            itemList[key].summarySettings = findProgramNameById(
+                apiProgramList,
+                { id: itemList[key].program }
+            )
+            teiItemRows.push(itemList[key])
+        }
+    }
+    return teiItemRows
+}
+
+export const removeSummarySettings = itemList => {
+    return map(itemList, object => omit(object, ['summarySettings']))
 }
