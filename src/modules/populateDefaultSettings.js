@@ -27,9 +27,6 @@ export const populateObject = type => {
             object = {
                 settingDownload: programSettingsDefault.settingDownload,
                 teiDownload: programSettingsDefault.teiDownload,
-                enrollmentDownload: programSettingsDefault.enrollmentDownload,
-                enrollmentDateDownload:
-                    programSettingsDefault.enrollmentDateDownload,
                 updateDownload: programSettingsDefault.updateDownload,
                 eventsDownload: programSettingsDefault.eventsDownload,
                 eventDateDownload: programSettingsDefault.eventDateDownload,

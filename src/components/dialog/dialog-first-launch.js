@@ -6,9 +6,8 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
-    ScreenCover,
-} from '@dhis2/ui-core'
-
+    Layer,
+} from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
@@ -17,7 +16,7 @@ import buttonStyle from '../../styles/Button.module.css'
 import warning from '../../styles/Warning.module.css'
 import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 
-const DialogFirstLaunch = ({ handleSave }) => {
+const DialogFirstLaunch = ({ handleSave, isOutOfDate }) => {
     const { baseUrl } = useConfig()
     const { data } = useDataQuery(authorityQuery)
     const [disable, setDisable] = useState(false)
@@ -32,7 +31,7 @@ const DialogFirstLaunch = ({ handleSave }) => {
     return (
         <>
             {data && (
-                <ScreenCover>
+                <Layer translucent>
                     <Modal position="middle">
                         <ModalTitle>{i18n.t('First time setup')}</ModalTitle>
                         <ModalContent>
@@ -47,6 +46,14 @@ const DialogFirstLaunch = ({ handleSave }) => {
                                     "Any settings or configuration on a user's device will be overwritten by settings applied here."
                                 )}
                             </strong>
+
+                            {isOutOfDate && (
+                                <p>
+                                    {i18n.t(
+                                        'The new version of the Android Settings web app comes with improvements and disruptive changes. The previous versions are no longer supported, and the settings stored there will be removed.'
+                                    )}
+                                </p>
+                            )}
 
                             <p
                                 className={cx({
@@ -82,7 +89,7 @@ const DialogFirstLaunch = ({ handleSave }) => {
                             </ButtonStrip>
                         </ModalActions>
                     </Modal>
-                </ScreenCover>
+                </Layer>
             )}
         </>
     )
@@ -90,6 +97,7 @@ const DialogFirstLaunch = ({ handleSave }) => {
 
 DialogFirstLaunch.propTypes = {
     handleSave: PropTypes.func.isRequired,
+    isOutOfDate: PropTypes.bool,
 }
 
 export default DialogFirstLaunch
