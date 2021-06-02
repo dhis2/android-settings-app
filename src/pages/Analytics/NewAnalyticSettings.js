@@ -11,7 +11,12 @@ import {
 import { useReadIdQuery } from './AnalyticsQueries'
 import { updateSettingsList } from '../../utils/utils'
 
-const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
+const NewAnalyticSettings = ({
+    disable,
+    handleSettings,
+    settings,
+    programList,
+}) => {
     const { refetch: refetchId, data: id } = useReadIdQuery()
     const [openDialog, setOpenDialog] = useState(false)
     const [specificSettings, setSpecificSettings] = useState(
@@ -58,6 +63,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
                     handleClose={handleClose}
                     handleChange={setSpecificSettings}
                     specificSettings={specificSettings}
+                    programList={programList}
                     disableSave={disableSave}
                 />
             )}
@@ -69,6 +75,7 @@ NewAnalyticSettings.propTypes = {
     settings: PropTypes.array,
     disable: PropTypes.bool,
     handleSettings: PropTypes.func,
+    programList: PropTypes.array,
 }
 
 export default NewAnalyticSettings

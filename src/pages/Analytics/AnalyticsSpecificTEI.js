@@ -36,6 +36,7 @@ const AnalyticsSpecificTEI = ({ settings, handleSettings, disable }) => {
                             rows={rows}
                             handleRows={setRows}
                             disableAll={disable}
+                            programList={programList}
                         />
                     )}
 
@@ -43,6 +44,7 @@ const AnalyticsSpecificTEI = ({ settings, handleSettings, disable }) => {
                         disable={disable}
                         settings={rows}
                         handleSettings={setRows}
+                        programList={programList}
                     />
                 </>
             )}

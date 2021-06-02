@@ -12,7 +12,7 @@ import {
 } from './helper'
 import { removeSettingsFromList, updateSettingsList } from '../../utils/utils'
 
-const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
+const AnalyticsTable = ({ rows, disableAll, handleRows, programList }) => {
     const [specificSettings, setSpecificSettings] = useState({})
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [openEditDialog, setOpenEditDialog] = useState(false)
@@ -81,6 +81,7 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
                         handleChange={setSpecificSettings}
                         specificSettings={specificSettings}
                         handleSave={handleSave}
+                        programList={programList}
                         edit={true}
                         disableSave={disableSave}
                     />
@@ -93,6 +94,7 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
 AnalyticsTable.propTypes = {
     rows: PropTypes.array,
     handleRows: PropTypes.func,
+    programList: PropTypes.array,
     disableAll: PropTypes.bool,
 }
 

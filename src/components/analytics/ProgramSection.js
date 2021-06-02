@@ -4,10 +4,8 @@ import { CircularLoader } from '@dhis2/ui'
 import { Section } from './Section'
 import { SelectProgram } from './SelectProgram'
 import { SelectProgramStage } from './SelectProgramStage'
-import { useReadProgramQuery } from '../../pages/Analytics/AnalyticsQueries'
 
-export const ProgramSection = ({ onChange, value, edit }) => {
-    const { programList, loading } = useReadProgramQuery()
+export const ProgramSection = ({ onChange, value, edit, programList }) => {
     const [programStageList, setProgramStageList] = useState([])
 
     useEffect(() => {
@@ -19,8 +17,7 @@ export const ProgramSection = ({ onChange, value, edit }) => {
         }
     }, [programList, edit])
 
-    if (edit && (loading || programStageList.length === 0))
-        return <CircularLoader small />
+    if (edit && programStageList.length === 0) return <CircularLoader small />
 
     return (
         <Section>

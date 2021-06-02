@@ -232,18 +232,20 @@ export const validMandatoryFields = specificSettings => {
 
 export const prepareItemsList = (itemList, apiProgramList) => {
     const teiItemRows = []
-    for (const key in itemList) {
+    const items = [...itemList]
+
+    items.map(item => {
         const result = apiProgramList.find(
-            program => program.id === itemList[key].program
+            program => program.id === item.program
         )
+
         if (result) {
-            itemList[key].summarySettings = findProgramNameById(
-                apiProgramList,
-                { id: itemList[key].program }
-            )
-            teiItemRows.push(itemList[key])
+            item.summarySettings = findProgramNameById(apiProgramList, {
+                id: item.program,
+            })
+            teiItemRows.push(item)
         }
-    }
+    })
     return teiItemRows
 }
 
