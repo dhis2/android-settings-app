@@ -33,7 +33,9 @@ export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
             const filterList = getFilters(settings[key])
             settings[key].name = result.name
             settings[key].id = key
-            settings[key].summarySettings = `Filters: ${filterList}`
+            settings[key].summarySettings = filterList
+                ? `Filters: ${filterList}`
+                : 'No Filters'
             specificSettingsRows.push(settings[key])
         }
     }

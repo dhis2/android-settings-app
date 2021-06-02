@@ -63,7 +63,7 @@ const GlobalSettings = () => {
 
     return (
         <Page
-            title={i18n.t('Global sync Settings')}
+            title={i18n.t('Global sync settings')}
             loading={load}
             unsavedChanges={!disableSave}
         >
