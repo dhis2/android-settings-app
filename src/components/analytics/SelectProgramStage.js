@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { SelectField } from './SelectField'
 import { createInitialValues } from '../../pages/Analytics/helper'
-import { isValidValue } from '../../utils/validators/isValidValue'
+import { isValidValue } from '../../utils/validators'
 
 export const SelectProgramStage = ({
     onChange,

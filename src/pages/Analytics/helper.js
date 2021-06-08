@@ -1,6 +1,6 @@
 import omit from 'lodash/omit'
 import map from 'lodash/map'
-import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
+import { validateObjectByProperty } from '../../utils/validators'
 import { findProgramNameById } from '../../utils/utils'
 
 export const WHO_NUTRITION = 'WHO_NUTRITION'

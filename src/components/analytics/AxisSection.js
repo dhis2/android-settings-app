@@ -4,7 +4,7 @@ import PropTypes from '@dhis2/prop-types'
 import { Section } from './Section'
 import { SelectDataElement } from './SelectDataElement'
 import { SelectElementType } from './SelectElementType'
-import { isValidValue } from '../../utils/validators/isValidValue'
+import { isValidValue } from '../../utils/validators'
 
 const elementTypeOptionsWHO = [
     {

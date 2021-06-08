@@ -7,7 +7,7 @@ import {
     SMS_TO_SEND,
 } from '../../constants/android-settings'
 import { useState } from 'react'
-import { validateNumber } from './validatePhoneNumber'
+import { validateNumber } from '../../utils/validators'
 
 export const useGeneralForm = ({ setSubmitDataStore }) => {
     const [openEncryptDialog, setOpenEncryptDialog] = useState(false)
