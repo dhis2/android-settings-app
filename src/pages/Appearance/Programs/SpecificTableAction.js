@@ -4,11 +4,11 @@ import PropTypes from '@dhis2/prop-types'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
 import DialogNewProgram from './DialogNewProgram'
+import { programHasCategoryCombo } from './helper'
 import {
-    programHasCategoryCombo,
     removeSettingsFromList,
     updateSettingsList,
-} from './helper'
+} from '../../../utils/utils'
 
 const SpecificTableAction = ({
     rows,

@@ -25,6 +25,8 @@ const DialogAnalyticsTEI = ({
     handleSave,
     specificSettings,
     handleChange,
+    programList,
+    edit,
     disableSave,
 }) => {
     const [attributeOptions, setAttributeOptions] = useState([])
@@ -32,12 +34,14 @@ const DialogAnalyticsTEI = ({
     return (
         <>
             {open && (
-                <Modal large onClose={handleClose} position="middle">
+                <Modal large position="middle">
                     <ModalTitle>{i18n.t('Add TEI Analytics')}</ModalTitle>
                     <ModalContent>
                         <ProgramSection
                             onChange={handleChange}
                             value={specificSettings}
+                            programList={programList}
+                            edit={edit}
                         />
 
                         <TitleSection
@@ -49,6 +53,7 @@ const DialogAnalyticsTEI = ({
                             onChange={handleChange}
                             value={specificSettings}
                             handleWHOAttribute={setAttributeOptions}
+                            edit={edit}
                         />
 
                         {specificSettings.type === WHO_NUTRITION ? (
@@ -56,11 +61,13 @@ const DialogAnalyticsTEI = ({
                                 handleChange={handleChange}
                                 specificSettings={specificSettings}
                                 attributeOptions={attributeOptions}
+                                edit={edit}
                             />
                         ) : (
                             <VisualizationElement
                                 handleChange={handleChange}
                                 specificSettings={specificSettings}
+                                edit={edit}
                             />
                         )}
                     </ModalContent>
@@ -92,6 +99,8 @@ DialogAnalyticsTEI.propTypes = {
     handleSave: PropTypes.func,
     specificSettings: PropTypes.object,
     handleChange: PropTypes.func,
+    programList: PropTypes.array,
+    edit: PropTypes.bool,
     disableSave: PropTypes.bool,
 }
 

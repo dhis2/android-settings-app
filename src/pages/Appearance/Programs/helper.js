@@ -1,3 +1,4 @@
+import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 
 const filterSortingDefault = {
@@ -36,44 +37,56 @@ export const getProgramName = (program, programList) => {
     return programFilter[0].name
 }
 
-export const filterUnusedElements = (apiElementList, settingList) => {
-    const list = []
-    apiElementList.map(program => {
-        if (!settingList.some(settings => settings.name === program.name)) {
-            list.push(program)
-        }
-    })
-    return list
-}
-
-/**
- * Specific settings, object to array:
- * Add name and id property
- * */
-export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
-    for (const key in settings) {
-        const result = apiDatasetList.find(a => a.id === key)
-        if (result) {
-            settings[key].name = result.name
-            settings[key].id = key
-        }
-    }
-    return toArray(settings)
-}
-
 export const programHasCategoryCombo = (programId, datasetList) => {
     const program = datasetList.find(option => option.id === programId)
     return program.categoryCombo.name !== 'default'
 }
 
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
+export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
+    const specificSettingsRows = []
+    for (const key in settings) {
+        const result = apiDatasetList.find(dataset => dataset.id === key)
+        if (result) {
+            const filterList = getFilters(settings[key])
+            settings[key].name = result.name
+            settings[key].id = key
+            settings[key].summarySettings = filterList
+                ? `Filters: ${filterList}`
+                : 'No Filters' //`Filters: ${filterList}`
+            specificSettingsRows.push(settings[key])
+        }
+    }
+    return toArray(specificSettingsRows)
 }
 
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
+const getFilters = settings => {
+    const filterList = []
+    map(
+        settings,
+        (element, key) =>
+            element.filter === true &&
+            filterList.push(convertFilterKeyToValue(key))
     )
-    updatedList.push(settings)
-    return updatedList
+    return filterList.join(', ')
+}
+
+const convertFilterKeyToValue = filter => {
+    switch (filter) {
+        case 'assignedToMe':
+            return 'Assigned to me'
+        case 'enrollmentDate':
+            return 'Enrollment Date'
+        case 'enrollmentStatus':
+            return 'Enrollment Status'
+        case 'eventDate':
+            return 'Event Date'
+        case 'eventStatus':
+            return 'Event Status'
+        case 'categoryCombo':
+            return 'Category Combo'
+        case 'organisationUnit':
+            return 'Organisation Unit'
+        case 'syncStatus':
+            return 'Sync Status'
+    }
 }

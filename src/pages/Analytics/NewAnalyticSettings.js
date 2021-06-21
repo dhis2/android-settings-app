@@ -6,13 +6,17 @@ import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createInitialValues,
     createTEIValues,
-    updateList,
-    WHO_NUTRITION,
+    validMandatoryFields,
 } from './helper'
 import { useReadIdQuery } from './AnalyticsQueries'
-import { validateObjectByProperty } from '../../utils/validators/validateObjectByProperty'
+import { updateSettingsList } from '../../utils/utils'
 
-const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
+const NewAnalyticSettings = ({
+    disable,
+    handleSettings,
+    settings,
+    programList,
+}) => {
     const { refetch: refetchId, data: id } = useReadIdQuery()
     const [openDialog, setOpenDialog] = useState(false)
     const [specificSettings, setSpecificSettings] = useState(
@@ -21,42 +25,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
     const [disableSave, setDisableSave] = useState(true)
 
     useEffect(() => {
-        if (specificSettings.type === WHO_NUTRITION) {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'chartType',
-                    'attribute',
-                    'male',
-                    'female',
-                    'elementX',
-                    'elementValueX',
-                    'elementY',
-                    'elementValueY',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        } else {
-            validateObjectByProperty(
-                [
-                    'program',
-                    'programStage',
-                    'name',
-                    'type',
-                    'period',
-                    'element',
-                    'elementValue',
-                ],
-                specificSettings
-            )
-                ? setDisableSave(false)
-                : setDisableSave(true)
-        }
+        setDisableSave(validMandatoryFields(specificSettings))
     }, [specificSettings])
 
     const handleOpenDialog = () => {
@@ -75,7 +44,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
             specificSettings,
             id.system.codes[0]
         )
-        handleSettings(updateList(updatedValue, settings))
+        handleSettings(updateSettingsList(updatedValue, settings))
         handleClose()
     }
 
@@ -94,6 +63,7 @@ const NewAnalyticSettings = ({ disable, handleSettings, settings }) => {
                     handleClose={handleClose}
                     handleChange={setSpecificSettings}
                     specificSettings={specificSettings}
+                    programList={programList}
                     disableSave={disableSave}
                 />
             )}
@@ -105,6 +75,7 @@ NewAnalyticSettings.propTypes = {
     settings: PropTypes.array,
     disable: PropTypes.bool,
     handleSettings: PropTypes.func,
+    programList: PropTypes.array,
 }
 
 export default NewAnalyticSettings

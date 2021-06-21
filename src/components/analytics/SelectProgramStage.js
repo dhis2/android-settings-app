@@ -3,9 +3,14 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { SelectField } from './SelectField'
 import { createInitialValues } from '../../pages/Analytics/helper'
-import { isValidValue } from '../../utils/validators/isValidValue'
+import { isValidValue } from '../../utils/validators'
 
-export const SelectProgramStage = ({ onChange, value, options }) => {
+export const SelectProgramStage = ({
+    onChange,
+    value,
+    options,
+    fixedValue,
+}) => {
     const handleChange = (e, key) => {
         onChange({
             ...createInitialValues(''),
@@ -22,12 +27,14 @@ export const SelectProgramStage = ({ onChange, value, options }) => {
             onChange={handleChange}
             value={value.programStage || ''}
             options={options}
-            disabled={!isValidValue(value.program)}
+            disabled={!isValidValue(value.program) || fixedValue}
         />
     )
 }
 
 SelectProgramStage.propTypes = {
+    value: PropTypes.object,
     options: PropTypes.array,
     onChange: PropTypes.func,
+    fixedValue: PropTypes.bool,
 }

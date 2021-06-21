@@ -1,17 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import TableActions from '../../components/table-actions'
 import DialogDelete from '../../components/dialog/dialog-delete'
-import { removeSettingsFromList } from './helper'
+import DialogAnalyticsTEI from './DialogAnalyticsTEI'
+import {
+    createTEIValues,
+    populateAnalyticItem,
+    populateWHOItem,
+    validMandatoryFields,
+} from './helper'
+import { removeSettingsFromList, updateSettingsList } from '../../utils/utils'
 
-const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
+const AnalyticsTable = ({ rows, disableAll, handleRows, programList }) => {
     const [specificSettings, setSpecificSettings] = useState({})
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+    const [openEditDialog, setOpenEditDialog] = useState(false)
+    const [disableSave, setDisableSave] = useState(false)
+
+    useEffect(() => {
+        setDisableSave(validMandatoryFields(specificSettings))
+    }, [specificSettings])
 
     const tableActions = {
         edit: (...arg) => {
-            setSpecificSettings(arg[0])
+            arg[0].data
+                ? setSpecificSettings(populateAnalyticItem(arg[0]))
+                : setSpecificSettings(populateWHOItem(arg[0]))
+            setOpenEditDialog(true)
         },
         delete: (...arg) => {
             setOpenDeleteDialog(true)
@@ -26,6 +42,19 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
 
     const handleDialogClose = () => {
         setOpenDeleteDialog(false)
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditDialog(false)
+    }
+
+    const handleSave = () => {
+        const updatedValue = createTEIValues(
+            specificSettings,
+            specificSettings.uid
+        )
+        handleRows(updateSettingsList(updatedValue, rows))
+        handleCloseEdit()
     }
 
     return (
@@ -45,6 +74,17 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
                         typeName={i18n.t('Analytics')}
                         name={specificSettings.name}
                     />
+
+                    <DialogAnalyticsTEI
+                        open={openEditDialog}
+                        handleClose={handleCloseEdit}
+                        handleChange={setSpecificSettings}
+                        specificSettings={specificSettings}
+                        handleSave={handleSave}
+                        programList={programList}
+                        edit={true}
+                        disableSave={disableSave}
+                    />
                 </>
             )}
         </>
@@ -54,6 +94,7 @@ const AnalyticsTable = ({ rows, disableAll, handleRows }) => {
 AnalyticsTable.propTypes = {
     rows: PropTypes.array,
     handleRows: PropTypes.func,
+    programList: PropTypes.array,
     disableAll: PropTypes.bool,
 }
 

@@ -1,4 +1,18 @@
-import { periodTypeConstants } from '../../../constants/data-set-settings'
+import {
+    dataSetSettingsDefault,
+    periodTypeConstants,
+} from '../../../constants/data-set-settings'
+
+export const createInitialValues = prevDetails => ({
+    periodDSDownload:
+        prevDetails.periodDSDownload || dataSetSettingsDefault.periodDSDownload,
+})
+
+export const createInitialSpecificValues = (prevDetails, periodType) => ({
+    name: '',
+    periodDSDownload:
+        prevDetails.periodDSDownload || getPeriodDefaultValueByType(periodType),
+})
 
 export const prepareSpecificSettingsList = (
     datasetSettings,
@@ -11,7 +25,9 @@ export const prepareSpecificSettingsList = (
 
     for (const key in datasetSettings) {
         if (datasetId.includes(key)) {
-            const periodType = getPeriodType(key, apiDatasetList).name
+            const periodType =
+                getPeriodType(key, apiDatasetList).name ||
+                getPeriodType(key, apiDatasetList)
             const dataset = datasetSettings[key]
             const summarySettings = `${dataset.periodDSDownload} ${periodType} period`
 
@@ -33,28 +49,6 @@ export const findDatasetName = (datasetList, specificProgram) => {
         dataset => dataset.id === specificProgram.id
     )
     return dataset.name
-}
-
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
-}
-
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
-}
-
-export const filterUnusedElements = (apiElementList, settingList) => {
-    const list = []
-    apiElementList.map(program => {
-        if (!settingList.some(settings => settings.name === program.name)) {
-            list.push(program)
-        }
-    })
-    return list
 }
 
 export const getPeriodDefaultValueByType = periodType =>

@@ -29,8 +29,16 @@ const programsQuery = {
     programs: {
         resource: 'programs',
         params: {
-            fields: ['id', 'name', 'programType', 'programStages[id, name]'],
-            filter: 'access.data.write:eq:true',
+            fields: [
+                'id',
+                'name',
+                'programType',
+                'programStages[id,name,repeatable]',
+            ],
+            filter: [
+                'programStages.repeatable:eq:true',
+                'access.data.write:eq:true',
+            ],
             pager: 'false',
         },
     },
@@ -38,27 +46,29 @@ const programsQuery = {
 
 /**
  * Query to get program list
- * return only list of program with registration
+ * return only list of program with registration and repeatable program stage
  * */
 
 export const useReadProgramQuery = () => {
     const { loading, data, error } = useDataQuery(programsQuery)
-    const programStagesList = []
     let programList = []
     if (data) {
-        data.programs.programs.map(program =>
-            programStagesList.push(program.programStages)
-        )
         programList = data.programs.programs.filter(
             program => program.programType === 'WITH_REGISTRATION'
         )
+
+        programList.map(program => {
+            program.programStages = program.programStages.filter(
+                programStage => programStage.repeatable === true
+            )
+            return program
+        })
     }
 
     return {
         loading,
         error,
         programList: data && programList,
-        programStagesList: data && programStagesList,
     }
 }
 

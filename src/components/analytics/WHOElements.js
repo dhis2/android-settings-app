@@ -10,6 +10,7 @@ export const WHOElements = ({
     handleChange,
     specificSettings,
     attributeOptions,
+    edit,
 }) => (
     <>
         <WHOVisualizationType
@@ -23,6 +24,7 @@ export const WHOElements = ({
             onChange={handleChange}
             specificSettings={specificSettings}
             attributeOptions={attributeOptions}
+            edit={edit}
         />
 
         <AxisSection
@@ -31,6 +33,7 @@ export const WHOElements = ({
             legend={i18n.t('Horizontal (x) axis')}
             axis="elementX"
             axisValue="elementValueX"
+            edit={edit}
         />
 
         <AxisSection
@@ -39,6 +42,7 @@ export const WHOElements = ({
             legend={i18n.t('Vertical (y) axis')}
             axis="elementY"
             axisValue="elementValueY"
+            edit={edit}
         />
     </>
 )
@@ -47,4 +51,5 @@ WHOElements.propTypes = {
     handleChange: PropTypes.func,
     specificSettings: PropTypes.object,
     attributeOptions: PropTypes.array,
+    edit: PropTypes.bool,
 }

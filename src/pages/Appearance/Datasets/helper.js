@@ -1,3 +1,4 @@
+import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 
 const filterSortingDefault = {
@@ -19,34 +20,48 @@ export const createInitialSpecificValues = prevDetails => ({
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
 })
 
-/**
- * Specific settings, object to array:
- * Add name and id property
- * */
-export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
-    for (const key in settings) {
-        const result = apiDatasetList.find(a => a.id === key)
-        if (result) {
-            settings[key].name = result.name
-            settings[key].id = key
-        }
-    }
-    return toArray(settings)
-}
-
 export const datasetHasCategoryCombo = (datasetId, datasetList) => {
     const dataset = datasetList.find(option => option.id === datasetId)
     return dataset.categoryCombo.name !== 'default'
 }
 
-export const updateSettingsList = (settings, settingsList) => {
-    const updatedList = settingsList.filter(
-        program => program.id !== settings.id
-    )
-    updatedList.push(settings)
-    return updatedList
+export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
+    const specificSettingsRows = []
+    for (const key in settings) {
+        const result = apiDatasetList.find(dataset => dataset.id === key)
+        if (result) {
+            const filterList = getFilters(settings[key])
+            settings[key].name = result.name
+            settings[key].id = key
+            settings[key].summarySettings = filterList
+                ? `Filters: ${filterList}`
+                : 'No Filters'
+            specificSettingsRows.push(settings[key])
+        }
+    }
+    return toArray(specificSettingsRows)
 }
 
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.id !== setting.id)
+const getFilters = settings => {
+    const filterList = []
+    map(
+        settings,
+        (element, key) =>
+            element.filter === true &&
+            filterList.push(convertFilterKeyToValue(key))
+    )
+    return filterList.join(', ')
+}
+
+const convertFilterKeyToValue = filter => {
+    switch (filter) {
+        case 'categoryCombo':
+            return 'Category Combo'
+        case 'period':
+            return 'Period'
+        case 'organisationUnit':
+            return 'Organisation Unit'
+        case 'syncStatus':
+            return 'Sync Status'
+    }
 }

@@ -8,9 +8,9 @@ import {
     createInitialValues,
     getProgramName,
     programHasCategoryCombo,
-    updateSettingsList,
 } from './helper'
 import DialogNewProgram from './DialogNewProgram'
+import { updateSettingsList } from '../../../utils/utils'
 
 const NewProgramSpecific = ({
     programList,

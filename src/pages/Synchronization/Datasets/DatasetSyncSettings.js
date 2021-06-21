@@ -11,8 +11,7 @@ import Page from '../../../components/page/Page'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import { populateSettingObject } from '../../../modules/dataset/populateSettingObject'
-import { DEFAULT } from '../../../constants/data-set-settings'
+import { createInitialValues } from './helper'
 
 const DatasetSyncSettings = () => {
     const {
@@ -62,7 +61,7 @@ const DatasetSyncSettings = () => {
     }, [globalSettings, initialValues, specificSettings])
 
     const resetSettings = () => {
-        setGlobalSettings(populateSettingObject(DEFAULT))
+        setGlobalSettings(createInitialValues(''))
         setSpecificSettings({})
     }
 

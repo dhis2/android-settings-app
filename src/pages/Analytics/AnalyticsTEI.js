@@ -11,6 +11,7 @@ import Page from '../../components/page/Page'
 import AnalyticsInfo from '../../components/noticeAlert/AnalyticsInfo'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
+import { removeSummarySettings } from './helper'
 
 const AnalyticsTEI = () => {
     const { data: analytics, loading } = useDataQuery(getAnalyticsKeyQuery)
@@ -44,7 +45,7 @@ const AnalyticsTEI = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            tei: analyticSettings,
+            tei: removeSummarySettings(analyticSettings),
         }
 
         await mutate({ settings: settingsToSave })

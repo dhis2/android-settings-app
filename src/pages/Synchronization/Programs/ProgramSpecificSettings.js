@@ -4,10 +4,11 @@ import PropTypes from '@dhis2/prop-types'
 import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
 import PageHeader from '../../../components/page/PageHeader'
-import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
+import { prepareSpecificSettingsList } from './helper'
 import SpecificTableAction from './SpecificTableAction'
 import NewProgramSpecific from './NewProgramSpecific'
 import { useReadProgram } from './programQueries'
+import { filterUnusedElements } from '../../../utils/utils'
 
 const ProgramSpecificSettings = ({
     specificSettings,
@@ -18,6 +19,7 @@ const ProgramSpecificSettings = ({
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
+    const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
         if (specificSettings && programList) {
@@ -28,6 +30,7 @@ const ProgramSpecificSettings = ({
             setInitialRows(rowList)
             setRows(rowList)
             setListName(filterUnusedElements(programList, rowList))
+            setLoad(true)
         }
     }, [specificSettings, programList])
 
@@ -45,23 +48,25 @@ const ProgramSpecificSettings = ({
                     'Applies only to the assigned program. Program specific settings will overwrite the global settings above.'
                 )}
             />
+            {loadSpecific && (
+                <>
+                    {rows && (
+                        <SpecificTableAction
+                            rows={rows}
+                            changeRows={setRows}
+                            programList={programList}
+                            disableAll={disabled}
+                        />
+                    )}
 
-            {rows && (
-                <SpecificTableAction
-                    rows={rows}
-                    specificSettingList={specificSettings}
-                    changeRows={setRows}
-                    programList={programList}
-                    disableAll={disabled}
-                />
+                    <NewProgramSpecific
+                        programList={listName}
+                        rows={rows}
+                        handleRows={setRows}
+                        disabled={disabled}
+                    />
+                </>
             )}
-
-            <NewProgramSpecific
-                programList={listName}
-                rows={rows}
-                handleRows={setRows}
-                disabled={disabled}
-            />
         </>
     )
 }

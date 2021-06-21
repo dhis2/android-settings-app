@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
-import {
-    getPeriodType,
-    removeSettingsFromList,
-    updateSettingsList,
-} from './helper'
+import { getPeriodType } from './helper'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
 import DialogSpecificSettings from './DialogSpecificSettings'
+import {
+    removeSettingsFromList,
+    updateSettingsList,
+} from '../../../utils/utils'
 
 const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -19,8 +19,11 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
 
     const tableActions = {
         edit: (...args) => {
+            const periodTypeName =
+                getPeriodType(args[0].id, datasetList).name ||
+                getPeriodType(args[0].id, datasetList)
             setSpecificSetting(args[0])
-            setPeriodType(getPeriodType(args[0].id, datasetList).name)
+            setPeriodType(periodTypeName)
             setOpenEditDialog(true)
         },
         delete: (...args) => {

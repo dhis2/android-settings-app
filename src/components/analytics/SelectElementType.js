@@ -20,6 +20,7 @@ export const SelectElementType = ({
     handleList,
     value,
     handleLoading,
+    edit,
     ...props
 }) => {
     const { refetch, loading: loadDataElement } = useReadDataElementsQuery({})
@@ -31,6 +32,12 @@ export const SelectElementType = ({
         refetch: refetchProgramIndicators,
         loading: loadProgram,
     } = useReadProgramIndicatorsQuery({})
+
+    useEffect(() => {
+        if (edit) {
+            chooseInputType(specificSettings[value])
+        }
+    }, [])
 
     useEffect(() => {
         handleList([])
@@ -85,4 +92,5 @@ SelectElementType.propTypes = {
     handleChange: PropTypes.func,
     specificSettings: PropTypes.object,
     elementValueOptions: PropTypes.array,
+    edit: PropTypes.bool,
 }

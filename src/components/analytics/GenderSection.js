@@ -5,12 +5,13 @@ import { CircularLoader } from '@dhis2/ui'
 import { SelectField } from './SelectField'
 import { TextField } from './TextField'
 import { Section } from './Section'
-import { isValidValue } from '../../utils/validators/isValidValue'
+import { isValidValue } from '../../utils/validators'
 
 export const GenderSection = ({
     onChange,
     specificSettings,
     attributeOptions,
+    edit,
 }) => {
     const handleChange = (e, key) => {
         let name
@@ -22,7 +23,7 @@ export const GenderSection = ({
         })
     }
 
-    if (attributeOptions.length === 0) return <CircularLoader small />
+    if (edit && attributeOptions.length === 0) return <CircularLoader small />
 
     return (
         <Section legend={i18n.t('Gender Attributes')}>

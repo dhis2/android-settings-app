@@ -1,3 +1,8 @@
+import omit from 'lodash/omit'
+import map from 'lodash/map'
+import { validateObjectByProperty } from '../../utils/validators'
+import { findProgramNameById } from '../../utils/utils'
+
 export const WHO_NUTRITION = 'WHO_NUTRITION'
 
 export const createInitialValues = initialValues => ({
@@ -21,22 +26,57 @@ export const createInitialValues = initialValues => ({
     elementValueY: initialValues.elementValueY || '',
 })
 
-export const updateList = (newEntry, list) => {
-    const updatedList = list.filter(element => element.uid !== newEntry.uid)
-    updatedList.push(newEntry)
-    return updatedList
+export const populateWHOItem = whoItem => {
+    const elementX = Object.keys(whoItem.WHONutrition.x)[0]
+    const elementY = Object.keys(whoItem.WHONutrition.y)[0]
+    const elementValueX = whoItem.WHONutrition.x[elementX][0]
+    const elementValueY = whoItem.WHONutrition.y[elementY][0]
+    return {
+        ...whoItem,
+        attribute: whoItem.WHONutrition.gender.attribute,
+        male: whoItem.WHONutrition.gender.values.male,
+        female: whoItem.WHONutrition.gender.values.female,
+        chartType: whoItem.WHONutrition.chartType,
+        elementX: elementX,
+        elementValueX:
+            elementX === 'programIndicators'
+                ? elementValueX.split('.')[0]
+                : elementValueX.split('.')[1],
+        elementY: elementY,
+        elementValueY:
+            elementY === 'programIndicators'
+                ? elementValueY.split('.')[0]
+                : elementValueY.split('.')[1],
+    }
 }
 
-export const removeSettingsFromList = (setting, settingList) => {
-    return settingList.filter(program => program.uid !== setting.uid)
+export const populateAnalyticItem = item => {
+    const element = Object.keys(item.data)[0]
+    const elementValue = item.data[element][0]
+    return {
+        ...item,
+        element,
+        elementValue:
+            element === 'attributes'
+                ? elementValue
+                : elementValue.split('.')[1],
+    }
 }
 
 const createWHOValues = values => ({
     x: {
-        [values.elementX]: `${values.programStage}.${values.elementValueX}`,
+        [values.elementX]: [
+            values.elementX === 'programIndicators'
+                ? `${values.elementValueX}`
+                : `${values.programStage}.${values.elementValueX}`,
+        ],
     },
     y: {
-        [values.elementY]: `${values.programStage}.${values.elementValueY}`,
+        [values.elementY]: [
+            values.elementY === 'programIndicators'
+                ? `${values.elementValueY}`
+                : `${values.programStage}.${values.elementValueY}`,
+        ],
     },
     gender: {
         values: {
@@ -61,12 +101,12 @@ const createVisualizationValues = values => ({
 
 export const createTEIValues = (values, id) => {
     let teiValues = {
+        uid: id,
         name: values.name,
         shortName: values.shortName,
         program: values.program,
         programStage: values.programStage,
         type: values.type,
-        uid: id,
     }
 
     values.type !== WHO_NUTRITION
@@ -153,4 +193,62 @@ export const updateProgramIndicatorsList = (programId, refetch, updateList) => {
             }))
             updateList(options)
         })
+}
+
+export const validMandatoryFields = specificSettings => {
+    if (specificSettings.type === WHO_NUTRITION) {
+        return !validateObjectByProperty(
+            [
+                'program',
+                'programStage',
+                'name',
+                'type',
+                'chartType',
+                'attribute',
+                'male',
+                'female',
+                'elementX',
+                'elementValueX',
+                'elementY',
+                'elementValueY',
+            ],
+            specificSettings
+        )
+    } else {
+        return !validateObjectByProperty(
+            [
+                'program',
+                'programStage',
+                'name',
+                'type',
+                'period',
+                'element',
+                'elementValue',
+            ],
+            specificSettings
+        )
+    }
+}
+
+export const prepareItemsList = (itemList, apiProgramList) => {
+    const teiItemRows = []
+    const items = [...itemList]
+
+    items.map(item => {
+        const result = apiProgramList.find(
+            program => program.id === item.program
+        )
+
+        if (result) {
+            item.summarySettings = findProgramNameById(apiProgramList, {
+                id: item.program,
+            })
+            teiItemRows.push(item)
+        }
+    })
+    return teiItemRows
+}
+
+export const removeSummarySettings = itemList => {
+    return map(itemList, object => omit(object, ['summarySettings']))
 }

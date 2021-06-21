@@ -12,6 +12,7 @@ import {
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { createInitialValues } from './helper'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
+import { removeSummaryFromSettings } from '../../../utils/utils'
 
 const DatasetsAppearance = () => {
     const {
@@ -67,11 +68,12 @@ const DatasetsAppearance = () => {
                 programSettings,
                 dataSetSettings: {
                     globalSettings,
-                    specificSettings,
+                    specificSettings: {
+                        ...removeSummaryFromSettings(specificSettings),
+                    },
                 },
             },
         }
-
         await mutate({ settings: settingsToSave })
     }
 

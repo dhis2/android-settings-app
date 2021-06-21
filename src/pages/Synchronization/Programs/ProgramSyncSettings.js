@@ -10,6 +10,7 @@ import {
     DEFAULT,
     GLOBAL,
     GLOBAL_SPECIAL,
+    PER_ORG_UNIT,
 } from '../../../constants/program-settings'
 import {
     saveSynchronizationKeyMutation,
@@ -52,7 +53,8 @@ const ProgramSyncSettings = () => {
                 ...initialGlobalSettings,
                 specificSettings,
             })
-            programSettings.globalSettings.settingDownload === GLOBAL
+            programSettings.globalSettings.settingDownload === GLOBAL ||
+            programSettings.globalSettings.settingDownload === PER_ORG_UNIT
                 ? setGlobalSettings(
                       populateProgramObject(
                           GLOBAL_SPECIAL,

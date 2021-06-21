@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { Divider } from '@dhis2/ui'
-import { isValidValue } from '../../utils/validators/isValidValue'
+import { isValidValue } from '../../utils/validators'
 import { Section } from './Section'
 import { SelectField } from './SelectField'
 import { SelectDataElement } from './SelectDataElement'
@@ -41,8 +41,8 @@ const periodType = [
         label: i18n.t('Quarterly'),
     },
     {
-        value: 'SixMontly',
-        label: i18n.t('SixMontly'),
+        value: 'SixMonthly',
+        label: i18n.t('SixMonthly'),
     },
     {
         value: 'Yearly',
@@ -54,7 +54,11 @@ const periodType = [
     },
 ]
 
-export const VisualizationElement = ({ handleChange, specificSettings }) => {
+export const VisualizationElement = ({
+    handleChange,
+    specificSettings,
+    edit,
+}) => {
     const [elementList, setElementList] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -92,6 +96,7 @@ export const VisualizationElement = ({ handleChange, specificSettings }) => {
                     options={elementTypeOptions}
                     disabled={!isValidValue(specificSettings.programStage)}
                     handleLoading={setLoading}
+                    edit={edit}
                 />
 
                 <SelectDataElement
@@ -104,6 +109,7 @@ export const VisualizationElement = ({ handleChange, specificSettings }) => {
                         !isValidValue(specificSettings.type)
                     }
                     loading={loading}
+                    edit={edit}
                 />
             </Section>
         </>

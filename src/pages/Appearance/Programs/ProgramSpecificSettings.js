@@ -6,8 +6,9 @@ import isEqual from 'lodash/isEqual'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import NewProgramSpecific from './NewProgramSpecific'
 import SpecificTableAction from './SpecificTableAction'
-import { filterUnusedElements, prepareSpecificSettingsList } from './helper'
 import { useReadProgram } from './programQuery'
+import { filterUnusedElements } from '../../../utils/utils'
+import { prepareSpecificSettingsList } from './helper'
 
 const ProgramSpecificSettings = ({
     onChange,
@@ -22,6 +23,7 @@ const ProgramSpecificSettings = ({
     const [listName, setListName] = useState()
     const [spinnerList, setSpinnerList] = useState()
     const [initialSpinner, setInitialSpinner] = useState()
+    const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
         if (programList && specificSettings && spinnerSettings) {
@@ -38,6 +40,7 @@ const ProgramSpecificSettings = ({
             setInitialRows(settingsListUpdated)
             setSpinnerList(spinnerListUpdated)
             setInitialSpinner(spinnerListUpdated)
+            setLoad(true)
         }
     }, [programList, specificSettings, spinnerSettings])
 
@@ -56,26 +59,29 @@ const ProgramSpecificSettings = ({
     return (
         <>
             <PageSubtitle title={i18n.t('Specific settings')} />
+            {loadSpecific && (
+                <>
+                    {rows && (
+                        <SpecificTableAction
+                            rows={rows}
+                            changeRows={setRows}
+                            elementList={programList}
+                            spinnerList={spinnerList}
+                            onChangeSpinnerList={setSpinnerList}
+                            disableAll={disabled}
+                        />
+                    )}
 
-            {rows && (
-                <SpecificTableAction
-                    rows={rows}
-                    changeRows={setRows}
-                    elementList={programList}
-                    spinnerList={spinnerList}
-                    onChangeSpinnerList={setSpinnerList}
-                    disableAll={disabled}
-                />
+                    <NewProgramSpecific
+                        programList={listName}
+                        rows={rows}
+                        handleRows={setRows}
+                        spinnerList={spinnerList}
+                        onChangeSpinnerList={setSpinnerList}
+                        disabled={disabled}
+                    />
+                </>
             )}
-
-            <NewProgramSpecific
-                programList={listName}
-                rows={rows}
-                handleRows={setRows}
-                spinnerList={spinnerList}
-                onChangeSpinnerList={setSpinnerList}
-                disabled={disabled}
-            />
         </>
     )
 }

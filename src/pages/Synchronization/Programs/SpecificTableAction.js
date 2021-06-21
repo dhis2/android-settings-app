@@ -4,12 +4,12 @@ import PropTypes from '@dhis2/prop-types'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
 import DialogSpecificSetting from './DialogSpecificSetting'
+import { isProgramWithRegistration } from './helper'
+import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
 import {
-    isProgramWithRegistration,
     removeSettingsFromList,
     updateSettingsList,
-} from './helper'
-import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
+} from '../../../utils/utils'
 
 const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
