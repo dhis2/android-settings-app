@@ -1,7 +1,7 @@
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from '../field'
 import { RadioGroup } from './RadioGroup'
 
 const WHOVisualizationOptions = [
@@ -36,7 +36,7 @@ export const WHOVisualizationType = ({ onChange, value }) => {
     }
 
     return (
-        <FormSection>
+        <FieldSection>
             <RadioGroup
                 required
                 name="chartType"
@@ -46,7 +46,7 @@ export const WHOVisualizationType = ({ onChange, value }) => {
                 options={WHOVisualizationOptions}
                 defaultValues={whoDefaultValues}
             />
-        </FormSection>
+        </FieldSection>
     )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { CheckboxField as UICheckboxField } from '@dhis2/ui'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from './FieldSection'
 
 export const CheckboxField = ({
     label,
@@ -11,7 +11,7 @@ export const CheckboxField = ({
     disabled,
     onChange,
 }) => (
-    <FormSection>
+    <FieldSection>
         <UICheckboxField
             label={label}
             helpText={helpText}
@@ -21,7 +21,7 @@ export const CheckboxField = ({
             type="checkbox"
             onChange={onChange}
         />
-    </FormSection>
+    </FieldSection>
 )
 
 CheckboxField.propTypes = {

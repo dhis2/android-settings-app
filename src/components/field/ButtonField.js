@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { Button, Field } from '@dhis2/ui'
-import formStyles from '../../styles/Form.module.css'
+import styles from './Fied.module.css'
 
 export const ButtonField = ({ label, helpText, onOpen, disabled }) => (
-    <div className={formStyles.rowMargin}>
+    <div className={styles.rowMargin}>
         <Field helpText={helpText}>
             <Button onClick={onOpen} disabled={disabled}>
                 {label}

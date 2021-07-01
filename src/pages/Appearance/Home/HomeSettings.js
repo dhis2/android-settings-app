@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import Wrapper from '../../../components/wrapper'
 import { TableHeader, TableRowWrapper } from '../../../components/table'
-import { CheckboxField } from '../../../components/CheckboxField'
+import { CheckboxField } from '../../../components/field'
 import { homeScreenRowSettings } from '../../../constants/home-appearance'
 
 const HomeSettings = ({ states, onChange, disable }) => {
