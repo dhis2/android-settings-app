@@ -4,8 +4,8 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import buttonStyles from '../../styles/Button.module.css'
 import DialogSaveData from '../dialog/dialog-save-data'
-import SaveErrorAlert from '../alert-bar/save-error-alert'
-import SuccessAlert from '../alert-bar/success-alert'
+import SaveErrorAlert from '../alertBar/SaveErrorAlert'
+import SuccessAlert from '../alertBar/SuccessAlert'
 
 const FooterStripButtons = ({
     saveButtonDisabled,
@@ -59,7 +59,9 @@ const FooterStripButtons = ({
                 saveDataStore={handleSaveDatStore}
             />
 
-            {requestResult && <SuccessAlert show={requestResult} />}
+            {requestResult && (
+                <SuccessAlert show={requestResult.httpStatusCode === 200} />
+            )}
 
             {errorRequest && (
                 <SaveErrorAlert show={true} message={errorRequest.message} />
