@@ -6,7 +6,7 @@ import {
     programSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
-} from '../../constants/program-settings'
+} from '../../../constants/program-settings'
 
 const {
     settingDownload,

@@ -4,7 +4,7 @@ import {
     maxValues,
     TEI_DB_TRIMMING,
     TEI_DOWNLOAD,
-} from '../../constants/program-settings'
+} from '../../../constants/program-settings'
 
 const convertToPositiveInteger = (value, maxValue) => {
     return Math.min(

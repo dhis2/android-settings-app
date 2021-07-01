@@ -17,7 +17,7 @@ import {
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { populateProgramObject } from '../../../modules/programs/populateProgramObject'
+import { populateProgramObject } from './populateProgramObject'
 
 const ProgramSyncSettings = () => {
     const {

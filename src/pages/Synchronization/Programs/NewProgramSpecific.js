@@ -14,8 +14,8 @@ import {
     findProgramNameById,
     isProgramWithRegistration,
 } from './helper'
-import { populateProgramObject } from '../../../modules/programs/populateProgramObject'
-import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
+import { populateProgramObject } from './populateProgramObject'
+import { parseValueByType } from './parseValueBySettingType'
 import { updateSettingsList } from '../../../utils/utils'
 
 const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
