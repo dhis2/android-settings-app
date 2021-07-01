@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
+import { parseValueBySettingType } from './parseValueBySettingType'
 import { getPeriodType } from './helper'
 import TableActions from '../../../components/table-actions'
 import DialogDelete from '../../../components/dialog/dialog-delete'
