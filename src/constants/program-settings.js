@@ -1,47 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 
-export const GlobalSettingLevel = {
-    keyDownload: 'settingDownload',
-    keyDBTrimming: 'settingDBTrimming',
-    option: i18n.t('Setting level'),
-    download: [
-        {
-            label: i18n.t('Global'),
-            value: 'GLOBAL',
-        },
-        {
-            label: i18n.t('Per Org Unit'),
-            value: 'PER_ORG_UNIT',
-        },
-        {
-            label: i18n.t('Per program'),
-            value: 'PER_PROGRAM',
-        },
-        {
-            label: i18n.t('Per OU and program'),
-            value: 'PER_OU_AND_PROGRAM',
-        },
-    ],
-    DBTrimming: [
-        {
-            label: i18n.t('Global'),
-            value: 'GLOBAL',
-        },
-        {
-            label: i18n.t('Per Org Unit'),
-            value: 'PER_ORG_UNIT',
-        },
-        {
-            label: i18n.t('Per program'),
-            value: 'PER_PROGRAM',
-        },
-        {
-            label: i18n.t('Per OU and program'),
-            value: 'PER_OU_AND_PROGRAM',
-        },
-    ],
-}
-
 export const GlobalProgram = [
     {
         keyDownload: 'teiDownload',
@@ -482,18 +440,7 @@ export const FULL_SPECIFIC = 'FULL_SPECIFIC'
 export const GLOBAL_SPECIAL = 'GLOBAL_SPECIAL'
 export const DEFAULT = 'DEFAULT'
 
-export const ProgramTitles = {
-    typeName: 'Program Name',
-    type: 'Program',
-    typePlural: 'Programs',
-    typeLowercase: 'program',
-}
-
 export const TEI_DOWNLOAD = 'teiDownload'
 export const TEI_DB_TRIMMING = 'teiDBTrimming'
 export const EVENTS_DOWNLOAD = 'eventsDownload'
 export const EVENTS_DB_TRIMMING = 'eventsDBTrimming'
-export const SETTING_DOWNLOAD = 'settingDownload'
-
-export const ENROLLMENT_DOWNLOAD = 'enrollmentDownload'
-export const PROGRAM = 'PROGRAM'

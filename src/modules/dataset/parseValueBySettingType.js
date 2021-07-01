@@ -1,7 +1,5 @@
-import {
-    PERIOD_DS_DB_TRIMMING,
-    PERIOD_DS_DOWNLOAD,
-} from '../../constants/data-set-settings'
+const PERIOD_DS_DOWNLOAD = 'periodDSDownload'
+const PERIOD_DS_DB_TRIMMING = 'periodDSDBTrimming'
 
 export const parseValueBySettingType = (name, value) => {
     switch (name) {
