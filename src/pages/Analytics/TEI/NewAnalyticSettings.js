@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import { AddNewSetting } from '../../components/field'
+import { AddNewSetting } from '../../../components/field'
 import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createInitialValues,
@@ -9,7 +9,7 @@ import {
     validMandatoryFields,
 } from './helper'
 import { useReadIdQuery } from './AnalyticsQueries'
-import { updateSettingsList } from '../../utils/utils'
+import { updateSettingsList } from '../../../utils/utils'
 
 const NewAnalyticSettings = ({
     disable,

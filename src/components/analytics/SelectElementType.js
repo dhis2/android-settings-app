@@ -6,12 +6,12 @@ import {
     useReadAttributesQuery,
     useReadDataElementsQuery,
     useReadProgramIndicatorsQuery,
-} from '../../pages/Analytics/AnalyticsQueries'
+} from '../../pages/Analytics/TEI/AnalyticsQueries'
 import {
     updateAttributesList,
     updateDataElementsList,
     updateProgramIndicatorsList,
-} from '../../pages/Analytics/helper'
+} from '../../pages/Analytics/TEI/helper'
 
 export const SelectElementType = ({
     handleChange,

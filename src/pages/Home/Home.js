@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-    analyticsPage,
+    analyticsPages,
+    analyticsSection,
     appearancePages,
     appearanceSection,
     generalPage,
@@ -51,14 +52,19 @@ const Home = () => (
             )}
         </div>
 
-        <h2 className={styles.sectionTitle}> {analyticsPage.label} </h2>
+        <h2 className={styles.sectionTitle}> {analyticsSection} </h2>
         <div className={styles.grid}>
-            <HomeCard
-                linkText={analyticsPage.linkText}
-                to={analyticsPage.path}
-                bodyText={analyticsPage.description}
-                titleText={analyticsPage.label}
-            />
+            {analyticsPages.map(
+                ({ path, code, linkText, description, label }) => (
+                    <HomeCard
+                        key={code}
+                        linkText={linkText}
+                        to={path}
+                        bodyText={description}
+                        titleText={label}
+                    />
+                )
+            )}
         </div>
     </>
 )

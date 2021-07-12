@@ -1,4 +1,4 @@
-import { ANALYTICS, NAMESPACE } from '../../constants/data-store'
+import { ANALYTICS, NAMESPACE } from '../../../constants/data-store'
 import { useDataQuery } from '@dhis2/app-runtime'
 
 /**

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import TableActions from '../../components/TableActions'
-import DialogDelete from '../../components/dialog/DialogDelete'
+import TableActions from '../../../components/TableActions'
+import DialogDelete from '../../../components/dialog/DialogDelete'
 import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createTEIValues,
@@ -10,7 +10,10 @@ import {
     populateWHOItem,
     validMandatoryFields,
 } from './helper'
-import { removeSettingsFromList, updateSettingsList } from '../../utils/utils'
+import {
+    removeSettingsFromList,
+    updateSettingsList,
+} from '../../../utils/utils'
 
 const AnalyticsTable = ({ rows, disableAll, handleRows, programList }) => {
     const [specificSettings, setSpecificSettings] = useState({})

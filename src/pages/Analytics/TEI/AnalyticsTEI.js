@@ -6,10 +6,10 @@ import {
     getAnalyticsKeyQuery,
     saveAnalyticsKeyMutation,
 } from './AnalyticsQueries'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
-import Page from '../../components/page/Page'
-import AnalyticsInfo from '../../components/noticeAlert/AnalyticsInfo'
-import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import Page from '../../../components/page/Page'
+import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
 import { removeSummarySettings } from './helper'
 

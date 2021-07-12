@@ -8,8 +8,8 @@ import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSe
 import DatasetSyncSettings from '../pages/Synchronization/Datasets/DatasetSyncSettings'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
-import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
 import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
+import AnalyticsTEI from '../pages/Analytics/TEI/AnalyticsTEI'
 
 export const overviewPage = {
     code: 'home',
@@ -101,19 +101,48 @@ export const appearancePages = [
     },
 ]
 
-export const analyticsPage = {
-    code: 'analytics',
-    label: i18n.t('Analytics'),
-    path: '/analytics',
-    linkText: i18n.t('Set TEI Analytics'),
-    description: i18n.t('Manage TEI analytics for tracker programs'),
-    component: <AnalyticsTEI />,
-}
+export const analyticsSection = i18n.t('Analytics')
+export const analyticsPages = [
+    {
+        code: 'tei-analytics',
+        label: i18n.t('TEI'),
+        path: '/analytics/TEI',
+        linkText: i18n.t('Set TEI Analytics'),
+        description: i18n.t('Manage TEI analytics for tracker programs'),
+        component: <AnalyticsTEI />,
+    },
+    {
+        code: 'home-analytics',
+        label: i18n.t('Home'),
+        path: '/analytics/home',
+        linkText: i18n.t('Set Home Visualizations'),
+        description: i18n.t('Manage visualizations to be shown in home screen'),
+        component: <div> Home </div>,
+    },
+    {
+        code: 'program-analytics',
+        label: i18n.t('Program'),
+        path: '/analytics/program',
+        linkText: i18n.t('Set Programs Visualizations'),
+        description: i18n.t('Manage visualizations for programs'),
+        component: <div> Program </div>,
+    },
+    {
+        code: 'dataset-analytics',
+        label: i18n.t('Data set'),
+        path: '/analytics/dataset',
+        linkText: i18n.t('Set Data set Visualizations'),
+        description: i18n.t('Manage visualizations for data sets'),
+        component: <div> Data set </div>,
+    },
+]
 
 export const menuSection = [
     overviewPage,
     generalPage,
     ...syncPages,
     ...appearancePages,
-    analyticsPage,
+    ...analyticsPages,
 ]
+
+// TODO: replace div "component" with the real section/Page component

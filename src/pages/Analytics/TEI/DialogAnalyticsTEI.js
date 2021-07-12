@@ -9,14 +9,14 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import buttonStyles from '../../styles/Button.module.css'
+import buttonStyles from '../../../styles/Button.module.css'
 import {
     ProgramSection,
     TitleSection,
     VisualizationElement,
     VisualizationType,
     WHOElements,
-} from '../../components/analytics'
+} from '../../../components/analytics'
 import { WHO_NUTRITION } from './helper'
 
 const DialogAnalyticsTEI = ({
