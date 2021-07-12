@@ -9,9 +9,9 @@ import {
     PER_ORG_UNIT,
 } from '../../../constants/program-settings'
 import { SelectSettings } from '../../../components/inputs'
-import SettingsTable from '../../../components/settings-table/settings-table'
-import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
-import { populateProgramObject } from '../../../modules/programs/populateProgramObject'
+import SettingsTable from '../../../components/settingsTable/SettingsTable'
+import { parseValueByType } from './parseValueBySettingType'
+import { populateProgramObject } from './populateProgramObject'
 import inputStyles from '../../../styles/Input.module.css'
 
 const CODE = 'settingDownload'

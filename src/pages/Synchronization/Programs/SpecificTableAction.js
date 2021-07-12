@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import TableActions from '../../../components/table-actions'
-import DialogDelete from '../../../components/dialog/dialog-delete'
+import TableActions from '../../../components/TableActions'
+import DialogDelete from '../../../components/dialog/DialogDelete'
 import DialogSpecificSetting from './DialogSpecificSetting'
 import { isProgramWithRegistration } from './helper'
-import { parseValueByType } from '../../../modules/programs/parseValueBySettingType'
+import { parseValueByType } from './parseValueBySettingType'
 import {
     removeSettingsFromList,
     updateSettingsList,

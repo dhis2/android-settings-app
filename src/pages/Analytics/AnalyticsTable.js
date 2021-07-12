@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import TableActions from '../../components/table-actions'
-import DialogDelete from '../../components/dialog/dialog-delete'
+import TableActions from '../../components/TableActions'
+import DialogDelete from '../../components/dialog/DialogDelete'
 import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createTEIValues,

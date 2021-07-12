@@ -2,7 +2,7 @@ import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { Divider } from '@dhis2/ui'
-import Wrapper from '../../../components/wrapper'
+import Wrapper from '../../../components/Wrapper'
 import { TableRow } from '../../../components/table/'
 import { InputNumber, SelectSettings } from '../../../components/inputs'
 import {

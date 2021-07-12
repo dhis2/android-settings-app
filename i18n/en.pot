@@ -5,8 +5,19 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-28T00:19:09.592Z\n"
-"PO-Revision-Date: 2021-05-28T00:19:09.592Z\n"
+"POT-Creation-Date: 2021-07-12T14:33:04.371Z\n"
+"PO-Revision-Date: 2021-07-12T14:33:04.371Z\n"
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
+msgstr ""
 
 msgid "Failed to get data from Data Store"
 msgstr ""
@@ -128,9 +139,6 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Delete"
-msgstr ""
-
 msgid "Disable all settings"
 msgstr ""
 
@@ -222,12 +230,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Values per {{title}}"
-msgstr ""
-
-msgid "Add/Save"
-msgstr ""
-
 msgid "30 Minutes"
 msgstr ""
 
@@ -310,21 +312,6 @@ msgid ""
 "app version 2.3.0 onwards."
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Number of Periods"
-msgstr ""
-
-msgid "General download sync settings"
-msgstr ""
-
-msgid "These settings apply to all Android users."
-msgstr ""
-
-msgid "Summary Settings"
-msgstr ""
-
 msgid "Recommended maximum: {{maxValue}}"
 msgstr ""
 
@@ -337,29 +324,10 @@ msgstr ""
 msgid "Run test"
 msgstr ""
 
-msgid "Default"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
 msgid "Search for a user"
 msgstr ""
 
 msgid "User"
-msgstr ""
-
-msgid ""
-"You have unsaved changes, if you leave you will lose your changes. Are you "
-"sure you want to leave?"
-msgstr ""
-
-msgid ""
-"This phone number is not valid. Must start with + and be at least 4 "
-"characters long."
-msgstr ""
-
-msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
@@ -479,18 +447,6 @@ msgstr ""
 msgid "Event status"
 msgstr ""
 
-msgid "Setting level"
-msgstr ""
-
-msgid "Per Org Unit"
-msgstr ""
-
-msgid "Per program"
-msgstr ""
-
-msgid "Per OU and program"
-msgstr ""
-
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr ""
 
@@ -536,7 +492,13 @@ msgstr ""
 msgid "Download Events with event date within"
 msgstr ""
 
+msgid "Setting level"
+msgstr ""
+
 msgid "All Org Units"
+msgstr ""
+
+msgid "Per Org Unit"
 msgstr ""
 
 msgid "Maximum Tracked Entity Instance (TEI) download per program"
@@ -579,15 +541,6 @@ msgid "metadata download size (KB)"
 msgstr ""
 
 msgid "data download size (KB)"
-msgstr ""
-
-msgid "{{teiDownload}} TEI"
-msgstr ""
-
-msgid "{{eventsDownload}} events per OU"
-msgstr ""
-
-msgid "{{periodDSDownload}} {{periodType}} period"
 msgstr ""
 
 msgid "TEI Analytics"
@@ -648,6 +601,9 @@ msgid ""
 "individual programs can also be applied."
 msgstr ""
 
+msgid "This will disable and remove all General, Program and Data set settings."
+msgstr ""
+
 msgid "General Settings"
 msgstr ""
 
@@ -673,6 +629,9 @@ msgstr ""
 msgid "Add a data set specific setting"
 msgstr ""
 
+msgid "Default"
+msgstr ""
+
 msgid "data set"
 msgstr ""
 
@@ -683,6 +642,12 @@ msgid "Values per Program"
 msgstr ""
 
 msgid "Add a program specific setting"
+msgstr ""
+
+msgid "Per program"
+msgstr ""
+
+msgid "Per OU and program"
 msgstr ""
 
 msgid "Programs specific download sync settings"
@@ -702,23 +667,4 @@ msgid ""
 msgstr ""
 
 msgid "program"
-msgstr ""
-
-msgid "{{elementPlural}} global download sync settings"
-msgstr ""
-
-msgid ""
-"Applies to all {{elementPlural}} an Android user has access to. Specific "
-"{{elementSingular}} settings can be defined in the section below."
-msgstr ""
-
-msgid "{{elementPlural}} specific download sync settings"
-msgstr ""
-
-msgid ""
-"Applies only to the assigned {{elementLowerCase}}. {{elementSingular}} "
-"specific settings will overwrite the global settings above."
-msgstr ""
-
-msgid "Add a {{elementSingular}} specific setting"
 msgstr ""

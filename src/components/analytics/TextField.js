@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from '../field'
 
 export const TextField = ({ value, onChange, ...props }) => (
-    <FormSection>
+    <FieldSection>
         <InputField
             dense
             inputWidth="300px"
@@ -12,7 +12,7 @@ export const TextField = ({ value, onChange, ...props }) => (
             value={value}
             {...props}
         />
-    </FormSection>
+    </FieldSection>
 )
 
 TextField.propTypes = {

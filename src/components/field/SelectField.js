@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from './FieldSection'
 
 export const SelectField = ({ label, options, onChange, ...props }) => (
-    <FormSection>
+    <FieldSection>
         <SingleSelectField
             inputWidth="250px"
             label={label}
@@ -19,7 +19,7 @@ export const SelectField = ({ label, options, onChange, ...props }) => (
                 />
             ))}
         </SingleSelectField>
-    </FormSection>
+    </FieldSection>
 )
 
 SelectField.propTypes = {

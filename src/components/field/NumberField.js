@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from './FieldSection'
 
 export const NumberField = ({ label, helpText, value, ...props }) => (
-    <FormSection>
+    <FieldSection>
         <InputField
             inputWidth="100px"
             type="number"
@@ -13,7 +13,7 @@ export const NumberField = ({ label, helpText, value, ...props }) => (
             value={value.toString()}
             {...props}
         />
-    </FormSection>
+    </FieldSection>
 )
 
 NumberField.propTypes = {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
-import { FormSection } from '../sections/general/form-sections'
+import { FieldSection } from './FieldSection'
 import { validateNumber, isValidValue } from '../../utils/validators'
 
 export const PhoneNumberField = ({
@@ -34,7 +34,7 @@ export const PhoneNumberField = ({
     }
 
     return (
-        <FormSection>
+        <FieldSection>
             <InputField
                 type="tel"
                 inputWidth="250px"
@@ -45,7 +45,7 @@ export const PhoneNumberField = ({
                 error={error}
                 {...props}
             />
-        </FormSection>
+        </FieldSection>
     )
 }
 

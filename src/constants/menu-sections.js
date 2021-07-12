@@ -1,13 +1,7 @@
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import {
-    AndroidSettingsIcon,
-    ProgramsIcon,
-    DataSetIcon,
-    TestRun,
-} from '../components/icons-svg'
 import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
-import Home from '../pages/Home/home'
+import Home from '../pages/Home/Home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSettings'
@@ -42,7 +36,6 @@ export const syncPages = [
         code: 'global-settings',
         label: i18n.t('Global'),
         path: '/sync/global-settings',
-        icon: <AndroidSettingsIcon />,
         component: <GlobalSettings />,
         linkText: i18n.t('Set Global sync settings'),
         description: i18n.t(
@@ -53,7 +46,6 @@ export const syncPages = [
         code: 'program-setting',
         label: i18n.t('Programs'),
         path: '/sync/program-setting',
-        icon: <ProgramsIcon />,
         component: <ProgramSyncSettings />,
         linkText: i18n.t('Set Programs sync settings'),
         description: i18n.t(
@@ -64,7 +56,6 @@ export const syncPages = [
         code: 'dataset-setting',
         label: i18n.t('Data sets'),
         path: '/sync/dataset-setting',
-        icon: <DataSetIcon />,
         component: <DatasetSyncSettings />,
         linkText: i18n.t('Set Data set sync settings'),
         description: i18n.t('Define synchronization parameters for data sets'),
@@ -73,7 +64,6 @@ export const syncPages = [
         code: 'user-sync-test',
         label: i18n.t('User sync test'),
         path: '/sync/user-sync-test',
-        icon: <TestRun />,
         component: <UserSyncTestContainer />,
         linkText: i18n.t('Run user sync test'),
         description: i18n.t(

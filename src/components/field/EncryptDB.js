@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxField } from './CheckboxField'
-import DialogEncrypt from '../dialog/dialog-encrypt'
+import DialogEncrypt from '../dialog/DialogEncrypt'
 
 const CODE = 'encryptDB'
 

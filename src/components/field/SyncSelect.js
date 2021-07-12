@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { SelectField } from './SelectField'
-import DialogManualAlert from '../dialog/dialog-manual-alert'
+import DialogManualAlert from '../dialog/DialogManualAlert'
 
 export const MANUAL = 'manual'
 

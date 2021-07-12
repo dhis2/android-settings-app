@@ -9,7 +9,7 @@ import {
     findDatasetName,
     getPeriodType,
 } from './helper'
-import { parseValueBySettingType } from '../../../modules/dataset/parseValueBySettingType'
+import { parseValueBySettingType } from './parseValueBySettingType'
 import { updateSettingsList } from '../../../utils/utils'
 
 const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {

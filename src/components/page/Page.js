@@ -2,7 +2,7 @@ import React from 'react'
 import { CircularLoader } from '@dhis2/ui'
 import PropTypes from '@dhis2/prop-types'
 import styles from './Page.module.css'
-import UnsavedChangesAlert from '../unsaved-changes-alert'
+import UnsavedChangesAlert from '../UnsavedChangesAlert'
 
 const Page = ({ loading, title, desc, unsavedChanges, children }) => {
     if (loading === true) {
