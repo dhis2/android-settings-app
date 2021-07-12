@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsTableRow from './setting-table-row'
+import SettingsTableRow from './SettingTableRow'
 import Wrapper from '../wrapper'
 
 const SettingsTable = ({ data, states, onChange }) => (

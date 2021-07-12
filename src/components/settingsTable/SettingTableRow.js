@@ -3,7 +3,7 @@ import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
 import disable from '../../styles/Disable.module.css'
 import { InputNumber, RadioGroup, SelectSettings } from '../inputs'
-import TableRow from './table-row'
+import TableRow from './TableRow'
 
 const InputChoice = ({ dataRow, states, onChange }) => (
     <>
