@@ -1,7 +1,7 @@
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
-import Wrapper from '../../../components/wrapper'
+import Wrapper from '../../../components/Wrapper'
 import { TableHeader } from '../../../components/table'
 import { TableSettings } from './TableSettings'
 import { CheckboxField } from '../../../components/field'

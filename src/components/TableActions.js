@@ -7,7 +7,7 @@ import cx from 'classnames'
 import dataTableStyles from '../styles/DataTable.module.css'
 import disableStyle from '../styles/Disable.module.css'
 import tableActionStyles from '../styles/TableActions.module.css'
-import Wrapper from './wrapper'
+import Wrapper from './Wrapper'
 
 const TableActions = ({ rows, menuActions, states }) => (
     <Wrapper>

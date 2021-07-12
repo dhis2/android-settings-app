@@ -1,10 +1,10 @@
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import SideBar from '../components/sidebar/Sidebar'
-import Router from '../components/router'
+import Router from '../components/Router'
 import styles from '../styles/Layout.module.css'
 
-const Layout = () => (
+const AppLayout = () => (
     <HashRouter>
         <div className={styles.container}>
             <div className={styles.sidebar}>
@@ -17,4 +17,4 @@ const Layout = () => (
     </HashRouter>
 )
 
-export default Layout
+export default AppLayout

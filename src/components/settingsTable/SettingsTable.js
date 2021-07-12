@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsTableRow from './SettingTableRow'
-import Wrapper from '../wrapper'
+import Wrapper from '../Wrapper'
 
 const SettingsTable = ({ data, states, onChange }) => (
     <Wrapper>
