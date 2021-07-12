@@ -1,4 +1,4 @@
-export * from './input-number'
+export * from './InputNumber'
 export * from './RadioGroup'
-export * from './select'
-export * from './select-settings'
+export * from './Select'
+export * from './SelectSettings'

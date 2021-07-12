@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select } from './select'
+import { Select } from './Select'
 import PropTypes from '@dhis2/prop-types'
 
 export const SelectSettings = ({
