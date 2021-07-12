@@ -9,7 +9,7 @@ import DatasetSyncSettings from '../pages/Synchronization/Datasets/DatasetSyncSe
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
-import AnalyticsTEI from '../pages/Analytics/AnalyticsTEI'
+import AnalyticsTEI from '../pages/Analytics/TEI/AnalyticsTEI'
 
 export const overviewPage = {
     code: 'home',

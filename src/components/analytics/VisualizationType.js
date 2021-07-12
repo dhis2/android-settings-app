@@ -7,8 +7,8 @@ import {
     createInitialValues,
     updateAttributesList,
     WHO_NUTRITION,
-} from '../../pages/Analytics/helper'
-import { useReadAttributesQuery } from '../../pages/Analytics/AnalyticsQueries'
+} from '../../pages/Analytics/TEI/helper'
+import { useReadAttributesQuery } from '../../pages/Analytics/TEI/AnalyticsQueries'
 
 const visualizationOptions = [
     {
