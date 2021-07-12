@@ -3,7 +3,7 @@ import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import buttonStyles from '../../styles/Button.module.css'
-import DialogSaveData from '../dialog/dialog-save-data'
+import DialogSaveData from '../dialog/DialogSaveData'
 import SaveErrorAlert from '../alertBar/SaveErrorAlert'
 import SuccessAlert from '../alertBar/SuccessAlert'
 

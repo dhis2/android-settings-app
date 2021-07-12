@@ -4,7 +4,7 @@ import PropTypes from '@dhis2/prop-types'
 import { parseValueBySettingType } from './parseValueBySettingType'
 import { getPeriodType } from './helper'
 import TableActions from '../../../components/table-actions'
-import DialogDelete from '../../../components/dialog/dialog-delete'
+import DialogDelete from '../../../components/dialog/DialogDelete'
 import DialogSpecificSettings from './DialogSpecificSettings'
 import {
     removeSettingsFromList,

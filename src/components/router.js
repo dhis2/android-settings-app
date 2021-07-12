@@ -7,7 +7,7 @@ import {
 import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import { menuSection } from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
-import DialogFirstLaunch from './dialog/dialog-first-launch'
+import DialogFirstLaunch from './dialog/DialogFirstLaunch'
 import { useDataMutation } from '@dhis2/app-runtime'
 
 const Router = () => {
