@@ -3,7 +3,7 @@ import cx from 'classnames'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { CheckboxField } from './CheckboxField'
-import styles from './Fied.module.css'
+import styles from './Field.module.css'
 
 export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
     const handleChange = e => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
 import { Button, Field } from '@dhis2/ui'
-import styles from './Fied.module.css'
+import styles from './Field.module.css'
 
 export const ButtonField = ({ label, helpText, onOpen, disabled }) => (
     <div className={styles.rowMargin}>
