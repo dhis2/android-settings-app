@@ -1,8 +1,8 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { Menu } from '@dhis2/ui'
-import MenuItem from './menu-item'
-import MenuSectionHeader from './menu-section-header'
+import MenuItem from './MenuItem'
+import MenuSectionHeader from './MenuSectionHeader'
 import {
     analyticsPage,
     appearancePages,

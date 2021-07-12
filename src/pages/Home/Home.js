@@ -9,7 +9,7 @@ import {
 } from '../../constants/menu-sections'
 
 import styles from './Home.module.css'
-import HomeCard from './home-card'
+import HomeCard from './HomeCard'
 
 const Home = () => (
     <>
