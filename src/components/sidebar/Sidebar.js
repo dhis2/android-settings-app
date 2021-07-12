@@ -4,7 +4,8 @@ import { Menu } from '@dhis2/ui'
 import MenuItem from './MenuItem'
 import MenuSectionHeader from './MenuSectionHeader'
 import {
-    analyticsPage,
+    analyticsPages,
+    analyticsSection,
     appearancePages,
     appearanceSection,
     generalPage,
@@ -63,13 +64,19 @@ const SideBar = () => {
                 )
             })}
 
-            <MenuItem
-                label={analyticsPage.label}
-                path={analyticsPage.path}
-                code={analyticsPage.code}
-                active={pathname === analyticsPage.path}
-                isHeader={true}
-            />
+            <MenuSectionHeader label={analyticsSection} />
+            {analyticsPages.map(({ code, label, path }) => {
+                const active = pathname === path
+                return (
+                    <MenuItem
+                        key={code}
+                        code={code}
+                        label={label}
+                        path={path}
+                        active={active}
+                    />
+                )
+            })}
         </Menu>
     )
 }
