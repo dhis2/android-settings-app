@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
-import { Button } from '@dhis2/ui-core'
+import { Button } from '@dhis2/ui'
 import TextFieldSearch from '../../text-field-search'
 import i18n from '@dhis2/d2-i18n'
 import titleStyles from '../../../styles/LayoutTitles.module.css'

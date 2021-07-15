@@ -8,21 +8,27 @@ export const InputNumber = ({
     maxValue,
     value,
     disabled,
-}) => (
-    <InputField
-        type="number"
-        inputWidth="100px"
-        name={keyDownload}
-        max={maxValue}
-        value={value.toString()}
-        onChange={onChange}
-        disabled={disabled}
-    />
-)
+    ...props
+}) => {
+    const max = maxValue && maxValue.toString()
+
+    return (
+        <InputField
+            type="number"
+            inputWidth="100px"
+            name={keyDownload}
+            max={max}
+            value={value.toString()}
+            onChange={onChange}
+            disabled={disabled}
+            {...props}
+        />
+    )
+}
 
 InputNumber.propTypes = {
     keyDownload: PropTypes.string,
-    maxValue: PropTypes.number,
+    maxValue: PropTypes.number || PropTypes.string,
     value: PropTypes.number,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,

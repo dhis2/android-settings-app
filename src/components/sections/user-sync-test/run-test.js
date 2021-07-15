@@ -6,7 +6,7 @@ import itemStyles from '../../../styles/TestAndroidTable.module.css'
 import layoutStyles from '../../../styles/Layout.module.css'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import { CircularLoader } from '@dhis2/ui-core'
+import { CircularLoader } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 import cx from 'classnames'
 

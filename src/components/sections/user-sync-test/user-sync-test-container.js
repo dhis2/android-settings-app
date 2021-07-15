@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CircularLoader } from '@dhis2/ui-core'
+import { CircularLoader } from '@dhis2/ui'
 import TestAndroid from './test-android'
 import { formatByteSize, memorySizeOf } from '../../../utils/memory-size'
 import {
