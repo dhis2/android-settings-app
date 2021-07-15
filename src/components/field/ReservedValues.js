@@ -21,6 +21,7 @@ export const ReservedValues = ({ onChange, value, ...props }) => {
             name={CODE}
             onChange={handleChange}
             value={value[CODE]}
+            step="10"
             {...props}
         />
     )

@@ -42,6 +42,7 @@ const ProgramTableRow = ({ row, specificSetting, onChange }) => (
                             keyDownload={row.keyDownload}
                             maxValue={row.maxValue}
                             value={specificSetting[row.keyDownload]}
+                            step="50"
                         />
                     )}
                 </div>

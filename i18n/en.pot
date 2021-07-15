@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-12T14:33:04.371Z\n"
-"PO-Revision-Date: 2021-07-12T14:33:04.371Z\n"
+"POT-Creation-Date: 2021-07-15T17:14:24.104Z\n"
+"PO-Revision-Date: 2021-07-15T17:14:24.104Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -429,10 +429,34 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
+msgid "TEI"
+msgstr ""
+
 msgid "Set TEI Analytics"
 msgstr ""
 
 msgid "Manage TEI analytics for tracker programs"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Set Home Visualizations"
+msgstr ""
+
+msgid "Manage visualizations to be shown in home screen"
+msgstr ""
+
+msgid "Set Programs Visualizations"
+msgstr ""
+
+msgid "Manage visualizations for programs"
+msgstr ""
+
+msgid "Set Data set Visualizations"
+msgstr ""
+
+msgid "Manage visualizations for data sets"
 msgstr ""
 
 msgid "Enrollment Date"
