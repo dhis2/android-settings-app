@@ -10,6 +10,7 @@ import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
 import AnalyticsTEI from '../pages/Analytics/TEI/AnalyticsTEI'
+import ProgramAnalytics from '../pages/Analytics/Program/ProgramAnalytics'
 
 export const overviewPage = {
     code: 'home',
@@ -125,7 +126,7 @@ export const analyticsPages = [
         path: '/analytics/program',
         linkText: i18n.t('Set Programs Visualizations'),
         description: i18n.t('Manage visualizations for programs'),
-        component: <div> Program </div>,
+        component: <ProgramAnalytics />,
     },
     {
         code: 'dataset-analytics',
