@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-15T17:14:24.104Z\n"
-"PO-Revision-Date: 2021-07-15T17:14:24.104Z\n"
+"POT-Creation-Date: 2021-07-22T15:24:01.412Z\n"
+"PO-Revision-Date: 2021-07-22T15:24:01.412Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -565,6 +565,9 @@ msgid "metadata download size (KB)"
 msgstr ""
 
 msgid "data download size (KB)"
+msgstr ""
+
+msgid "Add Home Visualization"
 msgstr ""
 
 msgid "TEI Analytics"
