@@ -59,6 +59,14 @@ export const programAppearanceSettings = [
         },
         label: i18n.t('Sync status'),
     },
+    {
+        key: 'followUp',
+        date: {
+            filter: FILTER,
+            sort: SORT,
+        },
+        label: i18n.t('Follow up'),
+    },
 ]
 
 export const programAppearanceSpecificSettings = [
@@ -125,5 +133,13 @@ export const programAppearanceSpecificSettings = [
             sort: SORT,
         },
         label: i18n.t('Sync status'),
+    },
+    {
+        key: 'followUp',
+        date: {
+            filter: FILTER,
+            sort: SORT,
+        },
+        label: i18n.t('Follow up'),
     },
 ]

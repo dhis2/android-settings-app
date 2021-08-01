@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-15T17:14:24.104Z\n"
-"PO-Revision-Date: 2021-07-15T17:14:24.104Z\n"
+"POT-Creation-Date: 2021-08-01T22:21:13.531Z\n"
+"PO-Revision-Date: 2021-08-01T22:21:13.531Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -469,6 +469,9 @@ msgid "Event Date"
 msgstr ""
 
 msgid "Event status"
+msgstr ""
+
+msgid "Follow up"
 msgstr ""
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"

@@ -1,5 +1,6 @@
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
+import mapValues from 'lodash/mapValues'
 
 const filterSortingDefault = {
     filter: true,
@@ -14,6 +15,7 @@ export const createInitialValues = prevDetails => ({
     eventStatus: prevDetails.eventStatus || filterSortingDefault,
     organisationUnit: prevDetails.organisationUnit || filterSortingDefault,
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
+    followUp: prevDetails.followUp || filterSortingDefault,
 })
 
 export const createInitialSpinnerValue = prevDetails => ({
@@ -30,7 +32,19 @@ export const createInitialSpecificValues = prevDetails => ({
     eventStatus: prevDetails.eventStatus || filterSortingDefault,
     organisationUnit: prevDetails.organisationUnit || filterSortingDefault,
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
+    followUp: prevDetails.followUp || filterSortingDefault,
 })
+
+/**
+ * Add Follow up default value
+ * */
+export const assignSpecificValue = values => ({
+    ...values,
+    followUp: values.followUp || filterSortingDefault,
+})
+
+export const createSpecificValues = specificValues =>
+    mapValues(specificValues, element => assignSpecificValue(element))
 
 export const getProgramName = (program, programList) => {
     const programFilter = programList.filter(option => option.id === program)
@@ -42,17 +56,17 @@ export const programHasCategoryCombo = (programId, datasetList) => {
     return program.categoryCombo.name !== 'default'
 }
 
-export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
+export const prepareSpecificSettingsList = (settings, apiProgramList) => {
     const specificSettingsRows = []
     for (const key in settings) {
-        const result = apiDatasetList.find(dataset => dataset.id === key)
+        const result = apiProgramList.find(program => program.id === key)
         if (result) {
             const filterList = getFilters(settings[key])
             settings[key].name = result.name
             settings[key].id = key
             settings[key].summarySettings = filterList
                 ? `Filters: ${filterList}`
-                : 'No Filters' //`Filters: ${filterList}`
+                : 'No Filters'
             specificSettingsRows.push(settings[key])
         }
     }
@@ -88,5 +102,7 @@ const convertFilterKeyToValue = filter => {
             return 'Organisation Unit'
         case 'syncStatus':
             return 'Sync Status'
+        case 'followUp':
+            return 'Follow up'
     }
 }

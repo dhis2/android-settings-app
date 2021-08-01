@@ -7,7 +7,11 @@ import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
-import { createInitialSpinnerValue, createInitialValues } from './helper'
+import {
+    createInitialSpinnerValue,
+    createInitialValues,
+    createSpecificValues,
+} from './helper'
 import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
@@ -46,7 +50,9 @@ const ProgramsAppearance = () => {
             setInitialValues({ globalSettings, specificSettings })
             setGlobalSettings(createInitialValues(globalSettings))
             programSettings.specificSettings
-                ? setSpecificSettings(programSettings.specificSettings)
+                ? setSpecificSettings(
+                      createSpecificValues(programSettings.specificSettings)
+                  )
                 : setSpecificSettings({})
             setSpinnerSettings(completionSpinner)
             setSpinnerGlobal(completionSpinner.globalSettings)
