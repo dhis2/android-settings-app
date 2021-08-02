@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-22T15:24:01.412Z\n"
-"PO-Revision-Date: 2021-07-22T15:24:01.412Z\n"
+"POT-Creation-Date: 2021-08-02T00:36:10.164Z\n"
+"PO-Revision-Date: 2021-08-02T00:36:10.164Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -312,6 +312,14 @@ msgid ""
 "app version 2.3.0 onwards."
 msgstr ""
 
+msgid "No {{type}} Visualization found"
+msgstr ""
+
+msgid ""
+"It looks like there aren't any configured visualizations, or they couldn't "
+"be loaded."
+msgstr ""
+
 msgid "Recommended maximum: {{maxValue}}"
 msgstr ""
 
@@ -567,7 +575,10 @@ msgstr ""
 msgid "data download size (KB)"
 msgstr ""
 
-msgid "Add Home Visualization"
+msgid "Manage visualizations for program."
+msgstr ""
+
+msgid "Add Program Visualization"
 msgstr ""
 
 msgid "TEI Analytics"
