@@ -1,0 +1,23 @@
+.table {
+    border: none !important;
+    background: none;
+    max-width: 1000px;
+}
+
+.tableCell {
+    background: none !important;
+}
+
+.subItemTitle {
+    color: #494949;
+    padding: 0 10px;
+    font-size: 0.8rem;
+}
+
+.maxValue {
+    color: red;
+}
+
+.topMargin {
+    margin-top: var(--spacers-dp24);
+}
