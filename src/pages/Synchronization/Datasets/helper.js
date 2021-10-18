@@ -33,6 +33,7 @@ export const prepareSpecificSettingsList = (
 
             const row = {
                 ...dataset,
+                name: findDatasetName(apiDatasetList, dataset),
                 summarySettings,
             }
             specificSettingsRowList.push(row)
