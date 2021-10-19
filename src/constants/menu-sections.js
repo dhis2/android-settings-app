@@ -1,11 +1,11 @@
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import UserSyncTestContainer from '../components/sections/user-sync-test/user-sync-test-container'
 import Home from '../pages/Home/Home'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSettings'
 import DatasetSyncSettings from '../pages/Synchronization/Datasets/DatasetSyncSettings'
+import UserSyncTest from '../pages/Synchronization/UserSyncTest/UserSyncTest'
 import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import DatasetsAppearance from '../pages/Appearance/Datasets/DatasetsAppearance'
@@ -64,7 +64,7 @@ export const syncPages = [
         code: 'user-sync-test',
         label: i18n.t('User sync test'),
         path: '/sync/user-sync-test',
-        component: <UserSyncTestContainer />,
+        component: <UserSyncTest />,
         linkText: i18n.t('Run user sync test'),
         description: i18n.t(
             'Check how much data a user downloads when syncing'
