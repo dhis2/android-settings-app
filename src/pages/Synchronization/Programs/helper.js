@@ -78,6 +78,7 @@ export const prepareSpecificSettingsList = (
 
             const row = {
                 ...program,
+                name: findProgramNameById(apiProgramList, program),
                 summarySettings,
             }
             specificSettingsRowList.push(row)
