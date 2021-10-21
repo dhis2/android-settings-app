@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-01T22:21:13.531Z\n"
-"PO-Revision-Date: 2021-08-01T22:21:13.531Z\n"
+"POT-Creation-Date: 2021-10-21T22:36:10.521Z\n"
+"PO-Revision-Date: 2021-10-21T22:36:10.521Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -626,6 +626,15 @@ msgid ""
 "Customize filter and sorting options available for programs. Settings below "
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
+msgstr ""
+
+msgid "Enrollment Status"
+msgstr ""
+
+msgid "Event Status"
+msgstr ""
+
+msgid "Sync Status"
 msgstr ""
 
 msgid "This will disable and remove all General, Program and Data set settings."

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
@@ -87,22 +88,22 @@ const getFilters = settings => {
 const convertFilterKeyToValue = filter => {
     switch (filter) {
         case 'assignedToMe':
-            return 'Assigned to me'
+            return i18n.t('Assigned to me')
         case 'enrollmentDate':
-            return 'Enrollment Date'
+            return i18n.t('Enrollment Date')
         case 'enrollmentStatus':
-            return 'Enrollment Status'
+            return i18n.t('Enrollment Status')
         case 'eventDate':
-            return 'Event Date'
+            return i18n.t('Event Date')
         case 'eventStatus':
-            return 'Event Status'
+            return i18n.t('Event Status')
         case 'categoryCombo':
-            return 'Category Combo'
+            return i18n.t('Category Combo')
         case 'organisationUnit':
-            return 'Organisation Unit'
+            return i18n.t('Organisation Unit')
         case 'syncStatus':
-            return 'Sync Status'
+            return i18n.t('Sync Status')
         case 'followUp':
-            return 'Follow up'
+            return i18n.t('Follow up')
     }
 }
