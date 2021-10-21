@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-05T14:42:31.584Z\n"
-"PO-Revision-Date: 2021-08-05T14:42:31.584Z\n"
+"POT-Creation-Date: 2021-10-21T22:45:32.196Z\n"
+"PO-Revision-Date: 2021-10-21T22:45:32.196Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -471,6 +471,9 @@ msgstr ""
 msgid "Event status"
 msgstr ""
 
+msgid "Follow up"
+msgstr ""
+
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr ""
 
@@ -625,6 +628,15 @@ msgid ""
 "individual programs can also be applied."
 msgstr ""
 
+msgid "Enrollment Status"
+msgstr ""
+
+msgid "Event Status"
+msgstr ""
+
+msgid "Sync Status"
+msgstr ""
+
 msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
@@ -694,9 +706,6 @@ msgid "program"
 msgstr ""
 
 msgid "User Sync Test"
-msgstr ""
-
-msgid "Insert"
 msgstr ""
 
 msgid "Search by user"
