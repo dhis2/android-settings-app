@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
+import { formatList } from '../../../utils/utils'
 
 const filterSortingDefault = {
     filter: true,
@@ -66,8 +67,11 @@ export const prepareSpecificSettingsList = (settings, apiProgramList) => {
             settings[key].name = result.name
             settings[key].id = key
             settings[key].summarySettings = filterList
-                ? `Filters: ${filterList}`
-                : 'No Filters'
+                ? i18n.t('Filters: {{filterList}}', {
+                      nsSeparator: '---',
+                      filterList,
+                  })
+                : i18n.t('No Filters')
             specificSettingsRows.push(settings[key])
         }
     }
@@ -82,7 +86,7 @@ const getFilters = settings => {
             element.filter === true &&
             filterList.push(convertFilterKeyToValue(key))
     )
-    return filterList.join(', ')
+    return formatList(filterList)
 }
 
 const convertFilterKeyToValue = filter => {
