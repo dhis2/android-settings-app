@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-21T22:45:32.196Z\n"
-"PO-Revision-Date: 2021-10-21T22:45:32.196Z\n"
+"POT-Creation-Date: 2021-10-26T22:11:32.821Z\n"
+"PO-Revision-Date: 2021-10-26T22:11:32.821Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -459,21 +459,6 @@ msgstr ""
 msgid "Manage visualizations for data sets"
 msgstr ""
 
-msgid "Enrollment Date"
-msgstr ""
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Event Date"
-msgstr ""
-
-msgid "Event status"
-msgstr ""
-
-msgid "Follow up"
-msgstr ""
-
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr ""
 
@@ -626,6 +611,27 @@ msgid ""
 "Customize filter and sorting options available for programs. Settings below "
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
+msgstr ""
+
+msgid "Enrollment Date"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Event Date"
+msgstr ""
+
+msgid "Event status"
+msgstr ""
+
+msgid "Follow up"
+msgstr ""
+
+msgid "Filters: {{filterList}}"
+msgstr ""
+
+msgid "No Filters"
 msgstr ""
 
 msgid "Enrollment Status"
