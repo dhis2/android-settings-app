@@ -14,19 +14,19 @@ export const DatasetGlobalSettings = ({
     dense,
 }) => (
     <>
-        {datasetAppearanceSettings.map(row => (
+        {datasetAppearanceSettings.map(({ key, label }) => (
             <TableRowWrapper
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 disable={disabled}
                 dense={dense}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}
@@ -45,19 +45,19 @@ export const DatasetCategoryComboSettings = ({
     disabled,
 }) => (
     <>
-        {datasetAppearanceSpecificSettings.map(row => (
+        {datasetAppearanceSpecificSettings.map(({ key, label }) => (
             <TableRowWrapper
                 dense={true}
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 disable={disabled}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}

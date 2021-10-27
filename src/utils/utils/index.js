@@ -1,5 +1,6 @@
 export * from './filterUnusedElements'
 export * from './findProgramNameById'
+export * from './formatList'
 export * from './prepareSpecificSettingsList'
 export * from './removeNameIDFromSettings'
 export * from './removePropertiesFromObject'
