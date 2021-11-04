@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import isEmpty from 'lodash/isEmpty'
 import Page from '../../../components/page/Page'
 import {
     saveAnalyticsKeyMutation,
@@ -9,12 +10,19 @@ import {
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramAnalyticsList from './ProgramAnalyticsList'
-import VisualizationsInfo from '../../../components/noticeAlert/VisualizationsInfo'
+import { VisualizationsInfo } from '../../../components/noticeAlert'
 
 const ProgramAnalytics = () => {
-    const { tei, home, programs, dataSet, load } = useReadAnalyticsDataStore()
+    const {
+        tei,
+        home,
+        program,
+        dataSet,
+        load,
+        errorDataStore,
+    } = useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
-    const [programsAnalytics, setProgramAnalytics] = useState([])
+    const [programsAnalytics, setProgramAnalytics] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
 
@@ -25,17 +33,17 @@ const ProgramAnalytics = () => {
     }, [hasAuthority])
 
     useEffect(() => {
-        if (programs) {
-            setProgramAnalytics(programs)
+        if (program) {
+            setProgramAnalytics(program)
         }
-    }, [programs])
+    }, [program])
 
     const saveSettings = async () => {
         const settingsToSave = {
             tei,
             dhisVisualizations: {
                 home,
-                program: '',
+                program: {},
                 dataSet,
             },
         }
@@ -43,7 +51,7 @@ const ProgramAnalytics = () => {
     }
 
     const resetSettings = () => {
-        setProgramAnalytics([])
+        setProgramAnalytics({})
     }
 
     return (
@@ -51,11 +59,12 @@ const ProgramAnalytics = () => {
             title={i18n.t('Program')}
             desc={i18n.t('Manage visualizations for program.')}
             loading={load}
+            error={errorDataStore}
             unsavedChanges={!disableSave}
         >
             {programsAnalytics && (
                 <>
-                    {!programsAnalytics.length && (
+                    {isEmpty(programsAnalytics) && (
                         <VisualizationsInfo type="Programs" />
                     )}
 

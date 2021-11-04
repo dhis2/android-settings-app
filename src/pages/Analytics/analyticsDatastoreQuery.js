@@ -36,11 +36,11 @@ export const useReadAnalyticsDataStore = () => {
 
     return {
         load: loading,
-        error,
+        errorDataStore: error,
         tei: data && data.analytics.tei,
         dhisVisualizations: data && data.analytics.dhisVisualizations,
         home: data && data.analytics.dhisVisualizations.home,
-        programs: data && data.analytics.dhisVisualizations.program,
-        dataSets: data && data.analytics.dhisVisualizations.dataSet,
+        program: data && data.analytics.dhisVisualizations.program,
+        dataSet: data && data.analytics.dhisVisualizations.dataSet,
     }
 }
