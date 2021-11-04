@@ -21,13 +21,13 @@ const HomeSettings = ({ states, onChange, disable }) => {
         <Wrapper>
             <div>
                 <TableHeader title={i18n.t('Show Filter')} />
-                {homeScreenRowSettings.map(row => (
-                    <TableRowWrapper row={row} disable={disable} key={row.key}>
+                {homeScreenRowSettings.map(({ key, label }) => (
+                    <TableRowWrapper label={label} disable={disable} key={key}>
                         <CheckboxField
-                            name={row.key}
+                            name={key}
                             onChange={handleChange}
                             disabled={disable}
-                            checked={states[row.key].filter}
+                            checked={states[key].filter}
                         />
                     </TableRowWrapper>
                 ))}

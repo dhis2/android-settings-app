@@ -1,11 +1,82 @@
 import React from 'react'
+import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { TableRowWrapper } from '../../../components/table'
 import { CheckboxField } from '../../../components/field'
-import {
-    programAppearanceSettings,
-    programAppearanceSpecificSettings,
-} from '../../../constants/program-appearance'
+
+const programAppearanceSettings = [
+    {
+        key: 'assignedToMe',
+        label: i18n.t('Assigned to me'),
+    },
+    {
+        key: 'enrollmentDate',
+        label: i18n.t('Enrollment Date'),
+    },
+    {
+        key: 'enrollmentStatus',
+        label: i18n.t('Enrollment status'),
+    },
+    {
+        key: 'eventDate',
+        label: i18n.t('Event Date'),
+    },
+    {
+        key: 'eventStatus',
+        label: i18n.t('Event status'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+    {
+        key: 'followUp',
+        label: i18n.t('Follow up'),
+    },
+]
+
+export const programAppearanceSpecificSettings = [
+    {
+        key: 'categoryCombo',
+        label: i18n.t('Category Combo'),
+    },
+    {
+        key: 'assignedToMe',
+        label: i18n.t('Assigned to me'),
+    },
+    {
+        key: 'enrollmentDate',
+        label: i18n.t('Enrollment Date'),
+    },
+    {
+        key: 'enrollmentStatus',
+        label: i18n.t('Enrollment status'),
+    },
+    {
+        key: 'eventDate',
+        label: i18n.t('Event Date'),
+    },
+    {
+        key: 'eventStatus',
+        label: i18n.t('Event status'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+    {
+        key: 'followUp',
+        label: i18n.t('Follow up'),
+    },
+]
 
 export const ProgramGlobalSettings = ({
     states,
@@ -14,18 +85,18 @@ export const ProgramGlobalSettings = ({
     dense,
 }) => (
     <>
-        {programAppearanceSettings.map(row => (
+        {programAppearanceSettings.map(({ key, label }) => (
             <TableRowWrapper
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 dense={dense}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}
@@ -45,18 +116,18 @@ export const ProgramCategoryComboSettings = ({
     disabled,
 }) => (
     <>
-        {programAppearanceSpecificSettings.map(row => (
+        {programAppearanceSpecificSettings.map(({ key, label }) => (
             <TableRowWrapper
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 dense={true}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}
