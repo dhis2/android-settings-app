@@ -1,14 +1,17 @@
 import React from 'react'
+import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeInfo } from './NoticeInfo'
 
-const VisualizationsInfo = ({ type }) => (
+export const VisualizationsInfo = ({ type }) => (
     <NoticeInfo
         title={i18n.t('No {{type}} Visualization found', { type })}
         notice={i18n.t(
-            "It looks like there aren't any configured visualizations, or they couldn't be loaded."
+            "It looks like there aren't any configured visualizations."
         )}
     />
 )
 
-export default VisualizationsInfo
+VisualizationsInfo.propTypes = {
+    type: PropTypes.string,
+}
