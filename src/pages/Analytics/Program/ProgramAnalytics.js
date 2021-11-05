@@ -65,7 +65,11 @@ const ProgramAnalytics = () => {
             {programsAnalytics && (
                 <>
                     {isEmpty(programsAnalytics) && (
-                        <VisualizationsInfo type="Programs" />
+                        <VisualizationsInfo
+                            title={i18n.t(
+                                'Could not find any program visualisations'
+                            )}
+                        />
                     )}
 
                     <ProgramAnalyticsList disable={disable} />
