@@ -3,9 +3,9 @@ import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import {
-    getAnalyticsKeyQuery,
     saveAnalyticsKeyMutation,
-} from './AnalyticsQueries'
+    useReadAnalyticsDataStore,
+} from '../analyticsDatastoreQuery'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import Page from '../../../components/page/Page'
 import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
@@ -14,7 +14,12 @@ import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
 import { removeSummarySettings } from './helper'
 
 const AnalyticsTEI = () => {
-    const { data: analytics, loading } = useDataQuery(getAnalyticsKeyQuery)
+    const {
+        tei,
+        dhisVisualizations,
+        errorDataStore,
+        load,
+    } = useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [analyticSettings, setAnalyticSettings] = useState([])
     const [initialValues, setInitialValues] = useState()
@@ -28,12 +33,11 @@ const AnalyticsTEI = () => {
     }, [hasAuthority])
 
     useEffect(() => {
-        if (analytics) {
-            const settings = analytics.analytics.tei
-            setInitialValues(settings)
-            setAnalyticSettings(settings)
+        if (tei) {
+            setInitialValues(tei)
+            setAnalyticSettings(tei)
         }
-    }, [analytics])
+    }, [tei])
 
     useEffect(() => {
         initialValues &&
@@ -46,6 +50,7 @@ const AnalyticsTEI = () => {
     const saveSettings = async () => {
         const settingsToSave = {
             tei: removeSummarySettings(analyticSettings),
+            dhisVisualizations,
         }
 
         await mutate({ settings: settingsToSave })
@@ -61,7 +66,8 @@ const AnalyticsTEI = () => {
             desc={i18n.t(
                 'Manage Tracked Entity Instance (TEI) analytics for tracker programs. The settings below apply to all tracker programs an Android user has access to.'
             )}
-            loading={loading}
+            loading={load}
+            error={errorDataStore}
             unsavedChanges={!disableSave}
         >
             {analyticSettings && (

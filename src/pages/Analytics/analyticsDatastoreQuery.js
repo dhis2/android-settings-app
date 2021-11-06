@@ -1,5 +1,6 @@
-import { ANALYTICS, NAMESPACE } from '../../constants/data-store'
+import { useState } from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
+import { ANALYTICS, NAMESPACE } from '../../constants/data-store'
 
 /**
  * update data store
@@ -32,15 +33,38 @@ export const getAnalyticsKeyQuery = {
  * */
 
 export const useReadAnalyticsDataStore = () => {
-    const { loading, error, data } = useDataQuery(getAnalyticsKeyQuery)
+    const [teiAnalytics, setTei] = useState()
+    const [visualizations, setVisualizations] = useState()
+    const [home, setHome] = useState()
+    const [program, setProgram] = useState()
+    const [dataSet, setDataSet] = useState()
+
+    const { loading, error } = useDataQuery(getAnalyticsKeyQuery, {
+        onComplete: result => {
+            const { tei, dhisVisualizations } = result.analytics
+            setTei(tei || [])
+            setHome(dhisVisualizations ? dhisVisualizations.home : [])
+            setProgram(dhisVisualizations ? dhisVisualizations.program : {})
+            setDataSet(dhisVisualizations ? dhisVisualizations.dataSet : {})
+            setVisualizations(
+                dhisVisualizations
+                    ? dhisVisualizations
+                    : {
+                          home: [],
+                          program: {},
+                          dataSet: {},
+                      }
+            )
+        },
+    })
 
     return {
         load: loading,
         errorDataStore: error,
-        tei: data && data.analytics.tei,
-        dhisVisualizations: data && data.analytics.dhisVisualizations,
-        home: data && data.analytics.dhisVisualizations.home,
-        program: data && data.analytics.dhisVisualizations.program,
-        dataSet: data && data.analytics.dhisVisualizations.dataSet,
+        tei: teiAnalytics,
+        dhisVisualizations: visualizations,
+        home,
+        program,
+        dataSet,
     }
 }
