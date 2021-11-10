@@ -32,8 +32,7 @@ export const GroupVisualizationRow = ({
     )
 
     const createGroupRow = () => {
-        return Object.keys(group.groups).map((item, i) => {
-            const groupRow = group.groups[item]
+        return Object.entries(group.groups).map(([item, groupRow], i) => {
             const groupName =
                 groupRow[0].group.name === 'default'
                     ? ''
