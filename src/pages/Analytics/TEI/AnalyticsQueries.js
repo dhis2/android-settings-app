@@ -1,29 +1,4 @@
-import { ANALYTICS, NAMESPACE } from '../../../constants/data-store'
 import { useDataQuery } from '@dhis2/app-runtime'
-
-/**
- * update data store
- * key: Analytics
- * */
-export const saveAnalyticsKeyMutation = {
-    resource: `dataStore/${NAMESPACE}/${ANALYTICS}`,
-    type: 'update',
-    data: ({ settings }) => ({
-        ...settings,
-        lastUpdated: new Date().toJSON(),
-    }),
-}
-
-/**
- * Query to get Analytics Settings from Data store
- * key: Analytics Settings
- * */
-
-export const getAnalyticsKeyQuery = {
-    analytics: {
-        resource: `dataStore/${NAMESPACE}/${ANALYTICS}`,
-    },
-}
 
 const programsQuery = {
     programs: {
@@ -35,10 +10,7 @@ const programsQuery = {
                 'programType',
                 'programStages[id,name,repeatable]',
             ],
-            filter: [
-                'programStages.repeatable:eq:true',
-                'access.data.write:eq:true',
-            ],
+            filter: 'programStages.repeatable:eq:true',
             pager: 'false',
         },
     },
@@ -86,7 +58,6 @@ const dataElementsQuery = {
                 'name',
                 'programStageDataElements[dataElement[id,name,valueType]',
             ],
-            filter: 'access.data.write:eq:true',
             pager: 'false',
         },
     },
@@ -94,7 +65,7 @@ const dataElementsQuery = {
 
 export const useReadDataElementsQuery = ({ programId }) =>
     useDataQuery(dataElementsQuery, {
-        variables: { programId },
+        variables: { programId: programId || '' },
         lazy: true,
     })
 
@@ -112,7 +83,6 @@ const attributesQuery = {
                 'name',
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,name,valueType]]',
             ],
-            filter: 'access.data.write:eq:true',
             pager: 'false',
         },
     },
@@ -120,7 +90,7 @@ const attributesQuery = {
 
 export const useReadAttributesQuery = ({ programId }) =>
     useDataQuery(attributesQuery, {
-        variables: { programId },
+        variables: { programId: programId || '' },
         lazy: true,
     })
 
@@ -133,7 +103,6 @@ const programIndicatorsQuery = {
         id: ({ programId }) => `${programId}`,
         params: {
             fields: ['id', 'name', 'programIndicators[id,name,expression]'],
-            filter: 'access.data.write:eq:true',
             pager: 'false',
         },
     },
@@ -141,7 +110,7 @@ const programIndicatorsQuery = {
 
 export const useReadProgramIndicatorsQuery = ({ programId }) =>
     useDataQuery(programIndicatorsQuery, {
-        variables: { programId },
+        variables: { programId: programId || '' },
         lazy: true,
     })
 
