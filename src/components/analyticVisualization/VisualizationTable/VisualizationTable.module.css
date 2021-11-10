@@ -1,0 +1,36 @@
+.rowContainer {
+    display: flex;
+    margin: 8px 8px 8px 40px;
+    padding: 0 12px;
+    border: 1px solid rgb(232, 237, 242);
+}
+
+.table {
+    border-bottom-color: #ffffff !important;
+}
+
+.rowPadding {
+    margin: 0 -12px;
+}
+
+.tableTitle {
+    font-weight: 500;
+}
+
+.tableSubtitle {
+    color: var(--colors-grey800)!important;
+    font-weight: 500;
+}
+
+.boxContainer {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.table > tbody > tr > td:first-child {
+    padding-left: 40px;
+}
+
+.boxContainer > div {
+    align-self: center
+}
