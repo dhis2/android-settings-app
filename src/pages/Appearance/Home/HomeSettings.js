@@ -4,7 +4,25 @@ import PropTypes from '@dhis2/prop-types'
 import Wrapper from '../../../components/Wrapper'
 import { TableHeader, TableRowWrapper } from '../../../components/table'
 import { CheckboxField } from '../../../components/field'
-import { homeScreenRowSettings } from '../../../constants/home-appearance'
+
+const homeScreenRowSettings = [
+    {
+        key: 'date',
+        label: i18n.t('Date'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+    {
+        key: 'assignedToMe',
+        label: i18n.t('Assigned to me'),
+    },
+]
 
 const HomeSettings = ({ states, onChange, disable }) => {
     const handleChange = e => {

@@ -1,11 +1,42 @@
 import React from 'react'
 import PropTypes from '@dhis2/prop-types'
+import i18n from '@dhis2/d2-i18n'
 import { TableRowWrapper } from '../../../components/table'
 import { CheckboxField } from '../../../components/field'
-import {
-    datasetAppearanceSettings,
-    datasetAppearanceSpecificSettings,
-} from '../../../constants/dataset-appearance'
+
+const datasetAppearanceSettings = [
+    {
+        key: 'period',
+        label: i18n.t('Period'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+]
+
+const datasetAppearanceSpecificSettings = [
+    {
+        key: 'categoryCombo',
+        label: i18n.t('Category Combo'),
+    },
+    {
+        key: 'period',
+        label: i18n.t('Period'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+]
 
 export const DatasetGlobalSettings = ({
     states,
