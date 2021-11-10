@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEmpty from 'lodash/isEmpty'
+import isEqual from 'lodash/isEqual'
 import Page from '../../../components/page/Page'
 import {
     saveAnalyticsKeyMutation,
@@ -11,6 +12,7 @@ import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramAnalyticsList from './ProgramAnalyticsList'
 import { VisualizationsInfo } from '../../../components/noticeAlert'
+import { createDataStoreGroupRows } from './helper'
 
 const ProgramAnalytics = () => {
     const {
@@ -23,6 +25,7 @@ const ProgramAnalytics = () => {
     } = useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [programsAnalytics, setProgramAnalytics] = useState()
+    const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
 
@@ -35,15 +38,24 @@ const ProgramAnalytics = () => {
     useEffect(() => {
         if (program) {
             setProgramAnalytics(program)
+            setInitialValues(program)
         }
     }, [program])
+
+    useEffect(() => {
+        initialValues &&
+        programsAnalytics &&
+        !isEqual(programsAnalytics, initialValues)
+            ? setDisableSave(false)
+            : setDisableSave(true)
+    }, [programsAnalytics])
 
     const saveSettings = async () => {
         const settingsToSave = {
             tei,
             dhisVisualizations: {
                 home,
-                program: {},
+                program: createDataStoreGroupRows(programsAnalytics),
                 dataSet,
             },
         }
@@ -72,7 +84,11 @@ const ProgramAnalytics = () => {
                         />
                     )}
 
-                    <ProgramAnalyticsList disable={disable} />
+                    <ProgramAnalyticsList
+                        disable={disable}
+                        visualizations={programsAnalytics}
+                        handleVisualizations={setProgramAnalytics}
+                    />
 
                     <FooterStripButtons
                         onSave={saveSettings}
