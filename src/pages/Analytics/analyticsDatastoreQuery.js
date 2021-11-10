@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
 import { ANALYTICS, NAMESPACE } from '../../constants/data-store'
 
@@ -33,15 +33,16 @@ export const getAnalyticsKeyQuery = {
  * */
 
 export const useReadAnalyticsDataStore = () => {
+    const { loading, error, data } = useDataQuery(getAnalyticsKeyQuery)
     const [teiAnalytics, setTei] = useState()
     const [visualizations, setVisualizations] = useState()
     const [home, setHome] = useState()
     const [program, setProgram] = useState()
     const [dataSet, setDataSet] = useState()
 
-    const { loading, error } = useDataQuery(getAnalyticsKeyQuery, {
-        onComplete: result => {
-            const { tei, dhisVisualizations } = result.analytics
+    useEffect(() => {
+        if (data) {
+            const { tei, dhisVisualizations } = data.analytics
             setTei(tei || [])
             setHome(dhisVisualizations ? dhisVisualizations.home : [])
             setProgram(dhisVisualizations ? dhisVisualizations.program : {})
@@ -55,8 +56,8 @@ export const useReadAnalyticsDataStore = () => {
                           dataSet: {},
                       }
             )
-        },
-    })
+        }
+    }, [data])
 
     return {
         load: loading,
