@@ -1,4 +1,32 @@
 import mapValues from 'lodash/mapValues'
+import { validateObjectByProperty } from '../../../utils/validators'
+
+export const createInitialValues = initialValues => ({
+    id: initialValues.id || '',
+    program: initialValues.program || '',
+    visualization: initialValues.visualization || '',
+    name: initialValues.name || '',
+    group: initialValues.group || {
+        name: '',
+        id: '',
+    },
+})
+
+export const validMandatoryFields = settings => {
+    return !validateObjectByProperty(['program', 'visualization'], settings)
+}
+
+export const createVisualizationValues = value => ({
+    id: value.visualization || value.id,
+    name: value.name || value.visualizationName,
+    timestamp: value.timestamp || new Date().toJSON(),
+    program: value.program,
+    programName: value.programName,
+    group: {
+        id: value.group.id,
+        name: value.group.name,
+    },
+})
 
 export const getGroupList = visualizations => {
     const groupList = {}
@@ -96,4 +124,44 @@ export const createDataStoreGroupRows = datastore => {
     })
 
     return result
+}
+
+export const updateRows = (current, rows) => {
+    const updatedRow = Object.assign({}, rows)
+    const programFound = Object.keys(updatedRow).find(
+        program => program === current.program
+    )
+
+    if (programFound) {
+        const groupFound = Object.keys(updatedRow[programFound].groups).find(
+            group => group === current.group.id
+        )
+
+        const updatedGroups = groupFound
+            ? {
+                  ...updatedRow[programFound].groups,
+                  [groupFound]: [
+                      ...updatedRow[programFound].groups[groupFound],
+                      current,
+                  ],
+              }
+            : {
+                  ...updatedRow[programFound].groups,
+                  [current.group.id]: [current],
+              }
+
+        updatedRow[programFound] = {
+            ...updatedRow[programFound],
+            groups: updatedGroups,
+        }
+    } else {
+        updatedRow[current.program] = {
+            programName: current.programName,
+            groups: {
+                [current.group.id]: [current],
+            },
+        }
+    }
+
+    return updatedRow
 }

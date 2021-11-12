@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
-import i18n from '@dhis2/d2-i18n'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
 import { ProgramTable } from '../../../components/analyticVisualization'
 import { useReadProgramQuery } from './ProgramVisualizationQueries'
 import { prepareRows, rowsToDataStore } from './helper'
-import { AddNewSetting } from '../../../components/field'
+import NewProgramVisualization from './NewProgramVisualization'
 
 const ProgramAnalyticsList = ({
     visualizations,
@@ -16,14 +15,16 @@ const ProgramAnalyticsList = ({
     const { programList } = useReadProgramQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
+    const [groups, setGroups] = useState()
 
     useEffect(() => {
         if (visualizations && programList) {
-            const { visualizationsByPrograms } = prepareRows(
+            const { visualizationsByPrograms, groupList } = prepareRows(
                 visualizations,
                 programList
             )
             setRows(visualizationsByPrograms)
+            setGroups(groupList)
             setInitialRows(visualizationsByPrograms)
         }
     }, [visualizations, programList])
@@ -44,9 +45,12 @@ const ProgramAnalyticsList = ({
                 />
             )}
 
-            <AddNewSetting
-                label={i18n.t('Add Program Visualization')}
+            <NewProgramVisualization
                 disable={disable}
+                visualization={rows}
+                handleVisualization={setRows}
+                groups={groups}
+                handleGroups={setGroups}
             />
         </>
     )
