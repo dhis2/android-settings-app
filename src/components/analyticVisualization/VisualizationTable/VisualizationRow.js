@@ -8,6 +8,7 @@ import styles from './VisualizationTable.module.css'
 export const VisualizationRow = ({
     visualizationList,
     deleteVisualization,
+    groupId,
     disabled,
 }) => (
     <>
@@ -24,7 +25,8 @@ export const VisualizationRow = ({
                         onClick={() => {
                             deleteVisualization(
                                 visualization,
-                                visualizationList
+                                visualizationList,
+                                groupId
                             )
                         }}
                         disabled={disabled}
@@ -40,5 +42,6 @@ export const VisualizationRow = ({
 VisualizationRow.propTypes = {
     visualizations: PropTypes.array,
     deleteVisualization: PropTypes.func,
+    groupId: PropTypes.string,
     disabled: PropTypes.bool,
 }
