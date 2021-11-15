@@ -12,17 +12,15 @@ const HomeAnalyticList = ({
     disable,
 }) => {
     const [rows, setRows] = useState()
-    const [initialRows, setInitialRows] = useState()
 
     useEffect(() => {
         if (visualizations) {
             setRows(visualizations)
-            setInitialRows(visualizations)
         }
     }, [visualizations])
 
     useEffect(() => {
-        if (rows && initialRows && !isEqual(rows, initialRows)) {
+        if (rows && visualizations && !isEqual(rows, visualizations)) {
             handleVisualizations(rows)
         }
     }, [rows])
