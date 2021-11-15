@@ -127,41 +127,30 @@ export const createDataStoreGroupRows = datastore => {
 }
 
 export const updateRows = (current, rows) => {
-    const updatedRow = Object.assign({}, rows)
-    const programFound = Object.keys(updatedRow).find(
-        program => program === current.program
-    )
+    const programRow = rows[current.program]
 
-    if (programFound) {
-        const groupFound = Object.keys(updatedRow[programFound].groups).find(
-            group => group === current.group.id
-        )
-
-        const updatedGroups = groupFound
-            ? {
-                  ...updatedRow[programFound].groups,
-                  [groupFound]: [
-                      ...updatedRow[programFound].groups[groupFound],
-                      current,
-                  ],
-              }
-            : {
-                  ...updatedRow[programFound].groups,
-                  [current.group.id]: [current],
-              }
-
-        updatedRow[programFound] = {
-            ...updatedRow[programFound],
-            groups: updatedGroups,
+    if (programRow) {
+        const group = programRow.groups[current.group.id]
+        const updatedGroups = {
+            ...programRow.groups,
+            [current.group.id]: group ? [...group, current] : [current],
         }
-    } else {
-        updatedRow[current.program] = {
-            programName: current.programName,
-            groups: {
-                [current.group.id]: [current],
+        return {
+            ...rows,
+            [current.program]: {
+                ...programRow,
+                groups: updatedGroups,
             },
         }
     }
 
-    return updatedRow
+    return {
+        ...rows,
+        [current.program]: {
+            programName: current.programName,
+            groups: {
+                [current.group.id]: [current],
+            },
+        },
+    }
 }
