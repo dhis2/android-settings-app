@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-15T17:27:12.917Z\n"
-"PO-Revision-Date: 2021-11-15T17:27:12.917Z\n"
+"POT-Creation-Date: 2021-11-15T17:50:59.768Z\n"
+"PO-Revision-Date: 2021-11-15T17:50:59.768Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -58,9 +58,6 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-msgid "Delete Group"
-msgstr ""
-
 msgid "Visualization"
 msgstr ""
 
@@ -68,6 +65,9 @@ msgid "Visualization Group"
 msgstr ""
 
 msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr ""
+
+msgid "Delete Group"
 msgstr ""
 
 msgid "Visualization title"
@@ -592,6 +592,15 @@ msgid "metadata download size (KB)"
 msgstr ""
 
 msgid "data download size (KB)"
+msgstr ""
+
+msgid "Add Data set Visualization"
+msgstr ""
+
+msgid "Manage visualizations for data set."
+msgstr ""
+
+msgid "Could not find any data set visualisations"
 msgstr ""
 
 msgid "Add Home Visualization"
