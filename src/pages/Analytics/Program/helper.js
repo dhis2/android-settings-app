@@ -12,7 +12,7 @@ export const createInitialValues = initialValues => ({
     },
 })
 
-export const validMandatoryFields = settings => {
+export const invalidMandatoryFields = settings => {
     return !validateObjectByProperty(['program', 'visualization'], settings)
 }
 

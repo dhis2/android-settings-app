@@ -7,8 +7,8 @@ import {
     createInitialValues,
     createVisualizationValues,
     getGroupList,
+    invalidMandatoryFields,
     updateRows,
-    validMandatoryFields,
 } from './helper'
 
 const NewProgramVisualization = ({
@@ -25,7 +25,7 @@ const NewProgramVisualization = ({
     const [disableSave, setDisableSave] = useState(true)
 
     useEffect(() => {
-        setDisableSave(validMandatoryFields(visualizationSettings))
+        setDisableSave(invalidMandatoryFields(visualizationSettings))
     }, [visualizationSettings])
 
     const handleOpenDialog = () => {
