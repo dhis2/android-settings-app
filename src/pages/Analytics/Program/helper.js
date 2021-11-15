@@ -1,4 +1,32 @@
 import mapValues from 'lodash/mapValues'
+import { validateObjectByProperty } from '../../../utils/validators'
+
+export const createInitialValues = initialValues => ({
+    id: initialValues.id || '',
+    program: initialValues.program || '',
+    visualization: initialValues.visualization || '',
+    name: initialValues.name || '',
+    group: initialValues.group || {
+        name: '',
+        id: '',
+    },
+})
+
+export const invalidMandatoryFields = settings => {
+    return !validateObjectByProperty(['program', 'visualization'], settings)
+}
+
+export const createVisualizationValues = value => ({
+    id: value.visualization || value.id,
+    name: value.name || value.visualizationName,
+    timestamp: value.timestamp || new Date().toJSON(),
+    program: value.program,
+    programName: value.programName,
+    group: {
+        id: value.group.id,
+        name: value.group.name,
+    },
+})
 
 export const getGroupList = visualizations => {
     const groupList = {}
@@ -96,4 +124,33 @@ export const createDataStoreGroupRows = datastore => {
     })
 
     return result
+}
+
+export const updateRows = (current, rows) => {
+    const programRow = rows[current.program]
+
+    if (programRow) {
+        const group = programRow.groups[current.group.id]
+        const updatedGroups = {
+            ...programRow.groups,
+            [current.group.id]: group ? [...group, current] : [current],
+        }
+        return {
+            ...rows,
+            [current.program]: {
+                ...programRow,
+                groups: updatedGroups,
+            },
+        }
+    }
+
+    return {
+        ...rows,
+        [current.program]: {
+            programName: current.programName,
+            groups: {
+                [current.group.id]: [current],
+            },
+        },
+    }
 }

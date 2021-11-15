@@ -13,9 +13,9 @@ export const SelectField = ({ label, options, onChange, ...props }) => (
         >
             {options.map(option => (
                 <SingleSelectOption
-                    key={option.value}
-                    label={option.label}
-                    value={option.value}
+                    key={option.value || option.id}
+                    label={option.label || option.name}
+                    value={option.value || option.id}
                 />
             ))}
         </SingleSelectField>
