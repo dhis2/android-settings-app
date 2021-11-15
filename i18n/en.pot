@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-12T21:43:47.530Z\n"
-"PO-Revision-Date: 2021-11-12T21:43:47.530Z\n"
+"POT-Creation-Date: 2021-11-12T15:56:16.909Z\n"
+"PO-Revision-Date: 2021-11-12T15:56:16.909Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -23,6 +23,24 @@ msgid "Failed to get data from Data Store"
 msgstr ""
 
 msgid "Settings were successfully saved"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Add a group name"
+msgstr ""
+
+msgid "Create a new group"
+msgstr ""
+
+msgid "Select a created group visualization"
+msgstr ""
+
+msgid "Select a group visualization"
+msgstr ""
+
+msgid "Use a group visualization"
 msgstr ""
 
 msgid "No visualization found"
@@ -46,10 +64,16 @@ msgstr ""
 msgid "Visualization"
 msgstr ""
 
+msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr ""
+
 msgid "Visualization Group"
 msgstr ""
 
-msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgid "Visualization title"
+msgstr ""
+
+msgid "This will override the visualization title when shown in the app"
 msgstr ""
 
 msgid "Data Element"
@@ -74,9 +98,6 @@ msgid "Choose element"
 msgstr ""
 
 msgid "Choose element type"
-msgstr ""
-
-msgid "Program"
 msgstr ""
 
 msgid "Program Stage"
@@ -573,22 +594,16 @@ msgstr ""
 msgid "data download size (KB)"
 msgstr ""
 
-msgid "Add Home Visualization"
+msgid "Add Program visualization"
 msgstr ""
 
-msgid "Manage visualizations for Home screen."
-msgstr ""
-
-msgid "Could not find any home visualisations"
+msgid "Add Program Visualization"
 msgstr ""
 
 msgid "Manage visualizations for program."
 msgstr ""
 
 msgid "Could not find any program visualisations"
-msgstr ""
-
-msgid "Add Program Visualization"
 msgstr ""
 
 msgid "TEI Analytics"

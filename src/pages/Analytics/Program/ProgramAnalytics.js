@@ -59,7 +59,7 @@ const ProgramAnalytics = () => {
                 dataSet,
             },
         }
-        await mutate({ settingsToSave })
+        await mutate({ settings: settingsToSave })
     }
 
     const resetSettings = () => {
