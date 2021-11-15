@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import { SelectField } from '../field'
@@ -6,13 +6,7 @@ import { useReadProgramQuery } from '../../pages/Analytics/Program/ProgramVisual
 
 export const SelectProgram = ({ settings, onChange }) => {
     const { programList, loading } = useReadProgramQuery()
-    const [options, setOptions] = useState([])
-
-    useEffect(() => {
-        if (programList) {
-            setOptions(programList)
-        }
-    }, [programList])
+    const options = programList || []
 
     const handleChange = e => {
         const name = options.find(program => program.id === e.selected)
