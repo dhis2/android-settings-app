@@ -80,6 +80,6 @@ RadioGroup.propTypes = {
     value: PropTypes.string,
     groupName: PropTypes.object,
     changeGroup: PropTypes.func,
-    groups: PropTypes.object,
+    groups: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     type: PropTypes.string,
 }

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-16T01:39:38.876Z\n"
-"PO-Revision-Date: 2021-11-16T01:39:38.876Z\n"
+"POT-Creation-Date: 2021-11-15T23:27:02.773Z\n"
+"PO-Revision-Date: 2021-11-15T23:27:02.773Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -23,9 +23,6 @@ msgid "Failed to get data from Data Store"
 msgstr ""
 
 msgid "Settings were successfully saved"
-msgstr ""
-
-msgid "Dataset"
 msgstr ""
 
 msgid "Program"
@@ -597,16 +594,16 @@ msgstr ""
 msgid "data download size (KB)"
 msgstr ""
 
+msgid "Add Data set Visualization"
+msgstr ""
+
 msgid "Manage visualizations for data set."
 msgstr ""
 
 msgid "Could not find any data set visualisations"
 msgstr ""
 
-msgid "Add Data set visualization"
-msgstr ""
-
-msgid "Add Data set Visualization"
+msgid "Add Home visualization"
 msgstr ""
 
 msgid "Add Home Visualization"
