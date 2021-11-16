@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import PropTypes from '@dhis2/prop-types'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
+import NewHomeVisualization from './NewHomeVisualization'
 import { HomeVisualizationTable } from '../../../components/analyticVisualization'
-import { AddNewSetting } from '../../../components/field'
 
 const HomeAnalyticList = ({
     visualizations,
@@ -35,9 +34,10 @@ const HomeAnalyticList = ({
                 />
             )}
 
-            <AddNewSetting
-                label={i18n.t('Add Home Visualization')}
+            <NewHomeVisualization
                 disable={disable}
+                visualization={rows}
+                handleVisualization={setRows}
             />
         </>
     )
