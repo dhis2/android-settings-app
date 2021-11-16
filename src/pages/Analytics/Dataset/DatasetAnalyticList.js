@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
-import i18n from '@dhis2/d2-i18n'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
 import { useReadDatasetQuery } from './DatasetVisualizationQuery'
 import { prepareRows, rowsToDataStore } from './helper'
+import NewDatasetVisualization from './NewDatasetVisualization'
 import { DatasetTable } from '../../../components/analyticVisualization'
-import { AddNewSetting } from '../../../components/field'
 
 const DatasetAnalyticList = ({
     visualizations,
@@ -16,14 +15,16 @@ const DatasetAnalyticList = ({
     const { datasetList } = useReadDatasetQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
+    const [groups, setGroups] = useState()
 
     useEffect(() => {
         if (visualizations && datasetList) {
-            const { visualizationsByDatasets } = prepareRows(
+            const { visualizationsByDatasets, groupList } = prepareRows(
                 visualizations,
                 datasetList
             )
             setRows(visualizationsByDatasets)
+            setGroups(groupList)
             setInitialRows(visualizationsByDatasets)
         }
     }, [visualizations, datasetList])
@@ -44,9 +45,12 @@ const DatasetAnalyticList = ({
                 />
             )}
 
-            <AddNewSetting
-                label={i18n.t('Add Data set Visualization')}
+            <NewDatasetVisualization
                 disable={disable}
+                visualization={rows}
+                handleVisualization={setRows}
+                groups={groups}
+                handleGroups={setGroups}
             />
         </>
     )
