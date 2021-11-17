@@ -15,6 +15,7 @@ import {
     SelectDataset,
     SelectVisualization,
     VisualizationTitle,
+    VisualizationUserTest,
 } from '../../../components/analyticVisualization'
 
 const DialogVisualization = ({
@@ -54,6 +55,11 @@ const DialogVisualization = ({
                                 onChange={handleChange}
                                 groupList={groups}
                                 type="dataset"
+                            />
+
+                            <VisualizationUserTest
+                                visualization={settings.visualization}
+                                visualizationName={settings.visualizationName}
                             />
                         </>
                     )}

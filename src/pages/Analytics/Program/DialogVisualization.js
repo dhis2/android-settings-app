@@ -14,6 +14,7 @@ import {
     SelectProgram,
     SelectVisualization,
     VisualizationTitle,
+    VisualizationUserTest,
 } from '../../../components/analyticVisualization'
 import buttonStyles from '../../../styles/Button.module.css'
 
@@ -53,6 +54,11 @@ const DialogVisualization = ({
                                 onChange={handleChange}
                                 groupList={groups}
                                 type="program"
+                            />
+
+                            <VisualizationUserTest
+                                visualization={settings.visualization}
+                                visualizationName={settings.visualizationName}
                             />
                         </>
                     )}

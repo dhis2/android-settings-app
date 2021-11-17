@@ -14,6 +14,7 @@ import {
     VisualizationGroup,
     SelectVisualization,
     VisualizationTitle,
+    VisualizationUserTest,
 } from '../../../components/analyticVisualization'
 
 const DialogVisualization = ({
@@ -47,6 +48,11 @@ const DialogVisualization = ({
                                 settings={settings}
                                 onChange={handleChange}
                                 groupList={groups}
+                            />
+
+                            <VisualizationUserTest
+                                visualization={settings.visualization}
+                                visualizationName={settings.visualizationName}
                             />
                         </>
                     )}
