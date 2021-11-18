@@ -11,7 +11,7 @@ export const validateUserVisualization = (user, visualization) =>
  * User has at least read access to a visualization
  * */
 const visualizationHasPublicAccess = visualization =>
-    visualization.publicAccess.indexOf('r') === 0
+    visualization.publicAccess.startsWith('r')
 
 /**
  * Check if a user belongs to user Group that has access to a visualization
