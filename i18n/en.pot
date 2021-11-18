@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-16T14:37:03.167Z\n"
-"PO-Revision-Date: 2021-11-16T14:37:03.167Z\n"
+"POT-Creation-Date: 2021-11-17T19:17:59.427Z\n"
+"PO-Revision-Date: 2021-11-17T19:17:59.427Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -77,6 +77,24 @@ msgid "Visualization title"
 msgstr ""
 
 msgid "This will override the visualization title when shown in the app"
+msgstr ""
+
+msgid "No user found"
+msgstr ""
+
+msgid "Search by user"
+msgstr ""
+
+msgid "{{userName}} can visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "{{userName}} can not visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "Visualization user test"
+msgstr ""
+
+msgid "Run test"
 msgstr ""
 
 msgid "Data Element"
@@ -379,9 +397,6 @@ msgid "User sync test"
 msgstr ""
 
 msgid "Check the amount of data a user would sync to their device."
-msgstr ""
-
-msgid "Run test"
 msgstr ""
 
 msgid "Search for a user"
@@ -808,7 +823,4 @@ msgid "program"
 msgstr ""
 
 msgid "User Sync Test"
-msgstr ""
-
-msgid "Search by user"
 msgstr ""
