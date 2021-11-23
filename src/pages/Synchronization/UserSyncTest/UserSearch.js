@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import isEmpty from 'lodash/isEmpty'
 import ItemSelector from './searchField/ItemSelector'
 import RunTest from './RunTest'
 
@@ -7,7 +8,7 @@ const UserSearch = () => {
     const [userSelected, setUser] = useState()
 
     useEffect(() => {
-        userSelected ? setDisableRun(false) : setDisableRun(true)
+        !isEmpty(userSelected) ? setDisableRun(false) : setDisableRun(true)
     }, [userSelected])
 
     return (

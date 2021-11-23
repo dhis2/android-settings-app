@@ -16,7 +16,7 @@ const RunTest = ({ disabled, user }) => {
         specificSettings,
     } = useReadSettings()
     const [runTest, setRunTest] = useState(false)
-    const [loading, setLoad] = useState(true)
+    const [loading, setLoad] = useState(false)
     const [userTestValues, setValues] = useState(createInitialValues(''))
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const RunTest = ({ disabled, user }) => {
 
             <AddNewSetting
                 label={i18n.t('Run test')}
-                disable={disabled}
+                disable={disabled || loading}
                 onClick={testUser}
             />
         </>
