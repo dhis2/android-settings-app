@@ -13,7 +13,7 @@ const UserSearch = () => {
     return (
         <>
             <ItemSelector selection={setUser} />
-            <RunTest disabled={disableRun} />
+            <RunTest disabled={disableRun} user={userSelected} />
         </>
     )
 }
