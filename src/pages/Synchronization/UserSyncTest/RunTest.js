@@ -20,7 +20,10 @@ const RunTest = ({ disabled, user }) => {
     const [userTestValues, setValues] = useState(createInitialValues(''))
 
     useEffect(() => {
-        isEmpty(user) && setValues(createInitialValues(''))
+        if (isEmpty(user)) {
+            setValues(createInitialValues(''))
+            setRunTest(false)
+        }
     }, [user])
 
     const testUser = () => {
