@@ -17,13 +17,13 @@ const TestResult = ({ load, state, test }) => (
         {load ? (
             <CircularLoader small />
         ) : (
-            <p
+            <span
                 className={cx(classes.mainItem, {
                     [classes.maxValue]: state[test.state] >= test.maxValue,
                 })}
             >
                 {state[test.state]}
-            </p>
+            </span>
         )}
     </>
 )
@@ -40,15 +40,15 @@ const TestRow = ({ test, load, state }) => (
             <TestResult load={load} state={state} test={test} />
         </DataTableCell>
         <DataTableCell large className={classes.tableCell}>
-            <p className={classes.subItemTitle}>{test.title}</p>
+            <span className={classes.subItemTitle}>{test.title}</span>
         </DataTableCell>
         <DataTableCell large className={classes.tableCell}>
-            <p className={classes.subItemItem}>
+            <span className={classes.subItemItem}>
                 {i18n.t('Recommended maximum: {{maxValue}}', {
                     nsSeparator: '---',
                     maxValue: test.maxValue,
                 })}
-            </p>
+            </span>
         </DataTableCell>
     </DataTableRow>
 )
