@@ -13,10 +13,11 @@ export const getDataSize = async ({
 }) => {
     const programList = toArray(program)
     let metadataSize = 0
+    const TEIs = await getTEI({ dataEngine, programList, globalLimit, orgUnit })
 
-    await getTEI({ dataEngine, programList, globalLimit, orgUnit }).then(
-        result => result.map(data => (metadataSize += getByteLength(data)))
-    )
+    TEIs.forEach(data => {
+        metadataSize += getByteLength(data)
+    })
 
     return formatByteSize(metadataSize)
 }

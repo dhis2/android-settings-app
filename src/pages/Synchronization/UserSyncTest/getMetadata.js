@@ -41,7 +41,7 @@ export const getMetadataSize = async ({
     let metadataSize = 0
 
     await Promise.all([
-        getOrgUnit(dataEngine, orgUnitList),
+        fetchOrgUnits(dataEngine, orgUnitList),
         apiFetchOULevel(dataEngine),
         apiFetchProgram(dataEngine, programList),
         apiFetchProgramStage(dataEngine, programList),
@@ -69,7 +69,7 @@ export const getMetadataSize = async ({
     return formatByteSize(metadataSize)
 }
 
-const getOrgUnit = (dataEngine, orgUnitList) => {
+const fetchOrgUnits = (dataEngine, orgUnitList) => {
     const orgUnitPromises = []
     orgUnitList.map(ou => orgUnitPromises.push(apiFetchOrgUnit(dataEngine, ou)))
 
