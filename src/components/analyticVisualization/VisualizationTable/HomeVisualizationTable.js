@@ -20,7 +20,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const [specificSetting, setSpecificSetting] = useState({})
     const [section, setSection] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
-    const [elementName, setName] = useState()
+    const [elementName, setName] = useState('')
     const [groupId, setGroupId] = useState()
 
     const deleteVisualization = (visualization, currentGroup, groupId) => {
@@ -136,6 +136,7 @@ const VisualizationTable = ({
                             small
                             secondary
                             onClick={() => deleteGroup(item)}
+                            disabled={disabled}
                         >
                             {i18n.t('Delete Group')}
                         </Button>

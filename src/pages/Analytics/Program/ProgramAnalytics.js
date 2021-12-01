@@ -73,6 +73,7 @@ const ProgramAnalytics = () => {
             loading={load}
             error={errorDataStore}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {programsAnalytics && (
                 <>

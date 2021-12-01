@@ -5,7 +5,15 @@ import styles from './Page.module.css'
 import UnsavedChangesAlert from '../UnsavedChangesAlert'
 import { VisualizationsError } from '../noticeAlert'
 
-const Page = ({ loading, title, desc, unsavedChanges, error, children }) => {
+const Page = ({
+    loading,
+    title,
+    desc,
+    unsavedChanges,
+    error,
+    authority,
+    children,
+}) => {
     if (error) {
         return <VisualizationsError error={error.message} />
     }
@@ -22,7 +30,9 @@ const Page = ({ loading, title, desc, unsavedChanges, error, children }) => {
             </header>
 
             <div className={styles.content}>
-                <UnsavedChangesAlert unsavedChanges={unsavedChanges} />
+                {authority && (
+                    <UnsavedChangesAlert unsavedChanges={unsavedChanges} />
+                )}
                 {children}
             </div>
         </>
@@ -35,6 +45,7 @@ Page.propTypes = {
     desc: PropTypes.string,
     unsavedChanges: PropTypes.bool,
     error: PropTypes.object,
+    authority: PropTypes.bool,
     children: PropTypes.element,
 }
 

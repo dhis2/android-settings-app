@@ -108,6 +108,7 @@ const ProgramSyncSettings = () => {
             )}
             loading={load}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {globalSettings && (
                 <>

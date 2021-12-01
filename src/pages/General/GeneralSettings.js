@@ -82,6 +82,7 @@ const GeneralSettings = () => {
             title={i18n.t('General Settings')}
             loading={loading}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {settings && (
                 <>

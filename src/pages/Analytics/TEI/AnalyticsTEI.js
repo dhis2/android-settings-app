@@ -65,6 +65,7 @@ const AnalyticsTEI = () => {
             loading={load}
             error={errorDataStore}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {analyticSettings && (
                 <>

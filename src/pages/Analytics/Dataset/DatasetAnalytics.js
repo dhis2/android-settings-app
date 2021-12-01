@@ -74,6 +74,7 @@ const DatasetAnalytics = () => {
             loading={load}
             error={errorDataStore}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {datasetAnalytics && (
                 <>
