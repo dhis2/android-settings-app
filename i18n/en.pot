@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-17T19:17:59.427Z\n"
-"PO-Revision-Date: 2021-11-17T19:17:59.427Z\n"
+"POT-Creation-Date: 2021-12-01T20:03:39.830Z\n"
+"PO-Revision-Date: 2021-12-01T20:03:39.830Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -363,6 +363,16 @@ msgid "Must start with + and be at least 4 characters long."
 msgstr ""
 
 msgid "SMS Result Sender phone number"
+msgstr ""
+
+msgid "Use new version of Tracker Importer"
+msgstr ""
+
+msgid ""
+"Use new tracker endpoints dedicated to importing and querying tracker "
+"objects (including tracked entities, enrollments, events, and "
+"relationships). Be aware that some functionality is not yet ready in the "
+"new endpoints, but they support their primary use-cases."
 msgstr ""
 
 msgid "Reset all values to default"

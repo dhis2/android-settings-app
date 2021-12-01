@@ -202,12 +202,10 @@ const getOrgUnit = (orgUnits, dataEngine) => {
 }
 
 const getProgramRules = (programs, dataEngine) => {
-    const programRulesPromises = []
     const programRules = []
-    programs.map(program =>
-        programRulesPromises.push(
-            apiFetchProgramRulesBasic(dataEngine, program)
-        )
+
+    const programRulesPromises = programs.map(program =>
+        apiFetchProgramRulesBasic(dataEngine, program.id)
     )
 
     return Promise.all(programRulesPromises).then(result => {

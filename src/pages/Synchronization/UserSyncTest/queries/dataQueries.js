@@ -29,7 +29,7 @@ export const apiFetchTrackedEntityInstances = async ({
 const eventsQuery = ({ ou, program, pageSize = 500 }) => ({
     resource: 'events',
     params: {
-        ou,
+        orgUnit: ou,
         ouMode: 'DESCENDANTS',
         program,
         pageSize,
