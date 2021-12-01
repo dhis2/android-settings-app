@@ -44,7 +44,7 @@ const FooterStripButtons = ({
                     primary
                     className={buttonStyles.button_marginLeft}
                     onClick={handleOpenSaveDialog}
-                    disabled={saveButtonDisabled}
+                    disabled={saveButtonDisabled || disableAll}
                 >
                     {i18n.t('Save')}
                 </Button>

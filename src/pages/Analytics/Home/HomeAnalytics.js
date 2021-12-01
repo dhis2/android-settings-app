@@ -68,6 +68,7 @@ const HomeAnalytics = () => {
             loading={load}
             error={errorDataStore}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {homeAnalytics && (
                 <>

@@ -2,8 +2,8 @@ import React, { createRef, useEffect, useState } from 'react'
 import { Popover, FlyoutMenu } from '@dhis2/ui'
 import { useDataEngine } from '@dhis2/app-runtime'
 import ItemSearchField from './ItemSearchField'
-import ContentMenuItem from './ContentMenuItem'
-import { getUserQuery } from '../userSyncQueries'
+import ContentMenuGroup from './ContentMenuGroup'
+import { getUserQuery } from '../queries/userSyncQueries'
 import useDebounce from '../../../../utils/useDebounce'
 import classes from './styles/ItemSelector.module.css'
 
@@ -11,24 +11,21 @@ const ItemSelector = ({ selection }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [filter, setFilter] = useState('')
     const [items, setItems] = useState(null)
-    const [maxOptions, setMaxOptions] = useState(new Set())
     const [disableField, setDisable] = useState(false)
     const dataEngine = useDataEngine()
     const debouncedFilterText = useDebounce(filter, 350)
 
     useEffect(() => {
-        const query = getUserQuery(debouncedFilterText, Array.from(maxOptions))
-
+        const query = getUserQuery(debouncedFilterText)
         dataEngine.query({ items: query }).then(res => {
             setItems(res.items.users)
         })
-    }, [debouncedFilterText, maxOptions])
+    }, [debouncedFilterText])
 
     const closeMenu = () => {
         setIsOpen(false)
         setFilter('')
-        selection('')
-        setMaxOptions(new Set())
+        selection({})
     }
 
     const openMenu = () => setIsOpen(true)
@@ -37,7 +34,7 @@ const ItemSelector = ({ selection }) => {
         setDisable(true)
         closeMenu()
         setFilter(item.name)
-        selection(item.id)
+        selection(item)
     }
 
     const clearField = () => {
@@ -47,18 +44,8 @@ const ItemSelector = ({ selection }) => {
 
     const getMenus = () => {
         const displayItems = items.slice(0, 5)
-        return displayItems.map(item => (
-            <ContentMenuItem
-                key={item.id || item.key}
-                name={item.displayName || item.name}
-                onInsert={addItem(item)}
-                type={item.type}
-                valid={item.valid}
-            />
-        ))
+        return <ContentMenuGroup addItem={addItem} items={displayItems} />
     }
-
-    const getItems = () => getMenus()
 
     const updateFilter = ({ value }) => setFilter(value)
 
@@ -89,7 +76,7 @@ const ItemSelector = ({ selection }) => {
                             dataTest="item-menu"
                             maxWidth="400px"
                         >
-                            {getItems()}
+                            {getMenus()}
                         </FlyoutMenu>
                     </div>
                 </Popover>

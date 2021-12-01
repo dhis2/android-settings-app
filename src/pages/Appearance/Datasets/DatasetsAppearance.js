@@ -90,6 +90,7 @@ const DatasetsAppearance = () => {
             )}
             loading={load}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {globalSettings && (
                 <>

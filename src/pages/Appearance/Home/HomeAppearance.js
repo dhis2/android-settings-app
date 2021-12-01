@@ -71,6 +71,7 @@ const HomeAppearance = () => {
             )}
             loading={load}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {settings && (
                 <>

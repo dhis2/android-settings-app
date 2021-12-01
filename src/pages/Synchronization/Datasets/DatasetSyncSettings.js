@@ -86,6 +86,7 @@ const DatasetSyncSettings = () => {
             )}
             loading={load}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {globalSettings && (
                 <>

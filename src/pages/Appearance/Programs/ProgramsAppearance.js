@@ -109,6 +109,7 @@ const ProgramsAppearance = () => {
             )}
             unsavedChanges={!disableSave}
             loading={load}
+            authority={!disable}
         >
             {globalSettings && (
                 <>

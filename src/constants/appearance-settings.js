@@ -54,6 +54,10 @@ export const appearanceDefault = {
                     filter: true,
                     sort: true,
                 },
+                followUp: {
+                    filter: true,
+                    sort: true,
+                },
             },
             specificSettings: {},
         },
