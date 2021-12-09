@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-01T20:03:39.830Z\n"
-"PO-Revision-Date: 2021-12-01T20:03:39.830Z\n"
+"POT-Creation-Date: 2021-12-13T14:29:18.076Z\n"
+"PO-Revision-Date: 2021-12-13T14:29:18.076Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -400,21 +400,6 @@ msgstr ""
 msgid "It looks like there aren't any configured visualizations."
 msgstr ""
 
-msgid "Recommended maximum: {{maxValue}}"
-msgstr ""
-
-msgid "User sync test"
-msgstr ""
-
-msgid "Check the amount of data a user would sync to their device."
-msgstr ""
-
-msgid "Search for a user"
-msgstr ""
-
-msgid "User"
-msgstr ""
-
 msgid "Maximum number of periods to download data sets for"
 msgstr ""
 
@@ -458,6 +443,9 @@ msgid "Set Data set sync settings"
 msgstr ""
 
 msgid "Define synchronization parameters for data sets"
+msgstr ""
+
+msgid "User sync test"
 msgstr ""
 
 msgid "Run user sync test"
@@ -832,5 +820,14 @@ msgstr ""
 msgid "program"
 msgstr ""
 
+msgid "Recommended maximum: {{maxValue}}"
+msgstr ""
+
 msgid "User Sync Test"
+msgstr ""
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr ""
+
+msgid "User"
 msgstr ""
