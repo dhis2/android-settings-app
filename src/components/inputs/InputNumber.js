@@ -1,6 +1,9 @@
 import React from 'react'
+import cx from 'classnames'
+import i18n from '@dhis2/d2-i18n'
 import { InputField } from '@dhis2/ui'
 import PropTypes from '@dhis2/prop-types'
+import styles from './Invalid.module.css'
 
 export const InputNumber = ({
     onChange,
@@ -10,19 +13,39 @@ export const InputNumber = ({
     disabled,
     ...props
 }) => {
-    const max = maxValue && maxValue.toString()
+    let key = ''
+
+    switch (keyDownload) {
+        case 'teiDownload':
+            key = 'TEI'
+            break
+        case 'eventsDownload':
+            key = 'events'
+            break
+    }
+
+    const showWarning = value >= maxValue
+    const validationText = showWarning
+        ? i18n.t(
+              'It is recommended to download a maximum of {{maxValue}} {{key}}',
+              { maxValue, key }
+          )
+        : ''
 
     return (
-        <InputField
-            type="number"
-            inputWidth="100px"
-            name={keyDownload}
-            max={max}
-            value={value.toString()}
-            onChange={onChange}
-            disabled={disabled}
-            {...props}
-        />
+        <div className={cx({ [styles.invalid]: showWarning })}>
+            <InputField
+                type="number"
+                inputWidth="120px"
+                warning={showWarning}
+                validationText={validationText}
+                name={keyDownload}
+                value={value.toString()}
+                onChange={onChange}
+                disabled={disabled}
+                {...props}
+            />
+        </div>
     )
 }
 
