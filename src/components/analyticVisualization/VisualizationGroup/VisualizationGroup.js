@@ -15,7 +15,7 @@ const findDefaultGroup = (type, groupList, settings) => {
     switch (type) {
         case 'program':
         case 'dataset':
-            const selectedGroup = groupList[settings.program]
+            const selectedGroup = groupList[settings[type]]
             defaultGroup = find(selectedGroup, g => g.name === DEFAULT)
             break
         default:
@@ -36,6 +36,7 @@ export const VisualizationGroup = ({ settings, onChange, groupList, type }) => {
         setGroupType(e.checked)
         if (!isEmpty(groupList)) {
             const defaultFound = findDefaultGroup(type, groupList, settings)
+            console.log()
             onChange({
                 ...settings,
                 [e.name]: {
