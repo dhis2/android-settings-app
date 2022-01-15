@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-20T20:55:25.412Z\n"
-"PO-Revision-Date: 2021-12-20T20:55:25.412Z\n"
+"POT-Creation-Date: 2022-01-15T02:56:31.316Z\n"
+"PO-Revision-Date: 2022-01-15T02:56:31.316Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Reserved values downloaded per TEI attribute"
 msgstr ""
 
-msgid "It is recommended a maximum of 500 reserve values"
+msgid "Recommended maximum is {{maxValue}} reserved values"
 msgstr ""
 
 msgid "SMS Gateway phone number"
@@ -381,7 +381,10 @@ msgstr ""
 msgid "Reset all values to default"
 msgstr ""
 
-msgid "It is recommended a maximum of {{maxValue}} {{keyDownload}}"
+msgid "Recommended maximum is {{maxValue}} TEI"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} events"
 msgstr ""
 
 msgid "No TEI Analytics found"

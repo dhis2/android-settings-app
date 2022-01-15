@@ -27,7 +27,7 @@ export const ReservedValues = ({ onChange, value, ...props }) => {
             step="10"
             inputWidth="120px"
             validationText={i18n.t(
-                'It is recommended a maximum of {{maxValue}} reserved values',
+                'Recommended maximum is {{maxValue}} reserved values',
                 { maxValue: MAXVALUE }
             )}
             {...props}

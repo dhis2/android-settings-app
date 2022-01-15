@@ -13,24 +13,22 @@ export const InputNumber = ({
     disabled,
     ...props
 }) => {
-    let key = ''
-
+    let warning = ''
     switch (keyDownload) {
         case 'teiDownload':
-            key = 'TEI'
+            warning = i18n.t('Recommended maximum is {{maxValue}} TEI', {
+                maxValue,
+            })
             break
         case 'eventsDownload':
-            key = 'events'
+            warning = i18n.t('Recommended maximum is {{maxValue}} events', {
+                maxValue,
+            })
             break
     }
 
     const showWarning = value >= maxValue
-    const validationText = showWarning
-        ? i18n.t(
-              'It is recommended to download a maximum of {{maxValue}} {{key}}',
-              { maxValue, key }
-          )
-        : ''
+    const validationText = showWarning ? warning : ''
 
     return (
         <div className={cx({ [styles.invalid]: showWarning })}>
