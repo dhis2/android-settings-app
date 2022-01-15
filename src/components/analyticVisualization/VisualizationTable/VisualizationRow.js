@@ -17,7 +17,7 @@ export const VisualizationRow = ({
                 className={cx([styles.boxContainer, styles.rowContainer])}
                 key={visualization.id}
             >
-                <p> {visualization.name} </p>
+                <p> {visualization.name || visualization.visualizationName} </p>
                 <div>
                     <Button
                         small
