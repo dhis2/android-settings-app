@@ -10,7 +10,7 @@ test('"http://www.aa.com" is a valid URL', () => {
     expect(isValidURL(url)).toBeTruthy()
 })
 
-test('"http://matomo.com" is not a valid URL', () => {
+test('"http://matomo.com" is a valid URL', () => {
     const url = 'http://matomo.com'
     expect(isValidURL(url)).toBeTruthy()
 })
