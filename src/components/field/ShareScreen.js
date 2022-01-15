@@ -15,8 +15,7 @@ export const ShareScreen = ({ value, onChange, ...props }) => {
     return (
         <CheckboxField
             name={CODE}
-            label={i18n.t('Take screenshots and share it')}
-            helpText={i18n.t(
+            label={i18n.t(
                 'Allow user to take screenshots and share their screen.'
             )}
             checked={value[CODE]}
