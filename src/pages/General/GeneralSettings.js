@@ -8,6 +8,7 @@ import {
     MatomoId,
     MatomoUrl,
     ReservedValues,
+    ShareScreen,
     SmsGateway,
     SmsResultSender,
 } from '../../components/field'
@@ -112,6 +113,11 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <EncryptDB
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <ShareScreen
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
