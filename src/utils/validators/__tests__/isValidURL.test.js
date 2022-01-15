@@ -30,7 +30,7 @@ test('"htp://future" is not a valid URL', () => {
     expect(isValidURL(url)).toBeFalsy()
 })
 
-test('"apple.gr" is a valid URL', () => {
+test('"apple.gr" is not a valid URL', () => {
     const url = 'apple.gr'
     expect(isValidURL(url)).toBeFalsy()
 })
