@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-15T14:51:03.774Z\n"
-"PO-Revision-Date: 2022-01-15T14:51:03.774Z\n"
+"POT-Creation-Date: 2022-01-15T14:58:51.278Z\n"
+"PO-Revision-Date: 2022-01-15T14:58:51.278Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -357,6 +357,9 @@ msgid "Reserved values downloaded per TEI attribute"
 msgstr ""
 
 msgid "Recommended maximum is {{maxValue}} reserved values"
+msgstr ""
+
+msgid "Allow user to take screenshots and share their screen."
 msgstr ""
 
 msgid "SMS Gateway phone number"
