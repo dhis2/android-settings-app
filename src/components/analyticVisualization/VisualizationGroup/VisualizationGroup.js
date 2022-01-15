@@ -36,7 +36,6 @@ export const VisualizationGroup = ({ settings, onChange, groupList, type }) => {
         setGroupType(e.checked)
         if (!isEmpty(groupList)) {
             const defaultFound = findDefaultGroup(type, groupList, settings)
-            console.log()
             onChange({
                 ...settings,
                 [e.name]: {
