@@ -31,8 +31,6 @@ else
     echo "URL is correct ..."
 fi
 
-exit 0
-
 # find zip file
 cd build
 app_file=$(ls *.zip)
