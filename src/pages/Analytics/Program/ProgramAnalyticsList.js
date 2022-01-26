@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
+import { useDataEngine } from '@dhis2/app-runtime'
 import { ProgramTable } from '../../../components/analyticVisualization'
 import { useReadProgramQuery } from './ProgramVisualizationQueries'
-import { prepareRows, rowsToDataStore } from './helper'
+import { rowsToDataStore, updateVisualizationRow } from './helper'
 import NewProgramVisualization from './NewProgramVisualization'
 
 const ProgramAnalyticsList = ({
@@ -12,6 +13,7 @@ const ProgramAnalyticsList = ({
     handleVisualizations,
     disable,
 }) => {
+    const dataEngine = useDataEngine()
     const { programList } = useReadProgramQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
@@ -19,13 +21,15 @@ const ProgramAnalyticsList = ({
 
     useEffect(() => {
         if (visualizations && programList) {
-            const { visualizationsByPrograms, groupList } = prepareRows(
+            updateVisualizationRow(
                 visualizations,
-                programList
-            )
-            setRows(visualizationsByPrograms)
-            setGroups(groupList)
-            setInitialRows(visualizationsByPrograms)
+                programList,
+                dataEngine
+            ).then(({ visualizationsByPrograms, groupList }) => {
+                setRows(visualizationsByPrograms)
+                setGroups(groupList)
+                setInitialRows(visualizationsByPrograms)
+            })
         }
     }, [visualizations, programList])
 
