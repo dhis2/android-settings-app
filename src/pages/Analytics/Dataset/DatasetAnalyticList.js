@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
+import { useDataEngine } from '@dhis2/app-runtime'
 import { useReadDatasetQuery } from './DatasetVisualizationQuery'
-import { prepareRows, rowsToDataStore } from './helper'
+import { rowsToDataStore, updateVisualizationRow } from './helper'
 import NewDatasetVisualization from './NewDatasetVisualization'
 import { DatasetTable } from '../../../components/analyticVisualization'
 
@@ -12,6 +13,7 @@ const DatasetAnalyticList = ({
     handleVisualizations,
     disable,
 }) => {
+    const dataEngine = useDataEngine()
     const { datasetList } = useReadDatasetQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
@@ -19,13 +21,15 @@ const DatasetAnalyticList = ({
 
     useEffect(() => {
         if (visualizations && datasetList) {
-            const { visualizationsByDatasets, groupList } = prepareRows(
+            updateVisualizationRow(
                 visualizations,
-                datasetList
-            )
-            setRows(visualizationsByDatasets)
-            setGroups(groupList)
-            setInitialRows(visualizationsByDatasets)
+                datasetList,
+                dataEngine
+            ).then(({ visualizationsByDatasets, groupList }) => {
+                setRows(visualizationsByDatasets)
+                setGroups(groupList)
+                setInitialRows(visualizationsByDatasets)
+            })
         }
     }, [visualizations, datasetList])
 
