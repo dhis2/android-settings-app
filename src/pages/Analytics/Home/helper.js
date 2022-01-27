@@ -3,7 +3,6 @@ import flattenDeep from 'lodash/flattenDeep'
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
-import { apiFetchVisualizations } from '../VisualizationQuery'
 import { validateObjectByProperty } from '../../../utils/validators'
 import {
     createBasicVisualization,
@@ -65,21 +64,6 @@ export const getVisualizationIdList = datastore => {
         visualizationList.push(map(group.visualizations, 'id'))
     })
     return flattenDeep(visualizationList)
-}
-
-/**
- * Update rows, verify if the android visualization has a title
- * */
-
-export const updateVisualizationRows = (
-    visualizations,
-    dataEngine,
-    handleRows
-) => {
-    const query = getVisualizationIdList(visualizations)
-    apiFetchVisualizations(dataEngine, query).then(visualizationAPI =>
-        handleRows(createRows(visualizations, visualizationAPI))
-    )
 }
 
 /**
