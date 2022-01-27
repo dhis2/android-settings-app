@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from '@dhis2/prop-types'
+import i18n from '@dhis2/d2-i18n'
+import { CircularLoader } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import { useDataEngine } from '@dhis2/app-runtime'
-import { ProgramTable } from '../../../components/analyticVisualization'
-import { useReadProgramQuery } from './ProgramVisualizationQueries'
-import { rowsToDataStore, updateVisualizationRow } from './helper'
 import NewProgramVisualization from './NewProgramVisualization'
+import { ProgramTable } from '../../../components/analyticVisualization'
+import { NoticeError } from '../../../components/noticeAlert'
+import { useReadProgramQuery } from './ProgramVisualizationQueries'
+import { useVisualizations } from '../VisualizationQuery'
+import { prepareRows, rowsToDataStore } from './helper'
+import { getVisualizationIdList } from '../helper'
 
 const ProgramAnalyticsList = ({
     visualizations,
     handleVisualizations,
     disable,
 }) => {
-    const dataEngine = useDataEngine()
+    const {
+        loading,
+        error,
+        visualizations: visualizationAPI,
+    } = useVisualizations(getVisualizationIdList(visualizations))
     const { programList } = useReadProgramQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [groups, setGroups] = useState()
 
     useEffect(() => {
-        if (visualizations && programList) {
-            updateVisualizationRow(
+        if (visualizations && programList && visualizationAPI) {
+            const { visualizationsByPrograms, groupList } = prepareRows(
                 visualizations,
                 programList,
-                dataEngine
-            ).then(({ visualizationsByPrograms, groupList }) => {
-                setRows(visualizationsByPrograms)
-                setGroups(groupList)
-                setInitialRows(visualizationsByPrograms)
-            })
+                visualizationAPI
+            )
+            setRows(visualizationsByPrograms)
+            setGroups(groupList)
+            setInitialRows(visualizationsByPrograms)
         }
-    }, [visualizations, programList])
+    }, [visualizations, programList, visualizationAPI])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {
@@ -41,6 +48,13 @@ const ProgramAnalyticsList = ({
 
     return (
         <>
+            {loading && <CircularLoader small />}
+            {error && (
+                <NoticeError
+                    title={i18n.t('Error loading visualizations')}
+                    notice={error.message}
+                />
+            )}
             {!isEmpty(rows) && (
                 <ProgramTable
                     rows={rows}
