@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-12-01T20:03:39.830Z\n"
-"PO-Revision-Date: 2021-12-01T20:03:39.830Z\n"
+"POT-Creation-Date: 2022-01-27T03:08:56.907Z\n"
+"PO-Revision-Date: 2022-01-27T03:08:56.907Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -620,6 +620,9 @@ msgid "metadata download size (KB)"
 msgstr ""
 
 msgid "data download size (KB)"
+msgstr ""
+
+msgid "Error loading visualizations"
 msgstr ""
 
 msgid "Manage visualizations for data set."

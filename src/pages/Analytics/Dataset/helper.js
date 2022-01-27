@@ -1,11 +1,9 @@
 import mapValues from 'lodash/mapValues'
 import { validateObjectByProperty } from '../../../utils/validators'
-import { apiFetchVisualizations } from '../VisualizationQuery'
 import {
     createBasicVisualization,
     createGroup,
     findVisualizationById,
-    getVisualizationIdList,
 } from '../helper'
 
 export const createInitialValues = initialValues => ({
@@ -82,17 +80,6 @@ export const getGroupList = visualizations => {
     })
 
     return groupList
-}
-
-export const updateVisualizationRow = (
-    visualizations,
-    datasetList,
-    dataEngine
-) => {
-    const idList = getVisualizationIdList(visualizations)
-    return apiFetchVisualizations(dataEngine, idList).then(visualizationAPI =>
-        prepareRows(visualizations, datasetList, visualizationAPI)
-    )
 }
 
 /**
