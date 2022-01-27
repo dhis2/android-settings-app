@@ -5,6 +5,11 @@ test('"https://debug.dhis2.org" is a valid URL', () => {
     expect(isValidURL(url)).toBeTruthy()
 })
 
+test('"http://hoyhabloyo.com:8080/matomo.php" is a valid URL', () => {
+    const url = 'http://hoyhabloyo.com:8080/matomo.php'
+    expect(isValidURL(url)).toBeTruthy()
+})
+
 test('"http://www.aa.com" is a valid URL', () => {
     const url = 'http://www.aa.com'
     expect(isValidURL(url)).toBeTruthy()
