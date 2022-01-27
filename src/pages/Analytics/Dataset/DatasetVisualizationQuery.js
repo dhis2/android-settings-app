@@ -5,7 +5,7 @@ const datasetsQuery = {
         resource: 'dataSets',
         params: {
             fields: ['id', 'name'],
-            pager: false,
+            paging: 'false',
         },
     },
 }
