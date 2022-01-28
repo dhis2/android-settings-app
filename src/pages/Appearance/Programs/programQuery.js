@@ -9,7 +9,7 @@ const getProgramsQuery = {
         params: {
             fields: ['id', 'name', 'programType', 'categoryCombo[id,name]'],
             filter: 'access.data.write:eq:true',
-            pager: false,
+            paging: 'false',
         },
     },
 }
