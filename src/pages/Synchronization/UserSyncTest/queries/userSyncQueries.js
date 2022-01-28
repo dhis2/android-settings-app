@@ -10,6 +10,7 @@ export const getUserQuery = (query = '') => {
             fields:
                 'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
             order: 'name:asc',
+            paging: 'false',
         },
     }
 }

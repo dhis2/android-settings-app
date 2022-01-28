@@ -9,7 +9,7 @@ const getDatasetsQuery = {
         params: {
             fields: ['id', 'name', 'periodType', 'categoryCombo[id,name]'],
             filter: 'access.data.write:eq:true',
-            pager: false,
+            paging: 'false',
         },
     },
 }

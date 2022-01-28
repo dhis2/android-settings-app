@@ -11,7 +11,7 @@ const programsQuery = {
                 'programStages[id,name,repeatable]',
             ],
             filter: 'programStages.repeatable:eq:true',
-            pager: 'false',
+            paging: 'false',
         },
     },
 }
@@ -58,7 +58,7 @@ const dataElementsQuery = {
                 'name',
                 'programStageDataElements[dataElement[id,name,valueType]',
             ],
-            pager: 'false',
+            paging: 'false',
         },
     },
 }
@@ -83,7 +83,7 @@ const attributesQuery = {
                 'name',
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,name,valueType]]',
             ],
-            pager: 'false',
+            paging: 'false',
         },
     },
 }
@@ -103,7 +103,7 @@ const programIndicatorsQuery = {
         id: ({ programId }) => `${programId}`,
         params: {
             fields: ['id', 'name', 'programIndicators[id,name,expression]'],
-            pager: 'false',
+            paging: 'false',
         },
     },
 }
