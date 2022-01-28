@@ -56,7 +56,11 @@ const GlobalSettings = () => {
     }, [settings])
 
     const saveSettings = async () => {
-        const settingsToSave = { ...settings, dataSetSettings, programSettings }
+        const settingsToSave = {
+            ...createInitialValues(settings),
+            dataSetSettings,
+            programSettings,
+        }
         await mutate({ settings: settingsToSave })
     }
 
