@@ -12,7 +12,7 @@ const visualizations = {
                 'userGroupAccesses',
                 'userAccesses',
             ],
-            pager: 'false',
+            paging: 'false',
         },
     },
 }
