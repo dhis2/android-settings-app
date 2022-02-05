@@ -12,7 +12,6 @@ import {
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { createRows } from './helper'
 
 const HomeAnalytics = () => {
     const {
@@ -50,7 +49,7 @@ const HomeAnalytics = () => {
         const settingsToSave = {
             tei,
             dhisVisualizations: {
-                home: createRows(homeAnalytics),
+                home: homeAnalytics,
                 program,
                 dataSet,
             },
