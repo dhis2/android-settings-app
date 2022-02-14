@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Bitrise input variables: $USERNAME_DHIS, $PASSWORD_DHIS, $SERVER_URL
+SERVER_URL_LAST_CHAR=${SERVER_URL: -1}
 
 # check every argument is filled
 if [[ -z "$USERNAME_DHIS" || -z "$PASSWORD_DHIS" || -z "$SERVER_URL" ]];
@@ -13,7 +14,6 @@ else
 fi
 
 # check if the last url character is / if not it will be added
-SERVER_URL_LAST_CHAR=${SERVER_URL: -1}
 if  [ "$SERVER_URL_LAST_CHAR" = "/" ]
 then
     SERVER_URL=${SERVER_URL::-1}
@@ -24,7 +24,7 @@ else
 fi
 
 # find zip file
-cd build
+cd build/bundle/
 app_file=$(ls *.zip)
 
 # rename zip removing version numbers
