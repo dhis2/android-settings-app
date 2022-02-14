@@ -1,15 +1,6 @@
 #!/bin/bash
 
-# this is temporary, once moved to bitrise it will be removed
-if [ $# -ne 3 ]; then
-    echo "Wrong arguments. Usage: ./deploy_settings_app USERNAME PASSWORD SERVER_URL"
-    exit -1
-fi
-
-USERNAME_DHIS=$1
-PASSWORD_DHIS=$2
-SERVER_URL=$3
-SERVER_URL_LAST_CHAR=${SERVER_URL: -1}
+# Bitrise input variables: $USERNAME_DHIS, $PASSWORD_DHIS, $SERVER_URL
 
 # check every argument is filled
 if [[ -z "$USERNAME_DHIS" || -z "$PASSWORD_DHIS" || -z "$SERVER_URL" ]];
@@ -22,6 +13,7 @@ else
 fi
 
 # check if the last url character is / if not it will be added
+SERVER_URL_LAST_CHAR=${SERVER_URL: -1}
 if  [ "$SERVER_URL_LAST_CHAR" = "/" ]
 then
     SERVER_URL=${SERVER_URL::-1}
