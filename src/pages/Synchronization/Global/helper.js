@@ -1,7 +1,13 @@
-import { defaultDataSync, defaultMetadataSync } from '../../../components/field'
+import {
+    defaultDataSync,
+    defaultMetadataSync,
+    defaultTrackerImporterVersion,
+} from '../../../components/field'
 
 export const createInitialValues = prevGlobalDetails => ({
     metadataSync: prevGlobalDetails.metadataSync || defaultMetadataSync,
     dataSync: prevGlobalDetails.dataSync || defaultDataSync,
-    newTrackerImporter: false,
+    trackerImporterVersion:
+        prevGlobalDetails.trackerImporterVersion ||
+        defaultTrackerImporterVersion,
 })

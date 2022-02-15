@@ -1,5 +1,10 @@
 import mapValues from 'lodash/mapValues'
 import { validateObjectByProperty } from '../../../utils/validators'
+import {
+    createBasicVisualization,
+    createGroup,
+    findVisualizationById,
+} from '../helper'
 
 export const createInitialValues = initialValues => ({
     id: initialValues.id || '',
@@ -18,7 +23,8 @@ export const invalidMandatoryFields = settings => {
 
 export const createVisualizationValues = value => ({
     id: value.visualization || value.id,
-    name: value.name || value.visualizationName,
+    name: value.name || '',
+    visualizationName: value.visualizationName || value.name,
     timestamp: value.timestamp || new Date().toJSON(),
     dataset: value.dataset,
     datasetName: value.datasetName,
@@ -76,7 +82,12 @@ export const getGroupList = visualizations => {
     return groupList
 }
 
-export const prepareRows = (visualizations, datasetList) => {
+/**
+ * Verify if the visualization has a title, if not add the API name
+ * Only save visualization that can be found using the API
+ * */
+
+export const prepareRows = (visualizations, datasetList, visualizationAPI) => {
     const rows = {}
     mapValues(visualizations, (dataset, i) => {
         let groups = {}
@@ -86,23 +97,33 @@ export const prepareRows = (visualizations, datasetList) => {
             group.dataset = i
             group.datasetName = dataset.datasetName || foundDataset.name
             group.visualizations.map(visualization => {
-                visual.push({
-                    ...visualization,
-                    timestamp: visualization.timestamp || new Date().toJSON(),
-                    dataset: i,
-                    datasetName: dataset.datasetName || foundDataset.name,
-                    group: {
-                        id: group.id,
-                        name: group.name,
-                    },
-                })
-                groups = {
-                    ...groups,
-                    [group.id]: visual,
-                }
-                rows[i] = {
-                    datasetName: dataset.datasetName || foundDataset.name,
-                    groups: { ...groups },
+                const visualizationFound = findVisualizationById(
+                    visualizationAPI,
+                    visualization
+                )
+                if (visualizationFound) {
+                    visual.push({
+                        ...createBasicVisualization(
+                            visualization,
+                            visualizationFound
+                        ),
+                        timestamp:
+                            visualization.timestamp || new Date().toJSON(),
+                        dataset: i,
+                        datasetName: dataset.datasetName || foundDataset.name,
+                        group: {
+                            id: group.id,
+                            name: group.name,
+                        },
+                    })
+                    groups = {
+                        ...groups,
+                        [group.id]: visual,
+                    }
+                    rows[i] = {
+                        datasetName: dataset.datasetName || foundDataset.name,
+                        groups: { ...groups },
+                    }
                 }
             })
         })
@@ -113,12 +134,6 @@ export const prepareRows = (visualizations, datasetList) => {
         groupList: getGroupList(rows),
     }
 }
-
-export const createGroup = (group, visualizations) => ({
-    id: group.id,
-    name: group.name,
-    visualizations: group.visualizations || visualizations,
-})
 
 export const rowsToDataStore = rows => {
     const updatedRows = {}

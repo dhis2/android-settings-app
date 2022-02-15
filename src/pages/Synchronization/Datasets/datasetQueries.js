@@ -10,7 +10,7 @@ export const getDatasetQuery = {
         params: {
             fields: ['id', 'name', 'periodType'],
             filter: 'access.read:eq:true',
-            pager: false,
+            paging: 'false',
         },
     },
 }

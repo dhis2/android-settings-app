@@ -1,5 +1,10 @@
 import mapValues from 'lodash/mapValues'
 import { validateObjectByProperty } from '../../../utils/validators'
+import {
+    createBasicVisualization,
+    createGroup,
+    findVisualizationById,
+} from '../helper'
 
 export const createInitialValues = initialValues => ({
     id: initialValues.id || '',
@@ -18,7 +23,8 @@ export const invalidMandatoryFields = settings => {
 
 export const createVisualizationValues = value => ({
     id: value.visualization || value.id,
-    name: value.name || value.visualizationName,
+    name: value.name || '',
+    visualizationName: value.visualizationName || value.name,
     timestamp: value.timestamp || new Date().toJSON(),
     program: value.program,
     programName: value.programName,
@@ -47,7 +53,11 @@ export const getGroupList = visualizations => {
     return groupList
 }
 
-export const prepareRows = (visualizations, programList) => {
+/**
+ * Verify if the visualization has a title, if not add the API name
+ * Only save visualizations that can be found using the API
+ * */
+export const prepareRows = (visualizations, programList, visualizationAPI) => {
     const rows = {}
     mapValues(visualizations, (program, i) => {
         let groups = {}
@@ -57,23 +67,33 @@ export const prepareRows = (visualizations, programList) => {
             group.program = i
             group.programName = program.programName || foundProgram.name
             group.visualizations.map(visualization => {
-                visual.push({
-                    ...visualization,
-                    timestamp: visualization.timestamp || new Date().toJSON(),
-                    program: i,
-                    programName: program.programName || foundProgram.name,
-                    group: {
-                        id: group.id,
-                        name: group.name,
-                    },
-                })
-                groups = {
-                    ...groups,
-                    [group.id]: visual,
-                }
-                rows[i] = {
-                    programName: program.programName || foundProgram.name,
-                    groups: { ...groups },
+                const visualizationFound = findVisualizationById(
+                    visualizationAPI,
+                    visualization
+                )
+                if (visualizationFound) {
+                    visual.push({
+                        ...createBasicVisualization(
+                            visualization,
+                            visualizationFound
+                        ),
+                        timestamp:
+                            visualization.timestamp || new Date().toJSON(),
+                        program: i,
+                        programName: program.programName || foundProgram.name,
+                        group: {
+                            id: group.id,
+                            name: group.name,
+                        },
+                    })
+                    groups = {
+                        ...groups,
+                        [group.id]: visual,
+                    }
+                    rows[i] = {
+                        programName: program.programName || foundProgram.name,
+                        groups: { ...groups },
+                    }
                 }
             })
         })
@@ -84,12 +104,6 @@ export const prepareRows = (visualizations, programList) => {
         groupList: getGroupList(rows),
     }
 }
-
-export const createGroup = (group, visualizations) => ({
-    id: group.id,
-    name: group.name,
-    visualizations: group.visualizations || visualizations,
-})
 
 export const rowsToDataStore = rows => {
     const updatedRows = {}

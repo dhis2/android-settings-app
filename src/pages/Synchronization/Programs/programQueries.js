@@ -9,6 +9,7 @@ export const getProgramsQuery = {
         params: {
             fields: ['id', 'name', 'programType'],
             filter: 'access.read:eq:true',
+            paging: 'false',
         },
     },
 }

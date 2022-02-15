@@ -5,7 +5,7 @@ const programsQuery = {
         resource: 'programs',
         params: {
             fields: ['id', 'name'],
-            pager: false,
+            paging: 'false',
         },
     },
 }
