@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-27T15:28:43.869Z\n"
-"PO-Revision-Date: 2022-01-27T15:28:43.869Z\n"
+"POT-Creation-Date: 2022-03-01T21:31:57.542Z\n"
+"PO-Revision-Date: 2022-03-01T21:31:57.542Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -345,6 +345,14 @@ msgid "Analytics reporting URL (Matomo)"
 msgstr ""
 
 msgid "Must be a valid url"
+msgstr ""
+
+msgid "Add message of the day"
+msgstr ""
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
 msgstr ""
 
 msgid "1 Week"
