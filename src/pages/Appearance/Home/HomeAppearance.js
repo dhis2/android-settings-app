@@ -16,7 +16,7 @@ const HomeAppearance = () => {
     const {
         load,
         home,
-        completionSpinner,
+        programConfiguration,
         programSettings,
         dataSetSettings,
     } = useReadAppearanceDataStore()
@@ -49,7 +49,7 @@ const HomeAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            completionSpinner,
+            programConfiguration,
             filterSorting: {
                 home: settings,
                 programSettings,
