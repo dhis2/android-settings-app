@@ -7,6 +7,7 @@ import {
     EncryptDB,
     MatomoId,
     MatomoUrl,
+    MessageOfDay,
     ReservedValues,
     ShareScreen,
     SmsGateway,
@@ -108,6 +109,11 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <ReservedValues
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <MessageOfDay
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
