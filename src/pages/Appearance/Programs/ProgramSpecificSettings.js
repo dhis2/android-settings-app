@@ -8,7 +8,10 @@ import NewProgramSpecific from './NewProgramSpecific'
 import SpecificTableAction from './SpecificTableAction'
 import { useReadProgram } from './programQuery'
 import { filterUnusedElements } from '../../../utils/utils'
-import { prepareSpecificSettingsList } from './helper'
+import {
+    prepareProgramConfigurationList,
+    prepareSpecificSettingsList,
+} from './helper'
 
 const ProgramSpecificSettings = ({
     onChange,
@@ -31,7 +34,7 @@ const ProgramSpecificSettings = ({
                 specificSettings,
                 programList
             )
-            const spinnerListUpdated = prepareSpecificSettingsList(
+            const spinnerListUpdated = prepareProgramConfigurationList(
                 spinnerSettings,
                 programList
             )

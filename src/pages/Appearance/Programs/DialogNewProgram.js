@@ -25,6 +25,7 @@ const DialogNewProgram = ({
     hasCategoryCombo,
     spinnerSettings,
     disableSave,
+    isTrackerProgram,
 }) => (
     <>
         {open && (
@@ -51,6 +52,7 @@ const DialogNewProgram = ({
                             hasCategoryCombo={hasCategoryCombo}
                             specificSettings={specificSettings}
                             handleSettings={handleChange}
+                            isTrackerProgram={isTrackerProgram}
                         />
                     )}
                 </ModalContent>
@@ -83,6 +85,7 @@ DialogNewProgram.propTypes = {
     hasCategoryCombo: PropTypes.bool,
     spinnerSettings: PropTypes.object,
     disableSave: PropTypes.bool,
+    isTrackerProgram: PropTypes.bool,
 }
 
 export default DialogNewProgram
