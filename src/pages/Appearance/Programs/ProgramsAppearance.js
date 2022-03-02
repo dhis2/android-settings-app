@@ -22,7 +22,7 @@ const ProgramsAppearance = () => {
     const {
         load,
         dataSetSettings,
-        completionSpinner,
+        programConfiguration,
         home,
         programSettings,
     } = useReadAppearanceDataStore()
@@ -45,7 +45,7 @@ const ProgramsAppearance = () => {
     }, [data])
 
     useEffect(() => {
-        if (programSettings && completionSpinner) {
+        if (programSettings && programConfiguration) {
             const { globalSettings, specificSettings } = programSettings
             setInitialValues({ globalSettings, specificSettings })
             setGlobalSettings(createInitialValues(globalSettings))
@@ -54,9 +54,9 @@ const ProgramsAppearance = () => {
                       createSpecificValues(programSettings.specificSettings)
                   )
                 : setSpecificSettings({})
-            setSpinnerSettings(completionSpinner)
-            setSpinnerGlobal(completionSpinner.globalSettings)
-            setSpinnerSpecific(completionSpinner.specificSettings)
+            setSpinnerSettings(programConfiguration)
+            setSpinnerGlobal(programConfiguration.globalSettings)
+            setSpinnerSpecific(programConfiguration.specificSettings)
         }
     }, [programSettings])
 
@@ -73,7 +73,7 @@ const ProgramsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            completionSpinner: {
+            programConfiguration: {
                 globalSettings: {
                     ...spinnerGlobal,
                 },
