@@ -18,7 +18,7 @@ const DatasetsAppearance = () => {
     const {
         load,
         dataSetSettings,
-        completionSpinner,
+        programConfiguration,
         home,
         programSettings,
     } = useReadAppearanceDataStore()
@@ -62,7 +62,7 @@ const DatasetsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            completionSpinner,
+            programConfiguration,
             filterSorting: {
                 home,
                 programSettings,

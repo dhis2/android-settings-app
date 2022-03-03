@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import defaults from 'lodash/defaults'
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
@@ -20,9 +21,17 @@ export const createInitialValues = prevDetails => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialSpinnerValue = prevDetails => ({
-    visible: prevDetails.visible || true,
-})
+export const createInitialSpinnerValue = prevDetails => {
+    defaults(prevDetails, {
+        completionSpinner: true,
+        optionalSearch: false,
+    })
+
+    return {
+        completionSpinner: prevDetails.completionSpinner,
+        optionalSearch: prevDetails.optionalSearch,
+    }
+}
 
 export const createInitialSpecificValues = prevDetails => ({
     name: '',
@@ -53,15 +62,23 @@ export const getProgramName = (program, programList) => {
     return programFilter[0].name
 }
 
-export const programHasCategoryCombo = (programId, datasetList) => {
-    const program = datasetList.find(option => option.id === programId)
+export const findElementById = (list, elementID) =>
+    list.find(setting => setting.id === elementID)
+
+export const programHasCategoryCombo = (programId, programList) => {
+    const program = findElementById(programList, programId)
     return program.categoryCombo.name !== 'default'
+}
+
+export const isTrackerProgram = (programId, programList) => {
+    const program = findElementById(programList, programId)
+    return program.programType === 'WITH_REGISTRATION'
 }
 
 export const prepareSpecificSettingsList = (settings, apiProgramList) => {
     const specificSettingsRows = []
     for (const key in settings) {
-        const result = apiProgramList.find(program => program.id === key)
+        const result = findElementById(apiProgramList, key)
         if (result) {
             const filterList = getFilters(settings[key])
             settings[key].name = result.name
@@ -76,6 +93,22 @@ export const prepareSpecificSettingsList = (settings, apiProgramList) => {
         }
     }
     return toArray(specificSettingsRows)
+}
+
+export const prepareProgramConfigurationList = (settings, apiProgramList) => {
+    const settingsRows = []
+    for (const key in settings) {
+        const result = findElementById(apiProgramList, key)
+        if (result) {
+            settings[key] = {
+                ...createInitialSpinnerValue(settings[key]),
+                name: result.name,
+                id: key,
+            }
+            settingsRows.push(settings[key])
+        }
+    }
+    return toArray(settingsRows)
 }
 
 const getFilters = settings => {
@@ -111,3 +144,6 @@ const convertFilterKeyToValue = filter => {
             return i18n.t('Follow up')
     }
 }
+
+export const isProgramConfiguration = configurationType =>
+    ['completionSpinner', 'optionalSearch'].includes(configurationType)

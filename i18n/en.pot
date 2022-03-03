@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-27T15:28:43.869Z\n"
-"PO-Revision-Date: 2022-01-27T15:28:43.869Z\n"
+"POT-Creation-Date: 2022-03-02T06:58:12.001Z\n"
+"PO-Revision-Date: 2022-03-02T06:58:12.001Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -351,6 +351,9 @@ msgid "1 Week"
 msgstr ""
 
 msgid "How often should metadata sync?"
+msgstr ""
+
+msgid "Allow the user to create a TEI without the prior search"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
