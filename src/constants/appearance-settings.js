@@ -1,5 +1,5 @@
 export const appearanceDefault = {
-    completionSpinner: {
+    programConfiguration: {
         globalSettings: {
             visible: true,
         },
