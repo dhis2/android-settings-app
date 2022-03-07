@@ -8,12 +8,14 @@ import {
     syncPages,
     syncSection,
 } from '../../constants/menu-sections'
-
 import styles from './Home.module.css'
 import HomeCard from './HomeCard'
+import { OverviewTitle, Section } from './Section'
 
 const Home = () => (
     <>
+        <OverviewTitle />
+
         <h2 className={styles.sectionTitle}> {generalPage.label} </h2>
         <div className={styles.grid}>
             <HomeCard
@@ -24,48 +26,11 @@ const Home = () => (
             />
         </div>
 
-        <h2 className={styles.sectionTitle}> {syncSection} </h2>
-        <div className={styles.grid}>
-            {syncPages.map(({ path, code, linkText, description, label }) => (
-                <HomeCard
-                    key={code}
-                    linkText={linkText}
-                    to={path}
-                    bodyText={description}
-                    titleText={label}
-                />
-            ))}
-        </div>
+        <Section title={syncSection} sectionPages={syncPages} />
 
-        <h2 className={styles.sectionTitle}> {appearanceSection} </h2>
-        <div className={styles.grid}>
-            {appearancePages.map(
-                ({ path, code, linkText, description, label }) => (
-                    <HomeCard
-                        key={code}
-                        linkText={linkText}
-                        to={path}
-                        bodyText={description}
-                        titleText={label}
-                    />
-                )
-            )}
-        </div>
+        <Section title={appearanceSection} sectionPages={appearancePages} />
 
-        <h2 className={styles.sectionTitle}> {analyticsSection} </h2>
-        <div className={styles.grid}>
-            {analyticsPages.map(
-                ({ path, code, linkText, description, label }) => (
-                    <HomeCard
-                        key={code}
-                        linkText={linkText}
-                        to={path}
-                        bodyText={description}
-                        titleText={label}
-                    />
-                )
-            )}
-        </div>
+        <Section title={analyticsSection} sectionPages={analyticsPages} />
     </>
 )
 
