@@ -5,6 +5,8 @@ import PropTypes from '@dhis2/prop-types'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 
+const CODE = 'completionSpinner'
+
 export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
     const handleChange = e => {
         onChange({ [e.name]: e.checked })
@@ -13,13 +15,13 @@ export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
     return (
         <div className={cx(styles.rowBMargin24, styles.rowTMargin32)}>
             <CheckboxField
-                name="visible"
+                name={CODE}
                 label={i18n.t(
                     'Show percentage (%) complete in Program toolbar'
                 )}
                 onChange={handleChange}
                 disabled={disable}
-                checked={settings.visible}
+                checked={settings.visible || settings[CODE]}
             />
         </div>
     )
