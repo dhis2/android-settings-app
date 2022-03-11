@@ -46,6 +46,13 @@ export const createInitialSpecificValues = prevDetails => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
+export const createInitialGlobalSpinner = prevDetails => {
+    defaults(prevDetails, {
+        completionSpinner: true,
+    })
+    return { completionSpinner: prevDetails.completionSpinner }
+}
+
 /**
  * Add Follow up default value
  * */
