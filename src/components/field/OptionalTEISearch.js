@@ -15,7 +15,7 @@ export const OptionalTEISearch = ({
             <CheckboxField
                 name={CODE}
                 label={i18n.t(
-                    'Allow the user to create a TEI without the prior search'
+                    'Allow the user to create a TEI without searching'
                 )}
                 onChange={handleChange}
                 checked={settings[CODE]}

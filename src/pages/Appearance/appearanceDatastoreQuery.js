@@ -40,8 +40,9 @@ export const useReadAppearanceDataStore = () => {
         error,
         programConfiguration:
             data &&
-            (data.appearanceSettings.completionSpinner ||
-                data.appearanceSettings.programConfiguration),
+            (data.appearanceSettings.programConfiguration ||
+                data.appearanceSettings.completionSpinner),
+        completionSpinner: data && data.appearanceSettings.completionSpinner,
         filterSorting: data && data.appearanceSettings.filterSorting,
         home: data && data.appearanceSettings.filterSorting.home,
         programSettings:
