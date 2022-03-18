@@ -5,6 +5,12 @@ export const appearanceDefault = {
         },
         specificSettings: {},
     },
+    completionSpinner: {
+        globalSettings: {
+            visible: true,
+        },
+        specificSettings: {},
+    },
     filterSorting: {
         home: {
             assignedToMe: {
