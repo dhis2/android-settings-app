@@ -1,6 +1,12 @@
 export const appearanceDefault = {
     programConfiguration: {
         globalSettings: {
+            completionSpinner: true,
+        },
+        specificSettings: {},
+    },
+    completionSpinner: {
+        globalSettings: {
             visible: true,
         },
         specificSettings: {},

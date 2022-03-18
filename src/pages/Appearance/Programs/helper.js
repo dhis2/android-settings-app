@@ -3,7 +3,11 @@ import defaults from 'lodash/defaults'
 import map from 'lodash/map'
 import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
-import { formatList } from '../../../utils/utils'
+import {
+    formatList,
+    removePropertiesFromObject,
+    removeSummaryFromSettings,
+} from '../../../utils/utils'
 
 const filterSortingDefault = {
     filter: true,
@@ -45,6 +49,34 @@ export const createInitialSpecificValues = prevDetails => ({
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
     followUp: prevDetails.followUp || filterSortingDefault,
 })
+
+export const createInitialGlobalSpinner = prevDetails => {
+    defaults(prevDetails, {
+        completionSpinner: true,
+    })
+    return { completionSpinner: prevDetails.completionSpinner }
+}
+
+export const createInitialGlobalSpinnerPrevious = prevDetails => {
+    defaults(prevDetails, {
+        completionSpinner: true,
+    })
+    return { visible: prevDetails.completionSpinner }
+}
+
+export const prepareSpinnerPreviousSpinner = settings => {
+    const spinnerSettings = mapValues(settings, element => ({
+        ...element,
+        visible: element.completionSpinner,
+    }))
+    return removePropertiesFromObject(
+        prepareSettingsSaveDataStore(spinnerSettings),
+        ['optionalSearch', 'completionSpinner']
+    )
+}
+
+export const prepareSettingsSaveDataStore = settings =>
+    removeSummaryFromSettings(settings)
 
 /**
  * Add Follow up default value
