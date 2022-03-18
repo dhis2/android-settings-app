@@ -9,15 +9,17 @@ import {
 } from '../appearanceDatastoreQuery'
 import {
     createInitialGlobalSpinner,
+    createInitialGlobalSpinnerPrevious,
     createInitialSpinnerValue,
     createInitialValues,
     createSpecificValues,
+    prepareSettingsSaveDataStore,
+    prepareSpinnerPreviousSpinner,
 } from './helper'
 import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
-import { removeSummaryFromSettings } from '../../../utils/utils'
 
 const ProgramsAppearance = () => {
     const {
@@ -81,7 +83,15 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...removeSummaryFromSettings(spinnerSpecific),
+                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                },
+            },
+            completionSpinner: {
+                globalSettings: {
+                    ...createInitialGlobalSpinnerPrevious(spinnerGlobal),
+                },
+                specificSettings: {
+                    ...prepareSpinnerPreviousSpinner(spinnerSpecific),
                 },
             },
             filterSorting: {
@@ -90,7 +100,7 @@ const ProgramsAppearance = () => {
                 programSettings: {
                     globalSettings,
                     specificSettings: {
-                        ...removeSummaryFromSettings(specificSettings),
+                        ...prepareSettingsSaveDataStore(specificSettings),
                     },
                 },
             },
