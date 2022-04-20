@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { Divider } from '@dhis2/ui'
 import TableRow from '../settingsTable/TableRow'
 import styles from '../../styles/TableSettings.module.css'

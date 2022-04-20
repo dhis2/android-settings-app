@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { RadioGroup } from './RadioGroup'
 import { FieldSection } from '../field'
 import {

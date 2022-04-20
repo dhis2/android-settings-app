@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { ButtonField } from '../../components/field'
 import DialogDisableSettings from '../../components/dialog/DialogDisableSettings'
 import { NAMESPACE } from '../../constants/data-store'

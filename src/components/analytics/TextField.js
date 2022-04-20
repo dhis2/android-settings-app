@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { InputField } from '@dhis2/ui'
 import { FieldSection } from '../field'
 

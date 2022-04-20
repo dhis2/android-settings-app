@@ -1,6 +1,6 @@
 import React from 'react'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 
 export const Select = ({
     onChange,

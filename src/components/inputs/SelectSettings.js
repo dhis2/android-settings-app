@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from './Select'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 
 export const SelectSettings = ({
     onChange,
