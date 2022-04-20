@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import styles from './Page.module.css'
 
 const PageHeader = ({ title, desc }) => (

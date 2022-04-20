@@ -9,7 +9,7 @@ import {
 } from '@dhis2/ui'
 import { encryptTitles } from '../../constants/android-settings'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 
 const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
     let encrypt

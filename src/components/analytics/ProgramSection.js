@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { CircularLoader } from '@dhis2/ui'
 import { Section } from './Section'
 import { SelectProgram } from './SelectProgram'

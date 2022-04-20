@@ -1,8 +1,7 @@
 import React from 'react'
-
 import { ButtonStrip, Button, Card } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import dataTableStyles from '../styles/DataTable.module.css'
 import disableStyle from '../styles/Disable.module.css'

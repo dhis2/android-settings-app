@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { Divider } from '@dhis2/ui'
 import TableRow from '../../../components/settingsTable/TableRow'
 import Wrapper from '../../../components/Wrapper'
