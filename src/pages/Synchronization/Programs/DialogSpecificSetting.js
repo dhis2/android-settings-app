@@ -37,7 +37,7 @@ const DialogSpecificSetting = ({
                     ) : (
                         <Select
                             name="name"
-                            inputWidth="300px"
+                            inputWidth="350px"
                             onChange={handleChange}
                             value={specificSetting.id || ''}
                             options={programOptions}

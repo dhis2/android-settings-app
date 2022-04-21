@@ -39,7 +39,7 @@ const DialogNewProgram = ({
                     ) : (
                         <Select
                             name="id"
-                            inputWidth="300px"
+                            inputWidth="350px"
                             onChange={handleChange}
                             value={specificSettings.id || ''}
                             options={dataOptions}
