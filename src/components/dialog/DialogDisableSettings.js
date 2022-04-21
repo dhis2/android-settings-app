@@ -19,7 +19,7 @@ const DialogDisableSettings = ({ openDialog, onClose, disableSettings }) => {
                     <ModalTitle>{i18n.t('Disable all settings')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
-                            'This action will disable and remove all General, Program and Data set settings. Are you sure you want to disable all settings?'
+                            'This action will disable and remove all General, Synchronization, Appearance and Analytics settings. Are you sure you want to disable all settings?'
                         )}
                     </ModalContent>
                     <ModalActions>
