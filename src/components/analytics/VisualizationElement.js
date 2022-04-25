@@ -25,10 +25,6 @@ const elementTypeOptions = [
 
 const periodType = [
     {
-        value: 'Monthly',
-        label: i18n.t('Monthly'),
-    },
-    {
         value: 'Daily',
         label: i18n.t('Daily'),
     },
@@ -37,12 +33,16 @@ const periodType = [
         label: i18n.t('Weekly'),
     },
     {
+        value: 'Monthly',
+        label: i18n.t('Monthly'),
+    },
+    {
         value: 'Quarterly',
         label: i18n.t('Quarterly'),
     },
     {
         value: 'SixMonthly',
-        label: i18n.t('SixMonthly'),
+        label: i18n.t('Six-monthly'),
     },
     {
         value: 'Yearly',
