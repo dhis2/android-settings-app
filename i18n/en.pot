@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-06T17:20:34.357Z\n"
-"PO-Revision-Date: 2022-03-06T17:20:34.357Z\n"
+"POT-Creation-Date: 2022-05-02T23:05:34.273Z\n"
+"PO-Revision-Date: 2022-05-02T23:05:34.273Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -353,7 +353,7 @@ msgstr ""
 msgid "How often should metadata sync?"
 msgstr ""
 
-msgid "Allow the user to create a TEI without the prior search"
+msgid "Allow the user to create a TEI without searching"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -374,7 +374,7 @@ msgstr ""
 msgid "SMS Result Sender phone number"
 msgstr ""
 
-msgid "Use new version of Tracker Importer"
+msgid "Use the new version of Tracker Importer (Web API)"
 msgstr ""
 
 msgid ""
@@ -644,6 +644,12 @@ msgid "Add Home visualization"
 msgstr ""
 
 msgid "Add Home Visualization"
+msgstr ""
+
+msgid "Edit Home visualization"
+msgstr ""
+
+msgid "Edit Visualization"
 msgstr ""
 
 msgid "Manage visualizations for Home screen."

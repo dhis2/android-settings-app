@@ -1,6 +1,7 @@
 import findIndex from 'lodash/findIndex'
 import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
+import reject from 'lodash/reject'
 
 export const removeElement = (elementList, elementId) =>
     omit(elementList, [elementId])
@@ -35,3 +36,23 @@ export const updateGroupList = (groups, groupId, updatedElement) =>
     !isEmpty(updatedElement)
         ? updateList(groups, groupId, updatedElement)
         : removeElementList(groups, groupId)
+
+export const findGroupIndex = (groupList, groupId) =>
+    findIndex(groupList, { id: groupId })
+
+export const updateVisualizationName = (groupList, groupId, visualization) => {
+    const updatedGroup = Object.assign([], groupList)
+    const index = findGroupIndex(groupList, groupId)
+    const homeGroup = groupList[index]
+    const visualizationList = reject(homeGroup.visualizations, {
+        id: visualization.id,
+    })
+    visualizationList.push(visualization)
+
+    updatedGroup[index] = {
+        ...homeGroup,
+        visualizations: visualizationList,
+    }
+
+    return updatedGroup
+}
