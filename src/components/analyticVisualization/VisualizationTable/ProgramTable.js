@@ -5,7 +5,8 @@ import { VisualizationTable } from './VisualizationTable'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { removeSettingsFromList } from '../../../utils/utils'
-import { removeElement, updateGroup } from './helper'
+import { removeElement, updateGroup, updateVisualizations } from './helper'
+import EditVisualization from '../../../pages/Analytics/Program/EditVisualization'
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -13,6 +14,32 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [group, setGroup] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
     const [elementName, setName] = useState()
+    const [groupId, setGroupId] = useState('')
+    const [openEditDialog, setOpenEditDialog] = useState(false)
+
+    const editVisualization = (visualization, visualizationGroup) => {
+        setOpenEditDialog(true)
+        setSpecificSetting(visualization)
+        setGroupId(visualization.group.id)
+        setGroup(visualizationGroup)
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditDialog(false)
+        setSpecificSetting({})
+        setGroupId('')
+        setGroup([])
+    }
+
+    const handleEdit = () => {
+        changeRows(
+            updateVisualizations(group, rows, {
+                currentElement: specificSetting,
+                elementType: 'program',
+            })
+        )
+        handleCloseEdit()
+    }
 
     const deleteRow = (row, group) => {
         setSpecificSetting(row)
@@ -85,6 +112,7 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
             <VisualizationTable
                 element="program"
                 rows={rows}
+                editVisualization={editVisualization}
                 deleteVisualization={deleteRow}
                 deleteGroup={deleteGroup}
                 disabled={disabled}
@@ -105,6 +133,15 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
                     { elementName: elementName }
                 )}
                 element={i18n.t('Visualization Group')}
+            />
+            <EditVisualization
+                open={openEditDialog}
+                settings={specificSetting}
+                handleChange={setSpecificSetting}
+                groups={group}
+                currentGroup={groupId}
+                handleClose={handleCloseEdit}
+                handleEdit={handleEdit}
             />
         </>
     )
