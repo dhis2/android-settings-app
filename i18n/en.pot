@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-05-02T23:05:34.273Z\n"
-"PO-Revision-Date: 2022-05-02T23:05:34.273Z\n"
+"POT-Creation-Date: 2022-05-13T04:41:42.079Z\n"
+"PO-Revision-Date: 2022-05-13T04:41:42.079Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -34,6 +34,9 @@ msgstr ""
 msgid "Add a group name"
 msgstr ""
 
+msgid "Use a group visualization"
+msgstr ""
+
 msgid "Create a new group"
 msgstr ""
 
@@ -41,9 +44,6 @@ msgid "Select a created group visualization"
 msgstr ""
 
 msgid "Select a group visualization"
-msgstr ""
-
-msgid "Use a group visualization"
 msgstr ""
 
 msgid "No visualization found"
@@ -640,6 +640,12 @@ msgstr ""
 msgid "Add Data set Visualization"
 msgstr ""
 
+msgid "Edit Data set visualization"
+msgstr ""
+
+msgid "Edit Visualization"
+msgstr ""
+
 msgid "Add Home visualization"
 msgstr ""
 
@@ -647,9 +653,6 @@ msgid "Add Home Visualization"
 msgstr ""
 
 msgid "Edit Home visualization"
-msgstr ""
-
-msgid "Edit Visualization"
 msgstr ""
 
 msgid "Manage visualizations for Home screen."

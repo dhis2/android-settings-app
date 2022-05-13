@@ -5,25 +5,26 @@ import find from 'lodash/find'
 import { CheckboxField, TextField } from '../../field'
 import styles from './styles/GroupField.module.css'
 
-const findGroup = (type, groupList, groupId) => {
+const findGroup = (type, group, settings) => {
+    const { groupList, groupId } = group
+
     switch (type) {
         case 'program':
         case 'dataset':
-            break
+            return settings.group
         default:
             return find(groupList, g => g.id === groupId)
-            break
     }
 }
 
 const isDefaultGroup = group => group.name === 'default'
 
-export const EditGroup = ({ groupList, groupId }) => {
+export const NotEditableGroup = ({ groupList, groupId, settings, type }) => {
     const [group, setGroup] = useState(false)
     const [title, setTitle] = useState('')
 
     useEffect(() => {
-        const groupFound = findGroup('', groupList, groupId)
+        const groupFound = findGroup(type, { groupList, groupId }, settings)
         if (!isDefaultGroup(groupFound)) {
             setGroup(!!groupFound)
             setTitle(groupFound.name)
@@ -48,7 +49,9 @@ export const EditGroup = ({ groupList, groupId }) => {
     )
 }
 
-EditGroup.propTypes = {
+NotEditableGroup.propTypes = {
     groupId: PropTypes.string,
     groupList: PropTypes.array,
+    settings: PropTypes.object,
+    type: PropTypes.string,
 }

@@ -4,8 +4,9 @@ import PropTypes from '@dhis2/prop-types'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { VisualizationTable } from './VisualizationTable'
-import { removeElement, updateGroup } from './helper'
+import { removeElement, updateGroup, updateVisualizations } from './helper'
 import { removeSettingsFromList } from '../../../utils/utils'
+import EditVisualization from '../../../pages/Analytics/Dataset/EditVisualization'
 
 export const DatasetTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -13,6 +14,32 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
     const [group, setGroup] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
     const [elementName, setName] = useState()
+    const [groupId, setGroupId] = useState('')
+    const [openEditDialog, setOpenEditDialog] = useState(false)
+
+    const editVisualization = (visualization, visualizationGroup) => {
+        setOpenEditDialog(true)
+        setSpecificSetting(visualization)
+        setGroupId(visualization.group.id)
+        setGroup(visualizationGroup)
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditDialog(false)
+        setSpecificSetting({})
+        setGroupId('')
+        setGroup([])
+    }
+
+    const handleEdit = () => {
+        changeRows(
+            updateVisualizations(group, rows, {
+                currentElement: specificSetting,
+                elementType: 'dataset',
+            })
+        )
+        handleCloseEdit()
+    }
 
     const deleteVisualization = (row, group) => {
         setSpecificSetting(row)
@@ -85,6 +112,7 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
             <VisualizationTable
                 element="dataset"
                 rows={rows}
+                editVisualization={editVisualization}
                 deleteVisualization={deleteVisualization}
                 deleteGroup={deleteGroup}
                 disabled={disabled}
@@ -105,6 +133,15 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
                     'Are you sure you want to delete {{elementName}} visualization group?',
                     { elementName: elementName }
                 )}
+            />
+            <EditVisualization
+                open={openEditDialog}
+                settings={specificSetting}
+                handleChange={setSpecificSetting}
+                groups={group}
+                currentGroup={groupId}
+                handleClose={handleCloseEdit}
+                handleEdit={handleEdit}
             />
         </>
     )

@@ -56,3 +56,24 @@ export const updateVisualizationName = (groupList, groupId, visualization) => {
 
     return updatedGroup
 }
+
+export const updateVisualizations = (currentGroup, rows, element) => {
+    const { currentElement, elementType } = element
+    const updatedGroups = Object.assign({}, rows)
+    const groupList = Object.assign([], currentGroup)
+    const elementIndex = findGroupIndex(currentGroup, currentElement.id)
+    const typeId = currentElement[elementType]
+
+    groupList.splice(elementIndex, 1, currentElement)
+
+    updatedGroups[typeId] = {
+        ...updatedGroups[typeId],
+        groups: updateGroup(
+            updatedGroups[typeId].groups,
+            currentElement.group.id,
+            groupList
+        ),
+    }
+
+    return updatedGroups
+}
