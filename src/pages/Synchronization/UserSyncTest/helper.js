@@ -1,4 +1,5 @@
 import isEmpty from 'lodash/isEmpty'
+import unionBy from 'lodash/unionBy'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import without from 'lodash/without'
@@ -238,4 +239,20 @@ const getTestElements = async (user, dataEngine) => {
         },
         dataSet,
     }
+}
+
+export const joinObjectsById = array => {
+    const joinedArray = []
+
+    array
+        .reduce((array1, array2) => unionBy(array1, array2, 'id'))
+        .map(e => joinedArray.push(e.id))
+
+    return parseUniqList(joinedArray)
+}
+
+export const joinElementsById = array => {
+    const joinedArray = []
+    array.map(e => joinedArray.push(e.id))
+    return parseUniqList(joinedArray)
 }

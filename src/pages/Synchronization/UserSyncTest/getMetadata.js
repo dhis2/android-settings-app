@@ -1,4 +1,6 @@
 import {
+    apiFetchApps,
+    apiFetchAuthorization,
     apiFetchCategories,
     apiFetchCategoryCombos,
     apiFetchCategoryOptions,
@@ -7,6 +9,8 @@ import {
     apiFetchDataSet,
     apiFetchEventFilters,
     apiFetchIndicators,
+    apiFetchLegendSet,
+    apiFetchIndicatorType,
     apiFetchMe,
     apiFetchOptionGroup,
     apiFetchOptions,
@@ -14,9 +18,11 @@ import {
     apiFetchOrgUnit,
     apiFetchOULevel,
     apiFetchProgram,
+    apiFetchProgramIndicators,
     apiFetchProgramRule,
     apiFetchProgramStage,
     apiFetchRelationshipTypes,
+    apiFetchSystemInfo,
     apiFetchSystemSettings,
     apiFetchTrackedEntityAttributes,
     apiFetchTrackedEntityInstanceFilter,
@@ -24,6 +30,7 @@ import {
     apiFetchUserSettings,
 } from './queries/metadataQueries'
 import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
+import { joinElementsById, joinObjectsById } from './helper'
 
 export const getMetadataSize = async ({
     dataEngine,
@@ -39,6 +46,13 @@ export const getMetadataSize = async ({
     indicatorList,
 }) => {
     let metadataSize = 0
+    const indicators = await apiFetchIndicators(dataEngine, indicatorList)
+    const indicatorTypesList = []
+    const legendSetsList = []
+    indicators.map(indicator => {
+        indicatorTypesList.push(indicator.indicatorType)
+        legendSetsList.push(indicator.legendSets)
+    })
 
     await Promise.all([
         fetchOrgUnits(dataEngine, orgUnitList),
@@ -64,6 +78,12 @@ export const getMetadataSize = async ({
         apiFetchSystemSettings(dataEngine),
         apiFetchConstants(dataEngine),
         apiFetchMe(dataEngine),
+        apiFetchSystemInfo(dataEngine),
+        apiFetchAuthorization(dataEngine),
+        apiFetchApps(dataEngine),
+        apiFetchIndicatorType(dataEngine, joinElementsById(indicatorTypesList)),
+        apiFetchProgramIndicators(dataEngine, programList),
+        apiFetchLegendSet(dataEngine, joinObjectsById(legendSetsList)),
     ]).then(result => result.map(data => (metadataSize += getByteLength(data))))
 
     return formatByteSize(metadataSize)
