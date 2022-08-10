@@ -16,7 +16,7 @@ import {
     LAST_WEEK,
     LAST_YEAR,
     MONTHS_THIS_YEAR,
-    QUARTERS_THIS_YEAR,
+    QUARTERS_THIS_YEAR, THIS_DAY,
     THIS_MONTH,
     THIS_QUARTER,
     THIS_WEEK,
@@ -59,6 +59,7 @@ const checkVisualizationType = visualization => {
 
 const relativePeriodsList = [
     TODAY,
+    THIS_DAY,
     YESTERDAY,
     LAST_3_DAYS,
     LAST_7_DAYS,

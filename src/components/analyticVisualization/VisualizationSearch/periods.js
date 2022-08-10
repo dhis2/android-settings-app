@@ -1,4 +1,5 @@
-export const TODAY = 'today' && 'thisDay'
+export const TODAY = 'today'
+export const THIS_DAY = 'thisDay'
 export const YESTERDAY = 'yesterday'
 export const LAST_3_DAYS = 'last3Days'
 export const LAST_7_DAYS = 'last7Days'
