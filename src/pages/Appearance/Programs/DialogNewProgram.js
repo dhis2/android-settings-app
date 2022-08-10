@@ -8,6 +8,7 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
+    spacers,
 } from '@dhis2/ui'
 import { Select } from '../../../components/inputs'
 import SpecificSettings from './SpecificSettings'
@@ -39,7 +40,7 @@ const DialogNewProgram = ({
                     ) : (
                         <Select
                             name="id"
-                            inputWidth="350px"
+                            inputWidth={spacers.dp384}
                             onChange={handleChange}
                             value={specificSettings.id || ''}
                             options={dataOptions}
