@@ -44,7 +44,7 @@ export const useReadVisualizationQuery = id => {
         if (!isEqual(id, prevIds)) {
             refetch({ id })
         }
-    })
+    }, [id, prevIds])
 
     return {
         loading: !called || loading,
