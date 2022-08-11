@@ -49,10 +49,10 @@ export const getMetadataSize = async ({
     const indicators = await apiFetchIndicators(dataEngine, indicatorList)
     const indicatorTypesList = []
     const legendSetsList = []
-    indicators.map(indicator => {
+    for (const indicator of indicators) {
         indicatorTypesList.push(indicator.indicatorType)
         legendSetsList.push(indicator.legendSets)
-    })
+    }
 
     await Promise.all([
         fetchOrgUnits(dataEngine, orgUnitList),
