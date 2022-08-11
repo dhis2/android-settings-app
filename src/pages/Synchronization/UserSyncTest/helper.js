@@ -252,7 +252,5 @@ export const joinObjectsById = array => {
 }
 
 export const joinElementsById = array => {
-    const joinedArray = []
-    array.map(e => joinedArray.push(e.id))
-    return parseUniqList(joinedArray)
+    return parseUniqList(array.map(e => e.id))
 }
