@@ -6,8 +6,11 @@ import { TextAreaField } from './TextAreaField'
 const CODE = 'messageOfTheDay'
 
 export const MessageOfDay = ({ value, onChange, disabled }) => {
+    const maxlength = (field, size) => field.length > size ? field.substring(0, size) : field
+
     const handleChange = e => {
-        onChange({ ...value, [CODE]: e.value })
+        const textValue = maxlength(e.value, 200)
+        onChange({ ...value, [CODE]: textValue })
     }
 
     return (
