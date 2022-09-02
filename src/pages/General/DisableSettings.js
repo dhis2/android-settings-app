@@ -38,7 +38,7 @@ const DisableSettings = ({ disabled }) => {
                 name="disableSettings"
                 label={i18n.t('Disable all settings')}
                 helpText={i18n.t(
-                    'This will disable and remove all General, Program and Data set settings.'
+                    'This will disable and remove all General, Synchronization, Appearance and Analytics settings.'
                 )}
                 onOpen={onClick}
                 disabled={disabled}
