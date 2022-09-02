@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-01T21:16:17.539Z\n"
-"PO-Revision-Date: 2022-09-01T21:16:17.539Z\n"
+"POT-Creation-Date: 2022-09-02T14:22:01.315Z\n"
+"PO-Revision-Date: 2022-09-02T14:22:01.315Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -25,6 +25,18 @@ msgstr ""
 msgid "Settings were successfully saved"
 msgstr ""
 
+msgid "Edit {{label}} visualization"
+msgstr ""
+
+msgid "Visualization item"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Edit Visualization"
+msgstr ""
+
 msgid "Dataset"
 msgstr ""
 
@@ -32,9 +44,6 @@ msgid "Program"
 msgstr ""
 
 msgid "Add a group name"
-msgstr ""
-
-msgid "Use a group visualization"
 msgstr ""
 
 msgid "Create a new group"
@@ -46,6 +55,9 @@ msgstr ""
 msgid "Select a group visualization"
 msgstr ""
 
+msgid "Use a group visualization"
+msgstr ""
+
 msgid "No visualization found"
 msgstr ""
 
@@ -53,9 +65,6 @@ msgid "Show fewer"
 msgstr ""
 
 msgid "Show more"
-msgstr ""
-
-msgid "Visualization item"
 msgstr ""
 
 msgid "Clear"
@@ -203,9 +212,6 @@ msgid "Delete {{typeName}}"
 msgstr ""
 
 msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Delete {{element}}"
@@ -640,22 +646,10 @@ msgstr ""
 msgid "Add Data set Visualization"
 msgstr ""
 
-msgid "Edit Data set visualization"
-msgstr ""
-
-msgid "Edit Visualization"
-msgstr ""
-
-msgid "Edit {{type}} visualization"
-msgstr ""
-
 msgid "Add Home visualization"
 msgstr ""
 
 msgid "Add Home Visualization"
-msgstr ""
-
-msgid "Edit Home visualization"
 msgstr ""
 
 msgid "Manage visualizations for Home screen."
@@ -668,9 +662,6 @@ msgid "Add Program visualization"
 msgstr ""
 
 msgid "Add Program Visualization"
-msgstr ""
-
-msgid "Edit Program visualization"
 msgstr ""
 
 msgid "Manage visualizations for program."
