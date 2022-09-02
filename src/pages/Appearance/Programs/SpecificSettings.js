@@ -4,24 +4,32 @@ import PropTypes from '@dhis2/prop-types'
 import Wrapper from '../../../components/Wrapper'
 import { TableHeader } from '../../../components/table'
 import { TableSettings } from './TableSettings'
-import { CheckboxField } from '../../../components/field'
+import {
+    OptionalTEISearch,
+    ProgramCompletionSpinner,
+} from '../../../components/field'
 
 const SpecificSettings = ({
     hasCategoryCombo,
     specificSettings,
     handleSettings,
     spinnerSettings,
+    isTrackerProgram,
 }) => (
     <>
         <Wrapper>
-            <CheckboxField
-                name="visible"
-                label={i18n.t(
-                    'Show percentage (%) complete in Program toolbar'
-                )}
-                onChange={handleSettings}
-                checked={spinnerSettings.visible}
-            />
+            <div>
+                <ProgramCompletionSpinner
+                    handleChange={handleSettings}
+                    settings={spinnerSettings}
+                />
+
+                <OptionalTEISearch
+                    isTrackerProgram={isTrackerProgram}
+                    handleChange={handleSettings}
+                    settings={spinnerSettings}
+                />
+            </div>
         </Wrapper>
 
         <Wrapper>
@@ -42,6 +50,7 @@ SpecificSettings.propTypes = {
     specificSettings: PropTypes.object,
     spinnerSettings: PropTypes.object,
     handleSettings: PropTypes.func,
+    isTrackerProgram: PropTypes.bool,
 }
 
 export default SpecificSettings

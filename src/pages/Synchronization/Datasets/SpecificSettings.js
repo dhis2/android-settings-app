@@ -6,7 +6,7 @@ import TableRow from '../../../components/settingsTable/TableRow'
 import Wrapper from '../../../components/Wrapper'
 import { InputNumber } from '../../../components/inputs'
 import { DataSpecificSetting } from '../../../constants/data-set-settings'
-import { getPeriodDefaultValueByType } from './helper'
+import { getPeriodDefaultValueByType, getPeriodLabel } from './helper'
 import tableTitleStyles from '../../../styles/TableTitle.module.css'
 
 const DataSetTableRow = ({
@@ -49,9 +49,11 @@ DataSetTableRow.propTypes = {
 
 const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
     const [defaultValue, setDefaultValue] = useState()
+    const [periodLabel, setPeriodLabel] = useState()
 
     useEffect(() => {
         setDefaultValue(getPeriodDefaultValueByType(periodType))
+        setPeriodLabel(getPeriodLabel(periodType))
     }, [periodType])
 
     return (
@@ -61,7 +63,7 @@ const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
                     <DataSetTableRow
                         key={row.option}
                         row={row}
-                        periodType={periodType}
+                        periodType={periodLabel}
                         defaultValue={defaultValue}
                         specificSettings={specificSettings}
                         onChange={onChange}

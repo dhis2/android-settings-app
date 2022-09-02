@@ -18,6 +18,7 @@ const DatasetsAppearance = () => {
     const {
         load,
         dataSetSettings,
+        programConfiguration,
         completionSpinner,
         home,
         programSettings,
@@ -62,6 +63,7 @@ const DatasetsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
+            programConfiguration,
             completionSpinner,
             filterSorting: {
                 home,

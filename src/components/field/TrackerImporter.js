@@ -5,7 +5,7 @@ import { CheckboxField } from './CheckboxField'
 import { useApiVersion } from '../../utils/useApiVersion'
 
 const CODE = 'trackerImporterVersion'
-const minApiVersion = '2.37'
+const minApiVersion = '2.38'
 
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
@@ -40,9 +40,11 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
             {validVersion && (
                 <CheckboxField
                     name={CODE}
-                    label={i18n.t('Use new version of Tracker Importer')}
+                    label={i18n.t(
+                        'Use the new version of Tracker Importer (Web API)'
+                    )}
                     helpText={i18n.t(
-                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality is not yet ready in the new endpoints, but they support their primary use-cases.'
+                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality might not be ready in the new endpoints, although primary use-cases are supported.'
                     )}
                     checked={tracker}
                     onChange={handleCheckbox}

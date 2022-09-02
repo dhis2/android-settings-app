@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-01T21:31:57.542Z\n"
-"PO-Revision-Date: 2022-03-01T21:31:57.542Z\n"
+"POT-Creation-Date: 2022-03-06T17:20:34.357Z\n"
+"PO-Revision-Date: 2022-03-06T17:20:34.357Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -347,18 +347,13 @@ msgstr ""
 msgid "Must be a valid url"
 msgstr ""
 
-msgid "Add message of the day"
-msgstr ""
-
-msgid ""
-"Use this message to communicate with users in order to display important "
-"information"
-msgstr ""
-
 msgid "1 Week"
 msgstr ""
 
 msgid "How often should metadata sync?"
+msgstr ""
+
+msgid "Allow the user to create a TEI without the prior search"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -779,6 +774,12 @@ msgid "This will disable and remove all General, Program and Data set settings."
 msgstr ""
 
 msgid "General Settings"
+msgstr ""
+
+msgid "Overview: Android Settings App"
+msgstr ""
+
+msgid "v{{version}}"
 msgstr ""
 
 msgid "Data sets specific download sync settings"
