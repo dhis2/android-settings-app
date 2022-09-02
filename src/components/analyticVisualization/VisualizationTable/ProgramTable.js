@@ -6,7 +6,7 @@ import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { removeSettingsFromList } from '../../../utils/utils'
 import { removeElement, updateGroup, updateVisualizations } from './helper'
-import EditVisualization from '../../../pages/Analytics/Program/EditVisualization'
+import EditVisualization from "../EditVisualization";
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -44,7 +44,7 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const deleteRow = (row, group) => {
         setSpecificSetting(row)
         setGroup(group)
-        setName(row.name)
+        setName(row.name || row.visualizationName)
         setOpenDialog(true)
     }
 
@@ -134,15 +134,19 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
                 )}
                 element={i18n.t('Visualization Group')}
             />
-            <EditVisualization
-                open={openEditDialog}
-                settings={specificSetting}
-                handleChange={setSpecificSetting}
-                groups={group}
-                currentGroup={groupId}
-                handleClose={handleCloseEdit}
-                handleEdit={handleEdit}
-            />
+
+            {openEditDialog &&
+                <EditVisualization
+                    open={openEditDialog}
+                    settings={specificSetting}
+                    handleChange={setSpecificSetting}
+                    groups={group}
+                    currentGroup={groupId}
+                    handleClose={handleCloseEdit}
+                    handleEdit={handleEdit}
+                    type="program"
+                />
+            }
         </>
     )
 }

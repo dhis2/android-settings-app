@@ -6,7 +6,7 @@ import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { VisualizationTable } from './VisualizationTable'
 import { removeElement, updateGroup, updateVisualizations } from './helper'
 import { removeSettingsFromList } from '../../../utils/utils'
-import EditVisualization from '../../../pages/Analytics/Dataset/EditVisualization'
+import EditVisualization from "../EditVisualization"
 
 export const DatasetTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -44,7 +44,7 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
     const deleteVisualization = (row, group) => {
         setSpecificSetting(row)
         setGroup(group)
-        setName(row.name)
+        setName(row.name || row.visualizationName)
         setOpenDialog(true)
     }
 
@@ -134,15 +134,19 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
                     { elementName: elementName }
                 )}
             />
-            <EditVisualization
-                open={openEditDialog}
-                settings={specificSetting}
-                handleChange={setSpecificSetting}
-                groups={group}
-                currentGroup={groupId}
-                handleClose={handleCloseEdit}
-                handleEdit={handleEdit}
-            />
+            {
+                openEditDialog &&
+                <EditVisualization
+                    open={openEditDialog}
+                    settings={specificSetting}
+                    handleChange={setSpecificSetting}
+                    groups={group}
+                    currentGroup={groupId}
+                    handleClose={handleCloseEdit}
+                    handleEdit={handleEdit}
+                    type="dataset"
+                />
+            }
         </>
     )
 }

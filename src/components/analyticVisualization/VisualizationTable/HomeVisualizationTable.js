@@ -18,7 +18,7 @@ import {
     updateVisualizationName,
 } from './helper'
 import styles from './VisualizationTable.module.css'
-import EditVisualization from '../../../pages/Analytics/Home/EditVisualization'
+import EditVisualization from "../EditVisualization";
 
 export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -33,7 +33,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
         setSpecificSetting(visualization)
         setSection(currentGroup)
         setGroupId(groupId)
-        setName(visualization.name)
+        setName(visualization.name || visualization.visualizationName)
         setOpenDialog(true)
     }
 
@@ -110,15 +110,19 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
                     { elementName: elementName }
                 )}
             />
-            <EditVisualization
-                open={openEditDialog}
-                settings={specificSetting}
-                handleChange={setSpecificSetting}
-                groups={group}
-                currentGroup={groupId}
-                handleClose={handleCloseEdit}
-                handleEdit={handleEdit}
-            />
+            {
+                openEditDialog &&
+                <EditVisualization
+                    open={openEditDialog}
+                    settings={specificSetting}
+                    handleChange={setSpecificSetting}
+                    groups={group}
+                    currentGroup={groupId}
+                    handleClose={handleCloseEdit}
+                    handleEdit={handleEdit}
+                    type="home"
+                />
+            }
         </>
     )
 }

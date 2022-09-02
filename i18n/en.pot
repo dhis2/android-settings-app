@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-05-13T06:58:23.562Z\n"
-"PO-Revision-Date: 2022-05-13T06:58:23.562Z\n"
+"POT-Creation-Date: 2022-09-01T21:16:17.539Z\n"
+"PO-Revision-Date: 2022-09-01T21:16:17.539Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -644,6 +644,9 @@ msgid "Edit Data set visualization"
 msgstr ""
 
 msgid "Edit Visualization"
+msgstr ""
+
+msgid "Edit {{type}} visualization"
 msgstr ""
 
 msgid "Add Home visualization"
