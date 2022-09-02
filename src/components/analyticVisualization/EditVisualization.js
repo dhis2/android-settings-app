@@ -9,7 +9,7 @@ import {
     ModalContent,
     ModalTitle,
 } from '@dhis2/ui'
-import {VisualizationGroup, VisualizationTitle} from "./index";
+import {NotEditableElement, VisualizationGroup, VisualizationTitle} from "./index";
 
 const EditVisualization = ({open, settings, handleChange, currentGroup, groups, handleEdit, handleClose, type}) => {
     const [typeName, useTypeName] = useState('')
