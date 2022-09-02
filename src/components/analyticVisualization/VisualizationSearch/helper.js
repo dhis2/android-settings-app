@@ -1,4 +1,5 @@
 import mapValues from 'lodash/mapValues'
+import orderBy from 'lodash/orderBy'
 import {
     LAST_12_MONTHS,
     LAST_12_WEEKS,
@@ -97,3 +98,6 @@ const isValidOrgUnit = visualization =>
     visualization.userOrganisationUnit ||
     visualization.userOrganisationUnitChildren ||
     visualization.userOrganisationUnitGrandChildren
+
+export const orderVisualizations = visualizationList =>
+    orderBy(visualizationList, [item => item.valid === true], ['desc'])
