@@ -4,14 +4,12 @@ import PropTypes from '@dhis2/prop-types'
 import { Button, Divider, Field, FieldSet, Legend } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import ItemSelector from './ItemSelector'
-import { useReadVisualizationsQuery } from './visualizationQuery'
+import { useReadVisualizationQuery } from './visualizationQuery'
 import { validateUserVisualization } from './helper'
 import styles from './styles/VisualizationUserTest.module.css'
 
 export const VisualizationUserTest = ({ visualization, visualizationName }) => {
-    const { data } = useReadVisualizationsQuery({
-        visualizationId: visualization,
-    })
+    const { data } = useReadVisualizationQuery(visualization)
     const [user, setUser] = useState()
     const [isValid, setValid] = useState(false)
     const [tested, setTesting] = useState(false)
@@ -21,7 +19,7 @@ export const VisualizationUserTest = ({ visualization, visualizationName }) => {
     }, [user])
 
     const handleChange = () => {
-        setValid(validateUserVisualization(user, data.visualizations))
+        setValid(validateUserVisualization(user, data))
         setTesting(true)
     }
 
