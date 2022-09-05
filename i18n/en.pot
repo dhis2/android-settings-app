@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-02T14:22:01.315Z\n"
-"PO-Revision-Date: 2022-09-02T14:22:01.315Z\n"
+"POT-Creation-Date: 2022-09-02T02:42:48.125Z\n"
+"PO-Revision-Date: 2022-09-02T02:42:48.125Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -23,18 +23,6 @@ msgid "Failed to get data from Data Store"
 msgstr ""
 
 msgid "Settings were successfully saved"
-msgstr ""
-
-msgid "Edit {{label}} visualization"
-msgstr ""
-
-msgid "Visualization item"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Edit Visualization"
 msgstr ""
 
 msgid "Dataset"
@@ -65,6 +53,9 @@ msgid "Show fewer"
 msgstr ""
 
 msgid "Show more"
+msgstr ""
+
+msgid "Visualization item"
 msgstr ""
 
 msgid "Clear"
@@ -145,19 +136,19 @@ msgstr ""
 msgid "Attribute"
 msgstr ""
 
-msgid "Monthly"
-msgstr ""
-
 msgid "Daily"
 msgstr ""
 
 msgid "Weekly"
 msgstr ""
 
+msgid "Monthly"
+msgstr ""
+
 msgid "Quarterly"
 msgstr ""
 
-msgid "SixMonthly"
+msgid "Six-monthly"
 msgstr ""
 
 msgid "Yearly"
@@ -214,6 +205,9 @@ msgstr ""
 msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Delete {{element}}"
 msgstr ""
 
@@ -221,8 +215,9 @@ msgid "Disable all settings"
 msgstr ""
 
 msgid ""
-"This action will disable and remove all General, Program and Data set "
-"settings. Are you sure you want to disable all settings?"
+"This action will disable and remove all General, Synchronization, "
+"Appearance and Analytics settings. Are you sure you want to disable all "
+"settings?"
 msgstr ""
 
 msgid "Disable"
@@ -353,6 +348,14 @@ msgstr ""
 msgid "Must be a valid url"
 msgstr ""
 
+msgid "Add message of the day"
+msgstr ""
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
+msgstr ""
+
 msgid "1 Week"
 msgstr ""
 
@@ -386,8 +389,8 @@ msgstr ""
 msgid ""
 "Use new tracker endpoints dedicated to importing and querying tracker "
 "objects (including tracked entities, enrollments, events, and "
-"relationships). Be aware that some functionality is not yet ready in the "
-"new endpoints, but they support their primary use-cases."
+"relationships). Be aware that some functionality might not be ready in the "
+"new endpoints, although primary use-cases are supported."
 msgstr ""
 
 msgid "Reset all values to default"
@@ -776,7 +779,9 @@ msgstr ""
 msgid "Event Status"
 msgstr ""
 
-msgid "This will disable and remove all General, Program and Data set settings."
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
 msgstr ""
 
 msgid "General Settings"

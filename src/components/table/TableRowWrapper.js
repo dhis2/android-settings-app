@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import style from '../../styles/Disable.module.css'
 import { Divider } from '@dhis2/ui'

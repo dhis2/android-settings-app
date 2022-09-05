@@ -1,13 +1,13 @@
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import {
     Button,
     ButtonStrip,
     Modal,
     ModalActions,
     ModalContent,
-    ModalTitle,
+    ModalTitle, spacers,
 } from '@dhis2/ui'
 import { Select } from '../../../components/inputs'
 import SpecificSettings from './SpecificSettings'
@@ -37,7 +37,7 @@ const DialogSpecificSettings = ({
                     ) : (
                         <Select
                             name="name"
-                            inputWidth="300px"
+                            inputWidth={spacers.dp384}
                             onChange={handleChange}
                             value={specificSetting.id || ''}
                             options={datasetOptions}

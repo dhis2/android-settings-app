@@ -44,7 +44,7 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
                         'Use the new version of Tracker Importer (Web API)'
                     )}
                     helpText={i18n.t(
-                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality is not yet ready in the new endpoints, but they support their primary use-cases.'
+                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality might not be ready in the new endpoints, although primary use-cases are supported.'
                     )}
                     checked={tracker}
                     onChange={handleCheckbox}

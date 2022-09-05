@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { VisualizationTable } from './VisualizationTable'
