@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-06T17:20:34.357Z\n"
-"PO-Revision-Date: 2022-03-06T17:20:34.357Z\n"
+"POT-Creation-Date: 2022-09-02T02:42:48.125Z\n"
+"PO-Revision-Date: 2022-09-02T02:42:48.125Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -136,19 +136,19 @@ msgstr ""
 msgid "Attribute"
 msgstr ""
 
-msgid "Monthly"
-msgstr ""
-
 msgid "Daily"
 msgstr ""
 
 msgid "Weekly"
 msgstr ""
 
+msgid "Monthly"
+msgstr ""
+
 msgid "Quarterly"
 msgstr ""
 
-msgid "SixMonthly"
+msgid "Six-monthly"
 msgstr ""
 
 msgid "Yearly"
@@ -215,8 +215,9 @@ msgid "Disable all settings"
 msgstr ""
 
 msgid ""
-"This action will disable and remove all General, Program and Data set "
-"settings. Are you sure you want to disable all settings?"
+"This action will disable and remove all General, Synchronization, "
+"Appearance and Analytics settings. Are you sure you want to disable all "
+"settings?"
 msgstr ""
 
 msgid "Disable"
@@ -347,13 +348,21 @@ msgstr ""
 msgid "Must be a valid url"
 msgstr ""
 
+msgid "Add message of the day"
+msgstr ""
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
+msgstr ""
+
 msgid "1 Week"
 msgstr ""
 
 msgid "How often should metadata sync?"
 msgstr ""
 
-msgid "Allow the user to create a TEI without the prior search"
+msgid "Allow the user to create a TEI without searching"
 msgstr ""
 
 msgid "Reserved values downloaded per TEI attribute"
@@ -374,14 +383,14 @@ msgstr ""
 msgid "SMS Result Sender phone number"
 msgstr ""
 
-msgid "Use new version of Tracker Importer"
+msgid "Use the new version of Tracker Importer (Web API)"
 msgstr ""
 
 msgid ""
 "Use new tracker endpoints dedicated to importing and querying tracker "
 "objects (including tracked entities, enrollments, events, and "
-"relationships). Be aware that some functionality is not yet ready in the "
-"new endpoints, but they support their primary use-cases."
+"relationships). Be aware that some functionality might not be ready in the "
+"new endpoints, although primary use-cases are supported."
 msgstr ""
 
 msgid "Reset all values to default"
@@ -770,7 +779,9 @@ msgstr ""
 msgid "Event Status"
 msgstr ""
 
-msgid "This will disable and remove all General, Program and Data set settings."
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
 msgstr ""
 
 msgid "General Settings"
