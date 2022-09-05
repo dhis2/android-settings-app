@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import buttonStyles from '../../styles/Button.module.css'
@@ -44,7 +44,7 @@ const FooterStripButtons = ({
                     primary
                     className={buttonStyles.button_marginLeft}
                     onClick={handleOpenSaveDialog}
-                    disabled={saveButtonDisabled}
+                    disabled={saveButtonDisabled || disableAll}
                 >
                     {i18n.t('Save')}
                 </Button>

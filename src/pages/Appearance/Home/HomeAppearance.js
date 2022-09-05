@@ -16,6 +16,7 @@ const HomeAppearance = () => {
     const {
         load,
         home,
+        programConfiguration,
         completionSpinner,
         programSettings,
         dataSetSettings,
@@ -49,6 +50,7 @@ const HomeAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
+            programConfiguration,
             completionSpinner,
             filterSorting: {
                 home: settings,
@@ -71,6 +73,7 @@ const HomeAppearance = () => {
             )}
             loading={load}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {settings && (
                 <>

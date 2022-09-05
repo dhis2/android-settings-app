@@ -1,4 +1,10 @@
 export const appearanceDefault = {
+    programConfiguration: {
+        globalSettings: {
+            completionSpinner: true,
+        },
+        specificSettings: {},
+    },
     completionSpinner: {
         globalSettings: {
             visible: true,
@@ -51,6 +57,10 @@ export const appearanceDefault = {
                     sort: true,
                 },
                 syncStatus: {
+                    filter: true,
+                    sort: true,
+                },
+                followUp: {
                     filter: true,
                     sort: true,
                 },

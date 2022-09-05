@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-15T17:14:24.104Z\n"
-"PO-Revision-Date: 2021-07-15T17:14:24.104Z\n"
+"POT-Creation-Date: 2022-09-02T02:42:48.125Z\n"
+"PO-Revision-Date: 2022-09-02T02:42:48.125Z\n"
 
 msgid "Edit"
 msgstr ""
@@ -23,6 +23,78 @@ msgid "Failed to get data from Data Store"
 msgstr ""
 
 msgid "Settings were successfully saved"
+msgstr ""
+
+msgid "Dataset"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Add a group name"
+msgstr ""
+
+msgid "Create a new group"
+msgstr ""
+
+msgid "Select a created group visualization"
+msgstr ""
+
+msgid "Select a group visualization"
+msgstr ""
+
+msgid "Use a group visualization"
+msgstr ""
+
+msgid "No visualization found"
+msgstr ""
+
+msgid "Show fewer"
+msgstr ""
+
+msgid "Show more"
+msgstr ""
+
+msgid "Visualization item"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Visualization"
+msgstr ""
+
+msgid "Visualization Group"
+msgstr ""
+
+msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr ""
+
+msgid "Delete Group"
+msgstr ""
+
+msgid "Visualization title"
+msgstr ""
+
+msgid "This will override the visualization title when shown in the app"
+msgstr ""
+
+msgid "No user found"
+msgstr ""
+
+msgid "Search by user"
+msgstr ""
+
+msgid "{{userName}} can visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "{{userName}} can not visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "Visualization user test"
+msgstr ""
+
+msgid "Run test"
 msgstr ""
 
 msgid "Data Element"
@@ -49,9 +121,6 @@ msgstr ""
 msgid "Choose element type"
 msgstr ""
 
-msgid "Program"
-msgstr ""
-
 msgid "Program Stage"
 msgstr ""
 
@@ -67,19 +136,19 @@ msgstr ""
 msgid "Attribute"
 msgstr ""
 
-msgid "Monthly"
-msgstr ""
-
 msgid "Daily"
 msgstr ""
 
 msgid "Weekly"
 msgstr ""
 
+msgid "Monthly"
+msgstr ""
+
 msgid "Quarterly"
 msgstr ""
 
-msgid "SixMonthly"
+msgid "Six-monthly"
 msgstr ""
 
 msgid "Yearly"
@@ -139,12 +208,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Delete {{element}}"
+msgstr ""
+
 msgid "Disable all settings"
 msgstr ""
 
 msgid ""
-"This action will disable and remove all General, Program and Data set "
-"settings. Are you sure you want to disable all settings?"
+"This action will disable and remove all General, Synchronization, "
+"Appearance and Analytics settings. Are you sure you want to disable all "
+"settings?"
 msgstr ""
 
 msgid "Disable"
@@ -275,13 +348,30 @@ msgstr ""
 msgid "Must be a valid url"
 msgstr ""
 
+msgid "Add message of the day"
+msgstr ""
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
+msgstr ""
+
 msgid "1 Week"
 msgstr ""
 
 msgid "How often should metadata sync?"
 msgstr ""
 
+msgid "Allow the user to create a TEI without searching"
+msgstr ""
+
 msgid "Reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} reserved values"
+msgstr ""
+
+msgid "Allow user to take screenshots and share their screen."
 msgstr ""
 
 msgid "SMS Gateway phone number"
@@ -293,7 +383,23 @@ msgstr ""
 msgid "SMS Result Sender phone number"
 msgstr ""
 
+msgid "Use the new version of Tracker Importer (Web API)"
+msgstr ""
+
+msgid ""
+"Use new tracker endpoints dedicated to importing and querying tracker "
+"objects (including tracked entities, enrollments, events, and "
+"relationships). Be aware that some functionality might not be ready in the "
+"new endpoints, although primary use-cases are supported."
+msgstr ""
+
 msgid "Reset all values to default"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} TEI"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} events"
 msgstr ""
 
 msgid "No TEI Analytics found"
@@ -312,43 +418,13 @@ msgid ""
 "app version 2.3.0 onwards."
 msgstr ""
 
-msgid "Recommended maximum: {{maxValue}}"
+msgid "Something went wrong when loading the data"
 msgstr ""
 
-msgid "User sync test"
-msgstr ""
-
-msgid "Check the amount of data a user would sync to their device."
-msgstr ""
-
-msgid "Run test"
-msgstr ""
-
-msgid "Search for a user"
-msgstr ""
-
-msgid "User"
+msgid "It looks like there aren't any configured visualizations."
 msgstr ""
 
 msgid "Maximum number of periods to download data sets for"
-msgstr ""
-
-msgid "Period"
-msgstr ""
-
-msgid "Organisation Unit"
-msgstr ""
-
-msgid "Sync status"
-msgstr ""
-
-msgid "Category Combo"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Assigned to me"
 msgstr ""
 
 msgid "Overview"
@@ -391,6 +467,9 @@ msgid "Set Data set sync settings"
 msgstr ""
 
 msgid "Define synchronization parameters for data sets"
+msgstr ""
+
+msgid "User sync test"
 msgstr ""
 
 msgid "Run user sync test"
@@ -457,18 +536,6 @@ msgid "Set Data set Visualizations"
 msgstr ""
 
 msgid "Manage visualizations for data sets"
-msgstr ""
-
-msgid "Enrollment Date"
-msgstr ""
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Event Date"
-msgstr ""
-
-msgid "Event status"
 msgstr ""
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
@@ -567,6 +634,45 @@ msgstr ""
 msgid "data download size (KB)"
 msgstr ""
 
+msgid "Error loading visualizations"
+msgstr ""
+
+msgid "Manage visualizations for data set."
+msgstr ""
+
+msgid "Could not find any data set visualisations"
+msgstr ""
+
+msgid "Add Data set visualization"
+msgstr ""
+
+msgid "Add Data set Visualization"
+msgstr ""
+
+msgid "Add Home visualization"
+msgstr ""
+
+msgid "Add Home Visualization"
+msgstr ""
+
+msgid "Manage visualizations for Home screen."
+msgstr ""
+
+msgid "Could not find any home visualisations"
+msgstr ""
+
+msgid "Add Program visualization"
+msgstr ""
+
+msgid "Add Program Visualization"
+msgstr ""
+
+msgid "Manage visualizations for program."
+msgstr ""
+
+msgid "Could not find any program visualisations"
+msgstr ""
+
 msgid "TEI Analytics"
 msgstr ""
 
@@ -602,12 +708,39 @@ msgstr ""
 msgid "Add a Data set Settings"
 msgstr ""
 
+msgid "Period"
+msgstr ""
+
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Sync status"
+msgstr ""
+
+msgid "Category Combo"
+msgstr ""
+
+msgid "Filters: {{filterList}}"
+msgstr ""
+
+msgid "No Filters"
+msgstr ""
+
+msgid "Sync Status"
+msgstr ""
+
 msgid "Home Screen"
 msgstr ""
 
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Assigned to me"
 msgstr ""
 
 msgid "Program specific settings"
@@ -625,10 +758,39 @@ msgid ""
 "individual programs can also be applied."
 msgstr ""
 
-msgid "This will disable and remove all General, Program and Data set settings."
+msgid "Enrollment Date"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Event Date"
+msgstr ""
+
+msgid "Event status"
+msgstr ""
+
+msgid "Follow up"
+msgstr ""
+
+msgid "Enrollment Status"
+msgstr ""
+
+msgid "Event Status"
+msgstr ""
+
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
 msgstr ""
 
 msgid "General Settings"
+msgstr ""
+
+msgid "Overview: Android Settings App"
+msgstr ""
+
+msgid "v{{version}}"
 msgstr ""
 
 msgid "Data sets specific download sync settings"
@@ -691,4 +853,16 @@ msgid ""
 msgstr ""
 
 msgid "program"
+msgstr ""
+
+msgid "Recommended maximum: {{maxValue}}"
+msgstr ""
+
+msgid "User Sync Test"
+msgstr ""
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr ""
+
+msgid "User"
 msgstr ""

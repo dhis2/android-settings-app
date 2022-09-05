@@ -8,7 +8,8 @@ export const getProgramsQuery = {
         resource: 'programs',
         params: {
             fields: ['id', 'name', 'programType'],
-            filter: 'access.data.write:eq:true',
+            filter: 'access.read:eq:true',
+            paging: 'false',
         },
     },
 }

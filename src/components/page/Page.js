@@ -1,11 +1,24 @@
 import React from 'react'
 import { CircularLoader } from '@dhis2/ui'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import styles from './Page.module.css'
 import UnsavedChangesAlert from '../UnsavedChangesAlert'
+import { VisualizationsError } from '../noticeAlert'
 
-const Page = ({ loading, title, desc, unsavedChanges, children }) => {
-    if (loading === true) {
+const Page = ({
+    loading,
+    title,
+    desc,
+    unsavedChanges,
+    error,
+    authority,
+    children,
+}) => {
+    if (error) {
+        return <VisualizationsError error={error.message} />
+    }
+
+    if (loading) {
         return <CircularLoader small />
     }
 
@@ -17,7 +30,9 @@ const Page = ({ loading, title, desc, unsavedChanges, children }) => {
             </header>
 
             <div className={styles.content}>
-                <UnsavedChangesAlert unsavedChanges={unsavedChanges} />
+                {authority && (
+                    <UnsavedChangesAlert unsavedChanges={unsavedChanges} />
+                )}
                 {children}
             </div>
         </>
@@ -29,6 +44,8 @@ Page.propTypes = {
     title: PropTypes.string,
     desc: PropTypes.string,
     unsavedChanges: PropTypes.bool,
+    error: PropTypes.object,
+    authority: PropTypes.bool,
     children: PropTypes.element,
 }
 

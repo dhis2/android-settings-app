@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import TableActions from '../../../components/TableActions'
 import DialogDelete from '../../../components/dialog/DialogDelete'
 import DialogNewProgram from './DialogNewProgram'
-import { programHasCategoryCombo } from './helper'
+import {
+    findElementById,
+    isProgramConfiguration,
+    isTrackerProgram,
+    programHasCategoryCombo,
+} from './helper'
 import {
     removeSettingsFromList,
     updateSettingsList,
@@ -23,6 +28,7 @@ const SpecificTableAction = ({
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [hasCategoryCombo, setHasCategoryCombo] = useState(false)
     const [spinner, setSpinner] = useState({})
+    const [isTracker, setTrackerProgram] = useState(false)
 
     const tableActions = {
         edit: (...args) => {
@@ -30,7 +36,8 @@ const SpecificTableAction = ({
             setHasCategoryCombo(
                 programHasCategoryCombo(args[0].id, elementList)
             )
-            setSpinner(spinnerList.find(setting => setting.id === args[0].id))
+            setTrackerProgram(isTrackerProgram(args[0].id, elementList))
+            setSpinner(findElementById(spinnerList, args[0].id))
             setOpenEditDialog(true)
         },
         delete: (...args) => {
@@ -61,8 +68,9 @@ const SpecificTableAction = ({
     }
 
     const handleChange = e => {
-        e.name === 'visible'
+        isProgramConfiguration(e.name)
             ? setSpinner({
+                  ...spinner,
                   [e.name]: e.checked,
                   id: specificSetting.id,
               })
@@ -103,6 +111,7 @@ const SpecificTableAction = ({
                         handleChange={handleChange}
                         hasCategoryCombo={hasCategoryCombo}
                         spinnerSettings={spinner}
+                        isTrackerProgram={isTracker}
                     />
                 </>
             )}

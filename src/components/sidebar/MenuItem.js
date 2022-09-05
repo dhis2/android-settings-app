@@ -1,7 +1,7 @@
 import React from 'react'
 import { MenuItem as UIMenuItem } from '@dhis2/ui'
 import { useHistory } from 'react-router-dom'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import styles from './Sidebar.module.css'
 

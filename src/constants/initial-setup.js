@@ -13,5 +13,10 @@ export const initialSetup = {
     appearance: appearanceDefault,
     analytics: {
         tei: [],
+        dhisVisualizations: {
+            home: [],
+            program: {},
+            dataSet: {},
+        },
     },
 }

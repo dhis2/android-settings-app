@@ -9,8 +9,8 @@ export const getDatasetQuery = {
         resource: 'dataSets',
         params: {
             fields: ['id', 'name', 'periodType'],
-            filter: 'access.data.write:eq:true',
-            pager: false,
+            filter: 'access.read:eq:true',
+            paging: 'false',
         },
     },
 }

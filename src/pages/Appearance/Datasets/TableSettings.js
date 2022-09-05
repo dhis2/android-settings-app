@@ -1,11 +1,42 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import i18n from '@dhis2/d2-i18n'
 import { TableRowWrapper } from '../../../components/table'
 import { CheckboxField } from '../../../components/field'
-import {
-    datasetAppearanceSettings,
-    datasetAppearanceSpecificSettings,
-} from '../../../constants/dataset-appearance'
+
+const datasetAppearanceSettings = [
+    {
+        key: 'period',
+        label: i18n.t('Period'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+]
+
+const datasetAppearanceSpecificSettings = [
+    {
+        key: 'categoryCombo',
+        label: i18n.t('Category Combo'),
+    },
+    {
+        key: 'period',
+        label: i18n.t('Period'),
+    },
+    {
+        key: 'organisationUnit',
+        label: i18n.t('Organisation Unit'),
+    },
+    {
+        key: 'syncStatus',
+        label: i18n.t('Sync status'),
+    },
+]
 
 export const DatasetGlobalSettings = ({
     states,
@@ -14,19 +45,19 @@ export const DatasetGlobalSettings = ({
     dense,
 }) => (
     <>
-        {datasetAppearanceSettings.map(row => (
+        {datasetAppearanceSettings.map(({ key, label }) => (
             <TableRowWrapper
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 disable={disabled}
                 dense={dense}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}
@@ -45,19 +76,19 @@ export const DatasetCategoryComboSettings = ({
     disabled,
 }) => (
     <>
-        {datasetAppearanceSpecificSettings.map(row => (
+        {datasetAppearanceSpecificSettings.map(({ key, label }) => (
             <TableRowWrapper
                 dense={true}
-                row={row}
+                label={label}
                 states={states}
-                key={row.key}
+                key={key}
                 disable={disabled}
             >
                 <CheckboxField
-                    name={row.key}
+                    name={key}
                     onChange={handleChange}
                     disabled={disabled}
-                    checked={states[row.key].filter}
+                    checked={states[key].filter}
                 />
             </TableRowWrapper>
         ))}

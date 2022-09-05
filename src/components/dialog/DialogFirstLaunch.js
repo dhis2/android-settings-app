@@ -9,7 +9,7 @@ import {
     Layer,
 } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
 import cx from 'classnames'
 import buttonStyle from '../../styles/Button.module.css'

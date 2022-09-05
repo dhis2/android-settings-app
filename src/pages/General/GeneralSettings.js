@@ -7,7 +7,9 @@ import {
     EncryptDB,
     MatomoId,
     MatomoUrl,
+    MessageOfDay,
     ReservedValues,
+    ShareScreen,
     SmsGateway,
     SmsResultSender,
 } from '../../components/field'
@@ -82,6 +84,7 @@ const GeneralSettings = () => {
             title={i18n.t('General Settings')}
             loading={loading}
             unsavedChanges={!disableSave}
+            authority={!disable}
         >
             {settings && (
                 <>
@@ -110,7 +113,17 @@ const GeneralSettings = () => {
                         onChange={setSettings}
                         disabled={disable}
                     />
+                    <MessageOfDay
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
                     <EncryptDB
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+                    <ShareScreen
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}

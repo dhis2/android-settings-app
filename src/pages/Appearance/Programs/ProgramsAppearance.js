@@ -7,18 +7,25 @@ import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
-import { createInitialSpinnerValue, createInitialValues } from './helper'
+import {
+    createInitialGlobalSpinner,
+    createInitialGlobalSpinnerPrevious,
+    createInitialSpinnerValue,
+    createInitialValues,
+    createSpecificValues,
+    prepareSettingsSaveDataStore,
+    prepareSpinnerPreviousSpinner,
+} from './helper'
 import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
-import { removeSummaryFromSettings } from '../../../utils/utils'
 
 const ProgramsAppearance = () => {
     const {
         load,
         dataSetSettings,
-        completionSpinner,
+        programConfiguration,
         home,
         programSettings,
     } = useReadAppearanceDataStore()
@@ -41,16 +48,20 @@ const ProgramsAppearance = () => {
     }, [data])
 
     useEffect(() => {
-        if (programSettings && completionSpinner) {
+        if (programSettings && programConfiguration) {
             const { globalSettings, specificSettings } = programSettings
             setInitialValues({ globalSettings, specificSettings })
             setGlobalSettings(createInitialValues(globalSettings))
             programSettings.specificSettings
-                ? setSpecificSettings(programSettings.specificSettings)
+                ? setSpecificSettings(
+                      createSpecificValues(programSettings.specificSettings)
+                  )
                 : setSpecificSettings({})
-            setSpinnerSettings(completionSpinner)
-            setSpinnerGlobal(completionSpinner.globalSettings)
-            setSpinnerSpecific(completionSpinner.specificSettings)
+            setSpinnerSettings(programConfiguration)
+            setSpinnerGlobal(
+                createInitialGlobalSpinner(programConfiguration.globalSettings)
+            )
+            setSpinnerSpecific(programConfiguration.specificSettings)
         }
     }, [programSettings])
 
@@ -67,12 +78,20 @@ const ProgramsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            completionSpinner: {
+            programConfiguration: {
                 globalSettings: {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...removeSummaryFromSettings(spinnerSpecific),
+                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                },
+            },
+            completionSpinner: {
+                globalSettings: {
+                    ...createInitialGlobalSpinnerPrevious(spinnerGlobal),
+                },
+                specificSettings: {
+                    ...prepareSpinnerPreviousSpinner(spinnerSpecific),
                 },
             },
             filterSorting: {
@@ -81,7 +100,7 @@ const ProgramsAppearance = () => {
                 programSettings: {
                     globalSettings,
                     specificSettings: {
-                        ...removeSummaryFromSettings(specificSettings),
+                        ...prepareSettingsSaveDataStore(specificSettings),
                     },
                 },
             },
@@ -103,6 +122,7 @@ const ProgramsAppearance = () => {
             )}
             unsavedChanges={!disableSave}
             loading={load}
+            authority={!disable}
         >
             {globalSettings && (
                 <>

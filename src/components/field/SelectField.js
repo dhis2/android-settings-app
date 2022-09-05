@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import { FieldSection } from './FieldSection'
 
@@ -13,9 +13,9 @@ export const SelectField = ({ label, options, onChange, ...props }) => (
         >
             {options.map(option => (
                 <SingleSelectOption
-                    key={option.value}
-                    label={option.label}
-                    value={option.value}
+                    key={option.value || option.id}
+                    label={option.label || option.name}
+                    value={option.value || option.id}
                 />
             ))}
         </SingleSelectField>

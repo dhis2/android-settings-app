@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { AddNewSetting } from '../../../components/field'
 import {
     createInitialSpecificValues,
     createInitialSpinnerValue,
     createInitialValues,
     getProgramName,
+    isProgramConfiguration,
+    isTrackerProgram,
     programHasCategoryCombo,
 } from './helper'
 import DialogNewProgram from './DialogNewProgram'
@@ -25,8 +27,9 @@ const NewProgramSpecific = ({
     const [specificSettings, setSpecificSettings] = useState(
         createInitialSpecificValues('')
     )
-    const [spinner, setSpinner] = useState(createInitialSpinnerValue(''))
+    const [spinner, setSpinner] = useState(createInitialSpinnerValue({}))
     const [disableSave, setDisableSave] = useState(true)
+    const [isTracker, setTrackerProgram] = useState(false)
 
     const handleOpenSettingsDialog = () => {
         setOpenDialog(true)
@@ -35,7 +38,7 @@ const NewProgramSpecific = ({
     const handleClose = () => {
         setOpenDialog(false)
         setSpecificSettings(createInitialSpecificValues(''))
-        setSpinner(createInitialSpinnerValue(''))
+        setSpinner(createInitialSpinnerValue({}))
         setDisableSave(true)
     }
 
@@ -56,25 +59,22 @@ const NewProgramSpecific = ({
                 id: e.selected,
             })
             setSpinner({
-                ...createInitialSpinnerValue(''),
+                ...createInitialSpinnerValue({}),
                 id: e.selected,
                 name: getProgramName(e.selected, programList),
             })
             setCategoryCombo(programHasCategoryCombo(e.selected, programList))
+            setTrackerProgram(isTrackerProgram(e.selected, programList))
             setDisableSave(false)
         } else {
-            if (e.name === 'visible') {
+            if (isProgramConfiguration(e.name)) {
                 setSpinner({
+                    ...spinner,
                     [e.name]: e.checked,
                     id: specificSettings.id,
                     name: specificSettings.name,
                 })
             } else {
-                setSpinner({
-                    ...spinner,
-                    id: specificSettings.id,
-                    name: specificSettings.name,
-                })
                 setSpecificSettings({
                     ...specificSettings,
                     [e.name]: {
@@ -103,6 +103,7 @@ const NewProgramSpecific = ({
                     specificSettings={specificSettings}
                     handleSave={handleSaveNew}
                     hasCategoryCombo={hasCategoryCombo}
+                    isTrackerProgram={isTracker}
                     spinnerSettings={spinner}
                     disableSave={disableSave}
                 />

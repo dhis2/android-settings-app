@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { NumberField } from './NumberField'
 
@@ -10,8 +10,10 @@ export const defaultReservedValues = 100
 
 export const ReservedValues = ({ onChange, value, ...props }) => {
     const handleChange = e => {
-        let inputValue = e.value
-        inputValue = inputValue <= 0 ? 0 : Math.min(MAXVALUE, inputValue)
+        const inputValue = Math.max(
+            0,
+            isNaN(parseInt(e.value)) ? 0 : parseInt(e.value)
+        )
         onChange({ ...value, [CODE]: inputValue })
     }
 
@@ -21,7 +23,13 @@ export const ReservedValues = ({ onChange, value, ...props }) => {
             name={CODE}
             onChange={handleChange}
             value={value[CODE]}
+            warning={value[CODE] >= MAXVALUE}
             step="10"
+            inputWidth="120px"
+            validationText={i18n.t(
+                'Recommended maximum is {{maxValue}} reserved values',
+                { maxValue: MAXVALUE }
+            )}
             {...props}
         />
     )

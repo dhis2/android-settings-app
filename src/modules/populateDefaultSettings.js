@@ -1,6 +1,7 @@
 import { programSettingsDefault } from '../constants/program-settings'
 import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import { androidSettingsDefault } from '../constants/android-settings'
+import { defaultShareScreen } from '../components/field'
 
 export const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
 export const DEFAULT_DATASET = 'DEFAULT_DATASET'
@@ -14,6 +15,7 @@ export const populateObject = type => {
             object = {
                 reservedValues: androidSettingsDefault.reservedValues,
                 encryptDB: androidSettingsDefault.encryptDB,
+                allowScreenCapture: defaultShareScreen,
             }
             break
         case DEFAULT_GLOBAL:
