@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { AlertBar } from '@dhis2/ui'
 import styles from './AlertBar.module.css'
 

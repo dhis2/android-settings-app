@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 
