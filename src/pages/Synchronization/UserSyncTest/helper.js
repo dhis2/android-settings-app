@@ -1,4 +1,5 @@
 import isEmpty from 'lodash/isEmpty'
+import unionBy from 'lodash/unionBy'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import without from 'lodash/without'
@@ -91,7 +92,7 @@ const getSearchOrgUnit = async (orgUnits, dataEngine) => {
 
 const parseUniqList = list => uniq(without(list, undefined))
 
-const getPrograms = orgUnitList => {
+export const getPrograms = orgUnitList => {
     const programList = []
     const trackedEntityTypeId = []
     const trackedEntityAttributeId = []
@@ -127,7 +128,7 @@ const getPrograms = orgUnitList => {
     }
 }
 
-const getDatasets = orgUnitList => {
+export const getDatasets = orgUnitList => {
     const dataSetList = []
     const dataElementId = []
     const categoryComboId = []
@@ -138,8 +139,10 @@ const getDatasets = orgUnitList => {
         dataSets.forEach(
             ({ id, dataSetElements, indicators, categoryCombo }) => {
                 dataSetList.push(id)
-                if (!isEmpty(dataSetElements.dataElement)) {
-                    dataElementId.push(dataSetElements.dataElement.id)
+                if (!isEmpty(dataSetElements)) {
+                    dataSetElements.forEach((dataSetElement) => {
+                        dataElementId.push(dataSetElement.dataElement.id)
+                    })
                 }
 
                 if (!isEmpty(indicators)) {
@@ -238,4 +241,18 @@ const getTestElements = async (user, dataEngine) => {
         },
         dataSet,
     }
+}
+
+export const joinObjectsById = array => {
+    const joinedArray = []
+
+    array
+        .reduce((array1, array2) => unionBy(array1, array2, 'id'))
+        .map(e => joinedArray.push(e.id))
+
+    return parseUniqList(joinedArray)
+}
+
+export const joinElementsById = array => {
+    return parseUniqList(array.map(e => e.id))
 }
