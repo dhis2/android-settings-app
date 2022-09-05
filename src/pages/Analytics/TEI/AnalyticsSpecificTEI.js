@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
 import isEqual from 'lodash/isEqual'
 import NewAnalyticSettings from './NewAnalyticSettings'
 import AnalyticsTable from './AnalyticsTable'

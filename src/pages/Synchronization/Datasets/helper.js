@@ -25,9 +25,10 @@ export const prepareSpecificSettingsList = (
 
     for (const key in datasetSettings) {
         if (datasetId.includes(key)) {
-            const periodType =
+            const periodType = getPeriodLabel(
                 getPeriodType(key, apiDatasetList).name ||
-                getPeriodType(key, apiDatasetList)
+                    getPeriodType(key, apiDatasetList)
+            )
             const dataset = datasetSettings[key]
             const summarySettings = `${dataset.periodDSDownload} ${periodType} period`
 
@@ -54,3 +55,5 @@ export const findDatasetName = (datasetList, specificProgram) => {
 
 export const getPeriodDefaultValueByType = periodType =>
     periodTypeConstants[periodType].default
+
+export const getPeriodLabel = period => periodTypeConstants[period].label

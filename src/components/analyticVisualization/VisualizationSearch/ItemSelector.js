@@ -5,7 +5,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { ContentMenuGroup } from './ContentMenuGroup'
 import { ItemSearchField } from './ItemSearchField'
 import { getVisualizationsQuery } from './visualizationQuery'
-import { validateAndroidVisualization } from './helper'
+import { orderVisualizations, validateAndroidVisualization } from './helper'
 import useDebounce from '../../../utils/useDebounce'
 import styles from './styles/ItemSelector.module.css'
 
@@ -25,10 +25,8 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
 
         dataEngine.query({ items: query }).then(res => {
             validateAndroidVisualization(res.items.visualizations)
-            const validItem = res.items.visualizations.filter(
-                item => item.valid === true
-            )
-            setItems(validItem)
+            const orderItems = orderVisualizations(res.items.visualizations)
+            setItems(orderItems)
         })
     }, [debouncedFilterText])
 
