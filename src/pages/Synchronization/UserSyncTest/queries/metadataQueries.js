@@ -43,7 +43,7 @@ const programQuery = query => ({
     resource: 'programs',
     params: {
         fields:
-            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programIndicators[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],analyticsType,analyticsPeriodBoundaries[boundaryTarget,analyticsPeriodBoundaryType,offsetPeriods,offsetPeriodType],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]]],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,accessLevel,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],trackedEntityAttributes[id],sortOrder,style[color,icon],formName],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
+            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,version,onlyEnrollOnce,enrollmentDateLabel,displayIncidentDate,incidentDateLabel,registration,selectEnrollmentDatesInFuture,dataEntryMethod,ignoreOverdueEvents,selectIncidentDatesInFuture,captureCoordinates,useFirstStageDuringRegistration,displayFrontPageList,programType,programTrackedEntityAttributes[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,mandatory,program[id],allowFutureDate,displayInList,sortOrder,searchable,trackedEntityAttribute[id],renderType],relatedProgram[id],trackedEntityType[id],categoryCombo[id],access[data[write]],programRuleVariables[id,code,name,displayName,created,lastUpdated,deleted,useCodeForOptionSet,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],programRuleVariableSourceType],style[color,icon],expiryDays,completeEventsExpiryDays,expiryPeriodType,minAttributesRequiredToSearch,maxTeiCountToReturn,featureType,accessLevel,programSections[id,code,name,displayName,created,lastUpdated,deleted,description,program[id],programTrackedEntityAttribute[id],trackedEntityAttributes[id],sortOrder,style[color,icon],formName,renderType],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
         filter: `id:in:[${query}]`,
         paging: false,
     },
@@ -64,7 +64,7 @@ const programStageQuery = query => ({
     resource: 'programStages',
     params: {
         fields:
-            'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,dueDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],fieldMask,style[color,icon],access[read],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted,enableUserAssignment,attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
+            'id,code,name,displayName,created,lastUpdated,deleted,description,displayDescription,executionDateLabel,dueDateLabel,allowGenerateNextVisit,validCompleteOnly,reportDateToUse,openAfterEnrollment,repeatable,captureCoordinates,featureType,formType,displayGenerateEventBox,generatedByEnrollmentDate,autoGenerateEvent,sortOrder,hideDueDate,blockEntryForm,minDaysFromStart,standardInterval,programStageSections[id,code,name,displayName,created,lastUpdated,deleted,sortOrder,programIndicators[id],dataElements[id],renderType],programStageDataElements[id,code,name,displayName,created,lastUpdated,deleted,displayInReports,dataElement[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],fieldMask,style[color,icon],access[read],legendSets[id],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]],compulsory,allowProvidedElsewhere,sortOrder,allowFutureDate,renderType,programStage[id]],style[color,icon],periodType,program,access[data[write]],remindCompleted,enableUserAssignment,attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
         filter: `program.id:in:[${query}]`,
         paging: false,
     },
@@ -297,7 +297,7 @@ const dataElementQuery = query => ({
     resource: 'dataElements',
     params: {
         fields:
-            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],fieldMask,style[color,icon],access[read],legendSets[id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
+            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,zeroIsSignificant,aggregationType,formName,domainType,displayFormName,optionSet[id],categoryCombo[id],fieldMask,style[color,icon],access[read],legendSets[id],attributeValues[value,attribute[id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,valueType,unique,mandatory,indicatorAttribute,indicatorGroupAttribute,userGroupAttribute,dataElementAttribute,constantAttribute,categoryOptionAttribute,optionSetAttribute,sqlViewAttribute,legendSetAttribute,trackedEntityAttributeAttribute,organisationUnitAttribute,dataSetAttribute,documentAttribute,validationRuleGroupAttribute,dataElementGroupAttribute,sectionAttribute,trackedEntityTypeAttribute,userAttribute,categoryOptionGroupAttribute,programStageAttribute,programAttribute,categoryAttribute,categoryOptionComboAttribute,categoryOptionGroupSetAttribute,validationRuleAttribute,programIndicatorAttribute,organisationUnitGroupAttribute,dataElementGroupSetAttribute,organisationUnitGroupSetAttribute,optionAttribute]]',
         filter: `id:in:[${query}]`,
         paging: false,
     },
@@ -397,10 +397,10 @@ export const apiFetchCategoryOptions = async (dataEngine, categories) => {
 }
 
 const indicatorsQuery = query => ({
-    resource: 'categoryOptions',
+    resource: 'indicators',
     params: {
         fields:
-            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url,decimals',
+            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,annualized,indicatorType[id],numerator,numeratorDescription,denominator,denominatorDescription,url,legendSets[id],decimals',
         filter: `id:in:[${query}]`,
         paging: false,
     },
@@ -489,6 +489,121 @@ export const apiFetchMe = async dataEngine => {
             me: meQuery(),
         })
         return meData.me.me
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const systemInfoQuery = () => ({
+    resource: 'system/info',
+    params: {
+        fields: 'serverDate,dateFormat,version,contextPath,systemName',
+        paging: false,
+    },
+})
+
+export const apiFetchSystemInfo = async dataEngine => {
+    try {
+        const systemInfoData = await dataEngine.query({
+            info: systemInfoQuery(),
+        })
+        return systemInfoData.info.info
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const authorizationQuery = () => ({
+    resource: 'me/authorization',
+})
+
+export const apiFetchAuthorization = async dataEngine => {
+    try {
+        const authorizationData = await dataEngine.query({
+            auth: authorizationQuery(),
+        })
+        return authorizationData.auth
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const appQuery = () => ({
+    resource: 'apps',
+    params: {
+        filter: 'name:eq:Android Settings',
+    },
+})
+
+export const apiFetchApps = async dataEngine => {
+    try {
+        const appsData = await dataEngine.query({
+            apps: appQuery(),
+        })
+        return appsData.apps
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const indicatorTypeQuery = query => ({
+    resource: 'indicatorTypes',
+    params: {
+        fields:
+            'id,code,name,displayName,created,lastUpdated,deleted,number,factor',
+        filter: `id:in:[${query}]`,
+        paging: false,
+    },
+})
+
+export const apiFetchIndicatorType = async (dataEngine, indicator) => {
+    try {
+        const indicatorTypeData = await dataEngine.query({
+            indicatorTypes: indicatorTypeQuery(indicator),
+        })
+        return indicatorTypeData.indicatorTypes.indicatorTypes
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const programIndicatorsQuery = query => ({
+    resource: 'programIndicators',
+    params: {
+        fields:
+            'id,code,name,displayName,created,lastUpdated,deleted,shortName,displayShortName,description,displayDescription,displayInForm,expression,dimensionItem,filter,decimals,aggregationType,program[id],analyticsType,analyticsPeriodBoundaries[boundaryTarget,analyticsPeriodBoundaryType,offsetPeriods,offsetPeriodType],legendSets[id]',
+        filter: `program.id:in:[${query}]`,
+        paging: false,
+    },
+})
+
+export const apiFetchProgramIndicators = async (dataEngine, program) => {
+    try {
+        const programIndicatorData = await dataEngine.query({
+            programIndicators: programIndicatorsQuery(program),
+        })
+        return programIndicatorData.programIndicators.programIndicators
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+const legendSetsQuery = query => ({
+    resource: 'legendSets',
+    params: {
+        fields:
+            'id,code,name,displayName,created,lastUpdated,deleted,symbolizer,legends[id,code,name,displayName,created,lastUpdated,deleted,startValue,endValue,color]',
+        filter: `id:in:[${query}]`,
+        paging: false,
+    },
+})
+
+export const apiFetchLegendSet = async (dataEngine, indicator) => {
+    try {
+        const legendSetData = await dataEngine.query({
+            legendSets: legendSetsQuery(indicator),
+        })
+        return legendSetData.legendSets.legendSets
     } catch (error) {
         console.log('Error: ', error)
     }
