@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import {
@@ -11,29 +11,21 @@ import {
 } from '@dhis2/ui'
 import {NotEditableElement, VisualizationGroup, VisualizationTitle} from "./index";
 
+const typeNameList = {
+    'home': '',
+    'program': 'programName',
+    'dataset': 'datasetName'
+}
+
+const labelList = {
+    'home': 'Home',
+    'program': 'Program',
+    'dataset': 'Data set'
+}
+
 const EditVisualization = ({open, settings, handleChange, currentGroup, groups, handleEdit, handleClose, type}) => {
-    const [typeName, useTypeName] = useState('')
-    const [label, useLabel] = useState('')
-
-    const chooseTypeName = type => {
-        switch (type) {
-            case 'home':
-                useTypeName('')
-                useLabel('Home')
-                break
-            case 'program':
-                useTypeName('programName')
-                useLabel('Program')
-                break
-            case 'dataset':
-                useTypeName('datasetName')
-                useLabel('Data set')
-        }
-    }
-
-    useEffect(() => {
-        chooseTypeName(type)
-    }, [type])
+    const typeName = typeNameList[type] || ''
+    const label = labelList[type] || ''
 
     return (
         <>
