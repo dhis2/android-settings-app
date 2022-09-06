@@ -23,6 +23,12 @@
     "scripts": {
         "start": "d2-app-scripts start",
         "build": "d2-app-scripts build",
+        "lint": "yarn run lint:js && yarn run lint:text",
+        "lint:js": "d2-style check js",
+        "lint:text": "d2-style check text",
+        "fix": "yarn run fix:js && yarn run fix:text",
+        "fix:js": "d2-style apply js",
+        "fix:text": "d2-style apply text",
         "test": "d2-app-scripts test",
         "clean": "rimraf build",
         "format": "d2-style js apply"
