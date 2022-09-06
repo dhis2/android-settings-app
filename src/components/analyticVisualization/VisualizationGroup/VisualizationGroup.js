@@ -42,12 +42,13 @@ const findGroup = (type, group, settings) => {
 }
 
 export const VisualizationGroup = ({ settings, onChange, groupList, type, groupId, disabled }) => {
-    const { data: id } = useSystemId()
+    const { refetch: refetchId, data: id } = useSystemId()
     const [group, setGroup] = useState(true)
     const [groupType, setGroupType] = useState(true)
     const [title, setTitle] = useState('')
 
     useEffect(() => {
+        refetchId()
         const groupFound = findGroup(type, { groupList, groupId }, settings)
         if (disabled) {
             if (!isDefaultGroup(groupFound)) {
