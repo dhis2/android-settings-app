@@ -7,7 +7,7 @@ import Wrapper from '../../../components/Wrapper'
 import { DatasetGlobalSettings as GlobalSettings } from './TableSettings'
 
 const DatasetGlobalSettings = ({ disable, settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             [e.name]: {

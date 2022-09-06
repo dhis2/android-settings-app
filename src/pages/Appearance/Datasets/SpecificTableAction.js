@@ -48,7 +48,7 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
         setOpenEditDialog(false)
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setSpecificSetting({
             ...specificSetting,
             [e.name]: {

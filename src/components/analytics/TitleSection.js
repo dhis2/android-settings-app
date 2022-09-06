@@ -5,7 +5,7 @@ import { Section } from './Section'
 import { TextField } from './TextField'
 
 export const TitleSection = ({ onChange, value }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...value,
             [e.name]: e.value,

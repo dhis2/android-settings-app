@@ -67,7 +67,7 @@ const SpecificTableAction = ({
         handleCloseEdit()
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         isProgramConfiguration(e.name)
             ? setSpinner({
                   ...spinner,

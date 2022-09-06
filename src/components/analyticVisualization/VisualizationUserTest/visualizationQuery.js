@@ -23,7 +23,7 @@ const visualization = {
  * Query to get data set list
  * */
 
-const usePrevious = value => {
+const usePrevious = (value) => {
     const ref = useRef()
     useEffect(() => {
         ref.current = value
@@ -31,7 +31,7 @@ const usePrevious = value => {
     return ref.current
 }
 
-export const useReadVisualizationQuery = id => {
+export const useReadVisualizationQuery = (id) => {
     const prevIds = usePrevious(id)
     const { called, loading, error, data, refetch } = useDataQuery(
         visualization,

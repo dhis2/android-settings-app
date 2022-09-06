@@ -43,7 +43,7 @@ const Router = () => {
                 </D2Shim>
             </Route>
 
-            {menuSection.map(section => (
+            {menuSection.map((section) => (
                 <Route
                     exact
                     key={section.code}

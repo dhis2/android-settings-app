@@ -44,7 +44,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
         handleDialogClose()
     }
 
-    const deleteGroup = item => {
+    const deleteGroup = (item) => {
         setName(item.name)
         setSpecificSetting(item)
         setDeleteGroup(true)
@@ -103,10 +103,10 @@ const VisualizationTable = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <VisualizationRow
             visualizationList={item.visualizations}
             deleteVisualization={deleteVisualization}

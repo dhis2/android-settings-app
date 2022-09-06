@@ -25,7 +25,7 @@ export const RadioGroup = ({
 
     return (
         <FieldGroup {...props}>
-            {options.map(option => (
+            {options.map((option) => (
                 <Radio
                     dense
                     onChange={onChange}

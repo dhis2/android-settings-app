@@ -46,7 +46,7 @@ const ProgramGlobalSettings = ({ settings, handleChange, disable }) => {
         }
     }, [settings])
 
-    const onSelectChange = e => {
+    const onSelectChange = (e) => {
         e.selected === GLOBAL || e.selected === PER_ORG_UNIT
             ? handleChange({
                   ...populateProgramObject(GLOBAL_SPECIAL, settings),

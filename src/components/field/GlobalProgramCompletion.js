@@ -8,7 +8,7 @@ import styles from './Field.module.css'
 const CODE = 'completionSpinner'
 
 export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({ [e.name]: e.checked })
     }
 

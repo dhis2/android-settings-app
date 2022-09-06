@@ -60,7 +60,7 @@ export const VisualizationType = ({
         }
     }, [])
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         if (e.selected || e.value === WHO_NUTRITION) {
             updateAttributesList({
                 programId: value.program,

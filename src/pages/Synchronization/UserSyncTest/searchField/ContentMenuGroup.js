@@ -10,7 +10,7 @@ const ContentMenuGroup = ({ items, addItem }) => (
             <ContentMenuItem name={i18n.t('No user found')} valid={false} />
         )}
 
-        {items.map(item => (
+        {items.map((item) => (
             <ContentMenuItem
                 key={item.id || item.key}
                 onInsert={addItem(item)}

@@ -36,7 +36,7 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
         setOpenDialog(false)
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setSpecificSetting({
             ...specificSetting,
             [e.name]: parseValueBySettingType(e.name, e.value),

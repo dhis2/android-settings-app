@@ -66,7 +66,7 @@ const SpecificSettings = ({
     <Wrapper fullWidth>
         <div>
             {programWithRegistration
-                ? SpecificProgram.withRegistration.map(row => (
+                ? SpecificProgram.withRegistration.map((row) => (
                       <ProgramTableRow
                           key={row.option}
                           row={row}
@@ -74,7 +74,7 @@ const SpecificSettings = ({
                           onChange={onChange}
                       />
                   ))
-                : SpecificProgram.withoutRegistration.map(row => (
+                : SpecificProgram.withoutRegistration.map((row) => (
                       <ProgramTableRow
                           key={row.option}
                           row={row}

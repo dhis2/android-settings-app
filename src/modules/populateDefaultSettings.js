@@ -8,7 +8,7 @@ export const DEFAULT_DATASET = 'DEFAULT_DATASET'
 export const DEFAULT_GENERAL = 'DEFAULT_GENERAL'
 export const DEFAULT_GLOBAL = 'DEFAULT_GLOBAL'
 
-export const populateObject = type => {
+export const populateObject = (type) => {
     let object = {}
     switch (type) {
         case DEFAULT_GENERAL:

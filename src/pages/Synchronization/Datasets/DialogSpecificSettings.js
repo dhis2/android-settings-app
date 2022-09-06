@@ -5,7 +5,8 @@ import {
     Modal,
     ModalActions,
     ModalContent,
-    ModalTitle, spacers,
+    ModalTitle,
+    spacers,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'

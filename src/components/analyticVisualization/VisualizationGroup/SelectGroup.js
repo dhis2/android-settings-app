@@ -19,8 +19,8 @@ export const SelectGroup = ({
         setSelection('')
     }, [checked, groupName[elementType]])
 
-    const handleChange = e => {
-        const value = options.find(group => group.id === e.selected)
+    const handleChange = (e) => {
+        const value = options.find((group) => group.id === e.selected)
         setSelection(e.selected)
         changeGroup({
             ...groupName,

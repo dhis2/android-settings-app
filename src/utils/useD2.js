@@ -12,7 +12,7 @@ export const useD2 = () => {
     useEffect(() => {
         if (!initialized) {
             initialized = true
-            initD2({ baseUrl: `${baseUrl}/api/${apiVersion}` }).then(d2 => {
+            initD2({ baseUrl: `${baseUrl}/api/${apiVersion}` }).then((d2) => {
                 theD2 = d2
                 setD2(d2)
             })

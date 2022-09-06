@@ -9,7 +9,7 @@ const CODE = 'matomoURL'
 export const MatomoUrl = ({ value, onChange, disabled }) => {
     const [error, setError] = useState(false)
 
-    const validateURL = value => {
+    const validateURL = (value) => {
         if (isValidValue(value)) {
             const validInput = isValidURL(value)
             !validInput ? setError(true) : setError(false)
@@ -18,7 +18,7 @@ export const MatomoUrl = ({ value, onChange, disabled }) => {
         }
     }
 
-    const onChangeUrl = e => {
+    const onChangeUrl = (e) => {
         const inputValue = e.value
         onChange({ ...value, [CODE]: inputValue })
         validateURL(inputValue)

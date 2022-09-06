@@ -11,13 +11,15 @@ export const ProgramSection = ({ onChange, value, edit, programList }) => {
     useEffect(() => {
         if (programList && edit) {
             setProgramStageList(
-                programList.filter(program => program.id === value.program)[0]
+                programList.filter((program) => program.id === value.program)[0]
                     .programStages
             )
         }
     }, [programList, edit])
 
-    if (edit && programStageList.length === 0) {return <CircularLoader small />}
+    if (edit && programStageList.length === 0) {
+        return <CircularLoader small />
+    }
 
     return (
         <Section>

@@ -5,7 +5,7 @@ import SettingsTableRow from './SettingTableRow'
 const SettingsTable = ({ data, states, onChange }) => (
     <Wrapper>
         <div>
-            {data.map(row => (
+            {data.map((row) => (
                 <SettingsTableRow
                     key={row.option}
                     dataRow={row}

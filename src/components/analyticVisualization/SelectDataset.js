@@ -8,8 +8,8 @@ export const SelectDataset = ({ settings, onChange }) => {
     const { datasetList, loading } = useReadDatasetQuery()
     const options = datasetList || []
 
-    const handleChange = e => {
-        const name = options.find(dataset => dataset.id === e.selected)
+    const handleChange = (e) => {
+        const name = options.find((dataset) => dataset.id === e.selected)
         onChange({
             ...settings,
             dataset: e.selected,

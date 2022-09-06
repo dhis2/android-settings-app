@@ -12,7 +12,7 @@ export const VisualizationRow = ({
     disabled,
 }) => (
     <>
-        {visualizationList.map(visualization => (
+        {visualizationList.map((visualization) => (
             <div
                 className={cx([styles.boxContainer, styles.rowContainer])}
                 key={visualization.id}

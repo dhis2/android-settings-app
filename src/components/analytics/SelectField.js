@@ -18,10 +18,10 @@ export const SelectField = ({
             label={label}
             name={name}
             selected={value}
-            onChange={e => onChange(e, name)}
+            onChange={(e) => onChange(e, name)}
             {...props}
         >
-            {options.map(option => (
+            {options.map((option) => (
                 <SingleSelectOption
                     key={option.value || option.id}
                     label={option.label || option.name}

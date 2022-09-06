@@ -10,13 +10,8 @@ import {
 import { initialSetup } from '../constants/initial-setup'
 import api from '../utils/api'
 
-const {
-    info,
-    generalSettings,
-    synchronization,
-    appearance,
-    analytics,
-} = initialSetup
+const { info, generalSettings, synchronization, appearance, analytics } =
+    initialSetup
 
 const getDataStoreKeyId = () => {
     return Promise.all([
@@ -25,7 +20,7 @@ const getDataStoreKeyId = () => {
         api.getMetaData(NAMESPACE, SYNC_SETTINGS),
         api.getMetaData(NAMESPACE, APPEARANCE),
         api.getMetaData(NAMESPACE, ANALYTICS),
-    ]).then(data => {
+    ]).then((data) => {
         return {
             [data[0].key]: data[0].id,
             [data[1].key]: data[1].id,
@@ -36,7 +31,7 @@ const getDataStoreKeyId = () => {
     })
 }
 
-const updateSecurityDataStore = id => {
+const updateSecurityDataStore = (id) => {
     const updatedObject = {
         object: {
             publicAccess: 'r-------',
@@ -44,7 +39,7 @@ const updateSecurityDataStore = id => {
         },
     }
 
-    return getInstance().then(d2 => {
+    return getInstance().then((d2) => {
         const keyNames = [
             INFO,
             GENERAL_SETTINGS,
@@ -53,7 +48,7 @@ const updateSecurityDataStore = id => {
             ANALYTICS,
         ]
         const sharingPromises = []
-        keyNames.map(keyName => {
+        keyNames.map((keyName) => {
             const sharingUrl = `sharing?type=dataStore&id=${id[keyName]}`
             sharingPromises.push(
                 d2.Api.getApi().post(sharingUrl, updatedObject)
@@ -80,6 +75,6 @@ const apiSetDefaultValues = () => {
 
 export const apiCreateFirstSetup = () => {
     return apiSetDefaultValues().then(() => {
-        return getDataStoreKeyId().then(ids => updateSecurityDataStore(ids))
+        return getDataStoreKeyId().then((ids) => updateSecurityDataStore(ids))
     })
 }

@@ -18,7 +18,7 @@ const TableActions = ({ rows, menuActions, states }) => (
 
 const TableRows = ({ rows, states, menuActions }) => (
     <div>
-        {rows.map(row => (
+        {rows.map((row) => (
             <Card key={row.id || row.uid} className={tableActionStyles.wrapper}>
                 <div className={tableActionStyles.parent}>
                     <div>

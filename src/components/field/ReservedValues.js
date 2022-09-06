@@ -9,7 +9,7 @@ const MAXVALUE = 500
 export const defaultReservedValues = 100
 
 export const ReservedValues = ({ onChange, value, ...props }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         const inputValue = Math.max(
             0,
             isNaN(parseInt(e.value)) ? 0 : parseInt(e.value)

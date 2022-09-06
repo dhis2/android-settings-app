@@ -3,7 +3,9 @@ export const splitArray = (list, howMany) => {
     const result = []
 
     while (idx < list.length) {
-        if (idx % howMany === 0) {result.push([])}
+        if (idx % howMany === 0) {
+            result.push([])
+        }
         result[result.length - 1].push(list[idx++])
     }
 

@@ -6,7 +6,7 @@ import {
     findVisualizationById,
 } from '../helper'
 
-export const createInitialValues = initialValues => ({
+export const createInitialValues = (initialValues) => ({
     id: initialValues.id || '',
     dataset: initialValues.dataset || '',
     visualization: initialValues.visualization || '',
@@ -17,11 +17,11 @@ export const createInitialValues = initialValues => ({
     },
 })
 
-export const invalidMandatoryFields = settings => {
+export const invalidMandatoryFields = (settings) => {
     return !validateObjectByProperty(['dataset', 'visualization'], settings)
 }
 
-export const createVisualizationValues = value => ({
+export const createVisualizationValues = (value) => ({
     id: value.visualization || value.id,
     name: value.name || '',
     visualizationName: value.visualizationName || value.name,
@@ -63,12 +63,12 @@ export const updateRows = (current, rows) => {
     }
 }
 
-export const getGroupList = visualizations => {
+export const getGroupList = (visualizations) => {
     const groupList = {}
 
     mapValues(visualizations, (dataset, i) => {
         const datasetGroup = []
-        mapValues(dataset.groups, group => {
+        mapValues(dataset.groups, (group) => {
             datasetGroup.push({
                 id: group[0].group.id,
                 name: group[0].group.name,
@@ -91,12 +91,12 @@ export const prepareRows = (visualizations, datasetList, visualizationAPI) => {
     const rows = {}
     mapValues(visualizations, (dataset, i) => {
         let groups = {}
-        dataset.map(group => {
+        dataset.map((group) => {
             const visual = []
-            const foundDataset = datasetList.find(d => d.id === i)
+            const foundDataset = datasetList.find((d) => d.id === i)
             group.dataset = i
             group.datasetName = dataset.datasetName || foundDataset.name
-            group.visualizations.map(visualization => {
+            group.visualizations.map((visualization) => {
                 const visualizationFound = findVisualizationById(
                     visualizationAPI,
                     visualization
@@ -135,15 +135,15 @@ export const prepareRows = (visualizations, datasetList, visualizationAPI) => {
     }
 }
 
-export const rowsToDataStore = rows => {
+export const rowsToDataStore = (rows) => {
     const updatedRows = {}
 
     mapValues(rows, (dataset, i) => {
         const groups = []
-        mapValues(dataset.groups, group => {
+        mapValues(dataset.groups, (group) => {
             const visualizations = []
             let groupUpdated = {}
-            group.map(visualization => {
+            group.map((visualization) => {
                 visualizations.push({
                     id: visualization.id,
                     name: visualization.name,
@@ -158,12 +158,12 @@ export const rowsToDataStore = rows => {
     return updatedRows
 }
 
-export const createDataStoreGroupRows = datastore => {
+export const createDataStoreGroupRows = (datastore) => {
     const dataStoreGroups = Object.assign({}, datastore)
     const result = {}
     mapValues(dataStoreGroups, (dataset, i) => {
         const groups = []
-        dataset.map(group => groups.push(createGroup(group)))
+        dataset.map((group) => groups.push(createGroup(group)))
         result[i] = groups
     })
 

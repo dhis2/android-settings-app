@@ -14,12 +14,8 @@ import DatasetSpecificSettings from './DatasetSpecificSettings'
 import { createInitialValues } from './helper'
 
 const DatasetSyncSettings = () => {
-    const {
-        load,
-        programSettings,
-        syncGlobal,
-        dataSetSettings,
-    } = useGetSyncDataStore()
+    const { load, programSettings, syncGlobal, dataSetSettings } =
+        useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
@@ -37,11 +33,8 @@ const DatasetSyncSettings = () => {
 
     useEffect(() => {
         if (dataSetSettings) {
-            const {
-                specificSettings,
-                lastUpdated,
-                ...globalSettings
-            } = dataSetSettings
+            const { specificSettings, lastUpdated, ...globalSettings } =
+                dataSetSettings
             setInitialValues({
                 ...globalSettings,
                 specificSettings,

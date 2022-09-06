@@ -2,7 +2,7 @@
  * Query to get org units
  * */
 
-export const orgUnitSearchQuery = query => ({
+export const orgUnitSearchQuery = (query) => ({
     resource: 'organisationUnits',
     params: {
         filter: `path:like:${query}`,
@@ -21,11 +21,10 @@ export const apiFetchOUSearch = async (dataEngine, ou) => {
     }
 }
 
-const orgUnitQuery = query => ({
+const orgUnitQuery = (query) => ({
     resource: 'organisationUnits',
     params: {
-        fields:
-            'id,name,programs[id,name,trackedEntityType[id],programTrackedEntityAttributes[id,trackedEntityAttribute[id,optionSet[id]]]],dataSets[id,name,categoryCombo[id,categories[id,categoryOptions[id]]],indicators[id,indicatorType[id]],dataSetElements[dataElement[id]]]',
+        fields: 'id,name,programs[id,name,trackedEntityType[id],programTrackedEntityAttributes[id,trackedEntityAttribute[id,optionSet[id]]]],dataSets[id,name,categoryCombo[id,categories[id,categoryOptions[id]]],indicators[id,indicatorType[id]],dataSetElements[dataElement[id]]]',
         filter: `path:like:${query}`,
         paging: false,
     },
@@ -45,7 +44,7 @@ export const apiFetchOU = async (dataEngine, ou) => {
 /**
  * Query to get Program rules based on a program
  * */
-const programRuleQuery = query => ({
+const programRuleQuery = (query) => ({
     resource: 'programRules',
     params: {
         fields: 'id,name',

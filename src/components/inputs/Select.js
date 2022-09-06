@@ -18,10 +18,10 @@ export const Select = ({
         selected={value}
         id={name}
         name={name}
-        onChange={e => onChange(e, name)}
+        onChange={(e) => onChange(e, name)}
         disabled={disabled}
     >
-        {options.map(option => (
+        {options.map((option) => (
             <SingleSelectOption
                 key={option.value || option.id}
                 label={option.label || option.name}

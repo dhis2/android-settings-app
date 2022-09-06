@@ -4,7 +4,7 @@ import React from 'react'
 import { TextField } from '../field'
 
 export const VisualizationTitle = ({ settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             name: e.value,

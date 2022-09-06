@@ -44,10 +44,8 @@ const GeneralSettings = () => {
 
     useEffect(() => {
         if (queryResult) {
-            const {
-                lastUpdated,
-                ...initialSettings
-            } = queryResult.generalSettings
+            const { lastUpdated, ...initialSettings } =
+                queryResult.generalSettings
             setInitialValues(initialSettings)
             setSettings(createInitialValues(initialSettings))
         }

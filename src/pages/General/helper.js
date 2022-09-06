@@ -12,7 +12,7 @@ import {
 /**
  * Return a settings object with properties that have a valid value
  * */
-export const checkValidSettings = settings => {
+export const checkValidSettings = (settings) => {
     const settingsToSave = Object.assign({}, settings)
 
     !isValidValue(settingsToSave.smsGateway) && delete settingsToSave.smsGateway
@@ -30,13 +30,13 @@ export const checkValidSettings = settings => {
  *  Matomo's URL
  *  are not valid inputs
  * */
-export const notValidFields = data =>
+export const notValidFields = (data) =>
     (isValidValue(data.smsGateway) && !validateNumber(data.smsGateway)) ||
     (isValidValue(data.smsResultSender) &&
         !validateNumber(data.smsResultSender)) ||
     (isValidValue(data.matomoURL) && !isValidURL(data.matomoURL))
 
-export const createInitialValues = prevGeneralDetails => ({
+export const createInitialValues = (prevGeneralDetails) => ({
     matomoURL: prevGeneralDetails.matomoURL || '',
     matomoID: prevGeneralDetails.matomoID || '',
     smsGateway: prevGeneralDetails.smsGateway || '',

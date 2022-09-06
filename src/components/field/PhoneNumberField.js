@@ -17,7 +17,7 @@ export const PhoneNumberField = ({
      * Checks if sms number or confirmation number is valid
      * validates number
      */
-    const validatePhoneNumber = e => {
+    const validatePhoneNumber = (e) => {
         const inputValue = e.value
 
         if (isValidValue(inputValue)) {
@@ -28,7 +28,7 @@ export const PhoneNumberField = ({
         }
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({ ...props.settingsValue, [props.name]: e.value })
         validatePhoneNumber(e)
     }

@@ -28,7 +28,7 @@ export const ContentMenuGroup = ({
                 />
             )}
 
-            {items.map(item => (
+            {items.map((item) => (
                 <ContentMenuItem
                     key={item.id || item.key}
                     name={item.displayName || item.name}

@@ -30,7 +30,7 @@ export const RadioGroup = ({
 
     return (
         <FieldGroup>
-            {options.map(option => (
+            {options.map((option) => (
                 <Radio
                     dense
                     name={keyDownload}

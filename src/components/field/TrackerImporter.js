@@ -10,7 +10,7 @@ const minApiVersion = '2.38'
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
 
-const isValidVersion = apiVersion => apiVersion >= minApiVersion
+const isValidVersion = (apiVersion) => apiVersion >= minApiVersion
 
 export const TrackerImporter = ({ value, onChange, ...props }) => {
     const [validVersion, setValidVersion] = useState(false)
@@ -25,7 +25,7 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
         }
     }, [apiVersion])
 
-    const handleCheckbox = e => {
+    const handleCheckbox = (e) => {
         setTracker(e.checked)
         onChange({
             ...value,

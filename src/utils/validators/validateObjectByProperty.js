@@ -9,4 +9,4 @@ import { isValidValue } from './isValidValue'
  * */
 
 export const validateObjectByProperty = (propertyArray, object) =>
-    propertyArray.every(property => isValidValue(object[property]) === true)
+    propertyArray.every((property) => isValidValue(object[property]) === true)

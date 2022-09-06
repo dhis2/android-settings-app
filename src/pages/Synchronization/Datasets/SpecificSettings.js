@@ -59,7 +59,7 @@ const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
     return (
         <Wrapper fullWidth>
             <div>
-                {DataSpecificSetting.map(row => (
+                {DataSpecificSetting.map((row) => (
                     <DataSetTableRow
                         key={row.option}
                         row={row}

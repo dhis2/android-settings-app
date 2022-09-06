@@ -11,9 +11,9 @@ export const SelectProgram = ({
     handleProgramStage,
     ...props
 }) => {
-    const handleSearchProgramStage = id => {
+    const handleSearchProgramStage = (id) => {
         handleProgramStage(
-            options.filter(program => program.id === id)[0].programStages
+            options.filter((program) => program.id === id)[0].programStages
         )
     }
 

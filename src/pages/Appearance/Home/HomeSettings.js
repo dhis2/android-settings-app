@@ -25,7 +25,7 @@ const homeScreenRowSettings = [
 ]
 
 const HomeSettings = ({ states, onChange, disable }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...states,
             [e.name]: {

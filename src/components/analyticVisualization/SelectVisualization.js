@@ -4,7 +4,7 @@ import { FieldSection } from '../field'
 import { VisualizationSearch } from './VisualizationSearch'
 
 export const SelectVisualization = ({ settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             visualization: e.id,

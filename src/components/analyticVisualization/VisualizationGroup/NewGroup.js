@@ -15,7 +15,7 @@ export const NewGroup = ({ checked, groupName, changeGroup, ...props }) => {
         refetchId()
     }, [checked])
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setTitle(e.value)
         changeGroup({
             ...groupName,

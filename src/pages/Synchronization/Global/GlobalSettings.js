@@ -18,13 +18,8 @@ import {
 import { createInitialValues } from './helper'
 
 const GlobalSettings = () => {
-    const {
-        load,
-        syncGlobal,
-        syncSettings,
-        dataSetSettings,
-        programSettings,
-    } = useGetSyncDataStore()
+    const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
+        useGetSyncDataStore()
     const { data: authority } = useDataQuery(authorityQuery)
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()

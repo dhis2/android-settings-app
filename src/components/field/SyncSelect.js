@@ -15,7 +15,7 @@ export const SyncSelect = ({
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
 
-    const onChangeSelect = e => {
+    const onChangeSelect = (e) => {
         e.selected === MANUAL
             ? setOpenDialog(true)
             : onChange({ ...settings, [name]: e.selected })

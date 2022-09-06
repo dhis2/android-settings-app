@@ -14,12 +14,8 @@ import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
 import { removeSummarySettings } from './helper'
 
 const AnalyticsTEI = () => {
-    const {
-        tei,
-        dhisVisualizations,
-        errorDataStore,
-        load,
-    } = useReadAnalyticsDataStore()
+    const { tei, dhisVisualizations, errorDataStore, load } =
+        useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [analyticSettings, setAnalyticSettings] = useState([])
     const [disableSave, setDisableSave] = useState(true)

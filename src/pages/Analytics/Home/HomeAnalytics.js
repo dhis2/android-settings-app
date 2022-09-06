@@ -14,14 +14,8 @@ import {
 import HomeAnalyticList from './HomeAnalyticList'
 
 const HomeAnalytics = () => {
-    const {
-        tei,
-        home,
-        program,
-        dataSet,
-        load,
-        errorDataStore,
-    } = useReadAnalyticsDataStore()
+    const { tei, home, program, dataSet, load, errorDataStore } =
+        useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [homeAnalytics, setHomeAnalytics] = useState([])
     const [disableSave, setDisableSave] = useState(true)

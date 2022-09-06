@@ -20,10 +20,10 @@ export const GroupVisualizationRow = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <VisualizationRow
             visualizationList={item}
             deleteVisualization={deleteVisualization}

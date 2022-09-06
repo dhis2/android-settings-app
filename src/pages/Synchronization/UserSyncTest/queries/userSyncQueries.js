@@ -7,8 +7,7 @@ export const getUserQuery = (query = '') => {
         resource: `users`,
         params: {
             query,
-            fields:
-                'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
+            fields: 'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
             order: 'name:asc',
             paging: 'false',
         },

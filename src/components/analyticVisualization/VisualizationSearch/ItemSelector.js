@@ -23,7 +23,7 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
             debouncedFilterText.length >= 3 ? debouncedFilterText : null
         const query = getVisualizationsQuery(text)
 
-        dataEngine.query({ items: query }).then(res => {
+        dataEngine.query({ items: query }).then((res) => {
             validateAndroidVisualization(res.items.visualizations)
             const orderItems = orderVisualizations(res.items.visualizations)
             setItems(orderItems)
@@ -39,7 +39,7 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
 
     const openMenu = () => setIsOpen(true)
 
-    const addItem = item => () => {
+    const addItem = (item) => () => {
         setDisable(true)
         closeMenu()
         setFilter(item.name || item.displayName)

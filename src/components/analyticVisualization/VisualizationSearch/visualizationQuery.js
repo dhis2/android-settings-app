@@ -3,8 +3,7 @@ export const getVisualizationsQuery = (query = '') => ({
     params: {
         query,
         pageSize: 20,
-        fields:
-            'id,displayName,type,relativePeriods,rowDimensions,columnDimensions,userOrganisationUnit,userOrganisationUnitChildren,userOrganisationUnitGrandChildren',
+        fields: 'id,displayName,type,relativePeriods,rowDimensions,columnDimensions,userOrganisationUnit,userOrganisationUnitChildren,userOrganisationUnitGrandChildren',
         order: 'displayName:asc',
     },
 })

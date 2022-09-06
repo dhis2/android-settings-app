@@ -14,7 +14,7 @@ const ProgramGlobalSettings = ({
     onChangeSpinner,
     disableAll,
 }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             [e.name]: {

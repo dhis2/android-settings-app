@@ -84,14 +84,18 @@ export const getMetadataSize = async ({
         apiFetchIndicatorType(dataEngine, joinElementsById(indicatorTypesList)),
         apiFetchProgramIndicators(dataEngine, programList),
         apiFetchLegendSet(dataEngine, joinObjectsById(legendSetsList)),
-    ]).then(result => result.map(data => (metadataSize += getByteLength(data))))
+    ]).then((result) =>
+        result.map((data) => (metadataSize += getByteLength(data)))
+    )
 
     return formatByteSize(metadataSize)
 }
 
 const fetchOrgUnits = (dataEngine, orgUnitList) => {
     const orgUnitPromises = []
-    orgUnitList.map(ou => orgUnitPromises.push(apiFetchOrgUnit(dataEngine, ou)))
+    orgUnitList.map((ou) =>
+        orgUnitPromises.push(apiFetchOrgUnit(dataEngine, ou))
+    )
 
     return Promise.all(orgUnitPromises)
 }

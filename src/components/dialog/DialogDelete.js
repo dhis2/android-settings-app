@@ -9,7 +9,6 @@ import {
 } from '@dhis2/ui'
 import React from 'react'
 
-
 const DialogDelete = ({
     open,
     onHandleClose,

@@ -63,7 +63,7 @@ const TestTable = ({ loading, state }) => (
     <div className={classes.topMargin}>
         <DataTable className={classes.table}>
             <TableBody>
-                {testAndroidDataConstants.map(test => (
+                {testAndroidDataConstants.map((test) => (
                     <TestRow
                         test={test}
                         key={test.state}

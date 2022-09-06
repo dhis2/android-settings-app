@@ -19,7 +19,7 @@ export const EncryptDB = ({ value, onChange, ...props }) => {
         setOpenDialog(false)
     }
 
-    const handleEncrypt = checked => {
+    const handleEncrypt = (checked) => {
         onChange({ ...value, [CODE]: !checked })
         setOpenDialog(false)
     }

@@ -33,9 +33,9 @@ const NewDatasetSettings = ({ datasetList, rows, handleRows, disabled }) => {
         handleClose()
     }
 
-    const getDatasetName = dataset => {
+    const getDatasetName = (dataset) => {
         const datasetFilter = datasetList.filter(
-            option => option.id === dataset
+            (option) => option.id === dataset
         )
         return datasetFilter[0].name
     }

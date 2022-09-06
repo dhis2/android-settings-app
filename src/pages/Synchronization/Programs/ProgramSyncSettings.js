@@ -20,12 +20,8 @@ import ProgramGlobalSettings from './ProgramGlobalSettings'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
 
 const ProgramSyncSettings = () => {
-    const {
-        load,
-        programSettings,
-        syncGlobal,
-        dataSetSettings,
-    } = useGetSyncDataStore()
+    const { load, programSettings, syncGlobal, dataSetSettings } =
+        useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [globalSettings, setGlobalSettings] = useState()
@@ -43,11 +39,8 @@ const ProgramSyncSettings = () => {
 
     useEffect(() => {
         if (programSettings) {
-            const {
-                lastUpdated,
-                specificSettings,
-                ...initialGlobalSettings
-            } = programSettings
+            const { lastUpdated, specificSettings, ...initialGlobalSettings } =
+                programSettings
 
             setInitialValues({
                 ...initialGlobalSettings,

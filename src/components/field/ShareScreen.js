@@ -8,7 +8,7 @@ const CODE = 'allowScreenCapture'
 export const defaultShareScreen = false
 
 export const ShareScreen = ({ value, onChange, ...props }) => {
-    const handleCheckbox = e => {
+    const handleCheckbox = (e) => {
         onChange({ ...value, [CODE]: e.checked })
     }
 

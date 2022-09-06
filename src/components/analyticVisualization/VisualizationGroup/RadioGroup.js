@@ -30,7 +30,7 @@ export const RadioGroup = ({
     useEffect(() => {
         if (groups) {
             const element = Object.keys(groups).find(
-                item => item === groupName[type]
+                (item) => item === groupName[type]
             )
             const list = type ? groups[element] : groups
             const updatedList = reject(list, { name: 'default' })

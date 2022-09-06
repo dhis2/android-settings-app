@@ -41,7 +41,7 @@ export const SINGLE_VALUE = 'SINGLE_VALUE'
 export const PIVOT_TABLE = 'PIVOT_TABLE'
 export const RADAR = 'RADAR'
 
-export const getVisualizationIcon = type => {
+export const getVisualizationIcon = (type) => {
     switch (type) {
         case REPORT_TABLE:
         case EVENT_REPORT:

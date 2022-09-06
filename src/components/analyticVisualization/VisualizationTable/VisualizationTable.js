@@ -18,10 +18,10 @@ export const VisualizationTable = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <GroupVisualizationRow
             group={item}
             deleteVisualization={deleteVisualization}

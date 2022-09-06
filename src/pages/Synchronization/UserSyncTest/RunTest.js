@@ -10,11 +10,8 @@ import TestTable from './TestTable'
 
 const RunTest = ({ disabled, user }) => {
     const dataEngine = useDataEngine()
-    const {
-        reservedValues,
-        globalSettings,
-        specificSettings,
-    } = useReadSettings()
+    const { reservedValues, globalSettings, specificSettings } =
+        useReadSettings()
     const [runTest, setRunTest] = useState(false)
     const [loading, setLoad] = useState(false)
     const [userTestValues, setValues] = useState(createInitialValues(''))
@@ -35,7 +32,7 @@ const RunTest = ({ disabled, user }) => {
             reservedValues,
             globalSettings,
             specificSettings,
-        }).then(result => {
+        }).then((result) => {
             setValues(createInitialValues(result))
             setLoad(false)
         })

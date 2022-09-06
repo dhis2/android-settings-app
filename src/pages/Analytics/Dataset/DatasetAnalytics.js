@@ -15,14 +15,8 @@ import DatasetAnalyticList from './DatasetAnalyticList'
 import { createDataStoreGroupRows } from './helper'
 
 const DatasetAnalytics = () => {
-    const {
-        tei,
-        home,
-        program,
-        dataSet,
-        load,
-        errorDataStore,
-    } = useReadAnalyticsDataStore()
+    const { tei, home, program, dataSet, load, errorDataStore } =
+        useReadAnalyticsDataStore()
     const { data: hasAuthority } = useDataQuery(authorityQuery)
     const [datasetAnalytics, setDatasetAnalytics] = useState()
     const [initialValues, setInitialValues] = useState()

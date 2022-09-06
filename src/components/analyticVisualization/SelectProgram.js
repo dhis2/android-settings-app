@@ -8,8 +8,8 @@ export const SelectProgram = ({ settings, onChange }) => {
     const { programList, loading } = useReadProgramQuery()
     const options = programList || []
 
-    const handleChange = e => {
-        const name = options.find(program => program.id === e.selected)
+    const handleChange = (e) => {
+        const name = options.find((program) => program.id === e.selected)
         onChange({
             ...settings,
             program: e.selected,

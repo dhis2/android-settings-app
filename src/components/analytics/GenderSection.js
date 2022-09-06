@@ -23,7 +23,9 @@ export const GenderSection = ({
         })
     }
 
-    if (edit && attributeOptions.length === 0) {return <CircularLoader small />}
+    if (edit && attributeOptions.length === 0) {
+        return <CircularLoader small />
+    }
 
     return (
         <Section legend={i18n.t('Gender Attributes')}>

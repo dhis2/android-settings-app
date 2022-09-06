@@ -6,7 +6,7 @@ import styles from './styles/GroupType.module.css'
 export const GroupType = ({ onChange, settings, groupList, type }) => {
     const [group, setGroup] = useState()
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setGroup(e.value)
     }
 
