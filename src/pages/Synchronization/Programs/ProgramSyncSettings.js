@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import Page from '../../../components/page/Page'
-import ProgramGlobalSettings from './ProgramGlobalSettings'
-import ProgramSpecificSettings from './ProgramSpecificSettings'
+import React, { useEffect, useState } from 'react'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
 import {
     DEFAULT,
     GLOBAL,
     GLOBAL_SPECIAL,
     PER_ORG_UNIT,
 } from '../../../constants/program-settings'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { populateProgramObject } from './populateProgramObject'
+import ProgramGlobalSettings from './ProgramGlobalSettings'
+import ProgramSpecificSettings from './ProgramSpecificSettings'
 
 const ProgramSyncSettings = () => {
     const {

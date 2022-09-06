@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import {
     Button,
     DataTable,
@@ -8,6 +6,8 @@ import {
     DataTableCell,
     DataTableRow,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { VisualizationRow } from './VisualizationRow'
 import styles from './VisualizationTable.module.css'
 

@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import defaults from 'lodash/defaults'
 import map from 'lodash/map'
-import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
+import toArray from 'lodash/toArray'
 import {
     formatList,
     removePropertiesFromObject,

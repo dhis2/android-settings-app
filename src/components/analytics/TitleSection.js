@@ -1,8 +1,8 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { TextField } from './TextField'
+import React from 'react'
 import { Section } from './Section'
+import { TextField } from './TextField'
 
 export const TitleSection = ({ onChange, value }) => {
     const handleChange = e => {

@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import cx from 'classnames'
-import style from '../../styles/Disable.module.css'
 import { Divider } from '@dhis2/ui'
+import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import style from '../../styles/Disable.module.css'
 import { TableRow } from './TableRow'
 
 export const TableRowWrapper = ({ label, disable, dense, children }) => (

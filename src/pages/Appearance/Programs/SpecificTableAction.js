@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import TableActions from '../../../components/TableActions'
+import React, { useState } from 'react'
 import DialogDelete from '../../../components/dialog/DialogDelete'
+import TableActions from '../../../components/TableActions'
+import {
+    removeSettingsFromList,
+    updateSettingsList,
+} from '../../../utils/utils'
 import DialogNewProgram from './DialogNewProgram'
 import {
     findElementById,
@@ -10,10 +14,6 @@ import {
     isTrackerProgram,
     programHasCategoryCombo,
 } from './helper'
-import {
-    removeSettingsFromList,
-    updateSettingsList,
-} from '../../../utils/utils'
 
 const SpecificTableAction = ({
     rows,

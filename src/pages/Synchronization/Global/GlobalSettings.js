@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import Page from '../../../components/page/Page'
+import React, { useEffect, useState } from 'react'
 import {
     DataSync,
     MetadataSync,
     TrackerImporter,
 } from '../../../components/field'
-import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
+import Page from '../../../components/page/Page'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { createInitialValues } from './helper'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
+import { createInitialValues } from './helper'
 
 const GlobalSettings = () => {
     const {

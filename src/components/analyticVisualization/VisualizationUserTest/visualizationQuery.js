@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
 import isEqual from 'lodash/isEqual'
+import React, { useEffect, useRef } from 'react'
 
 const visualization = {
     visualizations: {

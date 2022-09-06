@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import React, { useEffect, useState } from 'react'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
+import Page from '../../../components/page/Page'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import Page from '../../../components/page/Page'
-import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
 import { removeSummarySettings } from './helper'
 

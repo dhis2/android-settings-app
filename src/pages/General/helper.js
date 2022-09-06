@@ -1,13 +1,13 @@
 import {
-    isValidURL,
-    isValidValue,
-    validateNumber,
-} from '../../utils/validators'
-import {
     defaultEncryptDB,
     defaultReservedValues,
     defaultShareScreen,
 } from '../../components/field'
+import {
+    isValidURL,
+    isValidValue,
+    validateNumber,
+} from '../../utils/validators'
 
 /**
  * Return a settings object with properties that have a valid value

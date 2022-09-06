@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { CheckboxField } from './CheckboxField'
+import React, { useEffect, useState } from 'react'
 import { useApiVersion } from '../../utils/useApiVersion'
+import { CheckboxField } from './CheckboxField'
 
 const CODE = 'trackerImporterVersion'
 const minApiVersion = '2.38'

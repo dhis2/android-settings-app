@@ -1,6 +1,6 @@
-import React from 'react'
 import { MenuItem, colors } from '@dhis2/ui'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { getVisualizationIcon } from './visualizationTypes'
 
 export const ContentMenuItem = ({ type, name, onInsert, valid }) => {

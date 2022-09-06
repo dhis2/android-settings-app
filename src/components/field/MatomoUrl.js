@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { TextField } from './TextField'
+import React, { useState } from 'react'
 import { isValidURL, isValidValue } from '../../utils/validators'
+import { TextField } from './TextField'
 
 const CODE = 'matomoURL'
 

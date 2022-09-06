@@ -1,3 +1,5 @@
+import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
+import { joinElementsById, joinObjectsById } from './helper'
 import {
     apiFetchApps,
     apiFetchAuthorization,
@@ -29,8 +31,6 @@ import {
     apiFetchTrackedEntityType,
     apiFetchUserSettings,
 } from './queries/metadataQueries'
-import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
-import { joinElementsById, joinObjectsById } from './helper'
 
 export const getMetadataSize = async ({
     dataEngine,

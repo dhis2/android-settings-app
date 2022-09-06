@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { CircularLoader } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { Section } from './Section'
 import { SelectProgram } from './SelectProgram'
 import { SelectProgramStage } from './SelectProgramStage'
@@ -17,7 +17,7 @@ export const ProgramSection = ({ onChange, value, edit, programList }) => {
         }
     }, [programList, edit])
 
-    if (edit && programStageList.length === 0) return <CircularLoader small />
+    if (edit && programStageList.length === 0) {return <CircularLoader small />}
 
     return (
         <Section>

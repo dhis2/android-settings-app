@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
+import keyBy from 'lodash/keyBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import PageHeader from '../../../components/page/PageHeader'
+import { filterUnusedElements } from '../../../utils/utils'
 import { prepareSpecificSettingsList } from './helper'
-import SpecificTableAction from './SpecificTableAction'
 import NewProgramSpecific from './NewProgramSpecific'
 import { useReadProgram } from './programQueries'
-import { filterUnusedElements } from '../../../utils/utils'
+import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
     specificSettings,

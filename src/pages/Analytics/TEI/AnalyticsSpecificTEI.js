@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import isEqual from 'lodash/isEqual'
-import NewAnalyticSettings from './NewAnalyticSettings'
-import AnalyticsTable from './AnalyticsTable'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { useReadProgramQuery } from './AnalyticsQueries'
+import AnalyticsTable from './AnalyticsTable'
 import { prepareItemsList } from './helper'
+import NewAnalyticSettings from './NewAnalyticSettings'
 
 const AnalyticsSpecificTEI = ({ settings, handleSettings, disable }) => {
     const { programList } = useReadProgramQuery()

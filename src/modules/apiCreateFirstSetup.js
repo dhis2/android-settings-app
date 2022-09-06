@@ -1,4 +1,4 @@
-import api from '../utils/api'
+import { getInstance } from 'd2'
 import {
     ANALYTICS,
     APPEARANCE,
@@ -7,8 +7,8 @@ import {
     NAMESPACE,
     SYNC_SETTINGS,
 } from '../constants/data-store'
-import { getInstance } from 'd2'
 import { initialSetup } from '../constants/initial-setup'
+import api from '../utils/api'
 
 const {
     info,

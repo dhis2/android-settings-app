@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
+import React, { useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
+import { updateSettingsList } from '../../../utils/utils'
+import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
 import {
     createInitialSpecificValues,
     createInitialValues,
     datasetHasCategoryCombo,
 } from './helper'
-import { updateSettingsList } from '../../../utils/utils'
 
 const NewDatasetSettings = ({ datasetList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)

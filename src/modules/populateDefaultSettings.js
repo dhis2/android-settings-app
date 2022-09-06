@@ -1,7 +1,7 @@
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
-import { androidSettingsDefault } from '../constants/android-settings'
 import { defaultShareScreen } from '../components/field'
+import { androidSettingsDefault } from '../constants/android-settings'
+import { dataSetSettingsDefault } from '../constants/data-set-settings'
+import { programSettingsDefault } from '../constants/program-settings'
 
 export const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
 export const DEFAULT_DATASET = 'DEFAULT_DATASET'

@@ -1,9 +1,9 @@
 import toArray from 'lodash/toArray'
+import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
 import {
     apiFetchEvents,
     apiFetchTrackedEntityInstances,
 } from './queries/dataQueries'
-import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
 
 export const getDataSize = async ({
     dataEngine,

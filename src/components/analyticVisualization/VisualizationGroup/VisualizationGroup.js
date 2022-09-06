@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import find from 'lodash/find'
 import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { useSystemId } from '../../../utils/useSystemId'
 import { CheckboxField } from '../../field'
 import { GroupType } from './GroupType'
-import { useSystemId } from '../../../utils/useSystemId'
 
 const DEFAULT = 'default'
 

@@ -1,9 +1,9 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import Wrapper from '../../../components/Wrapper'
-import { TableHeader, TableRowWrapper } from '../../../components/table'
+import React from 'react'
 import { CheckboxField } from '../../../components/field'
+import { TableHeader, TableRowWrapper } from '../../../components/table'
+import Wrapper from '../../../components/Wrapper'
 
 const homeScreenRowSettings = [
     {

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { init as initD2, getInstance as getD2Instance } from 'd2'
 import { useConfig } from '@dhis2/app-runtime'
+import { init as initD2, getInstance as getD2Instance } from 'd2'
+import { useState, useEffect } from 'react'
 
 let initialized = false
 let theD2 = null

@@ -1,8 +1,8 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { SelectField } from '../field'
+import React from 'react'
 import { useReadDatasetQuery } from '../../pages/Analytics/Dataset/DatasetVisualizationQuery'
+import { SelectField } from '../field'
 
 export const SelectDataset = ({ settings, onChange }) => {
     const { datasetList, loading } = useReadDatasetQuery()

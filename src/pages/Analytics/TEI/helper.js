@@ -1,7 +1,7 @@
-import omit from 'lodash/omit'
 import map from 'lodash/map'
-import { validateObjectByProperty } from '../../../utils/validators'
+import omit from 'lodash/omit'
 import { findProgramNameById } from '../../../utils/utils'
+import { validateObjectByProperty } from '../../../utils/validators'
 
 export const WHO_NUTRITION = 'WHO_NUTRITION'
 
@@ -128,7 +128,7 @@ const VALID_VALUE_TYPE = [
 
 export const updateDataElementsList = (programId, refetch, updateList) => {
     if (programId)
-        refetch({ programId }).then(result => {
+        {refetch({ programId }).then(result => {
             const dataElements =
                 result.programStages.programStageDataElements || []
             const options = []
@@ -145,7 +145,7 @@ export const updateDataElementsList = (programId, refetch, updateList) => {
                 }
             })
             updateList(options)
-        })
+        })}
 }
 
 export const updateAttributesList = ({
@@ -155,7 +155,7 @@ export const updateAttributesList = ({
     isWHO,
 }) => {
     if (programId)
-        refetch({ programId }).then(result => {
+        {refetch({ programId }).then(result => {
             const attributes =
                 result.programs.programTrackedEntityAttributes || []
             const options = []
@@ -180,19 +180,19 @@ export const updateAttributesList = ({
                 }
             })
             updateList(options)
-        })
+        })}
 }
 
 export const updateProgramIndicatorsList = (programId, refetch, updateList) => {
     if (programId)
-        refetch({ programId }).then(result => {
+        {refetch({ programId }).then(result => {
             const programIndicators = result.programs.programIndicators || []
             const options = programIndicators.map(program => ({
                 label: program.name,
                 id: program.id,
             }))
             updateList(options)
-        })
+        })}
 }
 
 export const validMandatoryFields = specificSettings => {

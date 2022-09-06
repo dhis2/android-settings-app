@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
 import { useDataEngine } from '@dhis2/app-runtime'
-import TestTable from './TestTable'
+import i18n from '@dhis2/d2-i18n'
+import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
-import { useReadSettings } from './queries/userSyncQueries'
 import { runUserTest, createInitialValues } from './helper'
+import { useReadSettings } from './queries/userSyncQueries'
+import TestTable from './TestTable'
 
 const RunTest = ({ disabled, user }) => {
     const dataEngine = useDataEngine()

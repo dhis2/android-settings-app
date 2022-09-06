@@ -3,13 +3,13 @@ import unionBy from 'lodash/unionBy'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import without from 'lodash/without'
+import { getDataSize } from './getData'
+import { getMetadataSize } from './getMetadata'
 import {
     apiFetchOU,
     apiFetchOUSearch,
     apiFetchProgramRulesBasic,
 } from './queries/syncQueries'
-import { getMetadataSize } from './getMetadata'
-import { getDataSize } from './getData'
 
 export const createInitialValues = initialValues => ({
     organisationUnitsNumber: initialValues.organisationUnitsNumber || 0,

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import Page from '../../components/page/Page'
+import React, { useEffect, useState } from 'react'
 import {
     EncryptDB,
     MatomoId,
@@ -14,17 +13,18 @@ import {
     SmsResultSender,
 } from '../../components/field'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
+import Page from '../../components/page/Page'
+import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 import DisableSettings from './DisableSettings'
+import {
+    getGeneralKeyQuery,
+    updateGeneralKeyMutation,
+} from './generalDatastoreApi'
 import {
     checkValidSettings,
     createInitialValues,
     notValidFields,
 } from './helper'
-import {
-    getGeneralKeyQuery,
-    updateGeneralKeyMutation,
-} from './generalDatastoreApi'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 
 const GeneralSettings = () => {
     const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)

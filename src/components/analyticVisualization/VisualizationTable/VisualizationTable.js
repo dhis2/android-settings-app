@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import {
     DataTable,
     DataTableBody,
     DataTableRow,
     DataTableCell,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { GroupVisualizationRow } from './GroupVisualizationRow'
 import styles from './VisualizationTable.module.css'
 

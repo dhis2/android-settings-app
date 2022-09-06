@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { InputField } from '@dhis2/ui'
-import { FieldSection } from './FieldSection'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { validateNumber, isValidValue } from '../../utils/validators'
+import { FieldSection } from './FieldSection'
 
 export const PhoneNumberField = ({
     label,

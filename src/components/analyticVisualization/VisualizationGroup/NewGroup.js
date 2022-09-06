@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { Radio } from '@dhis2/ui'
-import { TextField } from '../../field'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { useSystemId } from '../../../utils/useSystemId'
+import { TextField } from '../../field'
 import styles from './styles/GroupField.module.css'
 
 export const NewGroup = ({ checked, groupName, changeGroup, ...props }) => {

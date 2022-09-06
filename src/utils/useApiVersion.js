@@ -1,5 +1,5 @@
-import React from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
+import React from 'react'
 
 const infoQuery = {
     system: {

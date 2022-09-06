@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import SettingsTable from '../../../components/settingsTable/SettingsTable'
 import { DataSetting } from '../../../constants/data-set-settings'
 import { parseValueBySettingType } from './parseValueBySettingType'

@@ -83,9 +83,9 @@ export const createRows = (datastore, apiVisualizationList) => {
                     vis
                 )
                 if (visualizationFound)
-                    visualizations.push(
+                    {visualizations.push(
                         createBasicVisualization(vis, visualizationFound)
-                    )
+                    )}
             } else {
                 visualizations.push(createVisualization(vis))
             }

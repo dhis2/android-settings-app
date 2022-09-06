@@ -1,5 +1,5 @@
-import omit from 'lodash/omit'
 import mapValues from 'lodash/mapValues'
+import omit from 'lodash/omit'
 
 /**
  * Object of objects

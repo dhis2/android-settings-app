@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import Page from '../../../components/page/Page'
+import React, { useEffect, useState } from 'react'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import { VisualizationsInfo } from '../../../components/noticeAlert'
+import Page from '../../../components/page/Page'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { VisualizationsInfo } from '../../../components/noticeAlert'
 import DatasetAnalyticList from './DatasetAnalyticList'
 import { createDataStoreGroupRows } from './helper'
 

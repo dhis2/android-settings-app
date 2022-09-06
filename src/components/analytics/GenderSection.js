@@ -1,11 +1,11 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { CircularLoader } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { isValidValue } from '../../utils/validators'
+import { Section } from './Section'
 import { SelectField } from './SelectField'
 import { TextField } from './TextField'
-import { Section } from './Section'
-import { isValidValue } from '../../utils/validators'
 
 export const GenderSection = ({
     onChange,
@@ -23,7 +23,7 @@ export const GenderSection = ({
         })
     }
 
-    if (edit && attributeOptions.length === 0) return <CircularLoader small />
+    if (edit && attributeOptions.length === 0) {return <CircularLoader small />}
 
     return (
         <Section legend={i18n.t('Gender Attributes')}>

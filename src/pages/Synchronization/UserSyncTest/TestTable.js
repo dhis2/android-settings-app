@@ -1,7 +1,4 @@
-import React from 'react'
-import cx from 'classnames'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import {
     DataTable,
     TableBody,
@@ -9,6 +6,9 @@ import {
     DataTableCell,
     CircularLoader,
 } from '@dhis2/ui'
+import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { testAndroidDataConstants } from '../../../constants/test-android'
 import classes from './TestTable.module.css'
 

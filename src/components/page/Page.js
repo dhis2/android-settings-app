@@ -1,9 +1,9 @@
-import React from 'react'
 import { CircularLoader } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import styles from './Page.module.css'
-import UnsavedChangesAlert from '../UnsavedChangesAlert'
+import React from 'react'
 import { VisualizationsError } from '../noticeAlert'
+import UnsavedChangesAlert from '../UnsavedChangesAlert'
+import styles from './Page.module.css'
 
 const Page = ({
     loading,

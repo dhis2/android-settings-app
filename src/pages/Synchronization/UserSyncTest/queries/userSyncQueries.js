@@ -1,6 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useGetSyncDataStore } from '../../SyncDatastoreQuery'
 import { getGeneralKeyQuery } from '../../../General/generalDatastoreApi'
+import { useGetSyncDataStore } from '../../SyncDatastoreQuery'
 
 export const getUserQuery = (query = '') => {
     return {

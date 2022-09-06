@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { SelectField } from './SelectField'
+import React, { useEffect } from 'react'
 import {
     useReadAttributesQuery,
     useReadDataElementsQuery,
@@ -12,6 +11,7 @@ import {
     updateDataElementsList,
     updateProgramIndicatorsList,
 } from '../../pages/Analytics/TEI/helper'
+import { SelectField } from './SelectField'
 
 export const SelectElementType = ({
     handleChange,

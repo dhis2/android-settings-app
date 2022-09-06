@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
 import { MenuItem } from '@dhis2/ui'
+import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { ContentMenuItem } from './ContentMenuItem'
 import styles from './styles/ContentMenuGroup.module.css'
 

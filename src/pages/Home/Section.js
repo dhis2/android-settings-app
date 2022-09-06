@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { Tag } from '@dhis2/ui'
-import HomeCard from './HomeCard'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { infoDefault } from '../../constants/info'
 import styles from './Home.module.css'
+import HomeCard from './HomeCard'
 
 export const OverviewTitle = () => (
     <div className={styles.titleContainer}>
