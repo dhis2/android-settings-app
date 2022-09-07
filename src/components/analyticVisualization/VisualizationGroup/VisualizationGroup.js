@@ -27,7 +27,7 @@ const findDefaultGroup = (type, groupList, settings) => {
     return defaultGroup
 }
 
-const isDefaultGroup = group => group.name === 'default'
+const isDefaultGroup = group => group.name === DEFAULT
 
 const findGroup = (type, group, settings) => {
     const { groupList, groupId } = group
@@ -58,7 +58,7 @@ export const VisualizationGroup = ({ settings, onChange, groupList, type, groupI
                 setGroup(false)
             }
         }
-    }, [groupList])
+    }, [])
 
     const handleChange = e => {
         setGroup(e.checked)
