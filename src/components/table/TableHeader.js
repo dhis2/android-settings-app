@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Divider } from '@dhis2/ui'
-import TableRow from '../settingsTable/TableRow'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from '../../styles/TableSettings.module.css'
+import TableRow from '../settingsTable/TableRow'
 
 export const TableHeader = ({ title }) => (
     <>

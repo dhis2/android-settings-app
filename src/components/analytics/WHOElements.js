@@ -1,10 +1,10 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { Divider } from '@dhis2/ui'
-import { WHOVisualizationType } from './WHOVisualizationType'
-import { GenderSection } from './GenderSection'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { AxisSection } from './AxisSection'
+import { GenderSection } from './GenderSection'
+import { WHOVisualizationType } from './WHOVisualizationType'
 
 export const WHOElements = ({
     handleChange,

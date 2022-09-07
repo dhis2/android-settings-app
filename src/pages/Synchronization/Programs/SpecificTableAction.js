@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import TableActions from '../../../components/TableActions'
+import React, { useState } from 'react'
 import DialogDelete from '../../../components/dialog/DialogDelete'
-import DialogSpecificSetting from './DialogSpecificSetting'
-import { isProgramWithRegistration } from './helper'
-import { parseValueByType } from './parseValueBySettingType'
+import TableActions from '../../../components/TableActions'
 import {
     removeSettingsFromList,
     updateSettingsList,
 } from '../../../utils/utils'
+import DialogSpecificSetting from './DialogSpecificSetting'
+import { isProgramWithRegistration } from './helper'
+import { parseValueByType } from './parseValueBySettingType'
 
 const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
+import { updateSettingsList } from '../../../utils/utils'
+import { useReadIdQuery } from './AnalyticsQueries'
 import DialogAnalyticsTEI from './DialogAnalyticsTEI'
 import {
     createInitialValues,
     createTEIValues,
     validMandatoryFields,
 } from './helper'
-import { useReadIdQuery } from './AnalyticsQueries'
-import { updateSettingsList } from '../../../utils/utils'
 
 const NewAnalyticSettings = ({
     disable,

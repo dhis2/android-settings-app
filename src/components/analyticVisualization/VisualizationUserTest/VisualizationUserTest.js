@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { Button, Divider, Field, FieldSet, Legend } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
-import ItemSelector from './ItemSelector'
-import { useReadVisualizationQuery } from './visualizationQuery'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { validateUserVisualization } from './helper'
+import ItemSelector from './ItemSelector'
 import styles from './styles/VisualizationUserTest.module.css'
+import { useReadVisualizationQuery } from './visualizationQuery'
 
 export const VisualizationUserTest = ({ visualization, visualizationName }) => {
     const { data } = useReadVisualizationQuery(visualization)

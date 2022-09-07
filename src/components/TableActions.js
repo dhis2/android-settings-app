@@ -1,8 +1,8 @@
-import React from 'react'
-import { ButtonStrip, Button, Card } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
+import { ButtonStrip, Button, Card } from '@dhis2/ui'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import dataTableStyles from '../styles/DataTable.module.css'
 import disableStyle from '../styles/Disable.module.css'
 import tableActionStyles from '../styles/TableActions.module.css'
@@ -18,7 +18,7 @@ const TableActions = ({ rows, menuActions, states }) => (
 
 const TableRows = ({ rows, states, menuActions }) => (
     <div>
-        {rows.map(row => (
+        {rows.map((row) => (
             <Card key={row.id || row.uid} className={tableActionStyles.wrapper}>
                 <div className={tableActionStyles.parent}>
                     <div>

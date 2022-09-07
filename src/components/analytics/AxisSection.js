@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { isValidValue } from '../../utils/validators'
 import { Section } from './Section'
 import { SelectDataElement } from './SelectDataElement'
 import { SelectElementType } from './SelectElementType'
-import { isValidValue } from '../../utils/validators'
 
 const elementTypeOptionsWHO = [
     {

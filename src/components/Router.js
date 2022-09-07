@@ -1,14 +1,14 @@
+import { useDataMutation } from '@dhis2/app-runtime'
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import { menuSection } from '../constants/menu-sections'
+import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
 import {
     deletePrevDataStoreMutation,
     useNamespaceDataStore,
 } from '../modules/apiLoadFirstSetup'
-import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
-import { menuSection } from '../constants/menu-sections'
 import { D2Shim } from '../utils/D2Shim'
 import DialogFirstLaunch from './dialog/DialogFirstLaunch'
-import { useDataMutation } from '@dhis2/app-runtime'
 
 const Router = () => {
     const [openFirstLaunch, setFirstLaunch] = useState(true)
@@ -43,7 +43,7 @@ const Router = () => {
                 </D2Shim>
             </Route>
 
-            {menuSection.map(section => (
+            {menuSection.map((section) => (
                 <Route
                     exact
                     key={section.code}

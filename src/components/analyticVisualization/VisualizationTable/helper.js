@@ -16,7 +16,7 @@ export const updateGroup = (elementList, elementId, updatedElement) =>
         : removeElement(elementList, elementId)
 
 const updateList = (groups, groupId, updatedList) => {
-    const groupFound = groups.find(group => group.id === groupId)
+    const groupFound = groups.find((group) => group.id === groupId)
     const index = findIndex(groups, { id: groupId })
     const updatedGroup = groups.slice()
     updatedGroup.splice(
@@ -29,7 +29,7 @@ const updateList = (groups, groupId, updatedList) => {
 }
 
 export const removeElementList = (groups, groupId) =>
-    groups.filter(group => group.id !== groupId)
+    groups.filter((group) => group.id !== groupId)
 
 export const updateGroupList = (groups, groupId, updatedElement) =>
     !isEmpty(updatedElement)

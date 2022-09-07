@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useConfig, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import {
     Modal,
     ModalTitle,
@@ -8,13 +9,12 @@ import {
     Button,
     Layer,
 } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import { useConfig, useDataQuery } from '@dhis2/app-runtime'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 import buttonStyle from '../../styles/Button.module.css'
 import warning from '../../styles/Warning.module.css'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 
 const DialogFirstLaunch = ({ handleSave, isOutOfDate }) => {
     const { baseUrl } = useConfig()

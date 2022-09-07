@@ -1,10 +1,10 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { TextField } from '../field'
 
 export const VisualizationTitle = ({ settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             name: e.value,

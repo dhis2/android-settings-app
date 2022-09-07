@@ -8,7 +8,7 @@ export const D2Shim = ({ children }) => {
         return null
     }
 
-    return React.Children.map(children, child =>
+    return React.Children.map(children, (child) =>
         React.cloneElement(child, { d2: d2 })
     )
 }

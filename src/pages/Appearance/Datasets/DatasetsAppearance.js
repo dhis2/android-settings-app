@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import isEqual from 'lodash/isEqual'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import Page from '../../../components/page/Page'
+import i18n from '@dhis2/d2-i18n'
+import isEqual from 'lodash/isEqual'
+import React, { useEffect, useState } from 'react'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import DatasetGlobalSettings from './DatasetGlobalSettings'
+import Page from '../../../components/page/Page'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { removeSummaryFromSettings } from '../../../utils/utils'
 import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { createInitialValues } from './helper'
+import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import { removeSummaryFromSettings } from '../../../utils/utils'
+import { createInitialValues } from './helper'
 
 const DatasetsAppearance = () => {
     const {

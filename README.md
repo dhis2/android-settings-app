@@ -2,5 +2,5 @@ A DHIS2 app for managing configurations for data and metadata that we want to do
 
 This app store all settings in DataStore using:
 
-- namespace: "ANDROID_SETTING_APP"
-- key: "android_settings", "program_settings" , "dataSet_settings"
+-   namespace: "ANDROID_SETTING_APP"
+-   key: "android_settings", "program_settings" , "dataSet_settings"

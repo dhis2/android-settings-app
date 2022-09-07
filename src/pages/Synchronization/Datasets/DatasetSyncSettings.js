@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import React, { useEffect, useState } from 'react'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
+import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import Page from '../../../components/page/Page'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { createInitialValues } from './helper'
 
 const DatasetSyncSettings = () => {
-    const {
-        load,
-        programSettings,
-        syncGlobal,
-        dataSetSettings,
-    } = useGetSyncDataStore()
+    const { load, programSettings, syncGlobal, dataSetSettings } =
+        useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
@@ -37,11 +33,8 @@ const DatasetSyncSettings = () => {
 
     useEffect(() => {
         if (dataSetSettings) {
-            const {
-                specificSettings,
-                lastUpdated,
-                ...globalSettings
-            } = dataSetSettings
+            const { specificSettings, lastUpdated, ...globalSettings } =
+                dataSetSettings
             setInitialValues({
                 ...globalSettings,
                 specificSettings,

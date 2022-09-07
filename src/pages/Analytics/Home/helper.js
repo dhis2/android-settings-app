@@ -10,7 +10,7 @@ import {
     findVisualizationById,
 } from '../helper'
 
-export const createInitialValues = initialValues => ({
+export const createInitialValues = (initialValues) => ({
     id: initialValues.id || '',
     visualization: initialValues.visualization || '',
     name: initialValues.name || '',
@@ -20,7 +20,7 @@ export const createInitialValues = initialValues => ({
     },
 })
 
-export const invalidMandatoryFields = settings => {
+export const invalidMandatoryFields = (settings) => {
     return !validateObjectByProperty(['visualization'], settings)
 }
 
@@ -48,7 +48,7 @@ export const updateRows = (current, rows) => {
     return updateGroup
 }
 
-const createVisualization = value => ({
+const createVisualization = (value) => ({
     id: value.visualization || value.id,
     name: value.name || '',
     timestamp: value.timestamp || new Date().toJSON(),
@@ -58,9 +58,9 @@ const createVisualization = value => ({
  * Get visualization's ID
  * */
 
-export const getVisualizationIdList = datastore => {
+export const getVisualizationIdList = (datastore) => {
     const visualizationList = []
-    datastore.map(group => {
+    datastore.map((group) => {
         visualizationList.push(map(group.visualizations, 'id'))
     })
     return flattenDeep(visualizationList)
@@ -74,18 +74,19 @@ export const getVisualizationIdList = datastore => {
 
 export const createRows = (datastore, apiVisualizationList) => {
     const result = []
-    datastore.forEach(group => {
+    datastore.forEach((group) => {
         let visualizations = []
-        group.visualizations.forEach(vis => {
+        group.visualizations.forEach((vis) => {
             if (!isEmpty(apiVisualizationList)) {
                 const visualizationFound = findVisualizationById(
                     apiVisualizationList,
                     vis
                 )
-                if (visualizationFound)
+                if (visualizationFound) {
                     visualizations.push(
                         createBasicVisualization(vis, visualizationFound)
                     )
+                }
             } else {
                 visualizations.push(createVisualization(vis))
             }

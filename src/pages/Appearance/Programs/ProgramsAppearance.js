@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import React, { useEffect, useState } from 'react'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
     saveAppearanceKeyMutation,
@@ -16,9 +18,7 @@ import {
     prepareSettingsSaveDataStore,
     prepareSpinnerPreviousSpinner,
 } from './helper'
-import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
 
 const ProgramsAppearance = () => {

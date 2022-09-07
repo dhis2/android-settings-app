@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
+import keyBy from 'lodash/keyBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import PageSubtitle from '../../../components/page/PageSubtitle'
-import SpecificTableAction from './SpecificTableAction'
-import NewDatasetSettings from './NewDatasetSettings'
-import { useReadDataset } from './datasetQuery'
 import { filterUnusedElements } from '../../../utils/utils'
+import { useReadDataset } from './datasetQuery'
 import { prepareSpecificSettingsList } from './helper'
+import NewDatasetSettings from './NewDatasetSettings'
+import SpecificTableAction from './SpecificTableAction'
 
 export const DatasetSpecificSettings = ({
     onChange,

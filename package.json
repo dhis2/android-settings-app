@@ -1,34 +1,40 @@
 {
-  "name": "android-settings-app",
-  "version": "2.2.1",
-  "author": "Milagros Rodriguez <milagros@dhis2.org>",
-  "private": true,
-  "dependencies": {
-    "@dhis2/app-runtime": "^3.4.4",
-    "@dhis2/d2-i18n": "^1.1.0",
-    "@dhis2/d2-ui-core": "^6.3.0",
-    "@dhis2/d2-ui-table": "^6.3.0",
-    "@dhis2/ui": "^8.2.1",
-    "@material-ui/core": "^3.9.2",
-    "d2": "^31.7",
-    "d3-color": "^1.4.0",
-    "downshift": "^3.2.10",
-    "loglevel": "^1.6.6",
-    "prop-types": "^15.7.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^5.0.1",
-    "styled-jsx": "^4.0.1"
-  },
-  "scripts": {
-    "start": "d2-app-scripts start",
-    "build": "d2-app-scripts build",
-    "test": "d2-app-scripts test",
-    "clean": "rimraf build",
-    "format": "d2-style js apply"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^9.0.1",
-    "@dhis2/cli-style": "^10.4.1"
-  }
+    "name": "android-settings-app",
+    "version": "2.2.1",
+    "author": "Milagros Rodriguez <milagros@dhis2.org>",
+    "private": true,
+    "dependencies": {
+        "@dhis2/app-runtime": "^3.4.4",
+        "@dhis2/d2-i18n": "^1.1.0",
+        "@dhis2/d2-ui-core": "^6.3.0",
+        "@dhis2/d2-ui-table": "^6.3.0",
+        "@dhis2/ui": "^8.2.1",
+        "@material-ui/core": "^3.9.2",
+        "d2": "^31.7",
+        "d3-color": "^1.4.0",
+        "downshift": "^3.2.10",
+        "loglevel": "^1.6.6",
+        "prop-types": "^15.7.2",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-router-dom": "^5.0.1",
+        "styled-jsx": "^4.0.1"
+    },
+    "scripts": {
+        "start": "d2-app-scripts start",
+        "build": "d2-app-scripts build",
+        "lint": "yarn run lint:js && yarn run lint:text",
+        "lint:js": "d2-style check js",
+        "lint:text": "d2-style check text",
+        "fix": "yarn run fix:js && yarn run fix:text",
+        "fix:js": "d2-style apply js",
+        "fix:text": "d2-style apply text",
+        "test": "d2-app-scripts test",
+        "clean": "rimraf build",
+        "format": "d2-style js apply"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^9.0.1",
+        "@dhis2/cli-style": "^10.4.1"
+    }
 }

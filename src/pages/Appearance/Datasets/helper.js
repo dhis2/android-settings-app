@@ -8,13 +8,13 @@ const filterSortingDefault = {
     sort: true,
 }
 
-export const createInitialValues = prevDetails => ({
+export const createInitialValues = (prevDetails) => ({
     period: prevDetails.period || filterSortingDefault,
     organisationUnit: prevDetails.organisationUnit || filterSortingDefault,
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
 })
 
-export const createInitialSpecificValues = prevDetails => ({
+export const createInitialSpecificValues = (prevDetails) => ({
     name: '',
     categoryCombo: prevDetails.categoryCombo || filterSortingDefault,
     period: prevDetails.period || filterSortingDefault,
@@ -23,14 +23,14 @@ export const createInitialSpecificValues = prevDetails => ({
 })
 
 export const datasetHasCategoryCombo = (datasetId, datasetList) => {
-    const dataset = datasetList.find(option => option.id === datasetId)
+    const dataset = datasetList.find((option) => option.id === datasetId)
     return dataset.categoryCombo.name !== 'default'
 }
 
 export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
     const specificSettingsRows = []
     for (const key in settings) {
-        const result = apiDatasetList.find(dataset => dataset.id === key)
+        const result = apiDatasetList.find((dataset) => dataset.id === key)
         if (result) {
             const filterList = getFilters(settings[key])
             settings[key].name = result.name
@@ -47,7 +47,7 @@ export const prepareSpecificSettingsList = (settings, apiDatasetList) => {
     return toArray(specificSettingsRows)
 }
 
-const getFilters = settings => {
+const getFilters = (settings) => {
     const filterList = []
     map(
         settings,
@@ -58,7 +58,7 @@ const getFilters = settings => {
     return formatList(filterList)
 }
 
-const convertFilterKeyToValue = filter => {
+const convertFilterKeyToValue = (filter) => {
     switch (filter) {
         case 'categoryCombo':
             return i18n.t('Category Combo')

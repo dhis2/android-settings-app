@@ -1,6 +1,6 @@
-import React from 'react'
 import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
+import React from 'react'
 import disable from '../../styles/Disable.module.css'
 import { InputNumber, RadioGroup, SelectSettings } from '../inputs'
 import TableRow from './TableRow'

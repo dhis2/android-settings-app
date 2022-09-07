@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import {
     Button,
     DataTable,
@@ -8,11 +6,13 @@ import {
     DataTableCell,
     DataTableRow,
 } from '@dhis2/ui'
-import { VisualizationRow } from './VisualizationRow'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import { removeSettingsFromList } from '../../../utils/utils'
 import { removeElementList, updateGroupList } from './helper'
+import { VisualizationRow } from './VisualizationRow'
 import styles from './VisualizationTable.module.css'
 
 export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
@@ -44,7 +44,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
         handleDialogClose()
     }
 
-    const deleteGroup = item => {
+    const deleteGroup = (item) => {
         setName(item.name)
         setSpecificSetting(item)
         setDeleteGroup(true)
@@ -103,10 +103,10 @@ const VisualizationTable = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <VisualizationRow
             visualizationList={item.visualizations}
             deleteVisualization={deleteVisualization}

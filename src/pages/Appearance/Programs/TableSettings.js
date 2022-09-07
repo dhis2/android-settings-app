@@ -1,8 +1,8 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { TableRowWrapper } from '../../../components/table'
+import React from 'react'
 import { CheckboxField } from '../../../components/field'
+import { TableRowWrapper } from '../../../components/table'
 
 const programAppearanceSettings = [
     {

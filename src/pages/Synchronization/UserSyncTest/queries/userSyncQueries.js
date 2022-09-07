@@ -1,14 +1,13 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useGetSyncDataStore } from '../../SyncDatastoreQuery'
 import { getGeneralKeyQuery } from '../../../General/generalDatastoreApi'
+import { useGetSyncDataStore } from '../../SyncDatastoreQuery'
 
 export const getUserQuery = (query = '') => {
     return {
         resource: `users`,
         params: {
             query,
-            fields:
-                'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
+            fields: 'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
             order: 'name:asc',
             paging: 'false',
         },

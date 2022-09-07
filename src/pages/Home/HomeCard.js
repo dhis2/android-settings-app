@@ -1,8 +1,7 @@
-import React from 'react'
 import { Card } from '@dhis2/ui'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-
+import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './HomeCard.module.css'
 
 const HomeCard = ({ titleText, bodyText, linkText, to }) => (

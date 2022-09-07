@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { SelectField } from './SelectField'
+import React, { useEffect } from 'react'
 import {
     useReadAttributesQuery,
     useReadDataElementsQuery,
@@ -12,6 +11,7 @@ import {
     updateDataElementsList,
     updateProgramIndicatorsList,
 } from '../../pages/Analytics/TEI/helper'
+import { SelectField } from './SelectField'
 
 export const SelectElementType = ({
     handleChange,
@@ -24,14 +24,10 @@ export const SelectElementType = ({
     ...props
 }) => {
     const { refetch, loading: loadDataElement } = useReadDataElementsQuery({})
-    const {
-        refetch: refetchAttributes,
-        loading: loadAttributes,
-    } = useReadAttributesQuery({})
-    const {
-        refetch: refetchProgramIndicators,
-        loading: loadProgram,
-    } = useReadProgramIndicatorsQuery({})
+    const { refetch: refetchAttributes, loading: loadAttributes } =
+        useReadAttributesQuery({})
+    const { refetch: refetchProgramIndicators, loading: loadProgram } =
+        useReadProgramIndicatorsQuery({})
 
     useEffect(() => {
         if (edit) {
@@ -51,7 +47,7 @@ export const SelectElementType = ({
         handleLoading(loadProgram || loadDataElement || loadAttributes)
     }, [loadProgram, loadDataElement, loadAttributes])
 
-    const chooseInputType = type => {
+    const chooseInputType = (type) => {
         switch (type) {
             case 'dataElements':
                 return updateDataElementsList(

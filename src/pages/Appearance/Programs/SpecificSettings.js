@@ -1,13 +1,13 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import Wrapper from '../../../components/Wrapper'
-import { TableHeader } from '../../../components/table'
-import { TableSettings } from './TableSettings'
+import React from 'react'
 import {
     OptionalTEISearch,
     ProgramCompletionSpinner,
 } from '../../../components/field'
+import { TableHeader } from '../../../components/table'
+import Wrapper from '../../../components/Wrapper'
+import { TableSettings } from './TableSettings'
 
 const SpecificSettings = ({
     hasCategoryCombo,

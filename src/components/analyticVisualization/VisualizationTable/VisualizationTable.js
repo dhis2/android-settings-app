@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import {
     DataTable,
     DataTableBody,
     DataTableRow,
     DataTableCell,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { GroupVisualizationRow } from './GroupVisualizationRow'
 import styles from './VisualizationTable.module.css'
 
@@ -18,10 +18,10 @@ export const VisualizationTable = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <GroupVisualizationRow
             group={item}
             deleteVisualization={deleteVisualization}

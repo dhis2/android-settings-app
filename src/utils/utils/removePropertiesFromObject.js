@@ -1,5 +1,5 @@
-import omit from 'lodash/omit'
 import mapValues from 'lodash/mapValues'
+import omit from 'lodash/omit'
 
 /**
  * Object of objects
@@ -8,4 +8,4 @@ import mapValues from 'lodash/mapValues'
  */
 
 export const removePropertiesFromObject = (object, propertiesToOmit) =>
-    mapValues(object, element => omit(element, propertiesToOmit))
+    mapValues(object, (element) => omit(element, propertiesToOmit))

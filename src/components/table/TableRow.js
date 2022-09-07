@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from '../../styles/TableSettings.module.css'
 
 export const TableRow = ({ children, dense }) => (

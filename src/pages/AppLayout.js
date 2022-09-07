@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
-import SideBar from '../components/sidebar/Sidebar'
 import Router from '../components/Router'
+import SideBar from '../components/sidebar/Sidebar'
 import styles from '../styles/Layout.module.css'
 
 const AppLayout = () => (

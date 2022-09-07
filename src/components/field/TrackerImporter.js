@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { CheckboxField } from './CheckboxField'
+import React, { useEffect, useState } from 'react'
 import { useApiVersion } from '../../utils/useApiVersion'
+import { CheckboxField } from './CheckboxField'
 
 const CODE = 'trackerImporterVersion'
 const minApiVersion = '2.38'
@@ -10,7 +10,7 @@ const minApiVersion = '2.38'
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
 
-const isValidVersion = apiVersion => apiVersion >= minApiVersion
+const isValidVersion = (apiVersion) => apiVersion >= minApiVersion
 
 export const TrackerImporter = ({ value, onChange, ...props }) => {
     const [validVersion, setValidVersion] = useState(false)
@@ -25,7 +25,7 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
         }
     }, [apiVersion])
 
-    const handleCheckbox = e => {
+    const handleCheckbox = (e) => {
         setTracker(e.checked)
         onChange({
             ...value,

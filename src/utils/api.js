@@ -13,12 +13,12 @@ class Api {
      */
 
     getNamespaces() {
-        return getInstance().then(d2 =>
+        return getInstance().then((d2) =>
             d2.dataStore
                 .getAll()
-                .then(response =>
+                .then((response) =>
                     response.filter(
-                        value => this.ignoredStores.indexOf(value) === -1
+                        (value) => this.ignoredStores.indexOf(value) === -1
                     )
                 )
         )
@@ -26,17 +26,17 @@ class Api {
 
     createNamespace(namespace, key, value = {}) {
         return getInstance()
-            .then(d2 => {
-                return d2.dataStore.create(namespace).then(namespace => {
+            .then((d2) => {
+                return d2.dataStore.create(namespace).then((namespace) => {
                     return namespace.set(key, value)
                 })
             })
-            .catch(error => Promise.reject(error))
+            .catch((error) => Promise.reject(error))
     }
 
     deleteNamespace(namespace) {
-        return getInstance().then(d2 =>
-            d2.dataStore.delete(namespace).then(response => {
+        return getInstance().then((d2) =>
+            d2.dataStore.delete(namespace).then((response) => {
                 this.cache[namespace] = []
                 return response
             })
@@ -45,9 +45,9 @@ class Api {
 
     getKeys(namespace) {
         return getInstance()
-            .then(d2 => d2.dataStore.get(namespace))
-            .then(resName => resName.getKeys())
-            .catch(error => Promise.reject(error))
+            .then((d2) => d2.dataStore.get(namespace))
+            .then((resName) => resName.getKeys())
+            .catch((error) => Promise.reject(error))
     }
 
     /**
@@ -55,7 +55,7 @@ class Api {
      * @param key
      */
     getValue(namespace, key) {
-        return getInstance().then(d2 => {
+        return getInstance().then((d2) => {
             const url = `dataStore/${namespace}/${key}`
             return d2.Api.getApi().get(url)
         })
@@ -67,8 +67,8 @@ class Api {
      */
     getMetaData(namespace, key) {
         return getInstance()
-            .then(d2 => d2.dataStore.get(namespace, false))
-            .then(namespace => namespace.getMetaData(key))
+            .then((d2) => d2.dataStore.get(namespace, false))
+            .then((namespace) => namespace.getMetaData(key))
     }
 
     /**
@@ -78,9 +78,9 @@ class Api {
      */
     createValue(namespace, key, value) {
         return getInstance()
-            .then(d2 => d2.dataStore.get(namespace))
-            .then(resName => resName.set(key, value, true))
-            .then(response => {
+            .then((d2) => d2.dataStore.get(namespace))
+            .then((resName) => resName.set(key, value, true))
+            .then((response) => {
                 // cache value
                 console.log(response)
                 if (this.cache[namespace] === undefined) {
@@ -103,9 +103,9 @@ class Api {
      */
     updateValue(namespace, key, value) {
         return getInstance()
-            .then(d2 => d2.dataStore.get(namespace))
-            .then(resName => resName.update(key, value))
-            .then(response => {
+            .then((d2) => d2.dataStore.get(namespace))
+            .then((resName) => resName.update(key, value))
+            .then((response) => {
                 // cache value
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = []
