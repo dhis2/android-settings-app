@@ -11,21 +11,27 @@ import {
 } from '@dhis2/ui'
 import {NotEditableElement, VisualizationGroup, VisualizationTitle} from "./index";
 
-const typeNameList = {
-    'home': '',
-    'program': 'programName',
-    'dataset': 'datasetName'
-}
-
-const labelList = {
-    'home': 'Home',
-    'program': 'Program',
-    'dataset': 'Data set'
+const sections = {
+    home: {
+        type: 'home',
+        typeName: '',
+        label: i18n.t('Home'),
+    },
+    program: {
+        type: 'program',
+        typeName: 'programName',
+        label: i18n.t('Program'),
+    },
+    dataset: {
+        type: 'dataset',
+        typeName: 'datasetName',
+        label: i18n.t('Data set'),
+    }
 }
 
 const EditVisualization = ({open, settings, handleChange, currentGroup, groups, handleEdit, handleClose, type}) => {
-    const typeName = typeNameList[type] || ''
-    const label = labelList[type] || ''
+    const typeName = sections[type].typeName || ''
+    const label = sections[type].label || ''
 
     return (
         <>
@@ -33,7 +39,7 @@ const EditVisualization = ({open, settings, handleChange, currentGroup, groups, 
                 <Modal position="middle">
                     <ModalTitle>{i18n.t('Edit {{label}} visualization', {label})}</ModalTitle>
                     <ModalContent>
-                        { type !=='home' &&
+                        { type !== sections.home.type &&
                             <NotEditableElement
                                 value={settings[typeName]}
                                 name={type}
