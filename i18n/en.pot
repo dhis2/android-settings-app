@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-06T00:16:50.301Z\n"
-"PO-Revision-Date: 2022-09-06T00:16:50.301Z\n"
+"POT-Creation-Date: 2022-09-06T18:29:05.203Z\n"
+"PO-Revision-Date: 2022-09-06T18:29:05.203Z\n"
 
 msgid "Edit"
 msgstr "Edit"
@@ -27,6 +27,15 @@ msgstr "Failed to get data from Data Store"
 msgid "Settings were successfully saved"
 msgstr "Settings were successfully saved"
 
+msgid "Home"
+msgstr "Home"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Data set"
+msgstr "Data set"
+
 msgid "Edit {{label}} visualization"
 msgstr "Edit {{label}} visualization"
 
@@ -41,9 +50,6 @@ msgstr "Edit Visualization"
 
 msgid "Dataset"
 msgstr "Dataset"
-
-msgid "Program"
-msgstr "Program"
 
 msgid "Add a group name"
 msgstr "Add a group name"
@@ -540,9 +546,6 @@ msgstr "Set Filters in Programs"
 msgid "Manage Programs"
 msgstr "Manage Programs"
 
-msgid "Data set"
-msgstr "Data set"
-
 msgid "Set Filters in Data sets"
 msgstr "Set Filters in Data sets"
 
@@ -560,9 +563,6 @@ msgstr "Set TEI Analytics"
 
 msgid "Manage TEI analytics for tracker programs"
 msgstr "Manage TEI analytics for tracker programs"
-
-msgid "Home"
-msgstr "Home"
 
 msgid "Set Home Visualizations"
 msgstr "Set Home Visualizations"
