@@ -1,6 +1,4 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import {
     Button,
     ButtonStrip,
@@ -9,7 +7,13 @@ import {
     ModalContent,
     ModalTitle,
 } from '@dhis2/ui'
-import {NotEditableElement, VisualizationGroup, VisualizationTitle} from "./index";
+import PropTypes from 'prop-types'
+import React from 'react'
+import {
+    NotEditableElement,
+    VisualizationGroup,
+    VisualizationTitle,
+} from './index'
 
 const sections = {
     home: {
@@ -26,10 +30,19 @@ const sections = {
         type: 'dataset',
         typeName: 'datasetName',
         label: i18n.t('Data set'),
-    }
+    },
 }
 
-const EditVisualization = ({open, settings, handleChange, currentGroup, groups, handleEdit, handleClose, type}) => {
+export const EditVisualization = ({
+    open,
+    settings,
+    handleChange,
+    currentGroup,
+    groups,
+    handleEdit,
+    handleClose,
+    type,
+}) => {
     const typeName = sections[type].typeName || ''
     const label = sections[type].label || ''
 
@@ -37,15 +50,17 @@ const EditVisualization = ({open, settings, handleChange, currentGroup, groups, 
         <>
             {open && (
                 <Modal position="middle">
-                    <ModalTitle>{i18n.t('Edit {{label}} visualization', {label})}</ModalTitle>
+                    <ModalTitle>
+                        {i18n.t('Edit {{label}} visualization', { label })}
+                    </ModalTitle>
                     <ModalContent>
-                        { type !== sections.home.type &&
+                        {type !== sections.home.type && (
                             <NotEditableElement
                                 value={settings[typeName]}
                                 name={type}
                                 label={label}
                             />
-                        }
+                        )}
 
                         <NotEditableElement
                             value={settings.visualizationName}
@@ -90,5 +105,3 @@ EditVisualization.propTypes = {
     handleClose: PropTypes.func,
     type: PropTypes.string,
 }
-
-export default EditVisualization

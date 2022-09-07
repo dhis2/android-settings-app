@@ -27,7 +27,7 @@ const findDefaultGroup = (type, groupList, settings) => {
     return defaultGroup
 }
 
-const isDefaultGroup = (group) => (group.name === DEFAULT)
+const isDefaultGroup = (group) => group.name === DEFAULT
 
 const findGroup = (type, group, settings) => {
     const { groupList, groupId } = group
@@ -37,11 +37,18 @@ const findGroup = (type, group, settings) => {
         case 'dataset':
             return settings.group
         default:
-            return find(groupList, g => g.id === groupId)
+            return find(groupList, (g) => g.id === groupId)
     }
 }
 
-export const VisualizationGroup = ({ settings, onChange, groupList, type, groupId, disabled }) => {
+export const VisualizationGroup = ({
+    settings,
+    onChange,
+    groupList,
+    type,
+    groupId,
+    disabled,
+}) => {
     const { refetch: refetchId, data: id } = useSystemId()
     const [group, setGroup] = useState(true)
     const [groupType, setGroupType] = useState(true)
@@ -85,20 +92,20 @@ export const VisualizationGroup = ({ settings, onChange, groupList, type, groupI
                 disabled={disabled}
             />
 
-            {disabled ?
-                group && (
-                    <div className={styles.field}>
-                        <TextField dense value={title} disabled />
-                    </div>
-                )
+            {disabled
+                ? group && (
+                      <div className={styles.field}>
+                          <TextField dense value={title} disabled />
+                      </div>
+                  )
                 : groupType && (
-                    <GroupType
-                        onChange={onChange}
-                        settings={settings}
-                        groupList={groupList}
-                        type={type}
-                    />
-            )}
+                      <GroupType
+                          onChange={onChange}
+                          settings={settings}
+                          groupList={groupList}
+                          type={type}
+                      />
+                  )}
         </>
     )
 }

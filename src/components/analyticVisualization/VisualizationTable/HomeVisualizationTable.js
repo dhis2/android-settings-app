@@ -11,8 +11,12 @@ import React, { useState } from 'react'
 import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import EditVisualization from '../EditVisualization'
-import { removeElementList, updateGroupList, updateVisualizationName } from './helper'
+import { EditVisualization } from '../EditVisualization'
+import {
+    removeElementList,
+    updateGroupList,
+    updateVisualizationName,
+} from './helper'
 import { VisualizationRow } from './VisualizationRow'
 import styles from './VisualizationTable.module.css'
 
@@ -106,8 +110,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
                     { elementName: elementName }
                 )}
             />
-            {
-                openEditDialog &&
+            {openEditDialog && (
                 <EditVisualization
                     open={openEditDialog}
                     settings={specificSetting}
@@ -118,7 +121,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
                     handleEdit={handleEdit}
                     type="home"
                 />
-            }
+            )}
         </>
     )
 }

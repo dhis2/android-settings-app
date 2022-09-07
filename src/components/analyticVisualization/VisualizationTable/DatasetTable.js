@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import EditVisualization from '../EditVisualization'
+import { EditVisualization } from '../EditVisualization'
 import { removeElement, updateGroup, updateVisualizations } from './helper'
 import { VisualizationTable } from './VisualizationTable'
 
@@ -134,8 +134,7 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
                     { elementName: elementName }
                 )}
             />
-            {
-                openEditDialog &&
+            {openEditDialog && (
                 <EditVisualization
                     open={openEditDialog}
                     settings={specificSetting}
@@ -146,7 +145,7 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
                     handleEdit={handleEdit}
                     type="dataset"
                 />
-            }
+            )}
         </>
     )
 }
