@@ -1,14 +1,14 @@
-import { programSettingsDefault } from '../constants/program-settings'
-import { dataSetSettingsDefault } from '../constants/data-set-settings'
-import { androidSettingsDefault } from '../constants/android-settings'
 import { defaultShareScreen } from '../components/field'
+import { androidSettingsDefault } from '../constants/android-settings'
+import { dataSetSettingsDefault } from '../constants/data-set-settings'
+import { programSettingsDefault } from '../constants/program-settings'
 
 export const DEFAULT_PROGRAM = 'DEFAULT_PROGRAM'
 export const DEFAULT_DATASET = 'DEFAULT_DATASET'
 export const DEFAULT_GENERAL = 'DEFAULT_GENERAL'
 export const DEFAULT_GLOBAL = 'DEFAULT_GLOBAL'
 
-export const populateObject = type => {
+export const populateObject = (type) => {
     let object = {}
     switch (type) {
         case DEFAULT_GENERAL:

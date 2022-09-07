@@ -17,7 +17,8 @@ import {
     LAST_WEEK,
     LAST_YEAR,
     MONTHS_THIS_YEAR,
-    QUARTERS_THIS_YEAR, THIS_DAY,
+    QUARTERS_THIS_YEAR,
+    THIS_DAY,
     THIS_MONTH,
     THIS_QUARTER,
     THIS_WEEK,
@@ -34,13 +35,13 @@ import {
     RADAR,
 } from './visualizationTypes'
 
-export const validateAndroidVisualization = visualizations => {
-    return visualizations.map(visualization =>
+export const validateAndroidVisualization = (visualizations) => {
+    return visualizations.map((visualization) =>
         checkVisualizationType(visualization)
     )
 }
 
-const checkVisualizationType = visualization => {
+const checkVisualizationType = (visualization) => {
     if (isValidVisualizationType(visualization.type)) {
         mapValues(visualization.relativePeriods, (period, i) => {
             if (
@@ -85,20 +86,20 @@ const relativePeriodsList = [
     LAST_5_YEAR,
 ]
 
-const isValidVisualizationType = visualizationType =>
+const isValidVisualizationType = (visualizationType) =>
     [PIVOT_TABLE, LINE, COLUMN, PIE, SINGLE_VALUE, RADAR].includes(
         visualizationType
     )
 
-const isValidPeriod = period => relativePeriodsList.includes(period)
+const isValidPeriod = (period) => relativePeriodsList.includes(period)
 
 const isValidDimension = (type, numberOfDimensions) =>
     type.length <= numberOfDimensions
 
-const isValidOrgUnit = visualization =>
+const isValidOrgUnit = (visualization) =>
     visualization.userOrganisationUnit ||
     visualization.userOrganisationUnitChildren ||
     visualization.userOrganisationUnitGrandChildren
 
-export const orderVisualizations = visualizationList =>
-    orderBy(visualizationList, [item => item.valid === true], ['desc'])
+export const orderVisualizations = (visualizationList) =>
+    orderBy(visualizationList, [(item) => item.valid === true], ['desc'])

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { VisualizationTable } from './VisualizationTable'
+import React, { useState } from 'react'
+import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import { removeSettingsFromList } from '../../../utils/utils'
+import EditVisualization from '../EditVisualization'
 import { removeElement, updateGroup, updateVisualizations } from './helper'
-import EditVisualization from "../EditVisualization";
+import { VisualizationTable } from './VisualizationTable'
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)

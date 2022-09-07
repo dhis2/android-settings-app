@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
+import { CircularLoader } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import { CircularLoader } from '@dhis2/ui'
-import NewHomeVisualization from './NewHomeVisualization'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { HomeVisualizationTable } from '../../../components/analyticVisualization'
 import { NoticeError } from '../../../components/noticeAlert'
 import { useVisualizations } from '../VisualizationQuery'
 import { createRows, getVisualizationIdList } from './helper'
+import NewHomeVisualization from './NewHomeVisualization'
 
 const HomeAnalyticList = ({
     visualizations,

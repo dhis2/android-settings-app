@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { FieldGroup, Radio } from '@dhis2/ui'
 import map from 'lodash/map'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 
 export const RadioGroup = ({
     onChange,
@@ -30,7 +30,7 @@ export const RadioGroup = ({
 
     return (
         <FieldGroup>
-            {options.map(option => (
+            {options.map((option) => (
                 <Radio
                     dense
                     name={keyDownload}

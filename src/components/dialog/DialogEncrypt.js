@@ -1,4 +1,4 @@
-import React from 'react'
+import i18n from '@dhis2/d2-i18n'
 import {
     Modal,
     ModalTitle,
@@ -7,9 +7,9 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import { encryptTitles } from '../../constants/android-settings'
-import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React from 'react'
+import { encryptTitles } from '../../constants/android-settings'
 
 const DialogEncrypt = ({ openDialog, onClose, checked, handleEncrypt }) => {
     let encrypt

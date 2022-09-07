@@ -6,10 +6,10 @@ import { removePropertiesFromObject } from './removePropertiesFromObject'
  * return: object
  */
 
-export const removeNameIDFromSettings = settingsObject =>
+export const removeNameIDFromSettings = (settingsObject) =>
     removePropertiesFromObject(settingsObject, ['name', 'id'])
 
-export const removeSummaryFromSettings = settingsObject =>
+export const removeSummaryFromSettings = (settingsObject) =>
     removePropertiesFromObject(settingsObject, [
         'name',
         'id',

@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
+import { updateSettingsList } from '../../../utils/utils'
+import DialogNewProgram from './DialogNewProgram'
 import {
     createInitialSpecificValues,
     createInitialSpinnerValue,
@@ -11,8 +13,6 @@ import {
     isTrackerProgram,
     programHasCategoryCombo,
 } from './helper'
-import DialogNewProgram from './DialogNewProgram'
-import { updateSettingsList } from '../../../utils/utils'
 
 const NewProgramSpecific = ({
     programList,

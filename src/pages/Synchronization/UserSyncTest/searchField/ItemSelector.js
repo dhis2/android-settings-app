@@ -1,10 +1,10 @@
-import React, { createRef, useEffect, useState } from 'react'
-import { Popover, FlyoutMenu } from '@dhis2/ui'
 import { useDataEngine } from '@dhis2/app-runtime'
-import ItemSearchField from './ItemSearchField'
-import ContentMenuGroup from './ContentMenuGroup'
-import { getUserQuery } from '../queries/userSyncQueries'
+import { Popover, FlyoutMenu } from '@dhis2/ui'
+import React, { createRef, useEffect, useState } from 'react'
 import useDebounce from '../../../../utils/useDebounce'
+import { getUserQuery } from '../queries/userSyncQueries'
+import ContentMenuGroup from './ContentMenuGroup'
+import ItemSearchField from './ItemSearchField'
 import classes from './styles/ItemSelector.module.css'
 
 const ItemSelector = ({ selection }) => {
@@ -17,7 +17,7 @@ const ItemSelector = ({ selection }) => {
 
     useEffect(() => {
         const query = getUserQuery(debouncedFilterText)
-        dataEngine.query({ items: query }).then(res => {
+        dataEngine.query({ items: query }).then((res) => {
             setItems(res.items.users)
         })
     }, [debouncedFilterText])
@@ -30,7 +30,7 @@ const ItemSelector = ({ selection }) => {
 
     const openMenu = () => setIsOpen(true)
 
-    const addItem = item => () => {
+    const addItem = (item) => () => {
         setDisable(true)
         closeMenu()
         setFilter(item.name)

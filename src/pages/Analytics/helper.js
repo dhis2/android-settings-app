@@ -20,12 +20,12 @@ export const createBasicVisualization = (
 })
 
 export const findVisualizationById = (apiVisualizationList, visualization) =>
-    apiVisualizationList.find(v => v.id === visualization.id)
+    apiVisualizationList.find((v) => v.id === visualization.id)
 
-export const getVisualizationIdList = datastore => {
+export const getVisualizationIdList = (datastore) => {
     const visualizationList = []
-    mapValues(datastore, element =>
-        element.map(group =>
+    mapValues(datastore, (element) =>
+        element.map((group) =>
             visualizationList.push(
                 values(mapValues(group.visualizations, 'id'))
             )

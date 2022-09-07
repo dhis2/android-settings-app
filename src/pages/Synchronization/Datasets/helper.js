@@ -3,7 +3,7 @@ import {
     periodTypeConstants,
 } from '../../../constants/data-set-settings'
 
-export const createInitialValues = prevDetails => ({
+export const createInitialValues = (prevDetails) => ({
     periodDSDownload:
         prevDetails.periodDSDownload || dataSetSettingsDefault.periodDSDownload,
 })
@@ -21,7 +21,7 @@ export const prepareSpecificSettingsList = (
     const specificSettingsRowList = []
 
     const datasetId = []
-    apiDatasetList.map(dataset => datasetId.push(dataset.id))
+    apiDatasetList.map((dataset) => datasetId.push(dataset.id))
 
     for (const key in datasetSettings) {
         if (datasetId.includes(key)) {
@@ -44,16 +44,16 @@ export const prepareSpecificSettingsList = (
 }
 
 export const getPeriodType = (id, datasetList) =>
-    datasetList.find(dataset => dataset.id === id).periodType
+    datasetList.find((dataset) => dataset.id === id).periodType
 
 export const findDatasetName = (datasetList, specificProgram) => {
     const dataset = datasetList.find(
-        dataset => dataset.id === specificProgram.id
+        (dataset) => dataset.id === specificProgram.id
     )
     return dataset.name
 }
 
-export const getPeriodDefaultValueByType = periodType =>
+export const getPeriodDefaultValueByType = (periodType) =>
     periodTypeConstants[periodType].default
 
-export const getPeriodLabel = period => periodTypeConstants[period].label
+export const getPeriodLabel = (period) => periodTypeConstants[period].label

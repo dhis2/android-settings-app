@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { SelectSettings } from '../../../components/inputs'
+import SettingsTable from '../../../components/settingsTable/SettingsTable'
 import {
     GLOBAL,
     GLOBAL_SPECIAL,
@@ -8,11 +10,9 @@ import {
     GlobalProgramSpecial,
     PER_ORG_UNIT,
 } from '../../../constants/program-settings'
-import { SelectSettings } from '../../../components/inputs'
-import SettingsTable from '../../../components/settingsTable/SettingsTable'
+import inputStyles from '../../../styles/Input.module.css'
 import { parseValueByType } from './parseValueBySettingType'
 import { populateProgramObject } from './populateProgramObject'
-import inputStyles from '../../../styles/Input.module.css'
 
 const CODE = 'settingDownload'
 const OPTIONS = [
@@ -46,7 +46,7 @@ const ProgramGlobalSettings = ({ settings, handleChange, disable }) => {
         }
     }, [settings])
 
-    const onSelectChange = e => {
+    const onSelectChange = (e) => {
         e.selected === GLOBAL || e.selected === PER_ORG_UNIT
             ? handleChange({
                   ...populateProgramObject(GLOBAL_SPECIAL, settings),

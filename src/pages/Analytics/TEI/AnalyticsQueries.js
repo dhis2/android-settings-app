@@ -26,12 +26,12 @@ export const useReadProgramQuery = () => {
     let programList = []
     if (data) {
         programList = data.programs.programs.filter(
-            program => program.programType === 'WITH_REGISTRATION'
+            (program) => program.programType === 'WITH_REGISTRATION'
         )
 
-        programList.map(program => {
+        programList.map((program) => {
             program.programStages = program.programStages.filter(
-                programStage => programStage.repeatable === true
+                (programStage) => programStage.repeatable === true
             )
             return program
         })

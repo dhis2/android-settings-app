@@ -1,6 +1,6 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { CheckboxField } from './CheckboxField'
 
 const CODE = 'allowScreenCapture'
@@ -8,7 +8,7 @@ const CODE = 'allowScreenCapture'
 export const defaultShareScreen = false
 
 export const ShareScreen = ({ value, onChange, ...props }) => {
-    const handleCheckbox = e => {
+    const handleCheckbox = (e) => {
         onChange({ ...value, [CODE]: e.checked })
     }
 

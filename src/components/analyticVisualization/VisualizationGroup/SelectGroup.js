@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { Radio } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { SelectField } from '../../field'
 import styles from './styles/GroupField.module.css'
 
@@ -19,8 +19,8 @@ export const SelectGroup = ({
         setSelection('')
     }, [checked, groupName[elementType]])
 
-    const handleChange = e => {
-        const value = options.find(group => group.id === e.selected)
+    const handleChange = (e) => {
+        const value = options.find((group) => group.id === e.selected)
         setSelection(e.selected)
         changeGroup({
             ...groupName,

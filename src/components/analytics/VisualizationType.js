@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { RadioGroup } from './RadioGroup'
-import { FieldSection } from '../field'
+import React, { useEffect } from 'react'
+import { useReadAttributesQuery } from '../../pages/Analytics/TEI/AnalyticsQueries'
 import {
     createInitialValues,
     updateAttributesList,
     WHO_NUTRITION,
 } from '../../pages/Analytics/TEI/helper'
-import { useReadAttributesQuery } from '../../pages/Analytics/TEI/AnalyticsQueries'
+import { FieldSection } from '../field'
+import { RadioGroup } from './RadioGroup'
 
 const visualizationOptions = [
     {
@@ -60,7 +60,7 @@ export const VisualizationType = ({
         }
     }, [])
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         if (e.selected || e.value === WHO_NUTRITION) {
             updateAttributesList({
                 programId: value.program,

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, createRef } from 'react'
-import PropTypes from 'prop-types'
-import { Popover, FlyoutMenu } from '@dhis2/ui'
 import { useDataEngine } from '@dhis2/app-runtime'
-import { ContentMenuGroup } from './ContentMenuGroup'
-import { ItemSearchField } from './ItemSearchField'
-import { getVisualizationsQuery } from './visualizationQuery'
-import { orderVisualizations, validateAndroidVisualization } from './helper'
+import { Popover, FlyoutMenu } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useState, useEffect, createRef } from 'react'
 import useDebounce from '../../../utils/useDebounce'
+import { ContentMenuGroup } from './ContentMenuGroup'
+import { orderVisualizations, validateAndroidVisualization } from './helper'
+import { ItemSearchField } from './ItemSearchField'
 import styles from './styles/ItemSelector.module.css'
+import { getVisualizationsQuery } from './visualizationQuery'
 
 export const ItemSelector = ({ setSelection, clearSelection }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -23,7 +23,7 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
             debouncedFilterText.length >= 3 ? debouncedFilterText : null
         const query = getVisualizationsQuery(text)
 
-        dataEngine.query({ items: query }).then(res => {
+        dataEngine.query({ items: query }).then((res) => {
             validateAndroidVisualization(res.items.visualizations)
             const orderItems = orderVisualizations(res.items.visualizations)
             setItems(orderItems)
@@ -39,7 +39,7 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
 
     const openMenu = () => setIsOpen(true)
 
-    const addItem = item => () => {
+    const addItem = (item) => () => {
         setDisable(true)
         closeMenu()
         setFilter(item.name || item.displayName)

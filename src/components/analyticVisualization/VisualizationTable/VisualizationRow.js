@@ -1,8 +1,8 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from './VisualizationTable.module.css'
 
 export const VisualizationRow = ({
@@ -13,7 +13,7 @@ export const VisualizationRow = ({
     disabled,
 }) => (
     <>
-        {visualizationList.map(visualization => (
+        {visualizationList.map((visualization) => (
             <div
                 className={cx([styles.boxContainer, styles.rowContainer])}
                 key={visualization.id}

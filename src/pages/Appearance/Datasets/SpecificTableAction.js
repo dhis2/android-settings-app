@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { datasetHasCategoryCombo } from './helper'
-import TableActions from '../../../components/TableActions'
+import React, { useState } from 'react'
 import DialogDelete from '../../../components/dialog/DialogDelete'
-import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
+import TableActions from '../../../components/TableActions'
 import {
     removeSettingsFromList,
     updateSettingsList,
 } from '../../../utils/utils'
+import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
+import { datasetHasCategoryCombo } from './helper'
 
 const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
@@ -48,7 +48,7 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
         setOpenEditDialog(false)
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setSpecificSetting({
             ...specificSetting,
             [e.name]: {

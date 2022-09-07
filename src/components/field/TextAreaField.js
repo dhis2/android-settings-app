@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { TextAreaField as TextArea } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { FieldSection } from './FieldSection'
 
 export const TextAreaField = ({ onChange, ...props }) => (

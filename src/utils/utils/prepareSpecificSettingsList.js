@@ -8,7 +8,7 @@ import toArray from 'lodash/toArray'
 export const prepareSpecificSettingsList = (settings, apiElementList) => {
     const specificSettingsRows = []
     for (const key in settings) {
-        const result = apiElementList.find(element => element.id === key)
+        const result = apiElementList.find((element) => element.id === key)
         if (result) {
             settings[key].name = result.name
             settings[key].id = key

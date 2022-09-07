@@ -1,5 +1,4 @@
-import React from 'react'
-
+import i18n from '@dhis2/d2-i18n'
 import {
     Modal,
     ModalTitle,
@@ -8,7 +7,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
+import React from 'react'
 
 const DialogDelete = ({
     open,

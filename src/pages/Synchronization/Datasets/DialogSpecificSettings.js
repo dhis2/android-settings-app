@@ -1,18 +1,19 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import {
     Button,
     ButtonStrip,
     Modal,
     ModalActions,
     ModalContent,
-    ModalTitle, spacers,
+    ModalTitle,
+    spacers,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { Select } from '../../../components/inputs'
-import SpecificSettings from './SpecificSettings'
-import titleStyles from '../../../styles/LayoutTitles.module.css'
 import buttonStyles from '../../../styles/Button.module.css'
+import titleStyles from '../../../styles/LayoutTitles.module.css'
+import SpecificSettings from './SpecificSettings'
 
 const DialogSpecificSettings = ({
     open,

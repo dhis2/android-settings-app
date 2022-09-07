@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import defaults from 'lodash/defaults'
 import map from 'lodash/map'
-import toArray from 'lodash/toArray'
 import mapValues from 'lodash/mapValues'
+import toArray from 'lodash/toArray'
 import {
     formatList,
     removePropertiesFromObject,
@@ -14,7 +14,7 @@ const filterSortingDefault = {
     sort: true,
 }
 
-export const createInitialValues = prevDetails => ({
+export const createInitialValues = (prevDetails) => ({
     assignedToMe: prevDetails.assignedToMe || filterSortingDefault,
     enrollmentDate: prevDetails.enrollmentDate || filterSortingDefault,
     enrollmentStatus: prevDetails.enrollmentStatus || filterSortingDefault,
@@ -25,7 +25,7 @@ export const createInitialValues = prevDetails => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialSpinnerValue = prevDetails => {
+export const createInitialSpinnerValue = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
         optionalSearch: false,
@@ -37,7 +37,7 @@ export const createInitialSpinnerValue = prevDetails => {
     }
 }
 
-export const createInitialSpecificValues = prevDetails => ({
+export const createInitialSpecificValues = (prevDetails) => ({
     name: '',
     categoryCombo: prevDetails.categoryCombo || filterSortingDefault,
     assignedToMe: prevDetails.assignedToMe || filterSortingDefault,
@@ -50,22 +50,22 @@ export const createInitialSpecificValues = prevDetails => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialGlobalSpinner = prevDetails => {
+export const createInitialGlobalSpinner = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
     })
     return { completionSpinner: prevDetails.completionSpinner }
 }
 
-export const createInitialGlobalSpinnerPrevious = prevDetails => {
+export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
     })
     return { visible: prevDetails.completionSpinner }
 }
 
-export const prepareSpinnerPreviousSpinner = settings => {
-    const spinnerSettings = mapValues(settings, element => ({
+export const prepareSpinnerPreviousSpinner = (settings) => {
+    const spinnerSettings = mapValues(settings, (element) => ({
         ...element,
         visible: element.completionSpinner,
     }))
@@ -75,27 +75,27 @@ export const prepareSpinnerPreviousSpinner = settings => {
     )
 }
 
-export const prepareSettingsSaveDataStore = settings =>
+export const prepareSettingsSaveDataStore = (settings) =>
     removeSummaryFromSettings(settings)
 
 /**
  * Add Follow up default value
  * */
-export const assignSpecificValue = values => ({
+export const assignSpecificValue = (values) => ({
     ...values,
     followUp: values.followUp || filterSortingDefault,
 })
 
-export const createSpecificValues = specificValues =>
-    mapValues(specificValues, element => assignSpecificValue(element))
+export const createSpecificValues = (specificValues) =>
+    mapValues(specificValues, (element) => assignSpecificValue(element))
 
 export const getProgramName = (program, programList) => {
-    const programFilter = programList.filter(option => option.id === program)
+    const programFilter = programList.filter((option) => option.id === program)
     return programFilter[0].name
 }
 
 export const findElementById = (list, elementID) =>
-    list.find(setting => setting.id === elementID)
+    list.find((setting) => setting.id === elementID)
 
 export const programHasCategoryCombo = (programId, programList) => {
     const program = findElementById(programList, programId)
@@ -143,7 +143,7 @@ export const prepareProgramConfigurationList = (settings, apiProgramList) => {
     return toArray(settingsRows)
 }
 
-const getFilters = settings => {
+const getFilters = (settings) => {
     const filterList = []
     map(
         settings,
@@ -154,7 +154,7 @@ const getFilters = settings => {
     return formatList(filterList)
 }
 
-const convertFilterKeyToValue = filter => {
+const convertFilterKeyToValue = (filter) => {
     switch (filter) {
         case 'assignedToMe':
             return i18n.t('Assigned to me')
@@ -177,5 +177,5 @@ const convertFilterKeyToValue = filter => {
     }
 }
 
-export const isProgramConfiguration = configurationType =>
+export const isProgramConfiguration = (configurationType) =>
     ['completionSpinner', 'optionalSearch'].includes(configurationType)

@@ -1,10 +1,10 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import { Divider } from '@dhis2/ui'
-import Wrapper from '../../../components/Wrapper'
-import { TableRow } from '../../../components/table/'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { InputNumber, SelectSettings } from '../../../components/inputs'
+import { TableRow } from '../../../components/table/'
+import Wrapper from '../../../components/Wrapper'
 import {
     SpecificProgram,
     specificSettingsDefault,
@@ -66,7 +66,7 @@ const SpecificSettings = ({
     <Wrapper fullWidth>
         <div>
             {programWithRegistration
-                ? SpecificProgram.withRegistration.map(row => (
+                ? SpecificProgram.withRegistration.map((row) => (
                       <ProgramTableRow
                           key={row.option}
                           row={row}
@@ -74,7 +74,7 @@ const SpecificSettings = ({
                           onChange={onChange}
                       />
                   ))
-                : SpecificProgram.withoutRegistration.map(row => (
+                : SpecificProgram.withoutRegistration.map((row) => (
                       <ProgramTableRow
                           key={row.option}
                           row={row}

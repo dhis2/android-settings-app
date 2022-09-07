@@ -3,7 +3,7 @@ const filterSortingDefault = {
     sort: true,
 }
 
-export const createInitialValues = prevDetails => ({
+export const createInitialValues = (prevDetails) => ({
     date: prevDetails.date || filterSortingDefault,
     organisationUnit: prevDetails.organisationUnit || filterSortingDefault,
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
