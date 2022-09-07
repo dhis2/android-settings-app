@@ -13,6 +13,7 @@ import styles from './VisualizationTable.module.css'
 
 export const GroupVisualizationRow = ({
     group,
+    editVisualization,
     deleteVisualization,
     deleteGroup,
     element,
@@ -26,6 +27,7 @@ export const GroupVisualizationRow = ({
     const expandableContent = (item) => (
         <VisualizationRow
             visualizationList={item}
+            editVisualization={editVisualization}
             deleteVisualization={deleteVisualization}
             disabled={disabled}
         />

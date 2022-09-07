@@ -11,6 +11,7 @@ import styles from './VisualizationTable.module.css'
 
 export const VisualizationTable = ({
     rows,
+    editVisualization,
     deleteVisualization,
     deleteGroup,
     element,
@@ -24,6 +25,7 @@ export const VisualizationTable = ({
     const expandableContent = (item) => (
         <GroupVisualizationRow
             group={item}
+            editVisualization={editVisualization}
             deleteVisualization={deleteVisualization}
             deleteGroup={deleteGroup}
             element={element}
@@ -54,6 +56,7 @@ export const VisualizationTable = ({
 VisualizationTable.propTypes = {
     rows: PropTypes.object,
     element: PropTypes.string,
+    editVisualization: PropTypes.func,
     deleteVisualization: PropTypes.func,
     deleteGroup: PropTypes.func,
     disabled: PropTypes.bool,

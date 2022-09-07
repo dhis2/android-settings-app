@@ -11,7 +11,12 @@ import React, { useState } from 'react'
 import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import { removeElementList, updateGroupList } from './helper'
+import { EditVisualization } from '../EditVisualization'
+import {
+    removeElementList,
+    updateGroupList,
+    updateVisualizationName,
+} from './helper'
 import { VisualizationRow } from './VisualizationRow'
 import styles from './VisualizationTable.module.css'
 
@@ -21,14 +26,32 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const [section, setSection] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
     const [elementName, setName] = useState('')
-    const [groupId, setGroupId] = useState()
+    const [groupId, setGroupId] = useState('')
+    const [openEditDialog, setOpenEditDialog] = useState(false)
 
     const deleteVisualization = (visualization, currentGroup, groupId) => {
         setSpecificSetting(visualization)
         setSection(currentGroup)
         setGroupId(groupId)
-        setName(visualization.name)
+        setName(visualization.name || visualization.visualizationName)
         setOpenDialog(true)
+    }
+
+    const editVisualization = (visualization, visualizationList, groupId) => {
+        setOpenEditDialog(true)
+        setSpecificSetting(visualization)
+        setGroupId(groupId)
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditDialog(false)
+        setSpecificSetting({})
+        setGroupId('')
+    }
+
+    const handleEdit = () => {
+        changeGroup(updateVisualizationName(group, groupId, specificSetting))
+        handleCloseEdit()
     }
 
     const handleDialogClose = () => {
@@ -66,6 +89,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
             <VisualizationTable
                 group={group}
                 deleteVisualization={deleteVisualization}
+                editVisualization={editVisualization}
                 deleteGroup={deleteGroup}
                 disabled={disable}
             />
@@ -86,6 +110,18 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
                     { elementName: elementName }
                 )}
             />
+            {openEditDialog && (
+                <EditVisualization
+                    open={openEditDialog}
+                    settings={specificSetting}
+                    handleChange={setSpecificSetting}
+                    groups={group}
+                    currentGroup={groupId}
+                    handleClose={handleCloseEdit}
+                    handleEdit={handleEdit}
+                    type="home"
+                />
+            )}
         </>
     )
 }
@@ -98,6 +134,7 @@ HomeVisualizationTable.propTypes = {
 const VisualizationTable = ({
     group,
     deleteVisualization,
+    editVisualization,
     deleteGroup,
     disabled,
 }) => {
@@ -110,6 +147,7 @@ const VisualizationTable = ({
         <VisualizationRow
             visualizationList={item.visualizations}
             deleteVisualization={deleteVisualization}
+            editVisualization={editVisualization}
             disabled={disabled}
             groupId={item.id}
         />
