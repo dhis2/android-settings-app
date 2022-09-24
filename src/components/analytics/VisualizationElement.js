@@ -48,10 +48,6 @@ const periodType = [
         value: 'Yearly',
         label: i18n.t('Yearly'),
     },
-    {
-        value: 'None',
-        label: i18n.t('None'),
-    },
 ]
 
 export const VisualizationElement = ({
