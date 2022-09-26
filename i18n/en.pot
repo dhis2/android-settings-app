@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-24T00:24:26.131Z\n"
-"PO-Revision-Date: 2022-09-24T00:24:26.131Z\n"
+"POT-Creation-Date: 2022-09-26T15:08:50.273Z\n"
+"PO-Revision-Date: 2022-09-26T15:08:50.273Z\n"
 
 msgid "Edit"
 msgstr "Edit"
@@ -170,6 +170,9 @@ msgstr "Six-monthly"
 
 msgid "Yearly"
 msgstr "Yearly"
+
+msgid "None"
+msgstr "None"
 
 msgid "Choose a period type"
 msgstr "Choose a period type"

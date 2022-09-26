@@ -48,6 +48,10 @@ const periodType = [
         value: 'Yearly',
         label: i18n.t('Yearly'),
     },
+    {
+        value: 'None',
+        label: i18n.t('None'),
+    },
 ]
 
 export const VisualizationElement = ({
@@ -80,6 +84,7 @@ export const VisualizationElement = ({
                 onChange={onChange}
                 value={specificSettings.period || ''}
                 options={periodType}
+                required
             />
             <Divider />
             <Section legend={i18n.t('Visualization elements')}>

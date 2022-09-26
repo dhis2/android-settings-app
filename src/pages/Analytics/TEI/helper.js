@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
 import omit from 'lodash/omit'
 import { findProgramNameById } from '../../../utils/utils'
@@ -55,6 +56,7 @@ export const populateAnalyticItem = (item) => {
     const elementValue = item.data[element][0]
     return {
         ...item,
+        period: !isEmpty(item.period) ? item.period : 'None',
         element,
         elementValue:
             element === 'attributes'
@@ -254,4 +256,17 @@ export const prepareItemsList = (itemList, apiProgramList) => {
 
 export const removeSummarySettings = (itemList) => {
     return map(itemList, (object) => omit(object, ['summarySettings']))
+}
+
+const removeNonePeriod = (values) => {
+    const visualization = {
+        ...values,
+        period: values.period === 'None' ? null : values.period,
+    }
+    return values.type !== WHO_NUTRITION ? visualization : values
+}
+
+export const dataStoreSettings = (settings) => {
+    const dataToSave = settings.map((tei) => removeNonePeriod(tei))
+    return removeSummarySettings(dataToSave)
 }
