@@ -84,6 +84,7 @@ export const VisualizationElement = ({
                 onChange={onChange}
                 value={specificSettings.period || ''}
                 options={periodType}
+                required
             />
             <Divider />
             <Section legend={i18n.t('Visualization elements')}>

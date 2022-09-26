@@ -11,7 +11,7 @@ import {
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
 import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
-import { removeSummarySettings } from './helper'
+import { dataStoreSettings } from './helper'
 
 const AnalyticsTEI = () => {
     const { tei, dhisVisualizations, errorDataStore, load } =
@@ -41,7 +41,7 @@ const AnalyticsTEI = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            tei: removeSummarySettings(analyticSettings),
+            tei: dataStoreSettings(analyticSettings),
             dhisVisualizations,
         }
 
