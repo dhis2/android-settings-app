@@ -45,5 +45,4 @@ export const createInitialValues = (prevGeneralDetails) => ({
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
-    messageOfTheDay: prevGeneralDetails.messageOfTheDay || '',
 })
