@@ -8,7 +8,7 @@ import {
     TrackerImporter,
 } from '../../../components/field'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
+import { TrackerImporterInfo } from '../../../components/noticeAlert'
 import Page from '../../../components/page/Page'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import {
@@ -73,7 +73,7 @@ const GlobalSettings = () => {
         >
             {settings && (
                 <>
-                    <ManualSyncAlert />
+                    <TrackerImporterInfo />
 
                     <MetadataSync
                         value={settings}
