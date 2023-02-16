@@ -6,11 +6,14 @@ import { CheckboxField } from './CheckboxField'
 
 const CODE = 'trackerImporterVersion'
 const minApiVersion = '2.38'
+const minApiVersionNewTrackerDefault = '2.40'
 
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
 
 const isValidVersion = (apiVersion) => apiVersion >= minApiVersion
+const shouldUseNewTracker = (apiVersion) =>
+    apiVersion >= minApiVersionNewTrackerDefault
 
 export const TrackerImporter = ({ value, onChange, ...props }) => {
     const [validVersion, setValidVersion] = useState(false)
@@ -22,6 +25,14 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
             isValidVersion(apiVersion)
                 ? setValidVersion(true)
                 : setValidVersion(false)
+
+            if (shouldUseNewTracker(apiVersion)) {
+                onChange({
+                    ...value,
+                    [CODE]: newTrackerVersion,
+                })
+                setTracker(true)
+            }
         }
     }, [apiVersion])
 
