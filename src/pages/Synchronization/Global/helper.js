@@ -12,6 +12,9 @@ export const createInitialValues = (prevGlobalDetails, apiVersion) => ({
     trackerImporterVersion:
         prevGlobalDetails.trackerImporterVersion ||
         getImporterVersion(apiVersion),
+    trackerExporterVersion:
+        prevGlobalDetails.trackerExporterVersion ||
+        getImporterVersion(apiVersion),
 })
 
 const getImporterVersion = (apiVersion) =>

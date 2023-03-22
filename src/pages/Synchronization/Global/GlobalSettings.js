@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import {
     DataSync,
     MetadataSync,
+    TrackerExporter,
     TrackerImporter,
 } from '../../../components/field'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
@@ -89,6 +90,12 @@ const GlobalSettings = () => {
                     />
 
                     <TrackerImporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <TrackerExporter
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}

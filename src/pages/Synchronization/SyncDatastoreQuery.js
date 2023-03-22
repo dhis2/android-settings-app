@@ -1,5 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { NAMESPACE, SYNC_SETTINGS } from '../../constants/data-store'
+import { useApiVersion } from '../../utils/useApiVersion'
 import { createInitialValues } from './Global/helper'
 
 /**
@@ -28,12 +29,13 @@ export const getSyncKeyQuery = {
 
 export const useGetSyncDataStore = () => {
     const { loading, error, data } = useDataQuery(getSyncKeyQuery)
+    const { apiVersion } = useApiVersion()
 
     return {
         load: loading,
         errorSync: error,
         syncSettings: data && data.syncSettings,
-        syncGlobal: data && createInitialValues(data.syncSettings),
+        syncGlobal: data && createInitialValues(data.syncSettings, apiVersion),
         programSettings: data && data.syncSettings.programSettings,
         dataSetSettings: data && data.syncSettings.dataSetSettings,
     }
