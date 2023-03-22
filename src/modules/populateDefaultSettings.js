@@ -25,7 +25,7 @@ export const populateObject = (type) => {
             object = {
                 metadataSync: androidSettingsDefault.metadataSync,
                 dataSync: androidSettingsDefault.dataSync,
-                newTrackerImporter: defaultTrackerImporterVersion,
+                trackerImporterVersion: defaultTrackerImporterVersion,
             }
             break
         case DEFAULT_PROGRAM:

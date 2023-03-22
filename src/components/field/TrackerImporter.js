@@ -6,13 +6,13 @@ import { CheckboxField } from './CheckboxField'
 
 const CODE = 'trackerImporterVersion'
 const minApiVersion = '2.38'
-const minApiVersionNewTrackerDefault = '2.40'
 
+export const minApiVersionNewTrackerDefault = '2.40'
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
 
 const isValidVersion = (apiVersion) => apiVersion >= minApiVersion
-const shouldUseNewTracker = (apiVersion) =>
+export const shouldUseNewTracker = (apiVersion) =>
     apiVersion >= minApiVersionNewTrackerDefault
 
 export const TrackerImporter = ({ value, onChange, ...props }) => {
@@ -21,18 +21,14 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
     const { apiVersion } = useApiVersion()
 
     useEffect(() => {
+        setTracker(value[CODE] === newTrackerVersion)
+    }, [value[CODE]])
+
+    useEffect(() => {
         if (apiVersion) {
             isValidVersion(apiVersion)
                 ? setValidVersion(true)
                 : setValidVersion(false)
-
-            if (shouldUseNewTracker(apiVersion)) {
-                onChange({
-                    ...value,
-                    [CODE]: newTrackerVersion,
-                })
-                setTracker(true)
-            }
         }
     }, [apiVersion])
 
@@ -55,7 +51,7 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
                         'Use the new version of Tracker Importer (Web API)'
                     )}
                     helpText={i18n.t(
-                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality might not be ready in the new endpoints, although primary use-cases are supported.'
+                        'Use new tracker endpoints dedicated to importing tracker objects (including tracked entities, enrollments, events, and relationships).'
                     )}
                     checked={tracker}
                     onChange={handleCheckbox}
