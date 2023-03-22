@@ -13,7 +13,11 @@ const NoticeAlert = ({ title, notice }) => (
 
 NoticeAlert.propTypes = {
     title: PropTypes.string,
-    notice: PropTypes.string,
+    notice: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.element,
+    ]),
 }
 
 export default NoticeAlert
