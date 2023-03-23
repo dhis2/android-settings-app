@@ -40,34 +40,30 @@ export const populateProgramObject = (programType, settingsList) => {
         case GLOBAL:
             object = {
                 settingDownload: settingsList.settingDownload,
-                teiDownload: settingsList.teiDownload || teiDownload,
+                teiDownload: settingsList.teiDownload,
                 enrollmentDownload:
                     settingsList.enrollmentDownload || enrollmentDownload,
                 enrollmentDateDownload:
                     settingsList.enrollmentDateDownload ||
                     enrollmentDateDownload,
-                updateDownload: settingsList.updateDownload || updateDownload,
-                eventsDownload: settingsList.eventsDownload || eventsDownload,
-                eventDateDownload:
-                    settingsList.eventDateDownload || eventDateDownload,
+                updateDownload: settingsList.updateDownload,
+                eventsDownload: settingsList.eventsDownload,
+                eventDateDownload: settingsList.eventDateDownload,
             }
             break
         case GLOBAL_SPECIAL:
             object = {
                 settingDownload: settingsList.settingDownload,
-                teiDownload: settingsList.teiDownload || teiDownload,
-                updateDownload: settingsList.updateDownload || updateDownload,
-                eventsDownload: settingsList.eventsDownload || eventsDownload,
-                eventDateDownload:
-                    settingsList.eventDateDownload || eventDateDownload,
+                teiDownload: settingsList.teiDownload,
+                updateDownload: settingsList.updateDownload,
+                eventsDownload: settingsList.eventsDownload,
+                eventDateDownload: settingsList.eventDateDownload,
             }
             break
         case DEFAULT:
             object = {
                 settingDownload,
                 teiDownload,
-                enrollmentDownload,
-                enrollmentDateDownload,
                 updateDownload,
                 eventsDownload,
                 eventDateDownload,
