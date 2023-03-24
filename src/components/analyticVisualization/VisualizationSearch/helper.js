@@ -47,7 +47,7 @@ const checkVisualizationType = (visualization) => {
             if (
                 isValidPeriod(i) &&
                 period &&
-                isValidDimension(visualization.rowDimensions, 1) &&
+                isValidDimension(visualization.rowDimensions, 2) &&
                 isValidDimension(visualization.columnDimensions, 2) &&
                 isValidOrgUnit(visualization)
             ) {
