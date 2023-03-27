@@ -5,12 +5,14 @@ import React, { useEffect, useState } from 'react'
 import {
     DataSync,
     MetadataSync,
+    TrackerExporter,
     TrackerImporter,
 } from '../../../components/field'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
+import { TrackerImporterInfo } from '../../../components/noticeAlert'
 import Page from '../../../components/page/Page'
 import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { useApiVersion } from '../../../utils/useApiVersion'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
@@ -21,6 +23,7 @@ const GlobalSettings = () => {
     const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
         useGetSyncDataStore()
     const { data: authority } = useDataQuery(authorityQuery)
+    const { apiVersion } = useApiVersion()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disable, setDisable] = useState(false)
@@ -60,8 +63,7 @@ const GlobalSettings = () => {
     }
 
     const resetSettings = () => {
-        const settingsToReset = createInitialValues('')
-        setSettings(settingsToReset)
+        setSettings(createInitialValues('', apiVersion))
     }
 
     return (
@@ -73,7 +75,7 @@ const GlobalSettings = () => {
         >
             {settings && (
                 <>
-                    <ManualSyncAlert />
+                    <TrackerImporterInfo />
 
                     <MetadataSync
                         value={settings}
@@ -88,6 +90,12 @@ const GlobalSettings = () => {
                     />
 
                     <TrackerImporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <TrackerExporter
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
