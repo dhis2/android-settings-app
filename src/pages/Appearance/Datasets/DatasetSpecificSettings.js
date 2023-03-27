@@ -10,11 +10,7 @@ import { prepareSpecificSettingsList } from './helper'
 import NewDatasetSettings from './NewDatasetSettings'
 import SpecificTableAction from './SpecificTableAction'
 
-export const DatasetSpecificSettings = ({
-    onChange,
-    specificSettings,
-    disabled,
-}) => {
+const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
     const { datasetList } = useReadDataset()
     const [initialRows, setInitialRows] = useState()
     const [rows, setRows] = useState()
