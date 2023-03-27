@@ -1,4 +1,7 @@
-import { defaultShareScreen } from '../components/field'
+import {
+    defaultShareScreen,
+    defaultTrackerImporterVersion,
+} from '../components/field'
 import { androidSettingsDefault } from '../constants/android-settings'
 import { dataSetSettingsDefault } from '../constants/data-set-settings'
 import { programSettingsDefault } from '../constants/program-settings'
@@ -22,7 +25,7 @@ export const populateObject = (type) => {
             object = {
                 metadataSync: androidSettingsDefault.metadataSync,
                 dataSync: androidSettingsDefault.dataSync,
-                newTrackerImporter: false,
+                trackerImporterVersion: defaultTrackerImporterVersion,
             }
             break
         case DEFAULT_PROGRAM:
