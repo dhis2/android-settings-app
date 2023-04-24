@@ -27,4 +27,5 @@ body {
     padding-top: var(--spacers-dp12);
     padding-right: var(--spacers-dp24);
     padding-bottom: var(--spacers-dp16);
+    max-width: 1200px;
 }
