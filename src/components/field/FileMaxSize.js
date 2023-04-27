@@ -11,9 +11,7 @@ export const FileMaxSize = ({ onChange, value, ...props }) => {
 
     return (
         <NumberField
-            label={i18n.t(
-                'Maximum file size limit for upload or download (Kb)'
-            )}
+            label={i18n.t('Maximum file size limit for download (Kb)')}
             name={CODE}
             value={value[CODE]}
             onChange={handleChange}

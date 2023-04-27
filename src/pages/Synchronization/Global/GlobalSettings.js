@@ -4,6 +4,7 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import {
     DataSync,
+    FileMaxSize,
     MetadataSync,
     TrackerExporter,
     TrackerImporter,
@@ -17,7 +18,7 @@ import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { createInitialValues, createValidValues } from './helper'
+import { checkValidSettings, createInitialValues, createValidValues } from './helper'
 
 const GlobalSettings = () => {
     const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
@@ -55,7 +56,7 @@ const GlobalSettings = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            ...createInitialValues(settings),
+            ...checkValidSettings(settings),
             dataSetSettings,
             programSettings,
         }
@@ -96,6 +97,12 @@ const GlobalSettings = () => {
                     />
 
                     <TrackerExporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <FileMaxSize
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
