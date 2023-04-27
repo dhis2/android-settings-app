@@ -3,7 +3,6 @@ import {
     defaultReservedValues,
     defaultShareScreen,
 } from '../../components/field'
-import { convertToByte, formatByteSize } from '../../utils/getByteLength'
 import {
     isValidURL,
     isValidValue,
@@ -21,10 +20,6 @@ export const checkValidSettings = (settings) => {
         delete settingsToSave.smsResultSender
     !isValidValue(settingsToSave.matomoURL) && delete settingsToSave.matomoURL
     !isValidValue(settingsToSave.matomoID) && delete settingsToSave.matomoID
-
-    settingsToSave.fileMaxLengthBytes = convertToByte(
-        settingsToSave.fileMaxLengthBytes
-    )
 
     return settingsToSave
 }
@@ -50,6 +45,4 @@ export const createInitialValues = (prevGeneralDetails) => ({
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
-    fileMaxLengthBytes:
-        formatByteSize(prevGeneralDetails.fileMaxLengthBytes) || 0,
 })

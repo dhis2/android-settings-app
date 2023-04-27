@@ -4,7 +4,6 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import {
     EncryptDB,
-    FileMaxSize,
     MatomoId,
     MatomoUrl,
     ReservedValues,
@@ -107,11 +106,6 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <ReservedValues
-                        value={settings}
-                        onChange={setSettings}
-                        disabled={disable}
-                    />
-                    <FileMaxSize
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
