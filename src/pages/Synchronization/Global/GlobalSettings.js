@@ -18,7 +18,11 @@ import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { checkValidSettings, createInitialValues, createValidValues } from './helper'
+import {
+    checkValidSettings,
+    createInitialValues,
+    createValidValues,
+} from './helper'
 
 const GlobalSettings = () => {
     const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
