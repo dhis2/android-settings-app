@@ -1,7 +1,9 @@
 import {
+    dataOptions,
     defaultDataSync,
     defaultMetadataSync,
     defaultTrackerImporterVersion,
+    metadataOptions,
     minApiVersionNewTrackerDefault,
     newTrackerVersion,
 } from '../../../components/field'
@@ -28,4 +30,17 @@ const getImporterVersion = (apiVersion) =>
 export const checkValidSettings = (settings) => ({
     ...settings,
     fileMaxLengthBytes: convertToByte(settings.fileMaxLengthBytes),
+})
+
+export const validValue = (validList, value, defaultValue) =>
+    validList.find((e) => e.value === value) ? value : defaultValue
+
+export const createValidValues = (values) => ({
+    ...values,
+    metadataSync: validValue(
+        metadataOptions,
+        values.metadataSync,
+        defaultMetadataSync
+    ),
+    dataSync: validValue(dataOptions, values.dataSync, defaultDataSync),
 })

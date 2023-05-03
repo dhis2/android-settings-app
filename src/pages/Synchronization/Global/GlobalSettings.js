@@ -18,7 +18,11 @@ import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { checkValidSettings, createInitialValues } from './helper'
+import {
+    checkValidSettings,
+    createInitialValues,
+    createValidValues,
+} from './helper'
 
 const GlobalSettings = () => {
     const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
@@ -40,7 +44,7 @@ const GlobalSettings = () => {
 
     useEffect(() => {
         if (syncSettings) {
-            setSettings(syncGlobal)
+            setSettings(createValidValues(syncGlobal))
             setInitialValues(syncGlobal)
         }
     }, [syncSettings])
