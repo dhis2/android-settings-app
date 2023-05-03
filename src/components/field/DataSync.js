@@ -6,7 +6,7 @@ import { MANUAL, SyncSelect } from './SyncSelect'
 export const defaultDataSync = '24h'
 
 const CODE = 'dataSync'
-const dataOptions = [
+export const dataOptions = [
     {
         value: '30m',
         label: i18n.t('30 Minutes'),
