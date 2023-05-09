@@ -1,11 +1,11 @@
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,
@@ -16,7 +16,7 @@ import { dataStoreSettings } from './helper'
 const AnalyticsTEI = () => {
     const { tei, dhisVisualizations, errorDataStore, load } =
         useReadAnalyticsDataStore()
-    const { data: hasAuthority } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [analyticSettings, setAnalyticSettings] = useState([])
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
@@ -24,7 +24,7 @@ const AnalyticsTEI = () => {
     const [mutate, { error, data }] = useDataMutation(saveAnalyticsKeyMutation)
 
     useEffect(() => {
-        hasAuthority && setDisable(!hasAuthority.authority)
+        setDisable(!hasAuthority)
     }, [hasAuthority])
 
     useEffect(() => {

@@ -1,10 +1,10 @@
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
@@ -21,15 +21,14 @@ const DatasetSyncSettings = () => {
     const [disable, setDisable] = useState(false)
     const [globalSettings, setGlobalSettings] = useState()
     const [specificSettings, setSpecificSettings] = useState()
-
-    const { data: authority } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [mutate, { error, data }] = useDataMutation(
         saveSynchronizationKeyMutation
     )
 
     useEffect(() => {
-        authority && setDisable(!authority.authority)
-    }, [authority])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (dataSetSettings) {

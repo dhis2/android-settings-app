@@ -1,10 +1,10 @@
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules'
 import { removeSummaryFromSettings } from '../../../utils/utils'
 import {
     saveAppearanceKeyMutation,
@@ -23,7 +23,7 @@ const DatasetsAppearance = () => {
         home,
         programSettings,
     } = useReadAppearanceDataStore()
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [disableSave, setDisableSave] = useState(true)
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
@@ -35,8 +35,8 @@ const DatasetsAppearance = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (dataSetSettings) {
