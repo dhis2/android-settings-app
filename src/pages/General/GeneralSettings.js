@@ -13,7 +13,7 @@ import {
 } from '../../components/field'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import Page from '../../components/page/Page'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
+import { authorityQuery } from '../../modules'
 import DisableSettings from './DisableSettings'
 import {
     getGeneralKeyQuery,

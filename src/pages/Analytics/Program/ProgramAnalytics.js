@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { VisualizationsInfo } from '../../../components/noticeAlert'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { authorityQuery } from '../../../modules'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,

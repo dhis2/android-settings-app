@@ -10,7 +10,7 @@ import {
     GLOBAL_SPECIAL,
     PER_ORG_UNIT,
 } from '../../../constants/program-settings'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { authorityQuery } from '../../../modules'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,

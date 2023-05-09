@@ -4,7 +4,7 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { authorityQuery } from '../../../modules'
 import { removeSummaryFromSettings } from '../../../utils/utils'
 import {
     saveAppearanceKeyMutation,

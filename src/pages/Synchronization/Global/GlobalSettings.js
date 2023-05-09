@@ -12,7 +12,7 @@ import {
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { TrackerImporterInfo } from '../../../components/noticeAlert'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { authorityQuery } from '../../../modules'
 import { useApiVersion } from '../../../utils/useApiVersion'
 import {
     saveSynchronizationKeyMutation,
