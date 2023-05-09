@@ -1,4 +1,5 @@
 import { getInstance } from 'd2'
+import { validApiVersion } from '../auth'
 import {
     ANALYTICS,
     APPEARANCE,
@@ -10,8 +11,14 @@ import {
 import { initialSetup } from '../constants/initial-setup'
 import api from '../utils/api'
 
-const { info, generalSettings, synchronization, appearance, analytics } =
-    initialSetup
+const {
+    info,
+    generalSettings,
+    synchronization,
+    synchronization_v2,
+    appearance,
+    analytics,
+} = initialSetup
 
 const getDataStoreKeyId = () => {
     return Promise.all([
@@ -59,22 +66,26 @@ const updateSecurityDataStore = (id) => {
     })
 }
 
-const apiSetDefaultValues = () => {
+const apiSetDefaultValues = (apiVersion) => {
     return api.createNamespace(NAMESPACE, INFO).then(() => {
+        const sync = validApiVersion(apiVersion)
+            ? synchronization_v2
+            : synchronization
+
         return Promise.all([
             api.updateValue(NAMESPACE, INFO, { ...info }),
             api.createValue(NAMESPACE, GENERAL_SETTINGS, {
                 ...generalSettings,
             }),
-            api.createValue(NAMESPACE, SYNC_SETTINGS, { ...synchronization }),
+            api.createValue(NAMESPACE, SYNC_SETTINGS, { ...sync }),
             api.createValue(NAMESPACE, APPEARANCE, { ...appearance }),
             api.createValue(NAMESPACE, ANALYTICS, { ...analytics }),
         ])
     })
 }
 
-export const apiCreateFirstSetup = () => {
-    return apiSetDefaultValues().then(() => {
+export const apiCreateFirstSetup = (apiVersion) => {
+    return apiSetDefaultValues(apiVersion).then(() => {
         return getDataStoreKeyId().then((ids) => updateSecurityDataStore(ids))
     })
 }
