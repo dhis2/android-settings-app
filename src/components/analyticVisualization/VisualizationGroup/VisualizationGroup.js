@@ -16,8 +16,10 @@ const findDefaultGroup = (type, groupList, settings) => {
     switch (type) {
         case 'program':
         case 'dataset':
-            const selectedGroup = groupList[settings[type]]
-            defaultGroup = find(selectedGroup, (g) => g.name === DEFAULT)
+            defaultGroup = find(
+                groupList[settings[type]],
+                (g) => g.name === DEFAULT
+            )
             break
         default:
             defaultGroup = find(groupList, (g) => g.name === DEFAULT)

@@ -1,46 +1,13 @@
-import { useDataMutation } from '@dhis2/app-runtime'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { menuSection } from '../constants/menu-sections'
-import { apiCreateFirstSetup } from '../modules/apiCreateFirstSetup'
-import {
-    deletePrevDataStoreMutation,
-    useNamespaceDataStore,
-} from '../modules/apiLoadFirstSetup'
 import { D2Shim } from '../utils/D2Shim'
-import DialogFirstLaunch from './dialog/DialogFirstLaunch'
 
 const Router = () => {
-    const [openFirstLaunch, setFirstLaunch] = useState(true)
-    const { namespace, hasPreviousVersion } = useNamespaceDataStore()
-    const [mutate] = useDataMutation(deletePrevDataStoreMutation)
-
-    useEffect(() => {
-        namespace ? setFirstLaunch(false) : setFirstLaunch(true)
-    }, [namespace])
-
-    const handleSave = async () => {
-        if (hasPreviousVersion) {
-            await mutate()
-        }
-        apiCreateFirstSetup().then(() => {
-            setFirstLaunch(false)
-        })
-    }
-
     return (
         <Switch>
             <Route path="/" exact>
-                <D2Shim>
-                    {openFirstLaunch === true ? (
-                        <DialogFirstLaunch
-                            handleSave={handleSave}
-                            isOutOfDate={hasPreviousVersion}
-                        />
-                    ) : (
-                        menuSection[0].component
-                    )}
-                </D2Shim>
+                <D2Shim>{menuSection[0].component}</D2Shim>
             </Route>
 
             {menuSection.map((section) => (
