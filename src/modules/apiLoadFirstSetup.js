@@ -9,9 +9,10 @@ export const namespaceDataStoreQuery = {
     },
 }
 
+/** Android Settings specific Authority*/
 export const authorityQuery = {
     authority: {
-        resource: 'me/authorities/ALL',
+        resource: 'me/authorities/M_androidsettingsapp',
     },
 }
 
