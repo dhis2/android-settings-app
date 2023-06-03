@@ -50,7 +50,7 @@ const DialogFirstLaunch = ({ handleSave, isOutOfDate, disable }) => {
                 >
                     {disable
                         ? i18n.t(
-                              "You don't have the authority to set up the android settings to this instance"
+                              "You don't have access to this app. Contact your DHIS2 system administrator to fix this problem."
                           )
                         : i18n.t(
                               'To set up the default settings and apply to all devices, click "Set default and save"'
