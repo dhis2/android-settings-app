@@ -69,7 +69,7 @@ export const getMetadataSize = async ({
         apiFetchOptions(dataEngine, optionSetList),
         apiFetchOptionGroup(dataEngine, optionSetList),
         apiFetchDataSet(dataEngine, dataSetList),
-        apiFetchDataElements(dataEngine, dataElementList),
+        fetchDataElements(dataEngine, dataElementList),
         apiFetchCategoryCombos(dataEngine, categoryComboList),
         apiFetchCategories(dataEngine, categoryList),
         apiFetchCategoryOptions(dataEngine, categoryList),
@@ -92,10 +92,15 @@ export const getMetadataSize = async ({
 }
 
 const fetchOrgUnits = (dataEngine, orgUnitList) => {
-    const orgUnitPromises = []
-    orgUnitList.map((ou) =>
-        orgUnitPromises.push(apiFetchOrgUnit(dataEngine, ou))
+    const orgUnitPromises = orgUnitList.map((ou) =>
+        apiFetchOrgUnit(dataEngine, ou)
     )
-
     return Promise.all(orgUnitPromises)
+}
+
+const fetchDataElements = (dataEngine, dataElementList) => {
+    const dataElementPromises = dataElementList.map((e) =>
+        apiFetchDataElements(dataEngine, e)
+    )
+    return Promise.all(dataElementPromises)
 }
