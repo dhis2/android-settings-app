@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import DialogFirstLaunch from '../components/dialog/DialogFirstLaunch'
-import { apiCreateFirstSetup, deletePrevDataStoreMutation } from '../modules'
+import { deletePrevDataStoreMutation, useCreateFirstSetup } from '../modules'
 import { useIsAuthorized } from './useIsAuthorized'
 
 const AuthWall = ({ children }) => {
@@ -12,6 +12,7 @@ const AuthWall = ({ children }) => {
     const { apiVersion } = useConfig()
     const [hasDatastoreAccess, setDatastoreAccess] = useState(hasNamespace)
     const [mutate] = useDataMutation(deletePrevDataStoreMutation)
+    const { createSetup } = useCreateFirstSetup()
     const { show } = useAlert(
         ({ success }) =>
             success
@@ -29,14 +30,16 @@ const AuthWall = ({ children }) => {
             await mutate()
         }
 
-        try {
-            apiCreateFirstSetup(apiVersion)
-            setDatastoreAccess(true)
-            show({ success: true })
-        } catch (e) {
-            setDatastoreAccess(false)
-            show({ success: false })
-        }
+        createSetup(apiVersion)
+            .then(() => {
+                setDatastoreAccess(true)
+                show({ success: true })
+            })
+            .catch((e) => {
+                console.error(e)
+                setDatastoreAccess(false)
+                show({ success: false })
+            })
     }
 
     if (!hasDatastoreAccess) {
