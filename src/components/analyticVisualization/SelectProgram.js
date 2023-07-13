@@ -1,11 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useReadProgramQuery } from '../../pages/Analytics/Program/ProgramVisualizationQueries'
+import { useWorkflowContext } from '../../workflow-context'
 import { SelectField } from '../field'
 
 export const SelectProgram = ({ settings, onChange }) => {
-    const { programList, loading } = useReadProgramQuery()
+    const { programs: programList } = useWorkflowContext()
     const options = programList || []
 
     const handleChange = (e) => {
@@ -25,7 +25,6 @@ export const SelectProgram = ({ settings, onChange }) => {
             label={i18n.t('Program')}
             selected={settings.program || ''}
             onChange={handleChange}
-            loading={loading}
             options={options}
         />
     )

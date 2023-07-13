@@ -4,8 +4,11 @@ import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import PageHeader from '../../../components/page/PageHeader'
-import { filterUnusedElements } from '../../../utils/utils'
-import { useReadDataset } from './datasetQueries'
+import {
+    filterListByReadAccess,
+    filterUnusedElements,
+} from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
 import { prepareSpecificSettingsList } from './helper'
 import NewDatasetSpecific from './NewDatasetSpecific'
 import SpecificTableAction from './SpecificTableAction'
@@ -15,8 +18,9 @@ const DatasetSpecificSettings = ({
     handleSpecificSettings,
     disabled,
 }) => {
-    const { datasetList } = useReadDataset()
+    const { dataSets } = useWorkflowContext()
     const [rows, setRows] = useState()
+    const datasetList = filterListByReadAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
     const [loadSpecific, setLoad] = useState(false)
@@ -32,7 +36,7 @@ const DatasetSpecificSettings = ({
             setListName(filterUnusedElements(datasetList, rowList))
             setLoad(true)
         }
-    }, [specificSettings, datasetList])
+    }, [specificSettings])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {
