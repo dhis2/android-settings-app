@@ -3,6 +3,7 @@ import { CssVariables } from '@dhis2/ui'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import React from 'react'
 import './App.css'
+import i18n from './locales/index'
 import AppLayout from './pages/AppLayout'
 
 const App = () => (
