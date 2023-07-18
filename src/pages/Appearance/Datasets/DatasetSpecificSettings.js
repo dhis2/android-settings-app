@@ -4,14 +4,18 @@ import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import PageSubtitle from '../../../components/page/PageSubtitle'
-import { filterUnusedElements } from '../../../utils/utils'
-import { useReadDataset } from './datasetQuery'
+import {
+    filterListByDataWriteAccess,
+    filterUnusedElements,
+} from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
 import { prepareSpecificSettingsList } from './helper'
 import NewDatasetSettings from './NewDatasetSettings'
 import SpecificTableAction from './SpecificTableAction'
 
 const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
-    const { datasetList } = useReadDataset()
+    const { dataSets } = useWorkflowContext()
+    const datasetList = filterListByDataWriteAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
     const [rows, setRows] = useState()
     const [listName, setListName] = useState()
@@ -28,7 +32,7 @@ const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
             setListName(filterUnusedElements(datasetList, updated))
             setLoad(true)
         }
-    }, [specificSettings, datasetList])
+    }, [specificSettings])
 
     useEffect(() => {
         if (rows && !isEqual(rows, initialRows)) {

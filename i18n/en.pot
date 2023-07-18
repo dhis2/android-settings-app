@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-29T16:48:00.591Z\n"
-"PO-Revision-Date: 2023-05-29T16:48:00.591Z\n"
+"POT-Creation-Date: 2023-07-05T09:36:08.695Z\n"
+"PO-Revision-Date: 2023-07-05T09:36:08.695Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -974,3 +974,6 @@ msgstr "Check the amount of data a user would sync to their device."
 
 msgid "User"
 msgstr "User"
+
+msgid "Failed to get data"
+msgstr "Failed to get data"
