@@ -6,11 +6,11 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { ProgramTable } from '../../../components/analyticVisualization'
 import { NoticeError } from '../../../components/noticeAlert'
+import { useWorkflowContext } from '../../../workflow-context'
 import { getVisualizationIdList } from '../helper'
 import { useVisualizations } from '../VisualizationQuery'
 import { prepareRows, rowsToDataStore } from './helper'
 import NewProgramVisualization from './NewProgramVisualization'
-import { useReadProgramQuery } from './ProgramVisualizationQueries'
 
 const ProgramAnalyticsList = ({
     visualizations,
@@ -22,7 +22,7 @@ const ProgramAnalyticsList = ({
         error,
         visualizations: visualizationAPI,
     } = useVisualizations(getVisualizationIdList(visualizations))
-    const { programList } = useReadProgramQuery()
+    const { programs: programList } = useWorkflowContext()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [groups, setGroups] = useState()

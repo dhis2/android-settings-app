@@ -4,10 +4,13 @@ import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import PageHeader from '../../../components/page/PageHeader'
-import { filterUnusedElements } from '../../../utils/utils'
+import {
+    filterListByReadAccess,
+    filterUnusedElements,
+} from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
 import { prepareSpecificSettingsList } from './helper'
 import NewProgramSpecific from './NewProgramSpecific'
-import { useReadProgram } from './programQueries'
 import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
@@ -15,7 +18,8 @@ const ProgramSpecificSettings = ({
     changeSpecificSettings,
     disabled,
 }) => {
-    const { programList } = useReadProgram()
+    const { programs } = useWorkflowContext()
+    const programList = filterListByReadAccess(programs)
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
@@ -32,7 +36,7 @@ const ProgramSpecificSettings = ({
             setListName(filterUnusedElements(programList, rowList))
             setLoad(true)
         }
-    }, [specificSettings, programList])
+    }, [specificSettings])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {

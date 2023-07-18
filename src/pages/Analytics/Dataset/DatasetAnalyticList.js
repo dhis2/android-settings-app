@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { DatasetTable } from '../../../components/analyticVisualization'
 import { NoticeError } from '../../../components/noticeAlert'
+import { useWorkflowContext } from '../../../workflow-context'
 import { getVisualizationIdList } from '../helper'
 import { useVisualizations } from '../VisualizationQuery'
-import { useReadDatasetQuery } from './DatasetVisualizationQuery'
 import { prepareRows, rowsToDataStore } from './helper'
 import NewDatasetVisualization from './NewDatasetVisualization'
 
@@ -22,7 +22,7 @@ const DatasetAnalyticList = ({
         error,
         visualizations: visualizationAPI,
     } = useVisualizations(getVisualizationIdList(visualizations))
-    const { datasetList } = useReadDatasetQuery()
+    const { dataSets: datasetList } = useWorkflowContext()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [groups, setGroups] = useState()

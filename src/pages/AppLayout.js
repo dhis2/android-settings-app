@@ -5,6 +5,7 @@ import { AuthWall } from '../auth'
 import Router from '../components/Router'
 import SideBar from '../components/sidebar/Sidebar'
 import styles from '../styles/Layout.module.css'
+import { WorkflowProvider } from '../workflow-context'
 
 const AppLayout = () => (
     <HashRouter>
@@ -15,7 +16,9 @@ const AppLayout = () => (
                         <SideBar />
                     </div>
                     <div className={styles.content}>
-                        <Router />
+                        <WorkflowProvider>
+                            <Router />
+                        </WorkflowProvider>
                     </div>
                 </div>
             </AuthWall>
