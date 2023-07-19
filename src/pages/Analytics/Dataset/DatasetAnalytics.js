@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import Page from '../../../components/page/Page'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import { VisualizationsInfo } from '../../../components/noticeAlert'
+import Page from '../../../components/page/Page'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { VisualizationsInfo } from '../../../components/noticeAlert'
 import DatasetAnalyticList from './DatasetAnalyticList'
 import { createDataStoreGroupRows } from './helper'
 
 const DatasetAnalytics = () => {
-    const {
-        tei,
-        home,
-        program,
-        dataSet,
-        load,
-        errorDataStore,
-    } = useReadAnalyticsDataStore()
-    const { data: hasAuthority } = useDataQuery(authorityQuery)
+    const { tei, home, program, dataSet, load, errorDataStore } =
+        useReadAnalyticsDataStore()
+    const { hasAuthority } = useIsAuthorized()
     const [datasetAnalytics, setDatasetAnalytics] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
@@ -32,7 +26,7 @@ const DatasetAnalytics = () => {
     const [mutate, { error, data }] = useDataMutation(saveAnalyticsKeyMutation)
 
     useEffect(() => {
-        hasAuthority && setDisable(!hasAuthority.authority)
+        setDisable(!hasAuthority)
     }, [hasAuthority])
 
     useEffect(() => {

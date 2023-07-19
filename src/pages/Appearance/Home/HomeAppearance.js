@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEqual from 'lodash/isEqual'
-import Page from '../../../components/page/Page'
-import HomeSettings from './HomeSettings'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import { createInitialValues } from './helper'
+import Page from '../../../components/page/Page'
 import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import { createInitialValues } from './helper'
+import HomeSettings from './HomeSettings'
 
 const HomeAppearance = () => {
     const {
         load,
         home,
+        programConfiguration,
         completionSpinner,
         programSettings,
         dataSetSettings,
     } = useReadAppearanceDataStore()
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disable, setDisable] = useState(false)
@@ -31,8 +32,8 @@ const HomeAppearance = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (home) {
@@ -49,6 +50,7 @@ const HomeAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
+            programConfiguration,
             completionSpinner,
             filterSorting: {
                 home: settings,

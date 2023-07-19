@@ -1,8 +1,8 @@
-import React from 'react'
 import { MenuItem as UIMenuItem } from '@dhis2/ui'
-import { useHistory } from 'react-router-dom'
-import PropTypes from '@dhis2/prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './Sidebar.module.css'
 
 const MenuItem = ({ label, path, code, active, isHeader }) => {

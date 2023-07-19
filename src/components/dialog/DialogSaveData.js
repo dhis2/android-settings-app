@@ -1,5 +1,4 @@
-import React from 'react'
-
+import i18n from '@dhis2/d2-i18n'
 import {
     Modal,
     ModalTitle,
@@ -8,8 +7,8 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const DialogSaveData = ({ openDialog, onClose, saveDataStore }) => {
     return (

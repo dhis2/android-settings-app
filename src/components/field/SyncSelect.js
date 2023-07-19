@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
-import { SelectField } from './SelectField'
 import DialogManualAlert from '../dialog/DialogManualAlert'
+import { SelectField } from './SelectField'
 
 export const MANUAL = 'manual'
 
@@ -15,7 +15,7 @@ export const SyncSelect = ({
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
 
-    const onChangeSelect = e => {
+    const onChangeSelect = (e) => {
         e.selected === MANUAL
             ? setOpenDialog(true)
             : onChange({ ...settings, [name]: e.selected })

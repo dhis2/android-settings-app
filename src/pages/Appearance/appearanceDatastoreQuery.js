@@ -1,5 +1,5 @@
-import { APPEARANCE, NAMESPACE } from '../../constants/data-store'
 import { useDataQuery } from '@dhis2/app-runtime'
+import { APPEARANCE, NAMESPACE } from '../../constants/data-store'
 
 /**
  * update data store
@@ -38,6 +38,10 @@ export const useReadAppearanceDataStore = () => {
     return {
         load: loading,
         error,
+        programConfiguration:
+            data &&
+            (data.appearanceSettings.programConfiguration ||
+                data.appearanceSettings.completionSpinner),
         completionSpinner: data && data.appearanceSettings.completionSpinner,
         filterSorting: data && data.appearanceSettings.filterSorting,
         home: data && data.appearanceSettings.filterSorting.home,

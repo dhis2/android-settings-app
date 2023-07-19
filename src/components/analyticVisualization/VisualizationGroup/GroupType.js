@@ -1,12 +1,12 @@
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
 import { RadioGroup } from './RadioGroup'
 import styles from './styles/GroupType.module.css'
 
 export const GroupType = ({ onChange, settings, groupList, type }) => {
     const [group, setGroup] = useState()
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setGroup(e.value)
     }
 

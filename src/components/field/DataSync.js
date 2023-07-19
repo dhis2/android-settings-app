@@ -1,12 +1,12 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { MANUAL, SyncSelect } from './SyncSelect'
 
 export const defaultDataSync = '24h'
 
 const CODE = 'dataSync'
-const dataOptions = [
+export const dataOptions = [
     {
         value: '30m',
         label: i18n.t('30 Minutes'),

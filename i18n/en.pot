@@ -5,844 +5,975 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-27T15:28:43.869Z\n"
-"PO-Revision-Date: 2022-01-27T15:28:43.869Z\n"
+"POT-Creation-Date: 2023-07-05T09:36:08.695Z\n"
+"PO-Revision-Date: 2023-07-05T09:36:08.695Z\n"
+
+msgid ""
+"The initial configuration of the app has been completed and it is now ready "
+"to use."
+msgstr ""
+"The initial configuration of the app has been completed and it is now ready "
+"to use."
+
+msgid ""
+"The initial configuration of the app encountered an error and it cannot be "
+"used at this time."
+msgstr ""
+"The initial configuration of the app encountered an error and it cannot be "
+"used at this time."
 
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid ""
 "You have unsaved changes, if you leave you will lose your changes. Are you "
 "sure you want to leave?"
 msgstr ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
 
 msgid "Failed to get data from Data Store"
-msgstr ""
+msgstr "Failed to get data from Data Store"
 
 msgid "Settings were successfully saved"
-msgstr ""
+msgstr "Settings were successfully saved"
 
-msgid "Dataset"
-msgstr ""
+msgid "Home"
+msgstr "Home"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
-msgid "Add a group name"
-msgstr ""
+msgid "Data set"
+msgstr "Data set"
 
-msgid "Create a new group"
-msgstr ""
-
-msgid "Select a created group visualization"
-msgstr ""
-
-msgid "Select a group visualization"
-msgstr ""
-
-msgid "Use a group visualization"
-msgstr ""
-
-msgid "No visualization found"
-msgstr ""
-
-msgid "Show fewer"
-msgstr ""
-
-msgid "Show more"
-msgstr ""
+msgid "Edit {{label}} visualization"
+msgstr "Edit {{label}} visualization"
 
 msgid "Visualization item"
-msgstr ""
-
-msgid "Clear"
-msgstr ""
-
-msgid "Visualization"
-msgstr ""
-
-msgid "Visualization Group"
-msgstr ""
-
-msgid "Are you sure you want to delete {{elementName}} visualization group?"
-msgstr ""
-
-msgid "Delete Group"
-msgstr ""
-
-msgid "Visualization title"
-msgstr ""
-
-msgid "This will override the visualization title when shown in the app"
-msgstr ""
-
-msgid "No user found"
-msgstr ""
-
-msgid "Search by user"
-msgstr ""
-
-msgid "{{userName}} can visualize {{visualization}} visualization"
-msgstr ""
-
-msgid "{{userName}} can not visualize {{visualization}} visualization"
-msgstr ""
-
-msgid "Visualization user test"
-msgstr ""
-
-msgid "Run test"
-msgstr ""
-
-msgid "Data Element"
-msgstr ""
-
-msgid "Program Indicator"
-msgstr ""
-
-msgid "Gender Attributes"
-msgstr ""
-
-msgid "Choose attribute"
-msgstr ""
-
-msgid "Female title"
-msgstr ""
-
-msgid "Male title"
-msgstr ""
-
-msgid "Choose element"
-msgstr ""
-
-msgid "Choose element type"
-msgstr ""
-
-msgid "Program Stage"
-msgstr ""
-
-msgid "Title and name"
-msgstr ""
-
-msgid "Analytics chart title"
-msgstr ""
-
-msgid "Short name"
-msgstr ""
-
-msgid "Attribute"
-msgstr ""
-
-msgid "Monthly"
-msgstr ""
-
-msgid "Daily"
-msgstr ""
-
-msgid "Weekly"
-msgstr ""
-
-msgid "Quarterly"
-msgstr ""
-
-msgid "SixMonthly"
-msgstr ""
-
-msgid "Yearly"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Choose a period type"
-msgstr ""
-
-msgid "Visualization elements"
-msgstr ""
-
-msgid "Bar chart"
-msgstr ""
-
-msgid "Line chart"
-msgstr ""
-
-msgid "Pivot table"
-msgstr ""
-
-msgid "Single value"
-msgstr ""
-
-msgid "WHO nutrition"
-msgstr ""
-
-msgid "Choose visualization type"
-msgstr ""
-
-msgid "Horizontal (x) axis"
-msgstr ""
-
-msgid "Vertical (y) axis"
-msgstr ""
-
-msgid "Height for age"
-msgstr ""
-
-msgid "Weight for age"
-msgstr ""
-
-msgid "Weight for height"
-msgstr ""
-
-msgid "Choose WHO visualization type"
-msgstr ""
-
-msgid "Delete {{typeName}}"
-msgstr ""
-
-msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
-msgstr ""
+msgstr "Visualization item"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
+
+msgid "Edit Visualization"
+msgstr "Edit Visualization"
+
+msgid "Dataset"
+msgstr "Dataset"
+
+msgid "Add a group name"
+msgstr "Add a group name"
+
+msgid "Create a new group"
+msgstr "Create a new group"
+
+msgid "Select a created group visualization"
+msgstr "Select a created group visualization"
+
+msgid "Select a group visualization"
+msgstr "Select a group visualization"
+
+msgid "Use a group visualization"
+msgstr "Use a group visualization"
+
+msgid "No visualization found"
+msgstr "No visualization found"
+
+msgid "Show fewer"
+msgstr "Show fewer"
+
+msgid "Show more"
+msgstr "Show more"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Visualization"
+msgstr "Visualization"
+
+msgid "Visualization Group"
+msgstr "Visualization Group"
+
+msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr "Are you sure you want to delete {{elementName}} visualization group?"
+
+msgid "Delete Group"
+msgstr "Delete Group"
+
+msgid "Visualization title"
+msgstr "Visualization title"
+
+msgid "This will override the visualization title when shown in the app"
+msgstr "This will override the visualization title when shown in the app"
+
+msgid "No user found"
+msgstr "No user found"
+
+msgid "Search by user"
+msgstr "Search by user"
+
+msgid "{{userName}} can visualize {{visualization}} visualization"
+msgstr "{{userName}} can visualize {{visualization}} visualization"
+
+msgid "{{userName}} can not visualize {{visualization}} visualization"
+msgstr "{{userName}} can not visualize {{visualization}} visualization"
+
+msgid "Visualization user test"
+msgstr "Visualization user test"
+
+msgid "Run test"
+msgstr "Run test"
+
+msgid "Data Element"
+msgstr "Data Element"
+
+msgid "Program Indicator"
+msgstr "Program Indicator"
+
+msgid "Gender Attributes"
+msgstr "Gender Attributes"
+
+msgid "Choose attribute"
+msgstr "Choose attribute"
+
+msgid "Female title"
+msgstr "Female title"
+
+msgid "Male title"
+msgstr "Male title"
+
+msgid "Choose element"
+msgstr "Choose element"
+
+msgid "Choose element type"
+msgstr "Choose element type"
+
+msgid "Program Stage"
+msgstr "Program Stage"
+
+msgid "Title and name"
+msgstr "Title and name"
+
+msgid "Analytics chart title"
+msgstr "Analytics chart title"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Attribute"
+msgstr "Attribute"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Quarterly"
+msgstr "Quarterly"
+
+msgid "Six-monthly"
+msgstr "Six-monthly"
+
+msgid "Yearly"
+msgstr "Yearly"
+
+msgid "None"
+msgstr "None"
+
+msgid "Choose a period type"
+msgstr "Choose a period type"
+
+msgid "Visualization elements"
+msgstr "Visualization elements"
+
+msgid "Bar chart"
+msgstr "Bar chart"
+
+msgid "Line chart"
+msgstr "Line chart"
+
+msgid "Pivot table"
+msgstr "Pivot table"
+
+msgid "Single value"
+msgstr "Single value"
+
+msgid "WHO nutrition"
+msgstr "WHO nutrition"
+
+msgid "Choose visualization type"
+msgstr "Choose visualization type"
+
+msgid "Horizontal (x) axis"
+msgstr "Horizontal (x) axis"
+
+msgid "Vertical (y) axis"
+msgstr "Vertical (y) axis"
+
+msgid "Height for age"
+msgstr "Height for age"
+
+msgid "Weight for age"
+msgstr "Weight for age"
+
+msgid "Weight for height"
+msgstr "Weight for height"
+
+msgid "Choose WHO visualization type"
+msgstr "Choose WHO visualization type"
+
+msgid "Delete {{typeName}}"
+msgstr "Delete {{typeName}}"
+
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr "Are you sure you want to delete {{name}} {{typeName}} settings?"
 
 msgid "Delete {{element}}"
-msgstr ""
+msgstr "Delete {{element}}"
 
 msgid "Disable all settings"
-msgstr ""
+msgstr "Disable all settings"
 
 msgid ""
-"This action will disable and remove all General, Program and Data set "
-"settings. Are you sure you want to disable all settings?"
+"This action will disable and remove all General, Synchronization, "
+"Appearance and Analytics settings. Are you sure you want to disable all "
+"settings?"
 msgstr ""
+"This action will disable and remove all General, Synchronization, "
+"Appearance and Analytics settings. Are you sure you want to disable all "
+"settings?"
 
 msgid "Disable"
-msgstr ""
+msgstr "Disable"
 
 msgid "{{encrypt}} the device database"
-msgstr ""
+msgstr "{{encrypt}} the device database"
 
 msgid ""
 "Decrypting the device database is a critical action that will reduce the "
 "level of protection of your data. Are you sure you want to decrypt the "
 "device database?"
 msgstr ""
+"Decrypting the device database is a critical action that will reduce the "
+"level of protection of your data. Are you sure you want to decrypt the "
+"device database?"
 
 msgid ""
 "Encrypting the device database is a critical action that could have an "
 "impact on the database volume and performance. Are you sure you want to "
 "encrypt the device database?"
 msgstr ""
+"Encrypting the device database is a critical action that could have an "
+"impact on the database volume and performance. Are you sure you want to "
+"encrypt the device database?"
 
 msgid "Decrypt"
-msgstr ""
+msgstr "Decrypt"
 
 msgid "Encrypt"
-msgstr ""
+msgstr "Encrypt"
 
 msgid "First time setup"
-msgstr ""
+msgstr "First time setup"
 
 msgid ""
 "Using the Android Settings app will apply default settings to all Android "
 "devices connected to this instance."
 msgstr ""
+"Using the Android Settings app will apply default settings to all Android "
+"devices connected to this instance."
 
 msgid ""
 "Any settings or configuration on a user's device will be overwritten by "
 "settings applied here."
 msgstr ""
+"Any settings or configuration on a user's device will be overwritten by "
+"settings applied here."
 
 msgid ""
 "The new version of the Android Settings web app comes with improvements and "
 "disruptive changes. The previous versions are no longer supported, and the "
 "settings stored there will be removed."
 msgstr ""
+"The new version of the Android Settings web app comes with improvements and "
+"disruptive changes. The previous versions are no longer supported, and the "
+"settings stored there will be removed."
 
-msgid "You don't have the authority to set up the android settings to this instance"
+msgid ""
+"You don't have access to this app. Contact your DHIS2 system administrator "
+"to fix this problem."
 msgstr ""
+"You don't have access to this app. Contact your DHIS2 system administrator "
+"to fix this problem."
 
 msgid ""
 "To set up the default settings and apply to all devices, click \"Set "
 "default and save\""
 msgstr ""
+"To set up the default settings and apply to all devices, click \"Set "
+"default and save\""
 
 msgid "Exit, do not apply settings"
-msgstr ""
+msgstr "Exit, do not apply settings"
 
 msgid "Set defaults and save"
-msgstr ""
+msgstr "Set defaults and save"
 
 msgid "Select Manual option"
-msgstr ""
+msgstr "Select Manual option"
 
 msgid ""
 "By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
 "{{type}}. Your users will need to download the {{type}} manually."
 msgstr ""
+"By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
+"{{type}}. Your users will need to download the {{type}} manually."
 
 msgid "Do you want to select this option?"
-msgstr ""
+msgstr "Do you want to select this option?"
 
 msgid "Yes"
-msgstr ""
+msgstr "Yes"
 
 msgid "Save in DataStore"
-msgstr ""
+msgstr "Save in DataStore"
 
 msgid ""
 "Saving settings in DataStore is a critical action that could have very "
 "serious consequences. Are you sure you want to save these settings in "
 "DataStore?"
 msgstr ""
+"Saving settings in DataStore is a critical action that could have very "
+"serious consequences. Are you sure you want to save these settings in "
+"DataStore?"
 
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 msgid "30 Minutes"
-msgstr ""
+msgstr "30 Minutes"
 
 msgid "1 Hour"
-msgstr ""
+msgstr "1 Hour"
 
 msgid "6 Hours"
-msgstr ""
+msgstr "6 Hours"
 
 msgid "12 Hours"
-msgstr ""
+msgstr "12 Hours"
 
 msgid "1 Day"
-msgstr ""
+msgstr "1 Day"
 
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 msgid "How often should data sync?"
-msgstr ""
+msgstr "How often should data sync?"
 
 msgid "Encrypt device database"
-msgstr ""
+msgstr "Encrypt device database"
 
 msgid ""
 "Encrypt all data stored on device. Data can be lost if there are problems "
 "with an encrypted database. This will not affect the DHIS2 database stored "
 "on an external server."
 msgstr ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
+
+msgid "Maximum file size limit for download (Kb)"
+msgstr "Maximum file size limit for download (Kb)"
 
 msgid "Show percentage (%) complete in Program toolbar"
-msgstr ""
+msgstr "Show percentage (%) complete in Program toolbar"
 
 msgid "Analytics reporting ID (Matomo)"
-msgstr ""
+msgstr "Analytics reporting ID (Matomo)"
 
 msgid "Must be at least 1 character long"
-msgstr ""
+msgstr "Must be at least 1 character long"
 
 msgid "Analytics reporting URL (Matomo)"
-msgstr ""
+msgstr "Analytics reporting URL (Matomo)"
 
 msgid "Must be a valid url"
-msgstr ""
+msgstr "Must be a valid url"
 
-msgid "1 Week"
-msgstr ""
-
-msgid "How often should metadata sync?"
-msgstr ""
-
-msgid "Reserved values downloaded per TEI attribute"
-msgstr ""
-
-msgid "Recommended maximum is {{maxValue}} reserved values"
-msgstr ""
-
-msgid "Allow user to take screenshots and share their screen."
-msgstr ""
-
-msgid "SMS Gateway phone number"
-msgstr ""
-
-msgid "Must start with + and be at least 4 characters long."
-msgstr ""
-
-msgid "SMS Result Sender phone number"
-msgstr ""
-
-msgid "Use new version of Tracker Importer"
-msgstr ""
+msgid "Add message of the day"
+msgstr "Add message of the day"
 
 msgid ""
-"Use new tracker endpoints dedicated to importing and querying tracker "
-"objects (including tracked entities, enrollments, events, and "
-"relationships). Be aware that some functionality is not yet ready in the "
-"new endpoints, but they support their primary use-cases."
+"Use this message to communicate with users in order to display important "
+"information"
 msgstr ""
+"Use this message to communicate with users in order to display important "
+"information"
+
+msgid "1 Week"
+msgstr "1 Week"
+
+msgid "How often should metadata sync?"
+msgstr "How often should metadata sync?"
+
+msgid "Allow the user to create a TEI without searching"
+msgstr "Allow the user to create a TEI without searching"
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr "Reserved values downloaded per TEI attribute"
+
+msgid "Recommended maximum is {{maxValue}} reserved values"
+msgstr "Recommended maximum is {{maxValue}} reserved values"
+
+msgid "Allow user to take screenshots and share their screen."
+msgstr "Allow user to take screenshots and share their screen."
+
+msgid "SMS Gateway phone number"
+msgstr "SMS Gateway phone number"
+
+msgid "Must start with + and be at least 4 characters long."
+msgstr "Must start with + and be at least 4 characters long."
+
+msgid "SMS Result Sender phone number"
+msgstr "SMS Result Sender phone number"
+
+msgid "Use the new version of Tracker Exporter (Web API)"
+msgstr "Use the new version of Tracker Exporter (Web API)"
+
+msgid ""
+"Use new tracker endpoints dedicated to querying tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr ""
+"Use new tracker endpoints dedicated to querying tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+
+msgid "Use the new version of Tracker Importer (Web API)"
+msgstr "Use the new version of Tracker Importer (Web API)"
+
+msgid ""
+"Use new tracker endpoints dedicated to importing tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr ""
+"Use new tracker endpoints dedicated to importing tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
 
 msgid "Reset all values to default"
-msgstr ""
+msgstr "Reset all values to default"
 
 msgid "Recommended maximum is {{maxValue}} TEI"
-msgstr ""
+msgstr "Recommended maximum is {{maxValue}} TEI"
 
 msgid "Recommended maximum is {{maxValue}} events"
-msgstr ""
+msgstr "Recommended maximum is {{maxValue}} events"
 
 msgid "No TEI Analytics found"
-msgstr ""
+msgstr "No TEI Analytics found"
 
 msgid ""
 "It looks like there aren't any configured analytics, or they couldn't be "
 "loaded."
 msgstr ""
+"It looks like there aren't any configured analytics, or they couldn't be "
+"loaded."
 
 msgid "Manual options"
-msgstr ""
+msgstr "Manual options"
 
 msgid ""
 "Manual options for data and metadata sync are only available from android "
 "app version 2.3.0 onwards."
 msgstr ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+
+msgid ""
+"If the API version is 2.40 or higher, please note that the New Tracker "
+"Importer and New Tracker Exporter should be used as the default option."
+msgstr ""
+"If the API version is 2.40 or higher, please note that the New Tracker "
+"Importer and New Tracker Exporter should be used as the default option."
+
+msgid ""
+"Be aware that some functionality might not be ready in the new endpoints, "
+"although primary use-cases are supported."
+msgstr ""
+"Be aware that some functionality might not be ready in the new endpoints, "
+"although primary use-cases are supported."
+
+msgid "New Tracker Importer and Exporter"
+msgstr "New Tracker Importer and Exporter"
 
 msgid "Something went wrong when loading the data"
-msgstr ""
+msgstr "Something went wrong when loading the data"
 
 msgid "It looks like there aren't any configured visualizations."
-msgstr ""
+msgstr "It looks like there aren't any configured visualizations."
 
 msgid "Maximum number of periods to download data sets for"
-msgstr ""
+msgstr "Maximum number of periods to download data sets for"
 
 msgid "Overview"
-msgstr ""
+msgstr "Overview"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Set General settings"
-msgstr ""
+msgstr "Set General settings"
 
 msgid "Defines generic parameters like SMS gateway number and TEI reserved values"
-msgstr ""
+msgstr "Defines generic parameters like SMS gateway number and TEI reserved values"
 
 msgid "Synchronization"
-msgstr ""
+msgstr "Synchronization"
 
 msgid "Global"
-msgstr ""
+msgstr "Global"
 
 msgid "Set Global sync settings"
-msgstr ""
+msgstr "Set Global sync settings"
 
 msgid "Set global settings like metadata anda data sync period"
-msgstr ""
+msgstr "Set global settings like metadata anda data sync period"
 
 msgid "Programs"
-msgstr ""
+msgstr "Programs"
 
 msgid "Set Programs sync settings"
-msgstr ""
+msgstr "Set Programs sync settings"
 
 msgid "Define synchronization parameters to tracker and event programs"
-msgstr ""
+msgstr "Define synchronization parameters to tracker and event programs"
 
 msgid "Data sets"
-msgstr ""
+msgstr "Data sets"
 
 msgid "Set Data set sync settings"
-msgstr ""
+msgstr "Set Data set sync settings"
 
 msgid "Define synchronization parameters for data sets"
-msgstr ""
+msgstr "Define synchronization parameters for data sets"
 
 msgid "User sync test"
-msgstr ""
+msgstr "User sync test"
 
 msgid "Run user sync test"
-msgstr ""
+msgstr "Run user sync test"
 
 msgid "Check how much data a user downloads when syncing"
-msgstr ""
+msgstr "Check how much data a user downloads when syncing"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Appearance"
 
 msgid "Home screen"
-msgstr ""
+msgstr "Home screen"
 
 msgid "Set Filters in Home screen"
-msgstr ""
+msgstr "Set Filters in Home screen"
 
 msgid "Manage Home screen"
-msgstr ""
+msgstr "Manage Home screen"
 
 msgid "Set Filters in Programs"
-msgstr ""
+msgstr "Set Filters in Programs"
 
 msgid "Manage Programs"
-msgstr ""
-
-msgid "Data set"
-msgstr ""
+msgstr "Manage Programs"
 
 msgid "Set Filters in Data sets"
-msgstr ""
+msgstr "Set Filters in Data sets"
 
 msgid "Manage Data sets"
-msgstr ""
+msgstr "Manage Data sets"
 
 msgid "Analytics"
-msgstr ""
+msgstr "Analytics"
 
 msgid "TEI"
-msgstr ""
+msgstr "TEI"
 
 msgid "Set TEI Analytics"
-msgstr ""
+msgstr "Set TEI Analytics"
 
 msgid "Manage TEI analytics for tracker programs"
-msgstr ""
-
-msgid "Home"
-msgstr ""
+msgstr "Manage TEI analytics for tracker programs"
 
 msgid "Set Home Visualizations"
-msgstr ""
+msgstr "Set Home Visualizations"
 
 msgid "Manage visualizations to be shown in home screen"
-msgstr ""
+msgstr "Manage visualizations to be shown in home screen"
 
 msgid "Set Programs Visualizations"
-msgstr ""
+msgstr "Set Programs Visualizations"
 
 msgid "Manage visualizations for programs"
-msgstr ""
+msgstr "Manage visualizations for programs"
 
 msgid "Set Data set Visualizations"
-msgstr ""
+msgstr "Set Data set Visualizations"
 
 msgid "Manage visualizations for data sets"
-msgstr ""
+msgstr "Manage visualizations for data sets"
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
-msgstr ""
+msgstr "Maximum Tracked Entity Instance (TEI) downloads"
 
 msgid "Download TEI with status"
-msgstr ""
+msgstr "Download TEI with status"
 
 msgid "All statuses"
-msgstr ""
+msgstr "All statuses"
 
 msgid "Active Only"
-msgstr ""
+msgstr "Active Only"
 
 msgid "All"
-msgstr ""
+msgstr "All"
 
 msgid "Only Active"
-msgstr ""
+msgstr "Only Active"
 
 msgid "Download TEI with enrollment date within"
-msgstr ""
+msgstr "Download TEI with enrollment date within"
 
 msgid "Any time period"
-msgstr ""
+msgstr "Any time period"
 
 msgid "Last month"
-msgstr ""
+msgstr "Last month"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Last 3 months"
 
 msgid "Last 12 months"
-msgstr ""
+msgstr "Last 12 months"
 
 msgid "Any"
-msgstr ""
+msgstr "Any"
 
 msgid "Download TEI that have been updated within"
-msgstr ""
+msgstr "Download TEI that have been updated within"
 
 msgid "Maximum Event downloads"
-msgstr ""
+msgstr "Maximum Event downloads"
 
 msgid "Download Events with event date within"
-msgstr ""
+msgstr "Download Events with event date within"
 
 msgid "Setting level"
-msgstr ""
+msgstr "Setting level"
 
 msgid "All Org Units"
-msgstr ""
+msgstr "All Org Units"
 
 msgid "Per Org Unit"
-msgstr ""
+msgstr "Per Org Unit"
 
 msgid "Maximum Tracked Entity Instance (TEI) download per program"
-msgstr ""
+msgstr "Maximum Tracked Entity Instance (TEI) download per program"
 
 msgid "org units available for data capture"
-msgstr ""
+msgstr "org units available for data capture"
 
 msgid "Number of org unit that are available for data capture"
-msgstr ""
+msgstr "Number of org unit that are available for data capture"
 
 msgid "org units available for data search"
-msgstr ""
+msgstr "org units available for data search"
 
 msgid "data sets linked to capture org units"
-msgstr ""
+msgstr "data sets linked to capture org units"
 
 msgid "Number of datasets associated to capture OUs"
-msgstr ""
+msgstr "Number of datasets associated to capture OUs"
 
 msgid "programs linked to org units"
-msgstr ""
+msgstr "programs linked to org units"
 
 msgid "Number of program associated to capture OUs"
-msgstr ""
+msgstr "Number of program associated to capture OUs"
 
 msgid "program rules linked to org units"
-msgstr ""
+msgstr "program rules linked to org units"
 
 msgid "Number of program rules to download"
-msgstr ""
+msgstr "Number of program rules to download"
 
 msgid "reserved values per TEI"
-msgstr ""
+msgstr "reserved values per TEI"
 
 msgid "Number of reserved values downloaded per TEI attribute"
-msgstr ""
+msgstr "Number of reserved values downloaded per TEI attribute"
 
 msgid "metadata download size (KB)"
-msgstr ""
+msgstr "metadata download size (KB)"
 
 msgid "data download size (KB)"
-msgstr ""
+msgstr "data download size (KB)"
 
 msgid "Error loading visualizations"
-msgstr ""
+msgstr "Error loading visualizations"
 
 msgid "Manage visualizations for data set."
-msgstr ""
+msgstr "Manage visualizations for data set."
 
 msgid "Could not find any data set visualisations"
-msgstr ""
+msgstr "Could not find any data set visualisations"
 
 msgid "Add Data set visualization"
-msgstr ""
+msgstr "Add Data set visualization"
 
 msgid "Add Data set Visualization"
-msgstr ""
+msgstr "Add Data set Visualization"
 
 msgid "Add Home visualization"
-msgstr ""
+msgstr "Add Home visualization"
 
 msgid "Add Home Visualization"
-msgstr ""
+msgstr "Add Home Visualization"
 
 msgid "Manage visualizations for Home screen."
-msgstr ""
+msgstr "Manage visualizations for Home screen."
 
 msgid "Could not find any home visualisations"
-msgstr ""
+msgstr "Could not find any home visualisations"
 
 msgid "Add Program visualization"
-msgstr ""
+msgstr "Add Program visualization"
 
 msgid "Add Program Visualization"
-msgstr ""
+msgstr "Add Program Visualization"
 
 msgid "Manage visualizations for program."
-msgstr ""
+msgstr "Manage visualizations for program."
 
 msgid "Could not find any program visualisations"
-msgstr ""
+msgstr "Could not find any program visualisations"
 
 msgid "TEI Analytics"
-msgstr ""
+msgstr "TEI Analytics"
 
 msgid ""
 "Manage Tracked Entity Instance (TEI) analytics for tracker programs. The "
 "settings below apply to all tracker programs an Android user has access to."
 msgstr ""
+"Manage Tracked Entity Instance (TEI) analytics for tracker programs. The "
+"settings below apply to all tracker programs an Android user has access to."
 
 msgid "Add TEI Analytics"
-msgstr ""
+msgstr "Add TEI Analytics"
 
 msgid "Global settings"
-msgstr ""
+msgstr "Global settings"
 
 msgid "Show Filter"
-msgstr ""
+msgstr "Show Filter"
 
 msgid "Specific settings"
-msgstr ""
+msgstr "Specific settings"
 
 msgid ""
 "Customize filter and sorting options available for data sets. Settings "
 "below apply to all data sets a mobile user has access to. Settings specific "
 "to individual data sets can also be applied."
 msgstr ""
+"Customize filter and sorting options available for data sets. Settings "
+"below apply to all data sets a mobile user has access to. Settings specific "
+"to individual data sets can also be applied."
 
 msgid "Data set specific settings"
-msgstr ""
+msgstr "Data set specific settings"
 
 msgid "Save Data set"
-msgstr ""
+msgstr "Save Data set"
 
 msgid "Add a Data set Settings"
-msgstr ""
+msgstr "Add a Data set Settings"
 
 msgid "Period"
-msgstr ""
+msgstr "Period"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Organisation Unit"
 
 msgid "Sync status"
-msgstr ""
+msgstr "Sync status"
 
 msgid "Category Combo"
-msgstr ""
+msgstr "Category Combo"
 
 msgid "Filters: {{filterList}}"
-msgstr ""
+msgstr "Filters: {{filterList}}"
 
 msgid "No Filters"
-msgstr ""
+msgstr "No Filters"
 
 msgid "Sync Status"
-msgstr ""
+msgstr "Sync Status"
 
 msgid "Home Screen"
-msgstr ""
+msgstr "Home Screen"
 
 msgid ""
 "Customize the available filters and sorting options for the home screen. "
 "Filters and sorting options set here will only affect the home screen."
 msgstr ""
+"Customize the available filters and sorting options for the home screen. "
+"Filters and sorting options set here will only affect the home screen."
 
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 msgid "Assigned to me"
-msgstr ""
+msgstr "Assigned to me"
 
 msgid "Program specific settings"
-msgstr ""
+msgstr "Program specific settings"
 
 msgid "Save Program"
-msgstr ""
+msgstr "Save Program"
 
 msgid "Add a Program Settings"
-msgstr ""
+msgstr "Add a Program Settings"
 
 msgid ""
 "Customize filter and sorting options available for programs. Settings below "
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
 msgstr ""
+"Customize filter and sorting options available for programs. Settings below "
+"apply to all programs a mobile user has access to. Settings specific to "
+"individual programs can also be applied."
 
 msgid "Enrollment Date"
-msgstr ""
+msgstr "Enrollment Date"
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Enrollment status"
 
 msgid "Event Date"
-msgstr ""
+msgstr "Event Date"
 
 msgid "Event status"
-msgstr ""
+msgstr "Event status"
 
 msgid "Follow up"
-msgstr ""
+msgstr "Follow up"
 
 msgid "Enrollment Status"
-msgstr ""
+msgstr "Enrollment Status"
 
 msgid "Event Status"
-msgstr ""
+msgstr "Event Status"
 
-msgid "This will disable and remove all General, Program and Data set settings."
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
 msgstr ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
 
 msgid "General Settings"
-msgstr ""
+msgstr "General Settings"
+
+msgid "Overview: Android Settings App"
+msgstr "Overview: Android Settings App"
+
+msgid "v{{version}}"
+msgstr "v{{version}}"
 
 msgid "Data sets specific download sync settings"
-msgstr ""
+msgstr "Data sets specific download sync settings"
 
 msgid ""
 "Applies only to the assigned data set. Data set specific settings will "
 "overwrite the global settings above."
 msgstr ""
+"Applies only to the assigned data set. Data set specific settings will "
+"overwrite the global settings above."
 
 msgid "Data set global download sync settings"
-msgstr ""
+msgstr "Data set global download sync settings"
 
 msgid ""
 "Applies to all Data sets an Android user has access to. Specific data set "
 "settings can be defined in the section below."
 msgstr ""
+"Applies to all Data sets an Android user has access to. Specific data set "
+"settings can be defined in the section below."
 
 msgid "Values per Data set"
-msgstr ""
+msgstr "Values per Data set"
 
 msgid "Add a data set specific setting"
-msgstr ""
+msgstr "Add a data set specific setting"
 
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 msgid "data set"
-msgstr ""
+msgstr "data set"
 
 msgid "Global sync settings"
-msgstr ""
+msgstr "Global sync settings"
 
 msgid "Values per Program"
-msgstr ""
+msgstr "Values per Program"
 
 msgid "Add a program specific setting"
-msgstr ""
+msgstr "Add a program specific setting"
 
 msgid "Per program"
-msgstr ""
+msgstr "Per program"
 
 msgid "Per OU and program"
-msgstr ""
+msgstr "Per OU and program"
 
 msgid "Programs specific download sync settings"
-msgstr ""
+msgstr "Programs specific download sync settings"
 
 msgid ""
 "Applies only to the assigned program. Program specific settings will "
 "overwrite the global settings above."
 msgstr ""
+"Applies only to the assigned program. Program specific settings will "
+"overwrite the global settings above."
 
 msgid "Program global download sync settings"
-msgstr ""
+msgstr "Program global download sync settings"
 
 msgid ""
 "Applies to all programs an Android user has access to. Specific program "
 "settings can be defined in the section below."
 msgstr ""
+"Applies to all programs an Android user has access to. Specific program "
+"settings can be defined in the section below."
 
 msgid "program"
-msgstr ""
+msgstr "program"
 
 msgid "Recommended maximum: {{maxValue}}"
-msgstr ""
+msgstr "Recommended maximum: {{maxValue}}"
 
 msgid "User Sync Test"
-msgstr ""
+msgstr "User Sync Test"
 
 msgid "Check the amount of data a user would sync to their device."
-msgstr ""
+msgstr "Check the amount of data a user would sync to their device."
 
 msgid "User"
-msgstr ""
+msgstr "User"
+
+msgid "Failed to get data"
+msgstr "Failed to get data"

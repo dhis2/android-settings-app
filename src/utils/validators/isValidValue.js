@@ -4,5 +4,5 @@
  * length > 0
  * */
 
-export const isValidValue = value =>
+export const isValidValue = (value) =>
     ![null, '', false, undefined].includes(value)

@@ -1,15 +1,15 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useWorkflowContext } from '../../workflow-context'
 import { SelectField } from '../field'
-import { useReadDatasetQuery } from '../../pages/Analytics/Dataset/DatasetVisualizationQuery'
 
 export const SelectDataset = ({ settings, onChange }) => {
-    const { datasetList, loading } = useReadDatasetQuery()
+    const { dataSets: datasetList } = useWorkflowContext()
     const options = datasetList || []
 
-    const handleChange = e => {
-        const name = options.find(dataset => dataset.id === e.selected)
+    const handleChange = (e) => {
+        const name = options.find((dataset) => dataset.id === e.selected)
         onChange({
             ...settings,
             dataset: e.selected,
@@ -26,7 +26,6 @@ export const SelectDataset = ({ settings, onChange }) => {
             selected={settings.dataset || ''}
             onChange={handleChange}
             options={options}
-            loading={loading}
         />
     )
 }

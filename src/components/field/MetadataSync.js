@@ -1,12 +1,12 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { MANUAL, SyncSelect } from './SyncSelect'
 
 export const defaultMetadataSync = '24h'
 
 const CODE = 'metadataSync'
-const metadataOptions = [
+export const metadataOptions = [
     {
         value: defaultMetadataSync,
         label: i18n.t('1 Day'),

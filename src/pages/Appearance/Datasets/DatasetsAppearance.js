@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import isEqual from 'lodash/isEqual'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import Page from '../../../components/page/Page'
+import isEqual from 'lodash/isEqual'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import DatasetGlobalSettings from './DatasetGlobalSettings'
+import Page from '../../../components/page/Page'
+import { removeSummaryFromSettings } from '../../../utils/utils'
 import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { createInitialValues } from './helper'
+import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import { removeSummaryFromSettings } from '../../../utils/utils'
+import { createInitialValues } from './helper'
 
 const DatasetsAppearance = () => {
     const {
         load,
         dataSetSettings,
+        programConfiguration,
         completionSpinner,
         home,
         programSettings,
     } = useReadAppearanceDataStore()
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [disableSave, setDisableSave] = useState(true)
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
@@ -34,8 +35,8 @@ const DatasetsAppearance = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (dataSetSettings) {
@@ -62,6 +63,7 @@ const DatasetsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
+            programConfiguration,
             completionSpinner,
             filterSorting: {
                 home,

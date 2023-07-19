@@ -6,7 +6,7 @@ import {
     findVisualizationById,
 } from '../helper'
 
-export const createInitialValues = initialValues => ({
+export const createInitialValues = (initialValues) => ({
     id: initialValues.id || '',
     program: initialValues.program || '',
     visualization: initialValues.visualization || '',
@@ -17,11 +17,11 @@ export const createInitialValues = initialValues => ({
     },
 })
 
-export const invalidMandatoryFields = settings => {
+export const invalidMandatoryFields = (settings) => {
     return !validateObjectByProperty(['program', 'visualization'], settings)
 }
 
-export const createVisualizationValues = value => ({
+export const createVisualizationValues = (value) => ({
     id: value.visualization || value.id,
     name: value.name || '',
     visualizationName: value.visualizationName || value.name,
@@ -34,12 +34,12 @@ export const createVisualizationValues = value => ({
     },
 })
 
-export const getGroupList = visualizations => {
+export const getGroupList = (visualizations) => {
     const groupList = {}
 
     mapValues(visualizations, (program, i) => {
         const programGroup = []
-        mapValues(program.groups, group => {
+        mapValues(program.groups, (group) => {
             programGroup.push({
                 id: group[0].group.id,
                 name: group[0].group.name,
@@ -61,12 +61,12 @@ export const prepareRows = (visualizations, programList, visualizationAPI) => {
     const rows = {}
     mapValues(visualizations, (program, i) => {
         let groups = {}
-        program.map(group => {
+        program.map((group) => {
             const visual = []
-            const foundProgram = programList.find(p => p.id === i)
+            const foundProgram = programList.find((p) => p.id === i)
             group.program = i
             group.programName = program.programName || foundProgram.name
-            group.visualizations.map(visualization => {
+            group.visualizations.map((visualization) => {
                 const visualizationFound = findVisualizationById(
                     visualizationAPI,
                     visualization
@@ -105,15 +105,15 @@ export const prepareRows = (visualizations, programList, visualizationAPI) => {
     }
 }
 
-export const rowsToDataStore = rows => {
+export const rowsToDataStore = (rows) => {
     const updatedRows = {}
 
     mapValues(rows, (program, i) => {
         const groups = []
-        mapValues(program.groups, group => {
+        mapValues(program.groups, (group) => {
             const visualizations = []
             let groupUpdated = {}
-            group.map(visualization => {
+            group.map((visualization) => {
                 visualizations.push({
                     id: visualization.id,
                     name: visualization.name,
@@ -128,12 +128,12 @@ export const rowsToDataStore = rows => {
     return updatedRows
 }
 
-export const createDataStoreGroupRows = datastore => {
+export const createDataStoreGroupRows = (datastore) => {
     const dataStoreGroups = Object.assign({}, datastore)
     const result = {}
     mapValues(dataStoreGroups, (program, i) => {
         const groups = []
-        program.map(group => groups.push(createGroup(group)))
+        program.map((group) => groups.push(createGroup(group)))
         result[i] = groups
     })
 

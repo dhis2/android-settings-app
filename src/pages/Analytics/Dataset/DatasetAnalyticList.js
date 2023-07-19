@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { CircularLoader } from '@dhis2/ui'
-import PropTypes from '@dhis2/prop-types'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import NewDatasetVisualization from './NewDatasetVisualization'
-import { NoticeError } from '../../../components/noticeAlert'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { DatasetTable } from '../../../components/analyticVisualization'
-import { useReadDatasetQuery } from './DatasetVisualizationQuery'
+import { NoticeError } from '../../../components/noticeAlert'
+import { useWorkflowContext } from '../../../workflow-context'
+import { getVisualizationIdList } from '../helper'
 import { useVisualizations } from '../VisualizationQuery'
 import { prepareRows, rowsToDataStore } from './helper'
-import { getVisualizationIdList } from '../helper'
+import NewDatasetVisualization from './NewDatasetVisualization'
 
 const DatasetAnalyticList = ({
     visualizations,
@@ -22,7 +22,7 @@ const DatasetAnalyticList = ({
         error,
         visualizations: visualizationAPI,
     } = useVisualizations(getVisualizationIdList(visualizations))
-    const { datasetList } = useReadDatasetQuery()
+    const { dataSets: datasetList } = useWorkflowContext()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [groups, setGroups] = useState()

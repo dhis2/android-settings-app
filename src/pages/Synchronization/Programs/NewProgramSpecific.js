@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
-import DialogSpecificSetting from './DialogSpecificSetting'
 import {
     FULL_SPECIFIC,
     specificSettingsDefault,
     WITH_REGISTRATION,
     WITHOUT_REGISTRATION,
 } from '../../../constants/program-settings'
+import { updateSettingsList } from '../../../utils/utils'
+import DialogSpecificSetting from './DialogSpecificSetting'
 import {
     createInitialSpecificValues,
     findProgramNameById,
     isProgramWithRegistration,
 } from './helper'
-import { populateProgramObject } from './populateProgramObject'
 import { parseValueByType } from './parseValueBySettingType'
-import { updateSettingsList } from '../../../utils/utils'
+import { populateProgramObject } from './populateProgramObject'
 
 const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)

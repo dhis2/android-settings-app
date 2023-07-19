@@ -1,13 +1,13 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import Wrapper from '../../../components/Wrapper'
+import PropTypes from 'prop-types'
+import React from 'react'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import { TableHeader } from '../../../components/table'
+import Wrapper from '../../../components/Wrapper'
 import { DatasetGlobalSettings as GlobalSettings } from './TableSettings'
 
 const DatasetGlobalSettings = ({ disable, settings, onChange }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({
             ...settings,
             [e.name]: {

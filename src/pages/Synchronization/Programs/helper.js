@@ -5,7 +5,7 @@ import {
     WITH_REGISTRATION,
 } from '../../../constants/program-settings'
 
-export const createInitialValues = prevGlobalDetails => ({
+export const createInitialValues = (prevGlobalDetails) => ({
     settingDownload:
         prevGlobalDetails.settingDownload ||
         programSettingsDefault.settingDownload,
@@ -28,7 +28,7 @@ export const createInitialValues = prevGlobalDetails => ({
         programSettingsDefault.eventDateDownload,
 })
 
-export const createInitialSpecificValues = prevDetails => ({
+export const createInitialSpecificValues = (prevDetails) => ({
     name: '',
     settingDownload:
         prevDetails.settingDownload || specificSettingsDefault.settingDownload,
@@ -50,7 +50,7 @@ export const createInitialSpecificValues = prevDetails => ({
 
 export const isProgramWithRegistration = (programList, specificProgram) => {
     const program = programList.find(
-        programApi => programApi.id === specificProgram
+        (programApi) => programApi.id === specificProgram
     )
     return program.programType === WITH_REGISTRATION
 }
@@ -62,7 +62,7 @@ export const prepareSpecificSettingsList = (
     const specificSettingsRowList = []
 
     const programsId = []
-    apiProgramList.map(program => programsId.push(program.id))
+    apiProgramList.map((program) => programsId.push(program.id))
 
     for (const key in programSettings) {
         if (programsId.includes(key)) {
@@ -89,7 +89,7 @@ export const prepareSpecificSettingsList = (
 
 export const findProgramNameById = (programList, specificProgram) => {
     const program = programList.find(
-        program => program.id === specificProgram.id
+        (program) => program.id === specificProgram.id
     )
     return program.name
 }

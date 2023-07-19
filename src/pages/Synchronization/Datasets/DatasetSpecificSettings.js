@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import isEqual from 'lodash/isEqual'
 import keyBy from 'lodash/keyBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import PageHeader from '../../../components/page/PageHeader'
+import {
+    filterListByReadAccess,
+    filterUnusedElements,
+} from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
+import { prepareSpecificSettingsList } from './helper'
 import NewDatasetSpecific from './NewDatasetSpecific'
 import SpecificTableAction from './SpecificTableAction'
-import PageHeader from '../../../components/page/PageHeader'
-import { useReadDataset } from './datasetQueries'
-import { prepareSpecificSettingsList } from './helper'
-import { filterUnusedElements } from '../../../utils/utils'
 
 const DatasetSpecificSettings = ({
     specificSettings,
     handleSpecificSettings,
     disabled,
 }) => {
-    const { datasetList } = useReadDataset()
+    const { dataSets } = useWorkflowContext()
     const [rows, setRows] = useState()
+    const datasetList = filterListByReadAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
     const [loadSpecific, setLoad] = useState(false)
@@ -32,7 +36,7 @@ const DatasetSpecificSettings = ({
             setListName(filterUnusedElements(datasetList, rowList))
             setLoad(true)
         }
-    }, [specificSettings, datasetList])
+    }, [specificSettings])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {

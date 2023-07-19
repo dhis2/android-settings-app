@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
+import Page from '../../../components/page/Page'
 import {
     saveAnalyticsKeyMutation,
     useReadAnalyticsDataStore,
 } from '../analyticsDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import Page from '../../../components/page/Page'
-import AnalyticsInfo from '../../../components/noticeAlert/AnalyticsInfo'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import AnalyticsSpecificTEI from './AnalyticsSpecificTEI'
-import { removeSummarySettings } from './helper'
+import { dataStoreSettings } from './helper'
 
 const AnalyticsTEI = () => {
-    const {
-        tei,
-        dhisVisualizations,
-        errorDataStore,
-        load,
-    } = useReadAnalyticsDataStore()
-    const { data: hasAuthority } = useDataQuery(authorityQuery)
+    const { tei, dhisVisualizations, errorDataStore, load } =
+        useReadAnalyticsDataStore()
+    const { hasAuthority } = useIsAuthorized()
     const [analyticSettings, setAnalyticSettings] = useState([])
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
@@ -28,7 +24,7 @@ const AnalyticsTEI = () => {
     const [mutate, { error, data }] = useDataMutation(saveAnalyticsKeyMutation)
 
     useEffect(() => {
-        hasAuthority && setDisable(!hasAuthority.authority)
+        setDisable(!hasAuthority)
     }, [hasAuthority])
 
     useEffect(() => {
@@ -45,7 +41,7 @@ const AnalyticsTEI = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            tei: removeSummarySettings(analyticSettings),
+            tei: dataStoreSettings(analyticSettings),
             dhisVisualizations,
         }
 

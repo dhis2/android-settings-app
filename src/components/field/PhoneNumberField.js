@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
 import { InputField } from '@dhis2/ui'
-import { FieldSection } from './FieldSection'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { validateNumber, isValidValue } from '../../utils/validators'
+import { FieldSection } from './FieldSection'
 
 export const PhoneNumberField = ({
     label,
@@ -17,7 +17,7 @@ export const PhoneNumberField = ({
      * Checks if sms number or confirmation number is valid
      * validates number
      */
-    const validatePhoneNumber = e => {
+    const validatePhoneNumber = (e) => {
         const inputValue = e.value
 
         if (isValidValue(inputValue)) {
@@ -28,7 +28,7 @@ export const PhoneNumberField = ({
         }
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         onChange({ ...props.settingsValue, [props.name]: e.value })
         validatePhoneNumber(e)
     }

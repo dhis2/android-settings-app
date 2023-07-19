@@ -1,8 +1,8 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import { SelectField } from './SelectField'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { createInitialValues } from '../../pages/Analytics/TEI/helper'
+import { SelectField } from './SelectField'
 
 export const SelectProgram = ({
     onChange,
@@ -11,9 +11,9 @@ export const SelectProgram = ({
     handleProgramStage,
     ...props
 }) => {
-    const handleSearchProgramStage = id => {
+    const handleSearchProgramStage = (id) => {
         handleProgramStage(
-            options.filter(program => program.id === id)[0].programStages
+            options.filter((program) => program.id === id)[0].programStages
         )
     }
 

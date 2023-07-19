@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEqual from 'lodash/isEqual'
-import Page from '../../../components/page/Page'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import {
     DataSync,
+    FileMaxSize,
     MetadataSync,
+    TrackerExporter,
     TrackerImporter,
 } from '../../../components/field'
-import ManualSyncAlert from '../../../components/noticeAlert/ManualSyncAlert'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import { createInitialValues } from './helper'
+import { TrackerImporterInfo } from '../../../components/noticeAlert'
+import Page from '../../../components/page/Page'
+import { useApiVersion } from '../../../utils/useApiVersion'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
+import {
+    checkValidSettings,
+    createInitialValues,
+    createValidValues,
+} from './helper'
 
 const GlobalSettings = () => {
-    const {
-        load,
-        syncGlobal,
-        syncSettings,
-        dataSetSettings,
-        programSettings,
-    } = useGetSyncDataStore()
-    const { data: authority } = useDataQuery(authorityQuery)
+    const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
+        useGetSyncDataStore()
+    const { hasAuthority } = useIsAuthorized()
+    const { apiVersion } = useApiVersion()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disable, setDisable] = useState(false)
@@ -36,12 +39,12 @@ const GlobalSettings = () => {
     )
 
     useEffect(() => {
-        authority && setDisable(!authority.authority)
-    }, [authority])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (syncSettings) {
-            setSettings(syncGlobal)
+            setSettings(createValidValues(syncGlobal))
             setInitialValues(syncGlobal)
         }
     }, [syncSettings])
@@ -57,7 +60,7 @@ const GlobalSettings = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            ...createInitialValues(settings),
+            ...checkValidSettings(settings),
             dataSetSettings,
             programSettings,
         }
@@ -65,8 +68,7 @@ const GlobalSettings = () => {
     }
 
     const resetSettings = () => {
-        const settingsToReset = createInitialValues('')
-        setSettings(settingsToReset)
+        setSettings(createInitialValues('', apiVersion))
     }
 
     return (
@@ -78,7 +80,7 @@ const GlobalSettings = () => {
         >
             {settings && (
                 <>
-                    <ManualSyncAlert />
+                    <TrackerImporterInfo />
 
                     <MetadataSync
                         value={settings}
@@ -93,6 +95,18 @@ const GlobalSettings = () => {
                     />
 
                     <TrackerImporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <TrackerExporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <FileMaxSize
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}

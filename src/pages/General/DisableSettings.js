@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import { ButtonField } from '../../components/field'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import DialogDisableSettings from '../../components/dialog/DialogDisableSettings'
+import { ButtonField } from '../../components/field'
 import { NAMESPACE } from '../../constants/data-store'
 import { useNavigation } from '../../utils/useNavigation'
 
@@ -38,7 +38,7 @@ const DisableSettings = ({ disabled }) => {
                 name="disableSettings"
                 label={i18n.t('Disable all settings')}
                 helpText={i18n.t(
-                    'This will disable and remove all General, Program and Data set settings.'
+                    'This will disable and remove all General, Synchronization, Appearance and Analytics settings.'
                 )}
                 onOpen={onClick}
                 disabled={disabled}

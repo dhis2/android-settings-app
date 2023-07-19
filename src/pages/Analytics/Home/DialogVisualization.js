@@ -1,6 +1,4 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import {
     Modal,
     ModalTitle,
@@ -9,13 +7,15 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import buttonStyles from '../../../styles/Button.module.css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import {
     VisualizationGroup,
     SelectVisualization,
     VisualizationTitle,
     VisualizationUserTest,
 } from '../../../components/analyticVisualization'
+import buttonStyles from '../../../styles/Button.module.css'
 
 const DialogVisualization = ({
     open,

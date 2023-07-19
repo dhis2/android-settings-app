@@ -4,7 +4,7 @@
 
 export const findProgramNameById = (programList, specificProgram) => {
     const program = programList.find(
-        program => program.id === specificProgram.id
+        (program) => program.id === specificProgram.id
     )
     return program.name
 }

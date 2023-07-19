@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { CheckboxField } from './CheckboxField'
+import React, { useEffect, useState } from 'react'
 import { useApiVersion } from '../../utils/useApiVersion'
+import { CheckboxField } from './CheckboxField'
 
 const CODE = 'trackerImporterVersion'
-const minApiVersion = '2.37'
+const minApiVersion = '2.38'
 
+export const minApiVersionNewTrackerDefault = '2.40'
 export const defaultTrackerImporterVersion = 'V1'
 export const newTrackerVersion = 'V2'
 
-const isValidVersion = apiVersion => apiVersion >= minApiVersion
+const isValidVersion = (apiVersion) => apiVersion >= minApiVersion
+export const shouldUseNewTracker = (apiVersion) =>
+    apiVersion >= minApiVersionNewTrackerDefault
 
 export const TrackerImporter = ({ value, onChange, ...props }) => {
     const [validVersion, setValidVersion] = useState(false)
     const [tracker, setTracker] = useState(value[CODE] === newTrackerVersion)
     const { apiVersion } = useApiVersion()
+
+    useEffect(() => {
+        setTracker(value[CODE] === newTrackerVersion)
+    }, [value[CODE]])
 
     useEffect(() => {
         if (apiVersion) {
@@ -25,7 +32,7 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
         }
     }, [apiVersion])
 
-    const handleCheckbox = e => {
+    const handleCheckbox = (e) => {
         setTracker(e.checked)
         onChange({
             ...value,
@@ -40,9 +47,11 @@ export const TrackerImporter = ({ value, onChange, ...props }) => {
             {validVersion && (
                 <CheckboxField
                     name={CODE}
-                    label={i18n.t('Use new version of Tracker Importer')}
+                    label={i18n.t(
+                        'Use the new version of Tracker Importer (Web API)'
+                    )}
                     helpText={i18n.t(
-                        'Use new tracker endpoints dedicated to importing and querying tracker objects (including tracked entities, enrollments, events, and relationships). Be aware that some functionality is not yet ready in the new endpoints, but they support their primary use-cases.'
+                        'Use new tracker endpoints dedicated to importing tracker objects (including tracked entities, enrollments, events, and relationships).'
                     )}
                     checked={tracker}
                     onChange={handleCheckbox}

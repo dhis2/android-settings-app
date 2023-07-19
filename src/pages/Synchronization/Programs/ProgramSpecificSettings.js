@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
+import keyBy from 'lodash/keyBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import PageHeader from '../../../components/page/PageHeader'
+import {
+    filterListByReadAccess,
+    filterUnusedElements,
+} from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
 import { prepareSpecificSettingsList } from './helper'
-import SpecificTableAction from './SpecificTableAction'
 import NewProgramSpecific from './NewProgramSpecific'
-import { useReadProgram } from './programQueries'
-import { filterUnusedElements } from '../../../utils/utils'
+import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
     specificSettings,
     changeSpecificSettings,
     disabled,
 }) => {
-    const { programList } = useReadProgram()
+    const { programs } = useWorkflowContext()
+    const programList = filterListByReadAccess(programs)
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
@@ -32,7 +36,7 @@ const ProgramSpecificSettings = ({
             setListName(filterUnusedElements(programList, rowList))
             setLoad(true)
         }
-    }, [specificSettings, programList])
+    }, [specificSettings])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {

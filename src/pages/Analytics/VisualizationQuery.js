@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
 import isEqual from 'lodash/isEqual'
+import React, { useEffect, useRef } from 'react'
 
 const query = {
     visualization: {
@@ -13,7 +13,7 @@ const query = {
     },
 }
 
-const usePrevious = value => {
+const usePrevious = (value) => {
     const ref = useRef()
     useEffect(() => {
         ref.current = value
@@ -21,7 +21,7 @@ const usePrevious = value => {
     return ref.current
 }
 
-export const useVisualizations = ids => {
+export const useVisualizations = (ids) => {
     const prevIds = usePrevious(ids)
     const { loading, error, data, refetch } = useDataQuery(query, {
         lazy: true,

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { CircularLoader } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import NewProgramVisualization from './NewProgramVisualization'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { ProgramTable } from '../../../components/analyticVisualization'
 import { NoticeError } from '../../../components/noticeAlert'
-import { useReadProgramQuery } from './ProgramVisualizationQueries'
+import { useWorkflowContext } from '../../../workflow-context'
+import { getVisualizationIdList } from '../helper'
 import { useVisualizations } from '../VisualizationQuery'
 import { prepareRows, rowsToDataStore } from './helper'
-import { getVisualizationIdList } from '../helper'
+import NewProgramVisualization from './NewProgramVisualization'
 
 const ProgramAnalyticsList = ({
     visualizations,
@@ -22,7 +22,7 @@ const ProgramAnalyticsList = ({
         error,
         visualizations: visualizationAPI,
     } = useVisualizations(getVisualizationIdList(visualizations))
-    const { programList } = useReadProgramQuery()
+    const { programs: programList } = useWorkflowContext()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [groups, setGroups] = useState()

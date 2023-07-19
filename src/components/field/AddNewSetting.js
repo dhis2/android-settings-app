@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from '@dhis2/prop-types'
 import { Button } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import buttonStyles from '../../styles/Button.module.css'
 
 export const AddNewSetting = ({ label, onClick, disable }) => (

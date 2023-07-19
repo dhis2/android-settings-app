@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import {
     Button,
     DataTable,
@@ -8,11 +6,14 @@ import {
     DataTableCell,
     DataTableRow,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { VisualizationRow } from './VisualizationRow'
 import styles from './VisualizationTable.module.css'
 
 export const GroupVisualizationRow = ({
     group,
+    editVisualization,
     deleteVisualization,
     deleteGroup,
     element,
@@ -20,12 +21,13 @@ export const GroupVisualizationRow = ({
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
-    const toggleOpenRow = index =>
+    const toggleOpenRow = (index) =>
         setOpenRowIndex(openRowIndex === index ? null : index)
 
-    const expandableContent = item => (
+    const expandableContent = (item) => (
         <VisualizationRow
             visualizationList={item}
+            editVisualization={editVisualization}
             deleteVisualization={deleteVisualization}
             disabled={disabled}
         />

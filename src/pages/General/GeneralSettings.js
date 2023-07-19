@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import Page from '../../components/page/Page'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../auth'
 import {
     EncryptDB,
     MatomoId,
@@ -13,21 +13,21 @@ import {
     SmsResultSender,
 } from '../../components/field'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
+import Page from '../../components/page/Page'
 import DisableSettings from './DisableSettings'
+import {
+    getGeneralKeyQuery,
+    updateGeneralKeyMutation,
+} from './generalDatastoreApi'
 import {
     checkValidSettings,
     createInitialValues,
     notValidFields,
 } from './helper'
-import {
-    getGeneralKeyQuery,
-    updateGeneralKeyMutation,
-} from './generalDatastoreApi'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 
 const GeneralSettings = () => {
     const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
@@ -38,15 +38,13 @@ const GeneralSettings = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (queryResult) {
-            const {
-                lastUpdated,
-                ...initialSettings
-            } = queryResult.generalSettings
+            const { lastUpdated, ...initialSettings } =
+                queryResult.generalSettings
             setInitialValues(initialSettings)
             setSettings(createInitialValues(initialSettings))
         }

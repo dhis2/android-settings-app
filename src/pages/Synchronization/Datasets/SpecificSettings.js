@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import { Divider } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { InputNumber } from '../../../components/inputs'
 import TableRow from '../../../components/settingsTable/TableRow'
 import Wrapper from '../../../components/Wrapper'
-import { InputNumber } from '../../../components/inputs'
 import { DataSpecificSetting } from '../../../constants/data-set-settings'
-import { getPeriodDefaultValueByType } from './helper'
 import tableTitleStyles from '../../../styles/TableTitle.module.css'
+import { getPeriodDefaultValueByType, getPeriodLabel } from './helper'
 
 const DataSetTableRow = ({
     row,
@@ -49,19 +49,21 @@ DataSetTableRow.propTypes = {
 
 const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
     const [defaultValue, setDefaultValue] = useState()
+    const [periodLabel, setPeriodLabel] = useState()
 
     useEffect(() => {
         setDefaultValue(getPeriodDefaultValueByType(periodType))
+        setPeriodLabel(getPeriodLabel(periodType))
     }, [periodType])
 
     return (
         <Wrapper fullWidth>
             <div>
-                {DataSpecificSetting.map(row => (
+                {DataSpecificSetting.map((row) => (
                     <DataSetTableRow
                         key={row.option}
                         row={row}
-                        periodType={periodType}
+                        periodType={periodLabel}
                         defaultValue={defaultValue}
                         specificSettings={specificSettings}
                         onChange={onChange}

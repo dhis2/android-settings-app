@@ -1,8 +1,6 @@
+import { Menu } from '@dhis2/ui'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { Menu } from '@dhis2/ui'
-import MenuItem from './MenuItem'
-import MenuSectionHeader from './MenuSectionHeader'
 import {
     analyticsPages,
     analyticsSection,
@@ -13,6 +11,8 @@ import {
     syncPages,
     syncSection,
 } from '../../constants/menu-sections'
+import MenuItem from './MenuItem'
+import MenuSectionHeader from './MenuSectionHeader'
 
 const SideBar = () => {
     const location = useLocation()

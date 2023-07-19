@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxField } from './CheckboxField'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import DialogEncrypt from '../dialog/DialogEncrypt'
+import { CheckboxField } from './CheckboxField'
 
 const CODE = 'encryptDB'
 
@@ -19,7 +19,7 @@ export const EncryptDB = ({ value, onChange, ...props }) => {
         setOpenDialog(false)
     }
 
-    const handleEncrypt = checked => {
+    const handleEncrypt = (checked) => {
         onChange({ ...value, [CODE]: !checked })
         setOpenDialog(false)
     }

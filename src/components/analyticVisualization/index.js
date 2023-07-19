@@ -1,3 +1,5 @@
+export * from './EditVisualization'
+export * from './NotEditableElement'
 export * from './SelectDataset'
 export * from './SelectProgram'
 export * from './SelectVisualization'

@@ -1,16 +1,17 @@
 import isEmpty from 'lodash/isEmpty'
+import unionBy from 'lodash/unionBy'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import without from 'lodash/without'
+import { getDataSize } from './getData'
+import { getMetadataSize } from './getMetadata'
 import {
     apiFetchOU,
     apiFetchOUSearch,
     apiFetchProgramRulesBasic,
 } from './queries/syncQueries'
-import { getMetadataSize } from './getMetadata'
-import { getDataSize } from './getData'
 
-export const createInitialValues = initialValues => ({
+export const createInitialValues = (initialValues) => ({
     organisationUnitsNumber: initialValues.organisationUnitsNumber || 0,
     organisationUnitSearchNumber:
         initialValues.organisationUnitSearchNumber || 0,
@@ -33,13 +34,8 @@ export const runUserTest = async ({
     globalSettings,
     specificSettings,
 }) => {
-    const {
-        orgUnitSearch,
-        orgUnit,
-        program,
-        dataSet,
-        programRule,
-    } = await getTestElements(user, dataEngine)
+    const { orgUnitSearch, orgUnit, program, dataSet, programRule } =
+        await getTestElements(user, dataEngine)
 
     const metadataSize = await getMetadataSize({
         dataEngine,
@@ -76,12 +72,12 @@ export const runUserTest = async ({
 
 const getSearchOrgUnit = async (orgUnits, dataEngine) => {
     const orgUnitSearch = []
-    const orgUnitPromises = orgUnits.map(orgUnit =>
+    const orgUnitPromises = orgUnits.map((orgUnit) =>
         apiFetchOUSearch(dataEngine, orgUnit.id)
     )
     const ouLists = await Promise.all(orgUnitPromises)
-    ouLists.forEach(ouList =>
-        ouList.forEach(ou => {
+    ouLists.forEach((ouList) =>
+        ouList.forEach((ou) => {
             orgUnitSearch.push(ou)
         })
     )
@@ -89,9 +85,9 @@ const getSearchOrgUnit = async (orgUnits, dataEngine) => {
     return uniqBy(orgUnitSearch, 'id').length
 }
 
-const parseUniqList = list => uniq(without(list, undefined))
+const parseUniqList = (list) => uniq(without(list, undefined))
 
-const getPrograms = orgUnitList => {
+export const getPrograms = (orgUnitList) => {
     const programList = []
     const trackedEntityTypeId = []
     const trackedEntityAttributeId = []
@@ -105,7 +101,7 @@ const getPrograms = orgUnitList => {
                     trackedEntityTypeId.push(trackedEntityType.id)
                 }
                 if (!isEmpty(programTrackedEntityAttributes)) {
-                    programTrackedEntityAttributes.forEach(tea => {
+                    programTrackedEntityAttributes.forEach((tea) => {
                         trackedEntityAttributeId.push(tea.id)
                         if (!isEmpty(tea.trackedEntityAttribute.optionSet)) {
                             optionSetId.push(
@@ -127,7 +123,7 @@ const getPrograms = orgUnitList => {
     }
 }
 
-const getDatasets = orgUnitList => {
+export const getDatasets = (orgUnitList) => {
     const dataSetList = []
     const dataElementId = []
     const categoryComboId = []
@@ -138,13 +134,15 @@ const getDatasets = orgUnitList => {
         dataSets.forEach(
             ({ id, dataSetElements, indicators, categoryCombo }) => {
                 dataSetList.push(id)
-                if (!isEmpty(dataSetElements.dataElement)) {
-                    dataElementId.push(dataSetElements.dataElement.id)
+                if (!isEmpty(dataSetElements)) {
+                    dataSetElements.forEach((dataSetElement) => {
+                        dataElementId.push(dataSetElement.dataElement.id)
+                    })
                 }
 
                 if (!isEmpty(indicators)) {
                     indicatorsId.push(
-                        ...indicators.map(indicator => indicator.id)
+                        ...indicators.map((indicator) => indicator.id)
                     )
                 }
 
@@ -152,7 +150,7 @@ const getDatasets = orgUnitList => {
                     categoryComboId.push(categoryCombo.id)
                     categoriesId.push(
                         ...categoryCombo.categories.map(
-                            categories => categories.id
+                            (categories) => categories.id
                         )
                     )
                 }
@@ -179,14 +177,14 @@ const getDatasets = orgUnitList => {
  * */
 const getOrgUnit = (orgUnits, dataEngine) => {
     const orgUnitCapture = []
-    const orgUnitPromises = orgUnits.map(orgUnit =>
+    const orgUnitPromises = orgUnits.map((orgUnit) =>
         apiFetchOU(dataEngine, orgUnit.id)
     )
 
-    return Promise.all(orgUnitPromises).then(result => {
-        result.map(ouList => ouList.map(ou => orgUnitCapture.push(ou)))
+    return Promise.all(orgUnitPromises).then((result) => {
+        result.map((ouList) => ouList.map((ou) => orgUnitCapture.push(ou)))
         const uniqOrgUnit = uniqBy(orgUnitCapture, 'id')
-        const orgUnitId = uniqOrgUnit.map(ou => ou.id)
+        const orgUnitId = uniqOrgUnit.map((ou) => ou.id)
         const program = getPrograms(uniqOrgUnit)
         const dataSet = getDatasets(uniqOrgUnit)
 
@@ -204,13 +202,13 @@ const getOrgUnit = (orgUnits, dataEngine) => {
 const getProgramRules = (programs, dataEngine) => {
     const programRules = []
 
-    const programRulesPromises = programs.map(program =>
+    const programRulesPromises = programs.map((program) =>
         apiFetchProgramRulesBasic(dataEngine, program.id)
     )
 
-    return Promise.all(programRulesPromises).then(result => {
-        result.map(programRuleList =>
-            programRuleList.map(programRule =>
+    return Promise.all(programRulesPromises).then((result) => {
+        result.map((programRuleList) =>
+            programRuleList.map((programRule) =>
                 programRules.push(programRule.id)
             )
         )
@@ -238,4 +236,18 @@ const getTestElements = async (user, dataEngine) => {
         },
         dataSet,
     }
+}
+
+export const joinObjectsById = (array) => {
+    const joinedArray = []
+
+    array
+        .reduce((array1, array2) => unionBy(array1, array2, 'id'))
+        .map((e) => joinedArray.push(e.id))
+
+    return parseUniqList(joinedArray)
+}
+
+export const joinElementsById = (array) => {
+    return parseUniqList(array.map((e) => e.id))
 }

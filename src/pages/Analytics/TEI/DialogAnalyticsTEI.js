@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import {
     Modal,
     ModalContent,
@@ -9,7 +7,8 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import buttonStyles from '../../../styles/Button.module.css'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import {
     ProgramSection,
     TitleSection,
@@ -17,6 +16,7 @@ import {
     VisualizationType,
     WHOElements,
 } from '../../../components/analytics'
+import buttonStyles from '../../../styles/Button.module.css'
 import { WHO_NUTRITION } from './helper'
 
 const DialogAnalyticsTEI = ({

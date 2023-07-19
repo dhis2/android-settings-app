@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { InputField, Button } from '@dhis2/ui'
+import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from './styles/ItemSearchField.module.css'
 
 export const ItemSearchField = ({
@@ -26,7 +27,11 @@ export const ItemSearchField = ({
             className={styles.field}
         />
 
-        <Button small onClick={onClear} className={styles.field}>
+        <Button
+            small
+            onClick={onClear}
+            className={cx(styles.field, styles.button)}
+        >
             {i18n.t('Clear')}
         </Button>
     </div>

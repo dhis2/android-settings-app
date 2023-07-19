@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { AlertBar } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from './AlertBar.module.css'
 
 const SuccessAlert = ({ show }) => (

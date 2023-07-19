@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
-import ItemSelector from './searchField/ItemSelector'
+import React, { useMemo, useState } from 'react'
 import RunTest from './RunTest'
+import ItemSelector from './searchField/ItemSelector'
 
 const UserSearch = () => {
     const [userSelected, setUser] = useState()

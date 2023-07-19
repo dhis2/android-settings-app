@@ -1,5 +1,4 @@
-import React from 'react'
-
+import i18n from '@dhis2/d2-i18n'
 import {
     Modal,
     ModalTitle,
@@ -8,8 +7,8 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const DialogDisableSettings = ({ openDialog, onClose, disableSettings }) => {
     return (
@@ -19,7 +18,7 @@ const DialogDisableSettings = ({ openDialog, onClose, disableSettings }) => {
                     <ModalTitle>{i18n.t('Disable all settings')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
-                            'This action will disable and remove all General, Program and Data set settings. Are you sure you want to disable all settings?'
+                            'This action will disable and remove all General, Synchronization, Appearance and Analytics settings. Are you sure you want to disable all settings?'
                         )}
                     </ModalContent>
                     <ModalActions>

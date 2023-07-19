@@ -7,7 +7,7 @@ export const useNavigation = () => {
         reloadPage: () => {
             history.go(0)
         },
-        navigateTo: path => {
+        navigateTo: (path) => {
             history.push(path)
         },
     }

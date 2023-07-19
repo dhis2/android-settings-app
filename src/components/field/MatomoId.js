@@ -1,12 +1,12 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { NumberField } from './NumberField'
 
 const CODE = 'matomoID'
 
 export const MatomoId = ({ value, onChange, disabled }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         let inputValue = e.value
         inputValue = Math.max(0, inputValue)
         onChange({ ...value, [CODE]: inputValue })

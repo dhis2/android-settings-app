@@ -1,9 +1,9 @@
 import toArray from 'lodash/toArray'
+import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
 import {
     apiFetchEvents,
     apiFetchTrackedEntityInstances,
 } from './queries/dataQueries'
-import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
 
 export const getDataSize = async ({
     dataEngine,
@@ -15,7 +15,7 @@ export const getDataSize = async ({
     let metadataSize = 0
     const TEIs = await getTEI({ dataEngine, programList, globalLimit, orgUnit })
 
-    TEIs.forEach(data => {
+    TEIs.forEach((data) => {
         metadataSize += getByteLength(data)
     })
 
@@ -25,8 +25,8 @@ export const getDataSize = async ({
 const getTEI = ({ dataEngine, programList, globalLimit, orgUnit }) => {
     const teiPromises = []
     const limitByProgram = globalLimit.settingDownload === 'PER_PROGRAM'
-    orgUnit.map(ou =>
-        programList.map(program => {
+    orgUnit.map((ou) =>
+        programList.map((program) => {
             const tei = program.teiDownload
             let pageSize
             if (tei) {

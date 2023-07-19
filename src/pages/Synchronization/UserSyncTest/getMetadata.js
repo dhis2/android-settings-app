@@ -1,4 +1,8 @@
+import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
+import { joinElementsById, joinObjectsById } from './helper'
 import {
+    apiFetchApps,
+    apiFetchAuthorization,
     apiFetchCategories,
     apiFetchCategoryCombos,
     apiFetchCategoryOptions,
@@ -7,6 +11,8 @@ import {
     apiFetchDataSet,
     apiFetchEventFilters,
     apiFetchIndicators,
+    apiFetchLegendSet,
+    apiFetchIndicatorType,
     apiFetchMe,
     apiFetchOptionGroup,
     apiFetchOptions,
@@ -14,16 +20,17 @@ import {
     apiFetchOrgUnit,
     apiFetchOULevel,
     apiFetchProgram,
+    apiFetchProgramIndicators,
     apiFetchProgramRule,
     apiFetchProgramStage,
     apiFetchRelationshipTypes,
+    apiFetchSystemInfo,
     apiFetchSystemSettings,
     apiFetchTrackedEntityAttributes,
     apiFetchTrackedEntityInstanceFilter,
     apiFetchTrackedEntityType,
     apiFetchUserSettings,
 } from './queries/metadataQueries'
-import { formatByteSize, getByteLength } from '../../../utils/getByteLength'
 
 export const getMetadataSize = async ({
     dataEngine,
@@ -39,6 +46,13 @@ export const getMetadataSize = async ({
     indicatorList,
 }) => {
     let metadataSize = 0
+    const indicators = await apiFetchIndicators(dataEngine, indicatorList)
+    const indicatorTypesList = []
+    const legendSetsList = []
+    for (const indicator of indicators) {
+        indicatorTypesList.push(indicator.indicatorType)
+        legendSetsList.push(indicator.legendSets)
+    }
 
     await Promise.all([
         fetchOrgUnits(dataEngine, orgUnitList),
@@ -55,7 +69,7 @@ export const getMetadataSize = async ({
         apiFetchOptions(dataEngine, optionSetList),
         apiFetchOptionGroup(dataEngine, optionSetList),
         apiFetchDataSet(dataEngine, dataSetList),
-        apiFetchDataElements(dataEngine, dataElementList),
+        fetchDataElements(dataEngine, dataElementList),
         apiFetchCategoryCombos(dataEngine, categoryComboList),
         apiFetchCategories(dataEngine, categoryList),
         apiFetchCategoryOptions(dataEngine, categoryList),
@@ -64,14 +78,29 @@ export const getMetadataSize = async ({
         apiFetchSystemSettings(dataEngine),
         apiFetchConstants(dataEngine),
         apiFetchMe(dataEngine),
-    ]).then(result => result.map(data => (metadataSize += getByteLength(data))))
+        apiFetchSystemInfo(dataEngine),
+        apiFetchAuthorization(dataEngine),
+        apiFetchApps(dataEngine),
+        apiFetchIndicatorType(dataEngine, joinElementsById(indicatorTypesList)),
+        apiFetchProgramIndicators(dataEngine, programList),
+        apiFetchLegendSet(dataEngine, joinObjectsById(legendSetsList)),
+    ]).then((result) =>
+        result.map((data) => (metadataSize += getByteLength(data)))
+    )
 
     return formatByteSize(metadataSize)
 }
 
 const fetchOrgUnits = (dataEngine, orgUnitList) => {
-    const orgUnitPromises = []
-    orgUnitList.map(ou => orgUnitPromises.push(apiFetchOrgUnit(dataEngine, ou)))
-
+    const orgUnitPromises = orgUnitList.map((ou) =>
+        apiFetchOrgUnit(dataEngine, ou)
+    )
     return Promise.all(orgUnitPromises)
+}
+
+const fetchDataElements = (dataEngine, dataElementList) => {
+    const dataElementPromises = dataElementList.map((e) =>
+        apiFetchDataElements(dataEngine, e)
+    )
+    return Promise.all(dataElementPromises)
 }

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import { VisualizationTable } from './VisualizationTable'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
-import { removeSettingsFromList } from '../../../utils/utils'
-import { removeElement, updateGroup } from './helper'
+import { EditVisualization } from '../EditVisualization'
+import { removeElement, updateGroup, updateVisualizations } from './helper'
+import { VisualizationTable } from './VisualizationTable'
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [openDeleteDialog, setOpenDialog] = useState(false)
@@ -13,11 +14,37 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const [group, setGroup] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
     const [elementName, setName] = useState()
+    const [groupId, setGroupId] = useState('')
+    const [openEditDialog, setOpenEditDialog] = useState(false)
+
+    const editVisualization = (visualization, visualizationGroup) => {
+        setOpenEditDialog(true)
+        setSpecificSetting(visualization)
+        setGroupId(visualization.group.id)
+        setGroup(visualizationGroup)
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEditDialog(false)
+        setSpecificSetting({})
+        setGroupId('')
+        setGroup([])
+    }
+
+    const handleEdit = () => {
+        changeRows(
+            updateVisualizations(group, rows, {
+                currentElement: specificSetting,
+                elementType: 'program',
+            })
+        )
+        handleCloseEdit()
+    }
 
     const deleteRow = (row, group) => {
         setSpecificSetting(row)
         setGroup(group)
-        setName(row.name)
+        setName(row.name || row.visualizationName)
         setOpenDialog(true)
     }
 
@@ -85,6 +112,7 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
             <VisualizationTable
                 element="program"
                 rows={rows}
+                editVisualization={editVisualization}
                 deleteVisualization={deleteRow}
                 deleteGroup={deleteGroup}
                 disabled={disabled}
@@ -106,6 +134,19 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
                 )}
                 element={i18n.t('Visualization Group')}
             />
+
+            {openEditDialog && (
+                <EditVisualization
+                    open={openEditDialog}
+                    settings={specificSetting}
+                    handleChange={setSpecificSetting}
+                    groups={group}
+                    currentGroup={groupId}
+                    handleClose={handleCloseEdit}
+                    handleEdit={handleEdit}
+                    type="program"
+                />
+            )}
         </>
     )
 }

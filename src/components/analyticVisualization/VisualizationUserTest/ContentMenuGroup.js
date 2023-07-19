@@ -1,7 +1,7 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import React from 'react'
 import ContentMenuItem from './ContentMenuItem'
 
 const ContentMenuGroup = ({ items, addItem }) => (
@@ -10,7 +10,7 @@ const ContentMenuGroup = ({ items, addItem }) => (
             <ContentMenuItem name={i18n.t('No user found')} valid={false} />
         )}
 
-        {items.map(item => (
+        {items.map((item) => (
             <ContentMenuItem
                 key={item.id || item.key}
                 addItem={addItem(item)}

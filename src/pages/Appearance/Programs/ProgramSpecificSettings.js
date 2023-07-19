@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
-import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'
+import keyBy from 'lodash/keyBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import PageSubtitle from '../../../components/page/PageSubtitle'
-import NewProgramSpecific from './NewProgramSpecific'
-import SpecificTableAction from './SpecificTableAction'
-import { useReadProgram } from './programQuery'
 import { filterUnusedElements } from '../../../utils/utils'
-import { prepareSpecificSettingsList } from './helper'
+import {
+    prepareProgramConfigurationList,
+    prepareSpecificSettingsList,
+} from './helper'
+import NewProgramSpecific from './NewProgramSpecific'
+import { useReadProgram } from './programQuery'
+import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
     onChange,
@@ -31,7 +34,7 @@ const ProgramSpecificSettings = ({
                 specificSettings,
                 programList
             )
-            const spinnerListUpdated = prepareSpecificSettingsList(
+            const spinnerListUpdated = prepareProgramConfigurationList(
                 spinnerSettings,
                 programList
             )

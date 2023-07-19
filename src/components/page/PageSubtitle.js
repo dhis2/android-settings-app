@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import PropTypes from '@dhis2/prop-types'
 import styles from './Page.module.css'
 
 const PageSubtitle = ({ title, desc }) => (

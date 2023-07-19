@@ -1,47 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
-import Page from '../../../components/page/Page'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { createInitialValues } from './helper'
 
 const DatasetSyncSettings = () => {
-    const {
-        load,
-        programSettings,
-        syncGlobal,
-        dataSetSettings,
-    } = useGetSyncDataStore()
+    const { load, programSettings, syncGlobal, dataSetSettings } =
+        useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
     const [globalSettings, setGlobalSettings] = useState()
     const [specificSettings, setSpecificSettings] = useState()
-
-    const { data: authority } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [mutate, { error, data }] = useDataMutation(
         saveSynchronizationKeyMutation
     )
 
     useEffect(() => {
-        authority && setDisable(!authority.authority)
-    }, [authority])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (dataSetSettings) {
-            const {
-                specificSettings,
-                lastUpdated,
-                ...globalSettings
-            } = dataSetSettings
+            const { specificSettings, lastUpdated, ...globalSettings } =
+                dataSetSettings
             setInitialValues({
                 ...globalSettings,
                 specificSettings,

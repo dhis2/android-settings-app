@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { NumberField } from './NumberField'
 
 const CODE = 'reservedValues'
@@ -9,7 +9,7 @@ const MAXVALUE = 500
 export const defaultReservedValues = 100
 
 export const ReservedValues = ({ onChange, value, ...props }) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
         const inputValue = Math.max(
             0,
             isNaN(parseInt(e.value)) ? 0 : parseInt(e.value)

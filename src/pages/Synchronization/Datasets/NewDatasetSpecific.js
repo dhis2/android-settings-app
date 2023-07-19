@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
+import { updateSettingsList } from '../../../utils/utils'
 import DialogSpecificSettings from './DialogSpecificSettings'
 import {
     createInitialSpecificValues,
@@ -10,7 +11,6 @@ import {
     getPeriodType,
 } from './helper'
 import { parseValueBySettingType } from './parseValueBySettingType'
-import { updateSettingsList } from '../../../utils/utils'
 
 const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
     const [openDialog, setOpenDialog] = useState(false)

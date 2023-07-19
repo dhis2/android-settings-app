@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
+import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
 import {
     saveAppearanceKeyMutation,
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
 import {
+    createInitialGlobalSpinner,
+    createInitialGlobalSpinnerPrevious,
     createInitialSpinnerValue,
     createInitialValues,
     createSpecificValues,
+    prepareSettingsSaveDataStore,
+    prepareSpinnerPreviousSpinner,
 } from './helper'
-import Page from '../../../components/page/Page'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
-import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
-import { removeSummaryFromSettings } from '../../../utils/utils'
 
 const ProgramsAppearance = () => {
     const {
         load,
         dataSetSettings,
-        completionSpinner,
+        programConfiguration,
         home,
         programSettings,
     } = useReadAppearanceDataStore()
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [disableSave, setDisableSave] = useState(true)
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
@@ -41,11 +44,11 @@ const ProgramsAppearance = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
-        if (programSettings && completionSpinner) {
+        if (programSettings && programConfiguration) {
             const { globalSettings, specificSettings } = programSettings
             setInitialValues({ globalSettings, specificSettings })
             setGlobalSettings(createInitialValues(globalSettings))
@@ -54,9 +57,11 @@ const ProgramsAppearance = () => {
                       createSpecificValues(programSettings.specificSettings)
                   )
                 : setSpecificSettings({})
-            setSpinnerSettings(completionSpinner)
-            setSpinnerGlobal(completionSpinner.globalSettings)
-            setSpinnerSpecific(completionSpinner.specificSettings)
+            setSpinnerSettings(programConfiguration)
+            setSpinnerGlobal(
+                createInitialGlobalSpinner(programConfiguration.globalSettings)
+            )
+            setSpinnerSpecific(programConfiguration.specificSettings)
         }
     }, [programSettings])
 
@@ -73,12 +78,20 @@ const ProgramsAppearance = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            completionSpinner: {
+            programConfiguration: {
                 globalSettings: {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...removeSummaryFromSettings(spinnerSpecific),
+                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                },
+            },
+            completionSpinner: {
+                globalSettings: {
+                    ...createInitialGlobalSpinnerPrevious(spinnerGlobal),
+                },
+                specificSettings: {
+                    ...prepareSpinnerPreviousSpinner(spinnerSpecific),
                 },
             },
             filterSorting: {
@@ -87,7 +100,7 @@ const ProgramsAppearance = () => {
                 programSettings: {
                     globalSettings,
                     specificSettings: {
-                        ...removeSummaryFromSettings(specificSettings),
+                        ...prepareSettingsSaveDataStore(specificSettings),
                     },
                 },
             },

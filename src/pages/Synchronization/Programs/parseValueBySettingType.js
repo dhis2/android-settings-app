@@ -5,7 +5,7 @@ import {
     TEI_DOWNLOAD,
 } from '../../../constants/program-settings'
 
-const convertToPositiveInteger = value => {
+const convertToPositiveInteger = (value) => {
     return Math.max(0, isNaN(parseInt(value)) ? 0 : parseInt(value))
 }
 

@@ -10,7 +10,7 @@ export const validateUserVisualization = (user, visualization) =>
 /**
  * User has at least read access to a visualization
  * */
-const visualizationHasPublicAccess = visualization =>
+const visualizationHasPublicAccess = (visualization) =>
     visualization.publicAccess.startsWith('r')
 
 /**

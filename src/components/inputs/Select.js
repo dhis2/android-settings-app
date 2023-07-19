@@ -1,6 +1,6 @@
-import React from 'react'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import PropTypes from '@dhis2/prop-types'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 export const Select = ({
     onChange,
@@ -18,10 +18,10 @@ export const Select = ({
         selected={value}
         id={name}
         name={name}
-        onChange={e => onChange(e, name)}
+        onChange={(e) => onChange(e, name)}
         disabled={disabled}
     >
-        {options.map(option => (
+        {options.map((option) => (
             <SingleSelectOption
                 key={option.value || option.id}
                 label={option.label || option.name}

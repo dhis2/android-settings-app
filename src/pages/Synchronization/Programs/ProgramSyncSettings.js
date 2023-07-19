@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
-import Page from '../../../components/page/Page'
-import ProgramGlobalSettings from './ProgramGlobalSettings'
-import ProgramSpecificSettings from './ProgramSpecificSettings'
+import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
+import Page from '../../../components/page/Page'
 import {
     DEFAULT,
     GLOBAL,
@@ -16,38 +15,31 @@ import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { populateProgramObject } from './populateProgramObject'
+import ProgramGlobalSettings from './ProgramGlobalSettings'
+import ProgramSpecificSettings from './ProgramSpecificSettings'
 
 const ProgramSyncSettings = () => {
-    const {
-        load,
-        programSettings,
-        syncGlobal,
-        dataSetSettings,
-    } = useGetSyncDataStore()
+    const { load, programSettings, syncGlobal, dataSetSettings } =
+        useGetSyncDataStore()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [globalSettings, setGlobalSettings] = useState()
     const [specificSettings, setSpecificSettings] = useState()
     const [disable, setDisable] = useState(false)
-
-    const { data: authority } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [mutate, { error, data }] = useDataMutation(
         saveSynchronizationKeyMutation
     )
 
     useEffect(() => {
-        authority && setDisable(!authority.authority)
-    }, [authority])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (programSettings) {
-            const {
-                lastUpdated,
-                specificSettings,
-                ...initialGlobalSettings
-            } = programSettings
+            const { lastUpdated, specificSettings, ...initialGlobalSettings } =
+                programSettings
 
             setInitialValues({
                 ...initialGlobalSettings,

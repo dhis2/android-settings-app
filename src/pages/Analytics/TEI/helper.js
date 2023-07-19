@@ -1,11 +1,12 @@
-import omit from 'lodash/omit'
+import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
-import { validateObjectByProperty } from '../../../utils/validators'
+import omit from 'lodash/omit'
 import { findProgramNameById } from '../../../utils/utils'
+import { validateObjectByProperty } from '../../../utils/validators'
 
 export const WHO_NUTRITION = 'WHO_NUTRITION'
 
-export const createInitialValues = initialValues => ({
+export const createInitialValues = (initialValues) => ({
     uid: initialValues.uid || '',
     program: initialValues.program || '',
     programStage: initialValues.programStage || '',
@@ -26,7 +27,7 @@ export const createInitialValues = initialValues => ({
     elementValueY: initialValues.elementValueY || '',
 })
 
-export const populateWHOItem = whoItem => {
+export const populateWHOItem = (whoItem) => {
     const elementX = Object.keys(whoItem.WHONutrition.x)[0]
     const elementY = Object.keys(whoItem.WHONutrition.y)[0]
     const elementValueX = whoItem.WHONutrition.x[elementX][0]
@@ -50,11 +51,12 @@ export const populateWHOItem = whoItem => {
     }
 }
 
-export const populateAnalyticItem = item => {
+export const populateAnalyticItem = (item) => {
     const element = Object.keys(item.data)[0]
     const elementValue = item.data[element][0]
     return {
         ...item,
+        period: !isEmpty(item.period) ? item.period : 'None',
         element,
         elementValue:
             element === 'attributes'
@@ -63,7 +65,7 @@ export const populateAnalyticItem = item => {
     }
 }
 
-const createWHOValues = values => ({
+const createWHOValues = (values) => ({
     x: {
         [values.elementX]: [
             values.elementX === 'programIndicators'
@@ -88,7 +90,7 @@ const createWHOValues = values => ({
     chartType: values.chartType,
 })
 
-const createVisualizationValues = values => ({
+const createVisualizationValues = (values) => ({
     data: {
         [values.element]: [
             values.element === 'attributes'
@@ -127,13 +129,13 @@ const VALID_VALUE_TYPE = [
 ]
 
 export const updateDataElementsList = (programId, refetch, updateList) => {
-    if (programId)
-        refetch({ programId }).then(result => {
+    if (programId) {
+        refetch({ programId }).then((result) => {
             const dataElements =
                 result.programStages.programStageDataElements || []
             const options = []
 
-            dataElements.map(dataElement => {
+            dataElements.map((dataElement) => {
                 if (
                     VALID_VALUE_TYPE.includes(dataElement.dataElement.valueType)
                 ) {
@@ -146,6 +148,7 @@ export const updateDataElementsList = (programId, refetch, updateList) => {
             })
             updateList(options)
         })
+    }
 }
 
 export const updateAttributesList = ({
@@ -154,13 +157,13 @@ export const updateAttributesList = ({
     updateList,
     isWHO,
 }) => {
-    if (programId)
-        refetch({ programId }).then(result => {
+    if (programId) {
+        refetch({ programId }).then((result) => {
             const attributes =
                 result.programs.programTrackedEntityAttributes || []
             const options = []
 
-            attributes.map(attribute => {
+            attributes.map((attribute) => {
                 if (isWHO) {
                     options.push({
                         label: attribute.trackedEntityAttribute.name,
@@ -181,21 +184,23 @@ export const updateAttributesList = ({
             })
             updateList(options)
         })
+    }
 }
 
 export const updateProgramIndicatorsList = (programId, refetch, updateList) => {
-    if (programId)
-        refetch({ programId }).then(result => {
+    if (programId) {
+        refetch({ programId }).then((result) => {
             const programIndicators = result.programs.programIndicators || []
-            const options = programIndicators.map(program => ({
+            const options = programIndicators.map((program) => ({
                 label: program.name,
                 id: program.id,
             }))
             updateList(options)
         })
+    }
 }
 
-export const validMandatoryFields = specificSettings => {
+export const validMandatoryFields = (specificSettings) => {
     if (specificSettings.type === WHO_NUTRITION) {
         return !validateObjectByProperty(
             [
@@ -234,9 +239,9 @@ export const prepareItemsList = (itemList, apiProgramList) => {
     const teiItemRows = []
     const items = [...itemList]
 
-    items.map(item => {
+    items.map((item) => {
         const result = apiProgramList.find(
-            program => program.id === item.program
+            (program) => program.id === item.program
         )
 
         if (result) {
@@ -249,6 +254,19 @@ export const prepareItemsList = (itemList, apiProgramList) => {
     return teiItemRows
 }
 
-export const removeSummarySettings = itemList => {
-    return map(itemList, object => omit(object, ['summarySettings']))
+export const removeSummarySettings = (itemList) => {
+    return map(itemList, (object) => omit(object, ['summarySettings']))
+}
+
+const removeNonePeriod = (values) => {
+    const visualization = {
+        ...values,
+        period: values.period === 'None' ? null : values.period,
+    }
+    return values.type !== WHO_NUTRITION ? visualization : values
+}
+
+export const dataStoreSettings = (settings) => {
+    const dataToSave = settings.map((tei) => removeNonePeriod(tei))
+    return removeSummarySettings(dataToSave)
 }

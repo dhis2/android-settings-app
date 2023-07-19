@@ -1,6 +1,4 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from '@dhis2/prop-types'
 import {
     Button,
     ButtonStrip,
@@ -8,11 +6,14 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
+    spacers,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { Select } from '../../../components/inputs'
-import SpecificSettings from './SpecificSettings'
-import titleStyles from '../../../styles/LayoutTitles.module.css'
 import buttonStyles from '../../../styles/Button.module.css'
+import titleStyles from '../../../styles/LayoutTitles.module.css'
+import SpecificSettings from './SpecificSettings'
 
 const DialogNewProgram = ({
     open,
@@ -25,6 +26,7 @@ const DialogNewProgram = ({
     hasCategoryCombo,
     spinnerSettings,
     disableSave,
+    isTrackerProgram,
 }) => (
     <>
         {open && (
@@ -38,7 +40,7 @@ const DialogNewProgram = ({
                     ) : (
                         <Select
                             name="id"
-                            inputWidth="300px"
+                            inputWidth={spacers.dp384}
                             onChange={handleChange}
                             value={specificSettings.id || ''}
                             options={dataOptions}
@@ -51,6 +53,7 @@ const DialogNewProgram = ({
                             hasCategoryCombo={hasCategoryCombo}
                             specificSettings={specificSettings}
                             handleSettings={handleChange}
+                            isTrackerProgram={isTrackerProgram}
                         />
                     )}
                 </ModalContent>
@@ -83,6 +86,7 @@ DialogNewProgram.propTypes = {
     hasCategoryCombo: PropTypes.bool,
     spinnerSettings: PropTypes.object,
     disableSave: PropTypes.bool,
+    isTrackerProgram: PropTypes.bool,
 }
 
 export default DialogNewProgram

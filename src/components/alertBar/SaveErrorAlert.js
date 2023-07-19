@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from '@dhis2/prop-types'
 import { AlertBar } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styles from './AlertBar.module.css'
 
 const SaveErrorAlert = ({ show, message }) => (
