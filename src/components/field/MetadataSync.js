@@ -6,7 +6,7 @@ import { MANUAL, SyncSelect } from './SyncSelect'
 export const defaultMetadataSync = '24h'
 
 const CODE = 'metadataSync'
-const metadataOptions = [
+export const metadataOptions = [
     {
         value: defaultMetadataSync,
         label: i18n.t('1 Day'),

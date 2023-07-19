@@ -2,9 +2,9 @@ import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../auth'
 import {
     EncryptDB,
-    FileMaxSize,
     MatomoId,
     MatomoUrl,
     ReservedValues,
@@ -14,7 +14,6 @@ import {
 } from '../../components/field'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import Page from '../../components/page/Page'
-import { authorityQuery } from '../../modules/apiLoadFirstSetup'
 import DisableSettings from './DisableSettings'
 import {
     getGeneralKeyQuery,
@@ -28,7 +27,7 @@ import {
 
 const GeneralSettings = () => {
     const { loading, data: queryResult } = useDataQuery(getGeneralKeyQuery)
-    const { data } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
@@ -39,8 +38,8 @@ const GeneralSettings = () => {
     )
 
     useEffect(() => {
-        data && setDisable(!data.authority)
-    }, [data])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (queryResult) {
@@ -107,11 +106,6 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <ReservedValues
-                        value={settings}
-                        onChange={setSettings}
-                        disabled={disable}
-                    />
-                    <FileMaxSize
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}

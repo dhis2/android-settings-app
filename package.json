@@ -1,11 +1,11 @@
 {
     "name": "android-settings-app",
-    "version": "2.3.0",
-    "author": "Milagros Rodriguez <milagros@dhis2.org>",
+    "version": "2.3.1",
+    "author": "UiO <milagros@dhis2.org>",
     "private": true,
     "dependencies": {
         "@dhis2/app-runtime": "^3.4.4",
-        "@dhis2/d2-i18n": "^1.1.0",
+        "@dhis2/d2-i18n": "^1.1.1",
         "@dhis2/d2-ui-core": "^6.3.0",
         "@dhis2/d2-ui-table": "^6.3.0",
         "@dhis2/ui": "^8.2.1",
@@ -34,7 +34,7 @@
         "format": "d2-style js apply"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^9.0.1",
+        "@dhis2/cli-app-scripts": "^10.3.9",
         "@dhis2/cli-style": "^10.4.1"
     }
 }

@@ -1,9 +1,11 @@
-import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
+import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
+import { useIsAuthorized } from '../../../auth'
 import {
     DataSync,
+    FileMaxSize,
     MetadataSync,
     TrackerExporter,
     TrackerImporter,
@@ -11,18 +13,21 @@ import {
 import FooterStripButtons from '../../../components/footerStripButton/FooterStripButtons'
 import { TrackerImporterInfo } from '../../../components/noticeAlert'
 import Page from '../../../components/page/Page'
-import { authorityQuery } from '../../../modules/apiLoadFirstSetup'
 import { useApiVersion } from '../../../utils/useApiVersion'
 import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
-import { createInitialValues } from './helper'
+import {
+    checkValidSettings,
+    createInitialValues,
+    createValidValues,
+} from './helper'
 
 const GlobalSettings = () => {
     const { load, syncGlobal, syncSettings, dataSetSettings, programSettings } =
         useGetSyncDataStore()
-    const { data: authority } = useDataQuery(authorityQuery)
+    const { hasAuthority } = useIsAuthorized()
     const { apiVersion } = useApiVersion()
     const [settings, setSettings] = useState()
     const [initialValues, setInitialValues] = useState()
@@ -34,12 +39,12 @@ const GlobalSettings = () => {
     )
 
     useEffect(() => {
-        authority && setDisable(!authority.authority)
-    }, [authority])
+        setDisable(!hasAuthority)
+    }, [hasAuthority])
 
     useEffect(() => {
         if (syncSettings) {
-            setSettings(syncGlobal)
+            setSettings(createValidValues(syncGlobal))
             setInitialValues(syncGlobal)
         }
     }, [syncSettings])
@@ -55,7 +60,7 @@ const GlobalSettings = () => {
 
     const saveSettings = async () => {
         const settingsToSave = {
-            ...createInitialValues(settings),
+            ...checkValidSettings(settings),
             dataSetSettings,
             programSettings,
         }
@@ -96,6 +101,12 @@ const GlobalSettings = () => {
                     />
 
                     <TrackerExporter
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
+
+                    <FileMaxSize
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}
