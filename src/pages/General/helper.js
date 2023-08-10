@@ -1,3 +1,4 @@
+import isNil from 'lodash/isNil'
 import {
     defaultEncryptDB,
     defaultReservedValues,
@@ -41,8 +42,15 @@ export const createInitialValues = (prevGeneralDetails) => ({
     matomoID: prevGeneralDetails.matomoID || '',
     smsGateway: prevGeneralDetails.smsGateway || '',
     smsResultSender: prevGeneralDetails.smsResultSender || '',
-    reservedValues: prevGeneralDetails.reservedValues || defaultReservedValues,
+    reservedValues: validReservedValue(prevGeneralDetails.reservedValues),
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
 })
+
+const validReservedValue = (value) => {
+    if (isNil(value) || !isValidValue(value)) {
+        return defaultReservedValues
+    }
+    return value
+}
