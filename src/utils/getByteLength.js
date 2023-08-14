@@ -1,8 +1,10 @@
 /**
  * Returns the byte length
  * */
-export const getByteLength = (element) =>
-    Buffer.byteLength(JSON.stringify(element))
+export const getByteLength = (element) => {
+    const encoder = new TextEncoder()
+    return encoder.encode(JSON.stringify(element)).length
+}
 
 /**
  * Returns Kb
