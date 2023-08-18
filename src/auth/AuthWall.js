@@ -1,17 +1,24 @@
 import { useAlert, useConfig, useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import isNil from 'lodash/isNil'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DialogFirstLaunch from '../components/dialog/DialogFirstLaunch'
 import { deletePrevDataStoreMutation, useCreateFirstSetup } from '../modules'
+import {
+    updateInfoMutation,
+    useAndroidSettingsVersion,
+} from './useAndroidSettingsVersion'
 import { useIsAuthorized } from './useIsAuthorized'
 
 const AuthWall = ({ children }) => {
     const { hasAuthority, hasNamespace, hasOutDateNamespace } =
         useIsAuthorized()
+    const { isInfoUpdated } = useAndroidSettingsVersion()
     const { apiVersion } = useConfig()
     const [hasDatastoreAccess, setDatastoreAccess] = useState(hasNamespace)
     const [mutate] = useDataMutation(deletePrevDataStoreMutation)
+    const [mutateUpdateInfo] = useDataMutation(updateInfoMutation)
     const { createSetup } = useCreateFirstSetup()
     const { show } = useAlert(
         ({ success }) =>
@@ -24,6 +31,16 @@ const AuthWall = ({ children }) => {
                   ),
         ({ success }) => (success ? { success: true } : { critical: true })
     )
+
+    useEffect(() => {
+        if (!isNil(isInfoUpdated) && !isInfoUpdated) {
+            updateInfoVersion().catch((e) => console.error(e))
+        }
+    }, [isInfoUpdated])
+
+    const updateInfoVersion = async () => {
+        await mutateUpdateInfo()
+    }
 
     const handleSave = async () => {
         if (hasOutDateNamespace) {
