@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-07-05T09:36:08.695Z\n"
-"PO-Revision-Date: 2023-07-05T09:36:08.695Z\n"
+"POT-Creation-Date: 2023-08-25T13:59:32.928Z\n"
+"PO-Revision-Date: 2023-08-25T13:59:32.928Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -378,6 +378,9 @@ msgstr "Manual"
 
 msgid "How often should data sync?"
 msgstr "How often should data sync?"
+
+msgid "Disable TEI referrals"
+msgstr "Disable TEI referrals"
 
 msgid "Encrypt device database"
 msgstr "Encrypt device database"
