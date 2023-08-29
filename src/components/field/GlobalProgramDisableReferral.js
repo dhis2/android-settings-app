@@ -5,9 +5,13 @@ import React from 'react'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 
-const CODE = 'completionSpinner'
+const CODE = 'disableReferral'
 
-export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
+export const GlobalProgramDisableReferral = ({
+    disable,
+    settings,
+    onChange,
+}) => {
     const handleChange = (e) => {
         onChange({
             ...settings,
@@ -16,21 +20,20 @@ export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
     }
 
     return (
-        <div className={cx(styles.rowBMargin24, styles.rowTMargin32)}>
+        <div className={cx(styles.rowBMargin24)}>
             <CheckboxField
                 name={CODE}
-                label={i18n.t(
-                    'Show percentage (%) complete in Program toolbar'
-                )}
+                label={i18n.t('Disable TEI referrals')}
                 onChange={handleChange}
                 disabled={disable}
-                checked={settings.visible || settings[CODE]}
+                checked={settings[CODE]}
             />
         </div>
     )
 }
 
-GlobalProgramCompletion.propTypes = {
+GlobalProgramDisableReferral.propTypes = {
     disable: PropTypes.bool,
     settings: PropTypes.object,
+    onChange: PropTypes.func,
 }
