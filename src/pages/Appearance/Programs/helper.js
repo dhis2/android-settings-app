@@ -179,3 +179,6 @@ const convertFilterKeyToValue = (filter) => {
 
 export const isProgramConfiguration = (configurationType) =>
     ['completionSpinner', 'optionalSearch'].includes(configurationType)
+
+export const removeAttributes = (itemList) =>
+    removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])

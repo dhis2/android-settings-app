@@ -17,6 +17,7 @@ import {
     createSpecificValues,
     prepareSettingsSaveDataStore,
     prepareSpinnerPreviousSpinner,
+    removeAttributes,
 } from './helper'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
@@ -68,7 +69,10 @@ const ProgramsAppearance = () => {
     useEffect(() => {
         if (globalSettings) {
             !isEqual(globalSettings, initialValues.globalSettings) ||
-            !isEqual(specificSettings, initialValues.specificSettings) ||
+            !isEqual(
+                removeAttributes(specificSettings),
+                initialValues.specificSettings
+            ) ||
             !isEqual(spinnerGlobal, spinnerSettings.globalSettings) ||
             !isEqual(spinnerSpecific, spinnerSettings.specificSettings)
                 ? setDisableSave(false)
