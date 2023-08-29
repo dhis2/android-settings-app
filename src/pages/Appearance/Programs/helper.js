@@ -29,11 +29,13 @@ export const createInitialSpinnerValue = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
         optionalSearch: false,
+        disableReferral: false,
     })
 
     return {
         completionSpinner: prevDetails.completionSpinner,
         optionalSearch: prevDetails.optionalSearch,
+        disableReferral: prevDetails.disableReferral,
     }
 }
 
@@ -71,7 +73,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
     }))
     return removePropertiesFromObject(
         prepareSettingsSaveDataStore(spinnerSettings),
-        ['optionalSearch', 'completionSpinner']
+        ['optionalSearch', 'completionSpinner', 'disableReferral']
     )
 }
 
@@ -178,7 +180,9 @@ const convertFilterKeyToValue = (filter) => {
 }
 
 export const isProgramConfiguration = (configurationType) =>
-    ['completionSpinner', 'optionalSearch'].includes(configurationType)
+    ['completionSpinner', 'optionalSearch', 'disableReferral'].includes(
+        configurationType
+    )
 
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
