@@ -58,7 +58,11 @@ export const createInitialGlobalSpinner = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
     })
-    return { completionSpinner: prevDetails.completionSpinner }
+    return {
+        completionSpinner: prevDetails.completionSpinner,
+        disableReferral: prevDetails.disableReferral || false,
+        collapsibleSections: prevDetails.collapsibleSections || true,
+    }
 }
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {

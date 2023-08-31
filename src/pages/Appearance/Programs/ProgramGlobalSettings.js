@@ -4,6 +4,7 @@ import React from 'react'
 import {
     GlobalProgramCompletion,
     GlobalProgramDisableReferral,
+    GlobalProgramHideSections,
 } from '../../../components/field'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import { TableHeader } from '../../../components/table'
@@ -38,6 +39,12 @@ const ProgramGlobalSettings = ({
             />
 
             <GlobalProgramDisableReferral
+                settings={spinnerSettings}
+                onChange={onChangeSpinner}
+                disable={disableAll}
+            />
+
+            <GlobalProgramHideSections
                 settings={spinnerSettings}
                 onChange={onChangeSpinner}
                 disable={disableAll}
