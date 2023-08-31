@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {
     DisableReferral,
+    HideFormSections,
     OptionalTEISearch,
     ProgramCompletionSpinner,
 } from '../../../components/field'
@@ -32,6 +33,11 @@ const SpecificSettings = ({
                 />
 
                 <DisableReferral
+                    handleChange={handleSettings}
+                    settings={spinnerSettings}
+                />
+
+                <HideFormSections
                     handleChange={handleSettings}
                     settings={spinnerSettings}
                 />
