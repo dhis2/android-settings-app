@@ -60,6 +60,9 @@ export const createInitialGlobalSpinner = (prevDetails) => ({
     disableReferrals: !isNil(prevDetails.disableReferrals)
         ? prevDetails.disableReferrals
         : false,
+    collapsibleSections: !isNil(prevDetails.collapsibleSections)
+        ? prevDetails.collapsibleSections
+        : true,
 })
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
