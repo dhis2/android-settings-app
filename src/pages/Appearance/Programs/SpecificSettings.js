@@ -33,6 +33,7 @@ const SpecificSettings = ({
                 />
 
                 <DisableReferral
+                    isTrackerProgram={isTrackerProgram}
                     handleChange={handleSettings}
                     settings={spinnerSettings}
                 />
