@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import defaults from 'lodash/defaults'
+import isNil from 'lodash/isNil'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import toArray from 'lodash/toArray'
@@ -54,16 +55,15 @@ export const createInitialSpecificValues = (prevDetails) => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialGlobalSpinner = (prevDetails) => {
-    defaults(prevDetails, {
-        completionSpinner: true,
-    })
-    return {
-        completionSpinner: prevDetails.completionSpinner,
-        disableReferrals: prevDetails.disableReferrals || false,
-        collapsibleSections: prevDetails.collapsibleSections || true,
-    }
-}
+export const createInitialGlobalSpinner = (prevDetails) => ({
+    completionSpinner: prevDetails.completionSpinner || true,
+    disableReferrals: !isNil(prevDetails.disableReferrals)
+        ? prevDetails.disableReferrals
+        : false,
+    collapsibleSections: !isNil(prevDetails.collapsibleSections)
+        ? prevDetails.collapsibleSections
+        : true,
+})
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
     defaults(prevDetails, {

@@ -12,7 +12,6 @@ import {
 import {
     createInitialGlobalSpinner,
     createInitialGlobalSpinnerPrevious,
-    createInitialSpinnerValue,
     createInitialValues,
     createSpecificValues,
     prepareSettingsSaveDataStore,
@@ -115,7 +114,8 @@ const ProgramsAppearance = () => {
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
         setSpecificSettings({})
-        setSpinnerGlobal(createInitialSpinnerValue(''))
+        setSpinnerSpecific({})
+        setSpinnerGlobal(createInitialGlobalSpinner({}))
     }
 
     return (
