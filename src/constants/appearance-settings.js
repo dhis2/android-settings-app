@@ -2,6 +2,8 @@ export const appearanceDefault = {
     programConfiguration: {
         globalSettings: {
             completionSpinner: true,
+            disableReferrals: false,
+            collapsibleSections: true,
         },
         specificSettings: {},
     },
@@ -86,3 +88,6 @@ export const appearanceDefault = {
         },
     },
 }
+
+export const COMPLETION_SPINNER = 'completionSpinner'
+export const DISABLE_REFERRALS = 'disableReferrals'
