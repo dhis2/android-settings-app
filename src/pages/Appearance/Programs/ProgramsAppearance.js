@@ -10,8 +10,8 @@ import {
     useReadAppearanceDataStore,
 } from '../appearanceDatastoreQuery'
 import {
+    createInitialGlobalSpinner,
     createInitialGlobalSpinnerPrevious,
-    createInitialSpinnerValue,
     createInitialValues,
     createSpecificValues,
     prepareSettingsSaveDataStore,
@@ -58,7 +58,9 @@ const ProgramsAppearance = () => {
                   )
                 : setSpecificSettings({})
             setSpinnerSettings(programConfiguration)
-            setSpinnerGlobal(programConfiguration.globalSettings)
+            setSpinnerGlobal(
+                createInitialGlobalSpinner(programConfiguration.globalSettings)
+            )
             setSpinnerSpecific(programConfiguration.specificSettings)
         }
     }, [programSettings])
@@ -112,7 +114,8 @@ const ProgramsAppearance = () => {
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
         setSpecificSettings({})
-        setSpinnerGlobal(createInitialSpinnerValue(''))
+        setSpinnerSpecific({})
+        setSpinnerGlobal(createInitialGlobalSpinner({}))
     }
 
     return (
