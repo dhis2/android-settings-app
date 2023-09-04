@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { CheckboxField } from './CheckboxField'
 
-const CODE = 'disableReferral'
+const CODE = 'disableReferrals'
 
 export const DisableReferral = ({ handleChange, settings }) => (
     <CheckboxField

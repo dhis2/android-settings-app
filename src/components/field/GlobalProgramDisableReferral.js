@@ -5,7 +5,7 @@ import React from 'react'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 
-const CODE = 'disableReferral'
+const CODE = 'disableReferrals'
 
 export const GlobalProgramDisableReferral = ({
     disable,
