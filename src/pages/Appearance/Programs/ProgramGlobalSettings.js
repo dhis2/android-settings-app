@@ -1,7 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { GlobalProgramCompletion } from '../../../components/field'
+import {
+    GlobalProgramCompletion,
+    GlobalProgramDisableReferral,
+} from '../../../components/field'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import { TableHeader } from '../../../components/table'
 import Wrapper from '../../../components/Wrapper'
@@ -29,6 +32,12 @@ const ProgramGlobalSettings = ({
             <PageSubtitle title={i18n.t('Global settings')} />
 
             <GlobalProgramCompletion
+                settings={spinnerSettings}
+                onChange={onChangeSpinner}
+                disable={disableAll}
+            />
+
+            <GlobalProgramDisableReferral
                 settings={spinnerSettings}
                 onChange={onChangeSpinner}
                 disable={disableAll}

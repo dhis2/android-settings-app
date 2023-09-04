@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import defaults from 'lodash/defaults'
+import isNil from 'lodash/isNil'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import toArray from 'lodash/toArray'
@@ -29,11 +30,13 @@ export const createInitialSpinnerValue = (prevDetails) => {
     defaults(prevDetails, {
         completionSpinner: true,
         optionalSearch: false,
+        disableReferrals: false,
     })
 
     return {
         completionSpinner: prevDetails.completionSpinner,
         optionalSearch: prevDetails.optionalSearch,
+        disableReferrals: prevDetails.disableReferrals,
     }
 }
 
@@ -50,12 +53,12 @@ export const createInitialSpecificValues = (prevDetails) => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialGlobalSpinner = (prevDetails) => {
-    defaults(prevDetails, {
-        completionSpinner: true,
-    })
-    return { completionSpinner: prevDetails.completionSpinner }
-}
+export const createInitialGlobalSpinner = (prevDetails) => ({
+    completionSpinner: prevDetails.completionSpinner,
+    disableReferrals: !isNil(prevDetails.disableReferrals)
+        ? prevDetails.disableReferrals
+        : false,
+})
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
     defaults(prevDetails, {
@@ -71,7 +74,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
     }))
     return removePropertiesFromObject(
         prepareSettingsSaveDataStore(spinnerSettings),
-        ['optionalSearch', 'completionSpinner']
+        ['optionalSearch', 'completionSpinner', 'disableReferrals']
     )
 }
 
@@ -178,4 +181,9 @@ const convertFilterKeyToValue = (filter) => {
 }
 
 export const isProgramConfiguration = (configurationType) =>
-    ['completionSpinner', 'optionalSearch'].includes(configurationType)
+    ['completionSpinner', 'optionalSearch', 'disableReferrals'].includes(
+        configurationType
+    )
+
+export const removeAttributes = (itemList) =>
+    removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])

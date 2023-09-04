@@ -2,12 +2,15 @@ import i18n from '@dhis2/d2-i18n'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { DISABLE_REFERRALS } from '../../constants'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 
-const CODE = 'completionSpinner'
-
-export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
+export const GlobalProgramDisableReferral = ({
+    disable,
+    settings,
+    onChange,
+}) => {
     const handleChange = (e) => {
         onChange({
             ...settings,
@@ -16,21 +19,20 @@ export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
     }
 
     return (
-        <div className={cx(styles.rowBMargin24, styles.rowTMargin32)}>
+        <div className={cx(styles.rowBMargin24)}>
             <CheckboxField
-                name={CODE}
-                label={i18n.t(
-                    'Show percentage (%) complete in Program toolbar'
-                )}
+                name={DISABLE_REFERRALS}
+                label={i18n.t('Disable TEI referrals')}
                 onChange={handleChange}
                 disabled={disable}
-                checked={settings.visible || settings[CODE]}
+                checked={settings[DISABLE_REFERRALS]}
             />
         </div>
     )
 }
 
-GlobalProgramCompletion.propTypes = {
+GlobalProgramDisableReferral.propTypes = {
     disable: PropTypes.bool,
     settings: PropTypes.object,
+    onChange: PropTypes.func,
 }
