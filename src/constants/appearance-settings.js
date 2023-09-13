@@ -3,7 +3,7 @@ export const appearanceDefault = {
         globalSettings: {
             completionSpinner: true,
             disableReferrals: false,
-            collapsibleSections: true,
+            disableCollapsibleSections: true,
         },
         specificSettings: {},
     },
@@ -91,4 +91,4 @@ export const appearanceDefault = {
 
 export const COMPLETION_SPINNER = 'completionSpinner'
 export const DISABLE_REFERRALS = 'disableReferrals'
-export const COLLAPSIBLE_SECTIONS = 'collapsibleSections'
+export const COLLAPSIBLE_SECTIONS = 'disableCollapsibleSections'

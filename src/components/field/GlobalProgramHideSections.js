@@ -19,7 +19,7 @@ export const GlobalProgramHideSections = ({ disable, settings, onChange }) => {
         <div className={cx(styles.rowBMargin24)}>
             <CheckboxField
                 name={COLLAPSIBLE_SECTIONS}
-                label={i18n.t('Hide collapsible sections in forms')}
+                label={i18n.t('Do not collapse sections in form')}
                 onChange={handleChange}
                 disabled={disable}
                 checked={settings[COLLAPSIBLE_SECTIONS]}
