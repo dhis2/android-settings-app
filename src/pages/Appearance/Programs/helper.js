@@ -31,7 +31,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         completionSpinner: true,
         optionalSearch: false,
         disableReferrals: false,
-        disableCollapsibleSections: true,
+        disableCollapsibleSections: false,
     })
 
     return {

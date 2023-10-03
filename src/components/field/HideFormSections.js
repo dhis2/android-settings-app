@@ -7,7 +7,7 @@ import { CheckboxField } from './CheckboxField'
 export const HideFormSections = ({ settings, handleChange }) => (
     <CheckboxField
         name={COLLAPSIBLE_SECTIONS}
-        label={i18n.t('Hide collapsible sections in forms')}
+        label={i18n.t('Do not collapse sections in form')}
         onChange={handleChange}
         checked={settings[COLLAPSIBLE_SECTIONS]}
     />
