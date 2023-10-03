@@ -1,11 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { spacers } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
+import { validateAndroidExpressions } from '../../pages/Appearance/Programs/helper'
 import { useWorkflowContext } from '../../workflow-context'
 import { SelectField } from './SelectField'
 
 const CODE = 'programIndicator'
 
+// expression does not meet android criteria
 export const TeiHeader = ({ settings, handleChange, program }) => {
     const { programs } = useWorkflowContext()
     //const {refetch, loading} = use
@@ -15,15 +17,20 @@ export const TeiHeader = ({ settings, handleChange, program }) => {
 
     useEffect(() => {
         // filter list of options based on selected program
-        const indicators = programs.find(
-            (p) => p.id === program
-        )?.programIndicators
-        console.log({ program, indicators })
-        //setOptions()
+        if (program) {
+            const indicators = programs.find(
+                (p) => p.id === program
+            )?.programIndicators
+
+            validateAndroidExpressions(indicators)
+            console.log('valid check', { indicators })
+            setOptions(indicators)
+        }
     }, [program])
 
     useEffect(() => {
         // get expression
+        console.log('program ind', settings)
     }, [settings[CODE]])
 
     return (

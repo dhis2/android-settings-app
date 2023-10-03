@@ -16,6 +16,7 @@ export const SelectField = ({ label, options, onChange, ...props }) => (
                     key={option.value || option.id}
                     label={option.label || option.name}
                     value={option.value || option.id}
+                    disabled={!option.valid}
                 />
             ))}
         </SingleSelectField>
