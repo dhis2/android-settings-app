@@ -204,15 +204,32 @@ export const isProgramConfiguration = (configurationType) =>
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
 
-// validate if the indicator has a valid android expression
-
 /**
  * An expression is valid for android when:
  * - Based only on attributes and functions
  * - No Data Elements
  * */
-const isValidAndroidExpression = (expression) => {}
 
-export const validateAndroidExpressions = (expressions) => {
-    //expressions.map(())
+export const isValidAndroidExpression = (inputString) => {
+    const invalidPatterns = [
+        /#\{[^}]*\}/, // Matches anything starting with "#{"
+        /V\{\}/, // Matches "V{}"
+        /#\{[^}]*\}|V\{\}/, // Combination of the above two
+    ]
+
+    // Check if the string contains any invalid patterns
+    return !invalidPatterns.some((pattern) => pattern.test(inputString))
+}
+
+export const validateAndroidExpressions = (programIndicators) => {
+    programIndicators.map((element) => {
+        // console.log('valid: ', element.expression, isValidAndroidExpression(element.expression))
+        isValidAndroidExpression(element.expression)
+            ? (element.valid = true)
+            : (element.valid = false)
+        /*element.expression
+                .map(expression => {
+                console.log('valid: ', isValidAndroidExpression(expression))
+            })*/
+    })
 }
