@@ -75,8 +75,6 @@ const NewProgramSpecific = ({
                     : { ...spinner, [key]: e.selected }
 
                 setSpinner({
-                    /*...spinner,
-                    [e.name]: e.checked,*/
                     ...spinnerSettings,
                     id: specificSettings.id,
                     name: specificSettings.name,

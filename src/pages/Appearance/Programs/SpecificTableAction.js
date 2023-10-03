@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import isNil from 'lodash/isNil'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import DialogDelete from '../../../components/dialog/DialogDelete'
@@ -67,20 +68,25 @@ const SpecificTableAction = ({
         handleCloseEdit()
     }
 
-    const handleChange = (e) => {
-        isProgramConfiguration(e.name)
-            ? setSpinner({
-                  ...spinner,
-                  [e.name]: e.checked,
-                  id: specificSetting.id,
-              })
-            : setSpecificSetting({
-                  ...specificSetting,
-                  [e.name]: {
-                      filter: e.checked,
-                      sort: e.checked,
-                  },
-              })
+    const handleChange = (e, key) => {
+        if (isProgramConfiguration(e.name || key)) {
+            const spinnerSettings = !isNil(e.name)
+                ? { ...spinner, [e.name]: e.checked }
+                : { ...spinner, [key]: e.selected }
+
+            setSpinner({
+                ...spinnerSettings,
+                id: specificSetting.id,
+            })
+        } else {
+            setSpecificSetting({
+                ...specificSetting,
+                [e.name]: {
+                    filter: e.checked,
+                    sort: e.checked,
+                },
+            })
+        }
     }
 
     return (
