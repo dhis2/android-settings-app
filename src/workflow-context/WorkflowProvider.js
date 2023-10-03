@@ -14,6 +14,7 @@ const query = {
                 'name',
                 'programType',
                 'categoryCombo[id,name]',
+                'programIndicators[id,name,expression]',
                 'access',
             ],
             paging: 'false',
