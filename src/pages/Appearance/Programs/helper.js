@@ -32,6 +32,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: false,
         disableReferrals: false,
         disableCollapsibleSections: true,
+        programIndicator: '',
     })
 
     return {
@@ -39,6 +40,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: prevDetails.optionalSearch,
         disableReferrals: prevDetails.disableReferrals,
         disableCollapsibleSections: prevDetails.disableCollapsibleSections,
+        programIndicator: prevDetails.programIndicator,
     }
 }
 
@@ -196,7 +198,21 @@ export const isProgramConfiguration = (configurationType) =>
         'optionalSearch',
         'disableReferrals',
         'disableCollapsibleSections',
+        'programIndicator',
     ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
+
+// validate if the indicator has a valid android expression
+
+/**
+ * An expression is valid for android when:
+ * - Based only on attributes and functions
+ * - No Data Elements
+ * */
+const isValidAndroidExpression = (expression) => {}
+
+export const validateAndroidExpressions = (expressions) => {
+    //expressions.map(())
+}

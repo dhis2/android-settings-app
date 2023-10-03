@@ -6,6 +6,7 @@ import {
     HideFormSections,
     OptionalTEISearch,
     ProgramCompletionSpinner,
+    TeiHeader,
 } from '../../../components/field'
 import { TableHeader } from '../../../components/table'
 import Wrapper from '../../../components/Wrapper'
@@ -21,6 +22,12 @@ const SpecificSettings = ({
     <>
         <Wrapper>
             <div>
+                <TeiHeader
+                    handleChange={handleSettings}
+                    settings={spinnerSettings}
+                    program={specificSettings.id}
+                />
+
                 <ProgramCompletionSpinner
                     handleChange={handleSettings}
                     settings={spinnerSettings}

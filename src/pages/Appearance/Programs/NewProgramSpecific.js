@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import isNil from 'lodash/isNil'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { AddNewSetting } from '../../../components/field'
@@ -49,7 +50,7 @@ const NewProgramSpecific = ({
     }
 
     const handleChange = (e, key) => {
-        if (typeof key === 'string') {
+        if (key === 'id') {
             const states = programHasCategoryCombo(e.selected, programList)
                 ? createInitialSpecificValues('')
                 : createInitialValues('')
@@ -67,10 +68,16 @@ const NewProgramSpecific = ({
             setTrackerProgram(isTrackerProgram(e.selected, programList))
             setDisableSave(false)
         } else {
-            if (isProgramConfiguration(e.name)) {
+            console.log({ key })
+            if (isProgramConfiguration(e.name || key)) {
+                const spinnerSettings = !isNil(e.name)
+                    ? { ...spinner, [e.name]: e.checked }
+                    : { ...spinner, [key]: e.selected }
+
                 setSpinner({
-                    ...spinner,
-                    [e.name]: e.checked,
+                    /*...spinner,
+                    [e.name]: e.checked,*/
+                    ...spinnerSettings,
                     id: specificSettings.id,
                     name: specificSettings.name,
                 })
