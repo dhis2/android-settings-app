@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-13T08:52:39.539Z\n"
-"PO-Revision-Date: 2023-09-13T08:52:39.539Z\n"
+"POT-Creation-Date: 2023-10-03T11:54:31.751Z\n"
+"PO-Revision-Date: 2023-10-03T11:54:31.751Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -402,9 +402,6 @@ msgstr "Show percentage (%) complete in Program toolbar"
 
 msgid "Do not collapse sections in form"
 msgstr "Do not collapse sections in form"
-
-msgid "Hide collapsible sections in forms"
-msgstr "Hide collapsible sections in forms"
 
 msgid "Analytics reporting ID (Matomo)"
 msgstr "Analytics reporting ID (Matomo)"
