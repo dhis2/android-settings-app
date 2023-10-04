@@ -41,7 +41,9 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: prevDetails.optionalSearch,
         disableReferrals: prevDetails.disableReferrals,
         disableCollapsibleSections: prevDetails.disableCollapsibleSections,
-        programIndicator: prevDetails.programIndicator,
+        programIndicator:
+            prevDetails.programIndicator ||
+            prevDetails?.itemHeader?.programIndicator,
     }
 }
 
@@ -87,6 +89,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
             'completionSpinner',
             'disableReferrals',
             'disableCollapsibleSections',
+            'programIndicator',
         ]
     )
 }
@@ -205,6 +208,32 @@ export const isProgramConfiguration = (configurationType) =>
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
 
+export const prepareSpinnerSettingsDatStore = (settings) => {
+    const settingsToSave = mapValues(settings, (setting) =>
+        createItemHeader(setting)
+    )
+
+    return removePropertiesFromObject(settingsToSave, [
+        'summarySettings',
+        'id',
+        'name',
+        'programIndicator',
+    ])
+}
+
+const createItemHeader = (settings) => {
+    const programIndicator = !isNil(settings.programIndicator) && {
+        itemHeader: {
+            programIndicator: settings.programIndicator,
+        },
+    }
+
+    return {
+        ...settings,
+        ...programIndicator,
+    }
+}
+
 /**
  * An expression is valid for android when:
  * - Based only on attributes and functions
@@ -214,8 +243,8 @@ export const removeAttributes = (itemList) =>
 export const isValidAndroidExpression = (inputString) => {
     const invalidPatterns = [
         /#\{[^}]*\}/, // Matches anything starting with "#{"
-        /V\{\}/, // Matches "V{}"
-        /#\{[^}]*\}|V\{\}/, // Combination of the above two
+        /V\{\s*[^}]+\s*\}/, // Matches "V{}" with optional spaces inside the braces
+        /#\{[^}]*\}|V\{\s*[^}]+\s*\}/, // Combination of the above two
     ]
 
     // Check if the string contains any invalid patterns
@@ -230,3 +259,5 @@ export const validateAndroidExpressions = (programIndicators) => {
     })
     return orderBy(programIndicators, [(item) => item.valid === true], ['desc'])
 }
+
+// manage expression

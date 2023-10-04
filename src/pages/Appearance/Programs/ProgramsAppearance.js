@@ -16,6 +16,7 @@ import {
     createSpecificValues,
     prepareSettingsSaveDataStore,
     prepareSpinnerPreviousSpinner,
+    prepareSpinnerSettingsDatStore,
     removeAttributes,
 } from './helper'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
@@ -86,7 +87,8 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                    //...prepareSettingsSaveDataStore(spinnerSpecific),
+                    ...prepareSpinnerSettingsDatStore(spinnerSpecific),
                 },
             },
             completionSpinner: {
@@ -108,7 +110,8 @@ const ProgramsAppearance = () => {
                 },
             },
         }
-        await mutate({ settings: settingsToSave })
+        console.log('in datastore', { settingsToSave })
+        //await mutate({ settings: settingsToSave })
     }
 
     const resetSettings = () => {

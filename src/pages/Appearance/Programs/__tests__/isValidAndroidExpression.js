@@ -53,3 +53,13 @@ test('"(A{ZzYYXq4fJie}+#{ZzYYXq4fJie.GQY2lXrypjO})" is not a valid Android expre
     const expression = '(A{ZzYYXq4fJie}+#{ZzYYXq4fJie.GQY2lXrypjO})'
     expect(isValidAndroidExpression(expression)).toBeFalsy()
 })
+
+test('"V{event_count}" is not a valid Android expression', () => {
+    const expression = 'V{event_count}'
+    expect(isValidAndroidExpression(expression)).toBeFalsy()
+})
+
+test('"#{ZzYYXq4fJie.GQY2lXrypjO}" is not a valid Android expression', () => {
+    const expression = '#{ZzYYXq4fJie.GQY2lXrypjO}'
+    expect(isValidAndroidExpression(expression)).toBeFalsy()
+})
