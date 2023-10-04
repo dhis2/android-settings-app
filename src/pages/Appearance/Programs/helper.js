@@ -3,6 +3,7 @@ import defaults from 'lodash/defaults'
 import isNil from 'lodash/isNil'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
+import orderBy from 'lodash/orderBy'
 import toArray from 'lodash/toArray'
 import {
     formatList,
@@ -223,13 +224,9 @@ export const isValidAndroidExpression = (inputString) => {
 
 export const validateAndroidExpressions = (programIndicators) => {
     programIndicators.map((element) => {
-        // console.log('valid: ', element.expression, isValidAndroidExpression(element.expression))
         isValidAndroidExpression(element.expression)
             ? (element.valid = true)
             : (element.valid = false)
-        /*element.expression
-                .map(expression => {
-                console.log('valid: ', isValidAndroidExpression(expression))
-            })*/
     })
+    return orderBy(programIndicators, [(item) => item.valid === true], ['desc'])
 }
