@@ -6,6 +6,7 @@ import {
     HideFormSections,
     OptionalTEISearch,
     ProgramCompletionSpinner,
+    Section,
     TeiHeader,
 } from '../../../components/field'
 import { TableHeader } from '../../../components/table'
@@ -28,38 +29,40 @@ const SpecificSettings = ({
                     program={specificSettings.id}
                 />
 
-                <ProgramCompletionSpinner
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
+                <Section legend={i18n.t('Advanced options')}>
+                    <ProgramCompletionSpinner
+                        handleChange={handleSettings}
+                        settings={spinnerSettings}
+                    />
 
-                <OptionalTEISearch
-                    isTrackerProgram={isTrackerProgram}
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
+                    <OptionalTEISearch
+                        isTrackerProgram={isTrackerProgram}
+                        handleChange={handleSettings}
+                        settings={spinnerSettings}
+                    />
 
-                <DisableReferral
-                    isTrackerProgram={isTrackerProgram}
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
-                <HideFormSections
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
+                    <DisableReferral
+                        isTrackerProgram={isTrackerProgram}
+                        handleChange={handleSettings}
+                        settings={spinnerSettings}
+                    />
+                    <HideFormSections
+                        handleChange={handleSettings}
+                        settings={spinnerSettings}
+                    />
+                </Section>
             </div>
         </Wrapper>
 
         <Wrapper>
-            <div>
+            <Section legend={i18n.t('Filter')}>
                 <TableHeader title={i18n.t('Show Filter')} />
                 <TableSettings
                     type={hasCategoryCombo ? 'ProgramCategory' : 'Program'}
                     states={specificSettings}
                     handleChange={handleSettings}
                 />
-            </div>
+            </Section>
         </Wrapper>
     </>
 )
