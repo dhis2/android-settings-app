@@ -68,7 +68,6 @@ const NewProgramSpecific = ({
             setTrackerProgram(isTrackerProgram(e.selected, programList))
             setDisableSave(false)
         } else {
-            console.log({ key })
             if (isProgramConfiguration(e.name || key)) {
                 const spinnerSettings = !isNil(e.name)
                     ? { ...spinner, [e.name]: e.checked }

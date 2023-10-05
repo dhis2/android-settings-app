@@ -243,9 +243,9 @@ const createItemHeader = (settings) => {
 
 export const isValidAndroidExpression = (inputString) => {
     const invalidPatterns = [
-        /#\{[^}]*\}/, // Matches anything starting with "#{"
-        /V\{\s*[^}]+\s*\}/, // Matches "V{}" with optional spaces inside the braces
-        /#\{[^}]*\}|V\{\s*[^}]+\s*\}/, // Combination of the above two
+        /#\{[^}]*/, // Matches anything starting with "#{"
+        /V\{\s*[^}]+\s*/, // Matches "V{}" with optional spaces inside the braces
+        /#\{[^}]*|V\{\s*[^}]+\s*/, // Combination of the above two
     ]
 
     // Check if the string contains any invalid patterns

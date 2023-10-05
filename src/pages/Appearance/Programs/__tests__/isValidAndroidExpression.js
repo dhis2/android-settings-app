@@ -23,7 +23,7 @@ test("\"A{w75KJ2mc4zz}  A{zDhUuAYrxNC}, if(A{cejWyOfXge6} == 'Male', 'M', 'F')\"
 
 test("\"d2:concatenate(A{w75KJ2mc4zz}, ' ', A{zDhUuAYrxNC}, ', ', d2:substring(A{cejWyOfXge6}, 0, 1)\" is a valid Android expression", () => {
     const expression =
-        "d2:concatenate(A{w75KJ2mc4zz}, ' ', A{zDhUuAYrxNC}, ', ', d2:substring(A{cejWyOfXge6}, 0, 1)"
+        "d2:concatenate(A{w75KJ2mc4zz}, ' ', A{zDhUuAYrxNC}, ', ', d2:substring(A{cejWyOfXge6}, 0, 1))"
     expect(isValidAndroidExpression(expression)).toBeTruthy()
 })
 

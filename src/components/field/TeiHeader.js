@@ -9,6 +9,7 @@ import {
     Tooltip,
 } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import {
     getAttributes,
@@ -92,8 +93,7 @@ export const TeiHeader = ({ settings, handleChange, program }) => {
                                 <InputField
                                     readOnly
                                     dense
-                                    inputWidth={spacers.dp384}
-                                    //value={`This is a: ${expression}`}
+                                    inputWidth={spacers.dp512}
                                     value={expression}
                                 />
                             </FieldSection>
@@ -109,4 +109,10 @@ export const TeiHeader = ({ settings, handleChange, program }) => {
             </Section>
         </>
     )
+}
+
+TeiHeader.propTypes = {
+    settings: PropTypes.object,
+    handleChange: PropTypes.func,
+    program: PropTypes.string,
 }
