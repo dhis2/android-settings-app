@@ -10,42 +10,45 @@ import {
 } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import React, { useEffect, useState } from 'react'
-import { validateAndroidExpressions } from '../../pages/Appearance/Programs/helper'
-import { useWorkflowContext } from '../../workflow-context'
+import {
+    getAttributes,
+    getExpressionDescription,
+    validateAndroidExpressions,
+} from '../../pages/Appearance/Programs/helper'
+import { useGetProgram } from '../../pages/Appearance/Programs/ProgramQueries'
 import { FieldSection } from './FieldSection'
 import { Section } from './Section'
 
 const CODE = 'programIndicator'
 
-// expression does not meet android criteria
 export const TeiHeader = ({ settings, handleChange, program }) => {
-    const { programs } = useWorkflowContext()
-    //const {refetch, loading} = use
+    const { programs } = useGetProgram()
     const [options, setOptions] = useState([])
-    const [programIndicator, setProgramIndicator] = useState([])
+    const [attributes, setAttributes] = useState([])
     const [expression, setExpression] = useState('')
 
     useEffect(() => {
         // filter list of options based on selected program
-        if (program) {
-            const indicators = programs.find(
-                (p) => p.id === program
-            )?.programIndicators
-
-            const checkedExpressions = validateAndroidExpressions(indicators)
-
+        if (program && programs) {
+            const selectedProgram = programs.find((p) => p.id === program)
+            const checkedExpressions = validateAndroidExpressions(
+                selectedProgram?.programIndicators
+            )
             setOptions(checkedExpressions)
+            setAttributes(getAttributes(selectedProgram))
         }
-    }, [program])
+    }, [program, programs])
 
     useEffect(() => {
         // get expression
-        const indicator = options.find(
-            (i) => i.id === settings[CODE]
-        )?.expression
-        setExpression(indicator)
-        console.log('program ind', indicator)
-    }, [settings[CODE]])
+        if (options && attributes) {
+            const indicator = options.find(
+                (i) => i.id === settings[CODE]
+            )?.expression
+
+            setExpression(getExpressionDescription(indicator, attributes))
+        }
+    }, [settings[CODE], options])
 
     return (
         <>
@@ -90,7 +93,8 @@ export const TeiHeader = ({ settings, handleChange, program }) => {
                                     readOnly
                                     dense
                                     inputWidth={spacers.dp384}
-                                    value={`This is a: ${expression}`}
+                                    //value={`This is a: ${expression}`}
+                                    value={expression}
                                 />
                             </FieldSection>
                         )}

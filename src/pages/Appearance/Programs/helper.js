@@ -267,3 +267,18 @@ export const validateAndroidExpressions = (programIndicators) => {
 }
 
 // manage expression
+export const getAttributes = (program) =>
+    program.programTrackedEntityAttributes.map(
+        (tea) => tea.trackedEntityAttribute
+    )
+
+export const getExpressionDescription = (expression, attributes) => {
+    // Regular expression to match substrings like A{...}
+    const regex = /A{([A-Za-z0-9]{11,13})}/g
+
+    // Replace each match with the corresponding value from the array
+    return expression?.replace(regex, (match, p1) => {
+        const replacementObj = attributes.find((obj) => obj.id === p1)
+        return replacementObj ? replacementObj.name : match
+    })
+}
