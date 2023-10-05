@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import defaults from 'lodash/defaults'
+import every from 'lodash/every'
 import isNil from 'lodash/isNil'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
@@ -257,6 +258,11 @@ export const validateAndroidExpressions = (programIndicators) => {
             ? (element.valid = true)
             : (element.valid = false)
     })
+
+    if (every(programIndicators, ['valid', false])) {
+        return []
+    }
+
     return orderBy(programIndicators, [(item) => item.valid === true], ['desc'])
 }
 
