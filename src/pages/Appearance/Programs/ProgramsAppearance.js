@@ -87,7 +87,6 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    //...prepareSettingsSaveDataStore(spinnerSpecific),
                     ...prepareSpinnerSettingsDatStore(spinnerSpecific),
                 },
             },
@@ -110,8 +109,7 @@ const ProgramsAppearance = () => {
                 },
             },
         }
-        console.log('in datastore', { settingsToSave })
-        //await mutate({ settings: settingsToSave })
+        await mutate({ settings: settingsToSave })
     }
 
     const resetSettings = () => {

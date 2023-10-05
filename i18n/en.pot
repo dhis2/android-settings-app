@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-03T11:54:31.751Z\n"
-"PO-Revision-Date: 2023-10-03T11:54:31.751Z\n"
+"POT-Creation-Date: 2023-10-05T07:30:34.693Z\n"
+"PO-Revision-Date: 2023-10-05T07:30:34.693Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -452,6 +452,15 @@ msgstr "Must start with + and be at least 4 characters long."
 msgid "SMS Result Sender phone number"
 msgstr "SMS Result Sender phone number"
 
+msgid "TEI Header"
+msgstr "TEI Header"
+
+msgid "Disable elements don't meet android criteria"
+msgstr "Disable elements don't meet android criteria"
+
+msgid "There are no Program Indicators with expressions that meet android criteria"
+msgstr "There are no Program Indicators with expressions that meet android criteria"
+
 msgid "Use the new version of Tracker Exporter (Web API)"
 msgstr "Use the new version of Tracker Exporter (Web API)"
 
@@ -861,6 +870,12 @@ msgstr ""
 "Customize filter and sorting options available for programs. Settings below "
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
+
+msgid "Advanced options"
+msgstr "Advanced options"
+
+msgid "Filter"
+msgstr "Filter"
 
 msgid "Enrollment Date"
 msgstr "Enrollment Date"
