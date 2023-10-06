@@ -6,11 +6,17 @@ import {
     Tooltip,
     IconInfo16,
     InputField,
+    NoticeBox,
 } from '@dhis2/ui'
+import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { FieldSection } from '../../../components/field'
-import { validateAndroidExpressions } from './expressionHelper'
+import {
+    getAttributes,
+    getExpressionDescription,
+    validateAndroidExpressions,
+} from './expressionHelper'
 import { useGetPrograms } from './ProgramQueries'
 
 const CODE = 'programIndicator'
@@ -18,6 +24,7 @@ const CODE = 'programIndicator'
 export const TeiHeader = ({ settings, program, handleChange }) => {
     const { programs } = useGetPrograms()
     const [options, setOptions] = useState([])
+    const [attributes, setAttributes] = useState([])
     const [expression, setExpression] = useState('')
 
     useEffect(() => {
@@ -26,6 +33,7 @@ export const TeiHeader = ({ settings, program, handleChange }) => {
             setOptions(
                 validateAndroidExpressions(selectedProgram?.programIndicators)
             )
+            setAttributes(getAttributes(selectedProgram))
         }
     }, [program, programs])
 
@@ -35,9 +43,19 @@ export const TeiHeader = ({ settings, program, handleChange }) => {
                 (i) => i.id === settings[CODE]
             )?.expression
 
-            setExpression(indicator)
+            setExpression(getExpressionDescription(indicator, attributes))
         }
     }, [settings[CODE], options])
+
+    if (isEmpty(options)) {
+        return (
+            <NoticeBox>
+                {i18n.t(
+                    'There are no Program Indicators with valid expressions for Android'
+                )}
+            </NoticeBox>
+        )
+    }
 
     return (
         <>
