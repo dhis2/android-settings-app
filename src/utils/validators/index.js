@@ -1,3 +1,4 @@
+export * from './isValidAndroidExpression'
 export * from './isValidURL'
 export * from './isValidValue'
 export * from './validateObjectByProperty'
