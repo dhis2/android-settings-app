@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-25T13:59:32.928Z\n"
-"PO-Revision-Date: 2023-08-25T13:59:32.928Z\n"
+"POT-Creation-Date: 2023-10-03T11:54:31.751Z\n"
+"PO-Revision-Date: 2023-10-03T11:54:31.751Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -399,6 +399,9 @@ msgstr "Maximum file size limit for download (Kb)"
 
 msgid "Show percentage (%) complete in Program toolbar"
 msgstr "Show percentage (%) complete in Program toolbar"
+
+msgid "Do not collapse sections in form"
+msgstr "Do not collapse sections in form"
 
 msgid "Analytics reporting ID (Matomo)"
 msgstr "Analytics reporting ID (Matomo)"
