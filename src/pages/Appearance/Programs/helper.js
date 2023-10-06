@@ -31,12 +31,14 @@ export const createInitialSpinnerValue = (prevDetails) => {
         completionSpinner: true,
         optionalSearch: false,
         disableReferrals: false,
+        disableCollapsibleSections: false,
     })
 
     return {
         completionSpinner: prevDetails.completionSpinner,
         optionalSearch: prevDetails.optionalSearch,
         disableReferrals: prevDetails.disableReferrals,
+        disableCollapsibleSections: prevDetails.disableCollapsibleSections,
     }
 }
 
@@ -58,6 +60,9 @@ export const createInitialGlobalSpinner = (prevDetails) => ({
     disableReferrals: !isNil(prevDetails.disableReferrals)
         ? prevDetails.disableReferrals
         : false,
+    disableCollapsibleSections: !isNil(prevDetails.disableCollapsibleSections)
+        ? prevDetails.disableCollapsibleSections
+        : false,
 })
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
@@ -74,7 +79,12 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
     }))
     return removePropertiesFromObject(
         prepareSettingsSaveDataStore(spinnerSettings),
-        ['optionalSearch', 'completionSpinner', 'disableReferrals']
+        [
+            'optionalSearch',
+            'completionSpinner',
+            'disableReferrals',
+            'disableCollapsibleSections',
+        ]
     )
 }
 
@@ -181,9 +191,12 @@ const convertFilterKeyToValue = (filter) => {
 }
 
 export const isProgramConfiguration = (configurationType) =>
-    ['completionSpinner', 'optionalSearch', 'disableReferrals'].includes(
-        configurationType
-    )
+    [
+        'completionSpinner',
+        'optionalSearch',
+        'disableReferrals',
+        'disableCollapsibleSections',
+    ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
