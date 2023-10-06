@@ -32,6 +32,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: false,
         disableReferrals: false,
         disableCollapsibleSections: false,
+        programIndicator: '',
     })
 
     return {
@@ -39,6 +40,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: prevDetails.optionalSearch,
         disableReferrals: prevDetails.disableReferrals,
         disableCollapsibleSections: prevDetails.disableCollapsibleSections,
+        programIndicator: prevDetails.programIndicator,
     }
 }
 
@@ -196,6 +198,7 @@ export const isProgramConfiguration = (configurationType) =>
         'optionalSearch',
         'disableReferrals',
         'disableCollapsibleSections',
+        'programIndicator',
     ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>
