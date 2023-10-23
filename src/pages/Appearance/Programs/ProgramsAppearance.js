@@ -12,11 +12,12 @@ import {
 import {
     createInitialGlobalSpinner,
     createInitialGlobalSpinnerPrevious,
-    createInitialSpinnerValue,
     createInitialValues,
     createSpecificValues,
     prepareSettingsSaveDataStore,
     prepareSpinnerPreviousSpinner,
+    prepareSpinnerSettingsDataStore,
+    removeAttributes,
 } from './helper'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
 import ProgramSpecificSettings from './ProgramSpecificSettings'
@@ -68,7 +69,10 @@ const ProgramsAppearance = () => {
     useEffect(() => {
         if (globalSettings) {
             !isEqual(globalSettings, initialValues.globalSettings) ||
-            !isEqual(specificSettings, initialValues.specificSettings) ||
+            !isEqual(
+                removeAttributes(specificSettings),
+                initialValues.specificSettings
+            ) ||
             !isEqual(spinnerGlobal, spinnerSettings.globalSettings) ||
             !isEqual(spinnerSpecific, spinnerSettings.specificSettings)
                 ? setDisableSave(false)
@@ -83,7 +87,7 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                    ...prepareSpinnerSettingsDataStore(spinnerSpecific),
                 },
             },
             completionSpinner: {
@@ -111,7 +115,8 @@ const ProgramsAppearance = () => {
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
         setSpecificSettings({})
-        setSpinnerGlobal(createInitialSpinnerValue(''))
+        setSpinnerSpecific({})
+        setSpinnerGlobal(createInitialGlobalSpinner({}))
     }
 
     return (

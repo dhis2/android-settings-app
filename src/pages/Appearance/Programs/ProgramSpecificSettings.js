@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import PageSubtitle from '../../../components/page/PageSubtitle'
 import { filterUnusedElements } from '../../../utils/utils'
+import { useWorkflowContext } from '../../../workflow-context'
 import {
     prepareProgramConfigurationList,
     prepareSpecificSettingsList,
 } from './helper'
 import NewProgramSpecific from './NewProgramSpecific'
-import { useReadProgram } from './programQuery'
 import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
@@ -20,7 +20,7 @@ const ProgramSpecificSettings = ({
     onChangeSpinner,
     disabled,
 }) => {
-    const { programList } = useReadProgram()
+    const { programs } = useWorkflowContext()
     const [initialRows, setInitialRows] = useState()
     const [rows, setRows] = useState()
     const [listName, setListName] = useState()
@@ -29,23 +29,23 @@ const ProgramSpecificSettings = ({
     const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
-        if (programList && specificSettings && spinnerSettings) {
+        if (programs && specificSettings && spinnerSettings) {
             const settingsListUpdated = prepareSpecificSettingsList(
                 specificSettings,
-                programList
+                programs
             )
             const spinnerListUpdated = prepareProgramConfigurationList(
                 spinnerSettings,
-                programList
+                programs
             )
-            setListName(filterUnusedElements(programList, settingsListUpdated))
+            setListName(filterUnusedElements(programs, settingsListUpdated))
             setRows(settingsListUpdated)
             setInitialRows(settingsListUpdated)
             setSpinnerList(spinnerListUpdated)
             setInitialSpinner(spinnerListUpdated)
             setLoad(true)
         }
-    }, [programList, specificSettings, spinnerSettings])
+    }, [specificSettings, spinnerSettings])
 
     useEffect(() => {
         if (rows) {
@@ -68,7 +68,7 @@ const ProgramSpecificSettings = ({
                         <SpecificTableAction
                             rows={rows}
                             changeRows={setRows}
-                            elementList={programList}
+                            elementList={programs}
                             spinnerList={spinnerList}
                             onChangeSpinnerList={setSpinnerList}
                             disableAll={disabled}
