@@ -32,6 +32,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: false,
         disableReferrals: false,
         disableCollapsibleSections: false,
+        programIndicator: '',
     })
 
     return {
@@ -39,6 +40,9 @@ export const createInitialSpinnerValue = (prevDetails) => {
         optionalSearch: prevDetails.optionalSearch,
         disableReferrals: prevDetails.disableReferrals,
         disableCollapsibleSections: prevDetails.disableCollapsibleSections,
+        programIndicator:
+            prevDetails.programIndicator ||
+            prevDetails?.itemHeader?.programIndicator,
     }
 }
 
@@ -84,6 +88,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
             'completionSpinner',
             'disableReferrals',
             'disableCollapsibleSections',
+            'programIndicator',
         ]
     )
 }
@@ -196,7 +201,34 @@ export const isProgramConfiguration = (configurationType) =>
         'optionalSearch',
         'disableReferrals',
         'disableCollapsibleSections',
+        'programIndicator',
     ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>
     removePropertiesFromObject(itemList, ['summarySettings', 'id', 'name'])
+
+export const prepareSpinnerSettingsDataStore = (settings) => {
+    const settingsToSave = mapValues(settings, (setting) =>
+        createItemHeader(setting)
+    )
+
+    return removePropertiesFromObject(settingsToSave, [
+        'summarySettings',
+        'id',
+        'name',
+        'programIndicator',
+    ])
+}
+
+const createItemHeader = (settings) => {
+    const programIndicator = !isNil(settings.programIndicator) && {
+        itemHeader: {
+            programIndicator: settings.programIndicator,
+        },
+    }
+
+    return {
+        ...settings,
+        ...programIndicator,
+    }
+}
