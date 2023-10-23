@@ -16,6 +16,7 @@ import {
     createSpecificValues,
     prepareSettingsSaveDataStore,
     prepareSpinnerPreviousSpinner,
+    prepareSpinnerSettingsDataStore,
     removeAttributes,
 } from './helper'
 import ProgramGlobalSettings from './ProgramGlobalSettings'
@@ -86,7 +87,7 @@ const ProgramsAppearance = () => {
                     ...spinnerGlobal,
                 },
                 specificSettings: {
-                    ...prepareSettingsSaveDataStore(spinnerSpecific),
+                    ...prepareSpinnerSettingsDataStore(spinnerSpecific),
                 },
             },
             completionSpinner: {
