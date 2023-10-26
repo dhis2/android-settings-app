@@ -2,12 +2,16 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
+    DisableReferral,
+    HideFormSections,
     OptionalTEISearch,
     ProgramCompletionSpinner,
+    Section,
 } from '../../../components/field'
 import { TableHeader } from '../../../components/table'
 import Wrapper from '../../../components/Wrapper'
 import { TableSettings } from './TableSettings'
+import { TeiHeader } from './TeiHeader'
 
 const SpecificSettings = ({
     hasCategoryCombo,
@@ -19,27 +23,50 @@ const SpecificSettings = ({
     <>
         <Wrapper>
             <div>
-                <ProgramCompletionSpinner
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
+                <Section legend={i18n.t('TEI Header')}>
+                    <TeiHeader
+                        handleChange={handleSettings}
+                        settings={spinnerSettings}
+                        program={specificSettings.id}
+                    />
+                </Section>
 
-                <OptionalTEISearch
-                    isTrackerProgram={isTrackerProgram}
-                    handleChange={handleSettings}
-                    settings={spinnerSettings}
-                />
-            </div>
-        </Wrapper>
+                <Section legend={i18n.t('Advanced options')}>
+                    <>
+                        <ProgramCompletionSpinner
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
 
-        <Wrapper>
-            <div>
-                <TableHeader title={i18n.t('Show Filter')} />
-                <TableSettings
-                    type={hasCategoryCombo ? 'ProgramCategory' : 'Program'}
-                    states={specificSettings}
-                    handleChange={handleSettings}
-                />
+                        <OptionalTEISearch
+                            isTrackerProgram={isTrackerProgram}
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+
+                        <DisableReferral
+                            isTrackerProgram={isTrackerProgram}
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+                        <HideFormSections
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+                    </>
+                </Section>
+                <Section legend={i18n.t('Filter')}>
+                    <>
+                        <TableHeader title={i18n.t('Show Filter')} />
+                        <TableSettings
+                            type={
+                                hasCategoryCombo ? 'ProgramCategory' : 'Program'
+                            }
+                            states={specificSettings}
+                            handleChange={handleSettings}
+                        />
+                    </>
+                </Section>
             </div>
         </Wrapper>
     </>
