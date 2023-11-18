@@ -1,0 +1,39 @@
+.container {
+    margin-bottom: var(--spacers-dp48);
+    margin-top: var(--spacers-dp48);
+}
+
+.header {
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    margin: 0;
+    padding: var(--spacers-dp4) var(--spacers-dp8);
+    border-radius: 3px;
+    background: transparent;
+}
+
+.header:hover {
+    background: var(--colors-grey200);
+}
+
+.label {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--colors-grey900);
+    margin: 0;
+}
+
+.children {
+    margin-top: var(--spacers-dp4);
+}
+
+.chevronHidden svg {
+    transform: rotate(90deg);
+}
+
+.chevronVisible svg {
+    transform: rotate(-90deg);
+}
