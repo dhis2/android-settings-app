@@ -1,4 +1,6 @@
+import filter from 'lodash/filter'
 import isNil from 'lodash/isNil'
+import keysIn from 'lodash/keysIn'
 import {
     defaultEncryptDB,
     defaultReservedValues,
@@ -46,6 +48,7 @@ export const createInitialValues = (prevGeneralDetails) => ({
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
+    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [],
 })
 
 const validReservedValue = (value) => {
@@ -53,4 +56,17 @@ const validReservedValue = (value) => {
         return defaultReservedValues
     }
     return value
+}
+
+export const getFeaturesList = (list) => {
+    //pickBy(list, true)
+    const b = filter(list, (value, key) => {
+        console.log({ key, value })
+        return value === true ? key : false
+    })
+    const c = keysIn(b)
+    const d = filter(list, true)
+
+    console.log({ filterList: b, keysList: c, secondFilter: d, list })
+    return c
 }
