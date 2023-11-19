@@ -1,43 +1,58 @@
 import i18n from '@dhis2/d2-i18n'
+import { Legend } from '@dhis2/ui'
+import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { CheckboxField } from '../../../components/field'
 import { MoreOptions } from '../../../components/moreOptions'
-import { getFeaturesList } from '../helper'
+import { getValidKeysList } from '../helper'
+import styles from './ExperimentalFeatures.module.css'
 import { featureList } from './feature-list'
 
 const CODE = 'experimentalFeatures'
+
+/**
+ * Create an object based on elements of "featureList"
+ * */
+const populateOptions = (list) =>
+    featureList?.reduce((options, e) => {
+        options[e.name] = !isEmpty(list) && list.includes(e.name)
+        return options
+    }, {})
+
 export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
-    const [options, setOptions] = useState({
-        test: false,
-        test2: false,
-        test3: true,
-    })
+    const [options, setOptions] = useState({})
 
     useEffect(() => {
-        const a = getFeaturesList(options)
-        console.log({ a })
-    }, [options])
+        setOptions(populateOptions(value[CODE]))
+    }, [value[CODE]])
 
     const handleCheckbox = (e) => {
-        console.log(e)
-        setOptions({ ...options, [e.name]: e.checked })
-
-        onChange({ ...value, [CODE]: '' })
-
-        //onChange({ ...value, [CODE]: e.checked })
+        const optionsToSave = {
+            ...options,
+            [e.name]: e.checked,
+        }
+        setOptions({ ...optionsToSave })
+        onChange({ ...value, [CODE]: getValidKeysList(optionsToSave) })
     }
 
     return (
         <>
             <MoreOptions>
                 <>
+                    <Legend className={styles.container}>
+                        {i18n.t(
+                            'The Android Capture app has helpful new features that can be enable.'
+                        )}
+                    </Legend>
+
                     {featureList.map(({ name, label, description }) => (
-                        <Feature
+                        <CheckboxField
                             key={name}
                             name={name}
                             label={label}
-                            description={description}
-                            value={options}
+                            helpText={description}
+                            checked={options[name]}
                             onChange={handleCheckbox}
                             {...props}
                         />
@@ -48,15 +63,7 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
     )
 }
 
-const Feature = ({ name, label, description, value, onChange, ...props }) => {
-    return (
-        <CheckboxField
-            name={name}
-            label={label}
-            helpText={description}
-            checked={value[name]}
-            onChange={onChange}
-            {...props}
-        />
-    )
+ExperimentalFeatures.propTypes = {
+    value: PropTypes.object,
+    onChange: PropTypes.func,
 }

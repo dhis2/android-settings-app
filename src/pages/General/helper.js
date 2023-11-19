@@ -1,6 +1,5 @@
-import filter from 'lodash/filter'
 import isNil from 'lodash/isNil'
-import keysIn from 'lodash/keysIn'
+import map from 'lodash/map'
 import {
     defaultEncryptDB,
     defaultReservedValues,
@@ -58,15 +57,10 @@ const validReservedValue = (value) => {
     return value
 }
 
-export const getFeaturesList = (list) => {
-    //pickBy(list, true)
-    const b = filter(list, (value, key) => {
-        console.log({ key, value })
-        return value === true ? key : false
-    })
-    const c = keysIn(b)
-    const d = filter(list, true)
-
-    console.log({ filterList: b, keysList: c, secondFilter: d, list })
-    return c
-}
+/**
+ * Create an array with the keys of valid or selected elements
+ * */
+export const getValidKeysList = (list) =>
+    map(list, (value, key) => value === true && key).filter((e) =>
+        isValidValue(e)
+    )
