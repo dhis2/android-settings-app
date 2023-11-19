@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-06T16:23:08.006Z\n"
-"PO-Revision-Date: 2023-10-06T16:23:08.006Z\n"
+"POT-Creation-Date: 2023-11-19T01:31:15.820Z\n"
+"PO-Revision-Date: 2023-11-19T01:31:15.820Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -481,6 +481,9 @@ msgstr "Recommended maximum is {{maxValue}} TEI"
 msgid "Recommended maximum is {{maxValue}} events"
 msgstr "Recommended maximum is {{maxValue}} events"
 
+msgid "Advanced options"
+msgstr "Advanced options"
+
 msgid "No TEI Analytics found"
 msgstr "No TEI Analytics found"
 
@@ -865,9 +868,6 @@ msgstr ""
 msgid "TEI Header"
 msgstr "TEI Header"
 
-msgid "Advanced options"
-msgstr "Advanced options"
-
 msgid "Filter"
 msgstr "Filter"
 
@@ -907,6 +907,33 @@ msgstr ""
 
 msgid "General Settings"
 msgstr "General Settings"
+
+msgid "The Android Capture app has helpful new features that can be enable"
+msgstr "The Android Capture app has helpful new features that can be enable"
+
+msgid "New Data Entry Form"
+msgstr "New Data Entry Form"
+
+msgid ""
+"Enable the new data entry form with new inputs per value type. The inputs "
+"for all value types have been redesigned, with a improved selection mode "
+"and increased tappable areas and texts."
+msgstr ""
+"Enable the new data entry form with new inputs per value type. The inputs "
+"for all value types have been redesigned, with a improved selection mode "
+"and increased tappable areas and texts."
+
+msgid "New test"
+msgstr "New test"
+
+msgid "New Test 2"
+msgstr "New Test 2"
+
+msgid "New test 3"
+msgstr "New test 3"
+
+msgid "New test4"
+msgstr "New test4"
 
 msgid "Overview: Android Settings App"
 msgstr "Overview: Android Settings App"
