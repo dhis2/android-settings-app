@@ -15,6 +15,7 @@ import {
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import Page from '../../components/page/Page'
 import DisableSettings from './DisableSettings'
+import { ExperimentalFeatures } from './experimentalFeatures'
 import {
     getGeneralKeyQuery,
     updateGeneralKeyMutation,
@@ -121,6 +122,11 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <DisableSettings disabled={disable} />
+                    <ExperimentalFeatures
+                        value={settings}
+                        onChange={setSettings}
+                        disabled={disable}
+                    />
                     <FooterStripButtons
                         onSave={saveSettings}
                         onReset={resetSettings}
