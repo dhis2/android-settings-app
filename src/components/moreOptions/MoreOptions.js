@@ -1,17 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { Divider, IconChevronRight24 } from '@dhis2/ui'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styles from './MoreOptions.module.css'
-
-const AdvancedSettings = () => {
-    return <></>
-}
 
 export const MoreOptions = ({
     children,
     initiallyVisible,
-    noBottomMargin,
     dataTest = 'interaction-more-options',
 }) => {
     const [hidden, setHidden] = useState(!initiallyVisible)
@@ -21,10 +17,7 @@ export const MoreOptions = ({
     }
 
     return (
-        <section
-            className={cx({ [styles.container]: !noBottomMargin })}
-            data-test={dataTest}
-        >
+        <section className={styles.container} data-test={dataTest}>
             <header
                 className={styles.header}
                 onClick={onToggle}
@@ -46,4 +39,10 @@ export const MoreOptions = ({
             </div>
         </section>
     )
+}
+
+MoreOptions.propTypes = {
+    children: PropTypes.element,
+    initiallyVisible: PropTypes.bool,
+    dataTest: PropTypes.string,
 }
