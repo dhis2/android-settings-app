@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Legend } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { CheckboxField } from '../../../components/field'
 import { MoreOptions } from '../../../components/moreOptions'
 import { getValidKeysList } from '../helper'
@@ -27,14 +27,14 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
         setOptions(populateOptions(value[CODE]))
     }, [value[CODE]])
 
-    const handleCheckbox = (e) => {
+    const handleCheckbox = useCallback((e) => {
         const optionsToSave = {
             ...options,
             [e.name]: e.checked,
         }
         setOptions({ ...optionsToSave })
         onChange({ ...value, [CODE]: getValidKeysList(optionsToSave) })
-    }
+    }, [])
 
     return (
         <>
