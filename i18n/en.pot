@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-11-19T03:17:17.444Z\n"
-"PO-Revision-Date: 2023-11-19T03:17:17.444Z\n"
+"POT-Creation-Date: 2023-11-20T11:14:45.025Z\n"
+"PO-Revision-Date: 2023-11-20T11:14:45.025Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -481,8 +481,8 @@ msgstr "Recommended maximum is {{maxValue}} TEI"
 msgid "Recommended maximum is {{maxValue}} events"
 msgstr "Recommended maximum is {{maxValue}} events"
 
-msgid "Advanced options"
-msgstr "Advanced options"
+msgid "Opt-in Features"
+msgstr "Opt-in Features"
 
 msgid "No TEI Analytics found"
 msgstr "No TEI Analytics found"
@@ -867,6 +867,9 @@ msgstr ""
 
 msgid "TEI Header"
 msgstr "TEI Header"
+
+msgid "Advanced options"
+msgstr "Advanced options"
 
 msgid "Filter"
 msgstr "Filter"

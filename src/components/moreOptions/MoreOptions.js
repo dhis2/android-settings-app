@@ -31,7 +31,7 @@ export const MoreOptions = ({
                 >
                     <IconChevronRight24 />
                 </div>
-                <h2 className={styles.label}>{i18n.t('Advanced options')}</h2>
+                <h2 className={styles.label}>{i18n.t('Opt-in Features')}</h2>
             </header>
             {!hidden && <Divider />}
             <div className={styles.children} data-test={`${dataTest}-children`}>
