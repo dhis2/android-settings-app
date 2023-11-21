@@ -42,7 +42,7 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
                 <>
                     <Legend className={styles.container}>
                         {i18n.t(
-                            'The Android Capture app has helpful new and experimental features that can be enable.'
+                            'The Android Capture app has helpful new and experimental features that can be enabled.'
                         )}
                     </Legend>
 
