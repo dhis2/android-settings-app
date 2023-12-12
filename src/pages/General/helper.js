@@ -1,4 +1,5 @@
 import isNil from 'lodash/isNil'
+import map from 'lodash/map'
 import {
     defaultEncryptDB,
     defaultReservedValues,
@@ -46,6 +47,7 @@ export const createInitialValues = (prevGeneralDetails) => ({
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
+    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [],
     messageOfTheDay: prevGeneralDetails.messageOfTheDay,
 })
 
@@ -55,3 +57,11 @@ const validReservedValue = (value) => {
     }
     return value
 }
+
+/**
+ * Create an array with the keys of valid or selected elements
+ * */
+export const getValidKeysList = (list) =>
+    map(list, (value, key) => value === true && key).filter((e) =>
+        isValidValue(e)
+    )

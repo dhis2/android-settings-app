@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-07-05T09:36:08.695Z\n"
-"PO-Revision-Date: 2023-07-05T09:36:08.695Z\n"
+"POT-Creation-Date: 2023-11-21T14:06:37.126Z\n"
+"PO-Revision-Date: 2023-11-21T14:06:37.126Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -379,6 +379,9 @@ msgstr "Manual"
 msgid "How often should data sync?"
 msgstr "How often should data sync?"
 
+msgid "Disable TEI referrals"
+msgstr "Disable TEI referrals"
+
 msgid "Encrypt device database"
 msgstr "Encrypt device database"
 
@@ -396,6 +399,9 @@ msgstr "Maximum file size limit for download (Kb)"
 
 msgid "Show percentage (%) complete in Program toolbar"
 msgstr "Show percentage (%) complete in Program toolbar"
+
+msgid "Do not collapse sections in form"
+msgstr "Do not collapse sections in form"
 
 msgid "Analytics reporting ID (Matomo)"
 msgstr "Analytics reporting ID (Matomo)"
@@ -474,6 +480,9 @@ msgstr "Recommended maximum is {{maxValue}} TEI"
 
 msgid "Recommended maximum is {{maxValue}} events"
 msgstr "Recommended maximum is {{maxValue}} events"
+
+msgid "Opt-in Features"
+msgstr "Opt-in Features"
 
 msgid "No TEI Analytics found"
 msgstr "No TEI Analytics found"
@@ -856,6 +865,15 @@ msgstr ""
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
 
+msgid "TEI Header"
+msgstr "TEI Header"
+
+msgid "Advanced options"
+msgstr "Advanced options"
+
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Enrollment Date"
 msgstr "Enrollment Date"
 
@@ -870,6 +888,12 @@ msgstr "Event status"
 
 msgid "Follow up"
 msgstr "Follow up"
+
+msgid "There are no Program Indicators with valid expressions for Android"
+msgstr "There are no Program Indicators with valid expressions for Android"
+
+msgid "Disable elements do not meet Android criteria"
+msgstr "Disable elements do not meet Android criteria"
 
 msgid "Enrollment Status"
 msgstr "Enrollment Status"
@@ -886,6 +910,25 @@ msgstr ""
 
 msgid "General Settings"
 msgstr "General Settings"
+
+msgid ""
+"The Android Capture app has helpful new and experimental features that can "
+"be enabled."
+msgstr ""
+"The Android Capture app has helpful new and experimental features that can "
+"be enabled."
+
+msgid "New Data Entry Form"
+msgstr "New Data Entry Form"
+
+msgid ""
+"Enable the new data entry form with new inputs per value type. The inputs "
+"for all value types have been redesigned, with a improved selection mode "
+"and increased tappable areas and texts."
+msgstr ""
+"Enable the new data entry form with new inputs per value type. The inputs "
+"for all value types have been redesigned, with a improved selection mode "
+"and increased tappable areas and texts."
 
 msgid "Overview: Android Settings App"
 msgstr "Overview: Android Settings App"
