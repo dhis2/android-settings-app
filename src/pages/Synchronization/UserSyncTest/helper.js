@@ -239,11 +239,16 @@ const getTestElements = async (user, dataEngine) => {
 }
 
 export const joinObjectsById = (array) => {
-    const joinedArray = []
+    if (isEmpty(array)) {
+        return []
+    }
 
-    array
-        .reduce((array1, array2) => unionBy(array1, array2, 'id'))
-        .map((e) => joinedArray.push(e.id))
+    const joinedArray = array
+        .reduce(
+            (result, currentArray) => unionBy(result, currentArray, 'id'),
+            []
+        )
+        .map((e) => e.id)
 
     return parseUniqList(joinedArray)
 }
