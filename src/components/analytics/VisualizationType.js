@@ -73,6 +73,8 @@ export const VisualizationType = ({
                 ...createInitialValues(''),
                 program: value.program,
                 programStage: value.programStage,
+                name: value.name,
+                shortName: value.shortName,
                 [e.name]: e.selected || e.value,
             })
         } else {
