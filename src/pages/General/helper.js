@@ -48,6 +48,7 @@ export const createInitialValues = (prevGeneralDetails) => ({
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
     experimentalFeatures: prevGeneralDetails.experimentalFeatures || [],
+    messageOfTheDay: prevGeneralDetails.messageOfTheDay,
 })
 
 const validReservedValue = (value) => {
