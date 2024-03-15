@@ -23,7 +23,7 @@ export const populateObject = (type) => {
                 encryptDB: androidSettingsDefault.encryptDB,
                 allowScreenCapture: defaultShareScreen,
                 bypassDHIS2VersionCheck: defaultBypassDHIS2Version,
-                experimentalFeatures: ['newFormLayout']
+                experimentalFeatures: ['newFormLayout'],
             }
             break
         case DEFAULT_GLOBAL:

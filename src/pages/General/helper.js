@@ -50,7 +50,9 @@ export const createInitialValues = (prevGeneralDetails) => ({
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
     bypassDHIS2VersionCheck:
         prevGeneralDetails.bypassDHIS2VersionCheck || defaultBypassDHIS2Version,
-    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [],
+    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [
+        'newFormLayout',
+    ],
 })
 
 const validReservedValue = (value) => {
