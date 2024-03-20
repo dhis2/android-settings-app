@@ -2,14 +2,22 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { Popover, FlyoutMenu } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect, createRef } from 'react'
+import { EVENT_VISUALIZATION } from '../../../constants'
 import useDebounce from '../../../utils/useDebounce'
 import { ContentMenuGroup } from './ContentMenuGroup'
-import { orderVisualizations, validateAndroidVisualization } from './helper'
+import {
+    orderVisualizations,
+    validateAndroidEventVisualization,
+    validateAndroidVisualization,
+} from './helper'
 import { ItemSearchField } from './ItemSearchField'
 import styles from './styles/ItemSelector.module.css'
-import { getVisualizationsQuery } from './visualizationQuery'
+import {
+    getEventVisualizationsQuery,
+    getVisualizationsQuery,
+} from './visualizationQuery'
 
-export const ItemSelector = ({ setSelection, clearSelection }) => {
+export const ItemSelector = ({ setSelection, clearSelection, type }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [filter, setFilter] = useState('')
     const [items, setItems] = useState(null)
@@ -18,17 +26,32 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
     const dataEngine = useDataEngine()
     const debouncedFilterText = useDebounce(filter, 350)
 
+    // refactor event visualization validator function
     useEffect(() => {
         const text =
             debouncedFilterText.length >= 3 ? debouncedFilterText : null
-        const query = getVisualizationsQuery(text)
+        const query =
+            type === EVENT_VISUALIZATION
+                ? getEventVisualizationsQuery(text)
+                : getVisualizationsQuery(text)
 
         dataEngine.query({ items: query }).then((res) => {
-            validateAndroidVisualization(res.items.visualizations)
-            const orderItems = orderVisualizations(res.items.visualizations)
+            type === EVENT_VISUALIZATION
+                ? validateAndroidEventVisualization(
+                      res.items.eventVisualizations
+                  )
+                : validateAndroidVisualization(res.items.visualizations)
+
+            const orderItems = orderVisualizations(
+                res.items.visualizations || res.items.eventVisualizations
+            )
             setItems(orderItems)
         })
-    }, [debouncedFilterText])
+    }, [debouncedFilterText, type])
+
+    useEffect(() => {
+        clearField()
+    }, [type])
 
     const closeMenu = () => {
         setIsOpen(false)
@@ -52,8 +75,8 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
     }
 
     const getMenus = () => {
-        const hasMore = items.length > 5
-        const displayItems = maxOptions ? items : items.slice(0, 5)
+        const hasMore = items?.length > 5
+        const displayItems = maxOptions ? items : items?.slice(0, 5)
 
         return (
             <ContentMenuGroup
@@ -107,4 +130,5 @@ export const ItemSelector = ({ setSelection, clearSelection }) => {
 ItemSelector.propTypes = {
     setSelection: PropTypes.func,
     clearSelection: PropTypes.func,
+    type: PropTypes.string,
 }

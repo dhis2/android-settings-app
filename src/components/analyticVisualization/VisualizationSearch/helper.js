@@ -33,6 +33,7 @@ import {
     PIVOT_TABLE,
     SINGLE_VALUE,
     RADAR,
+    LINE_LIST,
 } from './visualizationTypes'
 
 export const validateAndroidVisualization = (visualizations) => {
@@ -103,3 +104,27 @@ const isValidOrgUnit = (visualization) =>
 
 export const orderVisualizations = (visualizationList) =>
     orderBy(visualizationList, [(item) => item.valid === true], ['desc'])
+
+/**
+ * Android Event visualization validation
+ * */
+
+export const validateAndroidEventVisualization = (visualizations) => {
+    return visualizations.map((visualization) =>
+        checkEventVisualizationType(visualization)
+    )
+}
+
+const checkEventVisualizationType = (visualization) => {
+    // check relative periods
+    if (visualization.type === LINE_LIST) {
+        if (
+            isValidDimension(visualization.columnDimensions, 15) &&
+            isValidOrgUnit(visualization)
+        ) {
+            visualization.valid = true
+        }
+    } else {
+        visualization.valid = false
+    }
+}

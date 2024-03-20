@@ -40,6 +40,7 @@ export const PIE = 'PIE'
 export const SINGLE_VALUE = 'SINGLE_VALUE'
 export const PIVOT_TABLE = 'PIVOT_TABLE'
 export const RADAR = 'RADAR'
+export const LINE_LIST = 'LINE_LIST'
 
 export const getVisualizationIcon = (type) => {
     switch (type) {
@@ -70,6 +71,7 @@ export const getVisualizationIcon = (type) => {
             return IconVisualizationScatter24
         case GAUGE:
             return IconVisualizationGauge24
+        case LINE_LIST:
         case PIVOT_TABLE:
             return IconTable24
         case LINE:
