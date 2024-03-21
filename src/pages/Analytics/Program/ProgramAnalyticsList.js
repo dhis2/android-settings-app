@@ -21,6 +21,7 @@ const ProgramAnalyticsList = ({
         loading,
         error,
         visualizations: visualizationAPI,
+        eventVisualizations,
     } = useVisualizations(getVisualizationIdList(visualizations))
     const { programs: programList } = useWorkflowContext()
     const [rows, setRows] = useState()
@@ -29,10 +30,14 @@ const ProgramAnalyticsList = ({
 
     useEffect(() => {
         if (visualizations && programList && visualizationAPI) {
+            const visualizationAPIList = [
+                ...visualizationAPI,
+                ...eventVisualizations,
+            ]
             const { visualizationsByPrograms, groupList } = prepareRows(
                 visualizations,
                 programList,
-                visualizationAPI
+                visualizationAPIList
             )
             setRows(visualizationsByPrograms)
             setGroups(groupList)
