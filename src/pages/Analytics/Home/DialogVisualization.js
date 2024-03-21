@@ -14,6 +14,7 @@ import {
     SelectVisualization,
     VisualizationTitle,
     VisualizationUserTest,
+    SelectVisualizationType,
 } from '../../../components/analyticVisualization'
 import buttonStyles from '../../../styles/Button.module.css'
 
@@ -32,10 +33,17 @@ const DialogVisualization = ({
                 <ModalTitle>{i18n.t('Add Home visualization')}</ModalTitle>
 
                 <ModalContent>
-                    <SelectVisualization
+                    <SelectVisualizationType
                         settings={settings}
                         onChange={handleChange}
                     />
+
+                    {settings.type && (
+                        <SelectVisualization
+                            settings={settings}
+                            onChange={handleChange}
+                        />
+                    )}
 
                     {settings.visualization && (
                         <>
