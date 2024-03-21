@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {
     NotEditableElement,
+    SelectVisualizationType,
     VisualizationGroup,
     VisualizationTitle,
 } from './index'
@@ -54,6 +55,14 @@ export const EditVisualization = ({
                         {i18n.t('Edit {{label}} visualization', { label })}
                     </ModalTitle>
                     <ModalContent>
+                        {type !== sections.dataset.type && (
+                            <SelectVisualizationType
+                                settings={settings}
+                                onChange={handleChange}
+                                disabled={true}
+                            />
+                        )}
+
                         {type !== sections.home.type && (
                             <NotEditableElement
                                 value={settings[typeName]}
