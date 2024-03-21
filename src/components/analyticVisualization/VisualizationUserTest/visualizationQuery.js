@@ -5,8 +5,7 @@ import React, { useEffect, useRef } from 'react'
 const visualization = {
     visualizations: {
         resource: 'visualizations',
-        id: ({ id }) => `${id}`,
-        params: {
+        params: ({ id }) => ({
             fields: [
                 'id',
                 'name',
@@ -14,8 +13,23 @@ const visualization = {
                 'userGroupAccesses',
                 'userAccesses',
             ],
+            filter: `id:in:[${id}]`,
             paging: 'false',
-        },
+        }),
+    },
+    eventVisualizations: {
+        resource: 'eventVisualizations',
+        params: ({ id }) => ({
+            fields: [
+                'id',
+                'name',
+                'publicAccess',
+                'userGroupAccesses',
+                'userAccesses',
+            ],
+            filter: `id:in:[${id}]`,
+            paging: 'false',
+        }),
     },
 }
 
@@ -49,6 +63,8 @@ export const useReadVisualizationQuery = (id) => {
     return {
         loading: !called || loading,
         error,
-        data: data && data.visualizations,
+        dataVisualization: data && data.visualizations.visualizations[0],
+        eventVisualization:
+            data && data.eventVisualizations.eventVisualizations[0],
     }
 }
