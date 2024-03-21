@@ -2,6 +2,7 @@ import { Divider } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
 import disable from '../../styles/Disable.module.css'
+import tableTitleStyles from '../../styles/TableTitle.module.css'
 import { InputNumber, RadioGroup, SelectSettings } from '../inputs'
 import TableRow from './TableRow'
 
@@ -42,7 +43,17 @@ const SettingsTableRow = ({ dataRow, states, onChange }) => (
     <div>
         <TableRow>
             <div className={cx({ [disable.disable_label]: states.disableAll })}>
-                {dataRow.option}
+                <p>{dataRow.option}</p>
+                {dataRow.helpText && (
+                    <em
+                        className={cx(
+                            tableTitleStyles.helpText,
+                            tableTitleStyles.attributeLabel
+                        )}
+                    >
+                        {dataRow.helpText}
+                    </em>
+                )}
             </div>
             <div>
                 <InputChoice
