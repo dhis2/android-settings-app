@@ -19,20 +19,22 @@ const HomeAnalyticList = ({
         loading,
         error,
         visualizations: visualizationAPI,
+        dataVisualizations,
+        eventVisualizations,
     } = useVisualizations(getVisualizationIdList(visualizations))
     const [rows, setRows] = useState([])
     const [initialRows, setInitialRows] = useState([])
 
     useEffect(() => {
-        if (!isEmpty(visualizations) && visualizationAPI) {
+        if (!isEmpty(visualizations) && dataVisualizations) {
             const homeVisualizations = createRows(
                 visualizations,
-                visualizationAPI
+                dataVisualizations
             )
             setRows(homeVisualizations)
             setInitialRows(homeVisualizations)
         }
-    }, [visualizations, visualizationAPI])
+    }, [visualizations, visualizationAPI, eventVisualizations])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {
