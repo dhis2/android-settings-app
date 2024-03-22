@@ -9,7 +9,8 @@ import styles from './styles/VisualizationUserTest.module.css'
 import { useReadVisualizationQuery } from './visualizationQuery'
 
 export const VisualizationUserTest = ({ visualization, visualizationName }) => {
-    const { data } = useReadVisualizationQuery(visualization)
+    const { dataVisualization, eventVisualization } =
+        useReadVisualizationQuery(visualization)
     const [user, setUser] = useState()
     const [isValid, setValid] = useState(false)
     const [tested, setTesting] = useState(false)
@@ -19,7 +20,8 @@ export const VisualizationUserTest = ({ visualization, visualizationName }) => {
     }, [user])
 
     const handleChange = () => {
-        setValid(validateUserVisualization(user, data))
+        const userVisualization = dataVisualization || eventVisualization
+        setValid(validateUserVisualization(user, userVisualization))
         setTesting(true)
     }
 

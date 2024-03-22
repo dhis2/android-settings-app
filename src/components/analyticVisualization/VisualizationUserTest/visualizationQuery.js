@@ -3,10 +3,9 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useRef } from 'react'
 
 const visualization = {
-    visualizations: {
+    visualization: {
         resource: 'visualizations',
-        id: ({ id }) => `${id}`,
-        params: {
+        params: ({ id }) => ({
             fields: [
                 'id',
                 'name',
@@ -14,8 +13,23 @@ const visualization = {
                 'userGroupAccesses',
                 'userAccesses',
             ],
+            filter: `id:eq:${id}`,
             paging: 'false',
-        },
+        }),
+    },
+    eventVisualization: {
+        resource: 'eventVisualizations',
+        params: ({ id }) => ({
+            fields: [
+                'id',
+                'name',
+                'publicAccess',
+                'userGroupAccesses',
+                'userAccesses',
+            ],
+            filter: `id:eq:${id}`,
+            paging: 'false',
+        }),
     },
 }
 
@@ -49,6 +63,8 @@ export const useReadVisualizationQuery = (id) => {
     return {
         loading: !called || loading,
         error,
-        data: data && data.visualizations,
+        dataVisualization: data && data.visualization.visualizations[0],
+        eventVisualization:
+            data && data.eventVisualization.eventVisualizations[0],
     }
 }
