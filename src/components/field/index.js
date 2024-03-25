@@ -1,5 +1,6 @@
 export * from './AddNewSetting'
 export * from './ButtonField'
+export * from './BypassDHIS2Version'
 export * from './CheckboxField'
 export * from './DataSync'
 export * from './DisableReferral'
