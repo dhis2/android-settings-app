@@ -7,3 +7,13 @@ export const getVisualizationsQuery = (query = '') => ({
         order: 'displayName:asc',
     },
 })
+
+export const getEventVisualizationsQuery = (query = '') => ({
+    resource: `eventVisualizations`,
+    params: {
+        query,
+        pageSize: 20,
+        fields: 'id,displayName,type,rowDimensions,columnDimensions,userOrganisationUnit,userOrganisationUnitChildren,userOrganisationUnitGrandChildren',
+        order: 'displayName:asc',
+    },
+})

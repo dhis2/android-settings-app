@@ -1,5 +1,6 @@
 import mapValues from 'lodash/mapValues'
 import orderBy from 'lodash/orderBy'
+import { EVENT_VISUALIZATION } from '../../../constants'
 import {
     LAST_12_MONTHS,
     LAST_12_WEEKS,
@@ -33,9 +34,14 @@ import {
     PIVOT_TABLE,
     SINGLE_VALUE,
     RADAR,
+    LINE_LIST,
 } from './visualizationTypes'
 
-export const validateAndroidVisualization = (visualizations) => {
+/**
+ * Valid Android Data visualization
+ * */
+
+export const validateDataVisualization = (visualizations) => {
     return visualizations.map((visualization) =>
         checkVisualizationType(visualization)
     )
@@ -103,3 +109,35 @@ const isValidOrgUnit = (visualization) =>
 
 export const orderVisualizations = (visualizationList) =>
     orderBy(visualizationList, [(item) => item.valid === true], ['desc'])
+
+/**
+ * Valid Android Event visualization
+ * */
+
+export const validateEventVisualization = (visualizations) => {
+    return visualizations.map((visualization) =>
+        checkEventVisualizationType(visualization)
+    )
+}
+
+const checkEventVisualizationType = (visualization) => {
+    if (visualization.type === LINE_LIST) {
+        if (
+            isValidDimension(visualization.columnDimensions, 15) &&
+            isValidOrgUnit(visualization)
+        ) {
+            visualization.valid = true
+        }
+    } else {
+        visualization.valid = false
+    }
+}
+
+/**
+ * Valid Android visualization
+ * */
+
+export const validateAndroidVisualization = (visualizations, type) =>
+    type === EVENT_VISUALIZATION
+        ? validateEventVisualization(visualizations)
+        : validateDataVisualization(visualizations)

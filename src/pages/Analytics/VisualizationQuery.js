@@ -11,6 +11,14 @@ const query = {
             paging: 'false',
         }),
     },
+    eventVisualization: {
+        resource: 'eventVisualizations',
+        params: ({ ids }) => ({
+            fields: ['id', 'name', 'displayName'],
+            filter: `id:in:[${ids}]`,
+            paging: 'false',
+        }),
+    },
 }
 
 const usePrevious = (value) => {
@@ -37,5 +45,11 @@ export const useVisualizations = (ids) => {
         loading,
         error,
         visualizations: data && data.visualization.visualizations,
+        eventVisualizations:
+            data && data.eventVisualization.eventVisualizations,
+        dataVisualizations: data && [
+            ...data.visualization.visualizations,
+            ...data.eventVisualization.eventVisualizations,
+        ],
     }
 }
