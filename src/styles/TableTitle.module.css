@@ -1,5 +1,12 @@
 .attributeLabel {
     color: #4A5768;
-    font-family: Roboto;
     font-style: normal;
+}
+
+.helpText{
+    margin-top: var(--spacers-dp8) !important;
+}
+
+.attribute {
+    margin: 0;
 }
