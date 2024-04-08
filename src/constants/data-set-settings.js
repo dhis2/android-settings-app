@@ -4,8 +4,7 @@ export const DataSetting = [
     {
         keyDownload: 'periodDSDownload',
         keyDBTrimming: 'periodDSDBTrimming',
-        option: i18n.t('Maximum number of periods to download data sets'),
-        helpText: i18n.t('Future periods are always included'),
+        option: i18n.t('Maximum number of past data to download'),
     },
 ]
 
@@ -13,7 +12,7 @@ export const DataSpecificSetting = [
     {
         keyDownload: 'periodDSDownload',
         keyDBTrimming: 'periodDSDBTrimming',
-        option: i18n.t('Maximum number of periods to download data sets for'),
+        option: i18n.t('Maximum number of past data to download'),
     },
 ]
 

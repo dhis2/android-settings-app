@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-21T20:23:54.340Z\n"
-"PO-Revision-Date: 2024-03-21T20:23:54.340Z\n"
+"POT-Creation-Date: 2024-04-08T17:11:56.533Z\n"
+"PO-Revision-Date: 2024-04-08T17:11:56.533Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -576,14 +576,8 @@ msgstr "Something went wrong when loading the data"
 msgid "It looks like there aren't any configured visualizations."
 msgstr "It looks like there aren't any configured visualizations."
 
-msgid "Maximum number of periods to download data sets"
-msgstr "Maximum number of periods to download data sets"
-
-msgid "Future periods are always included"
-msgstr "Future periods are always included"
-
-msgid "Maximum number of periods to download data sets for"
-msgstr "Maximum number of periods to download data sets for"
+msgid "Maximum number of past data to download"
+msgstr "Maximum number of past data to download"
 
 msgid "Overview"
 msgstr "Overview"
