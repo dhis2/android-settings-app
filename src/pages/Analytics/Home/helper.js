@@ -3,6 +3,7 @@ import flattenDeep from 'lodash/flattenDeep'
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
+import { DATA_VISUALIZATION } from '../../../constants'
 import { validateObjectByProperty } from '../../../utils/validators'
 import {
     createBasicVisualization,
@@ -52,6 +53,7 @@ const createVisualization = (value) => ({
     id: value.visualization || value.id,
     name: value.name || '',
     timestamp: value.timestamp || new Date().toJSON(),
+    type: value.type || DATA_VISUALIZATION,
 })
 
 /**

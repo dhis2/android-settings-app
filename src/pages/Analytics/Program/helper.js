@@ -1,4 +1,5 @@
 import mapValues from 'lodash/mapValues'
+import { DATA_VISUALIZATION } from '../../../constants'
 import { validateObjectByProperty } from '../../../utils/validators'
 import {
     createBasicVisualization,
@@ -25,6 +26,7 @@ export const createVisualizationValues = (value) => ({
     id: value.visualization || value.id,
     name: value.name || '',
     visualizationName: value.visualizationName || value.name,
+    type: value.type || DATA_VISUALIZATION,
     timestamp: value.timestamp || new Date().toJSON(),
     program: value.program,
     programName: value.programName,
@@ -118,6 +120,7 @@ export const rowsToDataStore = (rows) => {
                     id: visualization.id,
                     name: visualization.name,
                     timestamp: visualization.timestamp,
+                    type: visualization.type || DATA_VISUALIZATION,
                 })
                 groupUpdated = createGroup(visualization.group, visualizations)
             })

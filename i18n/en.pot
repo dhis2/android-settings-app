@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-14T01:10:43.345Z\n"
-"PO-Revision-Date: 2024-03-14T01:10:43.345Z\n"
+"POT-Creation-Date: 2024-03-22T00:14:50.729Z\n"
+"PO-Revision-Date: 2024-03-22T00:14:50.729Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -64,6 +64,9 @@ msgstr "Edit Visualization"
 
 msgid "Dataset"
 msgstr "Dataset"
+
+msgid "Visualization Type"
+msgstr "Visualization Type"
 
 msgid "Add a group name"
 msgstr "Add a group name"
@@ -575,6 +578,12 @@ msgstr "Something went wrong when loading the data"
 
 msgid "It looks like there aren't any configured visualizations."
 msgstr "It looks like there aren't any configured visualizations."
+
+msgid "Data Visualization"
+msgstr "Data Visualization"
+
+msgid "Event Visualization"
+msgstr "Event Visualization"
 
 msgid "Maximum number of periods to download data sets for"
 msgstr "Maximum number of periods to download data sets for"

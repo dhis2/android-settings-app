@@ -33,6 +33,7 @@ export const GAUGE = 'GAUGE'
 export const YEAR_OVER_YEAR_LINE = 'YEAR_OVER_YEAR_LINE'
 export const YEAR_OVER_YEAR_COLUMN = 'YEAR_OVER_YEAR_COLUMN'
 export const SCATTER = 'SCATTER'
+export const LINE_LIST = 'LINE_LIST'
 
 export const COLUMN = 'COLUMN'
 export const LINE = 'LINE'
@@ -70,6 +71,7 @@ export const getVisualizationIcon = (type) => {
             return IconVisualizationScatter24
         case GAUGE:
             return IconVisualizationGauge24
+        case LINE_LIST:
         case PIVOT_TABLE:
             return IconTable24
         case LINE:
