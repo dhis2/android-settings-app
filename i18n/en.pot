@@ -233,6 +233,49 @@ msgstr "Weight for height"
 msgid "Choose WHO visualization type"
 msgstr "Choose WHO visualization type"
 
+msgid "Bypass"
+msgstr "Bypass"
+
+msgid "Require"
+msgstr "Require"
+
+msgid "{{bypass}} DHIS2 Version Validation"
+msgstr "{{bypass}} DHIS2 Version Validation"
+
+msgid ""
+"Use this option to enforce strict version validation when connecting to "
+"DHIS2 instances."
+msgstr ""
+"Use this option to enforce strict version validation when connecting to "
+"DHIS2 instances."
+
+msgid ""
+"This ensures that only supported DHIS2 versions are accessed, maintaining "
+"compatibility and security standards."
+msgstr ""
+"This ensures that only supported DHIS2 versions are accessed, maintaining "
+"compatibility and security standards."
+
+msgid ""
+"Enabling this option allows you to proceed with connecting to DHIS2 "
+"instances even if they are not officially supported."
+msgstr ""
+"Enabling this option allows you to proceed with connecting to DHIS2 "
+"instances even if they are not officially supported."
+
+msgid ""
+"Use this with caution and ensure compatibility and security measures are in "
+"place."
+msgstr ""
+"Use this with caution and ensure compatibility and security measures are in "
+"place."
+
+msgid "Validate version"
+msgstr "Validate version"
+
+msgid "Bypass version"
+msgstr "Bypass version"
+
 msgid "Delete {{typeName}}"
 msgstr "Delete {{typeName}}"
 
@@ -360,6 +403,12 @@ msgstr ""
 
 msgid "Save"
 msgstr "Save"
+
+msgid "Bypass DHIS2 Version"
+msgstr "Bypass DHIS2 Version"
+
+msgid "Bypass the validation process for DHIS2 version compatibility"
+msgstr "Bypass the validation process for DHIS2 version compatibility"
 
 msgid "30 Minutes"
 msgstr "30 Minutes"
