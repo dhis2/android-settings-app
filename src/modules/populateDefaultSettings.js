@@ -21,6 +21,7 @@ export const populateObject = (type) => {
                 reservedValues: androidSettingsDefault.reservedValues,
                 encryptDB: androidSettingsDefault.encryptDB,
                 allowScreenCapture: defaultShareScreen,
+                experimentalFeatures: ['newFormLayout'],
             }
             break
         case DEFAULT_GLOBAL:

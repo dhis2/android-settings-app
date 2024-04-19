@@ -4,7 +4,6 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import { useIsAuthorized } from '../../auth'
 import {
-    BypassDHIS2Version,
     EncryptDB,
     MatomoId,
     MatomoUrl,
@@ -118,11 +117,6 @@ const GeneralSettings = () => {
                         disabled={disable}
                     />
                     <ShareScreen
-                        value={settings}
-                        onChange={setSettings}
-                        disabled={disable}
-                    />
-                    <BypassDHIS2Version
                         value={settings}
                         onChange={setSettings}
                         disabled={disable}

@@ -1,7 +1,6 @@
 import isNil from 'lodash/isNil'
 import map from 'lodash/map'
 import {
-    defaultBypassDHIS2Version,
     defaultEncryptDB,
     defaultReservedValues,
     defaultShareScreen,
@@ -48,9 +47,9 @@ export const createInitialValues = (prevGeneralDetails) => ({
     encryptDB: prevGeneralDetails.encryptDB || defaultEncryptDB,
     allowScreenCapture:
         prevGeneralDetails.allowScreenCapture || defaultShareScreen,
-    bypassDHIS2VersionCheck:
-        prevGeneralDetails.bypassDHIS2VersionCheck || defaultBypassDHIS2Version,
-    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [],
+    experimentalFeatures: prevGeneralDetails.experimentalFeatures || [
+        'newFormLayout',
+    ],
 })
 
 const validReservedValue = (value) => {

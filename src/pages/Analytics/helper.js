@@ -1,6 +1,7 @@
 import flattenDeep from 'lodash/flattenDeep'
 import mapValues from 'lodash/mapValues'
 import values from 'lodash/values'
+import { DATA_VISUALIZATION } from '../../constants'
 
 export const createGroup = (group, visualizations) => ({
     id: group.id,
@@ -14,6 +15,7 @@ export const createBasicVisualization = (
 ) => ({
     id: visualization.visualization || visualization.id,
     name: visualization.name || '',
+    type: visualization.type || DATA_VISUALIZATION,
     visualizationName:
         visualization.visualizationName || visualizationFound.name,
     timestamp: visualization.timestamp || new Date().toJSON(),
