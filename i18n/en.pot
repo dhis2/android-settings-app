@@ -585,8 +585,8 @@ msgstr "Data Visualization"
 msgid "Event Visualization"
 msgstr "Event Visualization"
 
-msgid "Maximum number of periods to download data sets for"
-msgstr "Maximum number of periods to download data sets for"
+msgid "Maximum number of past data to download"
+msgstr "Maximum number of past data to download"
 
 msgid "Overview"
 msgstr "Overview"
