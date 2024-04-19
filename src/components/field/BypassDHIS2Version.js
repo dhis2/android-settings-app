@@ -28,7 +28,7 @@ export const BypassDHIS2Version = ({ value, onChange, ...props }) => {
         <>
             <CheckboxField
                 name={CODE}
-                label={i18n.t('Bypass DHIS2 Version')}
+                label={i18n.t('Skip DHIS2 version validation')}
                 helpText={i18n.t(
                     'Bypass the validation process for DHIS2 version compatibility'
                 )}
