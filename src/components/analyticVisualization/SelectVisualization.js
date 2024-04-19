@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { DATA_VISUALIZATION } from '../../constants'
 import { FieldSection } from '../field'
 import { VisualizationSearch } from './VisualizationSearch'
 
@@ -25,6 +26,7 @@ export const SelectVisualization = ({ settings, onChange }) => {
             <VisualizationSearch
                 setSelection={handleChange}
                 clearSelection={clearSelection}
+                type={settings.type || DATA_VISUALIZATION}
             />
         </FieldSection>
     )

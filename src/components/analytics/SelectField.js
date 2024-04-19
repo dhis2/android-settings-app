@@ -34,7 +34,7 @@ export const SelectField = ({
 
 SelectField.propTypes = {
     label: PropTypes.string,
-    option: PropTypes.array,
+    options: PropTypes.array,
     onChange: PropTypes.func,
     name: PropTypes.string,
 }
