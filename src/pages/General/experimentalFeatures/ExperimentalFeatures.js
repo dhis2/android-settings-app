@@ -8,6 +8,7 @@ import { MoreOptions } from '../../../components/moreOptions'
 import { getValidKeysList } from '../helper'
 import styles from './ExperimentalFeatures.module.css'
 import { featureList } from './feature-list'
+import { HelpText } from './HelperText'
 
 const CODE = 'experimentalFeatures'
 
@@ -46,17 +47,25 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
                         )}
                     </Legend>
 
-                    {featureList.map(({ name, label, description }) => (
-                        <CheckboxField
-                            key={name}
-                            name={name}
-                            label={label}
-                            helpText={description}
-                            checked={options[name]}
-                            onChange={handleCheckbox}
-                            {...props}
-                        />
-                    ))}
+                    {featureList.map(
+                        ({ name, label, description, warning }) => (
+                            <CheckboxField
+                                key={name}
+                                name={name}
+                                label={label}
+                                helpText={
+                                    <HelpText
+                                        helpText={description}
+                                        warning={warning}
+                                        type={warning ? 'info' : undefined}
+                                    />
+                                }
+                                checked={options[name]}
+                                onChange={handleCheckbox}
+                                {...props}
+                            />
+                        )
+                    )}
                 </>
             </MoreOptions>
         </>

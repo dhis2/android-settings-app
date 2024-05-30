@@ -1,4 +1,5 @@
 import {
+    defaultBypassDHIS2Version,
     defaultShareScreen,
     defaultTrackerImporterVersion,
     newTrackerVersion,
@@ -21,6 +22,7 @@ export const populateObject = (type) => {
                 reservedValues: androidSettingsDefault.reservedValues,
                 encryptDB: androidSettingsDefault.encryptDB,
                 allowScreenCapture: defaultShareScreen,
+                bypassDHIS2VersionCheck: defaultBypassDHIS2Version,
                 experimentalFeatures: ['newFormLayout'],
             }
             break
