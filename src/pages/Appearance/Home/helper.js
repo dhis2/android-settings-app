@@ -1,6 +1,6 @@
 const filterSortingDefault = {
-    filter: true,
-    sort: true,
+    filter: false,
+    sort: false,
 }
 
 export const createInitialValues = (prevDetails) => ({
