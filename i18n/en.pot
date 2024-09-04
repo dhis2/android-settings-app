@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-28T14:13:22.879Z\n"
-"PO-Revision-Date: 2024-05-28T14:13:22.879Z\n"
+"POT-Creation-Date: 2024-08-29T01:11:26.030Z\n"
+"PO-Revision-Date: 2024-08-29T01:11:26.030Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -433,6 +433,9 @@ msgstr "Manual"
 
 msgid "How often should data sync?"
 msgstr "How often should data sync?"
+
+msgid "Disable manual location capture"
+msgstr "Disable manual location capture"
 
 msgid "Disable TEI referrals"
 msgstr "Disable TEI referrals"
@@ -931,6 +934,9 @@ msgstr "TEI Header"
 
 msgid "Advanced options"
 msgstr "Advanced options"
+
+msgid "Capture Coordinates settings"
+msgstr "Capture Coordinates settings"
 
 msgid "Filter"
 msgstr "Filter"

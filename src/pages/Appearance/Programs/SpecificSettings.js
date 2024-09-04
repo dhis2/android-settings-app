@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
+    DisableManualLocation,
     DisableReferral,
     HideFormSections,
     OptionalTEISearch,
@@ -50,6 +51,14 @@ const SpecificSettings = ({
                             settings={spinnerSettings}
                         />
                         <HideFormSections
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+                    </>
+                </Section>
+                <Section legend={i18n.t('Capture Coordinates settings')}>
+                    <>
+                        <DisableManualLocation
                             handleChange={handleSettings}
                             settings={spinnerSettings}
                         />
