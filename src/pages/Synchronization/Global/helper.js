@@ -7,7 +7,10 @@ import {
     minApiVersionNewTrackerDefault,
     newTrackerVersion,
 } from '../../../components/field'
-import { convertToByte, formatByteSize } from '../../../utils/getByteLength'
+import {
+    convertBytesToKilobytes,
+    convertToByte,
+} from '../../../utils/getByteLength'
 
 export const createInitialValues = (prevGlobalDetails, apiVersion) => ({
     metadataSync: prevGlobalDetails.metadataSync || defaultMetadataSync,
@@ -18,8 +21,9 @@ export const createInitialValues = (prevGlobalDetails, apiVersion) => ({
     trackerExporterVersion:
         prevGlobalDetails.trackerExporterVersion ||
         getImporterVersion(apiVersion),
-    fileMaxLengthBytes:
-        formatByteSize(prevGlobalDetails.fileMaxLengthBytes) || 0,
+    fileMaxLengthBytes: convertBytesToKilobytes(
+        prevGlobalDetails.fileMaxLengthBytes
+    ),
 })
 
 const getImporterVersion = (apiVersion) =>

@@ -39,7 +39,7 @@ export const populateObject = (type) => {
                 dataSync: androidSettingsDefault.dataSync,
                 trackerImporterVersion: newTrackerVersion,
                 trackerExporterVersion: newTrackerVersion,
-                fileMaxLengthBytes: 0,
+                fileMaxLengthBytes: null,
             }
             break
         case DEFAULT_PROGRAM:
