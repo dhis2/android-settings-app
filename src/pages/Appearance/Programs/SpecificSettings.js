@@ -5,6 +5,7 @@ import {
     DisableManualLocation,
     DisableReferral,
     HideFormSections,
+    MinimumLocation,
     OptionalTEISearch,
     ProgramCompletionSpinner,
     Section,
@@ -59,6 +60,10 @@ const SpecificSettings = ({
                 <Section legend={i18n.t('Capture Coordinates settings')}>
                     <>
                         <DisableManualLocation
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+                        <MinimumLocation
                             handleChange={handleSettings}
                             settings={spinnerSettings}
                         />

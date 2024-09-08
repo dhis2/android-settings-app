@@ -34,6 +34,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         disableCollapsibleSections: false,
         programIndicator: '',
         disableManualLocation: false,
+        minimumLocationAccuracy: null,
     })
 
     return {
@@ -45,6 +46,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
             prevDetails.programIndicator ||
             prevDetails?.itemHeader?.programIndicator,
         disableManualLocation: prevDetails.disableManualLocation,
+        minimumLocationAccuracy: prevDetails.minimumLocationAccuracy,
     }
 }
 
@@ -92,6 +94,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
             'disableCollapsibleSections',
             'programIndicator',
             'disableManualLocation',
+            'minimumLocationAccuracy',
         ]
     )
 }
@@ -206,6 +209,7 @@ export const isProgramConfiguration = (configurationType) =>
         'disableCollapsibleSections',
         'programIndicator',
         'disableManualLocation',
+        'minimumLocationAccuracy',
     ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>
