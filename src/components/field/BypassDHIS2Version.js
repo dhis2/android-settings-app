@@ -1,54 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxField as UICheckboxField } from '@dhis2/ui'
-import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import DialogBypass from '../dialog/DialogBypass'
 import { FieldSection } from './FieldSection'
-
-const HelpText = ({ helpText, warning, type }) => {
-    if (!warning) {
-        return helpText
-    }
-
-    return (
-        <>
-            <span>
-                {helpText}
-                <span
-                    className={cx('prefix', {
-                        prefixInfo: type === 'info',
-                    })}
-                >
-                    {warning}
-                </span>
-            </span>
-
-            <style>{`
-                .prefix {
-                font - family: monospace;
-                font-size: 13px;
-                color: var(--colors-grey800);
-                background: var(--colors-grey300);
-                padding: 2px var(--spacers-dp4);
-                margin-right: var(--spacers-dp4);
-                border-radius: 3px;
-            }
-
-                .prefixInfo {
-                color: var(--colors-blue800);
-                background: var(--colors-blue050);
-            }
-            `}</style>
-        </>
-    )
-}
-
-HelpText.propTypes = {
-    helpText: PropTypes.string,
-    warning: PropTypes.string,
-    type: PropTypes.string,
-}
+import { HelpText } from './HelpText'
 
 const CODE = 'bypassDHIS2VersionCheck'
 
@@ -87,6 +43,7 @@ export const BypassDHIS2Version = ({ value, onChange, ...props }) => {
                             warning={i18n.t(
                                 'Only applicable for users using Android app version 3.0 or later.'
                             )}
+                            version={i18n.t('3.0 +')}
                             type="info"
                         />
                     }
