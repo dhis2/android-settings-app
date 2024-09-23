@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-29T01:11:26.030Z\n"
-"PO-Revision-Date: 2024-08-29T01:11:26.030Z\n"
+"POT-Creation-Date: 2024-09-23T13:25:52.443Z\n"
+"PO-Revision-Date: 2024-09-23T13:25:52.443Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -413,6 +413,9 @@ msgstr "Bypass the validation process for DHIS2 version compatibility."
 msgid "Only applicable for users using Android app version 3.0 or later."
 msgstr "Only applicable for users using Android app version 3.0 or later."
 
+msgid "3.0 +"
+msgstr "3.0 +"
+
 msgid "30 Minutes"
 msgstr "30 Minutes"
 
@@ -437,8 +440,14 @@ msgstr "How often should data sync?"
 msgid "Disable manual location capture"
 msgstr "Disable manual location capture"
 
-msgid "Disable TEI referrals"
-msgstr "Disable TEI referrals"
+msgid "Disable TEI referrals."
+msgstr "Disable TEI referrals."
+
+msgid "Only applicable for users using Android app version 2.9 or later."
+msgstr "Only applicable for users using Android app version 2.9 or later."
+
+msgid "2.9 +"
+msgstr "2.9 +"
 
 msgid "Encrypt device database"
 msgstr "Encrypt device database"
@@ -455,11 +464,17 @@ msgstr ""
 msgid "Maximum file size limit for download (Kb)"
 msgstr "Maximum file size limit for download (Kb)"
 
+msgid "Only applicable for users using Android app version 2.8 or later."
+msgstr "Only applicable for users using Android app version 2.8 or later."
+
+msgid "2.8 +"
+msgstr "2.8 +"
+
 msgid "Show percentage (%) complete in Program toolbar"
 msgstr "Show percentage (%) complete in Program toolbar"
 
-msgid "Do not collapse sections in form"
-msgstr "Do not collapse sections in form"
+msgid "Do not collapse sections in form."
+msgstr "Do not collapse sections in form."
 
 msgid "Analytics reporting ID (Matomo)"
 msgstr "Analytics reporting ID (Matomo)"
@@ -938,6 +953,12 @@ msgstr "Advanced options"
 msgid "Capture Coordinates settings"
 msgstr "Capture Coordinates settings"
 
+msgid "Only applicable for users using Android app version 3.1 or later."
+msgstr "Only applicable for users using Android app version 3.1 or later."
+
+msgid "3.1 +"
+msgstr "3.1 +"
+
 msgid "Filter"
 msgstr "Filter"
 
@@ -999,6 +1020,9 @@ msgstr ""
 
 msgid "Only applicable for users using Android app versions 2.9, 2.9.1, and 2.9.2."
 msgstr "Only applicable for users using Android app versions 2.9, 2.9.1, and 2.9.2."
+
+msgid "2.9.x"
+msgstr "2.9.x"
 
 msgid "Overview: Android Settings App"
 msgstr "Overview: Android Settings App"
