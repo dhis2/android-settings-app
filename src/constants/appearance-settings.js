@@ -16,20 +16,20 @@ export const appearanceDefault = {
     filterSorting: {
         home: {
             assignedToMe: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             },
             date: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             },
             organisationUnit: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             },
             syncStatus: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             },
         },
         programSettings: {
