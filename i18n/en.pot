@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-29T01:11:26.030Z\n"
-"PO-Revision-Date: 2024-08-29T01:11:26.030Z\n"
+"POT-Creation-Date: 2024-09-04T17:01:04.488Z\n"
+"PO-Revision-Date: 2024-09-04T17:01:04.488Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -488,6 +488,12 @@ msgstr "1 Week"
 
 msgid "How often should metadata sync?"
 msgstr "How often should metadata sync?"
+
+msgid "Minimum location accuracy (m)"
+msgstr "Minimum location accuracy (m)"
+
+msgid "Configure the minimum precision level for location capture"
+msgstr "Configure the minimum precision level for location capture"
 
 msgid "Allow the user to create a TEI without searching"
 msgstr "Allow the user to create a TEI without searching"
