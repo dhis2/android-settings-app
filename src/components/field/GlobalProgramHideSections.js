@@ -6,6 +6,7 @@ import { COLLAPSIBLE_SECTIONS } from '../../constants'
 import { CheckboxField } from './CheckboxField'
 import styles from './Field.module.css'
 import { GlobalProgramDisableReferral } from './GlobalProgramDisableReferral'
+import { HelpText } from './HelpText'
 
 export const GlobalProgramHideSections = ({ disable, settings, onChange }) => {
     const handleChange = (e) => {
@@ -19,7 +20,16 @@ export const GlobalProgramHideSections = ({ disable, settings, onChange }) => {
         <div className={cx(styles.rowBMargin24)}>
             <CheckboxField
                 name={COLLAPSIBLE_SECTIONS}
-                label={i18n.t('Do not collapse sections in form')}
+                label={
+                    <HelpText
+                        helpText={i18n.t('Do not collapse sections in form.')}
+                        warning={i18n.t(
+                            'Only applicable for users using Android app version 2.9 or later.'
+                        )}
+                        version={i18n.t('2.9 +')}
+                        type="info"
+                    />
+                }
                 onChange={handleChange}
                 disabled={disable}
                 checked={settings[COLLAPSIBLE_SECTIONS]}

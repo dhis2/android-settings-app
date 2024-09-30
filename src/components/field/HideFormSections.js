@@ -3,11 +3,21 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { COLLAPSIBLE_SECTIONS } from '../../constants'
 import { CheckboxField } from './CheckboxField'
+import { HelpText } from './HelpText'
 
 export const HideFormSections = ({ settings, handleChange }) => (
     <CheckboxField
         name={COLLAPSIBLE_SECTIONS}
-        label={i18n.t('Do not collapse sections in form')}
+        label={
+            <HelpText
+                helpText={i18n.t('Do not collapse sections in form.')}
+                warning={i18n.t(
+                    'Only applicable for users using Android app version 2.9 or later.'
+                )}
+                type="info"
+                version={i18n.t('2.9 +')}
+            />
+        }
         onChange={handleChange}
         checked={settings[COLLAPSIBLE_SECTIONS]}
     />

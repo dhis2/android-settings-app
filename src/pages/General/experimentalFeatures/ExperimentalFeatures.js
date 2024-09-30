@@ -3,12 +3,11 @@ import { Legend } from '@dhis2/ui'
 import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { CheckboxField } from '../../../components/field'
+import { CheckboxField, HelpText } from '../../../components/field'
 import { MoreOptions } from '../../../components/moreOptions'
 import { getValidKeysList } from '../helper'
 import styles from './ExperimentalFeatures.module.css'
 import { featureList } from './feature-list'
-import { HelpText } from './HelperText'
 
 const CODE = 'experimentalFeatures'
 
@@ -48,7 +47,7 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
                     </Legend>
 
                     {featureList.map(
-                        ({ name, label, description, warning }) => (
+                        ({ name, label, description, warning, version }) => (
                             <CheckboxField
                                 key={name}
                                 name={name}
@@ -58,6 +57,7 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
                                         helpText={description}
                                         warning={warning}
                                         type={warning ? 'info' : undefined}
+                                        version={version}
                                     />
                                 }
                                 checked={options[name]}

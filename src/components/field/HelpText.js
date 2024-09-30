@@ -1,8 +1,9 @@
+import { Tooltip } from '@dhis2/ui'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-export const HelpText = ({ helpText, warning, type }) => {
+export const HelpText = ({ helpText, warning, type, version }) => {
     if (!warning) {
         return helpText
     }
@@ -11,13 +12,15 @@ export const HelpText = ({ helpText, warning, type }) => {
         <>
             <span>
                 {helpText}
-                <span
-                    className={cx('prefix', {
-                        prefixInfo: type === 'info',
-                    })}
-                >
-                    {warning}
-                </span>
+                <Tooltip placement="right" content={warning}>
+                    <span
+                        className={cx('prefix', {
+                            prefixInfo: type === 'info',
+                        })}
+                    >
+                        {version}
+                    </span>
+                </Tooltip>
             </span>
 
             <style>{`
@@ -28,6 +31,7 @@ export const HelpText = ({ helpText, warning, type }) => {
                 background: var(--colors-grey300);
                 padding: 2px var(--spacers-dp4);
                 margin-right: var(--spacers-dp4);
+                margin-left: var(--spacers-dp8);
                 border-radius: 3px;
             }
 
@@ -44,4 +48,5 @@ HelpText.propTypes = {
     helpText: PropTypes.string,
     warning: PropTypes.string,
     type: PropTypes.string,
+    version: PropTypes.string,
 }
