@@ -15,9 +15,11 @@ import buttonStyle from '../../styles/Button.module.css'
 import warning from '../../styles/Warning.module.css'
 
 const DialogFirstLaunch = ({ handleSave, isOutOfDate, disable }) => {
-    const { baseUrl } = useConfig()
+    const { baseUrl, apiVersion } = useConfig()
     const path = '/dhis-web-commons-about/redirect.action'
     const initialUrl = `${baseUrl}${path}`
+    const maxApiVersion = 42
+    const redirectUrl = apiVersion >= maxApiVersion ? baseUrl : initialUrl
 
     return (
         <Modal position="middle">
@@ -61,7 +63,7 @@ const DialogFirstLaunch = ({ handleSave, isOutOfDate, disable }) => {
                 <ButtonStrip end>
                     <Button>
                         <a
-                            href={initialUrl}
+                            href={redirectUrl}
                             className={buttonStyle.button_redirect}
                         >
                             {i18n.t('Exit, do not apply settings')}
