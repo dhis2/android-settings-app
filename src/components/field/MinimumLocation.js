@@ -10,7 +10,7 @@ export const MinimumLocation = ({ handleChange, settings, ...props }) => {
     const handleValidInput = (e) => {
         const inputValue = isNullUndefinedOrEmptyString(e.value)
             ? null
-            : Math.max(5, e.value).toString()
+            : Math.max(0, e.value).toString()
 
         handleChange({
             name: MINIMUM_LOCATION,

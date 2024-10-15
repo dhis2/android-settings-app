@@ -10,6 +10,7 @@ import {
 } from '../../../utils/utils'
 import DialogNewProgram from './DialogNewProgram'
 import {
+    createSettings,
     findElementById,
     isProgramConfiguration,
     isTrackerProgram,
@@ -38,7 +39,7 @@ const SpecificTableAction = ({
                 programHasCategoryCombo(args[0].id, elementList)
             )
             setTrackerProgram(isTrackerProgram(args[0].id, elementList))
-            setSpinner(findElementById(spinnerList, args[0].id))
+            setSpinner(createSettings(findElementById(spinnerList, args[0].id)))
             setOpenEditDialog(true)
         },
         delete: (...args) => {

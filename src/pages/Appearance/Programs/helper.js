@@ -9,6 +9,7 @@ import {
     removePropertiesFromObject,
     removeSummaryFromSettings,
 } from '../../../utils/utils'
+import { isValidValue } from '../../../utils/validators'
 
 const filterSortingDefault = {
     filter: true,
@@ -237,6 +238,31 @@ const createItemHeader = (settings) => {
 
     return {
         ...settings,
+        minimumLocationAccuracy: parseMinimumLocation(
+            settings.minimumLocationAccuracy,
+            'save'
+        ),
         ...programIndicator,
     }
 }
+
+const parseMinimumLocation = (value, type) => {
+    if (isNil(value) || !isValidValue(value)) {
+        return null
+    }
+    return type === 'save' ? parseInt(value) : value.toString()
+}
+
+export const createSettings = (settings) => ({
+    completionSpinner: settings.completionSpinner,
+    optionalSearch: settings.optionalSearch,
+    disableReferrals: settings.disableReferrals,
+    disableCollapsibleSections: settings.disableCollapsibleSections,
+    programIndicator:
+        settings.programIndicator || settings?.itemHeader?.programIndicator,
+    disableManualLocation: settings.disableManualLocation,
+    minimumLocationAccuracy: parseMinimumLocation(
+        settings.minimumLocationAccuracy,
+        'edit'
+    ),
+})
