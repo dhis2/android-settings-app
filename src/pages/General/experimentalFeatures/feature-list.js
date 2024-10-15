@@ -10,5 +10,6 @@ export const featureList = [
         warning: i18n.t(
             'Only applicable for users using Android app versions 2.9, 2.9.1, and 2.9.2.'
         ),
+        version: i18n.t('2.9.x'),
     },
 ]

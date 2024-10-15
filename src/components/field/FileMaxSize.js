@@ -4,6 +4,7 @@ import { isNullUndefinedOrEmptyString } from 'd2/lib/check'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FieldSection } from './FieldSection'
+import { HelpText } from './HelpText'
 
 const CODE = 'fileMaxLengthBytes'
 export const FileMaxSize = ({ onChange, value, ...props }) => {
@@ -16,7 +17,18 @@ export const FileMaxSize = ({ onChange, value, ...props }) => {
             <InputField
                 inputWidth="120px"
                 type="number"
-                label={i18n.t('Maximum file size limit for download (Kb)')}
+                label={
+                    <HelpText
+                        helpText={i18n.t(
+                            'Maximum file size limit for download (Kb)'
+                        )}
+                        warning={i18n.t(
+                            'Only applicable for users using Android app version 2.8 or later.'
+                        )}
+                        type="info"
+                        version={i18n.t('2.8 +')}
+                    />
+                }
                 name={CODE}
                 value={
                     isNullUndefinedOrEmptyString(value[CODE])
