@@ -4,6 +4,7 @@ import React from 'react'
 import {
     DisableManualLocation,
     DisableReferral,
+    HelpText,
     HideFormSections,
     OptionalTEISearch,
     ProgramCompletionSpinner,
@@ -24,7 +25,18 @@ const SpecificSettings = ({
     <>
         <Wrapper>
             <div>
-                <Section legend={i18n.t('TEI Header')}>
+                <Section
+                    legend={
+                        <HelpText
+                            helpText={i18n.t('TEI Header')}
+                            warning={i18n.t(
+                                'Only applicable for users using Android app version 2.9 or later.'
+                            )}
+                            version={i18n.t('2.9 +')}
+                            type="info"
+                        />
+                    }
+                >
                     <TeiHeader
                         handleChange={handleSettings}
                         settings={spinnerSettings}
@@ -56,7 +68,18 @@ const SpecificSettings = ({
                         />
                     </>
                 </Section>
-                <Section legend={i18n.t('Capture Coordinates settings')}>
+                <Section
+                    legend={
+                        <HelpText
+                            helpText={i18n.t('Capture Coordinates settings')}
+                            warning={i18n.t(
+                                'Only applicable for users using Android app version 3.1 or later.'
+                            )}
+                            version={i18n.t('3.1 +')}
+                            type="info"
+                        />
+                    }
+                >
                     <>
                         <DisableManualLocation
                             handleChange={handleSettings}
