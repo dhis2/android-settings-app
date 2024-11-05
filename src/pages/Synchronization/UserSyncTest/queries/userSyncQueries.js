@@ -7,7 +7,7 @@ export const getUserQuery = (query = '') => {
         resource: `users`,
         params: {
             query,
-            fields: 'id,name,userCredentials,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
+            fields: 'id,name,username,externalAuth,twoFA,passwordLastUpdated,cogsDimensionConstraints,catDimensionConstraints,previousPasswords,selfRegistered,invitation,disabled,sharing,userRoles,userGroups,organisationUnits,teiSearchOrganisationUnits,publicAccess,userGroupAccesses,userAccesses',
             order: 'name:asc',
             paging: 'false',
         },

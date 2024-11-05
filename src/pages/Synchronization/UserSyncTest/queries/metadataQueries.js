@@ -459,7 +459,7 @@ export const apiFetchConstants = async (dataEngine) => {
 const meQuery = () => ({
     resource: 'me',
     params: {
-        fields: 'id,code,name,displayName,created,lastUpdated,birthday,education,gender,jobTitle,surname,firstName,introduction,employer,interests,languages,email,phoneNumber,nationality,deleted,userCredentials[id,code,name,displayName,created,lastUpdated,deleted,username,userRoles[id,code,name,displayName,created,lastUpdated,deleted]],organisationUnits[id,path],teiSearchOrganisationUnits[id,path]',
+        fields: 'id,code,name,displayName,created,lastUpdated,birthday,education,gender,jobTitle,surname,firstName,introduction,employer,interests,languages,email,phoneNumber,nationality,deleted,username,userRoles[id,code,name,displayName,created,lastUpdated,deleted],organisationUnits[id,path],teiSearchOrganisationUnits[id,path]',
         paging: false,
     },
 })
