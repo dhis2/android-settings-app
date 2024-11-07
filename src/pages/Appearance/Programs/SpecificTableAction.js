@@ -10,6 +10,7 @@ import {
 } from '../../../utils/utils'
 import DialogNewProgram from './DialogNewProgram'
 import {
+    createSettings,
     findElementById,
     isProgramConfiguration,
     isTrackerProgram,
@@ -38,7 +39,7 @@ const SpecificTableAction = ({
                 programHasCategoryCombo(args[0].id, elementList)
             )
             setTrackerProgram(isTrackerProgram(args[0].id, elementList))
-            setSpinner(findElementById(spinnerList, args[0].id))
+            setSpinner(createSettings(findElementById(spinnerList, args[0].id)))
             setOpenEditDialog(true)
         },
         delete: (...args) => {
@@ -71,7 +72,7 @@ const SpecificTableAction = ({
     const handleChange = (e, key) => {
         if (isProgramConfiguration(e.name || key)) {
             const spinnerSettings = !isNil(e.name)
-                ? { ...spinner, [e.name]: e.checked }
+                ? { ...spinner, [e.name]: e.checked || e.value }
                 : { ...spinner, [key]: e.selected }
 
             setSpinner({
