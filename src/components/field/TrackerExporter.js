@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { useApiVersion } from '../../utils/useApiVersion'
 import { CheckboxField } from './CheckboxField'
+import { HelpText } from './HelpText'
 import {
     defaultTrackerImporterVersion,
     newTrackerVersion,
@@ -38,9 +39,18 @@ export const TrackerExporter = ({ value, onChange, ...props }) => {
                     label={i18n.t(
                         'Use the new version of Tracker Exporter (Web API)'
                     )}
-                    helpText={i18n.t(
-                        'Use new tracker endpoints dedicated to querying tracker objects (including tracked entities, enrollments, events, and relationships).'
-                    )}
+                    helpText={
+                        <HelpText
+                            helpText={i18n.t(
+                                'Use new tracker endpoints dedicated to querying tracker objects (including tracked entities, enrollments, events, and relationships).'
+                            )}
+                            warning={i18n.t(
+                                'Only applicable for users using Android app version 2.8 or later.'
+                            )}
+                            type="info"
+                            version={i18n.t('2.8 +')}
+                        />
+                    }
                     checked={tracker}
                     onChange={handleCheckbox}
                     {...props}

@@ -1,6 +1,6 @@
 {
     "name": "android-settings-app",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "author": "UiO <milagros@dhis2.org>",
     "private": true,
     "dependencies": {
