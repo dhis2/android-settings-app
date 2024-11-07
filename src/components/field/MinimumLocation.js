@@ -8,14 +8,22 @@ import { FieldSection } from './FieldSection'
 
 export const MinimumLocation = ({ handleChange, settings, ...props }) => {
     const handleValidInput = (e) => {
-        const inputValue = isNullUndefinedOrEmptyString(e.value)
-            ? null
-            : Math.max(0, e.value).toString()
+        const inputValue = e.value
 
-        handleChange({
-            name: MINIMUM_LOCATION,
-            value: inputValue,
-        })
+        // Allow clearing the input to set the value to null
+        if (isNullUndefinedOrEmptyString(inputValue)) {
+            handleChange({ name: MINIMUM_LOCATION, value: null })
+            return
+        }
+
+        // Check if the value is a valid positive number within the range
+        const numericValue = Number(inputValue)
+        if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 99) {
+            handleChange({
+                name: MINIMUM_LOCATION,
+                value: numericValue.toString(),
+            })
+        }
     }
 
     return (
@@ -33,6 +41,7 @@ export const MinimumLocation = ({ handleChange, settings, ...props }) => {
                 onChange={(e) => handleValidInput(e)}
                 step="5"
                 min="5"
+                max="99"
                 {...props}
             />
         </FieldSection>
