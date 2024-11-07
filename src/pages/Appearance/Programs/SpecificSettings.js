@@ -6,6 +6,7 @@ import {
     DisableReferral,
     HelpText,
     HideFormSections,
+    MinimumLocation,
     OptionalTEISearch,
     ProgramCompletionSpinner,
     Section,
@@ -82,6 +83,10 @@ const SpecificSettings = ({
                 >
                     <>
                         <DisableManualLocation
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
+                        />
+                        <MinimumLocation
                             handleChange={handleSettings}
                             settings={spinnerSettings}
                         />

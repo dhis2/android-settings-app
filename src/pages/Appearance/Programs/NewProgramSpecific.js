@@ -70,12 +70,12 @@ const NewProgramSpecific = ({
         } else {
             if (isProgramConfiguration(e.name || key)) {
                 const spinnerSettings = !isNil(e.name)
-                    ? { ...spinner, [e.name]: e.checked }
+                    ? { ...spinner, [e.name]: e.checked || e.value }
                     : { ...spinner, [key]: e.selected }
 
                 setSpinner({
                     ...spinnerSettings,
-                    [e.name]: e.checked,
+                    [e.name]: e.checked || e.value,
                     id: specificSettings.id,
                     name: specificSettings.name,
                 })

@@ -504,6 +504,12 @@ msgstr "1 Week"
 msgid "How often should metadata sync?"
 msgstr "How often should metadata sync?"
 
+msgid "Minimum location accuracy (m)"
+msgstr "Minimum location accuracy (m)"
+
+msgid "Configure the minimum precision level for location capture"
+msgstr "Configure the minimum precision level for location capture"
+
 msgid "Allow the user to create a TEI without searching"
 msgstr "Allow the user to create a TEI without searching"
 
