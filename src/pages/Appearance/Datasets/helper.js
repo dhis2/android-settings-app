@@ -22,6 +22,11 @@ export const createInitialSpecificValues = (prevDetails) => ({
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
 })
 
+export const createInitialDataSetConfiguration = (prevDetails) => ({
+    disableManualLocation: prevDetails.disableManualLocation || false,
+    minimumLocationAccuracy: prevDetails.minimumLocationAccuracy || null,
+})
+
 export const datasetHasCategoryCombo = (datasetId, datasetList) => {
     const dataset = datasetList.find((option) => option.id === datasetId)
     return dataset.categoryCombo.name !== 'default'
@@ -69,4 +74,25 @@ const convertFilterKeyToValue = (filter) => {
         case 'syncStatus':
             return i18n.t('Sync Status')
     }
+}
+
+export const isDataSetConfiguration = (configurationType) =>
+    ['disableManualLocation', 'minimumLocationAccuracy'].includes(
+        configurationType
+    )
+
+export const prepareDataSetConfigurationList = (settings, apiDataSetList) => {
+    const settingsRows = []
+    for (const key in settings) {
+        const result = apiDataSetList.find((dataset) => dataset.id === key)
+        if (result) {
+            settings[key] = {
+                ...createInitialDataSetConfiguration(settings[key]),
+                name: result.name,
+                id: key,
+            }
+            settingsRows.push(settings[key])
+        }
+    }
+    return toArray(settingsRows)
 }
