@@ -49,5 +49,7 @@ export const useReadAppearanceDataStore = () => {
             data && data.appearanceSettings.filterSorting.programSettings,
         dataSetSettings:
             data && data.appearanceSettings.filterSorting.dataSetSettings,
+        dataSetConfiguration:
+            data && data.appearanceSettings.dataSetConfiguration,
     }
 }

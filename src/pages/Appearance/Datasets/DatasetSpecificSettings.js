@@ -9,15 +9,26 @@ import {
     filterUnusedElements,
 } from '../../../utils/utils'
 import { useWorkflowContext } from '../../../workflow-context'
-import { prepareSpecificSettingsList } from './helper'
+import {
+    prepareDataSetConfigurationList,
+    prepareSpecificSettingsList,
+} from './helper'
 import NewDatasetSettings from './NewDatasetSettings'
 import SpecificTableAction from './SpecificTableAction'
 
-const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
+const DatasetSpecificSettings = ({
+    onChange,
+    specificSettings,
+    onChangeConfiguration,
+    configuration,
+    disabled,
+}) => {
     const { dataSets } = useWorkflowContext()
     const datasetList = filterListByDataWriteAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
+    const [initialConfiguration, setInitialConfiguration] = useState()
     const [rows, setRows] = useState()
+    const [dataSetConfiguration, setDataSetConfiguration] = useState()
     const [listName, setListName] = useState()
     const [loadSpecific, setLoad] = useState(false)
 
@@ -27,18 +38,28 @@ const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
                 specificSettings,
                 datasetList
             )
+            const updatedConfiguration = prepareDataSetConfigurationList(
+                configuration,
+                datasetList
+            )
             setInitialRows(updated)
             setRows(updated)
+            setDataSetConfiguration(updatedConfiguration)
+            setInitialConfiguration(updatedConfiguration)
             setListName(filterUnusedElements(datasetList, updated))
             setLoad(true)
         }
-    }, [specificSettings])
+    }, [specificSettings, configuration])
 
     useEffect(() => {
-        if (rows && !isEqual(rows, initialRows)) {
+        if (
+            (rows && !isEqual(rows, initialRows)) ||
+            !isEqual(dataSetConfiguration, initialConfiguration)
+        ) {
             onChange(keyBy(rows, 'id'))
+            onChangeConfiguration(keyBy(dataSetConfiguration, 'id'))
         }
-    }, [rows])
+    }, [rows, dataSetConfiguration])
 
     return (
         <>
@@ -49,6 +70,8 @@ const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
                         <SpecificTableAction
                             rows={rows}
                             changeRows={setRows}
+                            configurationList={dataSetConfiguration}
+                            handleConfigurationList={setDataSetConfiguration}
                             elementList={datasetList}
                             disableAll={disabled}
                         />
@@ -56,6 +79,8 @@ const DatasetSpecificSettings = ({ onChange, specificSettings, disabled }) => {
 
                     <NewDatasetSettings
                         datasetList={listName}
+                        configurationList={dataSetConfiguration}
+                        handleConfigurationList={setDataSetConfiguration}
                         rows={rows}
                         handleRows={setRows}
                         disabled={disabled}

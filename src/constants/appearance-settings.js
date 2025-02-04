@@ -1,4 +1,8 @@
 export const appearanceDefault = {
+    dataSetConfiguration: {
+        globalSettings: {},
+        specificSettings: {},
+    },
     programConfiguration: {
         globalSettings: {
             completionSpinner: true,
