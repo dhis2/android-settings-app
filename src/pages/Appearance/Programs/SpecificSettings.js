@@ -12,9 +12,11 @@ import {
     Section,
 } from '../../../components/field'
 import { TableHeader } from '../../../components/table'
+import QuickActionsHeader from '../../../components/table/QuickActionsHeader'
 import Wrapper from '../../../components/Wrapper'
 import { TableSettings } from './TableSettings'
 import { TeiHeader } from './TeiHeader'
+import { QuickActionsSettings } from './QuickActionsSettings'
 
 const SpecificSettings = ({
     hasCategoryCombo,
@@ -69,6 +71,7 @@ const SpecificSettings = ({
                         />
                     </>
                 </Section>
+
                 <Section
                     legend={
                         <HelpText
@@ -101,6 +104,16 @@ const SpecificSettings = ({
                             }
                             states={specificSettings}
                             handleChange={handleSettings}
+                        />
+                    </>
+                </Section>
+
+                <Section legend={i18n.t('Quick actions')}>
+                    <>
+                        <QuickActionsHeader/>
+                        <QuickActionsSettings
+                            handleChange={handleSettings}
+                            settings={specificSettings}
                         />
                     </>
                 </Section>
