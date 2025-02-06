@@ -30,3 +30,13 @@
 .dense > div:first-child {
     padding: initial;
 }
+
+.quickHeader{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    gap:5px;
+    font-size: 12px;
+    color: var(--colors-grey700);
+}
