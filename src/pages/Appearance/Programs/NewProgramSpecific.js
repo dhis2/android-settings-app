@@ -69,6 +69,7 @@ const NewProgramSpecific = ({
             setDisableSave(false)
         } else {
             if (isProgramConfiguration(e.name || key)) {
+                console.log('program configuration', { e, key })
                 const spinnerSettings = !isNil(e.name)
                     ? { ...spinner, [e.name]: e.checked || e.value }
                     : { ...spinner, [key]: e.selected }

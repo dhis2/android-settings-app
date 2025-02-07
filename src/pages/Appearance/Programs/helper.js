@@ -96,6 +96,7 @@ export const prepareSpinnerPreviousSpinner = (settings) => {
             'programIndicator',
             'disableManualLocation',
             'minimumLocationAccuracy',
+            'quickActions',
         ]
     )
 }
@@ -211,6 +212,7 @@ export const isProgramConfiguration = (configurationType) =>
         'programIndicator',
         'disableManualLocation',
         'minimumLocationAccuracy',
+        'quickActions',
     ].includes(configurationType)
 
 export const removeAttributes = (itemList) =>

@@ -1,6 +1,6 @@
+import { IconInfo16, Divider } from '@dhis2/ui'
 import React from 'react'
 import styles from '../../styles/TableSettings.module.css'
-import { IconInfo16, Divider } from '@dhis2/ui'
 
 function QuickActionsHeader() {
     return (

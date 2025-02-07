@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-06T11:42:56.713Z\n"
-"PO-Revision-Date: 2025-02-06T11:42:56.714Z\n"
+"POT-Creation-Date: 2025-02-07T11:36:50.011Z\n"
+"PO-Revision-Date: 2025-02-07T11:36:50.011Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -985,9 +985,6 @@ msgstr "Filter"
 
 msgid "Quick actions"
 msgstr "Quick actions"
-
-msgid "Display this action as a chip"
-msgstr "Display this action as a chip"
 
 msgid "Enrollment Date"
 msgstr "Enrollment Date"

@@ -14,9 +14,9 @@ import {
 import { TableHeader } from '../../../components/table'
 import QuickActionsHeader from '../../../components/table/QuickActionsHeader'
 import Wrapper from '../../../components/Wrapper'
+import { QuickActionsSettings } from './QuickActionsSettings'
 import { TableSettings } from './TableSettings'
 import { TeiHeader } from './TeiHeader'
-import { QuickActionsSettings } from './QuickActionsSettings'
 
 const SpecificSettings = ({
     hasCategoryCombo,
@@ -110,7 +110,7 @@ const SpecificSettings = ({
 
                 <Section legend={i18n.t('Quick actions')}>
                     <>
-                        <QuickActionsHeader/>
+                        <QuickActionsHeader />
                         <QuickActionsSettings
                             handleChange={handleSettings}
                             settings={specificSettings}

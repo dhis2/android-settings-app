@@ -16,7 +16,9 @@ export const QuickActionsSettings = ({ handleChange, settings }) => {
     const [selectedActions, setSelectedActions] = useState([])
     useEffect(() => {
         if (settings?.quickActions) {
-            setSelectedActions(settings.quickActions.map(action => action.actionId))
+            setSelectedActions(
+                settings.quickActions.map((action) => action.actionId)
+            )
         }
     }, [settings])
 
@@ -24,15 +26,14 @@ export const QuickActionsSettings = ({ handleChange, settings }) => {
         const { name, checked } = event
         console.log({ name, checked })
 
-        setSelectedActions(prevSelected => {
-            let updatedActions = checked
+        setSelectedActions((prevSelected) => {
+            const updatedActions = checked
                 ? [...prevSelected, name]
-                : prevSelected.filter(action => action !== name)
+                : prevSelected.filter((action) => action !== name)
+
             handleChange({
-                target: {
-                    name: 'quickActions',
-                    value: updatedActions.map(actionId => ({ actionId })),
-                },
+                name: 'quickActions',
+                value: updatedActions.map((actionId) => ({ actionId })),
             })
 
             return updatedActions
