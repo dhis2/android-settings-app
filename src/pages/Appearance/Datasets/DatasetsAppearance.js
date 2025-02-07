@@ -12,7 +12,7 @@ import {
 } from '../appearanceDatastoreQuery'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import { createInitialValues } from './helper'
+import { createInitialValues, prepareDataSetConfiguration } from './helper'
 
 const DatasetsAppearance = () => {
     const {
@@ -42,7 +42,7 @@ const DatasetsAppearance = () => {
     }, [hasAuthority])
 
     useEffect(() => {
-        if (dataSetSettings && dataSetConfiguration) {
+        if (dataSetSettings) {
             const { globalSettings, specificSettings } = dataSetSettings
             setInitialValues({
                 globalSettings,
@@ -84,7 +84,7 @@ const DatasetsAppearance = () => {
                 },
             },
             dataSetConfiguration: {
-                ...configuration,
+                ...prepareDataSetConfiguration(configuration),
             },
         }
         await mutate({ settings: settingsToSave })

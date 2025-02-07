@@ -8,7 +8,11 @@ import {
     updateSettingsList,
 } from '../../../utils/utils'
 import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
-import { datasetHasCategoryCombo, isDataSetConfiguration } from './helper'
+import {
+    createInitialDataSetConfiguration,
+    datasetHasCategoryCombo,
+    isDataSetConfiguration,
+} from './helper'
 
 const SpecificTableAction = ({
     rows,
@@ -26,13 +30,14 @@ const SpecificTableAction = ({
 
     const tableActions = {
         edit: (...args) => {
+            const parsedConfig =
+                configurationList?.find((item) => item.id === args[0].id) ||
+                createInitialDataSetConfiguration({})
             setSpecificSetting(args[0])
             setHasCategoryCombo(
                 datasetHasCategoryCombo(args[0].id, elementList)
             )
-            setDataSetConfiguration(
-                configurationList?.find((item) => item.id === args[0].id)
-            )
+            setDataSetConfiguration(parsedConfig)
             setOpenEditDialog(true)
         },
         delete: (...args) => {
