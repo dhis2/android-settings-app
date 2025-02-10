@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { CheckboxField } from '../../../components/field'
 import { TableRowWrapper } from '../../../components/table'
 
@@ -13,14 +13,9 @@ const quickActionsList = [
 ]
 
 export const QuickActionsSettings = ({ handleChange, settings }) => {
-    const [selectedActions, setSelectedActions] = useState([])
-    useEffect(() => {
-        if (settings?.quickActions) {
-            setSelectedActions(
-                settings.quickActions.map((action) => action.actionId)
-            )
-        }
-    }, [settings])
+    const [selectedActions, setSelectedActions] = useState(
+        settings?.quickActions?.map((action) => action.actionId) || []
+    )
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event
@@ -56,5 +51,11 @@ export const QuickActionsSettings = ({ handleChange, settings }) => {
 
 QuickActionsSettings.propTypes = {
     handleChange: PropTypes.func.isRequired,
-    settings: PropTypes.object,
+    settings: PropTypes.shape({
+        quickActions: PropTypes.arrayOf(
+            PropTypes.shape({
+                actionId: PropTypes.string.isRequired,
+            })
+        ),
+    }),
 }
