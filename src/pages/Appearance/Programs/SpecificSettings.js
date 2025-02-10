@@ -113,7 +113,7 @@ const SpecificSettings = ({
                         <QuickActionsHeader />
                         <QuickActionsSettings
                             handleChange={handleSettings}
-                            settings={specificSettings}
+                            settings={spinnerSettings}
                         />
                     </>
                 </Section>

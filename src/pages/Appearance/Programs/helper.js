@@ -36,6 +36,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
         programIndicator: '',
         disableManualLocation: false,
         minimumLocationAccuracy: null,
+        quickActions: [],
     })
 
     return {
@@ -48,6 +49,7 @@ export const createInitialSpinnerValue = (prevDetails) => {
             prevDetails?.itemHeader?.programIndicator,
         disableManualLocation: prevDetails.disableManualLocation,
         minimumLocationAccuracy: prevDetails.minimumLocationAccuracy,
+        quickActions: prevDetails?.quickActions || [],
     }
 }
 
@@ -267,4 +269,5 @@ export const createSettings = (settings) => ({
         settings.minimumLocationAccuracy,
         'edit'
     ),
+    quickActions: settings.quickActions || [],
 })

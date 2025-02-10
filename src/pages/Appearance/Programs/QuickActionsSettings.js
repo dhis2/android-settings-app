@@ -24,7 +24,6 @@ export const QuickActionsSettings = ({ handleChange, settings }) => {
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event
-        console.log({ name, checked })
 
         setSelectedActions((prevSelected) => {
             const updatedActions = checked

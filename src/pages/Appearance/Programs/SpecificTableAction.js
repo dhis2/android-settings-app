@@ -89,7 +89,6 @@ const SpecificTableAction = ({
             })
         }
     }
-
     return (
         <>
             {rows.length > 0 && (
