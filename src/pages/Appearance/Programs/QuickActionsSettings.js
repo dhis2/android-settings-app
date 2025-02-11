@@ -37,7 +37,7 @@ export const QuickActionsSettings = ({ handleChange, settings }) => {
     return (
         <>
             {quickActionsList.map(({ key, label }) => (
-                <TableRowWrapper key={key} label={label}>
+                <TableRowWrapper key={key} label={label} dense>
                     <CheckboxField
                         name={key}
                         onChange={handleCheckboxChange}
