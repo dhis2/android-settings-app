@@ -15,7 +15,8 @@ function QuickActionsHeader() {
                             style={{ width: '500px', height: '500px' }}
                         />
                     }
-                    placement="bottom"
+                    placement="top"
+                    className={styles.quickHeaderTooltip}
                 >
                     <IconInfo16 />
                 </Tooltip>

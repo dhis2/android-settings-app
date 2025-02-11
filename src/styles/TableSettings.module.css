@@ -40,3 +40,10 @@
     font-size: 12px;
     color: var(--colors-grey700);
 }
+
+.quickHeaderTooltip{
+    width: 100%;
+    min-width: 510px;
+    height: 100%;
+    min-height: 510px;
+}
