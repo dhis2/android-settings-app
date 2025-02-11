@@ -108,7 +108,18 @@ const SpecificSettings = ({
                     </>
                 </Section>
 
-                <Section legend={i18n.t('Quick actions')}>
+                <Section
+                    legend={
+                        <HelpText
+                            helpText={i18n.t('Quick actions')}
+                            warning={i18n.t(
+                                'Only applicable for users using Android app version 3.2 or later.'
+                            )}
+                            version={i18n.t('3.2 +')}
+                            type="info"
+                        />
+                    }
+                >
                     <>
                         <QuickActionsHeader />
                         <QuickActionsSettings

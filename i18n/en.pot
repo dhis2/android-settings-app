@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-07T11:36:50.011Z\n"
-"PO-Revision-Date: 2025-02-07T11:36:50.011Z\n"
+"POT-Creation-Date: 2025-02-11T14:21:22.714Z\n"
+"PO-Revision-Date: 2025-02-11T14:21:22.714Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -985,6 +985,12 @@ msgstr "Filter"
 
 msgid "Quick actions"
 msgstr "Quick actions"
+
+msgid "Only applicable for users using Android app version 3.2 or later."
+msgstr "Only applicable for users using Android app version 3.2 or later."
+
+msgid "3.2 +"
+msgstr "3.2 +"
 
 msgid "Enrollment Date"
 msgstr "Enrollment Date"
