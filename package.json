@@ -34,6 +34,7 @@
         "format": "d2-style js apply"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@dhis2/cli-app-scripts": "^10.3.9",
         "@dhis2/cli-style": "^10.4.1"
     }
