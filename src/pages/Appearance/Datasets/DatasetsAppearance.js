@@ -52,9 +52,9 @@ const DatasetsAppearance = () => {
             dataSetSettings.specificSettings
                 ? setSpecificSettings(dataSetSettings.specificSettings)
                 : setSpecificSettings({})
-            setInitialConfiguration(dataSetConfiguration)
+            setInitialConfiguration(dataSetConfiguration?.specificSettings)
             dataSetConfiguration
-                ? setConfiguration(dataSetConfiguration)
+                ? setConfiguration(dataSetConfiguration?.specificSettings)
                 : setConfiguration({})
         }
     }, [dataSetSettings])
@@ -84,7 +84,10 @@ const DatasetsAppearance = () => {
                 },
             },
             dataSetConfiguration: {
-                ...prepareDataSetConfiguration(configuration),
+                globalSettings: {},
+                specificSettings: {
+                    ...prepareDataSetConfiguration(configuration),
+                },
             },
         }
         await mutate({ settings: settingsToSave })
