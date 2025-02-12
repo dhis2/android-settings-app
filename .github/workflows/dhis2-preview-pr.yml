@@ -52,3 +52,4 @@ jobs:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.DHIS2_BOT_NETLIFY_TOKEN }}
                   # repo secret
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  D2_VERBOSE: true
