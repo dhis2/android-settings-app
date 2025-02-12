@@ -18,7 +18,8 @@
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-router-dom": "^5.0.1",
-        "styled-jsx": "^4.0.1"
+        "styled-jsx": "^4.0.1",
+        "lodash": "^4.17.21"
     },
     "scripts": {
         "start": "d2-app-scripts start",
