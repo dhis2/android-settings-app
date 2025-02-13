@@ -32,9 +32,6 @@ jobs:
             - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
-            - name: Debug build process
-              run: DEBUG=* yarn d2-app-scripts build --standalone
-
             - name: Build
               run: yarn d2-app-scripts build --standalone
 
