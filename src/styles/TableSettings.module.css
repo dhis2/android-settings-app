@@ -34,7 +34,7 @@
 .quickHeader{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
     gap:5px;
     font-size: 12px;
