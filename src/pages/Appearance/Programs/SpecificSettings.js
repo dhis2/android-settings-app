@@ -11,8 +11,9 @@ import {
     ProgramCompletionSpinner,
     Section,
 } from '../../../components/field'
-import { TableHeader } from '../../../components/table'
+import { QuickActionsHeader, TableHeader } from '../../../components/table'
 import Wrapper from '../../../components/Wrapper'
+import { QuickActionsSettings } from './QuickActionsSettings'
 import { TableSettings } from './TableSettings'
 import { TeiHeader } from './TeiHeader'
 
@@ -101,6 +102,26 @@ const SpecificSettings = ({
                             }
                             states={specificSettings}
                             handleChange={handleSettings}
+                        />
+                    </>
+                </Section>
+                <Section
+                    legend={
+                        <HelpText
+                            helpText={i18n.t('Quick actions')}
+                            warning={i18n.t(
+                                'Only applicable for users using Android app version 3.2 or later.'
+                            )}
+                            version={i18n.t('3.2 +')}
+                            type="info"
+                        />
+                    }
+                >
+                    <>
+                        <QuickActionsHeader />
+                        <QuickActionsSettings
+                            handleChange={handleSettings}
+                            settings={spinnerSettings}
                         />
                     </>
                 </Section>
