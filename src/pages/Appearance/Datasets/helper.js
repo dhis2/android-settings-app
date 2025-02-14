@@ -1,7 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
 import toArray from 'lodash/toArray'
-import { formatList } from '../../../utils/utils'
+import { formatList, removePropertiesFromObject } from '../../../utils/utils'
 
 const filterSortingDefault = {
     filter: true,
@@ -20,6 +21,11 @@ export const createInitialSpecificValues = (prevDetails) => ({
     period: prevDetails.period || filterSortingDefault,
     organisationUnit: prevDetails.organisationUnit || filterSortingDefault,
     syncStatus: prevDetails.syncStatus || filterSortingDefault,
+})
+
+export const createInitialDataSetConfiguration = (prevDetails) => ({
+    disableManualLocation: prevDetails.disableManualLocation || false,
+    minimumLocationAccuracy: prevDetails.minimumLocationAccuracy || null,
 })
 
 export const datasetHasCategoryCombo = (datasetId, datasetList) => {
@@ -69,4 +75,32 @@ const convertFilterKeyToValue = (filter) => {
         case 'syncStatus':
             return i18n.t('Sync Status')
     }
+}
+
+export const isDataSetConfiguration = (configurationType) =>
+    ['disableManualLocation', 'minimumLocationAccuracy'].includes(
+        configurationType
+    )
+
+export const prepareDataSetConfigurationList = (settings, apiDataSetList) => {
+    const settingsRows = []
+    for (const key in settings) {
+        const result = apiDataSetList.find((dataset) => dataset.id === key)
+        if (result) {
+            settings[key] = {
+                ...createInitialDataSetConfiguration(settings[key]),
+                name: result.name,
+                id: key,
+            }
+            settingsRows.push(settings[key])
+        }
+    }
+    return toArray(settingsRows)
+}
+
+export const prepareDataSetConfiguration = (settings) => {
+    const configuration = mapValues(settings, (element) => ({
+        ...element,
+    }))
+    return removePropertiesFromObject(configuration, ['id', 'name'])
 }

@@ -8,25 +8,42 @@ import {
     updateSettingsList,
 } from '../../../utils/utils'
 import DialogDatasetSpecificSetting from './DialogDatasetSpecificSetting'
-import { datasetHasCategoryCombo } from './helper'
+import {
+    createInitialDataSetConfiguration,
+    datasetHasCategoryCombo,
+    isDataSetConfiguration,
+} from './helper'
 
-const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
+const SpecificTableAction = ({
+    rows,
+    changeRows,
+    elementList,
+    configurationList,
+    handleConfigurationList,
+    disableAll,
+}) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
+    const [dataSetConfiguration, setDataSetConfiguration] = useState({})
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [hasCategoryCombo, setHasCategoryCombo] = useState(false)
 
     const tableActions = {
         edit: (...args) => {
+            const parsedConfig =
+                configurationList?.find((item) => item.id === args[0].id) ||
+                createInitialDataSetConfiguration({})
             setSpecificSetting(args[0])
             setHasCategoryCombo(
                 datasetHasCategoryCombo(args[0].id, elementList)
             )
+            setDataSetConfiguration(parsedConfig)
             setOpenEditDialog(true)
         },
         delete: (...args) => {
             setOpenDeleteDialog(true)
             setSpecificSetting(args[0])
+            setDataSetConfiguration(args[0])
         },
     }
 
@@ -36,6 +53,9 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
 
     const handleDelete = () => {
         changeRows(removeSettingsFromList(specificSetting, rows))
+        handleConfigurationList(
+            removeSettingsFromList(dataSetConfiguration, configurationList)
+        )
         setOpenDeleteDialog(false)
     }
 
@@ -45,17 +65,29 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
 
     const handleSave = () => {
         changeRows(updateSettingsList(specificSetting, rows))
+        handleConfigurationList(
+            updateSettingsList(dataSetConfiguration, configurationList)
+        )
         setOpenEditDialog(false)
     }
 
     const handleChange = (e) => {
-        setSpecificSetting({
-            ...specificSetting,
-            [e.name]: {
-                filter: e.checked,
-                sort: e.checked,
-            },
-        })
+        if (isDataSetConfiguration(e.name)) {
+            setDataSetConfiguration({
+                ...dataSetConfiguration,
+                [e.name]: e.checked || e.value,
+                id: specificSetting.id,
+                name: specificSetting.name,
+            })
+        } else {
+            setSpecificSetting({
+                ...specificSetting,
+                [e.name]: {
+                    filter: e.checked,
+                    sort: e.checked,
+                },
+            })
+        }
     }
 
     return (
@@ -85,6 +117,7 @@ const SpecificTableAction = ({ rows, changeRows, elementList, disableAll }) => {
                         handleSave={handleSave}
                         handleChange={handleChange}
                         hasCategoryCombo={hasCategoryCombo}
+                        dataSetConfiguration={dataSetConfiguration}
                     />
                 </>
             )}
