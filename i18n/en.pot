@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-31T11:56:52.626Z\n"
-"PO-Revision-Date: 2025-01-31T11:56:52.626Z\n"
+"POT-Creation-Date: 2025-02-13T12:51:12.830Z\n"
+"PO-Revision-Date: 2025-02-13T12:51:12.830Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -962,6 +962,21 @@ msgstr ""
 "apply to all programs a mobile user has access to. Settings specific to "
 "individual programs can also be applied."
 
+msgid "Mark for Follow Up"
+msgstr "Mark for Follow Up"
+
+msgid "Transfer"
+msgstr "Transfer"
+
+msgid "Complete Enrollment"
+msgstr "Complete Enrollment"
+
+msgid "Deactivate"
+msgstr "Deactivate"
+
+msgid "More Enrollments"
+msgstr "More Enrollments"
+
 msgid "TEI Header"
 msgstr "TEI Header"
 
@@ -973,6 +988,18 @@ msgstr "Only applicable for users using Android app version 3.1 or later."
 
 msgid "3.1 +"
 msgstr "3.1 +"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Quick actions"
+msgstr "Quick actions"
+
+msgid "Only applicable for users using Android app version 3.2 or later."
+msgstr "Only applicable for users using Android app version 3.2 or later."
+
+msgid "3.2 +"
+msgstr "3.2 +"
 
 msgid "Enrollment Date"
 msgstr "Enrollment Date"
