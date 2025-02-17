@@ -37,7 +37,7 @@ export const VisualizationRow = ({
                     </Button>
                     <Button
                         small
-                        destructive
+                        secondary
                         onClick={() => {
                             deleteVisualization(
                                 visualization,
