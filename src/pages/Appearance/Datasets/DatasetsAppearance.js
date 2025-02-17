@@ -12,12 +12,13 @@ import {
 } from '../appearanceDatastoreQuery'
 import DatasetGlobalSettings from './DatasetGlobalSettings'
 import DatasetSpecificSettings from './DatasetSpecificSettings'
-import { createInitialValues } from './helper'
+import { createInitialValues, prepareDataSetConfiguration } from './helper'
 
 const DatasetsAppearance = () => {
     const {
         load,
         dataSetSettings,
+        dataSetConfiguration,
         programConfiguration,
         completionSpinner,
         home,
@@ -28,6 +29,8 @@ const DatasetsAppearance = () => {
     const [initialValues, setInitialValues] = useState()
     const [globalSettings, setGlobalSettings] = useState()
     const [specificSettings, setSpecificSettings] = useState()
+    const [configuration, setConfiguration] = useState()
+    const [initialConfiguration, setInitialConfiguration] = useState()
     const [disable, setDisable] = useState(false)
 
     const [mutate, { error, data: updateResult }] = useDataMutation(
@@ -49,13 +52,18 @@ const DatasetsAppearance = () => {
             dataSetSettings.specificSettings
                 ? setSpecificSettings(dataSetSettings.specificSettings)
                 : setSpecificSettings({})
+            setInitialConfiguration(dataSetConfiguration?.specificSettings)
+            dataSetConfiguration
+                ? setConfiguration(dataSetConfiguration?.specificSettings)
+                : setConfiguration({})
         }
     }, [dataSetSettings])
 
     useEffect(() => {
         if (globalSettings) {
             !isEqual(globalSettings, initialValues.globalSettings) ||
-            !isEqual(specificSettings, initialValues.specificSettings)
+            !isEqual(specificSettings, initialValues.specificSettings) ||
+            !isEqual(configuration, initialConfiguration)
                 ? setDisableSave(false)
                 : setDisableSave(true)
         }
@@ -75,6 +83,12 @@ const DatasetsAppearance = () => {
                     },
                 },
             },
+            dataSetConfiguration: {
+                globalSettings: {},
+                specificSettings: {
+                    ...prepareDataSetConfiguration(configuration),
+                },
+            },
         }
         await mutate({ settings: settingsToSave })
     }
@@ -82,6 +96,7 @@ const DatasetsAppearance = () => {
     const resetSettings = () => {
         setGlobalSettings(createInitialValues(''))
         setSpecificSettings({})
+        setConfiguration({})
     }
 
     return (
@@ -105,6 +120,8 @@ const DatasetsAppearance = () => {
                     <DatasetSpecificSettings
                         specificSettings={specificSettings}
                         onChange={setSpecificSettings}
+                        configuration={configuration}
+                        onChangeConfiguration={setConfiguration}
                         disabled={disable}
                     />
 

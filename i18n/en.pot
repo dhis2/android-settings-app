@@ -895,6 +895,18 @@ msgstr "Save Data set"
 msgid "Add a Data set Settings"
 msgstr "Add a Data set Settings"
 
+msgid "Capture Coordinates settings"
+msgstr "Capture Coordinates settings"
+
+msgid "Only applicable for users using Android app version 3.2 or later."
+msgstr "Only applicable for users using Android app version 3.2 or later."
+
+msgid "3.2 +"
+msgstr "3.2 +"
+
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Period"
 msgstr "Period"
 
@@ -970,9 +982,6 @@ msgstr "TEI Header"
 
 msgid "Advanced options"
 msgstr "Advanced options"
-
-msgid "Capture Coordinates settings"
-msgstr "Capture Coordinates settings"
 
 msgid "Only applicable for users using Android app version 3.1 or later."
 msgstr "Only applicable for users using Android app version 3.1 or later."

@@ -24,6 +24,7 @@ const DialogDatasetSpecificSetting = ({
     handleSave,
     handleChange,
     hasCategoryCombo,
+    dataSetConfiguration,
     disableSave,
 }) => (
     <>
@@ -49,6 +50,7 @@ const DialogDatasetSpecificSetting = ({
                         <SpecificSettings
                             hasCategoryCombo={hasCategoryCombo}
                             specificSettings={specificSettings}
+                            dataSetConfiguration={dataSetConfiguration}
                             handleSettings={handleChange}
                         />
                     )}
