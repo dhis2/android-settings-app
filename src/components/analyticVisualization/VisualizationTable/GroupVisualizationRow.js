@@ -15,6 +15,7 @@ export const GroupVisualizationRow = ({
     group,
     editVisualization,
     deleteVisualization,
+    orderVisualization,
     deleteGroup,
     element,
     disabled,
@@ -29,6 +30,7 @@ export const GroupVisualizationRow = ({
             visualizationList={item}
             editVisualization={editVisualization}
             deleteVisualization={deleteVisualization}
+            orderVisualization={orderVisualization}
             disabled={disabled}
         />
     )

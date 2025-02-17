@@ -5,7 +5,12 @@ import { removeSettingsFromList } from '../../../utils/utils'
 import DialogDelete from '../../dialog/DialogDelete'
 import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { EditVisualization } from '../EditVisualization'
-import { removeElement, updateGroup, updateVisualizations } from './helper'
+import {
+    removeElement,
+    reorderElement,
+    updateGroup,
+    updateVisualizations,
+} from './helper'
 import { VisualizationTable } from './VisualizationTable'
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
@@ -107,6 +112,33 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
         setDeleteGroup(true)
     }
 
+    const orderVisualization = ({
+        visualization,
+        visualizationList,
+        groupId,
+        direction,
+    }) => {
+        const updatedList = reorderElement(
+            visualization,
+            visualizationList,
+            direction
+        )
+
+        const updatedGroups = updateGroup(
+            rows[visualization?.program].groups,
+            visualization?.group.id,
+            updatedList
+        )
+
+        changeRows({
+            ...rows,
+            [visualization?.program]: {
+                ...rows[visualization?.program],
+                groups: updatedGroups,
+            },
+        })
+    }
+
     return (
         <>
             <VisualizationTable
@@ -114,6 +146,7 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
                 rows={rows}
                 editVisualization={editVisualization}
                 deleteVisualization={deleteRow}
+                orderVisualization={orderVisualization}
                 deleteGroup={deleteGroup}
                 disabled={disabled}
             />
