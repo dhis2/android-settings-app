@@ -9,6 +9,7 @@ export const VisualizationRow = ({
     visualizationList,
     deleteVisualization,
     editVisualization,
+    orderVisualization,
     groupId,
     disabled,
 }) => (
@@ -50,8 +51,34 @@ export const VisualizationRow = ({
                     </Button>
 
                     <ButtonStrip>
-                        <Button small secondary><IconArrowUp16/></Button>
-                        <Button small secondary><IconArrowDown16/></Button>
+                        <Button
+                            small
+                            secondary
+                            onClick={() => {
+                                orderVisualization({
+                                    visualization,
+                                    visualizationList,
+                                    groupId,
+                                    direction: 'up',
+                                })
+                            }}
+                        >
+                            <IconArrowUp16 />
+                        </Button>
+                        <Button
+                            small
+                            secondary
+                            onClick={() => {
+                                orderVisualization({
+                                    visualization,
+                                    visualizationList,
+                                    groupId,
+                                    direction: 'down',
+                                })
+                            }}
+                        >
+                            <IconArrowDown16 />
+                        </Button>
                     </ButtonStrip>
                 </ButtonStrip>
             </div>
