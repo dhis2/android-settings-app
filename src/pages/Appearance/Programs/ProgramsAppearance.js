@@ -26,6 +26,7 @@ const ProgramsAppearance = () => {
     const {
         load,
         dataSetSettings,
+        dataSetConfiguration,
         programConfiguration,
         home,
         programSettings,
@@ -108,6 +109,7 @@ const ProgramsAppearance = () => {
                     },
                 },
             },
+            dataSetConfiguration,
         }
         await mutate({ settings: settingsToSave })
     }

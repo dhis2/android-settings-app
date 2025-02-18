@@ -16,6 +16,7 @@ const HomeAppearance = () => {
     const {
         load,
         home,
+        dataSetConfiguration,
         programConfiguration,
         completionSpinner,
         programSettings,
@@ -52,6 +53,7 @@ const HomeAppearance = () => {
         const settingsToSave = {
             programConfiguration,
             completionSpinner,
+            dataSetConfiguration,
             filterSorting: {
                 home: settings,
                 programSettings,
