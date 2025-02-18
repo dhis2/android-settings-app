@@ -77,3 +77,24 @@ export const updateVisualizations = (currentGroup, rows, element) => {
 
     return updatedGroups
 }
+
+export const reorderElement = (element, array, direction) => {
+    const index = array.findIndex((item) => item.id === element.id)
+    if (index === -1) {
+        return array
+    }
+
+    const newIndex = direction === 'up' ? index - 1 : index + 1
+    if (newIndex < 0 || newIndex >= array.length) {
+        return array
+    }
+
+    // Swap elements
+    const newArray = [...array]
+    ;[newArray[index], newArray[newIndex]] = [
+        newArray[newIndex],
+        newArray[index],
+    ]
+
+    return newArray
+}

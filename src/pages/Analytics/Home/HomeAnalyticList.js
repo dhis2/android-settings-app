@@ -26,7 +26,7 @@ const HomeAnalyticList = ({
     const [initialRows, setInitialRows] = useState([])
 
     useEffect(() => {
-        if (!isEmpty(visualizations) && dataVisualizations) {
+        if (visualizations && dataVisualizations) {
             const homeVisualizations = createRows(
                 visualizations,
                 dataVisualizations

@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
+import { Button, ButtonStrip, IconArrowUp16, IconArrowDown16 } from '@dhis2/ui'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -9,6 +9,7 @@ export const VisualizationRow = ({
     visualizationList,
     deleteVisualization,
     editVisualization,
+    orderVisualization,
     groupId,
     disabled,
 }) => (
@@ -48,6 +49,37 @@ export const VisualizationRow = ({
                     >
                         {i18n.t('Delete')}
                     </Button>
+
+                    <ButtonStrip>
+                        <Button
+                            small
+                            secondary
+                            onClick={() => {
+                                orderVisualization({
+                                    visualization,
+                                    visualizationList,
+                                    groupId,
+                                    direction: 'up',
+                                })
+                            }}
+                        >
+                            <IconArrowUp16 />
+                        </Button>
+                        <Button
+                            small
+                            secondary
+                            onClick={() => {
+                                orderVisualization({
+                                    visualization,
+                                    visualizationList,
+                                    groupId,
+                                    direction: 'down',
+                                })
+                            }}
+                        >
+                            <IconArrowDown16 />
+                        </Button>
+                    </ButtonStrip>
                 </ButtonStrip>
             </div>
         ))}

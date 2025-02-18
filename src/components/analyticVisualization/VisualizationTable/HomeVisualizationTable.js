@@ -14,6 +14,7 @@ import DialogDeleteElement from '../../dialog/DialogDeleteElement'
 import { EditVisualization } from '../EditVisualization'
 import {
     removeElementList,
+    reorderElement,
     updateGroupList,
     updateVisualizationName,
 } from './helper'
@@ -84,6 +85,20 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
         handleCloseDeleteGroup()
     }
 
+    const orderVisualization = ({
+        visualization,
+        visualizationList,
+        groupId,
+        direction,
+    }) => {
+        const updatedList = reorderElement(
+            visualization,
+            visualizationList,
+            direction
+        )
+        changeGroup(updateGroupList(group, groupId, updatedList))
+    }
+
     return (
         <>
             <VisualizationTable
@@ -91,6 +106,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
                 deleteVisualization={deleteVisualization}
                 editVisualization={editVisualization}
                 deleteGroup={deleteGroup}
+                orderVisualization={orderVisualization}
                 disabled={disable}
             />
             <DialogDelete
@@ -137,6 +153,7 @@ const VisualizationTable = ({
     editVisualization,
     deleteGroup,
     disabled,
+    orderVisualization,
 }) => {
     const [openRowIndex, setOpenRowIndex] = useState(null)
 
@@ -148,6 +165,7 @@ const VisualizationTable = ({
             visualizationList={item.visualizations}
             deleteVisualization={deleteVisualization}
             editVisualization={editVisualization}
+            orderVisualization={orderVisualization}
             disabled={disabled}
             groupId={item.id}
         />
