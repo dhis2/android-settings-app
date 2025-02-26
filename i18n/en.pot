@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-13T12:51:12.830Z\n"
-"PO-Revision-Date: 2025-02-13T12:51:12.830Z\n"
+"POT-Creation-Date: 2025-02-26T10:21:55.245Z\n"
+"PO-Revision-Date: 2025-02-26T10:21:55.245Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -573,6 +573,16 @@ msgstr ""
 "It looks like there aren't any configured analytics, or they couldn't be "
 "loaded."
 
+msgid "No custom Intents found"
+msgstr "No custom Intents found"
+
+msgid ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+msgstr ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+
 msgid "Manual options"
 msgstr "Manual options"
 
@@ -719,6 +729,15 @@ msgstr "Set Data set Visualizations"
 
 msgid "Manage visualizations for data sets"
 msgstr "Manage visualizations for data sets"
+
+msgid "Custom Intents"
+msgstr "Custom Intents"
+
+msgid "Set Intents"
+msgstr "Set Intents"
+
+msgid "Define actions triggered from external sources"
+msgstr "Define actions triggered from external sources"
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr "Maximum Tracked Entity Instance (TEI) downloads"
@@ -989,17 +1008,8 @@ msgstr "Only applicable for users using Android app version 3.1 or later."
 msgid "3.1 +"
 msgstr "3.1 +"
 
-msgid "Filter"
-msgstr "Filter"
-
 msgid "Quick actions"
 msgstr "Quick actions"
-
-msgid "Only applicable for users using Android app version 3.2 or later."
-msgstr "Only applicable for users using Android app version 3.2 or later."
-
-msgid "3.2 +"
-msgstr "3.2 +"
 
 msgid "Enrollment Date"
 msgstr "Enrollment Date"
@@ -1068,6 +1078,13 @@ msgstr "Overview: Android Settings App"
 
 msgid "v{{version}}"
 msgstr "v{{version}}"
+
+msgid ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+msgstr ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"
