@@ -2,7 +2,7 @@ import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import isEmpty from 'lodash/isEmpty'
 import { useEffect, useState } from 'react'
 import { CUSTOM_INTENTS, NAMESPACE } from '../../constants/data-store'
-import { createKeyCustomIntent } from '../../modules'
+import { createKeyCustomIntent, updateSharingMutation } from '../../modules'
 
 /**
  * update data store
@@ -36,22 +36,33 @@ const getMetadataQuery = {
 }
 
 export const useReadCustomIntentsDataStore = () => {
-    const { loading, error, data } = useDataQuery(getCustomIntentsQuery)
+    const { data } = useDataQuery(getCustomIntentsQuery)
     const [mutate] = useDataMutation(createKeyCustomIntent)
     const { refetch } = useDataQuery(getMetadataQuery, { lazy: true })
+    const [mutateSharing] = useDataMutation(updateSharingMutation)
     const [customIntents, setCustomIntents] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true)
                 await mutate()
+                const metadata = await refetch()
+                await mutateSharing({ id: metadata?.[CUSTOM_INTENTS]?.id })
+                setCustomIntents([])
             } catch (error) {
-                console.error(error)
+                setError(error)
+            } finally {
+                setLoading(false)
             }
         }
 
         if (isEmpty(data)) {
-            console.error(error)
+            fetchData()
+        } else {
+            setCustomIntents(data?.[CUSTOM_INTENTS])
         }
     }, [data])
 
