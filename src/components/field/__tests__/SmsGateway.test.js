@@ -1,6 +1,7 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { SmsGateway } from '../SmsGateway.js'
+import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import React from 'react'
+import { SmsGateway } from '../SmsGateway'
 
 let mockOnChange
 
