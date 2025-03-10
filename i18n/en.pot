@@ -990,8 +990,8 @@ msgstr "Transfer"
 msgid "Complete Enrollment"
 msgstr "Complete Enrollment"
 
-msgid "Deactivate"
-msgstr "Deactivate"
+msgid "Cancel Enrollment"
+msgstr "Cancel Enrollment"
 
 msgid "More Enrollments"
 msgstr "More Enrollments"
