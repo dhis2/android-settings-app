@@ -8,7 +8,7 @@ const quickActionsList = [
     { key: 'MARK_FOLLOW_UP', label: i18n.t('Mark for Follow Up') },
     { key: 'TRANSFER', label: i18n.t('Transfer') },
     { key: 'COMPLETE_ENROLLMENT', label: i18n.t('Complete Enrollment') },
-    { key: 'DEACTIVATE', label: i18n.t('Deactivate') },
+    { key: 'CANCEL_ENROLLMENT', label: i18n.t('Cancel Enrollment') },
     { key: 'MORE_ENROLLMENTS', label: i18n.t('More Enrollments') },
 ]
 
