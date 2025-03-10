@@ -7,18 +7,21 @@ import { useIsAuthorized } from '../../auth'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import { CustomIntentInfo } from '../../components/noticeAlert'
 import Page from '../../components/page/Page'
+import CustomIntentsList from './CustomIntentsList'
 import {
     saveCustomIntentsMutation,
     useReadCustomIntentsDataStore,
-} from './queries'
+} from './intentsDatastoreQuery'
+import { IntentsList } from './mockList'
 
+//TODO: change IntentsList mock data to real data
 const CustomIntents = () => {
     const { hasAuthority } = useIsAuthorized()
     const { customIntents } = useReadCustomIntentsDataStore()
     const [disableSave, setDisableSave] = useState(true)
-    const [customIntentSettings, setCustomIntentSettings] = useState([])
+    const [customIntentSettings, setCustomIntentSettings] =
+        useState(IntentsList)
     const initialValues = useMemo(() => {
-        console.log('initialValues', { customIntentSettings, customIntents })
         return customIntents
     }, [customIntentSettings])
     const [mutate, { error, data }] = useDataMutation(saveCustomIntentsMutation)
@@ -51,10 +54,14 @@ const CustomIntents = () => {
             )}
             authority={hasAuthority}
         >
-            {customIntents && (
+            {customIntentSettings && (
                 <>
-                    {isEmpty(customIntents) && <CustomIntentInfo />}
-                    Add Intent button
+                    {isEmpty(customIntentSettings) && <CustomIntentInfo />}
+                    <CustomIntentsList
+                        disable={!hasAuthority}
+                        settings={customIntentSettings}
+                        handleSettings={setCustomIntentSettings}
+                    />
                     <FooterStripButtons
                         onSave={saveSettings}
                         onReset={resetSettings}
