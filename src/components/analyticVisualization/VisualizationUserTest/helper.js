@@ -1,6 +1,7 @@
 import find from 'lodash/find'
 import intersectionBy from 'lodash/intersectionBy'
 import isEmpty from 'lodash/isEmpty'
+import values from 'lodash/values'
 
 export const validateUserVisualization = (user, visualization) =>
     visualizationHasPublicAccess(visualization) ||
@@ -9,24 +10,30 @@ export const validateUserVisualization = (user, visualization) =>
 
 /**
  * User has at least read access to a visualization
+ * From 2.36 a new sharing property has been introduced in order to replace the old sharing properties: sharing.public
  * */
-const visualizationHasPublicAccess = (visualization) =>
-    visualization.publicAccess.startsWith('r')
+export const visualizationHasPublicAccess = (visualization) =>
+    visualization?.sharing?.public?.startsWith('r') ||
+    visualization?.publicAccess?.startsWith('r')
 
 /**
  * Check if a user belongs to user Group that has access to a visualization
+ * From 2.36 a new sharing property has been introduced in order to replace the old sharing properties: sharing.userGroups
  * */
-const userGroupHasAccess = (visualization, user) => {
-    const groupIntersection = intersectionBy(
-        user.userGroups,
-        visualization.userGroupAccesses,
-        'id'
-    )
+export const userGroupHasAccess = (visualization, user) => {
+    const groupAccess =
+        visualization?.userGroupAccesses ||
+        values(visualization?.sharing?.userGroups)
+    const groupIntersection = intersectionBy(user.userGroups, groupAccess, 'id')
     return !isEmpty(groupIntersection)
 }
 
 /**
  * Check if user has access to a visualization
+ * From 2.36 a new sharing property has been introduced in order to replace the old sharing properties: sharing.users
  * */
-const userHasAccess = (visualization, user) =>
-    !isEmpty(find(visualization.userAccesses, { id: user.id }))
+export const userHasAccess = (visualization, user) => {
+    const userAccess =
+        visualization?.userAccesses || visualization?.sharing?.users
+    return !isEmpty(find(userAccess, { id: user.id }))
+}
