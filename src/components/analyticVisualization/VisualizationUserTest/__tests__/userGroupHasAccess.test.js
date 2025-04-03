@@ -38,7 +38,7 @@ test('User group has access to visualization v35', () => {
         ],
     }
 
-    expect(userGroupHasAccess(visualization, user_test1)).toBeTruthy()
+    expect(userGroupHasAccess(visualization, user_test2)).toBeTruthy()
 })
 
 test('User group does not have access to visualization v35', () => {

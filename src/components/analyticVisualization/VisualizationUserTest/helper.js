@@ -21,9 +21,10 @@ export const visualizationHasPublicAccess = (visualization) =>
  * From 2.36 a new sharing property has been introduced in order to replace the old sharing properties: sharing.userGroups
  * */
 export const userGroupHasAccess = (visualization, user) => {
-    const groupAccess =
-        visualization?.userGroupAccesses ||
-        values(visualization?.sharing?.userGroups)
+    const groupAccess = !isEmpty(values(visualization?.sharing?.userGroups))
+        ? values(visualization?.sharing?.userGroups)
+        : visualization?.userGroupAccesses
+
     const groupIntersection = intersectionBy(user.userGroups, groupAccess, 'id')
     return !isEmpty(groupIntersection)
 }
@@ -34,6 +35,6 @@ export const userGroupHasAccess = (visualization, user) => {
  * */
 export const userHasAccess = (visualization, user) => {
     const userAccess =
-        visualization?.userAccesses || visualization?.sharing?.users
+        visualization?.sharing?.users || visualization?.userAccesses
     return !isEmpty(find(userAccess, { id: user.id }))
 }
