@@ -15,10 +15,10 @@ const DialogSaveData = ({ openDialog, onClose, saveDataStore }) => {
         <>
             {openDialog && (
                 <Modal small onClose={onClose} position="middle">
-                    <ModalTitle>{i18n.t('Save in DataStore')}</ModalTitle>
+                    <ModalTitle>{i18n.t('Save new configuration')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
-                            'Saving settings in DataStore is a critical action that could have very serious consequences. Are you sure you want to save these settings in DataStore?'
+                            "You are about to update the configuration settings. Please confirm if you'd like to proceed?"
                         )}
                     </ModalContent>
                     <ModalActions>
