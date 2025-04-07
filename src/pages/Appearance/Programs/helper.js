@@ -66,15 +66,17 @@ export const createInitialSpecificValues = (prevDetails) => ({
     followUp: prevDetails.followUp || filterSortingDefault,
 })
 
-export const createInitialGlobalSpinner = (prevDetails = {}) => {
-    const {
-        completionSpinner = false,
-        disableReferrals = false,
-        disableCollapsibleSections = false,
-    } = prevDetails
-
-    return { completionSpinner, disableReferrals, disableCollapsibleSections }
-}
+export const createInitialGlobalSpinner = (prevDetails) => ({
+    completionSpinner: !isNil(prevDetails.completionSpinner)
+        ? prevDetails.completionSpinner
+        : false,
+    disableReferrals: !isNil(prevDetails.disableReferrals)
+        ? prevDetails.disableReferrals
+        : false,
+    disableCollapsibleSections: !isNil(prevDetails.disableCollapsibleSections)
+        ? prevDetails.disableCollapsibleSections
+        : false,
+})
 
 export const createInitialGlobalSpinnerPrevious = (prevDetails) => {
     defaults(prevDetails, {
