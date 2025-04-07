@@ -17,7 +17,7 @@ test('renders SMS Gateway component', () => {
     ).toBeInTheDocument()
 })
 
-test('valid phone number input triggers onChange', () => {
+test('valid phone number starts with + triggers onChange', () => {
     render(<SmsGateway value={{ smsGateway: '' }} onChange={mockOnChange} />)
 
     const input = screen.getByLabelText(/SMS Gateway phone number/i)
@@ -30,7 +30,7 @@ test('valid phone number input triggers onChange', () => {
     )
 })
 
-test('invalid phone number shows error message', () => {
+test('invalid phone number without + shows error message', () => {
     render(<SmsGateway value={{ smsGateway: '' }} onChange={mockOnChange} />)
 
     const input = screen.getByLabelText(/SMS Gateway phone number/i)
@@ -43,7 +43,7 @@ test('invalid phone number shows error message', () => {
     ).toBeInTheDocument()
 })
 
-test('clearing the input triggers onChange with empty value', () => {
+test('clearing the input triggers onChange with empty value and key not included in payload', () => {
     render(
         <SmsGateway
             value={{ smsGateway: '+1234567890' }}
