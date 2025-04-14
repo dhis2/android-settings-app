@@ -67,7 +67,9 @@ export const createInitialSpecificValues = (prevDetails) => ({
 })
 
 export const createInitialGlobalSpinner = (prevDetails) => ({
-    completionSpinner: prevDetails.completionSpinner,
+    completionSpinner: !isNil(prevDetails.completionSpinner)
+        ? prevDetails.completionSpinner
+        : false,
     disableReferrals: !isNil(prevDetails.disableReferrals)
         ? prevDetails.disableReferrals
         : false,
