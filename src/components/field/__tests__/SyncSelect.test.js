@@ -1,7 +1,7 @@
+import { render, screen, configure } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import '@testing-library/jest-dom'
-import { configure, render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { SyncSelect, MANUAL } from '../SyncSelect'
 configure({ testIdAttribute: 'data-test' })
 
@@ -71,5 +71,5 @@ describe('SyncSelect', () => {
         })
         await userEvent.click(cancelButton)
         expect(onChange).toHaveBeenCalledWith({ metadata: 'automatic' })
-    })    
+    })
 })
