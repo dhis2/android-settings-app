@@ -61,7 +61,11 @@ export const VisualizationUserTest = ({ visualization, visualizationName }) => {
                 {tested && getTestingResults()}
 
                 <Field className={styles.runTest}>
-                    <Button small onClick={handleChange}>
+                    <Button
+                        small
+                        onClick={handleChange}
+                        disabled={isEmpty(user)}
+                    >
                         {i18n.t('Run test')}
                     </Button>
                 </Field>
