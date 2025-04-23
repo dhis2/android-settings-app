@@ -26,17 +26,17 @@ jobs:
               with:
                   node-version: 16.x
 
-#            - uses: c-hive/gha-yarn-cache@v1
-#            - run: yarn install --frozen-lockfile
+            #            - uses: c-hive/gha-yarn-cache@v1
+            #            - run: yarn install --frozen-lockfile
 
-          # Use GitHub Actions cache instead of gha-yarn-cache
+            # Use GitHub Actions cache instead of gha-yarn-cache
             - name: Cache Yarn dependencies
               uses: actions/cache@v3
               with:
-                 path: |
-                    ~/.cache/yarn
-                 key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-                 restore-keys: |
+                  path: |
+                      ~/.cache/yarn
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
                       ${{ runner.os }}-yarn-
 
             - run: yarn install --frozen-lockfile
