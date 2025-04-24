@@ -20,7 +20,15 @@ jobs:
               with:
                   node-version: 16.x
 
-            - uses: c-hive/gha-yarn-cache@v1
+            # Use GitHub Actions cache instead of gha-yarn-cache
+            - name: Cache Yarn dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cache/yarn
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-
+
             - run: yarn install --frozen-lockfile
 
             # Can be removed if translations aren't required for tests,
@@ -39,7 +47,15 @@ jobs:
               with:
                   node-version: 16.x
 
-            - uses: c-hive/gha-yarn-cache@v1
+            # Use GitHub Actions cache instead of gha-yarn-cache
+            - name: Cache Yarn dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cache/yarn
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-
+
             - run: yarn install --frozen-lockfile
 
             # Can be removed if translations aren't required for tests,
