@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { TextField } from '../../components/field/TextField'
 
@@ -31,6 +32,11 @@ const ResponseForm = ({ data = {}, onChange }) => {
             />
         </div>
     )
+}
+
+ResponseForm.propTypes = {
+    data: PropTypes.object,
+    onChange: PropTypes.func,
 }
 
 export default ResponseForm
