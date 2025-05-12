@@ -35,6 +35,9 @@ const DialogCustomIntents = ({
     setFormData,
     handleChange,
     edit,
+    dataElements,
+    attributes,
+
 }) => {
     const [step, setStep] = useState(0)
 
@@ -55,6 +58,8 @@ const DialogCustomIntents = ({
                         formData={formData}
                         onChange={onChangeByPath}
                         edit={edit}
+                        dataElements={dataElements}
+                        attributes={attributes}
                     />
                 )
             case 1:
@@ -155,6 +160,8 @@ DialogCustomIntents.propTypes = {
     specificSettings: PropTypes.object,
     handleChange: PropTypes.func,
     edit: PropTypes.bool,
+    dataElements: PropTypes.array.isRequired,
+    attributes: PropTypes.array.isRequired,
 }
 
 export default DialogCustomIntents
