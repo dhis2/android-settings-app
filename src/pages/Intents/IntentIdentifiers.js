@@ -42,7 +42,6 @@ const IntentIdentifiers = ({
         onChange('trigger.attributes', [])
     }
 
-    
     const handleTriggerChange = ({ selected }) => {
         const selectedArray = Array.isArray(selected) ? selected : [selected]
         const mapped = selectedArray.map((id) => ({ id }))
@@ -52,7 +51,6 @@ const IntentIdentifiers = ({
                 : 'trigger.attributes'
         onChange(key, mapped)
     }
-    
 
     const elementOptions = (() => {
         if (selectedElementType === 'dataElements') {

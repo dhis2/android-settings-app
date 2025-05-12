@@ -17,7 +17,6 @@ import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
 import RequestForm from './RequestForm'
 import ResponseForm from './ResponseForm'
-import { validMandatoryFields } from './intentsDatastoreQuery'
 
 const setByPath = (obj, path, value) => {
     const keys = path.split('.')
