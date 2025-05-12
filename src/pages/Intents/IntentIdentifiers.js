@@ -44,14 +44,17 @@ const IntentIdentifiers = ({
         console.log({selected}, formData.trigger)
     }
 
+    
     const handleTriggerChange = ({ selected }) => {
-        const mapped = selected.map((id) => ({ id }))
+        const selectedArray = Array.isArray(selected) ? selected : [selected]
+        const mapped = selectedArray.map((id) => ({ id }))
         const key =
             selectedElementType === 'dataElements'
                 ? 'trigger.dataElements'
                 : 'trigger.attributes'
         onChange(key, mapped)
     }
+    
 
     return (
         <div className="column-gap" style={{ display: 'grid' }}>

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import TableActions from '../../components/TableActions'
 import DialogCustomIntents from './DialogCustomIntents'
 import DialogDelete from '../../components/dialog/DialogDelete'
+import { useDataQuery } from '@dhis2/app-runtime'
 
 const getDefaultForm = () => ({
     name: '',
@@ -14,31 +15,48 @@ const getDefaultForm = () => ({
     request: { arguments: {} },
     response: { data: {} },
 })
+const dataElementsQuery = {
+    dataElements: {
+        resource: 'dataElements',
+        params: {
+            fields: 'id,displayName,valueType',
+            paging: false,
+        },
+    },
+}
 
-// Mock data for dataElements and attributes
-const mockDataElements = [
-    { id: 'de1', displayName: 'Data Element 1' },
-    { id: 'de2', displayName: 'Data Element 2' },
-]
-
-const mockAttributes = [
-    { id: 'attr1', displayName: 'Tracked Entity Attribute 1' },
-    { id: 'attr2', displayName: 'Tracked Entity Attribute 2' },
-]
+const attributesQuery = {
+    attributes: {
+        resource: 'trackedEntityAttributes',
+        params: {
+            fields: 'id,displayName,valueType',
+            paging: false,
+        },
+    },
+}
 
 const CustomIntentsList = ({ settings, handleSettings, disable }) => {
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [specificSettings, setSpecificSettings] = useState({})
     const [formData, setFormData] = useState(getDefaultForm)
 
-    // Pass down the mock data for data elements and attributes
-    const [dataElements] = useState(mockDataElements)
-    const [attributes] = useState(mockAttributes)
+    const { loading, data } = useDataQuery(dataElementsQuery)
+    const { loading: loadingAttr, data: dataAttr } =
+        useDataQuery(attributesQuery)
+
+    const dataElements = data?.dataElements?.dataElements || []
+    const filteredDataElements = dataElements.filter((de) =>
+        ['TEXT', 'LONG_TEXT'].includes(de.valueType)
+    )
+
+    const attributes =
+        dataAttr?.attributes?.trackedEntityAttributes.filter((attr) =>
+            ['TEXT', 'LONG_TEXT'].includes(attr.valueType)
+        ) || []
 
     useEffect(() => {
         console.log('Updated formData:', formData)
     }, [formData])
-    
 
     useEffect(() => {
         if (open) {
@@ -91,12 +109,12 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                     disable={disable}
                     setSpecificSettings={setSpecificSettings}
                     openEditDialog={setOpenEditDialog}
-                    handleSettings={handleSettings} 
+                    handleSettings={handleSettings}
                 />
             )}
 
             <Button onClick={openAddDialog}>{i18n.t('Add Intent')}</Button>
-
+            {loading || (loadingAttr && <CircularLoader />)}
             <DialogCustomIntents
                 open={openEditDialog}
                 handleClose={handleDialogClose}
@@ -104,9 +122,9 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                 formData={formData}
                 setFormData={setFormData}
                 setSpecificSettings={setSpecificSettings}
-                handleChange={handleChange} 
+                handleChange={handleChange}
                 edit={!!specificSettings.uid}
-                dataElements={dataElements}
+                dataElements={filteredDataElements}
                 attributes={attributes}
             />
         </>
@@ -119,10 +137,14 @@ CustomIntentsList.propTypes = {
     disable: PropTypes.bool.isRequired,
 }
 
-
-
 // TODO: create actions functions (delete and edit)
-const RowList = ({ rows, disable, setSpecificSettings, openEditDialog, handleSettings }) => {
+const RowList = ({
+    rows,
+    disable,
+    setSpecificSettings,
+    openEditDialog,
+    handleSettings,
+}) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [deleteItem, setDeleteItem] = useState(null)
 
@@ -139,9 +161,11 @@ const RowList = ({ rows, disable, setSpecificSettings, openEditDialog, handleSet
 
     const handleDelete = () => {
         if (deleteItem) {
-            const updatedRows = rows.filter((item) => item.uid !== deleteItem.uid)
+            const updatedRows = rows.filter(
+                (item) => item.uid !== deleteItem.uid
+            )
             handleSettings(updatedRows)
-            setOpenDeleteDialog(false) 
+            setOpenDeleteDialog(false)
         }
     }
 
@@ -157,7 +181,7 @@ const RowList = ({ rows, disable, setSpecificSettings, openEditDialog, handleSet
                 <DialogDelete
                     open={openDeleteDialog}
                     onHandleClose={() => setOpenDeleteDialog(false)}
-                    name={deleteItem.name}  
+                    name={deleteItem.name}
                     typeName="Intent"
                     onHandleDelete={handleDelete}
                 />
@@ -173,6 +197,5 @@ RowList.propTypes = {
     openEditDialog: PropTypes.func.isRequired,
     handleSettings: PropTypes.func.isRequired,
 }
-
 
 export default CustomIntentsList
