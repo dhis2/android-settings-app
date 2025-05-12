@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { TextField } from '../../components/field/TextField'
 
-const ResponseForm = ({ data={}, onChange }) => {
+const ResponseForm = ({ data = {}, onChange }) => {
     const [responseData, setResponseData] = useState(data)
 
     useEffect(() => {
@@ -11,45 +11,24 @@ const ResponseForm = ({ data={}, onChange }) => {
     const handleChange = (field, value) => {
         const updated = { ...responseData, [field]: value }
         setResponseData(updated)
-        onChange('response.data', updated) 
+        onChange('response.data', updated)
     }
 
     return (
         <div style={{ display: 'grid', gap: '8px' }}>
-
             <TextField
                 label="Argument"
                 value={responseData.argument || ''}
                 onChange={(e) => handleChange('argument', e.value)}
                 required
             />
-            
+
             <TextField
                 label="Path"
                 value={responseData.path || ''}
                 onChange={(e) => handleChange('path', e.value)}
                 required
             />
-
-            <TextField
-                label="Type"
-                value={responseData.type || ''}
-                onChange={(e) => handleChange('type', e.value)}
-            />
-            
-            <TextField
-                label="Value Type"
-                value={responseData.valueType || ''}
-                onChange={(e) => handleChange('valueType', e.value)}
-            />
-            
-            {responseData.type === 'LIST_OF_OBJECTS' && (
-                <TextField
-                    label="Class Name"
-                    value={responseData.className || ''}
-                    onChange={(e) => handleChange('className', e.value)}
-                />
-            )}
         </div>
     )
 }

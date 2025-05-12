@@ -1,6 +1,5 @@
 .row {
     display: flex;
-    width: 300px;
 }
 
 .row + .row {
