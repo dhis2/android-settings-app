@@ -7,14 +7,6 @@ import DialogCustomIntents from './DialogCustomIntents'
 import DialogDelete from '../../components/dialog/DialogDelete'
 import { useDataQuery } from '@dhis2/app-runtime'
 
-const getDefaultForm = () => ({
-    name: '',
-    trigger: { dataElements: [], attributes: [] },
-    action: [],
-    packageName: '',
-    request: { arguments: {} },
-    response: { data: {} },
-})
 const dataElementsQuery = {
     dataElements: {
         resource: 'dataElements',
@@ -38,7 +30,6 @@ const attributesQuery = {
 const CustomIntentsList = ({ settings, handleSettings, disable }) => {
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [specificSettings, setSpecificSettings] = useState({})
-    const [formData, setFormData] = useState(getDefaultForm)
 
     const { loading, data } = useDataQuery(dataElementsQuery)
     const { loading: loadingAttr, data: dataAttr } =
@@ -54,28 +45,7 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
             ['TEXT', 'LONG_TEXT'].includes(attr.valueType)
         ) || []
 
-    useEffect(() => {
-        console.log('Updated formData:', formData)
-    }, [formData])
 
-    useEffect(() => {
-        if (open) {
-            setFormData({
-                ...getDefaultForm(),
-                ...specificSettings,
-                trigger: {
-                    dataElements: specificSettings?.trigger?.dataElements || [],
-                    attributes: specificSettings?.trigger?.attributes || [],
-                },
-                request: {
-                    arguments: specificSettings?.request?.arguments || {},
-                },
-                response: {
-                    data: specificSettings?.response?.data || {},
-                },
-            })
-        }
-    }, [open, specificSettings])
 
     const openAddDialog = () => {
         setSpecificSettings({})
@@ -119,13 +89,12 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                 open={openEditDialog}
                 handleClose={handleDialogClose}
                 handleSave={handleSave}
-                formData={formData}
-                setFormData={setFormData}
                 setSpecificSettings={setSpecificSettings}
                 handleChange={handleChange}
                 edit={!!specificSettings.uid}
                 dataElements={filteredDataElements}
                 attributes={attributes}
+                specificSettings={specificSettings}
             />
         </>
     )
