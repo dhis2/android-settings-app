@@ -13,6 +13,7 @@ const dataElementsQuery = {
         params: {
             fields: 'id,displayName,valueType',
             paging: false,
+            filter: 'valueType:in:[TEXT,LONG_TEXT]',
         },
     },
 }
@@ -23,6 +24,7 @@ const attributesQuery = {
         params: {
             fields: 'id,displayName,valueType',
             paging: false,
+            filter: 'valueType:in:[TEXT,LONG_TEXT]',
         },
     },
 }
@@ -36,14 +38,8 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
         useDataQuery(attributesQuery)
 
     const dataElements = data?.dataElements?.dataElements || []
-    const filteredDataElements = dataElements.filter((de) =>
-        ['TEXT', 'LONG_TEXT'].includes(de.valueType)
-    )
 
-    const attributes =
-        dataAttr?.attributes?.trackedEntityAttributes.filter((attr) =>
-            ['TEXT', 'LONG_TEXT'].includes(attr.valueType)
-        ) || []
+    const attributes = dataAttr?.attributes?.trackedEntityAttributes || []
 
     const openAddDialog = () => {
         setSpecificSettings({})
@@ -93,7 +89,7 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                     setSpecificSettings={setSpecificSettings}
                     handleChange={handleChange}
                     edit={!!specificSettings.uid}
-                    dataElements={filteredDataElements}
+                    dataElements={dataElements}
                     attributes={attributes}
                     specificSettings={specificSettings}
                 />
