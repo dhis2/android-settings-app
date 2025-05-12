@@ -45,7 +45,7 @@ export const validMandatoryFields = (specificSettings) => {
     ) {
         return false
     }
-    
+
     const isValid =
         validateObjectByProperty(
             ['name', 'action', 'packageName'],
