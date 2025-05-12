@@ -9,18 +9,20 @@ import tableActionStyles from '../styles/TableActions.module.css'
 import Wrapper from './Wrapper'
 
 const TableActions = ({ rows, menuActions, states }) => {
-    console.log({menuActions})
     return (
-    <Wrapper>
-        <div>
-            <TableRows rows={rows} menuActions={menuActions} states={states} />
-        </div>
-    </Wrapper>
-)}
+        <Wrapper>
+            <div>
+                <TableRows
+                    rows={rows}
+                    menuActions={menuActions}
+                    states={states}
+                />
+            </div>
+        </Wrapper>
+    )
+}
 
-const TableRows = ({ rows, states, menuActions }) => {
-
-    return(
+const TableRows = ({ rows, states, menuActions }) => (
     <div>
         {rows.map((row) => (
             <Card key={row.id || row.uid} className={tableActionStyles.wrapper}>
@@ -75,7 +77,7 @@ const TableRows = ({ rows, states, menuActions }) => {
             </Card>
         ))}
     </div>
-)}
+)
 
 TableActions.propTypes = {
     columns: PropTypes.array,

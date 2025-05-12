@@ -9,6 +9,8 @@ msgstr ""
 "PO-Revision-Date: 2025-05-10T04:02:25.523Z\n"
 "POT-Creation-Date: 2025-03-27T17:42:09.801Z\n"
 "PO-Revision-Date: 2025-03-27T17:42:09.801Z\n"
+"POT-Creation-Date: 2025-05-12T10:39:05.888Z\n"
+"PO-Revision-Date: 2025-05-12T10:39:05.888Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -1086,11 +1088,47 @@ msgstr ""
 "Define specific actions triggered from external sources to interact with "
 "other apps in the device."
 
-msgid "program"
-msgstr "program"
-
 msgid "Add Intent"
 msgstr "Add Intent"
+
+msgid "Identifiers"
+msgstr "Identifiers"
+
+msgid "Request"
+msgstr "Request"
+
+msgid "Response"
+msgstr "Response"
+
+msgid "Prev"
+msgstr "Prev"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Save Intent"
+msgstr "Save Intent"
+
+msgid "Tracked Entity Attribute"
+msgstr "Tracked Entity Attribute"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Choose Data Elements"
+msgstr "Choose Data Elements"
+
+msgid "Choose Attributes"
+msgstr "Choose Attributes"
+
+msgid "Screen Actions"
+msgstr "Screen Actions"
+
+msgid "At least one action is required"
+msgstr "At least one action is required"
+
+msgid "Package name"
+msgstr "Package name"
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"
@@ -1158,6 +1196,9 @@ msgid ""
 msgstr ""
 "Applies to all programs an Android user has access to. Specific program "
 "settings can be defined in the section below."
+
+msgid "program"
+msgstr "program"
 
 msgid "Recommended maximum: {{maxValue}}"
 msgstr "Recommended maximum: {{maxValue}}"
