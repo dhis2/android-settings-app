@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 import { useEffect, useState } from 'react'
 import { CUSTOM_INTENTS, NAMESPACE } from '../../constants/data-store'
 import { createKeyCustomIntent, updateSharingMutation } from '../../modules'
+import { validateObjectByProperty } from '../../utils/validators'
 
 /**
  * update data store
@@ -14,7 +15,6 @@ export const saveCustomIntentsMutation = {
     type: 'update',
     data: ({ settings }) => [...settings.customIntents],
 }
-
 
 /**
  * Query to get Customs Intents from Data store
@@ -36,6 +36,26 @@ const getMetadataQuery = {
 export const saveCustomIntents = async (settings) => {
     await save({ settings })
     setCustomIntents(settings)
+}
+
+export const validMandatoryFields = (specificSettings) => {
+    if (
+        specificSettings.trigger?.dataElements?.length === 0 &&
+        specificSettings.trigger?.attributes?.length === 0
+    ) {
+        return false
+    }
+    
+    const isValid =
+        validateObjectByProperty(
+            ['name', 'action', 'packageName'],
+            specificSettings
+        ) &&
+        validateObjectByProperty(
+            ['argument', 'path'],
+            specificSettings?.response.data
+        )
+    return isValid
 }
 
 export const useReadCustomIntentsDataStore = () => {

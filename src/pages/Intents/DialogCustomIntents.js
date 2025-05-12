@@ -14,6 +14,7 @@ import React, { useState, useEffect } from 'react'
 import IntentIdentifiers from './IntentIdentifiers'
 import RequestForm from './RequestForm'
 import ResponseForm from './ResponseForm'
+import { validMandatoryFields } from './intentsDatastoreQuery'
 
 // Utility to deeply update state via string paths like "request.arguments.projectID"
 const setByPath = (obj, path, value) => {
@@ -27,19 +28,44 @@ const setByPath = (obj, path, value) => {
     return { ...obj }
 }
 
+const getDefaultForm = () => ({
+    name: '',
+    description: '',
+    trigger: { dataElements: [], attributes: [] },
+    action: [],
+    packageName: '',
+    request: { arguments: {} },
+    response: { data: {} },
+})
+
 const DialogCustomIntents = ({
     open,
     handleClose,
     handleSave,
-    formData,
-    setFormData,
     handleChange,
     edit,
     dataElements,
     attributes,
-
+    specificSettings,
 }) => {
     const [step, setStep] = useState(0)
+
+    const [formData, setFormData] = useState({
+        ...getDefaultForm(),
+        ...specificSettings,
+        trigger: {
+            dataElements: specificSettings?.trigger?.dataElements || [],
+            attributes: specificSettings?.trigger?.attributes || [],
+        },
+        request: {
+            arguments: specificSettings?.request?.arguments || {},
+        },
+        response: {
+            data: specificSettings?.response?.data || {},
+        },
+    })
+
+    const  disableSave = !validMandatoryFields(formData)
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 2))
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 0))
@@ -142,6 +168,7 @@ const DialogCustomIntents = ({
                             <Button
                                 onClick={() => handleSave(formData)}
                                 primary
+                                disabled={disableSave}
                             >
                                 {i18n.t('Save Intent')}
                             </Button>
