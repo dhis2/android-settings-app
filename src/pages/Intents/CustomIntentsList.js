@@ -4,13 +4,7 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import TableActions from '../../components/TableActions'
 import DialogCustomIntents from './DialogCustomIntents'
-
-import { CircularLoader, Button } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
-import TableActions from '../../components/TableActions'
-import DialogCustomIntents from './DialogCustomIntents'
+import DialogDelete from '../../components/dialog/DialogDelete'
 
 const getDefaultForm = () => ({
     name: '',
@@ -85,7 +79,6 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
         handleSettings(updated)
         setOpenEditDialog(false)
     }
-
     const handleChange = (updatedSettings) => {
         setSpecificSettings(updatedSettings)
     }
@@ -98,6 +91,7 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                     disable={disable}
                     setSpecificSettings={setSpecificSettings}
                     openEditDialog={setOpenEditDialog}
+                    handleSettings={handleSettings} 
                 />
             )}
 
@@ -128,8 +122,9 @@ CustomIntentsList.propTypes = {
 
 
 // TODO: create actions functions (delete and edit)
-const RowList = ({ rows, disable, setSpecificSettings, openEditDialog }) => {
-    const [openDeleteDialog, setOpenDialog] = useState(false)
+const RowList = ({ rows, disable, setSpecificSettings, openEditDialog, handleSettings }) => {
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+    const [deleteItem, setDeleteItem] = useState(null)
 
     const menuActions = {
         edit: (row) => {
@@ -137,9 +132,17 @@ const RowList = ({ rows, disable, setSpecificSettings, openEditDialog }) => {
             openEditDialog(true)
         },
         delete: (row) => {
-            console.log('delete', row)
-            setOpenDialog(true)
+            setDeleteItem(row)
+            setOpenDeleteDialog(true)
         },
+    }
+
+    const handleDelete = () => {
+        if (deleteItem) {
+            const updatedRows = rows.filter((item) => item.uid !== deleteItem.uid)
+            handleSettings(updatedRows)
+            setOpenDeleteDialog(false) 
+        }
     }
 
     return (
@@ -149,7 +152,16 @@ const RowList = ({ rows, disable, setSpecificSettings, openEditDialog }) => {
                 menuActions={menuActions}
                 states={disable}
             />
-            {/* Only delete dialog remains here */}
+
+            {openDeleteDialog && deleteItem && (
+                <DialogDelete
+                    open={openDeleteDialog}
+                    onHandleClose={() => setOpenDeleteDialog(false)}
+                    name={deleteItem.name}  
+                    typeName="Intent"
+                    onHandleDelete={handleDelete}
+                />
+            )}
         </>
     )
 }
@@ -159,6 +171,8 @@ RowList.propTypes = {
     disable: PropTypes.bool,
     setSpecificSettings: PropTypes.func.isRequired,
     openEditDialog: PropTypes.func.isRequired,
+    handleSettings: PropTypes.func.isRequired,
 }
+
 
 export default CustomIntentsList
