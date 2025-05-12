@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { TextField } from '../../components/field/TextField'
 import { CustomMultiSelectField } from '../../components/field/CustomMultiSelectField'
 import { SelectField } from '../../components/field/SelectField'
+import { TextField } from '../../components/field/TextField'
 
 const screenActionOptions = [
     { label: 'Search', value: 'SEARCH' },
@@ -41,10 +41,9 @@ const IntentIdentifiers = ({
 
         onChange('trigger.dataElements', [])
         onChange('trigger.attributes', [])
-        console.log({selected}, formData.trigger)
+        console.log({ selected }, formData.trigger)
     }
 
-    
     const handleTriggerChange = ({ selected }) => {
         const selectedArray = Array.isArray(selected) ? selected : [selected]
         const mapped = selectedArray.map((id) => ({ id }))
@@ -54,7 +53,6 @@ const IntentIdentifiers = ({
                 : 'trigger.attributes'
         onChange(key, mapped)
     }
-    
 
     return (
         <div className="column-gap" style={{ display: 'grid' }}>
