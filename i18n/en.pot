@@ -5,6 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2025-03-06T17:18:32.794Z\n"
+"PO-Revision-Date: 2025-03-06T17:18:32.794Z\n"
 "POT-Creation-Date: 2025-03-27T17:42:09.801Z\n"
 "PO-Revision-Date: 2025-03-27T17:42:09.801Z\n"
 
@@ -571,6 +573,16 @@ msgstr ""
 "It looks like there aren't any configured analytics, or they couldn't be "
 "loaded."
 
+msgid "No custom Intents found"
+msgstr "No custom Intents found"
+
+msgid ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+msgstr ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+
 msgid "Manual options"
 msgstr "Manual options"
 
@@ -717,6 +729,15 @@ msgstr "Set Data set Visualizations"
 
 msgid "Manage visualizations for data sets"
 msgstr "Manage visualizations for data sets"
+
+msgid "Custom Intents"
+msgstr "Custom Intents"
+
+msgid "Set Intents"
+msgstr "Set Intents"
+
+msgid "Define actions triggered from external sources"
+msgstr "Define actions triggered from external sources"
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr "Maximum Tracked Entity Instance (TEI) downloads"
@@ -1057,6 +1078,16 @@ msgstr "Overview: Android Settings App"
 
 msgid "v{{version}}"
 msgstr "v{{version}}"
+
+msgid ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+msgstr ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+
+msgid "Add Intent"
+msgstr "Add Intent"
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"
