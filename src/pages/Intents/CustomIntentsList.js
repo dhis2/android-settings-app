@@ -4,6 +4,7 @@ import { CircularLoader, Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import DialogDelete from '../../components/dialog/DialogDelete'
+import { AddNewSetting } from '../../components/field'
 import TableActions from '../../components/TableActions'
 import DialogCustomIntents from './DialogCustomIntents'
 
@@ -79,7 +80,11 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                 />
             )}
 
-            <Button onClick={openAddDialog}>{i18n.t('Add Intent')}</Button>
+            <AddNewSetting
+                label={i18n.t('Add Intent')}
+                onClick={openAddDialog}
+            />
+
             {loading || (loadingAttr && <CircularLoader />)}
             {openEditDialog && (
                 <DialogCustomIntents
