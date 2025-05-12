@@ -10,7 +10,7 @@ import {
     Tab,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
 import RequestForm from './RequestForm'

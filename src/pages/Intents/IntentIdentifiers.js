@@ -130,7 +130,6 @@ const IntentIdentifiers = ({
 IntentIdentifiers.propTypes = {
     formData: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    edit: PropTypes.bool,
     dataElements: PropTypes.array.isRequired,
     attributes: PropTypes.array.isRequired,
 }
