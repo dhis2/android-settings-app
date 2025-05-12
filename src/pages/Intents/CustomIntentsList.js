@@ -1,11 +1,11 @@
-import { CircularLoader, Button } from '@dhis2/ui'
+import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { CircularLoader, Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
+import DialogDelete from '../../components/dialog/DialogDelete'
 import TableActions from '../../components/TableActions'
 import DialogCustomIntents from './DialogCustomIntents'
-import DialogDelete from '../../components/dialog/DialogDelete'
-import { useDataQuery } from '@dhis2/app-runtime'
 
 const dataElementsQuery = {
     dataElements: {
@@ -45,8 +45,6 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
             ['TEXT', 'LONG_TEXT'].includes(attr.valueType)
         ) || []
 
-
-
     const openAddDialog = () => {
         setSpecificSettings({})
         setOpenEditDialog(true)
@@ -60,7 +58,9 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
         const updated = [...settings]
         if (newIntent.uid) {
             const idx = updated.findIndex((s) => s.uid === newIntent.uid)
-            if (idx > -1) updated[idx] = newIntent
+            if (idx > -1) {
+                updated[idx] = newIntent
+            }
         } else {
             updated.push({ ...newIntent, uid: crypto.randomUUID() })
         }
@@ -85,17 +85,19 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
 
             <Button onClick={openAddDialog}>{i18n.t('Add Intent')}</Button>
             {loading || (loadingAttr && <CircularLoader />)}
-            <DialogCustomIntents
-                open={openEditDialog}
-                handleClose={handleDialogClose}
-                handleSave={handleSave}
-                setSpecificSettings={setSpecificSettings}
-                handleChange={handleChange}
-                edit={!!specificSettings.uid}
-                dataElements={filteredDataElements}
-                attributes={attributes}
-                specificSettings={specificSettings}
-            />
+            {openEditDialog && (
+                <DialogCustomIntents
+                    open={openEditDialog}
+                    handleClose={handleDialogClose}
+                    handleSave={handleSave}
+                    setSpecificSettings={setSpecificSettings}
+                    handleChange={handleChange}
+                    edit={!!specificSettings.uid}
+                    dataElements={filteredDataElements}
+                    attributes={attributes}
+                    specificSettings={specificSettings}
+                />
+            )}
         </>
     )
 }

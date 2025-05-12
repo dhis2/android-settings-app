@@ -12,16 +12,18 @@ import {
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import IntentIdentifiers from './IntentIdentifiers'
+import { validMandatoryFields } from './intentsDatastoreQuery'
 import RequestForm from './RequestForm'
 import ResponseForm from './ResponseForm'
-import { validMandatoryFields } from './intentsDatastoreQuery'
 
 // Utility to deeply update state via string paths like "request.arguments.projectID"
 const setByPath = (obj, path, value) => {
     const keys = path.split('.')
     const lastKey = keys.pop()
     const deepRef = keys.reduce((acc, key) => {
-        if (!acc[key]) acc[key] = {}
+        if (!acc[key]) {
+            acc[key] = {}
+        }
         return acc[key]
     }, obj)
     deepRef[lastKey] = value
@@ -65,7 +67,7 @@ const DialogCustomIntents = ({
         },
     })
 
-    const  disableSave = !validMandatoryFields(formData)
+    const disableSave = !validMandatoryFields(formData)
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 2))
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 0))
@@ -166,7 +168,9 @@ const DialogCustomIntents = ({
                                 {i18n.t('Cancel')}
                             </Button>
                             <Button
-                                onClick={() => handleSave(formData)}
+                                onClick={() => {
+                                    handleSave(formData)
+                                }}
                                 primary
                                 disabled={disableSave}
                             >
