@@ -19,7 +19,7 @@ export const SelectElementType = ({
     elementValueOptions,
     handleList,
     value,
-    handleLoading,
+    handleLoading = () => {},
     edit,
     ...props
 }) => {

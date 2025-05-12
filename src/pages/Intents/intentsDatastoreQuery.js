@@ -12,11 +12,9 @@ import { createKeyCustomIntent, updateSharingMutation } from '../../modules'
 export const saveCustomIntentsMutation = {
     resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}`,
     type: 'update',
-    data: ({ settings }) => ({
-        ...settings,
-        lastUpdated: new Date().toJSON(),
-    }),
+    data: ({ settings }) => [...settings.customIntents],
 }
+
 
 /**
  * Query to get Customs Intents from Data store
@@ -33,6 +31,11 @@ const getMetadataQuery = {
     customIntents: {
         resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}/metaData`,
     },
+}
+
+export const saveCustomIntents = async (settings) => {
+    await save({ settings })
+    setCustomIntents(settings)
 }
 
 export const useReadCustomIntentsDataStore = () => {

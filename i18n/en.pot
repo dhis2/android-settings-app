@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-06T17:18:32.794Z\n"
-"PO-Revision-Date: 2025-03-06T17:18:32.794Z\n"
+"POT-Creation-Date: 2025-05-10T04:02:25.522Z\n"
+"PO-Revision-Date: 2025-05-10T04:02:25.523Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -1086,6 +1086,9 @@ msgstr ""
 "Define specific actions triggered from external sources to interact with "
 "other apps in the device."
 
+msgid "program"
+msgstr "program"
+
 msgid "Add Intent"
 msgstr "Add Intent"
 
@@ -1155,9 +1158,6 @@ msgid ""
 msgstr ""
 "Applies to all programs an Android user has access to. Specific program "
 "settings can be defined in the section below."
-
-msgid "program"
-msgstr "program"
 
 msgid "Recommended maximum: {{maxValue}}"
 msgstr "Recommended maximum: {{maxValue}}"
