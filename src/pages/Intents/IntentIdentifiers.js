@@ -107,7 +107,7 @@ const IntentIdentifiers = ({
                     multiple
                 />
             )}
-            <CustomMultiSelectField
+            <MultiSelectField
                 label={i18n.t('Screen Actions')}
                 selected={formData.action || []}
                 onChange={(e) => onChange('action', e.value || e.selected)}

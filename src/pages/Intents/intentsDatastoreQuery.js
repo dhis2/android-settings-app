@@ -33,9 +33,18 @@ const getMetadataQuery = {
     },
 }
 
-export const saveCustomIntents = async (settings) => {
-    await save({ settings })
-    setCustomIntents(settings)
+const validateRequestArguments = (args) => {
+    if (!Array.isArray(args)) {
+        return false
+    }
+
+    return args.every(
+        ({ key, value }) =>
+            typeof key === 'string' &&
+            key.trim().length > 0 &&
+            typeof value === 'string' &&
+            value.trim().length > 0
+    )
 }
 
 export const validMandatoryFields = (specificSettings) => {
@@ -54,7 +63,8 @@ export const validMandatoryFields = (specificSettings) => {
         validateObjectByProperty(
             ['argument', 'path'],
             specificSettings?.response.data
-        )
+        ) &&
+        validateRequestArguments(specificSettings?.request?.arguments)
     return isValid
 }
 
