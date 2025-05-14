@@ -1121,12 +1121,6 @@ msgstr "Choose Data Elements"
 msgid "Choose Attributes"
 msgstr "Choose Attributes"
 
-msgid "Screen Actions"
-msgstr "Screen Actions"
-
-msgid "At least one action is required"
-msgstr "At least one action is required"
-
 msgid "Package name"
 msgstr "Package name"
 
