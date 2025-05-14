@@ -48,8 +48,10 @@ const RequestForm = ({ argumentsData = {}, onChange }) => {
     }
 
     const handleChange = (id, field, fieldValue) => {
-        const newParams = params.map((param) =>
-            param.id === id ? { ...param, [field]: fieldValue } : param
+        setParams((prev) =>
+            prev.map((param) =>
+                param.id === id ? { ...param, [field]: fieldValue } : param
+            )
         )
         setParams(newParams)
         updateParent(newParams)
@@ -95,7 +97,7 @@ const RequestForm = ({ argumentsData = {}, onChange }) => {
 }
 
 RequestForm.propTypes = {
-    argumentsData: PropTypes.object,
+    argumentsData: PropTypes.array,
     onChange: PropTypes.func.isRequired,
 }
 
