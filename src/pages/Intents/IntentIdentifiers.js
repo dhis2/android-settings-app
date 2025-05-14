@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { CustomMultiSelectField } from '../../components/field/CustomMultiSelectField'
+import { MultiSelectField } from '../../components/field/MultiSelectField'
 import { SelectField } from '../../components/field/SelectField'
 import { TextField } from '../../components/field/TextField'
 
