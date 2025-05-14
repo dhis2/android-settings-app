@@ -10,7 +10,7 @@ import {
     Tab,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
 import RequestForm from './RequestForm'
@@ -20,14 +20,14 @@ import ResponseForm from './ResponseForm'
 const setByPath = (obj, path, value) => {
     const keys = path.split('.')
     const lastKey = keys.pop()
-    const deepRef = keys.reduce((acc, key) => {
-        if (!acc[key]) {
-            acc[key] = {}
-        }
-        return acc[key]
-    }, obj)
-    deepRef[lastKey] = value
-    return { ...obj }
+    const newObj = { ...obj }
+    let current = newObj
+    for (const key of keys) {
+        current[key] = { ...current[key] }
+        current = current[key]
+    }
+    current[lastKey] = value
+    return newObj
 }
 
 const getDefaultForm = () => ({
