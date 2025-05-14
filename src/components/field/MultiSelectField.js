@@ -2,7 +2,7 @@ import { Field, MultiSelect, MultiSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-export const CustomMultiSelectField = ({
+export const MultiSelectField = ({
     label,
     options,
     selected,
@@ -35,7 +35,7 @@ export const CustomMultiSelectField = ({
     </Field>
 )
 
-CustomMultiSelectField.propTypes = {
+MultiSelectField.propTypes = {
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     selected: PropTypes.array,
