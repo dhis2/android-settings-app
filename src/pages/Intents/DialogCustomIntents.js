@@ -60,7 +60,10 @@ const DialogCustomIntents = ({
             attributes: specificSettings?.trigger?.attributes || [],
         },
         request: {
-            arguments: specificSettings?.request?.arguments || {},
+            arguments:
+                specificSettings?.request?.arguments?.length > 0
+                    ? specificSettings.request.arguments
+                    : [{ key: '', value: '' }],
         },
         response: {
             data: specificSettings?.response?.data || {},
