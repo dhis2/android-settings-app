@@ -121,32 +121,38 @@ const DialogCustomIntents = ({
                         {i18n.t(edit ? 'Edit Intent' : 'Add Intent')}
                     </ModalTitle>
                     <ModalContent>
-                        <TabBar>
-                            <Tab
-                                selected={step === 0}
-                                onClick={() => setStep(0)}
-                            >
-                                {i18n.t('Identifiers')}
-                            </Tab>
-                            <Tab
-                                selected={step === 1}
-                                onClick={() => setStep(1)}
-                            >
-                                {i18n.t('Request')}
-                            </Tab>
-                            <Tab
-                                selected={step === 2}
-                                onClick={() => setStep(2)}
-                            >
-                                {i18n.t('Response')}
-                            </Tab>
-                        </TabBar>
-
+                        <div
+                            style={{
+                                marginTop: 16,
+                                width: '50%',
+                            }}
+                        >
+                            <TabBar>
+                                <Tab
+                                    selected={step === 0}
+                                    onClick={() => setStep(0)}
+                                >
+                                    {i18n.t('Identifiers')}
+                                </Tab>
+                                <Tab
+                                    selected={step === 1}
+                                    onClick={() => setStep(1)}
+                                >
+                                    {i18n.t('Request')}
+                                </Tab>
+                                <Tab
+                                    selected={step === 2}
+                                    onClick={() => setStep(2)}
+                                >
+                                    {i18n.t('Response')}
+                                </Tab>
+                            </TabBar>
+                        </div>
                         <div
                             style={{
                                 marginTop: 16,
                                 width: '40%',
-                                height: '500px',
+                                minHeight: '400px',
                             }}
                         >
                             {renderStep()}

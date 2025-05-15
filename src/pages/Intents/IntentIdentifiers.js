@@ -41,7 +41,6 @@ const IntentIdentifiers = ({
 
         onChange('trigger.dataElements', [])
         onChange('trigger.attributes', [])
-        console.log({ selected }, formData.trigger)
     }
 
     const handleTriggerChange = ({ selected }) => {
@@ -79,43 +78,42 @@ const IntentIdentifiers = ({
                 onChange={handleElementTypeChange}
                 options={elementTypeOptions}
                 inputWidth="300px"
-                dense
             />
 
             {selectedElementType && (
                 <SelectField
-                    required
                     name="elementId"
                     label={
                         selectedElementType === 'dataElements'
-                            ? i18n.t('Choose Data Elements')
-                            : i18n.t('Choose Attributes')
+                            ? i18n.t('Choose Data Element')
+                            : i18n.t('Choose Attribute')
                     }
                     selected={
                         (selectedElementType === 'dataElements'
-                            ? formData.trigger?.dataElements
-                            : formData.trigger?.attributes
-                        )?.map((item) => item.id) || []
+                            ? formData.trigger?.dataElements?.[0]?.id
+                            : formData.trigger?.attributes?.[0]?.id) || ''
                     }
-                    onChange={handleTriggerChange}
+                    onChange={({ selected }) =>
+                        handleTriggerChange({ selected })
+                    }
                     options={list.map((item) => ({
                         label: item.displayName,
                         value: item.id,
                     }))}
                     inputWidth="300px"
-                    dense
-                    multiple
+                    required
                 />
             )}
-            <CustomMultiSelectField
-                label={i18n.t('Screen Actions')}
-                selected={formData.action || []}
-                onChange={(e) => onChange('action', e.value || e.selected)}
-                options={screenActionOptions}
-                required
-                error={(formData.action || []).length === 0}
-                validationText={i18n.t('At least one action is required')}
-            />
+
+            <div style={{ marginBottom: '20px', marginTop: '20px' }}>
+                <MultiSelectField
+                    label={i18n.t('Screen Actions')}
+                    selected={formData.action || []}
+                    onChange={(e) => onChange('action', e.value || e.selected)}
+                    options={screenActionOptions}
+                    required
+                />
+            </div>
 
             <TextField
                 name="packageName"
