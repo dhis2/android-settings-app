@@ -45,7 +45,7 @@ const TableRows = ({ rows, states, menuActions }) => (
                                 }
                             )}
                         >
-                            {row.description}
+                            {row.summarySettings ?? row.description}
                         </div>
                     </div>
 
