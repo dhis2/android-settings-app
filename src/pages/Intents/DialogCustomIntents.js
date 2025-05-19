@@ -11,12 +11,12 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import styles from './Intent.module.css'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
 import RequestForm from './RequestForm'
 import ResponseForm from './ResponseForm'
 
-// Utility to deeply update state via string paths like "request.arguments.projectID"
 const setByPath = (obj, path, value) => {
     const keys = path.split('.')
     const lastKey = keys.pop()
@@ -36,7 +36,7 @@ const getDefaultForm = () => ({
     trigger: { dataElements: [], attributes: [] },
     action: [],
     packageName: '',
-    request: { arguments: {} },
+    request: { arguments: [] },
     response: { data: {} },
 })
 
@@ -125,12 +125,7 @@ const DialogCustomIntents = ({
                         {i18n.t(edit ? 'Edit intent' : 'Add intent')}
                     </ModalTitle>
                     <ModalContent>
-                        <div
-                            style={{
-                                marginTop: 16,
-                                width: '50%',
-                            }}
-                        >
+                        <div className={styles.tabWrapper}>
                             <TabBar>
                                 <Tab
                                     selected={step === 0}
@@ -152,13 +147,7 @@ const DialogCustomIntents = ({
                                 </Tab>
                             </TabBar>
                         </div>
-                        <div
-                            style={{
-                                marginTop: 16,
-                                width: '40%',
-                                minHeight: '400px',
-                            }}
-                        >
+                        <div className={styles.contentWrapper}>
                             {renderStep()}
                         </div>
                         <ButtonStrip end>
