@@ -3,7 +3,7 @@ const letters = abc + abc.toUpperCase()
 
 const ALLOWED_CHARS = `0123456789${letters}`
 const CODESIZE = 11
-const CODE_PATTERN = /^[a-zA-Z]{1}[a-zA-Z0-9]{10}$/
+const CODE_PATTERN = /^[a-zA-Z][a-zA-Z0-9]{10}$/
 
 function randomWithMax(max) {
     return Math.floor(Math.random() * max)
