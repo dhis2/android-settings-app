@@ -113,12 +113,16 @@ const DialogCustomIntents = ({
         }
     }
 
+    if (!open) {
+        return null
+    }
+
     return (
         <>
             {open && (
                 <Modal large position="middle">
                     <ModalTitle>
-                        {i18n.t(edit ? 'Edit Intent' : 'Add Intent')}
+                        {i18n.t(edit ? 'Edit intent' : 'Add intent')}
                     </ModalTitle>
                     <ModalContent>
                         <div
