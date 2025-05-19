@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TextField } from '../../components/field/TextField'
+import styles from './Intent.module.css'
 
 const ResponseForm = ({ data = {}, onChange }) => {
     return (
-        <div style={{ display: 'grid', gap: '8px' }}>
+        <div className={styles.responseForm}>
             <TextField
                 label="Argument"
                 value={data.argument || ''}
