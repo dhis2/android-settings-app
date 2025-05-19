@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Field, MultiSelect, MultiSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -13,13 +14,13 @@ export const MultiSelectField = ({
     ...props
 }) => (
     <Field
-        label={label}
+        label={i18n.t(label)}
         required={required}
         error={error}
-        validationText={error ? validationText : ''}
+        validationText={error ? i18n.t(validationText) : ''}
     >
         <MultiSelect
-            placeholder="Choose an option"
+            placeholder={i18n.t('Choose an option')}
             selected={selected}
             onChange={onChange}
             {...props}
@@ -27,7 +28,7 @@ export const MultiSelectField = ({
             {options.map((option) => (
                 <MultiSelectOption
                     key={option.value}
-                    label={option.label}
+                    label={i18n.t(option.label)}
                     value={option.value}
                 />
             ))}
@@ -37,7 +38,12 @@ export const MultiSelectField = ({
 
 MultiSelectField.propTypes = {
     label: PropTypes.string,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired,
+        })
+    ).isRequired,
     selected: PropTypes.array,
     onChange: PropTypes.func.isRequired,
     required: PropTypes.bool,
