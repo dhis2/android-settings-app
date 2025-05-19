@@ -6,9 +6,10 @@ import React, { useState } from 'react'
 import DialogDelete from '../../components/dialog/DialogDelete'
 import { AddNewSetting } from '../../components/field'
 import TableActions from '../../components/TableActions'
+import { generateDhis2Id } from '../../utils/generateId'
 import DialogCustomIntents from './DialogCustomIntents'
 
-const dataElementsQuery = {
+const combinedQuery = {
     dataElements: {
         resource: 'dataElements',
         params: {
@@ -17,9 +18,6 @@ const dataElementsQuery = {
             filter: 'valueType:in:[TEXT,LONG_TEXT]',
         },
     },
-}
-
-const attributesQuery = {
     attributes: {
         resource: 'trackedEntityAttributes',
         params: {
@@ -34,13 +32,10 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [specificSettings, setSpecificSettings] = useState({})
 
-    const { loading, data } = useDataQuery(dataElementsQuery)
-    const { loading: loadingAttr, data: dataAttr } =
-        useDataQuery(attributesQuery)
+    const { loading, data } = useDataQuery(combinedQuery)
 
     const dataElements = data?.dataElements?.dataElements || []
-
-    const attributes = dataAttr?.attributes?.trackedEntityAttributes || []
+    const attributes = data?.attributes?.trackedEntityAttributes || []
 
     const openAddDialog = () => {
         setSpecificSettings({})
@@ -59,13 +54,17 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                 updated[idx] = newIntent
             }
         } else {
-            updated.push({ ...newIntent, uid: crypto.randomUUID() })
+            updated.push({ ...newIntent, uid: generateDhis2Id() })
         }
         handleSettings(updated)
         setOpenEditDialog(false)
     }
     const handleChange = (updatedSettings) => {
         setSpecificSettings(updatedSettings)
+    }
+
+    if (loading) {
+        return <CircularLoader />
     }
 
     return (
@@ -81,11 +80,10 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
             )}
 
             <AddNewSetting
-                label={i18n.t('Add Intent')}
+                label={i18n.t('Add intent')}
                 onClick={openAddDialog}
             />
 
-            {loading || (loadingAttr && <CircularLoader />)}
             {openEditDialog && (
                 <DialogCustomIntents
                     open={openEditDialog}
@@ -109,7 +107,6 @@ CustomIntentsList.propTypes = {
     disable: PropTypes.bool.isRequired,
 }
 
-// TODO: create actions functions (delete and edit)
 const RowList = ({
     rows,
     disable,
@@ -154,7 +151,7 @@ const RowList = ({
                     open={openDeleteDialog}
                     onHandleClose={() => setOpenDeleteDialog(false)}
                     name={deleteItem.name}
-                    typeName="Intent"
+                    typeName={i18n.t('Custom ntent')}
                     onHandleDelete={handleDelete}
                 />
             )}

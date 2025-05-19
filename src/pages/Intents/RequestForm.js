@@ -1,44 +1,31 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, IconDelete16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { TextField } from '../../components/field/TextField'
-
-const generateId = () => Math.random().toString(36).substring(2, 10)
-
-const addIdsToParams = (params = []) =>
-    params.length > 0
-        ? params.map((p) => ({ ...p, id: generateId() }))
-        : [{ id: generateId(), key: '', value: '' }]
+import { generateDhis2Id } from '../../utils/generateId'
 
 const RequestForm = ({ argumentsData = [], onChange }) => {
-    const [params, setParams] = useState(() => addIdsToParams(argumentsData))
-
-    useEffect(() => {
-        const cleanParams = params
-            .filter((p) => p.key?.trim())
-            .map(({ key, value }) => ({ key, value }))
-        onChange('request.arguments', cleanParams)
-    }, [params])
-
     const handleAdd = () => {
-        setParams((prev) => [...prev, { id: generateId(), key: '', value: '' }])
+        const newParam = { id: generateDhis2Id(), key: '', value: '' }
+        onChange('request.arguments', [...argumentsData, newParam])
     }
 
     const handleDelete = (id) => {
-        setParams((prev) => prev.filter((param) => param.id !== id))
+        const updated = argumentsData.filter((param) => param.id !== id)
+        onChange('request.arguments', updated)
     }
 
-    const handleChange = (id, field, fieldValue) => {
-        setParams((prev) =>
-            prev.map((param) =>
-                param.id === id ? { ...param, [field]: fieldValue } : param
-            )
+    const handleChange = (id, field, value) => {
+        const updated = argumentsData.map((param) =>
+            param.id === id ? { ...param, [field]: value } : param
         )
+        onChange('request.arguments', updated)
     }
 
     return (
         <div>
-            {params.map(({ id, key, value }) => (
+            {argumentsData.map(({ id, key, value }) => (
                 <div
                     key={id}
                     style={{
@@ -50,7 +37,7 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                 >
                     <div style={{ flex: 1 }}>
                         <TextField
-                            label="Key"
+                            label={i18n.t('Key')}
                             value={key}
                             onChange={({ value }) =>
                                 handleChange(id, 'key', value)
@@ -59,7 +46,7 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                     </div>
                     <div style={{ flex: 1 }}>
                         <TextField
-                            label="Value"
+                            label={i18n.t('Value')}
                             value={value}
                             onChange={({ value }) =>
                                 handleChange(id, 'value', value)
@@ -71,14 +58,14 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                         destructive
                         icon={<IconDelete16 />}
                         onClick={() => handleDelete(id)}
-                        disabled={params.length === 1}
+                        disabled={argumentsData.length === 1}
                     />
                 </div>
             ))}
 
             <div style={{ marginTop: '1rem' }}>
                 <Button small icon={<IconAdd16 />} onClick={handleAdd}>
-                    Add parameter
+                    {i18n.t('Add parameter')}
                 </Button>
             </div>
         </div>

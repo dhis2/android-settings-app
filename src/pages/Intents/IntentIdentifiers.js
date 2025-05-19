@@ -6,8 +6,8 @@ import { SelectField } from '../../components/field/SelectField'
 import { TextField } from '../../components/field/TextField'
 
 const screenActionOptions = [
-    { label: 'Search', value: 'SEARCH' },
-    { label: 'Data Entry', value: 'DATA_ENTRY' },
+    { label: i18n.t('Search'), value: 'SEARCH' },
+    { label: i18n.t('Data Entry'), value: 'DATA_ENTRY' },
 ]
 
 const elementTypeOptions = [
@@ -64,7 +64,6 @@ const IntentIdentifiers = ({
             />
 
             <TextField
-                required
                 name="description"
                 label={i18n.t('Description')}
                 onChange={(e) => onChange('description', e.value)}
@@ -72,6 +71,7 @@ const IntentIdentifiers = ({
             />
 
             <SelectField
+                required
                 name="elementType"
                 label={i18n.t('Choose element type')}
                 selected={selectedElementType}
@@ -116,6 +116,7 @@ const IntentIdentifiers = ({
             </div>
 
             <TextField
+                required
                 name="packageName"
                 label={i18n.t('Package name')}
                 onChange={(e) => onChange('packageName', e.value)}
