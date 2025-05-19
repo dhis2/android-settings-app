@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-15T07:16:22.546Z\n"
-"PO-Revision-Date: 2025-05-15T07:16:22.547Z\n"
+"POT-Creation-Date: 2025-05-19T08:15:06.260Z\n"
+"PO-Revision-Date: 2025-05-19T08:15:06.260Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -507,6 +507,9 @@ msgstr "Minimum location accuracy (m)"
 
 msgid "Configure the minimum precision level for location capture"
 msgstr "Configure the minimum precision level for location capture"
+
+msgid "Choose an option"
+msgstr "Choose an option"
 
 msgid "Allow the user to create a TEI without searching"
 msgstr "Allow the user to create a TEI without searching"
@@ -1084,8 +1087,11 @@ msgstr ""
 "Define specific actions triggered from external sources to interact with "
 "other apps in the device."
 
-msgid "Add Intent"
-msgstr "Add Intent"
+msgid "Add intent"
+msgstr "Add intent"
+
+msgid "Custom ntent"
+msgstr "Custom ntent"
 
 msgid "Identifiers"
 msgstr "Identifiers"
@@ -1105,23 +1111,41 @@ msgstr "Next"
 msgid "Save Intent"
 msgstr "Save Intent"
 
+msgid "Search"
+msgstr "Search"
+
+msgid "Data Entry"
+msgstr "Data Entry"
+
 msgid "Tracked Entity Attribute"
 msgstr "Tracked Entity Attribute"
 
 msgid "Description"
 msgstr "Description"
 
-msgid "Choose Data Elements"
-msgstr "Choose Data Elements"
+msgid "Choose Data Element"
+msgstr "Choose Data Element"
 
-msgid "Choose Attributes"
-msgstr "Choose Attributes"
+msgid "Choose Attribute"
+msgstr "Choose Attribute"
 
 msgid "Screen Actions"
 msgstr "Screen Actions"
 
 msgid "Package name"
 msgstr "Package name"
+
+msgid "Add Intent"
+msgstr "Add Intent"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Add parameter"
+msgstr "Add parameter"
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"
