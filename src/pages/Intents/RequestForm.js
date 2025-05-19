@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { TextField } from '../../components/field/TextField'
 import { generateDhis2Id } from '../../utils/generateId'
+import styles from './Intent.module.css'
 
 const RequestForm = ({ argumentsData = [], onChange }) => {
     const handleAdd = () => {
@@ -26,16 +27,8 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
     return (
         <div>
             {argumentsData.map(({ id, key, value }) => (
-                <div
-                    key={id}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        gap: '1rem',
-                        marginBottom: '1rem',
-                    }}
-                >
-                    <div style={{ flex: 1 }}>
+                <div key={id} className={styles.argumentRow}>
+                    <div className={styles.argumentColumn}>
                         <TextField
                             label={i18n.t('Key')}
                             value={key}
@@ -63,7 +56,7 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                 </div>
             ))}
 
-            <div style={{ marginTop: '1rem' }}>
+            <div className={styles.addButtonWrapper}>
                 <Button small icon={<IconAdd16 />} onClick={handleAdd}>
                     {i18n.t('Add parameter')}
                 </Button>
