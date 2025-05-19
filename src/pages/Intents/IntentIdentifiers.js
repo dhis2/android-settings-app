@@ -57,19 +57,25 @@ const IntentIdentifiers = ({
         onChange(key, mapped)
     }
 
-    const elementOptions =
-        selectedElementType === 'dataElements'
-            ? dataElements
-            : selectedElementType === 'trackedEntityAttributes'
-            ? attributes
-            : []
+    const elementOptions = (() => {
+        if (selectedElementType === 'dataElements') {
+            return dataElements
+        }
+        if (selectedElementType === 'trackedEntityAttributes') {
+            return attributes
+        }
+        return []
+    })()
 
-    const selectedTriggerId =
-        selectedElementType === 'dataElements'
-            ? formData.trigger?.dataElements?.[0]?.id
-            : selectedElementType === 'trackedEntityAttributes'
-            ? formData.trigger?.attributes?.[0]?.id
-            : ''
+    const selectedTriggerId = (() => {
+        if (selectedElementType === 'dataElements') {
+            return formData.trigger?.dataElements?.[0]?.id || ''
+        }
+        if (selectedElementType === 'trackedEntityAttributes') {
+            return formData.trigger?.attributes?.[0]?.id || ''
+        }
+        return ''
+    })()
 
     return (
         <div className={styles.intentFormGrid}>
