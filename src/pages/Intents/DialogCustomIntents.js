@@ -89,7 +89,6 @@ const DialogCustomIntents = ({
                     <IntentIdentifiers
                         formData={formData}
                         onChange={onChangeByPath}
-                        edit={edit}
                         dataElements={dataElements}
                         attributes={attributes}
                     />
@@ -123,7 +122,7 @@ const DialogCustomIntents = ({
             {open && (
                 <Modal large position="middle">
                     <ModalTitle>
-                        {i18n.t(edit ? 'Edit intent' : 'Add intent')}
+                        {edit ? i18n.t('Edit intent') : i18n.t('Add intent')}
                     </ModalTitle>
                     <ModalContent>
                         <div className={styles.tabWrapper}>

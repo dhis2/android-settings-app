@@ -27,7 +27,6 @@ const IntentIdentifiers = ({
     onChange,
     dataElements,
     attributes,
-    edit,
 }) => {
     const [selectedElementType, setSelectedElementType] = useState(() => {
         if (formData.trigger?.dataElements?.length > 0) {
@@ -147,7 +146,6 @@ IntentIdentifiers.propTypes = {
     onChange: PropTypes.func.isRequired,
     dataElements: PropTypes.array.isRequired,
     attributes: PropTypes.array.isRequired,
-    edit: PropTypes.bool,
 }
 
 export default IntentIdentifiers
