@@ -32,7 +32,7 @@
         "fix:text": "d2-style apply text",
         "test": "d2-app-scripts test",
         "clean": "rimraf build",
-        "format": "d2-style js apply"
+        "format": "d2-style apply js"
     },
     "devDependencies": {
         "@dhis2/cli-app-scripts": "^10.3.9",

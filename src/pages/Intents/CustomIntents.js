@@ -12,18 +12,18 @@ import {
     saveCustomIntentsMutation,
     useReadCustomIntentsDataStore,
 } from './intentsDatastoreQuery'
-import { IntentsList } from './mockList'
 
 //TODO: change IntentsList mock data to real data
 const CustomIntents = () => {
     const { hasAuthority } = useIsAuthorized()
     const { customIntents } = useReadCustomIntentsDataStore()
     const [disableSave, setDisableSave] = useState(true)
-    const [customIntentSettings, setCustomIntentSettings] =
-        useState(IntentsList)
+    const [customIntentSettings, setCustomIntentSettings] = useState([])
+
     const initialValues = useMemo(() => {
         return customIntents
-    }, [customIntentSettings])
+    }, [customIntents])
+
     const [mutate, { error, data }] = useDataMutation(saveCustomIntentsMutation)
 
     useEffect(() => {
