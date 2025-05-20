@@ -151,7 +151,7 @@ const RowList = ({
                     open={openDeleteDialog}
                     onHandleClose={() => setOpenDeleteDialog(false)}
                     name={deleteItem.name}
-                    typeName={i18n.t('Custom ntent')}
+                    typeName={i18n.t('Custom Intent')}
                     onHandleDelete={handleDelete}
                 />
             )}

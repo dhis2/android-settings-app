@@ -11,6 +11,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { generateDhis2Id } from '../../utils/generateId'
 import styles from './Intent.module.css'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
@@ -63,7 +64,7 @@ const DialogCustomIntents = ({
             arguments:
                 specificSettings?.request?.arguments?.length > 0
                     ? specificSettings.request.arguments
-                    : [{ key: '', value: '' }],
+                    : [{ key: '', value: '', id: generateDhis2Id() }],
         },
         response: {
             data: specificSettings?.response?.data || {},
