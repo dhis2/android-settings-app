@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { MultiSelectField } from '../../components/field/MultiSelectField'
 import { SelectField } from '../../components/field/SelectField'
 import { TextField } from '../../components/field/TextField'
@@ -14,11 +14,11 @@ const screenActionOptions = [
 const elementTypeOptions = [
     {
         value: 'dataElements',
-        label: i18n.t('Data Element'),
+        label: i18n.t('Data element'),
     },
     {
         value: 'trackedEntityAttributes',
-        label: i18n.t('Tracked Entity Attribute'),
+        label: i18n.t('Tracked entity attribute'),
     },
 ]
 
@@ -27,19 +27,14 @@ const IntentIdentifiers = ({
     onChange,
     dataElements,
     attributes,
-    edit,
 }) => {
-    const [selectedElementType, setSelectedElementType] = useState('')
-
-    useEffect(() => {
-        if (edit) {
-            if (formData.trigger?.dataElements?.length > 0) {
-                setSelectedElementType('dataElements')
-            } else if (formData.trigger?.attributes?.length > 0) {
-                setSelectedElementType('trackedEntityAttributes')
-            }
+    const [selectedElementType, setSelectedElementType] = useState(() => {
+        if (formData.trigger?.dataElements?.length > 0) {
+            return 'dataElements'
+        } else if (formData.trigger?.attributes?.length > 0) {
+            return 'trackedEntityAttributes'
         }
-    }, [edit, formData])
+    })
 
     const handleElementTypeChange = ({ selected }) => {
         setSelectedElementType(selected)
@@ -81,38 +76,36 @@ const IntentIdentifiers = ({
         <div className={styles.intentFormGrid}>
             <TextField
                 required
-                name="shortName"
-                label={i18n.t('Short name')}
+                name="name"
+                label={i18n.t('Intent name')}
                 onChange={(e) => onChange('name', e.value)}
                 value={formData.name || ''}
             />
 
             <TextField
                 name="description"
-                label={i18n.t('Description')}
+                label={i18n.t('Intent description')}
                 onChange={(e) => onChange('description', e.value)}
                 value={formData.description || ''}
             />
 
-            {!edit && (
-                <SelectField
-                    required
-                    name="elementType"
-                    label={i18n.t('Choose element type')}
-                    selected={selectedElementType}
-                    onChange={handleElementTypeChange}
-                    options={elementTypeOptions}
-                    inputWidth="300px"
-                />
-            )}
+            <SelectField
+                required
+                name="elementType"
+                label={i18n.t('Element type')}
+                selected={selectedElementType}
+                onChange={handleElementTypeChange}
+                options={elementTypeOptions}
+                inputWidth="300px"
+            />
 
             {selectedElementType && (
                 <SelectField
                     name="elementId"
                     label={
                         selectedElementType === 'dataElements'
-                            ? i18n.t('Choose Data Element')
-                            : i18n.t('Choose Attribute')
+                            ? i18n.t('Data Element')
+                            : i18n.t('Attribute')
                     }
                     selected={selectedTriggerId || ''}
                     onChange={({ selected }) =>
@@ -129,7 +122,7 @@ const IntentIdentifiers = ({
 
             <div className={styles.intentFieldGroup}>
                 <MultiSelectField
-                    label={i18n.t('Screen Actions')}
+                    label={i18n.t('Screen/Action')}
                     selected={formData.action || []}
                     onChange={(e) => onChange('action', e.value || e.selected)}
                     options={screenActionOptions}
@@ -153,7 +146,6 @@ IntentIdentifiers.propTypes = {
     onChange: PropTypes.func.isRequired,
     dataElements: PropTypes.array.isRequired,
     attributes: PropTypes.array.isRequired,
-    edit: PropTypes.bool,
 }
 
 export default IntentIdentifiers
