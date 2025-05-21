@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TextField } from '../../components/field/TextField'
@@ -7,14 +8,14 @@ const ResponseForm = ({ data = {}, onChange }) => {
     return (
         <div className={styles.responseForm}>
             <TextField
-                label="Argument"
+                label={i18n.t('Argument')}
                 value={data.argument || ''}
                 onChange={(e) => onChange('response.data.argument', e.value)}
                 required
             />
 
             <TextField
-                label="Path"
+                label={i18n.t('Path')}
                 value={data.path || ''}
                 onChange={(e) => onChange('response.data.path', e.value)}
                 required

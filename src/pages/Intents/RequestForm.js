@@ -37,7 +37,7 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                             }
                         />
                     </div>
-                    <div style={{ flex: 1 }}>
+                    <div className={styles.argumentColumn}>
                         <TextField
                             label={i18n.t('Value')}
                             value={value}
