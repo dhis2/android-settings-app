@@ -11,6 +11,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { generateDhis2Id } from '../../utils/generateId'
 import styles from './Intent.module.css'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'
@@ -63,7 +64,7 @@ const DialogCustomIntents = ({
             arguments:
                 specificSettings?.request?.arguments?.length > 0
                     ? specificSettings.request.arguments
-                    : [{ key: '', value: '' }],
+                    : [{ key: '', value: '', id: generateDhis2Id() }],
         },
         response: {
             data: specificSettings?.response?.data || {},
@@ -88,7 +89,6 @@ const DialogCustomIntents = ({
                     <IntentIdentifiers
                         formData={formData}
                         onChange={onChangeByPath}
-                        edit={edit}
                         dataElements={dataElements}
                         attributes={attributes}
                     />
@@ -122,7 +122,7 @@ const DialogCustomIntents = ({
             {open && (
                 <Modal large position="middle">
                     <ModalTitle>
-                        {i18n.t(edit ? 'Edit intent' : 'Add intent')}
+                        {edit ? i18n.t('Edit intent') : i18n.t('Add intent')}
                     </ModalTitle>
                     <ModalContent>
                         <div className={styles.tabWrapper}>
