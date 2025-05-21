@@ -66,7 +66,7 @@ export const useReadCustomIntentsDataStore = () => {
     const { refetch } = useDataQuery(getMetadataQuery, { lazy: true })
     const [mutateSharing] = useDataMutation(updateSharingMutation)
     const [customIntents, setCustomIntents] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -87,12 +87,12 @@ export const useReadCustomIntentsDataStore = () => {
         if (isEmpty(data) && !loadingNamespace) {
             fetchData()
         } else {
-            setCustomIntents(data?.[CUSTOM_INTENTS])
+            setCustomIntents(data?.[CUSTOM_INTENTS] ?? [])
         }
     }, [data])
 
     return {
-        load: loading,
+        load: loading || loadingNamespace,
         errorDataStore: error,
         customIntents: customIntents,
     }

@@ -2,7 +2,7 @@ import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIsAuthorized } from '../../auth'
 import FooterStripButtons from '../../components/footerStripButton/FooterStripButtons'
 import { CustomIntentInfo } from '../../components/noticeAlert'
@@ -13,26 +13,28 @@ import {
     useReadCustomIntentsDataStore,
 } from './intentsDatastoreQuery'
 
-//TODO: change IntentsList mock data to real data
 const CustomIntents = () => {
     const { hasAuthority } = useIsAuthorized()
-    const { customIntents } = useReadCustomIntentsDataStore()
+    const { customIntents, load, errorDataStore } =
+        useReadCustomIntentsDataStore()
     const [disableSave, setDisableSave] = useState(true)
     const [customIntentSettings, setCustomIntentSettings] = useState([])
 
-    const initialValues = useMemo(() => {
-        return customIntents
-    }, [customIntents])
+    useEffect(() => {
+        if (customIntentSettings?.length === 0 && customIntents) {
+            setCustomIntentSettings(customIntents)
+        }
+    }, [customIntents, customIntentSettings, setCustomIntentSettings])
 
     const [mutate, { error, data }] = useDataMutation(saveCustomIntentsMutation)
 
     useEffect(() => {
-        initialValues &&
+        customIntents &&
         customIntentSettings &&
-        !isEqual(initialValues, customIntentSettings)
+        !isEqual(customIntents, customIntentSettings)
             ? setDisableSave(false)
             : setDisableSave(true)
-    }, [customIntentSettings])
+    }, [customIntentSettings, customIntents, setDisableSave])
 
     const saveSettings = async () => {
         const settingsToSave = {
@@ -53,6 +55,9 @@ const CustomIntents = () => {
                 'Define specific actions triggered from external sources to interact with other apps in the device.'
             )}
             authority={hasAuthority}
+            unsavedChanges={!disableSave}
+            loading={load}
+            error={errorDataStore}
         >
             {customIntentSettings && (
                 <>
