@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-import PropTypes from 'prop-types'
 import React from 'react'
 import { NoticeInfo } from './NoticeInfo'
 
@@ -12,6 +11,3 @@ export const CustomIntentInfo = () => (
     />
 )
 
-CustomIntentInfo.propTypes = {
-    title: PropTypes.string,
-}
