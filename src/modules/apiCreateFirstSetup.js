@@ -55,7 +55,7 @@ export const createKeyAnalytics = {
 export const createKeyCustomIntent = {
     resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}`,
     type: 'create',
-    data: [...customIntents],
+    data: { ...customIntents },
 }
 
 const getMetadataQuery = {
