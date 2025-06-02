@@ -48,13 +48,13 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
 
     const handleSave = (newIntent) => {
         const updated = [...settings]
-        if (newIntent.uid) {
-            const idx = updated.findIndex((s) => s.uid === newIntent.uid)
+        if (newIntent.id) {
+            const idx = updated.findIndex((s) => s.id === newIntent.id)
             if (idx > -1) {
                 updated[idx] = newIntent
             }
         } else {
-            updated.push({ ...newIntent, uid: generateDhis2Id() })
+            updated.push({ ...newIntent, id: generateDhis2Id() })
         }
         handleSettings(updated)
         setOpenEditDialog(false)
@@ -91,7 +91,7 @@ const CustomIntentsList = ({ settings, handleSettings, disable }) => {
                     handleSave={handleSave}
                     setSpecificSettings={setSpecificSettings}
                     handleChange={handleChange}
-                    edit={!!specificSettings.uid}
+                    edit={!!specificSettings.id}
                     dataElements={dataElements}
                     attributes={attributes}
                     specificSettings={specificSettings}
@@ -130,9 +130,7 @@ const RowList = ({
 
     const handleDelete = () => {
         if (deleteItem) {
-            const updatedRows = rows.filter(
-                (item) => item.uid !== deleteItem.uid
-            )
+            const updatedRows = rows.filter((item) => item.id !== deleteItem.id)
             handleSettings(updatedRows)
             setOpenDeleteDialog(false)
         }
