@@ -13,7 +13,7 @@ import { validateObjectByProperty } from '../../utils/validators'
 export const saveCustomIntentsMutation = {
     resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}`,
     type: 'update',
-    data: ({ settings }) => [...settings.customIntents],
+    data: ({ settings }) => ({ customIntents: [...settings.customIntents] }),
 }
 
 /**
@@ -69,9 +69,13 @@ export const validMandatoryFields = (specificSettings) => {
 }
 
 export const useReadCustomIntentsDataStore = () => {
-    const { data, loading: loadingNamespace } = useDataQuery(
-        getCustomIntentsQuery
-    )
+    const {
+        data,
+        loading: loadingNamespace,
+        error: initialDataError,
+    } = useDataQuery(getCustomIntentsQuery)
+    const needToCreateCustomIntentsKey =
+        initialDataError?.details?.httpStatusCode === 404
     const [mutate] = useDataMutation(createKeyCustomIntent)
     const { refetch } = useDataQuery(getMetadataQuery, { lazy: true })
     const [mutateSharing] = useDataMutation(updateSharingMutation)
@@ -94,12 +98,15 @@ export const useReadCustomIntentsDataStore = () => {
             }
         }
 
-        if (isEmpty(data) && !loadingNamespace) {
+        if (
+            needToCreateCustomIntentsKey ||
+            (isEmpty(data) && !loadingNamespace)
+        ) {
             fetchData()
         } else {
-            setCustomIntents(data?.[CUSTOM_INTENTS])
+            setCustomIntents(data?.[CUSTOM_INTENTS]?.[CUSTOM_INTENTS])
         }
-    }, [data])
+    }, [data, needToCreateCustomIntentsKey])
 
     return {
         load: loading || loadingNamespace,
