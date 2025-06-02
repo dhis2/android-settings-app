@@ -129,10 +129,8 @@ const RowList = ({
     }
 
     const handleDelete = () => {
-        console.log('delet,', deleteItem)
         if (deleteItem) {
             const updatedRows = rows.filter((item) => item.id !== deleteItem.id)
-            console.log('updatedRows', updatedRows)
             handleSettings(updatedRows)
             setOpenDeleteDialog(false)
         }
