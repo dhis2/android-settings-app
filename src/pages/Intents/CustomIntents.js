@@ -18,10 +18,10 @@ const CustomIntents = () => {
     const { customIntents, load, errorDataStore } =
         useReadCustomIntentsDataStore()
     const [disableSave, setDisableSave] = useState(true)
-    const [customIntentSettings, setCustomIntentSettings] = useState([])
+    const [customIntentSettings, setCustomIntentSettings] = useState(undefined)
 
     useEffect(() => {
-        if (customIntentSettings?.length === 0 && customIntents) {
+        if (!customIntentSettings && customIntents) {
             setCustomIntentSettings(customIntents)
         }
     }, [customIntents, customIntentSettings, setCustomIntentSettings])
