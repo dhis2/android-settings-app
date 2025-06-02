@@ -152,12 +152,12 @@ const DialogCustomIntents = ({
                         </div>
                         <ButtonStrip end>
                             {step > 0 && (
-                                <Button onClick={prevStep}>
+                                <Button small onClick={prevStep}>
                                     {i18n.t('Prev')}
                                 </Button>
                             )}
                             {step < 2 && (
-                                <Button onClick={nextStep}>
+                                <Button small onClick={nextStep}>
                                     {i18n.t('Next')}
                                 </Button>
                             )}
