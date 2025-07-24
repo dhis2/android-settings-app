@@ -38,26 +38,6 @@ export const saveCustomIntents = async (settings) => {
     setCustomIntents(settings)
 }
 
-export const validMandatoryFields = (specificSettings) => {
-    if (
-        specificSettings.trigger?.dataElements?.length === 0 &&
-        specificSettings.trigger?.attributes?.length === 0
-    ) {
-        return false
-    }
-
-    const isValid =
-        validateObjectByProperty(
-            ['name', 'action', 'packageName'],
-            specificSettings
-        ) &&
-        validateObjectByProperty(
-            ['argument', 'path'],
-            specificSettings?.response.data
-        )
-    return isValid
-}
-
 export const useReadCustomIntentsDataStore = () => {
     const {
         data,
