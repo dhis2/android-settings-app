@@ -1138,12 +1138,6 @@ msgstr "Element type"
 msgid "Screen/Action"
 msgstr "Screen/Action"
 
-msgid "Element type"
-msgstr "Element type"
-
-msgid "Screen/Action"
-msgstr "Screen/Action"
-
 msgid "Package name"
 msgstr "Package name"
 
