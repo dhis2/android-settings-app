@@ -8,13 +8,19 @@ import disableStyle from '../styles/Disable.module.css'
 import tableActionStyles from '../styles/TableActions.module.css'
 import Wrapper from './Wrapper'
 
-const TableActions = ({ rows, menuActions, states }) => (
-    <Wrapper>
-        <div>
-            <TableRows rows={rows} menuActions={menuActions} states={states} />
-        </div>
-    </Wrapper>
-)
+const TableActions = ({ rows, menuActions, states }) => {
+    return (
+        <Wrapper>
+            <div>
+                <TableRows
+                    rows={rows}
+                    menuActions={menuActions}
+                    states={states}
+                />
+            </div>
+        </Wrapper>
+    )
+}
 
 const TableRows = ({ rows, states, menuActions }) => (
     <div>
@@ -39,7 +45,7 @@ const TableRows = ({ rows, states, menuActions }) => (
                                 }
                             )}
                         >
-                            {row.summarySettings}
+                            {row.summarySettings ?? row.description}
                         </div>
                     </div>
 

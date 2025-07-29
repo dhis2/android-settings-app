@@ -9,6 +9,7 @@ import HomeAppearance from '../pages/Appearance/Home/HomeAppearance'
 import ProgramsAppearance from '../pages/Appearance/Programs/ProgramsAppearance'
 import GeneralSettings from '../pages/General/GeneralSettings'
 import Home from '../pages/Home/Home'
+import CustomIntents from '../pages/Intents/CustomIntents'
 import DatasetSyncSettings from '../pages/Synchronization/Datasets/DatasetSyncSettings'
 import GlobalSettings from '../pages/Synchronization/Global/GlobalSettings'
 import ProgramSyncSettings from '../pages/Synchronization/Programs/ProgramSyncSettings'
@@ -140,10 +141,20 @@ export const analyticsPages = [
     },
 ]
 
+export const customIntentsPage = {
+    code: 'custom-intents',
+    label: i18n.t('Custom Intents'),
+    path: '/custom-intents',
+    linkText: i18n.t('Set Intents'),
+    description: i18n.t('Define actions triggered from external sources'),
+    component: <CustomIntents />,
+}
+
 export const menuSection = [
     overviewPage,
     generalPage,
     ...syncPages,
     ...appearancePages,
     ...analyticsPages,
+    customIntentsPage,
 ]

@@ -20,4 +20,7 @@ export const initialSetup = {
             dataSet: {},
         },
     },
+    customIntents: {
+        customIntents: [],
+    },
 }
