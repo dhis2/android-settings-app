@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-27T17:42:09.801Z\n"
-"PO-Revision-Date: 2025-03-27T17:42:09.801Z\n"
+"POT-Creation-Date: 2025-06-02T12:48:33.883Z\n"
+"PO-Revision-Date: 2025-06-02T12:48:33.883Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -508,6 +508,9 @@ msgstr "Minimum location accuracy (m)"
 msgid "Configure the minimum precision level for location capture"
 msgstr "Configure the minimum precision level for location capture"
 
+msgid "Choose an option"
+msgstr "Choose an option"
+
 msgid "Allow the user to create a TEI without searching"
 msgstr "Allow the user to create a TEI without searching"
 
@@ -569,6 +572,16 @@ msgid ""
 "loaded."
 msgstr ""
 "It looks like there aren't any configured analytics, or they couldn't be "
+"loaded."
+
+msgid "No custom Intents found"
+msgstr "No custom Intents found"
+
+msgid ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+msgstr ""
+"It looks like there aren't any configured actions, or they couldn't be "
 "loaded."
 
 msgid "Manual options"
@@ -717,6 +730,15 @@ msgstr "Set Data set Visualizations"
 
 msgid "Manage visualizations for data sets"
 msgstr "Manage visualizations for data sets"
+
+msgid "Custom Intents"
+msgstr "Custom Intents"
+
+msgid "Set Intents"
+msgstr "Set Intents"
+
+msgid "Define actions triggered from external sources"
+msgstr "Define actions triggered from external sources"
 
 msgid "Maximum Tracked Entity Instance (TEI) downloads"
 msgstr "Maximum Tracked Entity Instance (TEI) downloads"
@@ -1057,6 +1079,82 @@ msgstr "Overview: Android Settings App"
 
 msgid "v{{version}}"
 msgstr "v{{version}}"
+
+msgid ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+msgstr ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+
+msgid "Add intent"
+msgstr "Add intent"
+
+msgid "Custom Intent"
+msgstr "Custom Intent"
+
+msgid "Edit intent"
+msgstr "Edit intent"
+
+msgid "Identifiers"
+msgstr "Identifiers"
+
+msgid "Request"
+msgstr "Request"
+
+msgid "Response"
+msgstr "Response"
+
+msgid "Prev"
+msgstr "Prev"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Save Intent"
+msgstr "Save Intent"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Data Entry"
+msgstr "Data Entry"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Intent name"
+msgstr "Intent name"
+
+msgid "Intent description"
+msgstr "Intent description"
+
+msgid "Element type"
+msgstr "Element type"
+
+msgid "Screen/Action"
+msgstr "Screen/Action"
+
+msgid "Package name"
+msgstr "Package name"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Add parameter"
+msgstr "Add parameter"
+
+msgid "Argument"
+msgstr "Argument"
+
+msgid "Path"
+msgstr "Path"
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"

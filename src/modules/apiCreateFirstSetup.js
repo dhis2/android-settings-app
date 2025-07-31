@@ -4,6 +4,7 @@ import { validApiVersion } from '../auth'
 import {
     ANALYTICS,
     APPEARANCE,
+    CUSTOM_INTENTS,
     GENERAL_SETTINGS,
     INFO,
     NAMESPACE,
@@ -18,6 +19,7 @@ const {
     synchronization_v2,
     appearance,
     analytics,
+    customIntents,
 } = initialSetup
 
 export const createNamespace = {
@@ -50,6 +52,12 @@ export const createKeyAnalytics = {
     data: { ...analytics },
 }
 
+export const createKeyCustomIntent = {
+    resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}`,
+    type: 'create',
+    data: { ...customIntents },
+}
+
 const getMetadataQuery = {
     info: {
         resource: `dataStore/${NAMESPACE}/${INFO}/metaData`,
@@ -66,9 +74,12 @@ const getMetadataQuery = {
     analytics: {
         resource: `dataStore/${NAMESPACE}/${ANALYTICS}/metaData`,
     },
+    customIntents: {
+        resource: `dataStore/${NAMESPACE}/${CUSTOM_INTENTS}/metaData`,
+    },
 }
 
-const updateSharingMutation = {
+export const updateSharingMutation = {
     resource: 'sharing',
     type: 'update',
     params: ({ id }) => ({
@@ -87,6 +98,7 @@ export const useCreateFirstSetup = () => {
     const [mutateCreateSync] = useDataMutation(createKeySync)
     const [mutateCreateAppearance] = useDataMutation(createKeyAppearance)
     const [mutateCreateAnalytics] = useDataMutation(createKeyAnalytics)
+    const [mutateCreateCustomIntent] = useDataMutation(createKeyCustomIntent)
     const [mutateSharing] = useDataMutation(updateSharingMutation)
     const { refetch } = useDataQuery(getMetadataQuery, { lazy: true })
 
@@ -102,6 +114,7 @@ export const useCreateFirstSetup = () => {
                 mutateCreateSync({ settings: { ...sync } }),
                 mutateCreateAppearance(),
                 mutateCreateAnalytics(),
+                mutateCreateCustomIntent(),
             ])
             const keyList = await refetch()
             await Promise.all(

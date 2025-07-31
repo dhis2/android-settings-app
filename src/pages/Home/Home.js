@@ -4,6 +4,7 @@ import {
     analyticsSection,
     appearancePages,
     appearanceSection,
+    customIntentsPage,
     generalPage,
     syncPages,
     syncSection,
@@ -31,6 +32,16 @@ const Home = () => (
         <Section title={appearanceSection} sectionPages={appearancePages} />
 
         <Section title={analyticsSection} sectionPages={analyticsPages} />
+
+        <h2 className={styles.sectionTitle}> {customIntentsPage.label} </h2>
+        <div className={styles.grid}>
+            <HomeCard
+                linkText={customIntentsPage.linkText}
+                to={customIntentsPage.path}
+                bodyText={customIntentsPage.description}
+                titleText={customIntentsPage.label}
+            />
+        </div>
     </>
 )
 

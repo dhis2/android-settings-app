@@ -6,6 +6,7 @@ import {
     analyticsSection,
     appearancePages,
     appearanceSection,
+    customIntentsPage,
     generalPage,
     overviewPage,
     syncPages,
@@ -77,6 +78,14 @@ const SideBar = () => {
                     />
                 )
             })}
+
+            <MenuItem
+                label={customIntentsPage.label}
+                path={customIntentsPage.path}
+                code={customIntentsPage.code}
+                active={pathname === customIntentsPage.path}
+                isHeader={true}
+            />
         </Menu>
     )
 }

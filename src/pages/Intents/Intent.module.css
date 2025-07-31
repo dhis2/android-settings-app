@@ -1,0 +1,40 @@
+.tabWrapper {
+    margin-top: 16px;
+    width: 50%;
+}
+
+.contentWrapper {
+    margin-top: 16px;
+    width: 40%;
+    min-height: 400px;
+}
+
+.intentFormGrid {
+    display: grid;
+    column-gap: 1rem;
+}
+
+.intentFieldGroup {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.argumentRow {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.argumentColumn {
+    flex: 1;
+}
+
+.addButtonWrapper {
+    margin-top: 1rem;
+}
+
+.responseForm {
+    display: grid;
+    gap: 8px;
+}
