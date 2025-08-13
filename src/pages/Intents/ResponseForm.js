@@ -8,6 +8,10 @@ const FieldWrapper = (props) => (
     <div className={styles.row}>{props.children}</div>
 )
 
+FieldWrapper.propTypes = {
+    children: PropTypes.element,
+}
+
 const ResponseForm = ({ data = {}, onChange }) => {
     return (
         <div className={styles.responseForm}>

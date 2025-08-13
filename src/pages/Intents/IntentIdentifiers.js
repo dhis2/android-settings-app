@@ -153,6 +153,10 @@ const FieldWrapper = (props) => (
     <div className={styles.row}>{props.children}</div>
 )
 
+FieldWrapper.propTypes = {
+    children: PropTypes.element,
+}
+
 IntentIdentifiers.propTypes = {
     formData: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
