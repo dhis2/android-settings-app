@@ -122,46 +122,46 @@ const DialogCustomIntents = ({
             {open && (
                 <Modal large position="middle">
                     <ModalTitle>
-                        {edit ? i18n.t('Edit intent') : i18n.t('Add intent')}
+                        {edit ? i18n.t('Edit Intent') : i18n.t('New Intent')}
                     </ModalTitle>
-                    <ModalContent>
-                        <div className={styles.tabWrapper}>
-                            <TabBar>
-                                <Tab
-                                    selected={step === 0}
-                                    onClick={() => setStep(0)}
-                                >
-                                    {i18n.t('Identifiers')}
-                                </Tab>
-                                <Tab
-                                    selected={step === 1}
-                                    onClick={() => setStep(1)}
-                                >
-                                    {i18n.t('Request')}
-                                </Tab>
-                                <Tab
-                                    selected={step === 2}
-                                    onClick={() => setStep(2)}
-                                >
-                                    {i18n.t('Response')}
-                                </Tab>
-                            </TabBar>
-                        </div>
+                    <ModalContent className={styles.modalContentCustom}>
+                        <TabBar>
+                            <Tab
+                                selected={step === 0}
+                                onClick={() => setStep(0)}
+                            >
+                                {i18n.t('Identifiers')}
+                            </Tab>
+                            <Tab
+                                selected={step === 1}
+                                onClick={() => setStep(1)}
+                            >
+                                {i18n.t('Request')}
+                            </Tab>
+                            <Tab
+                                selected={step === 2}
+                                onClick={() => setStep(2)}
+                            >
+                                {i18n.t('Response')}
+                            </Tab>
+                        </TabBar>
                         <div className={styles.contentWrapper}>
                             {renderStep()}
                         </div>
-                        <ButtonStrip end>
-                            {step > 0 && (
-                                <Button small onClick={prevStep}>
-                                    {i18n.t('Prev')}
-                                </Button>
-                            )}
-                            {step < 2 && (
-                                <Button small onClick={nextStep}>
-                                    {i18n.t('Next')}
-                                </Button>
-                            )}
-                        </ButtonStrip>
+                        <div className={styles.actionButtonsWrapper}>
+                            <ButtonStrip end>
+                                {step > 0 && (
+                                    <Button small onClick={prevStep}>
+                                        {i18n.t('Prev')}
+                                    </Button>
+                                )}
+                                {step < 2 && (
+                                    <Button small onClick={nextStep}>
+                                        {i18n.t('Next')}
+                                    </Button>
+                                )}
+                            </ButtonStrip>
+                        </div>
                     </ModalContent>
 
                     <ModalActions>

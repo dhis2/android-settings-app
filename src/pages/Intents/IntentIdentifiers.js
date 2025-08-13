@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
+import { InputField } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { SingleSelect } from '../../components/field'
 import { MultiSelectField } from '../../components/field/MultiSelectField'
-import { SelectField } from '../../components/field/SelectField'
-import { TextField } from '../../components/field/TextField'
 import styles from './Intent.module.css'
 
 const screenActionOptions = [
@@ -73,54 +73,60 @@ const IntentIdentifiers = ({
     })()
 
     return (
-        <div className={styles.intentFormGrid}>
-            <TextField
-                required
-                name="name"
-                label={i18n.t('Intent name')}
-                onChange={(e) => onChange('name', e.value)}
-                value={formData.name || ''}
-            />
+        <div>
+            <FieldWrapper>
+                <InputField
+                    required
+                    name="name"
+                    label={i18n.t('Intent name')}
+                    onChange={(e) => onChange('name', e.value)}
+                    value={formData.name || ''}
+                />
+            </FieldWrapper>
 
-            <TextField
-                name="description"
-                label={i18n.t('Intent description')}
-                onChange={(e) => onChange('description', e.value)}
-                value={formData.description || ''}
-            />
+            <FieldWrapper>
+                <InputField
+                    name="description"
+                    label={i18n.t('Intent description')}
+                    onChange={(e) => onChange('description', e.value)}
+                    value={formData.description || ''}
+                />
+            </FieldWrapper>
 
-            <SelectField
-                required
-                name="elementType"
-                label={i18n.t('Element type')}
-                selected={selectedElementType}
-                onChange={handleElementTypeChange}
-                options={elementTypeOptions}
-                inputWidth="300px"
-            />
+            <FieldWrapper>
+                <SingleSelect
+                    required
+                    name="elementType"
+                    label={i18n.t('Element type')}
+                    selected={selectedElementType}
+                    onChange={handleElementTypeChange}
+                    options={elementTypeOptions}
+                />
+            </FieldWrapper>
 
             {selectedElementType && (
-                <SelectField
-                    name="elementId"
-                    label={
-                        selectedElementType === 'dataElements'
-                            ? i18n.t('Data Element')
-                            : i18n.t('Attribute')
-                    }
-                    selected={selectedTriggerId || ''}
-                    onChange={({ selected }) =>
-                        handleTriggerChange({ selected })
-                    }
-                    options={elementOptions.map((item) => ({
-                        label: item.displayName,
-                        value: item.id,
-                    }))}
-                    inputWidth="300px"
-                    required
-                />
+                <FieldWrapper>
+                    <SingleSelect
+                        name="elementId"
+                        label={
+                            selectedElementType === 'dataElements'
+                                ? i18n.t('Data Element')
+                                : i18n.t('Attribute')
+                        }
+                        selected={selectedTriggerId || ''}
+                        onChange={({ selected }) =>
+                            handleTriggerChange({ selected })
+                        }
+                        options={elementOptions.map((item) => ({
+                            label: item.displayName,
+                            value: item.id,
+                        }))}
+                        required
+                    />
+                </FieldWrapper>
             )}
 
-            <div className={styles.intentFieldGroup}>
+            <FieldWrapper>
                 <MultiSelectField
                     label={i18n.t('Screen/Action')}
                     selected={formData.action || []}
@@ -128,18 +134,24 @@ const IntentIdentifiers = ({
                     options={screenActionOptions}
                     required
                 />
-            </div>
+            </FieldWrapper>
 
-            <TextField
-                required
-                name="packageName"
-                label={i18n.t('Package name')}
-                onChange={(e) => onChange('packageName', e.value)}
-                value={formData.packageName || ''}
-            />
+            <FieldWrapper>
+                <InputField
+                    required
+                    name="packageName"
+                    label={i18n.t('Package name')}
+                    onChange={(e) => onChange('packageName', e.value)}
+                    value={formData.packageName || ''}
+                />
+            </FieldWrapper>
         </div>
     )
 }
+
+const FieldWrapper = (props) => (
+    <div className={styles.row}>{props.children}</div>
+)
 
 IntentIdentifiers.propTypes = {
     formData: PropTypes.object.isRequired,
