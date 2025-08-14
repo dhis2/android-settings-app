@@ -1,12 +1,9 @@
-.tabWrapper {
-    margin-top: 16px;
-    width: 50%;
-}
-
 .contentWrapper {
-    margin-top: 16px;
-    width: 40%;
-    min-height: 400px;
+    margin-top: var(--spacers-dp16);
+    padding-right: var(--spacers-dp8);
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .intentFormGrid {
@@ -37,4 +34,22 @@
 .responseForm {
     display: grid;
     gap: 8px;
+}
+
+.actionButtonsWrapper{
+    margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.row + .row {
+    margin-top: 20px;
+}
+
+.modalContentCustom{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
 }
