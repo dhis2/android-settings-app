@@ -24,7 +24,12 @@ const config = {
             name: 'Android analytics configuration',
             url: '#/analytics/TEI'
         }
-    ]
+    ],
+    viteConfigExtensions: {
+        define: {
+            global: 'window',
+        },
+    },
 }
 
 module.exports = config
