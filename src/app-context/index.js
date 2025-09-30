@@ -1,3 +1,3 @@
 export * from './AppContext'
-export * from './AppProvider'
+export * from './AppProvider.jsx'
 export * from './useAppContext'

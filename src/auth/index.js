@@ -1,2 +1,2 @@
-export * from './AuthWall'
+export * from './AuthWall.jsx'
 export * from './useIsAuthorized'
