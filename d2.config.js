@@ -10,20 +10,20 @@ const config = {
     shortcuts: [
         {
             name: 'Android settings',
-            url: '#/general-settings'
+            url: '#/general-settings',
         },
         {
             name: 'Android sync settings',
-            url: '#/sync/global-settings'
+            url: '#/sync/global-settings',
         },
         {
             name: 'Android appearance settings',
-            url: '#/appearance/home-screen'
+            url: '#/appearance/home-screen',
         },
         {
             name: 'Android analytics configuration',
-            url: '#/analytics/TEI'
-        }
+            url: '#/analytics/TEI',
+        },
     ],
     viteConfigExtensions: {
         define: {
