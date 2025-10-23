@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { CUSTOM_INTENTS, NAMESPACE } from '../../constants/data-store'
 import { createKeyCustomIntent, updateSharingMutation } from '../../modules'
 import { validateObjectByProperty } from '../../utils/validators'
+import { extraTypeOptions, extraTypesRequiringKey } from './ResponseForm'
 
 /**
  * update data store
@@ -47,6 +48,22 @@ const validateRequestArguments = (args) => {
     )
 }
 
+const validateExtras = (args) => {
+    if (!Array.isArray(args)) {
+        return false
+    }
+
+    return args.every(({ extraName, extraType, key }) =>
+        typeof extraName === 'string' &&
+        extraName.trim().length > 0 &&
+        typeof extraType === 'string' &&
+        extraTypeOptions.includes(extraType) &&
+        !extraTypesRequiringKey.includes(extraType)
+            ? true
+            : typeof key === 'string' && key.trim().length > 0
+    )
+}
+
 export const validMandatoryFields = (specificSettings) => {
     if (
         specificSettings.trigger?.dataElements?.length === 0 &&
@@ -60,10 +77,7 @@ export const validMandatoryFields = (specificSettings) => {
             ['name', 'action', 'packageName'],
             specificSettings
         ) &&
-        validateObjectByProperty(
-            ['argument', 'path'],
-            specificSettings?.response.data
-        ) &&
+        validateExtras(specificSettings.response.data.extras) &&
         validateRequestArguments(specificSettings?.request?.arguments)
     return isValid
 }

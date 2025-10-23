@@ -67,7 +67,11 @@ const DialogCustomIntents = ({
                     : [{ key: '', value: '', id: generateDhis2Id() }],
         },
         response: {
-            data: specificSettings?.response?.data || {},
+            data: {
+                extras: specificSettings?.response?.data?.extras || [
+                    { extraName: '', extraType: undefined },
+                ],
+            },
         },
     })
 
@@ -103,7 +107,7 @@ const DialogCustomIntents = ({
             case 2:
                 return (
                     <ResponseForm
-                        data={formData.response.data}
+                        extrasData={formData.response.data.extras}
                         onChange={onChangeByPath}
                     />
                 )
