@@ -48,19 +48,22 @@ const validateRequestArguments = (args) => {
     )
 }
 
+const extraTypeOptionValues = extraTypeOptions.map(({ value }) => value)
+
 const validateExtras = (args) => {
     if (!Array.isArray(args)) {
         return false
     }
 
-    return args.every(({ extraName, extraType, key }) =>
-        typeof extraName === 'string' &&
-        extraName.trim().length > 0 &&
-        typeof extraType === 'string' &&
-        extraTypeOptions.includes(extraType) &&
-        !extraTypesRequiringKey.includes(extraType)
-            ? true
-            : typeof key === 'string' && key.trim().length > 0
+    return args.every(
+        ({ extraName, extraType, key }) =>
+            typeof extraName === 'string' &&
+            extraName.trim().length > 0 &&
+            typeof extraType === 'string' &&
+            extraTypeOptionValues.includes(extraType) &&
+            (!extraTypesRequiringKey.includes(extraType)
+                ? true
+                : typeof key === 'string' && key.trim().length > 0)
     )
 }
 
