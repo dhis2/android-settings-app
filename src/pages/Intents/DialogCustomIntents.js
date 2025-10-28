@@ -11,7 +11,6 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { generateDhis2Id } from '../../utils/generateId'
 import styles from './Intent.module.css'
 import IntentIdentifiers from './IntentIdentifiers'
 import { validMandatoryFields } from './intentsDatastoreQuery'

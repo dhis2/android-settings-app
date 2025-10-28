@@ -42,7 +42,7 @@ export const extraTypeOptions = [
 
 export const extraTypesRequiringKey = ['OBJECT', 'LIST_OF_OBJECTS']
 
-const ResponseForm = ({ extrasData = [], onChange, options = {} }) => {
+const ResponseForm = ({ extrasData = [], onChange }) => {
     const handleChange = (index, updatedValues, options) => {
         const updated = extrasData.map((item, idx) => {
             if (idx === index) {
@@ -76,14 +76,14 @@ const ResponseForm = ({ extrasData = [], onChange, options = {} }) => {
                     label={i18n.t('Extra type')}
                     selected={extrasData[0]?.extraType || ''}
                     onChange={(e) => {
-                        if (!extraTypesRequiringKey.includes(e.selected)) {
+                        if (extraTypesRequiringKey.includes(e.selected)) {
+                            handleChange(0, { extraType: e.selected })
+                        } else {
                             handleChange(
                                 0,
                                 { extraType: e.selected },
                                 { removeKey: 'key' }
                             )
-                        } else {
-                            handleChange(0, { extraType: e.selected })
                         }
                     }}
                     options={extraTypeOptions}
