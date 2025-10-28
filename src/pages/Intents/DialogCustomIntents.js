@@ -64,7 +64,7 @@ const DialogCustomIntents = ({
             arguments:
                 specificSettings?.request?.arguments?.length > 0
                     ? specificSettings.request.arguments
-                    : [{ key: '', value: '', id: generateDhis2Id() }],
+                    : [],
         },
         response: {
             data: {
