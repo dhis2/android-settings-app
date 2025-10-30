@@ -1,4 +1,5 @@
 export * from './InputNumber'
+export * from './MultiSelect'
 export * from './RadioGroup'
 export * from './Select'
 export * from './SelectSettings'
