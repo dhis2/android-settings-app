@@ -42,20 +42,22 @@ const SelectField = ({
                     options={row.download}
                 />
             ) : (
-                <MultiSelect
-                    filterable
-                    disabled={emptyList}
-                    placeholder={
-                        emptyList
-                            ? i18n.t('No filters available')
-                            : i18n.t('Choose a filter')
-                    }
-                    empty={i18n.t('No filters available')}
-                    key={row.keyDownload}
-                    onChange={(e) => onChange(e, row.keyDownload)}
-                    selected={specificSetting[row.keyDownload]}
-                    options={filters || []}
-                />
+                <div style={{ minWidth: '200px' }}>
+                    <MultiSelect
+                        filterable
+                        disabled={emptyList}
+                        placeholder={
+                            emptyList
+                                ? i18n.t('No filters available')
+                                : i18n.t('Choose a filter')
+                        }
+                        empty={i18n.t('No filters available')}
+                        key={row.keyDownload}
+                        onChange={(e) => onChange(e, row.keyDownload)}
+                        selected={specificSetting[row.keyDownload]}
+                        options={filters || []}
+                    />
+                </div>
             )}
         </>
     )
