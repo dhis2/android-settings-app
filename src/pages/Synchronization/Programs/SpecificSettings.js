@@ -115,6 +115,7 @@ ProgramTableRow.propTypes = {
     row: PropTypes.object,
     specificSetting: PropTypes.object,
     onChange: PropTypes.func,
+    filters: PropTypes.array,
 }
 
 const SpecificSettings = ({
@@ -158,6 +159,7 @@ SpecificSettings.propTypes = {
     specificSetting: PropTypes.object,
     onChange: PropTypes.func,
     completeListOptions: PropTypes.array,
+    programOptions: PropTypes.array,
 }
 
 export default SpecificSettings
