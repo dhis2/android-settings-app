@@ -77,7 +77,7 @@ const query = {
 export const useProgramFilters = () => {
     const { data } = useDataQuery(query)
     const { programs } = useWorkflowContext()
-    const [programFilterList, setProgramList] = useState([])
+    const [programFilterList, setProgramFilterList] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -91,7 +91,7 @@ export const useProgramFilters = () => {
             const filters = groupByProgramId(tei, programWorking, event)
             const programL = filterListByReadAccess(programs)
 
-            setProgramList(combineProgramsWithFilters(programL, filters))
+            setProgramFilterList(combineProgramsWithFilters(programL, filters))
             setLoading(true)
         }
     }, [data])

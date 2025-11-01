@@ -122,11 +122,13 @@ const transformFiltersObject = (data) => {
     }
 
     return Object.entries(data).reduce((acc, [key, value]) => {
-        const filtersArray = Array.isArray(value.filters)
-            ? value.filters.length
+        let filtersArray = null
+
+        if (Array.isArray(value.filters)) {
+            filtersArray = value.filters.length
                 ? value.filters.map((id) => ({ id }))
                 : null
-            : null
+        }
 
         acc[key] = {
             ...value,
