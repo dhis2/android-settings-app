@@ -8,9 +8,9 @@ import {
     filterListByReadAccess,
     filterUnusedElements,
 } from '../../../utils/utils'
-import { useWorkflowContext } from '../../../workflow-context'
 import { prepareSpecificSettingsList } from './helper'
 import NewProgramSpecific from './NewProgramSpecific'
+import { useProgramFilters } from './ProgramQueries'
 import SpecificTableAction from './SpecificTableAction'
 
 const ProgramSpecificSettings = ({
@@ -18,25 +18,24 @@ const ProgramSpecificSettings = ({
     changeSpecificSettings,
     disabled,
 }) => {
-    const { programs } = useWorkflowContext()
-    const programList = filterListByReadAccess(programs)
+    const { programFilterList, loading } = useProgramFilters()
+    const [programList, setProgramList] = useState([])
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
     const [loadSpecific, setLoad] = useState(false)
 
     useEffect(() => {
-        if (specificSettings && programList) {
-            const rowList = prepareSpecificSettingsList(
-                specificSettings,
-                programList
-            )
+        if (specificSettings && loading) {
+            const list = filterListByReadAccess(programFilterList)
+            const rowList = prepareSpecificSettingsList(specificSettings, list)
+            setProgramList(list)
             setInitialRows(rowList)
             setRows(rowList)
-            setListName(filterUnusedElements(programList, rowList))
+            setListName(filterUnusedElements(list, rowList))
             setLoad(true)
         }
-    }, [specificSettings])
+    }, [specificSettings, programFilterList])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {

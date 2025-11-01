@@ -232,6 +232,15 @@ export const SpecificProgram = {
             ],
         },
         {
+            option: i18n.t(
+                'Filter downloaded TEIs with a predefined list view'
+            ),
+            keyDownload: 'filters',
+            keyDBTrimming: 'filtersDBTrimming',
+            download: [],
+            multiple: true,
+        },
+        {
             keyDownload: 'enrollmentDateDownload',
             keyDBTrimming: 'enrollmentDateDBTrimming',
             option: i18n.t('Download TEI with enrollment date within'),
@@ -341,6 +350,15 @@ export const SpecificProgram = {
             ],
         },
         {
+            option: i18n.t(
+                'Filter downloaded events with a predefined list view'
+            ),
+            keyDownload: 'filters',
+            keyDBTrimming: 'filtersDBTrimming',
+            download: [],
+            multiple: true,
+        },
+        {
             option: i18n.t('Maximum Event downloads'),
             keyDownload: 'eventsDownload',
             keyDBTrimming: 'eventsDBTrimming',
@@ -429,6 +447,7 @@ export const specificSettingsDefault = {
     eventsDBTrimming: 1000,
     eventDateDownload: 'ANY',
     eventDateDBTrimming: 'ANY',
+    filters: null,
 }
 
 export const GLOBAL = 'GLOBAL'
