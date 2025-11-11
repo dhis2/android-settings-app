@@ -7,11 +7,11 @@ export const MultiSelect = ({
     options,
     selected,
     onChange,
-    placeholder = 'Choose an option',
+    placeholder = i18n.t('Choose an option'),
     ...props
 }) => (
     <MultiSelectField
-        placeholder={i18n.t(placeholder)}
+        placeholder={placeholder}
         selected={selected}
         onChange={onChange}
         {...props}
