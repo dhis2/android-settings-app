@@ -78,23 +78,23 @@ export const useProgramFilters = () => {
     const { data } = useDataQuery(query)
     const { programs } = useWorkflowContext()
     const [programFilterList, setProgramFilterList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         if (data) {
             const tei =
                 data?.trackedEntityInstanceFilters?.trackedEntityInstanceFilters
             const programWorking =
-                data?.programStageWorkingList?.programStageWorkingList
+                data?.programStageWorkingLists?.programStageWorkingLists
             const event = data?.eventFilters?.eventFilters
 
             const filters = groupByProgramId(tei, programWorking, event)
             const programL = filterListByReadAccess(programs)
 
             setProgramFilterList(combineProgramsWithFilters(programL, filters))
-            setLoading(true)
+            setLoaded(true)
         }
     }, [data])
 
-    return { programFilterList, loading }
+    return { programFilterList, loaded }
 }
