@@ -232,9 +232,7 @@ export const SpecificProgram = {
             ],
         },
         {
-            option: i18n.t(
-                'Filter downloaded TEIs with a predefined list view'
-            ),
+            option: i18n.t('Download TEIs based on predefined list views'),
             keyDownload: 'filters',
             keyDBTrimming: 'filtersDBTrimming',
             download: [],
@@ -350,9 +348,7 @@ export const SpecificProgram = {
             ],
         },
         {
-            option: i18n.t(
-                'Filter downloaded events with a predefined list view'
-            ),
+            option: i18n.t('Download events based on predefined list views'),
             keyDownload: 'filters',
             keyDBTrimming: 'filtersDBTrimming',
             download: [],
