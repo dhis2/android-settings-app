@@ -46,6 +46,7 @@ export const createInitialSpecificValues = (prevDetails) => ({
     eventDateDownload:
         prevDetails.eventDateDownload ||
         specificSettingsDefault.eventDateDownload,
+    filters: prevDetails.filters || specificSettingsDefault.filters,
 })
 
 export const isProgramWithRegistration = (programList, specificProgram) => {
@@ -53,6 +54,22 @@ export const isProgramWithRegistration = (programList, specificProgram) => {
         (programApi) => programApi.id === specificProgram
     )
     return program.programType === WITH_REGISTRATION
+}
+
+const extractIds = (input) => {
+    if (!Array.isArray(input) || input.length === 0) {
+        return []
+    }
+
+    if (typeof input[0] === 'string') {
+        return input
+    }
+
+    if (typeof input[0] === 'object' && input[0] !== null) {
+        return input.map((item) => item.id).filter(Boolean)
+    }
+
+    return []
 }
 
 export const prepareSpecificSettingsList = (
@@ -79,6 +96,7 @@ export const prepareSpecificSettingsList = (
             const row = {
                 ...program,
                 name: findProgramNameById(apiProgramList, program),
+                filters: extractIds(program.filters),
                 summarySettings,
             }
             specificSettingsRowList.push(row)
@@ -93,3 +111,33 @@ export const findProgramNameById = (programList, specificProgram) => {
     )
     return program.name
 }
+
+/**
+ * Transforms an object of objects where 'filters' is an array of IDs
+ * into an object of objects where 'filters' is an array of { id } objects
+ */
+const transformFiltersObject = (data) => {
+    if (!data || typeof data !== 'object') {
+        return {}
+    }
+
+    return Object.entries(data).reduce((acc, [key, value]) => {
+        let filtersArray = null
+
+        if (Array.isArray(value.filters)) {
+            filtersArray = value.filters.length
+                ? value.filters.map((id) => ({ id }))
+                : null
+        }
+
+        acc[key] = {
+            ...value,
+            filters: filtersArray,
+        }
+
+        return acc
+    }, {})
+}
+
+export const transformSpecificSettingsDataStore = (specificSettings) =>
+    transformFiltersObject(specificSettings)
