@@ -1150,6 +1150,9 @@ msgstr "Screen/Action"
 msgid "Package name"
 msgstr "Package name"
 
+msgid "No requests parameters have been added"
+msgstr "No requests parameters have been added"
+
 msgid "Key"
 msgstr "Key"
 
@@ -1159,11 +1162,32 @@ msgstr "Value"
 msgid "Add parameter"
 msgstr "Add parameter"
 
-msgid "Argument"
-msgstr "Argument"
+msgid "String"
+msgstr "String"
 
-msgid "Path"
-msgstr "Path"
+msgid "Integer"
+msgstr "Integer"
+
+msgid "Boolean"
+msgstr "Boolean"
+
+msgid "Float"
+msgstr "Float"
+
+msgid "JSON object"
+msgstr "JSON object"
+
+msgid "List of JSON objects"
+msgstr "List of JSON objects"
+
+msgid "Extra name"
+msgstr "Extra name"
+
+msgid "Extra type"
+msgstr "Extra type"
+
+msgid "Property in JSON object"
+msgstr "Property in JSON object"
 
 msgid "Data sets specific download sync settings"
 msgstr "Data sets specific download sync settings"
