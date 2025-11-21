@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, IconAdd16, IconDelete16 } from '@dhis2/ui'
+import { Button, IconAdd16, IconDelete16, NoticeBox } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TextField } from '../../components/field/TextField.jsx'
@@ -26,6 +26,13 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
 
     return (
         <div>
+            {argumentsData?.length === 0 && (
+                <NoticeBox>
+                    <span>
+                        {i18n.t('No requests parameters have been added')}
+                    </span>
+                </NoticeBox>
+            )}
             {argumentsData.map(({ id, key, value }) => (
                 <div key={id} className={styles.argumentRow}>
                     <div className={styles.argumentColumn}>
@@ -51,7 +58,6 @@ const RequestForm = ({ argumentsData = [], onChange }) => {
                         destructive
                         icon={<IconDelete16 />}
                         onClick={() => handleDelete(id)}
-                        disabled={argumentsData.length === 1}
                     />
                 </div>
             ))}
