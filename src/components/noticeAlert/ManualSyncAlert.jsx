@@ -1,0 +1,14 @@
+import i18n from '@dhis2/d2-i18n'
+import React from 'react'
+import NoticeAlert from './NoticeAlert.jsx'
+
+const ManualSyncAlert = () => (
+    <NoticeAlert
+        title={i18n.t('Manual options')}
+        notice={i18n.t(
+            'Manual options for data and metadata sync are only available from android app version 2.3.0 onwards.'
+        )}
+    />
+)
+
+export default ManualSyncAlert

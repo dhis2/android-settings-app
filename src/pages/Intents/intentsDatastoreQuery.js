@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { CUSTOM_INTENTS, NAMESPACE } from '../../constants/data-store'
 import { createKeyCustomIntent, updateSharingMutation } from '../../modules'
 import { validateObjectByProperty } from '../../utils/validators'
-import { extraTypeOptions, extraTypesRequiringKey } from './ResponseForm'
+import { extraTypeOptions, extraTypesRequiringKey } from './ResponseForm.jsx'
 
 /**
  * update data store

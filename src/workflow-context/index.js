@@ -1,3 +1,3 @@
 export * from './useWorkflowContext'
 export * from './WorkflowContext'
-export * from './WorkflowProvider'
+export * from './WorkflowProvider.jsx'
