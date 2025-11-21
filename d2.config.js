@@ -24,6 +24,10 @@ const config = {
             name: 'Android analytics configuration',
             url: '#/analytics/TEI',
         },
+        {
+            name: 'Android custom intents',
+            url: '#/custom-intents',
+        },
     ],
     viteConfigExtensions: {
         define: {
