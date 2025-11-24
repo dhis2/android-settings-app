@@ -18,4 +18,5 @@ export const TextField = ({ label, helpText, value, ...props }) => (
 TextField.propTypes = {
     label: PropTypes.string,
     helpText: PropTypes.string,
+    value: PropTypes.string,
 }

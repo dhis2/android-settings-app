@@ -53,4 +53,7 @@ PhoneNumberField.propTypes = {
     label: PropTypes.string,
     helpText: PropTypes.string,
     onChange: PropTypes.func,
+    value: PropTypes.string,
+    name: PropTypes.string,
+    settingsValue: PropTypes.object,
 }
