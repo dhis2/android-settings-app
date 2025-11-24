@@ -22,11 +22,11 @@ import { VisualizationRow } from './VisualizationRow.jsx'
 import styles from './VisualizationTable.module.css'
 
 export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
-    const [openDeleteDialog, setOpenDialog] = useState(false)
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [section, setSection] = useState([])
     const [openDeleteGroup, setDeleteGroup] = useState(false)
-    const [elementName, setName] = useState('')
+    const [elementName, setElementName] = useState('')
     const [groupId, setGroupId] = useState('')
     const [openEditDialog, setOpenEditDialog] = useState(false)
 
@@ -34,8 +34,8 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
         setSpecificSetting(visualization)
         setSection(currentGroup)
         setGroupId(groupId)
-        setName(visualization.name || visualization.visualizationName)
-        setOpenDialog(true)
+        setElementName(visualization.name || visualization.visualizationName)
+        setOpenDeleteDialog(true)
     }
 
     const editVisualization = (visualization, visualizationList, groupId) => {
@@ -56,10 +56,10 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     }
 
     const handleDialogClose = () => {
-        setOpenDialog(false)
+        setOpenDeleteDialog(false)
         setSpecificSetting({})
         setSection([])
-        setName('')
+        setElementName('')
     }
 
     const handleDelete = () => {
@@ -69,7 +69,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     }
 
     const deleteGroup = (item) => {
-        setName(item.name)
+        setElementName(item.name)
         setSpecificSetting(item)
         setDeleteGroup(true)
     }
@@ -77,7 +77,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const handleCloseDeleteGroup = () => {
         setDeleteGroup(false)
         setSpecificSetting({})
-        setName('')
+        setElementName('')
     }
 
     const handleDeleteGroup = () => {
@@ -145,6 +145,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
 HomeVisualizationTable.propTypes = {
     group: PropTypes.array,
     changeGroup: PropTypes.func,
+    disable: PropTypes.bool,
 }
 
 const VisualizationTable = ({
@@ -214,4 +215,6 @@ VisualizationTable.propTypes = {
     deleteVisualization: PropTypes.func,
     deleteGroup: PropTypes.func,
     disabled: PropTypes.bool,
+    editVisualization: PropTypes.func,
+    orderVisualization: PropTypes.func,
 }

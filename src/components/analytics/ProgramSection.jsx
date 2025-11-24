@@ -45,4 +45,5 @@ ProgramSection.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.object,
     edit: PropTypes.bool,
+    programList: PropTypes.array,
 }

@@ -120,4 +120,5 @@ export const VisualizationElement = ({
 VisualizationElement.propTypes = {
     handleChange: PropTypes.func,
     specificSettings: PropTypes.object,
+    edit: PropTypes.bool,
 }

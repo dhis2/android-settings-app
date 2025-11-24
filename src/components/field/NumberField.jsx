@@ -19,4 +19,5 @@ export const NumberField = ({ label, helpText, value, ...props }) => (
 NumberField.propTypes = {
     label: PropTypes.string,
     helpText: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }

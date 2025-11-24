@@ -7,6 +7,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const DialogDelete = ({
@@ -43,6 +44,14 @@ const DialogDelete = ({
             )}
         </>
     )
+}
+
+DialogDelete.propTypes = {
+    open: PropTypes.bool,
+    onHandleClose: PropTypes.func,
+    name: PropTypes.string,
+    typeName: PropTypes.string,
+    onHandleDelete: PropTypes.func,
 }
 
 export default DialogDelete

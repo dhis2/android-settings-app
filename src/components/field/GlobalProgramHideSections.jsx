@@ -5,7 +5,6 @@ import React from 'react'
 import { COLLAPSIBLE_SECTIONS } from '../../constants'
 import { CheckboxField } from './CheckboxField.jsx'
 import styles from './Field.module.css'
-import { GlobalProgramDisableReferral } from './GlobalProgramDisableReferral.jsx'
 import { HelpText } from './HelpText.jsx'
 
 export const GlobalProgramHideSections = ({ disable, settings, onChange }) => {
@@ -38,7 +37,7 @@ export const GlobalProgramHideSections = ({ disable, settings, onChange }) => {
     )
 }
 
-GlobalProgramDisableReferral.propTypes = {
+GlobalProgramHideSections.propTypes = {
     disable: PropTypes.bool,
     settings: PropTypes.object,
     onChange: PropTypes.func,
