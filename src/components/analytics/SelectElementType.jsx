@@ -89,4 +89,6 @@ SelectElementType.propTypes = {
     specificSettings: PropTypes.object,
     elementValueOptions: PropTypes.array,
     edit: PropTypes.bool,
+    handleList: PropTypes.func,
+    handleLoading: PropTypes.func,
 }

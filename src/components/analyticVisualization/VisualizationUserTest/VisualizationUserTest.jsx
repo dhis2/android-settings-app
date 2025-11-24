@@ -12,17 +12,17 @@ export const VisualizationUserTest = ({ visualization, visualizationName }) => {
     const { dataVisualization, eventVisualization } =
         useReadVisualizationQuery(visualization)
     const [user, setUser] = useState()
-    const [isValid, setValid] = useState(false)
-    const [tested, setTesting] = useState(false)
+    const [isValid, setIsValid] = useState(false)
+    const [tested, setTested] = useState(false)
 
     useEffect(() => {
-        isEmpty(user) && setTesting(false)
+        isEmpty(user) && setTested(false)
     }, [user])
 
     const handleChange = () => {
         const userVisualization = dataVisualization || eventVisualization
-        setValid(validateUserVisualization(user, userVisualization))
-        setTesting(true)
+        setIsValid(validateUserVisualization(user, userVisualization))
+        setTested(true)
     }
 
     const getTestingResults = () =>

@@ -64,4 +64,5 @@ GenderSection.propTypes = {
     onChange: PropTypes.func,
     specificSettings: PropTypes.object,
     attributeOptions: PropTypes.array,
+    edit: PropTypes.bool,
 }

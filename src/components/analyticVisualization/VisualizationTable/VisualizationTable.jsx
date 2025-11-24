@@ -62,4 +62,5 @@ VisualizationTable.propTypes = {
     deleteVisualization: PropTypes.func,
     deleteGroup: PropTypes.func,
     disabled: PropTypes.bool,
+    orderVisualization: PropTypes.func,
 }

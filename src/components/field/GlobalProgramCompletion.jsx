@@ -33,4 +33,5 @@ export const GlobalProgramCompletion = ({ disable, settings, onChange }) => {
 GlobalProgramCompletion.propTypes = {
     disable: PropTypes.bool,
     settings: PropTypes.object,
+    onChange: PropTypes.func,
 }
