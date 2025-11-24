@@ -84,4 +84,6 @@ GroupVisualizationRow.propTypes = {
     deleteVisualization: PropTypes.func,
     disabled: PropTypes.bool,
     element: PropTypes.string,
+    editVisualization: PropTypes.func,
+    orderVisualization: PropTypes.func,
 }

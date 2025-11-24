@@ -116,4 +116,7 @@ VisualizationGroup.propTypes = {
     settings: PropTypes.object,
     onChange: PropTypes.func,
     groupList: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    type: PropTypes.string,
+    groupId: PropTypes.string,
+    disabled: PropTypes.bool,
 }

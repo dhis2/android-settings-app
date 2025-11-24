@@ -22,6 +22,12 @@ const TableActions = ({ rows, menuActions, states }) => {
     )
 }
 
+TableActions.propTypes = {
+    rows: PropTypes.array.isRequired,
+    menuActions: PropTypes.object.isRequired,
+    states: PropTypes.object.isRequired,
+}
+
 const TableRows = ({ rows, states, menuActions }) => (
     <div>
         {rows.map((row) => (
@@ -79,10 +85,23 @@ const TableRows = ({ rows, states, menuActions }) => (
     </div>
 )
 
-TableActions.propTypes = {
-    columns: PropTypes.array,
-    rows: PropTypes.array.isRequired,
-    menuActions: PropTypes.object.isRequired,
+TableRows.propTypes = {
+    rows: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            uid: PropTypes.string,
+            name: PropTypes.string,
+            description: PropTypes.string,
+            summarySettings: PropTypes.string,
+        })
+    ),
+    menuActions: PropTypes.shape({
+        edit: PropTypes.func.isRequired,
+        delete: PropTypes.func.isRequired,
+    }),
+    states: PropTypes.shape({
+        disableAll: PropTypes.bool,
+    }),
 }
 
 export default TableActions
