@@ -25,7 +25,7 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [section, setSection] = useState([])
-    const [openDeleteGroup, setDeleteGroup] = useState(false)
+    const [openDeleteGroup, setOpenDeleteGroup] = useState(false)
     const [elementName, setElementName] = useState('')
     const [groupId, setGroupId] = useState('')
     const [openEditDialog, setOpenEditDialog] = useState(false)
@@ -71,11 +71,11 @@ export const HomeVisualizationTable = ({ group, changeGroup, disable }) => {
     const deleteGroup = (item) => {
         setElementName(item.name)
         setSpecificSetting(item)
-        setDeleteGroup(true)
+        setOpenDeleteGroup(true)
     }
 
     const handleCloseDeleteGroup = () => {
-        setDeleteGroup(false)
+        setOpenDeleteGroup(false)
         setSpecificSetting({})
         setElementName('')
     }

@@ -39,35 +39,33 @@ export const RadioGroup = ({
     }, [groups, groupName[type]])
 
     return (
-        <>
-            <FieldGroup {...props}>
-                <NewGroup
+        <FieldGroup {...props}>
+            <NewGroup
+                dense
+                onChange={onChange}
+                name="newGroup"
+                label={i18n.t('Create a new group')}
+                value="newGroup"
+                checked={optionSelection['newGroup']}
+                groupName={groupName}
+                changeGroup={changeGroup}
+            />
+
+            {!isEmpty(groupOptions) && (
+                <SelectGroup
                     dense
                     onChange={onChange}
-                    name="newGroup"
-                    label={i18n.t('Create a new group')}
-                    value="newGroup"
-                    checked={optionSelection['newGroup']}
+                    name="existingGroup"
+                    label={i18n.t('Select a created group visualization')}
+                    value="existingGroup"
+                    checked={optionSelection['existingGroup']}
                     groupName={groupName}
                     changeGroup={changeGroup}
+                    options={groupOptions}
+                    elementType={type}
                 />
-
-                {!isEmpty(groupOptions) && (
-                    <SelectGroup
-                        dense
-                        onChange={onChange}
-                        name="existingGroup"
-                        label={i18n.t('Select a created group visualization')}
-                        value="existingGroup"
-                        checked={optionSelection['existingGroup']}
-                        groupName={groupName}
-                        changeGroup={changeGroup}
-                        options={groupOptions}
-                        elementType={type}
-                    />
-                )}
-            </FieldGroup>
-        </>
+            )}
+        </FieldGroup>
     )
 }
 

@@ -16,7 +16,7 @@ const AuthWall = ({ children }) => {
         useIsAuthorized()
     const { isInfoUpdated } = useAndroidSettingsVersion()
     const { apiVersion } = useConfig()
-    const [hasDatastoreAccess, setDatastoreAccess] = useState(hasNamespace)
+    const [hasDatastoreAccess, setHasDatastoreAccess] = useState(hasNamespace)
     const [mutate] = useDataMutation(deletePrevDataStoreMutation)
     const [mutateUpdateInfo] = useDataMutation(updateInfoMutation)
     const { createSetup } = useCreateFirstSetup()
@@ -49,25 +49,23 @@ const AuthWall = ({ children }) => {
 
         createSetup(apiVersion)
             .then(() => {
-                setDatastoreAccess(true)
+                setHasDatastoreAccess(true)
                 show({ success: true })
             })
             .catch((e) => {
                 console.error(e)
-                setDatastoreAccess(false)
+                setHasDatastoreAccess(false)
                 show({ success: false })
             })
     }
 
     if (!hasDatastoreAccess) {
         return (
-            <>
-                <DialogFirstLaunch
-                    handleSave={handleSave}
-                    disable={!hasAuthority}
-                    isOutOfDate={hasOutDateNamespace}
-                />
-            </>
+            <DialogFirstLaunch
+                handleSave={handleSave}
+                disable={!hasAuthority}
+                isOutOfDate={hasOutDateNamespace}
+            />
         )
     }
 

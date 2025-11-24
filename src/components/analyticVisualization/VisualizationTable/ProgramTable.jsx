@@ -14,11 +14,11 @@ import {
 import { VisualizationTable } from './VisualizationTable.jsx'
 
 export const ProgramTable = ({ rows, changeRows, disabled }) => {
-    const [openDeleteDialog, setOpenDialog] = useState(false)
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [group, setGroup] = useState([])
-    const [openDeleteGroup, setDeleteGroup] = useState(false)
-    const [elementName, setName] = useState()
+    const [openDeleteGroup, setOpenDeleteGroup] = useState(false)
+    const [elementName, setElementName] = useState()
     const [groupId, setGroupId] = useState('')
     const [openEditDialog, setOpenEditDialog] = useState(false)
 
@@ -49,15 +49,15 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     const deleteRow = (row, group) => {
         setSpecificSetting(row)
         setGroup(group)
-        setName(row.name || row.visualizationName)
-        setOpenDialog(true)
+        setElementName(row.name || row.visualizationName)
+        setOpenDeleteDialog(true)
     }
 
     const handleDialogClose = () => {
-        setOpenDialog(false)
+        setOpenDeleteDialog(false)
         setSpecificSetting({})
         setGroup([])
-        setName('')
+        setElementName('')
     }
 
     const handleDelete = () => {
@@ -98,18 +98,18 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     }
 
     const handleCloseDeleteGroup = () => {
-        setDeleteGroup(false)
+        setOpenDeleteGroup(false)
         setSpecificSetting({})
         setGroup([])
-        setName('')
+        setElementName('')
     }
 
     const deleteGroup = (item, programId) => {
         const name = rows[programId].groups[item][0].group.name
-        setName(name)
+        setElementName(name)
         setSpecificSetting(item)
         setGroup(programId)
-        setDeleteGroup(true)
+        setOpenDeleteGroup(true)
     }
 
     const orderVisualization = ({

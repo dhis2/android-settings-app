@@ -18,7 +18,7 @@ export const ItemSelector = ({ setSelection, clearSelection, type }) => {
     const [filter, setFilter] = useState('')
     const [items, setItems] = useState(null)
     const [maxOptions, setMaxOptions] = useState(false)
-    const [disableFields, setDisable] = useState(false)
+    const [disableFields, setDisableFields] = useState(false)
     const dataEngine = useDataEngine()
     const debouncedFilterText = useDebounce(filter, 350)
 
@@ -55,7 +55,7 @@ export const ItemSelector = ({ setSelection, clearSelection, type }) => {
     const openMenu = () => setIsOpen(true)
 
     const addItem = (item) => () => {
-        setDisable(true)
+        setDisableFields(true)
         closeMenu()
         setFilter(item.name || item.displayName)
         setSelection(item)
@@ -63,7 +63,7 @@ export const ItemSelector = ({ setSelection, clearSelection, type }) => {
 
     const clearField = () => {
         closeMenu()
-        setDisable(false)
+        setDisableFields(false)
     }
 
     const getMenus = () => {
