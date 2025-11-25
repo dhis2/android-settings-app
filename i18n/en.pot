@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-28T11:36:36.809Z\n"
-"PO-Revision-Date: 2025-10-28T11:36:36.809Z\n"
+"POT-Creation-Date: 2025-11-19T11:34:49.703Z\n"
+"PO-Revision-Date: 2025-11-19T11:34:49.703Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -797,6 +797,12 @@ msgstr "Per Org Unit"
 msgid "Maximum Tracked Entity Instance (TEI) download per program"
 msgstr "Maximum Tracked Entity Instance (TEI) download per program"
 
+msgid "Download TEIs based on predefined list views"
+msgstr "Download TEIs based on predefined list views"
+
+msgid "Download events based on predefined list views"
+msgstr "Download events based on predefined list views"
+
 msgid "org units available for data capture"
 msgstr "org units available for data capture"
 
@@ -1249,6 +1255,12 @@ msgid ""
 msgstr ""
 "Applies to all programs an Android user has access to. Specific program "
 "settings can be defined in the section below."
+
+msgid "No filters available"
+msgstr "No filters available"
+
+msgid "Choose a filter"
+msgstr "Choose a filter"
 
 msgid "program"
 msgstr "program"

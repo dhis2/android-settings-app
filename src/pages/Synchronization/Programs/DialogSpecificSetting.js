@@ -50,6 +50,7 @@ const DialogSpecificSetting = ({
                             specificSetting={specificSetting}
                             onChange={handleChange}
                             programWithRegistration={programWithRegistration}
+                            programOptions={programOptions}
                         />
                     )}
                 </ModalContent>
