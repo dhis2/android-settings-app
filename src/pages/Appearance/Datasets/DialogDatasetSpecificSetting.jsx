@@ -83,6 +83,7 @@ DialogDatasetSpecificSetting.propTypes = {
     handleChange: PropTypes.func,
     hasCategoryCombo: PropTypes.bool,
     disableSave: PropTypes.bool,
+    dataSetConfiguration: PropTypes.object,
 }
 
 export default DialogDatasetSpecificSetting

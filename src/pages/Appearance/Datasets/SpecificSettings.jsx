@@ -60,6 +60,7 @@ SpecificSettings.propTypes = {
     hasCategoryCombo: PropTypes.bool,
     specificSettings: PropTypes.object,
     handleSettings: PropTypes.func,
+    dataSetConfiguration: PropTypes.object,
 }
 
 export default SpecificSettings

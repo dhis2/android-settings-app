@@ -15,7 +15,7 @@ const NewHomeVisualization = ({
     handleVisualization,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
-    const [visualizationSettings, setSettings] = useState(
+    const [visualizationSettings, setVisualizationSettings] = useState(
         createInitialValues('')
     )
     const [disableSave, setDisableSave] = useState(true)
@@ -30,7 +30,7 @@ const NewHomeVisualization = ({
 
     const handleClose = () => {
         setOpenDialog(false)
-        setSettings(createInitialValues(''))
+        setVisualizationSettings(createInitialValues(''))
     }
 
     const handleSave = () => {
@@ -54,7 +54,7 @@ const NewHomeVisualization = ({
                 <DialogVisualization
                     open={openDialog}
                     settings={visualizationSettings}
-                    handleChange={setSettings}
+                    handleChange={setVisualizationSettings}
                     handleSave={handleSave}
                     handleClose={handleClose}
                     disableSave={disableSave}
@@ -69,8 +69,6 @@ NewHomeVisualization.propTypes = {
     disable: PropTypes.bool,
     visualization: PropTypes.array,
     handleVisualization: PropTypes.func,
-    groups: PropTypes.array,
-    handleGroups: PropTypes.func,
 }
 
 export default NewHomeVisualization

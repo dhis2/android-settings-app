@@ -21,7 +21,7 @@ const NewDatasetSettings = ({
     disabled,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
-    const [hasCategoryCombo, setCategoryCombo] = useState(false)
+    const [hasCategoryCombo, setHasCategoryCombo] = useState(false)
     const [specificSettings, setSpecificSettings] = useState(
         createInitialSpecificValues('')
     )
@@ -71,7 +71,9 @@ const NewDatasetSettings = ({
                 name: getDatasetName(e.selected),
                 id: e.selected,
             })
-            setCategoryCombo(datasetHasCategoryCombo(e.selected, datasetList))
+            setHasCategoryCombo(
+                datasetHasCategoryCombo(e.selected, datasetList)
+            )
             setDisableSave(false)
         } else {
             if (isDataSetConfiguration(e.name || key)) {
@@ -121,6 +123,8 @@ NewDatasetSettings.propTypes = {
     rows: PropTypes.array,
     handleRows: PropTypes.func,
     disabled: PropTypes.bool,
+    configurationList: PropTypes.array,
+    handleConfigurationList: PropTypes.func,
 }
 
 export default NewDatasetSettings

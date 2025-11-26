@@ -15,6 +15,10 @@ export const Section = ({ legend, children }) => (
 )
 
 Section.propTypes = {
-    legend: PropTypes.string,
+    legend: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.element,
+    ]),
     children: PropTypes.element.isRequired,
 }

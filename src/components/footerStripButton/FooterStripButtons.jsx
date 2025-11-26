@@ -76,11 +76,17 @@ FooterStripButtons.propTypes = {
     onSave: PropTypes.func,
     handleDisableSave: PropTypes.func,
     errorRequest: PropTypes.shape({
-        httpStatusCode: PropTypes.string,
+        httpStatusCode: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string,
+        ]),
         message: PropTypes.string,
     }),
     requestResult: PropTypes.shape({
-        httpStatusCode: PropTypes.string,
+        httpStatusCode: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string,
+        ]),
         message: PropTypes.string,
     }),
     disableAll: PropTypes.bool,

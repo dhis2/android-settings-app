@@ -37,38 +37,36 @@ export const ExperimentalFeatures = ({ onChange, value, ...props }) => {
     }
 
     return (
-        <>
-            <MoreOptions>
-                <>
-                    <Legend className={styles.container}>
-                        {i18n.t(
-                            'The Android Capture app has helpful new and experimental features that can be enabled.'
-                        )}
-                    </Legend>
-
-                    {featureList.map(
-                        ({ name, label, description, warning, version }) => (
-                            <CheckboxField
-                                key={name}
-                                name={name}
-                                label={label}
-                                helpText={
-                                    <HelpText
-                                        helpText={description}
-                                        warning={warning}
-                                        type={warning ? 'info' : undefined}
-                                        version={version}
-                                    />
-                                }
-                                checked={options[name]}
-                                onChange={handleCheckbox}
-                                {...props}
-                            />
-                        )
+        <MoreOptions>
+            <>
+                <Legend className={styles.container}>
+                    {i18n.t(
+                        'The Android Capture app has helpful new and experimental features that can be enabled.'
                     )}
-                </>
-            </MoreOptions>
-        </>
+                </Legend>
+
+                {featureList.map(
+                    ({ name, label, description, warning, version }) => (
+                        <CheckboxField
+                            key={name}
+                            name={name}
+                            label={label}
+                            helpText={
+                                <HelpText
+                                    helpText={description}
+                                    warning={warning}
+                                    type={warning ? 'info' : undefined}
+                                    version={version}
+                                />
+                            }
+                            checked={options[name]}
+                            onChange={handleCheckbox}
+                            {...props}
+                        />
+                    )
+                )}
+            </>
+        </MoreOptions>
     )
 }
 

@@ -26,7 +26,7 @@ const ProgramSpecificSettings = ({
     const [listName, setListName] = useState()
     const [spinnerList, setSpinnerList] = useState()
     const [initialSpinner, setInitialSpinner] = useState()
-    const [loadSpecific, setLoad] = useState(false)
+    const [loadSpecific, setLoadSpecific] = useState(false)
 
     useEffect(() => {
         if (programs && specificSettings && spinnerSettings) {
@@ -43,7 +43,7 @@ const ProgramSpecificSettings = ({
             setInitialRows(settingsListUpdated)
             setSpinnerList(spinnerListUpdated)
             setInitialSpinner(spinnerListUpdated)
-            setLoad(true)
+            setLoadSpecific(true)
         }
     }, [specificSettings, spinnerSettings])
 

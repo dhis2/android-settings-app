@@ -69,6 +69,8 @@ ProgramGlobalSettings.propTypes = {
     settings: PropTypes.object,
     spinnerSettings: PropTypes.object,
     disableAll: PropTypes.bool,
+    onChange: PropTypes.func,
+    onChangeSpinner: PropTypes.func,
 }
 
 export default ProgramGlobalSettings

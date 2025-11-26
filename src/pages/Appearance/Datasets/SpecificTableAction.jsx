@@ -130,6 +130,8 @@ SpecificTableAction.propTypes = {
     changeRows: PropTypes.func,
     elementList: PropTypes.array,
     disableAll: PropTypes.bool,
+    configurationList: PropTypes.array,
+    handleConfigurationList: PropTypes.func,
 }
 
 export default SpecificTableAction

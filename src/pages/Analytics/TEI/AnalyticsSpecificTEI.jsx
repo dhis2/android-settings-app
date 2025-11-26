@@ -10,14 +10,14 @@ const AnalyticsSpecificTEI = ({ settings, handleSettings, disable }) => {
     const { programList } = useReadProgramQuery()
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
-    const [loadSpecific, setLoad] = useState(false)
+    const [loadSpecific, setLoadSpecific] = useState(false)
 
     useEffect(() => {
         if (settings && programList) {
             prepareItemsList(settings, programList)
             setRows(settings)
             setInitialRows(settings)
-            setLoad(true)
+            setLoadSpecific(true)
         }
     }, [programList, settings])
 

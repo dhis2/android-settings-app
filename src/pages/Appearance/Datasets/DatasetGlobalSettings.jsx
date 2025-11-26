@@ -38,6 +38,7 @@ const DatasetGlobalSettings = ({ disable, settings, onChange }) => {
 DatasetGlobalSettings.propTypes = {
     settings: PropTypes.object,
     disable: PropTypes.bool,
+    onChange: PropTypes.func,
 }
 
 export default DatasetGlobalSettings

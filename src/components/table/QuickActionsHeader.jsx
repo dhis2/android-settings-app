@@ -12,7 +12,6 @@ export const QuickActionsHeader = () => {
                     content={
                         <img
                             src={androidQuickActions}
-                            alt="Tooltip Image"
                             style={{ width: '500px', height: '500px' }}
                         />
                     }

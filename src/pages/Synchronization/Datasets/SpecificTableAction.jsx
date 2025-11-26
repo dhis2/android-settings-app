@@ -12,7 +12,7 @@ import { getPeriodType } from './helper'
 import { parseValueBySettingType } from './parseValueBySettingType'
 
 const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
-    const [openDeleteDialog, setOpenDialog] = useState(false)
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [periodType, setPeriodType] = useState()
@@ -27,13 +27,13 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
             setOpenEditDialog(true)
         },
         delete: (...args) => {
-            setOpenDialog(true)
+            setOpenDeleteDialog(true)
             setSpecificSetting(args[0])
         },
     }
 
     const handleCloseDelete = () => {
-        setOpenDialog(false)
+        setOpenDeleteDialog(false)
     }
 
     const handleChange = (e) => {

@@ -1,5 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { Popover, FlyoutMenu } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React, { createRef, useEffect, useState } from 'react'
 import useDebounce from '../../../../utils/useDebounce'
 import { getUserQuery } from '../queries/userSyncQueries'
@@ -11,7 +12,7 @@ const ItemSelector = ({ selection }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [filter, setFilter] = useState('')
     const [items, setItems] = useState(null)
-    const [disableField, setDisable] = useState(false)
+    const [disableField, setDisableField] = useState(false)
     const dataEngine = useDataEngine()
     const debouncedFilterText = useDebounce(filter, 350)
 
@@ -31,7 +32,7 @@ const ItemSelector = ({ selection }) => {
     const openMenu = () => setIsOpen(true)
 
     const addItem = (item) => () => {
-        setDisable(true)
+        setDisableField(true)
         closeMenu()
         setFilter(item.name)
         selection(item)
@@ -39,7 +40,7 @@ const ItemSelector = ({ selection }) => {
 
     const clearField = () => {
         closeMenu()
-        setDisable(false)
+        setDisableField(false)
     }
 
     const getMenus = () => {
@@ -83,6 +84,10 @@ const ItemSelector = ({ selection }) => {
             )}
         </>
     )
+}
+
+ItemSelector.propTypes = {
+    selection: PropTypes.func,
 }
 
 export default ItemSelector

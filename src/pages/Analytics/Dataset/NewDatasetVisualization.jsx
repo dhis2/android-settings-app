@@ -19,7 +19,7 @@ const NewDatasetVisualization = ({
     handleGroups,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
-    const [visualizationSettings, setSettings] = useState(
+    const [visualizationSettings, setVisualizationSettings] = useState(
         createInitialValues('')
     )
     const [disableSave, setDisableSave] = useState(true)
@@ -34,7 +34,7 @@ const NewDatasetVisualization = ({
 
     const handleClose = () => {
         setOpenDialog(false)
-        setSettings(createInitialValues(''))
+        setVisualizationSettings(createInitialValues(''))
     }
 
     const handleSave = () => {
@@ -62,7 +62,7 @@ const NewDatasetVisualization = ({
                 <DialogVisualization
                     open={openDialog}
                     settings={visualizationSettings}
-                    handleChange={setSettings}
+                    handleChange={setVisualizationSettings}
                     handleSave={handleSave}
                     handleClose={handleClose}
                     disableSave={disableSave}

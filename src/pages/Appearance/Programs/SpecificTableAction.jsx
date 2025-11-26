@@ -30,7 +30,7 @@ const SpecificTableAction = ({
     const [openEditDialog, setOpenEditDialog] = useState(false)
     const [hasCategoryCombo, setHasCategoryCombo] = useState(false)
     const [spinner, setSpinner] = useState({})
-    const [isTracker, setTrackerProgram] = useState(false)
+    const [isTracker, setIsTracker] = useState(false)
 
     const tableActions = {
         edit: (...args) => {
@@ -38,7 +38,7 @@ const SpecificTableAction = ({
             setHasCategoryCombo(
                 programHasCategoryCombo(args[0].id, elementList)
             )
-            setTrackerProgram(isTrackerProgram(args[0].id, elementList))
+            setIsTracker(isTrackerProgram(args[0].id, elementList))
             setSpinner(createSettings(findElementById(spinnerList, args[0].id)))
             setOpenEditDialog(true)
         },

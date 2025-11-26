@@ -23,7 +23,7 @@ const DatasetSpecificSettings = ({
     const datasetList = filterListByReadAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
-    const [loadSpecific, setLoad] = useState(false)
+    const [loadSpecific, setLoadSpecific] = useState(false)
 
     useEffect(() => {
         if (datasetList && specificSettings) {
@@ -34,7 +34,7 @@ const DatasetSpecificSettings = ({
             setRows(rowList)
             setInitialRows(rowList)
             setListName(filterUnusedElements(datasetList, rowList))
-            setLoad(true)
+            setLoadSpecific(true)
         }
     }, [specificSettings])
 

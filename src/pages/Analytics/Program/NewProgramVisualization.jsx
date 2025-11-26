@@ -19,7 +19,7 @@ const NewProgramVisualization = ({
     handleGroups,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
-    const [visualizationSettings, setSettings] = useState(
+    const [visualizationSettings, setVisualizationSettings] = useState(
         createInitialValues('')
     )
     const [disableSave, setDisableSave] = useState(true)
@@ -34,7 +34,7 @@ const NewProgramVisualization = ({
 
     const handleClose = () => {
         setOpenDialog(false)
-        setSettings(createInitialValues(''))
+        setVisualizationSettings(createInitialValues(''))
     }
 
     const handleSave = () => {
@@ -64,7 +64,7 @@ const NewProgramVisualization = ({
                 <DialogVisualization
                     open={openDialog}
                     settings={visualizationSettings}
-                    handleChange={setSettings}
+                    handleChange={setVisualizationSettings}
                     handleSave={handleSave}
                     handleClose={handleClose}
                     disableSave={disableSave}

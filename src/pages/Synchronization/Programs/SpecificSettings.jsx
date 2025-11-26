@@ -89,7 +89,7 @@ const SpecificSettings = ({
 SpecificSettings.propTypes = {
     specificSetting: PropTypes.object,
     onChange: PropTypes.func,
-    completeListOptions: PropTypes.array,
+    programWithRegistration: PropTypes.bool,
 }
 
 export default SpecificSettings

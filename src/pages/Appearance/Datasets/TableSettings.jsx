@@ -68,6 +68,7 @@ DatasetGlobalSettings.propTypes = {
     states: PropTypes.object,
     handleChange: PropTypes.func,
     disabled: PropTypes.bool,
+    dense: PropTypes.bool,
 }
 
 export const DatasetCategoryComboSettings = ({

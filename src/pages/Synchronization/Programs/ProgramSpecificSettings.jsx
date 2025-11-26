@@ -23,7 +23,7 @@ const ProgramSpecificSettings = ({
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
-    const [loadSpecific, setLoad] = useState(false)
+    const [loadSpecific, setLoadSpecific] = useState(false)
 
     useEffect(() => {
         if (specificSettings && programList) {
@@ -34,7 +34,7 @@ const ProgramSpecificSettings = ({
             setInitialRows(rowList)
             setRows(rowList)
             setListName(filterUnusedElements(programList, rowList))
-            setLoad(true)
+            setLoadSpecific(true)
         }
     }, [specificSettings])
 

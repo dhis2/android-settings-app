@@ -12,25 +12,27 @@ import { isProgramWithRegistration } from './helper'
 import { parseValueByType } from './parseValueBySettingType'
 
 const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
-    const [openDeleteDialog, setOpenDialog] = useState(false)
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [openEditDialog, setOpenEditDialog] = useState(false)
-    const [programWithRegistration, setProgramType] = useState(true)
+    const [programWithRegistration, setProgramWithRegistration] = useState(true)
 
     const tableActions = {
         edit: (...args) => {
             setSpecificSetting(args[0])
-            setProgramType(isProgramWithRegistration(programList, args[0].id))
+            setProgramWithRegistration(
+                isProgramWithRegistration(programList, args[0].id)
+            )
             setOpenEditDialog(true)
         },
         delete: (...args) => {
-            setOpenDialog(true)
+            setOpenDeleteDialog(true)
             setSpecificSetting(args[0])
         },
     }
 
     const handleDialogClose = () => {
-        setOpenDialog(false)
+        setOpenDeleteDialog(false)
     }
 
     const handleDelete = () => {

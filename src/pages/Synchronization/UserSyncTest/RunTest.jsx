@@ -13,19 +13,21 @@ const RunTest = ({ disabled, user }) => {
     const { reservedValues, globalSettings, specificSettings } =
         useReadSettings()
     const [runTest, setRunTest] = useState(false)
-    const [loading, setLoad] = useState(false)
-    const [userTestValues, setValues] = useState(createInitialValues(''))
+    const [loading, setLoading] = useState(false)
+    const [userTestValues, setUserTestValues] = useState(
+        createInitialValues('')
+    )
 
     useEffect(() => {
         if (isEmpty(user)) {
-            setValues(createInitialValues(''))
+            setUserTestValues(createInitialValues(''))
             setRunTest(false)
         }
     }, [user])
 
     const testUser = () => {
         setRunTest(true)
-        setLoad(true)
+        setLoading(true)
         runUserTest({
             user,
             dataEngine,
@@ -33,8 +35,8 @@ const RunTest = ({ disabled, user }) => {
             globalSettings,
             specificSettings,
         }).then((result) => {
-            setValues(createInitialValues(result))
-            setLoad(false)
+            setUserTestValues(createInitialValues(result))
+            setLoading(false)
         })
     }
 

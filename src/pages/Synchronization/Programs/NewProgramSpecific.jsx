@@ -23,7 +23,7 @@ const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
     const [specificSetting, setSpecificSetting] = useState(
         createInitialSpecificValues('')
     )
-    const [programWithRegistration, setProgramType] = useState(true)
+    const [programWithRegistration, setProgramWithRegistration] = useState(true)
     const [disableSave, setDisableSave] = useState(true)
 
     const handleClose = () => {
@@ -59,7 +59,9 @@ const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
                 [key]: e.selected,
                 id: e.selected,
             })
-            setProgramType(isProgramWithRegistration(programList, e.selected))
+            setProgramWithRegistration(
+                isProgramWithRegistration(programList, e.selected)
+            )
             setDisableSave(false)
         } else {
             const name = typeof key === 'string' ? key : e.name
@@ -99,7 +101,6 @@ NewProgramSpecific.propTypes = {
     programList: PropTypes.array,
     rows: PropTypes.array,
     handleRows: PropTypes.func,
-    completeList: PropTypes.array,
     disabled: PropTypes.bool,
 }
 

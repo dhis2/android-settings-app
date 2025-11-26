@@ -30,7 +30,7 @@ const DatasetSpecificSettings = ({
     const [rows, setRows] = useState()
     const [dataSetConfiguration, setDataSetConfiguration] = useState()
     const [listName, setListName] = useState()
-    const [loadSpecific, setLoad] = useState(false)
+    const [loadSpecific, setLoadSpecific] = useState(false)
 
     useEffect(() => {
         if (specificSettings && datasetList) {
@@ -47,7 +47,7 @@ const DatasetSpecificSettings = ({
             setDataSetConfiguration(updatedConfiguration)
             setInitialConfiguration(updatedConfiguration)
             setListName(filterUnusedElements(datasetList, updated))
-            setLoad(true)
+            setLoadSpecific(true)
         }
     }, [specificSettings, configuration])
 
@@ -95,6 +95,8 @@ DatasetSpecificSettings.propTypes = {
     onChange: PropTypes.func,
     specificSettings: PropTypes.object,
     disabled: PropTypes.bool,
+    onChangeConfiguration: PropTypes.func,
+    configuration: PropTypes.object,
 }
 
 export default DatasetSpecificSettings

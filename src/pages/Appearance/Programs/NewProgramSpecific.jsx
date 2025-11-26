@@ -24,13 +24,13 @@ const NewProgramSpecific = ({
     disabled,
 }) => {
     const [openDialog, setOpenDialog] = useState(false)
-    const [hasCategoryCombo, setCategoryCombo] = useState(false)
+    const [hasCategoryCombo, setHasCategoryCombo] = useState(false)
     const [specificSettings, setSpecificSettings] = useState(
         createInitialSpecificValues('')
     )
     const [spinner, setSpinner] = useState(createInitialSpinnerValue({}))
     const [disableSave, setDisableSave] = useState(true)
-    const [isTracker, setTrackerProgram] = useState(false)
+    const [isTracker, setIsTracker] = useState(false)
 
     const handleOpenSettingsDialog = () => {
         setOpenDialog(true)
@@ -64,8 +64,10 @@ const NewProgramSpecific = ({
                 id: e.selected,
                 name: getProgramName(e.selected, programList),
             })
-            setCategoryCombo(programHasCategoryCombo(e.selected, programList))
-            setTrackerProgram(isTrackerProgram(e.selected, programList))
+            setHasCategoryCombo(
+                programHasCategoryCombo(e.selected, programList)
+            )
+            setIsTracker(isTrackerProgram(e.selected, programList))
             setDisableSave(false)
         } else {
             if (isProgramConfiguration(e.name || key)) {

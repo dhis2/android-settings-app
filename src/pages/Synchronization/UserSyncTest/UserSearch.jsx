@@ -4,12 +4,12 @@ import RunTest from './RunTest.jsx'
 import ItemSelector from './searchField/ItemSelector.jsx'
 
 const UserSearch = () => {
-    const [userSelected, setUser] = useState()
+    const [userSelected, setUserSelected] = useState()
     const disableRun = useMemo(() => isEmpty(userSelected), [userSelected])
 
     return (
         <>
-            <ItemSelector selection={setUser} />
+            <ItemSelector selection={setUserSelected} />
             <RunTest disabled={disableRun} user={userSelected} />
         </>
     )
