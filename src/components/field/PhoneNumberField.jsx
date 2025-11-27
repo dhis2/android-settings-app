@@ -20,12 +20,13 @@ export const PhoneNumberField = ({
     const validatePhoneNumber = (e) => {
         const inputValue = e.value
 
-        if (isValidValue(inputValue)) {
-            const validInput = validateNumber(inputValue)
-            !validInput ? setError(true) : setError(false)
-        } else {
+        if (!isValidValue(inputValue)) {
             setError(false)
+            return
         }
+
+        const validInput = validateNumber(inputValue)
+        setError(!validInput)
     }
 
     const handleChange = (e) => {
