@@ -29,18 +29,17 @@ export const AxisSection = ({
     const [loading, setLoading] = useState(true)
 
     const handleChange = (e, key) => {
-        let name
-        typeof key === 'string' ? (name = key) : (name = e.name)
-        name === axis
-            ? onChange({
-                  ...specificSettings,
-                  [axisValue]: '',
-                  [name]: e.value || e.selected,
-              })
-            : onChange({
-                  ...specificSettings,
-                  [name]: e.value || e.selected,
-              })
+        const name = typeof key === 'string' ? key : e.name
+        const value = e.value || e.selected
+
+        const updatedSettings = {
+            ...specificSettings,
+            [name]: value,
+        }
+        if (name === axis) {
+            updatedSettings[axisValue] = ''
+        }
+        onChange(updatedSettings)
     }
 
     return (
