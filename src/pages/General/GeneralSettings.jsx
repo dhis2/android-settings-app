@@ -58,16 +58,20 @@ const GeneralSettings = () => {
      *  the settings are valid inputs
      * */
     useEffect(() => {
-        if (initialValues && settings) {
-            const validSettings = checkValidSettings(settings)
-            if (!isEqual(validSettings, initialValues)) {
-                notValidFields(validSettings)
-                    ? setDisableSave(true)
-                    : setDisableSave(false)
-            } else {
-                setDisableSave(true)
-            }
+        if (!initialValues || !settings) {
+            return
         }
+
+        const validSettings = checkValidSettings(settings)
+        const settingsAreEqual = isEqual(validSettings, initialValues)
+
+        if (settingsAreEqual) {
+            setDisableSave(true)
+            return
+        }
+
+        const hasInvalidFields = notValidFields(validSettings)
+        setDisableSave(hasInvalidFields)
     }, [settings])
 
     const saveSettings = async () => {

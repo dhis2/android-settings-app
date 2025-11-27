@@ -51,46 +51,52 @@ const NewProgramSpecific = ({
 
     const handleChange = (e, key) => {
         if (key === 'id') {
-            const states = programHasCategoryCombo(e.selected, programList)
+            const hasCC = programHasCategoryCombo(e.selected, programList)
+            const programName = getProgramName(e.selected, programList)
+
+            const states = hasCC
                 ? createInitialSpecificValues('')
                 : createInitialValues('')
+
             setSpecificSettings({
                 ...states,
-                name: getProgramName(e.selected, programList),
+                name: programName,
                 id: e.selected,
             })
             setSpinner({
                 ...createInitialSpinnerValue({}),
                 id: e.selected,
-                name: getProgramName(e.selected, programList),
+                name: programName,
             })
-            setHasCategoryCombo(
-                programHasCategoryCombo(e.selected, programList)
-            )
+            setHasCategoryCombo(hasCC)
             setIsTracker(isTrackerProgram(e.selected, programList))
             setDisableSave(false)
-        } else {
-            if (isProgramConfiguration(e.name || key)) {
-                const spinnerSettings = !isNil(e.name)
-                    ? { ...spinner, [e.name]: e.checked || e.value }
-                    : { ...spinner, [key]: e.selected }
-
-                setSpinner({
-                    ...spinnerSettings,
-                    [e.name]: e.checked || e.value,
-                    id: specificSettings.id,
-                    name: specificSettings.name,
-                })
-            } else {
-                setSpecificSettings({
-                    ...specificSettings,
-                    [e.name]: {
-                        filter: e.checked,
-                        sort: e.checked,
-                    },
-                })
-            }
+            return
         }
+
+        if (isProgramConfiguration(e.name || key)) {
+            const hasName = !isNil(e.name)
+            const spinnerSettings = hasName
+                ? { ...spinner, [e.name]: e.checked ?? e.value }
+                : { ...spinner, [key]: e.selected }
+
+            setSpinner({
+                ...spinnerSettings,
+                [e.name]: e.checked ?? e.value,
+                id: specificSettings.id,
+                name: specificSettings.name,
+            })
+            return
+        }
+
+        // Handle filter toggles
+        setSpecificSettings({
+            ...specificSettings,
+            [e.name]: {
+                filter: e.checked,
+                sort: e.checked,
+            },
+        })
     }
 
     return (

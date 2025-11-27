@@ -58,41 +58,46 @@ const NewDatasetSettings = ({
 
     const handleChange = (e, key) => {
         if (typeof key === 'string') {
-            const settings = datasetHasCategoryCombo(e.selected, datasetList)
+            const hasCC = datasetHasCategoryCombo(e.selected, datasetList)
+            const datasetName = getDatasetName(e.selected)
+
+            const settings = hasCC
                 ? createInitialSpecificValues('')
                 : createInitialValues('')
+
             setSpecificSettings({
                 ...settings,
-                name: getDatasetName(e.selected),
+                name: datasetName,
                 id: e.selected,
             })
             setDataSetConfiguration({
                 ...createInitialDataSetConfiguration({}),
-                name: getDatasetName(e.selected),
+                name: datasetName,
                 id: e.selected,
             })
-            setHasCategoryCombo(
-                datasetHasCategoryCombo(e.selected, datasetList)
-            )
+            setHasCategoryCombo(hasCC)
             setDisableSave(false)
-        } else {
-            if (isDataSetConfiguration(e.name || key)) {
-                setDataSetConfiguration({
-                    ...dataSetConfiguration,
-                    [e.name]: e.checked || e.value,
-                    id: specificSettings.id,
-                    name: specificSettings.name,
-                })
-            } else {
-                setSpecificSettings({
-                    ...specificSettings,
-                    [e.name]: {
-                        filter: e.checked,
-                        sort: e.checked,
-                    },
-                })
-            }
+            return
         }
+
+        if (isDataSetConfiguration(e.name || key)) {
+            setDataSetConfiguration({
+                ...dataSetConfiguration,
+                [e.name]: e.checked || e.value,
+                id: specificSettings.id,
+                name: specificSettings.name,
+            })
+            return
+        }
+
+        // Handle filter
+        setSpecificSettings({
+            ...specificSettings,
+            [e.name]: {
+                filter: e.checked,
+                sort: e.checked,
+            },
+        })
     }
 
     return (

@@ -71,7 +71,8 @@ const SpecificTableAction = ({
 
     const handleChange = (e, key) => {
         if (isProgramConfiguration(e.name || key)) {
-            const spinnerSettings = !isNil(e.name)
+            const hasName = !isNil(e.name)
+            const spinnerSettings = hasName
                 ? { ...spinner, [e.name]: e.checked || e.value }
                 : { ...spinner, [key]: e.selected }
 

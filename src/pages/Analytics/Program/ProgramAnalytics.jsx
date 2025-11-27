@@ -18,7 +18,7 @@ const ProgramAnalytics = () => {
     const { tei, home, program, dataSet, load, errorDataStore } =
         useReadAnalyticsDataStore()
     const { hasAuthority } = useIsAuthorized()
-    const [programsAnalytics, setProgramAnalytics] = useState()
+    const [programsAnalytics, setProgramsAnalytics] = useState()
     const [initialValues, setInitialValues] = useState()
     const [disableSave, setDisableSave] = useState(true)
     const [disable, setDisable] = useState(false)
@@ -31,7 +31,7 @@ const ProgramAnalytics = () => {
 
     useEffect(() => {
         if (program) {
-            setProgramAnalytics(program)
+            setProgramsAnalytics(program)
             setInitialValues(program)
         }
     }, [program])
@@ -57,7 +57,7 @@ const ProgramAnalytics = () => {
     }
 
     const resetSettings = () => {
-        setProgramAnalytics({})
+        setProgramsAnalytics({})
     }
 
     return (
@@ -82,7 +82,7 @@ const ProgramAnalytics = () => {
                     <ProgramAnalyticsList
                         disable={disable}
                         visualizations={programsAnalytics}
-                        handleVisualizations={setProgramAnalytics}
+                        handleVisualizations={setProgramsAnalytics}
                     />
 
                     <FooterStripButtons

@@ -10,12 +10,12 @@ export const MatomoUrl = ({ value, onChange, disabled }) => {
     const [error, setError] = useState(false)
 
     const validateURL = (value) => {
-        if (isValidValue(value)) {
-            const validInput = isValidURL(value)
-            !validInput ? setError(true) : setError(false)
-        } else {
+        if (!isValidValue(value)) {
             setError(false)
+            return
         }
+
+        setError(!isValidURL(value))
     }
 
     const onChangeUrl = (e) => {

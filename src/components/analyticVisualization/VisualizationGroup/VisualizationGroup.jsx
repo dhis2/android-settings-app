@@ -60,12 +60,13 @@ export const VisualizationGroup = ({
         refetchId()
         const groupFound = findGroup(type, { groupList, groupId }, settings)
         if (disabled) {
-            if (!isDefaultGroup(groupFound)) {
-                setGroup(!!groupFound)
-                setTitle(groupFound.name)
-            } else {
+            if (isDefaultGroup(groupFound)) {
                 setGroup(false)
+                return
             }
+
+            setGroup(!!groupFound)
+            setTitle(groupFound.name)
         }
     }, [])
 
