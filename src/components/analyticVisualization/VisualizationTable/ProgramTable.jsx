@@ -80,8 +80,7 @@ export const ProgramTable = ({ rows, changeRows, disabled }) => {
     }
 
     const handleDeleteGroup = () => {
-        const visualizations = Object.assign({}, rows)
-        const currentProgramGroups = visualizations[group].groups
+        const currentProgramGroups = rows[group].groups
         const updatedGroupList = removeElement(
             currentProgramGroups,
             specificSetting

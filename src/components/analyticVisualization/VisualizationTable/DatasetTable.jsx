@@ -80,8 +80,7 @@ export const DatasetTable = ({ rows, changeRows, disabled }) => {
     }
 
     const handleDeleteGroup = () => {
-        const visualizations = Object.assign({}, rows)
-        const currentDatasetGroups = visualizations[group].groups
+        const currentDatasetGroups = rows[group].groups
         const updatedGroupList = removeElement(
             currentDatasetGroups,
             specificSetting
