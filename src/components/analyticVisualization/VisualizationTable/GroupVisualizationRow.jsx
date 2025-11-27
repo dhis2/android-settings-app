@@ -48,7 +48,7 @@ export const GroupVisualizationRow = ({
                     expanded={openRowIndex === i}
                     onExpandToggle={() => toggleOpenRow(i)}
                     expandableContent={expandableContent(groupRow)}
-                    key={i}
+                    key={item}
                 >
                     <DataTableCell className={styles.tableSubtitle}>
                         {groupName}
