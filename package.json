@@ -1,7 +1,7 @@
 {
     "name": "android-settings-app",
-    "version": "2.5.1",
-    "author": "UiO <milagros@dhis2.org>",
+    "version": "2.5.0",
+    "author": "UiO",
     "private": true,
     "dependencies": {
         "@dhis2/app-runtime": "^3.9.4",
