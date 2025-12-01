@@ -8,7 +8,7 @@ import {
     Button,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     ProgramSection,
     TitleSection,
@@ -30,6 +30,12 @@ const DialogAnalyticsTEI = ({
     disableSave,
 }) => {
     const [attributeOptions, setAttributeOptions] = useState([])
+
+    useEffect(() => {
+        if (edit) {
+            setAttributeOptions([])
+        }
+    }, [edit, specificSettings.program])
 
     return (
         <>

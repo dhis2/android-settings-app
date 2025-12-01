@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CircularLoader } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, {useEffect} from 'react'
+import React from 'react'
 import { isValidValue } from '../../utils/validators'
 import { Section } from './Section.jsx'
 import { SelectField } from './SelectField.jsx'
@@ -13,11 +13,6 @@ export const GenderSection = ({
     attributeOptions,
     edit,
 }) => {
-    useEffect(() => {
-        console.log('change specific', {attributeOptions, specificSettings, edit})
-        // error found cause no attributes where found when edit, needs to change the list
-    }, [specificSettings])
-
     const handleChange = (e, key) => {
         const name = typeof key === 'string' ? key : e.name
 
@@ -28,7 +23,6 @@ export const GenderSection = ({
     }
 
     if (edit && attributeOptions.length === 0) {
-        console.log({edit, attributeOptions, specificSettings})
         return <CircularLoader small />
     }
 
