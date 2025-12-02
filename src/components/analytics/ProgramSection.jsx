@@ -11,8 +11,8 @@ export const ProgramSection = ({ onChange, value, edit, programList }) => {
     useEffect(() => {
         if (programList && edit) {
             setProgramStageList(
-                programList.filter((program) => program.id === value.program)[0]
-                    .programStages
+                programList.find((p) => p.id === value.program)
+                    ?.programStages || []
             )
         }
     }, [programList, edit])
