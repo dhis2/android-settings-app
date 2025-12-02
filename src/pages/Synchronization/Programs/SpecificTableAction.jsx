@@ -87,6 +87,7 @@ const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
                         specificSetting={specificSetting}
                         handleSubmitDialog={handleSave}
                         programWithRegistration={programWithRegistration}
+                        programOptions={programList}
                     />
                 </>
             )}

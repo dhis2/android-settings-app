@@ -4,13 +4,10 @@ import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import PageHeader from '../../../components/page/PageHeader.jsx'
-import {
-    filterListByReadAccess,
-    filterUnusedElements,
-} from '../../../utils/utils'
-import { useWorkflowContext } from '../../../workflow-context'
+import { filterUnusedElements } from '../../../utils/utils'
 import { prepareSpecificSettingsList } from './helper'
 import NewProgramSpecific from './NewProgramSpecific.jsx'
+import { useProgramFilters } from './ProgramQueries'
 import SpecificTableAction from './SpecificTableAction.jsx'
 
 const ProgramSpecificSettings = ({
@@ -18,25 +15,34 @@ const ProgramSpecificSettings = ({
     changeSpecificSettings,
     disabled,
 }) => {
-    const { programs } = useWorkflowContext()
-    const programList = filterListByReadAccess(programs)
+    const { programFilterList, loaded } = useProgramFilters()
+    const [programList, setProgramList] = useState([])
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
     const [listName, setListName] = useState()
     const [loadSpecific, setLoadSpecific] = useState(false)
 
+    /**
+     * This effect initializes and synchronizes the local state when both
+     * specificSettings (the saved configuration) and the program filters list are available.
+     * It depends on specificSettings, loaded, and programFilterList
+     * because any change in these values means we need to rebuild the
+     * initial rows and related state values.
+     * */
+
     useEffect(() => {
-        if (specificSettings && programList) {
+        if (specificSettings && loaded) {
             const rowList = prepareSpecificSettingsList(
                 specificSettings,
-                programList
+                programFilterList
             )
+            setProgramList(programFilterList)
             setInitialRows(rowList)
             setRows(rowList)
-            setListName(filterUnusedElements(programList, rowList))
+            setListName(filterUnusedElements(programFilterList, rowList))
             setLoadSpecific(true)
         }
-    }, [specificSettings])
+    }, [specificSettings, programFilterList, loaded])
 
     useEffect(() => {
         if (rows && initialRows && !isEqual(rows, initialRows)) {

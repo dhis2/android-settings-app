@@ -15,6 +15,7 @@ import {
     saveSynchronizationKeyMutation,
     useGetSyncDataStore,
 } from '../SyncDatastoreQuery'
+import { transformSpecificSettingsDataStore } from './helper'
 import { populateProgramObject } from './populateProgramObject'
 import ProgramGlobalSettings from './ProgramGlobalSettings.jsx'
 import ProgramSpecificSettings from './ProgramSpecificSettings.jsx'
@@ -80,7 +81,8 @@ const ProgramSyncSettings = () => {
             dataSetSettings,
             programSettings: {
                 globalSettings,
-                specificSettings,
+                specificSettings:
+                    transformSpecificSettingsDataStore(specificSettings),
             },
         }
 
