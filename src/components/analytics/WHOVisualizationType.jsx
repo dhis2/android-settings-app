@@ -27,8 +27,7 @@ const whoDefaultValues = {
 
 export const WHOVisualizationType = ({ onChange, value }) => {
     const handleChange = (e, key) => {
-        let name
-        typeof key === 'string' ? (name = key) : (name = e.name)
+        const name = typeof key === 'string' ? key : e.name
         onChange({
             ...value,
             [name]: e.value || e.selected,
