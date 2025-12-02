@@ -12,7 +12,9 @@ export const ReservedValues = ({ onChange, value, ...props }) => {
     const handleChange = (e) => {
         const inputValue = Math.max(
             0,
-            isNaN(parseInt(e.value)) ? 0 : parseInt(e.value)
+            Number.isNaN(Number.parseInt(e.value))
+                ? 0
+                : Number.parseInt(e.value)
         )
         onChange({ ...value, [CODE]: inputValue })
     }

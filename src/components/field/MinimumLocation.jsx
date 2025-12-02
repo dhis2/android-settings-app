@@ -18,7 +18,11 @@ export const MinimumLocation = ({ handleChange, settings, ...props }) => {
 
         // Check if the value is a valid positive number within the range
         const numericValue = Number(inputValue)
-        if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 99) {
+        if (
+            !Number.isNaN(numericValue) &&
+            numericValue >= 1 &&
+            numericValue <= 99
+        ) {
             handleChange({
                 name: MINIMUM_LOCATION,
                 value: numericValue.toString(),
