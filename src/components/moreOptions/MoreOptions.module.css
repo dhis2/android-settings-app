@@ -13,10 +13,7 @@
     padding: var(--spacers-dp4) var(--spacers-dp8);
     border-radius: 3px;
     background: transparent;
-}
-
-.header:hover {
-    background: var(--colors-grey200);
+    border-color: transparent;
 }
 
 .label {
@@ -36,4 +33,8 @@
 
 .chevronVisible svg {
     transform: rotate(-90deg);
+}
+
+.headerContainer {
+    /* Keeps layout identical */
 }

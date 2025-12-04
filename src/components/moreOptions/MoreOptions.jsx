@@ -19,22 +19,36 @@ export const MoreOptions = ({
     return (
         <section className={styles.container} data-test={dataTest}>
             <header
-                className={styles.header}
-                onClick={onToggle}
+                className={styles.headerContainer}
                 data-test={`${dataTest}-header`}
             >
-                <div
-                    className={cx({
-                        [styles.chevronHidden]: hidden,
-                        [styles.chevronVisible]: !hidden,
-                    })}
+                <button
+                    type="button"
+                    onClick={onToggle}
+                    className={styles.header}
+                    data-test={`${dataTest}-header`}
+                    aria-expanded={!hidden}
+                    aria-controls={`${dataTest}-children`}
                 >
-                    <IconChevronRight24 />
-                </div>
-                <h2 className={styles.label}>{i18n.t('Opt-in Features')}</h2>
+                    <div
+                        className={cx({
+                            [styles.chevronHidden]: hidden,
+                            [styles.chevronVisible]: !hidden,
+                        })}
+                    >
+                        <IconChevronRight24 />
+                    </div>
+                    <h2 className={styles.label}>
+                        {i18n.t('Opt-in Features')}
+                    </h2>
+                </button>
             </header>
             {!hidden && <Divider />}
-            <div className={styles.children} data-test={`${dataTest}-children`}>
+            <div
+                className={styles.children}
+                id={`${dataTest}-children`}
+                data-test={`${dataTest}-children`}
+            >
                 {!hidden && children}
             </div>
         </section>
