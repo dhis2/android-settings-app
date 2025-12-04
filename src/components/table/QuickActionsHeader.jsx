@@ -13,6 +13,7 @@ export const QuickActionsHeader = () => {
                         <img
                             src={androidQuickActions}
                             style={{ width: '500px', height: '500px' }}
+                            alt="quick-actions"
                         />
                     }
                     placement="top"
