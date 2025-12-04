@@ -50,10 +50,7 @@ const NewDatasetSettings = ({
     }
 
     const getDatasetName = (dataset) => {
-        const datasetFilter = datasetList.filter(
-            (option) => option.id === dataset
-        )
-        return datasetFilter[0].name
+        return datasetList.find((option) => option.id === dataset)?.name ?? ''
     }
 
     const handleChange = (e, key) => {
