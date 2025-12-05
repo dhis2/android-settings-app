@@ -7,27 +7,52 @@ import tableTitleStyles from '../../styles/TableTitle.module.css'
 import { InputNumber, RadioGroup, SelectSettings } from '../inputs'
 import TableRow from './TableRow.jsx'
 
+const SelectorType = ({ radioButton, onChange, dataRow, states }) => (
+    <>
+        {radioButton === true ? (
+            <RadioGroup
+                onChange={onChange}
+                keyDownload={dataRow.keyDownload}
+                value={states[dataRow.keyDownload]}
+                disabled={states.disableAll}
+                options={dataRow.download}
+                defaultValues={dataRow.defaultValues}
+            />
+        ) : (
+            <SelectSettings
+                onChange={onChange}
+                keyDownload={dataRow.keyDownload}
+                value={states[dataRow.keyDownload]}
+                disabled={states.disableAll}
+                options={dataRow.download}
+            />
+        )}
+    </>
+)
+
+SelectorType.propTypes = {
+    radioButton: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
+    dataRow: PropTypes.shape({
+        download: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+        keyDownload: PropTypes.string,
+        defaultValues: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+        maxValue: PropTypes.number,
+    }),
+    states: PropTypes.shape({
+        disableAll: PropTypes.bool,
+    }),
+}
+
 const InputChoice = ({ dataRow, states, onChange }) => (
     <>
         {Array.isArray(dataRow.download) === true ? (
-            dataRow.radioButton === true ? (
-                <RadioGroup
-                    onChange={onChange}
-                    keyDownload={dataRow.keyDownload}
-                    value={states[dataRow.keyDownload]}
-                    disabled={states.disableAll}
-                    options={dataRow.download}
-                    defaultValues={dataRow.defaultValues}
-                />
-            ) : (
-                <SelectSettings
-                    onChange={onChange}
-                    keyDownload={dataRow.keyDownload}
-                    value={states[dataRow.keyDownload]}
-                    disabled={states.disableAll}
-                    options={dataRow.download}
-                />
-            )
+            <SelectorType
+                radioButton={dataRow.radioButton}
+                onChange={onChange}
+                dataRow={dataRow}
+                states={states}
+            />
         ) : (
             <InputNumber
                 onChange={onChange}
@@ -44,7 +69,6 @@ InputChoice.propTypes = {
     dataRow: PropTypes.shape({
         download: PropTypes.string,
         keyDownload: PropTypes.string,
-        defaultValues: PropTypes.array,
         radioButton: PropTypes.bool,
         maxValue: PropTypes.number,
     }),
