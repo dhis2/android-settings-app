@@ -1,1 +1,1 @@
-export * from './MoreOptions'
+export * from './MoreOptions.jsx'

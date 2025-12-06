@@ -1,1 +1,1 @@
-export { ItemSelector as VisualizationSearch } from './ItemSelector'
+export { ItemSelector as VisualizationSearch } from './ItemSelector.jsx'

@@ -1,0 +1,105 @@
+import i18n from '@dhis2/d2-i18n'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import DialogDelete from '../../../components/dialog/DialogDelete.jsx'
+import TableActions from '../../../components/TableActions.jsx'
+import {
+    removeSettingsFromList,
+    updateSettingsList,
+} from '../../../utils/utils'
+import DialogSpecificSetting from './DialogSpecificSetting.jsx'
+import { isProgramWithRegistration } from './helper'
+import { parseValueByType } from './parseValueBySettingType'
+
+const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+    const [specificSetting, setSpecificSetting] = useState({})
+    const [openEditDialog, setOpenEditDialog] = useState(false)
+    const [programWithRegistration, setProgramWithRegistration] = useState(true)
+
+    const tableActions = {
+        edit: (...args) => {
+            setSpecificSetting(args[0])
+            setProgramWithRegistration(
+                isProgramWithRegistration(programList, args[0].id)
+            )
+            setOpenEditDialog(true)
+        },
+        delete: (...args) => {
+            setOpenDeleteDialog(true)
+            setSpecificSetting(args[0])
+        },
+    }
+
+    const handleDialogClose = () => {
+        setOpenDeleteDialog(false)
+    }
+
+    const handleDelete = () => {
+        const updatedList = removeSettingsFromList(specificSetting, rows)
+        changeRows(updatedList)
+        handleDialogClose()
+    }
+
+    const handleEditClose = () => {
+        setOpenEditDialog(false)
+    }
+
+    const handleChange = (e, key) => {
+        const name = typeof key === 'string' ? key : e.name
+        const value = typeof key === 'string' ? e.selected : e.value
+
+        setSpecificSetting({
+            ...specificSetting,
+            [name]: parseValueByType(name, value),
+        })
+    }
+
+    const handleSave = () => {
+        const updatedList = updateSettingsList(specificSetting, rows)
+        changeRows(updatedList)
+        handleEditClose()
+    }
+
+    return (
+        <>
+            {rows.length > 0 && (
+                <>
+                    <TableActions
+                        states={{ disableAll }}
+                        rows={rows}
+                        menuActions={tableActions}
+                    />
+
+                    <DialogDelete
+                        open={openDeleteDialog}
+                        onHandleClose={handleDialogClose}
+                        onHandleDelete={handleDelete}
+                        typeName={i18n.t('program')}
+                        name={specificSetting.name}
+                    />
+
+                    <DialogSpecificSetting
+                        open={openEditDialog}
+                        handleClose={handleEditClose}
+                        programTitle={specificSetting.name}
+                        handleChange={handleChange}
+                        specificSetting={specificSetting}
+                        handleSubmitDialog={handleSave}
+                        programWithRegistration={programWithRegistration}
+                        programOptions={programList}
+                    />
+                </>
+            )}
+        </>
+    )
+}
+
+SpecificTableAction.propTypes = {
+    rows: PropTypes.array,
+    changeRows: PropTypes.func,
+    programList: PropTypes.array,
+    disableAll: PropTypes.bool,
+}
+
+export default SpecificTableAction

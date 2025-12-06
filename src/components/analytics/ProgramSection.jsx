@@ -1,0 +1,49 @@
+import { CircularLoader } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { Section } from './Section.jsx'
+import { SelectProgram } from './SelectProgram.jsx'
+import { SelectProgramStage } from './SelectProgramStage.jsx'
+
+export const ProgramSection = ({ onChange, value, edit, programList }) => {
+    const [programStageList, setProgramStageList] = useState([])
+
+    useEffect(() => {
+        if (programList && edit) {
+            setProgramStageList(
+                programList.find((p) => p.id === value.program)
+                    ?.programStages || []
+            )
+        }
+    }, [programList, edit])
+
+    if (edit && programStageList.length === 0) {
+        return <CircularLoader small />
+    }
+
+    return (
+        <Section>
+            <SelectProgram
+                onChange={onChange}
+                value={value}
+                options={programList || []}
+                handleProgramStage={setProgramStageList}
+                disabled={edit}
+            />
+
+            <SelectProgramStage
+                onChange={onChange}
+                value={value}
+                options={programStageList || []}
+                fixedValue={edit}
+            />
+        </Section>
+    )
+}
+
+ProgramSection.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.object,
+    edit: PropTypes.bool,
+    programList: PropTypes.array,
+}
