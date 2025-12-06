@@ -31,7 +31,7 @@ const SelectorType = ({ radioButton, onChange, dataRow, states }) => (
 )
 
 SelectorType.propTypes = {
-    radioButton: PropTypes.bool.isRequired,
+    radioButton: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     dataRow: PropTypes.shape({
         download: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -67,7 +67,7 @@ const InputChoice = ({ dataRow, states, onChange }) => (
 
 InputChoice.propTypes = {
     dataRow: PropTypes.shape({
-        download: PropTypes.string,
+        download: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
         keyDownload: PropTypes.string,
         radioButton: PropTypes.bool,
         maxValue: PropTypes.number,

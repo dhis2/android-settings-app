@@ -26,7 +26,11 @@ export const CheckboxField = ({
 
 CheckboxField.propTypes = {
     label: PropTypes.string,
-    helpText: PropTypes.string,
+    helpText: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.node,
+    ]),
     name: PropTypes.string,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
