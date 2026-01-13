@@ -1,5 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect, useState } from 'react'
+import { useApiVersion } from '../../../utils/useApiVersion'
 import { filterListByReadAccess } from '../../../utils/utils'
 import { useWorkflowContext } from '../../../workflow-context'
 
@@ -74,13 +75,28 @@ const query = {
     },
 }
 
+/**
+ * show list of programs if there is no working list available
+ * **/
+
 export const useProgramFilters = () => {
-    const { data } = useDataQuery(query)
+    const { apiVersion } = useApiVersion()
+    const { data, loading, error } = useDataQuery(query)
     const { programs } = useWorkflowContext()
     const [programFilterList, setProgramFilterList] = useState([])
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
+        const apiHasWorkingList = apiVersion >= 2.4
+        const noProgramWorkingListAccess =
+            !loading || error || !apiHasWorkingList
+        const programL = filterListByReadAccess(programs)
+
+        if (noProgramWorkingListAccess) {
+            setProgramFilterList(programL)
+            setLoaded(true)
+        }
+
         if (data) {
             const tei =
                 data?.trackedEntityInstanceFilters?.trackedEntityInstanceFilters
@@ -89,7 +105,6 @@ export const useProgramFilters = () => {
             const event = data?.eventFilters?.eventFilters
 
             const filters = groupByProgramId(tei, programWorking, event)
-            const programL = filterListByReadAccess(programs)
 
             setProgramFilterList(combineProgramsWithFilters(programL, filters))
             setLoaded(true)
