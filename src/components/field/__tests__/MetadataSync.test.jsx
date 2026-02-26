@@ -1,4 +1,3 @@
-import { useConfig } from '@dhis2/app-runtime'
 import '@testing-library/jest-dom'
 import { render, screen, within, configure } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
@@ -7,12 +6,6 @@ import { MetadataSync } from '../MetadataSync.jsx'
 
 let mockOnChange
 
-jest.mock('@dhis2/app-runtime', () => ({
-    ...jest.requireActual('@dhis2/app-runtime'),
-    useConfig: jest.fn(),
-}))
-
-const mockedUseConfig = jest.mocked(useConfig)
 const mockStartValue = {
     metadataSync: '24h',
     dataSync: '24h',
@@ -56,32 +49,10 @@ beforeEach(() => {
 })
 
 describe('MetadataSynce', () => {
-    test('renders Metadata sync component with expanded options if v43', async () => {
-        mockedUseConfig.mockReturnValue({ apiVersion: 43 })
+    test('renders Metadata sync component with appropriate options', async () => {
         const expectedOptions = [
-            { displayName: '1 Day' },
-            { displayName: '6 hours' },
-            { displayName: '12 hours' },
-            { displayName: '1 Week' },
-            { displayName: 'Manual' },
-        ]
-        render(
-            <div data-test="testing-wrapper">
-                <MetadataSync onChange={mockOnChange} value={mockStartValue} />
-            </div>
-        )
-        expect(
-            screen.getByText(/How often should metadata sync?/i)
-        ).toBeInTheDocument()
-        await expectSelectToExistWithOptions(
-            screen.getByTestId('testing-wrapper'),
-            { options: expectedOptions, selected: '1 Day' },
-            screen
-        )
-    })
-    test('renders Metadata sync component with limited options if v42', async () => {
-        mockedUseConfig.mockReturnValue({ apiVersion: 42 })
-        const expectedOptions = [
+            { displayName: '6 Hours' },
+            { displayName: '12 Hours' },
             { displayName: '1 Day' },
             { displayName: '1 Week' },
             { displayName: 'Manual' },
