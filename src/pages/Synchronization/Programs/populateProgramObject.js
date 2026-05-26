@@ -28,6 +28,7 @@ export const populateProgramObject = (programType, settingsList) => {
                 enrollmentDownload: settingsList.enrollmentDownload,
                 enrollmentDateDownload: settingsList.enrollmentDateDownload,
                 updateDownload: settingsList.updateDownload,
+                filters: settingsList.filters,
             }
             break
         case WITHOUT_REGISTRATION:
@@ -35,6 +36,7 @@ export const populateProgramObject = (programType, settingsList) => {
                 settingDownload: settingsList.settingDownload,
                 eventsDownload: settingsList.eventsDownload,
                 eventDateDownload: settingsList.eventDateDownload,
+                filters: settingsList.filters,
             }
             break
         case GLOBAL:
