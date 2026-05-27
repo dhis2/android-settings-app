@@ -8,6 +8,14 @@ export const defaultMetadataSync = '24h'
 const CODE = 'metadataSync'
 export const metadataOptions = [
     {
+        value: 'EVERY_6_HOURS',
+        label: i18n.t('6 Hours'),
+    },
+    {
+        value: 'EVERY_12_HOURS',
+        label: i18n.t('12 Hours'),
+    },
+    {
         value: defaultMetadataSync,
         label: i18n.t('1 Day'),
     },
