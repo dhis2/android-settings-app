@@ -1,0 +1,1213 @@
+# Translators:
+# Andres Miguel Rubio, 2026
+# 晓东 林 <13981924470@126.com>, 2026
+# easylin <lin_xd@126.com>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-02-25T15:14:00.274Z\n"
+"PO-Revision-Date: 2026-08-05 13:51+0000\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid ""
+"The initial configuration of the app has been completed and it is now ready "
+"to use."
+msgstr "该应用的初始配置已完成，现已可以投入使用。"
+
+msgid ""
+"The initial configuration of the app encountered an error and it cannot be "
+"used at this time."
+msgstr "该应用的初始配置出现错误，目前无法使用。"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
+msgstr "您有未保存的更改，如果离开，这些更改将会丢失。您确定要离开吗？"
+
+msgid "Failed to get data from Data Store"
+msgstr "无法从数据存储中获取数据"
+
+msgid "Settings were successfully saved"
+msgstr "设置已成功保存"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Program"
+msgstr "项目"
+
+msgid "Data set"
+msgstr "数据集"
+
+msgid "Edit {{label}} visualization"
+msgstr "编辑{{label}} 可视化效果"
+
+msgid "Visualization item"
+msgstr "可视化项目"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Edit Visualization"
+msgstr "编辑可视化效果"
+
+msgid "Dataset"
+msgstr "数据集"
+
+msgid "Visualization Type"
+msgstr "可视化类型"
+
+msgid "Add a group name"
+msgstr "添加组名"
+
+msgid "Create a new group"
+msgstr "创建一个新组"
+
+msgid "Select a created group visualization"
+msgstr "选择一个已创建的群组可视化"
+
+msgid "Select a group visualization"
+msgstr "选择一组可视化图表"
+
+msgid "Use a group visualization"
+msgstr "使用群组可视化"
+
+msgid "No visualization found"
+msgstr "未找到可视化内容"
+
+msgid "Show fewer"
+msgstr "显示较少"
+
+msgid "Show more"
+msgstr "显示更多"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Visualization"
+msgstr "可视化"
+
+msgid "Visualization Group"
+msgstr "可视化小组"
+
+msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr "您确定要删除“{{elementName}} ”可视化组吗？"
+
+msgid "Delete Group"
+msgstr "删除群组"
+
+msgid "Visualization title"
+msgstr "可视化标题"
+
+msgid "This will override the visualization title when shown in the app"
+msgstr "这将在应用中显示时覆盖可视化标题"
+
+msgid "No user found"
+msgstr "未找到该用户"
+
+msgid "Search by user"
+msgstr "按用户搜索"
+
+msgid "{{userName}} can visualize {{visualization}} visualization"
+msgstr "{{userName}} 可以查看{{visualization}} 的可视化效果"
+
+msgid "{{userName}} can not visualize {{visualization}} visualization"
+msgstr "{{userName}} 无法显示{{visualization}} 的可视化图表"
+
+msgid "Visualization user test"
+msgstr "可视化用户测试"
+
+msgid "Run test"
+msgstr "运行测试"
+
+msgid "Data Element"
+msgstr "数据元"
+
+msgid "Program Indicator"
+msgstr "项目指标"
+
+msgid "Gender Attributes"
+msgstr "性别属性"
+
+msgid "Choose attribute"
+msgstr "选择属性"
+
+msgid "Female title"
+msgstr "女性头衔"
+
+msgid "Male title"
+msgstr "男性头衔"
+
+msgid "Choose element"
+msgstr "选择元素"
+
+msgid "Choose element type"
+msgstr "选择元素类型"
+
+msgid "Program Stage"
+msgstr "项目阶段"
+
+msgid "Title and name"
+msgstr "标题和名称"
+
+msgid "Analytics chart title"
+msgstr "分析图表标题"
+
+msgid "Short name"
+msgstr "缩写名"
+
+msgid "Attribute"
+msgstr "属性"
+
+msgid "Daily"
+msgstr "每日"
+
+msgid "Weekly"
+msgstr "每周"
+
+msgid "Monthly"
+msgstr "每月"
+
+msgid "Quarterly"
+msgstr "季度"
+
+msgid "Six-monthly"
+msgstr "六个月"
+
+msgid "Yearly"
+msgstr "每年"
+
+msgid "None"
+msgstr "没有"
+
+msgid "Choose a period type"
+msgstr "选择句号类型"
+
+msgid "Visualization elements"
+msgstr "可视化元素"
+
+msgid "Bar chart"
+msgstr "柱状图"
+
+msgid "Line chart"
+msgstr "折线图"
+
+msgid "Pivot table"
+msgstr "数据透视表"
+
+msgid "Single value"
+msgstr "单一值"
+
+msgid "WHO nutrition"
+msgstr "世卫组织营养"
+
+msgid "Choose visualization type"
+msgstr "选择可视化类型"
+
+msgid "Horizontal (x) axis"
+msgstr "水平轴（X）"
+
+msgid "Vertical (y) axis"
+msgstr "垂轴（Y）"
+
+msgid "Height for age"
+msgstr "同龄儿童身高"
+
+msgid "Weight for age"
+msgstr "按年龄划分的体重"
+
+msgid "Weight for height"
+msgstr "身高体重比"
+
+msgid "Choose WHO visualization type"
+msgstr "选择世卫组织可视化类型"
+
+msgid "Bypass"
+msgstr "旁路"
+
+msgid "Require"
+msgstr "要求"
+
+msgid "{{bypass}} DHIS2 Version Validation"
+msgstr "{{bypass}} DHIS2 版本验证"
+
+msgid ""
+"Use this option to enforce strict version validation when connecting to "
+"DHIS2 instances."
+msgstr "连接到 DHIS2 实例时，请使用此选项强制执行严格的版本验证。"
+
+msgid ""
+"This ensures that only supported DHIS2 versions are accessed, maintaining "
+"compatibility and security standards."
+msgstr "这可确保仅访问受支持的 DHIS2 版本，从而保持兼容性并符合安全标准。"
+
+msgid ""
+"Enabling this option allows you to proceed with connecting to DHIS2 "
+"instances even if they are not officially supported."
+msgstr "启用此选项后，即使某些 DHIS2 实例未获得官方支持，您仍可继续连接到它们。"
+
+msgid ""
+"Use this with caution and ensure compatibility and security measures are in "
+"place."
+msgstr "使用时请谨慎，并确保已采取兼容性措施和安全措施。"
+
+msgid "Validate version"
+msgstr "验证版本"
+
+msgid "Bypass version"
+msgstr "旁路版本"
+
+msgid "Delete {{typeName}}"
+msgstr "删除{{typeName}}"
+
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr "您确定要删除{{name}} {{typeName}} 的设置吗？"
+
+msgid "Delete {{element}}"
+msgstr "删除{{element}}"
+
+msgid "Disable all settings"
+msgstr "禁用所有设置"
+
+msgid ""
+"This action will disable and remove all General, Synchronization, Appearance"
+" and Analytics settings. Are you sure you want to disable all settings?"
+msgstr "此操作将禁用并删除所有“常规”、“同步”、“外观”和“分析”设置。您确定要禁用所有设置吗？"
+
+msgid "Disable"
+msgstr "不显示"
+
+msgid "{{encrypt}} the device database"
+msgstr "{{encrypt}} 设备数据库"
+
+msgid ""
+"Decrypting the device database is a critical action that will reduce the "
+"level of protection of your data. Are you sure you want to decrypt the "
+"device database?"
+msgstr "解密设备数据库是一项关键操作，这将降低您数据的保护级别。您确定要解密设备数据库吗？"
+
+msgid ""
+"Encrypting the device database is a critical action that could have an "
+"impact on the database volume and performance. Are you sure you want to "
+"encrypt the device database?"
+msgstr "对设备数据库进行加密是一项关键操作，可能会影响数据库的容量和性能。您确定要对设备数据库进行加密吗？"
+
+msgid "Decrypt"
+msgstr "解密"
+
+msgid "Encrypt"
+msgstr "加密"
+
+msgid "First time setup"
+msgstr "首次设置"
+
+msgid ""
+"Using the Android Settings app will apply default settings to all Android "
+"devices connected to this instance."
+msgstr "使用 Android “设置” 应用将把默认设置应用到连接到此实例的所有 Android 设备上。"
+
+msgid ""
+"Any settings or configuration on a user's device will be overwritten by "
+"settings applied here."
+msgstr "用户设备上的任何设置或配置都将被此处应用的设置覆盖。"
+
+msgid ""
+"The new version of the Android Settings web app comes with improvements and "
+"disruptive changes. The previous versions are no longer supported, and the "
+"settings stored there will be removed."
+msgstr "新版 Android 设置网页应用带来了诸多改进和重大变更。旧版本将不再受支持，其中存储的设置也将被删除。"
+
+msgid ""
+"You don't have access to this app. Contact your DHIS2 system administrator "
+"to fix this problem."
+msgstr "您无权访问此应用程序。请联系您的 DHIS2 系统管理员以解决此问题。"
+
+msgid ""
+"To set up the default settings and apply to all devices, click \"Set default"
+" and save\""
+msgstr "要设置默认设置并将其应用到所有设备，请点击“设为默认并保存”"
+
+msgid "Exit, do not apply settings"
+msgstr "退出，不应用设置"
+
+msgid "Set defaults and save"
+msgstr "设置默认值并保存"
+
+msgid "Select Manual option"
+msgstr "选择“手动”选项"
+
+msgid ""
+"By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
+"{{type}}. Your users will need to download the {{type}} manually."
+msgstr "如果选择“手动”，则{{type}} 将不会进行任何自动同步。您的用户需要手动下载{{type}} 。"
+
+msgid "Do you want to select this option?"
+msgstr "您要选择此选项吗？"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "Save new configuration"
+msgstr "保存新配置"
+
+msgid ""
+"You are about to update the configuration settings. Please confirm if you'd "
+"like to proceed?"
+msgstr "您即将更新配置设置。请确认是否要继续？"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Skip DHIS2 version validation"
+msgstr "跳过 DHIS2 版本验证"
+
+msgid "Bypass the validation process for DHIS2 version compatibility."
+msgstr "跳过 DHIS2 版本兼容性验证流程。"
+
+msgid "Only applicable for users using Android app version 3.0 or later."
+msgstr "仅适用于使用 Android 应用 3.0 版或更高版本的用户。"
+
+msgid "3.0 +"
+msgstr "3.0 +简体中文（大陆）"
+
+msgid "30 Minutes"
+msgstr "30分钟"
+
+msgid "1 Hour"
+msgstr "一小时"
+
+msgid "6 Hours"
+msgstr "6小时"
+
+msgid "12 Hours"
+msgstr "12小时"
+
+msgid "1 Day"
+msgstr "1天"
+
+msgid "Manual"
+msgstr "手工"
+
+msgid "How often should data sync?"
+msgstr "数据应该多久同步一次？"
+
+msgid "Disable manual location capture"
+msgstr "禁用手动定位功能"
+
+msgid "Disable TEI referrals."
+msgstr "禁用 TEI 引用。"
+
+msgid "Only applicable for users using Android app version 2.9 or later."
+msgstr "仅适用于使用 Android 应用 2.9 版或更高版本的用户。"
+
+msgid "2.9 +"
+msgstr "2.9 +"
+
+msgid "Encrypt device database"
+msgstr "加密设备数据库"
+
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
+msgstr "对设备上存储的所有数据进行加密。如果加密数据库出现问题，数据可能会丢失。这不会影响存储在外部服务器上的 DHIS2 数据库。"
+
+msgid "Maximum file size limit for download (Kb)"
+msgstr "下载文件的最大大小限制（Kb）"
+
+msgid "Only applicable for users using Android app version 2.8 or later."
+msgstr "仅适用于使用 Android 应用 2.8 版或更高版本的用户。"
+
+msgid "2.8 +"
+msgstr "2.8 +"
+
+msgid "Show percentage (%) complete in Program toolbar"
+msgstr "在“程序”工具栏中显示完成百分比 (%)"
+
+msgid "Do not collapse sections in form."
+msgstr "请勿在表单中折叠各部分。"
+
+msgid "Analytics reporting ID (Matomo)"
+msgstr "分析报告 ID（Matomo）"
+
+msgid "Must be at least 1 character long"
+msgstr "长度必须至少为1个字符"
+
+msgid "Analytics reporting URL (Matomo)"
+msgstr "分析报告网址（Matomo）"
+
+msgid "Must be a valid url"
+msgstr "必须是有效的网址"
+
+msgid "Add message of the day"
+msgstr "添加“今日留言”"
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
+msgstr "使用此消息与用户沟通，以便显示重要信息"
+
+msgid "6 hours"
+msgstr "6小时"
+
+msgid "12 hours"
+msgstr "12小时"
+
+msgid "1 Week"
+msgstr "一周"
+
+msgid "How often should metadata sync?"
+msgstr "元数据应多久同步一次？"
+
+msgid "Minimum location accuracy (m)"
+msgstr "最小定位精度（米）"
+
+msgid "Configure the minimum precision level for location capture"
+msgstr "配置位置捕获的最低精度级别"
+
+msgid "Choose an option"
+msgstr "选择一个选项"
+
+msgid "Allow the user to create a TEI without searching"
+msgstr "允许用户在不进行搜索的情况下创建 TEI"
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr "每个TEI的属性下载的保留值"
+
+msgid "Recommended maximum is {{maxValue}} reserved values"
+msgstr "建议的最大值为{{maxValue}} 个保留值"
+
+msgid "Allow user to take screenshots and share their screen."
+msgstr "允许用户截屏并共享屏幕。"
+
+msgid "SMS Gateway phone number"
+msgstr "短信网关电话号码"
+
+msgid "Must start with + and be at least 4 characters long."
+msgstr "必须以“+”开头，且长度至少为4个字符。"
+
+msgid "SMS Result Sender phone number"
+msgstr "短信结果发送方电话号码"
+
+msgid "Use the new version of Tracker Exporter (Web API)"
+msgstr "使用新版 Tracker Exporter（Web API）"
+
+msgid ""
+"Use new tracker endpoints dedicated to querying tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr "请使用专门用于查询追踪器对象（包括被追踪实体、注册信息、事件和关系）的新追踪器端点。"
+
+msgid "Use the new version of Tracker Importer (Web API)"
+msgstr "使用新版 Tracker Importer（Web API）"
+
+msgid ""
+"Use new tracker endpoints dedicated to importing tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr "请使用专门用于导入追踪器对象（包括被追踪实体、注册信息、事件和关系）的新追踪器端点。"
+
+msgid "Reset all values to default"
+msgstr "将所有值重置为默认值"
+
+msgid "Recommended maximum is {{maxValue}} TEI"
+msgstr "建议最大值是{{maxValue}} TEI"
+
+msgid "Recommended maximum is {{maxValue}} events"
+msgstr "建议的最大值是{{maxValue}} 次事件"
+
+msgid "Opt-in Features"
+msgstr "需主动启用的功能"
+
+msgid "No TEI Analytics found"
+msgstr "未找到 TEI Analytics"
+
+msgid ""
+"It looks like there aren't any configured analytics, or they couldn't be "
+"loaded."
+msgstr "看来没有配置任何分析功能，或者无法加载这些分析数据。"
+
+msgid "No custom Intents found"
+msgstr "未找到自定义意图"
+
+msgid ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+msgstr "看来没有配置任何操作，或者无法加载这些操作。"
+
+msgid "Manual options"
+msgstr "手动选项"
+
+msgid ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+msgstr "数据和元数据同步的手动选项仅在 Android 应用 2.3.0 及以上版本中提供。"
+
+msgid ""
+"If the API version is 2.40 or higher, please note that the New Tracker "
+"Importer and New Tracker Exporter should be used as the default option."
+msgstr "如果 API 版本为 2.40 或更高，请注意应将“新追踪器导入器”和“新追踪器导出器”设为默认选项。"
+
+msgid ""
+"Be aware that some functionality might not be ready in the new endpoints, "
+"although primary use-cases are supported."
+msgstr "请注意，尽管主要用例已得到支持，但新端点中某些功能可能尚未就绪。"
+
+msgid "New Tracker Importer and Exporter"
+msgstr "新的追踪器导入和导出工具"
+
+msgid "Something went wrong when loading the data"
+msgstr "加载数据时出现错误"
+
+msgid "It looks like there aren't any configured visualizations."
+msgstr "看起来似乎没有配置任何可视化图表。"
+
+msgid "Data Visualization"
+msgstr "数据可视化"
+
+msgid "Event Visualization"
+msgstr "事件可视化"
+
+msgid "Maximum number of past data to download"
+msgstr "可下载的历史数据最大数量"
+
+msgid "Overview"
+msgstr "概要"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Set General settings"
+msgstr "设置“常规”选项"
+
+msgid ""
+"Defines generic parameters like SMS gateway number and TEI reserved values"
+msgstr "定义了诸如短信网关号码和TEI保留值之类的通用参数"
+
+msgid "Synchronization"
+msgstr "同步"
+
+msgid "Global"
+msgstr "全球"
+
+msgid "Set Global sync settings"
+msgstr "设置全局同步设置"
+
+msgid "Set global settings like metadata anda data sync period"
+msgstr "设置全局设置，例如元数据和数据同步周期"
+
+msgid "Programs"
+msgstr "项目"
+
+msgid "Set Programs sync settings"
+msgstr "设置“节目”的同步设置"
+
+msgid "Define synchronization parameters to tracker and event programs"
+msgstr "为跟踪器和事件程序定义同步参数"
+
+msgid "Data sets"
+msgstr "数据集"
+
+msgid "Set Data set sync settings"
+msgstr "设置数据集同步设置"
+
+msgid "Define synchronization parameters for data sets"
+msgstr "为数据集定义同步参数"
+
+msgid "User sync test"
+msgstr "用户同步测试"
+
+msgid "Run user sync test"
+msgstr "运行用户同步测试"
+
+msgid "Check how much data a user downloads when syncing"
+msgstr "检查用户在同步时下载了多少数据"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Home screen"
+msgstr "主屏幕"
+
+msgid "Set Filters in Home screen"
+msgstr "在主屏幕上设置筛选条件"
+
+msgid "Manage Home screen"
+msgstr "管理主屏幕"
+
+msgid "Set Filters in Programs"
+msgstr "在程序中设置过滤器"
+
+msgid "Manage Programs"
+msgstr "管理程序"
+
+msgid "Set Filters in Data sets"
+msgstr "在数据集中设置筛选条件"
+
+msgid "Manage Data sets"
+msgstr "管理数据集"
+
+msgid "Analytics"
+msgstr "Analytics"
+
+msgid "TEI"
+msgstr "跟踪实体"
+
+msgid "Set TEI Analytics"
+msgstr "设置 TEI Analytics"
+
+msgid "Manage TEI analytics for tracker programs"
+msgstr "管理追踪计划的TEI分析"
+
+msgid "Set Home Visualizations"
+msgstr "设置主页可视化效果"
+
+msgid "Manage visualizations to be shown in home screen"
+msgstr "管理要在主屏幕上显示的可视化内容"
+
+msgid "Set Programs Visualizations"
+msgstr "设置程序可视化效果"
+
+msgid "Manage visualizations for programs"
+msgstr "管理程序的可视化效果"
+
+msgid "Set Data set Visualizations"
+msgstr "设置 数据集 可视化"
+
+msgid "Manage visualizations for data sets"
+msgstr "管理数据集的可视化效果"
+
+msgid "Custom Intents"
+msgstr "自定义意图"
+
+msgid "Set Intents"
+msgstr "设置意图"
+
+msgid "Define actions triggered from external sources"
+msgstr "定义由外部来源触发的操作"
+
+msgid "Maximum Tracked Entity Instance (TEI) downloads"
+msgstr "被追踪实体实例（TEI）的最大下载次数"
+
+msgid "Download TEI with status"
+msgstr "下载带状态的 TEI 文件"
+
+msgid "All statuses"
+msgstr "所有状态"
+
+msgid "Active Only"
+msgstr "仅限活动期间"
+
+msgid "All"
+msgstr "全部"
+
+msgid "Only Active"
+msgstr "仅限活跃用户"
+
+msgid "Download TEI with enrollment date within"
+msgstr "下载注册日期在……之内的TEI"
+
+msgid "Any time period"
+msgstr "任意时间段"
+
+msgid "Last month"
+msgstr "上月"
+
+msgid "Last 3 months"
+msgstr "最近3个月"
+
+msgid "Last 12 months"
+msgstr "最近12月"
+
+msgid "Any"
+msgstr "任何"
+
+msgid "Download TEI that have been updated within"
+msgstr "下载在以下时间段内更新的 TEI 文件"
+
+msgid "Maximum Event downloads"
+msgstr "活动下载次数上限"
+
+msgid "Download Events with event date within"
+msgstr "下载日期在……范围内的活动"
+
+msgid "Setting level"
+msgstr "设置级别"
+
+msgid "All Org Units"
+msgstr "所有组织单位"
+
+msgid "Per Org Unit"
+msgstr "按组织单位"
+
+msgid "Maximum Tracked Entity Instance (TEI) download per program"
+msgstr "每个程序的最大“受追踪实体实例”（TEI）下载量"
+
+msgid "Download TEIs based on predefined list views"
+msgstr "根据预定义的列表视图下载 TEI 文件"
+
+msgid "Download events based on predefined list views"
+msgstr "根据预定义的列表视图下载事件"
+
+msgid "org units available for data capture"
+msgstr "可用于数据采集的组织单位"
+
+msgid "Number of org unit that are available for data capture"
+msgstr "可用于数据采集的组织单位数量"
+
+msgid "org units available for data search"
+msgstr "可用于数据检索的组织单位"
+
+msgid "data sets linked to capture org units"
+msgstr "与捕获组织单位关联的数据集"
+
+msgid "Number of datasets associated to capture OUs"
+msgstr "用于捕获OU的数据集数量"
+
+msgid "programs linked to org units"
+msgstr "与组织单位关联的项目"
+
+msgid "Number of program associated to capture OUs"
+msgstr "用于捕获组织单位的程序数量"
+
+msgid "program rules linked to org units"
+msgstr "与组织单位关联的项目规则"
+
+msgid "Number of program rules to download"
+msgstr "要下载的程序规则数量"
+
+msgid "reserved values per TEI"
+msgstr "TEI 中的保留值"
+
+msgid "Number of reserved values downloaded per TEI attribute"
+msgstr "每个 TEI 属性下载的预留值数量"
+
+msgid "metadata download size (KB)"
+msgstr "元数据下载大小（KB）"
+
+msgid "data download size (KB)"
+msgstr "数据下载大小（KB）"
+
+msgid "Error loading visualizations"
+msgstr "加载可视化时出错"
+
+msgid "Manage visualizations for data set."
+msgstr "管理数据集的可视化效果。"
+
+msgid "Could not find any data set visualisations"
+msgstr "未找到任何数据集可视化效果"
+
+msgid "Add Data set visualization"
+msgstr "添加数据集可视化"
+
+msgid "Add Data set Visualization"
+msgstr "添加数据集可视化"
+
+msgid "Add Home visualization"
+msgstr "添加“首页”可视化"
+
+msgid "Add Home Visualization"
+msgstr "添加家居可视化"
+
+msgid "Manage visualizations for Home screen."
+msgstr "管理主屏幕上的可视化内容。"
+
+msgid "Could not find any home visualisations"
+msgstr "未找到任何住宅效果图"
+
+msgid "Add Program visualization"
+msgstr "添加程序可视化功能"
+
+msgid "Add Program Visualization"
+msgstr "添加程序可视化功能"
+
+msgid "Manage visualizations for program."
+msgstr "管理程序的可视化效果。"
+
+msgid "Could not find any program visualisations"
+msgstr "未找到任何节目视觉效果"
+
+msgid "TEI Analytics"
+msgstr "TEI Analytics"
+
+msgid ""
+"Manage Tracked Entity Instance (TEI) analytics for tracker programs. The "
+"settings below apply to all tracker programs an Android user has access to."
+msgstr "管理追踪器计划的“被追踪实体实例”（TEI）分析。以下设置适用于 Android 用户有权访问的所有追踪器计划。"
+
+msgid "Add TEI Analytics"
+msgstr "添加 TEI Analytics"
+
+msgid "Global settings"
+msgstr "全局设置"
+
+msgid "Show Filter"
+msgstr "显示筛选条件"
+
+msgid "Specific settings"
+msgstr "具体设置"
+
+msgid ""
+"Customize filter and sorting options available for data sets. Settings below"
+" apply to all data sets a mobile user has access to. Settings specific to "
+"individual data sets can also be applied."
+msgstr "可针对数据集自定义筛选和排序选项。以下设置适用于移动端用户有权访问的所有数据集。此外，还可以针对单个数据集应用特定设置。"
+
+msgid "Data set specific settings"
+msgstr "数据集特定设置"
+
+msgid "Save Data set"
+msgstr "保存数据集"
+
+msgid "Add a Data set Settings"
+msgstr "添加数据集设置"
+
+msgid "Capture Coordinates settings"
+msgstr "“捕获坐标”设置"
+
+msgid "Only applicable for users using Android app version 3.2 or later."
+msgstr "仅适用于使用 Android 应用 3.2 版或更高版本的用户。"
+
+msgid "3.2 +"
+msgstr "3.2 +"
+
+msgid "Filter"
+msgstr "过滤器"
+
+msgid "Period"
+msgstr "期间"
+
+msgid "Organisation Unit"
+msgstr "机构"
+
+msgid "Sync status"
+msgstr "同步状态"
+
+msgid "Category Combo"
+msgstr "分类组合"
+
+msgid "Filters: {{filterList}}"
+msgstr "筛选条件：{{filterList}}"
+
+msgid "No Filters"
+msgstr "无滤镜"
+
+msgid "Sync Status"
+msgstr "同步状态"
+
+msgid "Home Screen"
+msgstr "主屏幕"
+
+msgid ""
+"Customize the available filters and sorting options for the home screen. "
+"Filters and sorting options set here will only affect the home screen."
+msgstr "自定义主屏幕上可用的筛选条件和排序选项。在此设置的筛选条件和排序选项仅对主屏幕生效。"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Assigned to me"
+msgstr "指派给我"
+
+msgid "Program specific settings"
+msgstr "程序特定设置"
+
+msgid "Save Program"
+msgstr "保存程序"
+
+msgid "Add a Program Settings"
+msgstr "添加程序设置"
+
+msgid ""
+"Customize filter and sorting options available for programs. Settings below "
+"apply to all programs a mobile user has access to. Settings specific to "
+"individual programs can also be applied."
+msgstr "可针对各节目自定义筛选和排序选项。以下设置适用于移动端用户可访问的所有节目。此外，还可针对单个节目应用特定设置。"
+
+msgid "Mark for Follow Up"
+msgstr "标记为待跟进"
+
+msgid "Transfer"
+msgstr "转移"
+
+msgid "Complete Enrollment"
+msgstr "完成注册"
+
+msgid "Cancel Enrollment"
+msgstr "取消注册"
+
+msgid "More Enrollments"
+msgstr "更多报名人数"
+
+msgid "TEI Header"
+msgstr "TEI 标题"
+
+msgid "Advanced options"
+msgstr "高级选项"
+
+msgid "Only applicable for users using Android app version 3.1 or later."
+msgstr "仅适用于使用 Android 应用 3.1 版或更高版本的用户。"
+
+msgid "3.1 +"
+msgstr "3.1 +"
+
+msgid "Quick actions"
+msgstr "快速行动"
+
+msgid "Enrollment Date"
+msgstr "注册日期"
+
+msgid "Enrollment status"
+msgstr "报名登记状态"
+
+msgid "Event Date"
+msgstr "活动日期"
+
+msgid "Event status"
+msgstr "事件状态"
+
+msgid "Follow up"
+msgstr "后续跟踪"
+
+msgid "There are no Program Indicators with valid expressions for Android"
+msgstr "Android 没有具有有效表达式的程序指标"
+
+msgid "Disable elements do not meet Android criteria"
+msgstr "已禁用的元素不符合 Android 的标准"
+
+msgid "Enrollment Status"
+msgstr "注册状态"
+
+msgid "Event Status"
+msgstr "活动状态"
+
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
+msgstr "这将禁用并删除所有“常规”、“同步”、“外观”和“分析”设置。"
+
+msgid "General Settings"
+msgstr "常规设置"
+
+msgid ""
+"The Android Capture app has helpful new and experimental features that can "
+"be enabled."
+msgstr "“Android Capture” 应用提供了一些实用的新功能和实验性功能，用户可以启用这些功能。"
+
+msgid "New Data Entry Form"
+msgstr "新的数据录入表单"
+
+msgid ""
+"Enable/Disable the new data entry form with new inputs per value type. The "
+"inputs for all value types have been redesigned, with a improved selection "
+"mode and increased tappable areas and texts."
+msgstr ""
+"启用/禁用新的数据输入表单，该表单针对每种值类型提供了新的输入字段。所有值类型的输入字段均已重新设计，不仅优化了选择模式，还扩大了可点击区域并增加了文本显示内容。"
+
+msgid ""
+"Only applicable for users using Android app versions 2.9, 2.9.1, and 2.9.2."
+msgstr "仅适用于使用 Android 应用版本 2.9、2.9.1 和 2.9.2 的用户。"
+
+msgid "2.9.x"
+msgstr "2.9.x"
+
+msgid "Overview: Android Settings App"
+msgstr "概述：Android“设置”应用"
+
+msgid "v{{version}}"
+msgstr "v{{version}}"
+
+msgid ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+msgstr "定义由外部来源触发的、用于与设备中其他应用进行交互的具体操作。"
+
+msgid "Add intent"
+msgstr "添加意图"
+
+msgid "Custom Intent"
+msgstr "自定义意图"
+
+msgid "Edit Intent"
+msgstr "编辑意图"
+
+msgid "New Intent"
+msgstr "新意图"
+
+msgid "Identifiers"
+msgstr "标识符"
+
+msgid "Request"
+msgstr "请求"
+
+msgid "Response"
+msgstr "回复"
+
+msgid "Prev"
+msgstr "前一年"
+
+msgid "Next"
+msgstr "下一个"
+
+msgid "Save Intent"
+msgstr "保存意图"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Data Entry"
+msgstr "数据输入"
+
+msgid "Data element"
+msgstr "数据元"
+
+msgid "Tracked entity attribute"
+msgstr "跟踪实体属性"
+
+msgid "Intent name"
+msgstr "意图名称"
+
+msgid "Intent description"
+msgstr "意图描述"
+
+msgid "Element type"
+msgstr "元素类型"
+
+msgid "Screen/Action"
+msgstr "屏幕/动作"
+
+msgid "Package name"
+msgstr "包名"
+
+msgid "No requests parameters have been added"
+msgstr "尚未添加任何请求参数"
+
+msgid "Key"
+msgstr "键值"
+
+msgid "Value"
+msgstr "数值"
+
+msgid "Add parameter"
+msgstr "添加参数"
+
+msgid "String"
+msgstr "字符串"
+
+msgid "Integer"
+msgstr "整型"
+
+msgid "Boolean"
+msgstr "Boolean"
+
+msgid "Float"
+msgstr "浮动"
+
+msgid "JSON object"
+msgstr "JSON 对象"
+
+msgid "List of JSON objects"
+msgstr "JSON 对象列表"
+
+msgid "Extra name"
+msgstr "附加名称"
+
+msgid "Extra type"
+msgstr "额外类型"
+
+msgid "Property in JSON object"
+msgstr "JSON 对象中的属性"
+
+msgid "Data sets specific download sync settings"
+msgstr "数据集的特定下载同步设置"
+
+msgid ""
+"Applies only to the assigned data set. Data set specific settings will "
+"overwrite the global settings above."
+msgstr "仅适用于所选数据集。数据集的特定设置将覆盖上述全局设置。"
+
+msgid "Data set global download sync settings"
+msgstr "设置数据集的全球下载同步选项"
+
+msgid ""
+"Applies to all Data sets an Android user has access to. Specific data set "
+"settings can be defined in the section below."
+msgstr "适用于 Android 用户有权访问的所有数据集。具体的数据集设置可在下文部分中进行定义。"
+
+msgid "Values per Data set"
+msgstr "每个数据集的数值"
+
+msgid "Add a data set specific setting"
+msgstr "添加数据集特定设置"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "data set"
+msgstr "数据集"
+
+msgid "Global sync settings"
+msgstr "全局同步设置"
+
+msgid "Values per Program"
+msgstr "各项目的数值"
+
+msgid "Add a program specific setting"
+msgstr "添加一个特定于程序的设置"
+
+msgid "Per program"
+msgstr "按项目"
+
+msgid "Per OU and program"
+msgstr "按大学和项目分类"
+
+msgid "Programs specific download sync settings"
+msgstr "特定程序的下载同步设置"
+
+msgid ""
+"Applies only to the assigned program. Program specific settings will "
+"overwrite the global settings above."
+msgstr "仅适用于已分配的程序。程序的特定设置将覆盖上述全局设置。"
+
+msgid "Program global download sync settings"
+msgstr "设置全局下载同步选项"
+
+msgid ""
+"Applies to all programs an Android user has access to. Specific program "
+"settings can be defined in the section below."
+msgstr "适用于 Android 用户可以访问的所有程序。具体程序设置可在下文部分中进行定义。"
+
+msgid "No filters available"
+msgstr "没有可用筛选条件"
+
+msgid "Choose a filter"
+msgstr "选择一个筛选条件"
+
+msgid "program"
+msgstr "程序"
+
+msgid "Recommended maximum: {{maxValue}}"
+msgstr "建议最大值：{{maxValue}}"
+
+msgid "User Sync Test"
+msgstr "用户同步测试"
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr "检查用户将同步到其设备上的数据量。"
+
+msgid "User"
+msgstr "用户"
+
+msgid "Failed to get data"
+msgstr "无法获取数据"
