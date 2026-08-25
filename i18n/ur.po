@@ -1,0 +1,1211 @@
+# Translators:
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Philip Larsen Donnelly, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-02-25T15:14:00.274Z\n"
+"PO-Revision-Date: 2026-08-05 13:51+0000\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ur\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+"The initial configuration of the app has been completed and it is now ready "
+"to use."
+msgstr ""
+
+msgid ""
+"The initial configuration of the app encountered an error and it cannot be "
+"used at this time."
+msgstr ""
+
+msgid "Edit"
+msgstr "ترمیم"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid ""
+"You have unsaved changes, if you leave you will lose your changes. Are you "
+"sure you want to leave?"
+msgstr ""
+
+msgid "Failed to get data from Data Store"
+msgstr ""
+
+msgid "Settings were successfully saved"
+msgstr ""
+
+msgid "Home"
+msgstr "گھر"
+
+msgid "Program"
+msgstr "پروگرام"
+
+msgid "Data set"
+msgstr "ڈیٹا سیٹ"
+
+msgid "Edit {{label}} visualization"
+msgstr ""
+
+msgid "Visualization item"
+msgstr ""
+
+msgid "Cancel"
+msgstr "منسوخ"
+
+msgid "Edit Visualization"
+msgstr ""
+
+msgid "Dataset"
+msgstr ""
+
+msgid "Visualization Type"
+msgstr ""
+
+msgid "Add a group name"
+msgstr ""
+
+msgid "Create a new group"
+msgstr ""
+
+msgid "Select a created group visualization"
+msgstr ""
+
+msgid "Select a group visualization"
+msgstr ""
+
+msgid "Use a group visualization"
+msgstr ""
+
+msgid "No visualization found"
+msgstr ""
+
+msgid "Show fewer"
+msgstr ""
+
+msgid "Show more"
+msgstr "اور دیکھاو"
+
+msgid "Clear"
+msgstr "کلیئر"
+
+msgid "Visualization"
+msgstr ""
+
+msgid "Visualization Group"
+msgstr ""
+
+msgid "Are you sure you want to delete {{elementName}} visualization group?"
+msgstr ""
+
+msgid "Delete Group"
+msgstr ""
+
+msgid "Visualization title"
+msgstr ""
+
+msgid "This will override the visualization title when shown in the app"
+msgstr ""
+
+msgid "No user found"
+msgstr ""
+
+msgid "Search by user"
+msgstr ""
+
+msgid "{{userName}} can visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "{{userName}} can not visualize {{visualization}} visualization"
+msgstr ""
+
+msgid "Visualization user test"
+msgstr ""
+
+msgid "Run test"
+msgstr ""
+
+msgid "Data Element"
+msgstr ""
+
+msgid "Program Indicator"
+msgstr ""
+
+msgid "Gender Attributes"
+msgstr ""
+
+msgid "Choose attribute"
+msgstr ""
+
+msgid "Female title"
+msgstr ""
+
+msgid "Male title"
+msgstr ""
+
+msgid "Choose element"
+msgstr ""
+
+msgid "Choose element type"
+msgstr ""
+
+msgid "Program Stage"
+msgstr "پروگرام کا مرحلہ"
+
+msgid "Title and name"
+msgstr ""
+
+msgid "Analytics chart title"
+msgstr ""
+
+msgid "Short name"
+msgstr "Ù"
+
+msgid "Attribute"
+msgstr "خصوصیت"
+
+msgid "Daily"
+msgstr "روزانہ"
+
+msgid "Weekly"
+msgstr "ہفتہ وار"
+
+msgid "Monthly"
+msgstr "ماہانہ"
+
+msgid "Quarterly"
+msgstr "سہ ماہی"
+
+msgid "Six-monthly"
+msgstr "چھ ماہی"
+
+msgid "Yearly"
+msgstr "سالانہ"
+
+msgid "None"
+msgstr "کوئی نہں"
+
+msgid "Choose a period type"
+msgstr ""
+
+msgid "Visualization elements"
+msgstr ""
+
+msgid "Bar chart"
+msgstr "بار چارٹ"
+
+msgid "Line chart"
+msgstr "لائن چارٹ"
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "WHO nutrition"
+msgstr ""
+
+msgid "Choose visualization type"
+msgstr ""
+
+msgid "Horizontal (x) axis"
+msgstr ""
+
+msgid "Vertical (y) axis"
+msgstr ""
+
+msgid "Height for age"
+msgstr ""
+
+msgid "Weight for age"
+msgstr ""
+
+msgid "Weight for height"
+msgstr ""
+
+msgid "Choose WHO visualization type"
+msgstr ""
+
+msgid "Bypass"
+msgstr ""
+
+msgid "Require"
+msgstr ""
+
+msgid "{{bypass}} DHIS2 Version Validation"
+msgstr ""
+
+msgid ""
+"Use this option to enforce strict version validation when connecting to "
+"DHIS2 instances."
+msgstr ""
+
+msgid ""
+"This ensures that only supported DHIS2 versions are accessed, maintaining "
+"compatibility and security standards."
+msgstr ""
+
+msgid ""
+"Enabling this option allows you to proceed with connecting to DHIS2 "
+"instances even if they are not officially supported."
+msgstr ""
+
+msgid ""
+"Use this with caution and ensure compatibility and security measures are in "
+"place."
+msgstr ""
+
+msgid "Validate version"
+msgstr ""
+
+msgid "Bypass version"
+msgstr ""
+
+msgid "Delete {{typeName}}"
+msgstr ""
+
+msgid "Are you sure you want to delete {{name}} {{typeName}} settings?"
+msgstr ""
+
+msgid "Delete {{element}}"
+msgstr ""
+
+msgid "Disable all settings"
+msgstr ""
+
+msgid ""
+"This action will disable and remove all General, Synchronization, Appearance"
+" and Analytics settings. Are you sure you want to disable all settings?"
+msgstr ""
+
+msgid "Disable"
+msgstr "غیر فعال"
+
+msgid "{{encrypt}} the device database"
+msgstr ""
+
+msgid ""
+"Decrypting the device database is a critical action that will reduce the "
+"level of protection of your data. Are you sure you want to decrypt the "
+"device database?"
+msgstr ""
+
+msgid ""
+"Encrypting the device database is a critical action that could have an "
+"impact on the database volume and performance. Are you sure you want to "
+"encrypt the device database?"
+msgstr ""
+
+msgid "Decrypt"
+msgstr ""
+
+msgid "Encrypt"
+msgstr ""
+
+msgid "First time setup"
+msgstr ""
+
+msgid ""
+"Using the Android Settings app will apply default settings to all Android "
+"devices connected to this instance."
+msgstr ""
+
+msgid ""
+"Any settings or configuration on a user's device will be overwritten by "
+"settings applied here."
+msgstr ""
+
+msgid ""
+"The new version of the Android Settings web app comes with improvements and "
+"disruptive changes. The previous versions are no longer supported, and the "
+"settings stored there will be removed."
+msgstr ""
+
+msgid ""
+"You don't have access to this app. Contact your DHIS2 system administrator "
+"to fix this problem."
+msgstr ""
+
+msgid ""
+"To set up the default settings and apply to all devices, click \"Set default"
+" and save\""
+msgstr ""
+
+msgid "Exit, do not apply settings"
+msgstr ""
+
+msgid "Set defaults and save"
+msgstr ""
+
+msgid "Select Manual option"
+msgstr ""
+
+msgid ""
+"By selecting Manual there will NOT be any AUTOMATIC SYNCHRONIZATION of "
+"{{type}}. Your users will need to download the {{type}} manually."
+msgstr ""
+
+msgid "Do you want to select this option?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ø¬Û ÛØ§Úº"
+
+msgid "Save new configuration"
+msgstr ""
+
+msgid ""
+"You are about to update the configuration settings. Please confirm if you'd "
+"like to proceed?"
+msgstr ""
+
+msgid "Save"
+msgstr "محفوظ"
+
+msgid "Skip DHIS2 version validation"
+msgstr ""
+
+msgid "Bypass the validation process for DHIS2 version compatibility."
+msgstr ""
+
+msgid "Only applicable for users using Android app version 3.0 or later."
+msgstr ""
+
+msgid "3.0 +"
+msgstr ""
+
+msgid "30 Minutes"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+msgid "6 Hours"
+msgstr ""
+
+msgid "12 Hours"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "How often should data sync?"
+msgstr ""
+
+msgid "Disable manual location capture"
+msgstr ""
+
+msgid "Disable TEI referrals."
+msgstr ""
+
+msgid "Only applicable for users using Android app version 2.9 or later."
+msgstr ""
+
+msgid "2.9 +"
+msgstr ""
+
+msgid "Encrypt device database"
+msgstr ""
+
+msgid ""
+"Encrypt all data stored on device. Data can be lost if there are problems "
+"with an encrypted database. This will not affect the DHIS2 database stored "
+"on an external server."
+msgstr ""
+
+msgid "Maximum file size limit for download (Kb)"
+msgstr ""
+
+msgid "Only applicable for users using Android app version 2.8 or later."
+msgstr ""
+
+msgid "2.8 +"
+msgstr ""
+
+msgid "Show percentage (%) complete in Program toolbar"
+msgstr ""
+
+msgid "Do not collapse sections in form."
+msgstr ""
+
+msgid "Analytics reporting ID (Matomo)"
+msgstr ""
+
+msgid "Must be at least 1 character long"
+msgstr ""
+
+msgid "Analytics reporting URL (Matomo)"
+msgstr ""
+
+msgid "Must be a valid url"
+msgstr ""
+
+msgid "Add message of the day"
+msgstr ""
+
+msgid ""
+"Use this message to communicate with users in order to display important "
+"information"
+msgstr ""
+
+msgid "6 hours"
+msgstr ""
+
+msgid "12 hours"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "How often should metadata sync?"
+msgstr ""
+
+msgid "Minimum location accuracy (m)"
+msgstr ""
+
+msgid "Configure the minimum precision level for location capture"
+msgstr ""
+
+msgid "Choose an option"
+msgstr ""
+
+msgid "Allow the user to create a TEI without searching"
+msgstr ""
+
+msgid "Reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} reserved values"
+msgstr ""
+
+msgid "Allow user to take screenshots and share their screen."
+msgstr ""
+
+msgid "SMS Gateway phone number"
+msgstr ""
+
+msgid "Must start with + and be at least 4 characters long."
+msgstr ""
+
+msgid "SMS Result Sender phone number"
+msgstr ""
+
+msgid "Use the new version of Tracker Exporter (Web API)"
+msgstr ""
+
+msgid ""
+"Use new tracker endpoints dedicated to querying tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr ""
+
+msgid "Use the new version of Tracker Importer (Web API)"
+msgstr ""
+
+msgid ""
+"Use new tracker endpoints dedicated to importing tracker objects (including "
+"tracked entities, enrollments, events, and relationships)."
+msgstr ""
+
+msgid "Reset all values to default"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} TEI"
+msgstr ""
+
+msgid "Recommended maximum is {{maxValue}} events"
+msgstr ""
+
+msgid "Opt-in Features"
+msgstr ""
+
+msgid "No TEI Analytics found"
+msgstr ""
+
+msgid ""
+"It looks like there aren't any configured analytics, or they couldn't be "
+"loaded."
+msgstr ""
+
+msgid "No custom Intents found"
+msgstr ""
+
+msgid ""
+"It looks like there aren't any configured actions, or they couldn't be "
+"loaded."
+msgstr ""
+
+msgid "Manual options"
+msgstr ""
+
+msgid ""
+"Manual options for data and metadata sync are only available from android "
+"app version 2.3.0 onwards."
+msgstr ""
+
+msgid ""
+"If the API version is 2.40 or higher, please note that the New Tracker "
+"Importer and New Tracker Exporter should be used as the default option."
+msgstr ""
+
+msgid ""
+"Be aware that some functionality might not be ready in the new endpoints, "
+"although primary use-cases are supported."
+msgstr ""
+
+msgid "New Tracker Importer and Exporter"
+msgstr ""
+
+msgid "Something went wrong when loading the data"
+msgstr ""
+
+msgid "It looks like there aren't any configured visualizations."
+msgstr ""
+
+msgid "Data Visualization"
+msgstr ""
+
+msgid "Event Visualization"
+msgstr ""
+
+msgid "Maximum number of past data to download"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "General"
+msgstr "Ø¬ÙØ±Ù"
+
+msgid "Set General settings"
+msgstr ""
+
+msgid ""
+"Defines generic parameters like SMS gateway number and TEI reserved values"
+msgstr ""
+
+msgid "Synchronization"
+msgstr "ہم آہنگی"
+
+msgid "Global"
+msgstr ""
+
+msgid "Set Global sync settings"
+msgstr ""
+
+msgid "Set global settings like metadata anda data sync period"
+msgstr ""
+
+msgid "Programs"
+msgstr "پروگرامز"
+
+msgid "Set Programs sync settings"
+msgstr ""
+
+msgid "Define synchronization parameters to tracker and event programs"
+msgstr ""
+
+msgid "Data sets"
+msgstr "ڈیٹا سیٹس"
+
+msgid "Set Data set sync settings"
+msgstr ""
+
+msgid "Define synchronization parameters for data sets"
+msgstr ""
+
+msgid "User sync test"
+msgstr ""
+
+msgid "Run user sync test"
+msgstr ""
+
+msgid "Check how much data a user downloads when syncing"
+msgstr ""
+
+msgid "Appearance"
+msgstr "ظہور"
+
+msgid "Home screen"
+msgstr ""
+
+msgid "Set Filters in Home screen"
+msgstr ""
+
+msgid "Manage Home screen"
+msgstr ""
+
+msgid "Set Filters in Programs"
+msgstr ""
+
+msgid "Manage Programs"
+msgstr ""
+
+msgid "Set Filters in Data sets"
+msgstr ""
+
+msgid "Manage Data sets"
+msgstr ""
+
+msgid "Analytics"
+msgstr "تجزیات"
+
+msgid "TEI"
+msgstr ""
+
+msgid "Set TEI Analytics"
+msgstr ""
+
+msgid "Manage TEI analytics for tracker programs"
+msgstr ""
+
+msgid "Set Home Visualizations"
+msgstr ""
+
+msgid "Manage visualizations to be shown in home screen"
+msgstr ""
+
+msgid "Set Programs Visualizations"
+msgstr ""
+
+msgid "Manage visualizations for programs"
+msgstr ""
+
+msgid "Set Data set Visualizations"
+msgstr ""
+
+msgid "Manage visualizations for data sets"
+msgstr ""
+
+msgid "Custom Intents"
+msgstr ""
+
+msgid "Set Intents"
+msgstr ""
+
+msgid "Define actions triggered from external sources"
+msgstr ""
+
+msgid "Maximum Tracked Entity Instance (TEI) downloads"
+msgstr ""
+
+msgid "Download TEI with status"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Active Only"
+msgstr ""
+
+msgid "All"
+msgstr "تمام"
+
+msgid "Only Active"
+msgstr ""
+
+msgid "Download TEI with enrollment date within"
+msgstr ""
+
+msgid "Any time period"
+msgstr ""
+
+msgid "Last month"
+msgstr "آخری ماہ"
+
+msgid "Last 3 months"
+msgstr "آخری ۳ ماہ"
+
+msgid "Last 12 months"
+msgstr "آخری ۱۲ ماہ"
+
+msgid "Any"
+msgstr ""
+
+msgid "Download TEI that have been updated within"
+msgstr ""
+
+msgid "Maximum Event downloads"
+msgstr ""
+
+msgid "Download Events with event date within"
+msgstr ""
+
+msgid "Setting level"
+msgstr ""
+
+msgid "All Org Units"
+msgstr ""
+
+msgid "Per Org Unit"
+msgstr ""
+
+msgid "Maximum Tracked Entity Instance (TEI) download per program"
+msgstr ""
+
+msgid "Download TEIs based on predefined list views"
+msgstr ""
+
+msgid "Download events based on predefined list views"
+msgstr ""
+
+msgid "org units available for data capture"
+msgstr ""
+
+msgid "Number of org unit that are available for data capture"
+msgstr ""
+
+msgid "org units available for data search"
+msgstr ""
+
+msgid "data sets linked to capture org units"
+msgstr ""
+
+msgid "Number of datasets associated to capture OUs"
+msgstr ""
+
+msgid "programs linked to org units"
+msgstr ""
+
+msgid "Number of program associated to capture OUs"
+msgstr ""
+
+msgid "program rules linked to org units"
+msgstr ""
+
+msgid "Number of program rules to download"
+msgstr ""
+
+msgid "reserved values per TEI"
+msgstr ""
+
+msgid "Number of reserved values downloaded per TEI attribute"
+msgstr ""
+
+msgid "metadata download size (KB)"
+msgstr ""
+
+msgid "data download size (KB)"
+msgstr ""
+
+msgid "Error loading visualizations"
+msgstr ""
+
+msgid "Manage visualizations for data set."
+msgstr ""
+
+msgid "Could not find any data set visualisations"
+msgstr ""
+
+msgid "Add Data set visualization"
+msgstr ""
+
+msgid "Add Data set Visualization"
+msgstr ""
+
+msgid "Add Home visualization"
+msgstr ""
+
+msgid "Add Home Visualization"
+msgstr ""
+
+msgid "Manage visualizations for Home screen."
+msgstr ""
+
+msgid "Could not find any home visualisations"
+msgstr ""
+
+msgid "Add Program visualization"
+msgstr ""
+
+msgid "Add Program Visualization"
+msgstr ""
+
+msgid "Manage visualizations for program."
+msgstr ""
+
+msgid "Could not find any program visualisations"
+msgstr ""
+
+msgid "TEI Analytics"
+msgstr ""
+
+msgid ""
+"Manage Tracked Entity Instance (TEI) analytics for tracker programs. The "
+"settings below apply to all tracker programs an Android user has access to."
+msgstr ""
+
+msgid "Add TEI Analytics"
+msgstr ""
+
+msgid "Global settings"
+msgstr ""
+
+msgid "Show Filter"
+msgstr ""
+
+msgid "Specific settings"
+msgstr ""
+
+msgid ""
+"Customize filter and sorting options available for data sets. Settings below"
+" apply to all data sets a mobile user has access to. Settings specific to "
+"individual data sets can also be applied."
+msgstr ""
+
+msgid "Data set specific settings"
+msgstr ""
+
+msgid "Save Data set"
+msgstr ""
+
+msgid "Add a Data set Settings"
+msgstr ""
+
+msgid "Capture Coordinates settings"
+msgstr ""
+
+msgid "Only applicable for users using Android app version 3.2 or later."
+msgstr ""
+
+msgid "3.2 +"
+msgstr ""
+
+msgid "Filter"
+msgstr "فلٹر"
+
+msgid "Period"
+msgstr "مدت"
+
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Sync status"
+msgstr ""
+
+msgid "Category Combo"
+msgstr ""
+
+msgid "Filters: {{filterList}}"
+msgstr ""
+
+msgid "No Filters"
+msgstr ""
+
+msgid "Sync Status"
+msgstr ""
+
+msgid "Home Screen"
+msgstr ""
+
+msgid ""
+"Customize the available filters and sorting options for the home screen. "
+"Filters and sorting options set here will only affect the home screen."
+msgstr ""
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Assigned to me"
+msgstr ""
+
+msgid "Program specific settings"
+msgstr ""
+
+msgid "Save Program"
+msgstr ""
+
+msgid "Add a Program Settings"
+msgstr ""
+
+msgid ""
+"Customize filter and sorting options available for programs. Settings below "
+"apply to all programs a mobile user has access to. Settings specific to "
+"individual programs can also be applied."
+msgstr ""
+
+msgid "Mark for Follow Up"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Complete Enrollment"
+msgstr ""
+
+msgid "Cancel Enrollment"
+msgstr ""
+
+msgid "More Enrollments"
+msgstr ""
+
+msgid "TEI Header"
+msgstr ""
+
+msgid "Advanced options"
+msgstr ""
+
+msgid "Only applicable for users using Android app version 3.1 or later."
+msgstr ""
+
+msgid "3.1 +"
+msgstr ""
+
+msgid "Quick actions"
+msgstr ""
+
+msgid "Enrollment Date"
+msgstr "اندراج کی تاریخ"
+
+msgid "Enrollment status"
+msgstr "اندراج کی حیثیت"
+
+msgid "Event Date"
+msgstr ""
+
+msgid "Event status"
+msgstr "واقعہ کی حیثیت"
+
+msgid "Follow up"
+msgstr ""
+
+msgid "There are no Program Indicators with valid expressions for Android"
+msgstr ""
+
+msgid "Disable elements do not meet Android criteria"
+msgstr ""
+
+msgid "Enrollment Status"
+msgstr ""
+
+msgid "Event Status"
+msgstr ""
+
+msgid ""
+"This will disable and remove all General, Synchronization, Appearance and "
+"Analytics settings."
+msgstr ""
+
+msgid "General Settings"
+msgstr ""
+
+msgid ""
+"The Android Capture app has helpful new and experimental features that can "
+"be enabled."
+msgstr ""
+
+msgid "New Data Entry Form"
+msgstr ""
+
+msgid ""
+"Enable/Disable the new data entry form with new inputs per value type. The "
+"inputs for all value types have been redesigned, with a improved selection "
+"mode and increased tappable areas and texts."
+msgstr ""
+
+msgid ""
+"Only applicable for users using Android app versions 2.9, 2.9.1, and 2.9.2."
+msgstr ""
+
+msgid "2.9.x"
+msgstr ""
+
+msgid "Overview: Android Settings App"
+msgstr ""
+
+msgid "v{{version}}"
+msgstr ""
+
+msgid ""
+"Define specific actions triggered from external sources to interact with "
+"other apps in the device."
+msgstr ""
+
+msgid "Add intent"
+msgstr ""
+
+msgid "Custom Intent"
+msgstr ""
+
+msgid "Edit Intent"
+msgstr ""
+
+msgid "New Intent"
+msgstr ""
+
+msgid "Identifiers"
+msgstr ""
+
+msgid "Request"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Prev"
+msgstr "پچھلا"
+
+msgid "Next"
+msgstr "اگلہ"
+
+msgid "Save Intent"
+msgstr ""
+
+msgid "Search"
+msgstr "تلاش کریں"
+
+msgid "Data Entry"
+msgstr "ڈیٹا اینٹری"
+
+msgid "Data element"
+msgstr "ڈیٹا عنصر"
+
+msgid "Tracked entity attribute"
+msgstr "ٹریک کردہ ادارے کی خاصیت"
+
+msgid "Intent name"
+msgstr ""
+
+msgid "Intent description"
+msgstr ""
+
+msgid "Element type"
+msgstr ""
+
+msgid "Screen/Action"
+msgstr ""
+
+msgid "Package name"
+msgstr ""
+
+msgid "No requests parameters have been added"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Value"
+msgstr "قدر"
+
+msgid "Add parameter"
+msgstr ""
+
+msgid "String"
+msgstr "سٹرنگ"
+
+msgid "Integer"
+msgstr "انٹیجر"
+
+msgid "Boolean"
+msgstr "بلین"
+
+msgid "Float"
+msgstr ""
+
+msgid "JSON object"
+msgstr ""
+
+msgid "List of JSON objects"
+msgstr ""
+
+msgid "Extra name"
+msgstr ""
+
+msgid "Extra type"
+msgstr ""
+
+msgid "Property in JSON object"
+msgstr ""
+
+msgid "Data sets specific download sync settings"
+msgstr ""
+
+msgid ""
+"Applies only to the assigned data set. Data set specific settings will "
+"overwrite the global settings above."
+msgstr ""
+
+msgid "Data set global download sync settings"
+msgstr ""
+
+msgid ""
+"Applies to all Data sets an Android user has access to. Specific data set "
+"settings can be defined in the section below."
+msgstr ""
+
+msgid "Values per Data set"
+msgstr ""
+
+msgid "Add a data set specific setting"
+msgstr ""
+
+msgid "Default"
+msgstr "طےشدہ"
+
+msgid "data set"
+msgstr ""
+
+msgid "Global sync settings"
+msgstr ""
+
+msgid "Values per Program"
+msgstr ""
+
+msgid "Add a program specific setting"
+msgstr ""
+
+msgid "Per program"
+msgstr ""
+
+msgid "Per OU and program"
+msgstr ""
+
+msgid "Programs specific download sync settings"
+msgstr ""
+
+msgid ""
+"Applies only to the assigned program. Program specific settings will "
+"overwrite the global settings above."
+msgstr ""
+
+msgid "Program global download sync settings"
+msgstr ""
+
+msgid ""
+"Applies to all programs an Android user has access to. Specific program "
+"settings can be defined in the section below."
+msgstr ""
+
+msgid "No filters available"
+msgstr ""
+
+msgid "Choose a filter"
+msgstr ""
+
+msgid "program"
+msgstr ""
+
+msgid "Recommended maximum: {{maxValue}}"
+msgstr ""
+
+msgid "User Sync Test"
+msgstr ""
+
+msgid "Check the amount of data a user would sync to their device."
+msgstr ""
+
+msgid "User"
+msgstr "صارف"
+
+msgid "Failed to get data"
+msgstr ""
