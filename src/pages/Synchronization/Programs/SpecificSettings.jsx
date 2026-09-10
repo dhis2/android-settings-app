@@ -16,6 +16,7 @@ import {
 } from '../../../constants/program-settings'
 import tableTitleStyles from '../../../styles/TableTitle.module.css'
 import { isValidValue } from '../../../utils/validators'
+import ImageQualitySettings from '../ImageQualitySettings.jsx'
 
 const getProgramFiltersById = (programId, list) => {
     const program = list?.find((p) => p.id === programId)
@@ -123,43 +124,56 @@ const SpecificSettings = ({
     onChange,
     programWithRegistration,
     programOptions,
-}) => (
-    <Wrapper fullWidth>
-        <div>
-            {programWithRegistration
-                ? SpecificProgram.withRegistration.map((row) => (
-                      <ProgramTableRow
-                          key={row.option}
-                          row={row}
-                          specificSetting={specificSetting}
-                          onChange={onChange}
-                          filters={getProgramFiltersById(
-                              specificSetting.id,
-                              programOptions
-                          )}
-                      />
-                  ))
-                : SpecificProgram.withoutRegistration.map((row) => (
-                      <ProgramTableRow
-                          key={row.option}
-                          row={row}
-                          specificSetting={specificSetting}
-                          onChange={onChange}
-                          filters={getProgramFiltersById(
-                              specificSetting.id,
-                              programOptions
-                          )}
-                      />
-                  ))}
-        </div>
-    </Wrapper>
-)
+    imageItemsById,
+}) => {
+    const handleImageSettingsChange = (updatedImageSettings) => {
+        onChange({ selected: updatedImageSettings }, 'imageSettings')
+    }
+
+    return (
+        <Wrapper fullWidth>
+            <div>
+                {programWithRegistration
+                    ? SpecificProgram.withRegistration.map((row) => (
+                          <ProgramTableRow
+                              key={row.option}
+                              row={row}
+                              specificSetting={specificSetting}
+                              onChange={onChange}
+                              filters={getProgramFiltersById(
+                                  specificSetting.id,
+                                  programOptions
+                              )}
+                          />
+                      ))
+                    : SpecificProgram.withoutRegistration.map((row) => (
+                          <ProgramTableRow
+                              key={row.option}
+                              row={row}
+                              specificSetting={specificSetting}
+                              onChange={onChange}
+                              filters={getProgramFiltersById(
+                                  specificSetting.id,
+                                  programOptions
+                              )}
+                          />
+                      ))}
+                <ImageQualitySettings
+                    items={imageItemsById?.[specificSetting.id]}
+                    imageSettings={specificSetting.imageSettings}
+                    onChange={handleImageSettingsChange}
+                />
+            </div>
+        </Wrapper>
+    )
+}
 
 SpecificSettings.propTypes = {
     specificSetting: PropTypes.object,
     onChange: PropTypes.func,
     programWithRegistration: PropTypes.bool,
     programOptions: PropTypes.array,
+    imageItemsById: PropTypes.object,
 }
 
 export default SpecificSettings

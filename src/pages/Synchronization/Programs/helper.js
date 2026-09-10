@@ -1,3 +1,4 @@
+import { imageSettingsDefault } from '../../../constants/image-settings'
 import {
     PER_ORG_UNIT,
     programSettingsDefault,
@@ -47,6 +48,7 @@ export const createInitialSpecificValues = (prevDetails) => ({
         prevDetails.eventDateDownload ||
         specificSettingsDefault.eventDateDownload,
     filters: prevDetails.filters || specificSettingsDefault.filters,
+    imageSettings: prevDetails.imageSettings || imageSettingsDefault,
 })
 
 export const isProgramWithRegistration = (programList, specificProgram) => {

@@ -1,3 +1,4 @@
+import { imageSettingsDefault } from '../../../constants/image-settings'
 import {
     DEFAULT,
     FULL_SPECIFIC,
@@ -29,6 +30,8 @@ export const populateProgramObject = (programType, settingsList) => {
                 enrollmentDateDownload: settingsList.enrollmentDateDownload,
                 updateDownload: settingsList.updateDownload,
                 filters: settingsList.filters,
+                imageSettings:
+                    settingsList.imageSettings || imageSettingsDefault,
             }
             break
         case WITHOUT_REGISTRATION:
@@ -37,6 +40,8 @@ export const populateProgramObject = (programType, settingsList) => {
                 eventsDownload: settingsList.eventsDownload,
                 eventDateDownload: settingsList.eventDateDownload,
                 filters: settingsList.filters,
+                imageSettings:
+                    settingsList.imageSettings || imageSettingsDefault,
             }
             break
         case GLOBAL:
@@ -80,6 +85,8 @@ export const populateProgramObject = (programType, settingsList) => {
                 updateDownload: settingsList.updateDownload,
                 eventsDownload: settingsList.eventsDownload,
                 eventDateDownload: settingsList.eventDateDownload,
+                imageSettings:
+                    settingsList.imageSettings || imageSettingsDefault,
             }
             break
         default:
