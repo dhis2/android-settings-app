@@ -10,3 +10,13 @@
 .attribute {
     margin: 0;
 }
+
+.settingsLabel {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--colors-grey900);
+}
+
+.paddingLeft20 {
+    padding-inline-start: 20px;
+}
