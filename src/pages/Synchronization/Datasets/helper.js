@@ -2,6 +2,7 @@ import {
     dataSetSettingsDefault,
     periodTypeConstants,
 } from '../../../constants/data-set-settings'
+import { imageSettingsDefault } from '../../../constants/image-settings'
 
 export const createInitialValues = (prevDetails) => ({
     periodDSDownload:
@@ -12,6 +13,7 @@ export const createInitialSpecificValues = (prevDetails, periodType) => ({
     name: '',
     periodDSDownload:
         prevDetails.periodDSDownload || getPeriodDefaultValueByType(periodType),
+    imageSettings: prevDetails.imageSettings || imageSettingsDefault,
 })
 
 export const prepareSpecificSettingsList = (

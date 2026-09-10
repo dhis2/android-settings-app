@@ -25,6 +25,7 @@ const DialogSpecificSettings = ({
     handleSubmitDialog,
     periodType,
     disableSave,
+    imageItemsById,
 }) => (
     <>
         {open && (
@@ -50,6 +51,7 @@ const DialogSpecificSettings = ({
                             specificSettings={specificSetting}
                             onChange={handleChange}
                             periodType={periodType}
+                            imageItemsById={imageItemsById}
                         />
                     )}
                 </ModalContent>
@@ -84,6 +86,7 @@ DialogSpecificSettings.propTypes = {
     specificSetting: PropTypes.object,
     handleSubmitDialog: PropTypes.func,
     disableSave: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default DialogSpecificSettings

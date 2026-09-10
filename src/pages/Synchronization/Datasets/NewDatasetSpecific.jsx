@@ -12,7 +12,13 @@ import {
 } from './helper'
 import { parseValueBySettingType } from './parseValueBySettingType'
 
-const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
+const NewDatasetSpecific = ({
+    datasetList,
+    rows,
+    handleRows,
+    disabled,
+    imageItemsById,
+}) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState(
         createInitialValues('')
@@ -78,6 +84,7 @@ const NewDatasetSpecific = ({ datasetList, rows, handleRows, disabled }) => {
                     specificSetting={specificSetting}
                     handleSubmitDialog={handleSave}
                     disableSave={disableSave}
+                    imageItemsById={imageItemsById}
                 />
             )}
         </>
@@ -89,6 +96,7 @@ NewDatasetSpecific.propTypes = {
     rows: PropTypes.array,
     handleRows: PropTypes.func,
     disabled: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default NewDatasetSpecific
