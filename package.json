@@ -1,6 +1,6 @@
 {
     "name": "android-settings-app",
-    "version": "2.5.1",
+    "version": "2.5.2",
     "author": "UiO",
     "private": true,
     "dependencies": {
