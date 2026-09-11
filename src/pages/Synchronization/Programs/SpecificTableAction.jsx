@@ -11,7 +11,13 @@ import DialogSpecificSetting from './DialogSpecificSetting.jsx'
 import { isProgramWithRegistration } from './helper'
 import { parseValueByType } from './parseValueBySettingType'
 
-const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
+const SpecificTableAction = ({
+    rows,
+    changeRows,
+    disableAll,
+    programList,
+    imageItemsById,
+}) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [openEditDialog, setOpenEditDialog] = useState(false)
@@ -88,6 +94,7 @@ const SpecificTableAction = ({ rows, changeRows, disableAll, programList }) => {
                         handleSubmitDialog={handleSave}
                         programWithRegistration={programWithRegistration}
                         programOptions={programList}
+                        imageItemsById={imageItemsById}
                     />
                 </>
             )}
@@ -100,6 +107,7 @@ SpecificTableAction.propTypes = {
     changeRows: PropTypes.func,
     programList: PropTypes.array,
     disableAll: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default SpecificTableAction

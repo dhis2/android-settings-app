@@ -18,7 +18,13 @@ import {
 import { parseValueByType } from './parseValueBySettingType'
 import { populateProgramObject } from './populateProgramObject'
 
-const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
+const NewProgramSpecific = ({
+    programList,
+    rows,
+    handleRows,
+    disabled,
+    imageItemsById,
+}) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState(
         createInitialSpecificValues('')
@@ -85,6 +91,7 @@ const NewProgramSpecific = ({ programList, rows, handleRows, disabled }) => {
                     handleSubmitDialog={handleSaveNew}
                     disableSave={disableSave}
                     programWithRegistration={programWithRegistration}
+                    imageItemsById={imageItemsById}
                 />
             )}
 
@@ -102,6 +109,7 @@ NewProgramSpecific.propTypes = {
     rows: PropTypes.array,
     handleRows: PropTypes.func,
     disabled: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default NewProgramSpecific

@@ -7,6 +7,7 @@ import TableRow from '../../../components/settingsTable/TableRow.jsx'
 import Wrapper from '../../../components/Wrapper.jsx'
 import { DataSpecificSetting } from '../../../constants/data-set-settings'
 import tableTitleStyles from '../../../styles/TableTitle.module.css'
+import ImageQualitySettings from '../ImageQualitySettings.jsx'
 import { getPeriodDefaultValueByType, getPeriodLabel } from './helper'
 
 const DataSetTableRow = ({
@@ -47,7 +48,12 @@ DataSetTableRow.propTypes = {
     onChange: PropTypes.func,
 }
 
-const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
+const SpecificSettings = ({
+    periodType,
+    specificSettings,
+    onChange,
+    imageItemsById,
+}) => {
     const [defaultValue, setDefaultValue] = useState()
     const [periodLabel, setPeriodLabel] = useState()
 
@@ -55,6 +61,10 @@ const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
         setDefaultValue(getPeriodDefaultValueByType(periodType))
         setPeriodLabel(getPeriodLabel(periodType))
     }, [periodType])
+
+    const handleImageSettingsChange = (updatedImageSettings) => {
+        onChange({ name: 'imageSettings', value: updatedImageSettings })
+    }
 
     return (
         <Wrapper fullWidth>
@@ -69,6 +79,15 @@ const SpecificSettings = ({ periodType, specificSettings, onChange }) => {
                         onChange={onChange}
                     />
                 ))}
+
+                <div className={tableTitleStyles.paddingLeft20}>
+                    <ImageQualitySettings
+                        items={imageItemsById?.[specificSettings.id]}
+                        imageSettings={specificSettings.imageSettings}
+                        onChange={handleImageSettingsChange}
+                        disabled={specificSettings.disableAll}
+                    />
+                </div>
             </div>
         </Wrapper>
     )
@@ -78,6 +97,7 @@ SpecificSettings.propTypes = {
     periodType: PropTypes.string,
     specificSettings: PropTypes.object,
     onChange: PropTypes.func,
+    imageItemsById: PropTypes.object,
 }
 
 export default SpecificSettings

@@ -9,6 +9,7 @@ import {
     filterUnusedElements,
 } from '../../../utils/utils'
 import { useWorkflowContext } from '../../../workflow-context'
+import { useDataSetImageItems } from './DatasetImageQueries'
 import { prepareSpecificSettingsList } from './helper'
 import NewDatasetSpecific from './NewDatasetSpecific.jsx'
 import SpecificTableAction from './SpecificTableAction.jsx'
@@ -19,6 +20,7 @@ const DatasetSpecificSettings = ({
     disabled,
 }) => {
     const { dataSets } = useWorkflowContext()
+    const { dataSetImageItemsById } = useDataSetImageItems()
     const [rows, setRows] = useState()
     const datasetList = filterListByReadAccess(dataSets)
     const [initialRows, setInitialRows] = useState()
@@ -60,6 +62,7 @@ const DatasetSpecificSettings = ({
                             changeRows={setRows}
                             datasetList={datasetList}
                             disableAll={disabled}
+                            imageItemsById={dataSetImageItemsById}
                         />
                     )}
 
@@ -68,6 +71,7 @@ const DatasetSpecificSettings = ({
                         rows={rows}
                         handleRows={setRows}
                         disabled={disabled}
+                        imageItemsById={dataSetImageItemsById}
                     />
                 </>
             )}

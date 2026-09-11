@@ -7,6 +7,7 @@ import PageHeader from '../../../components/page/PageHeader.jsx'
 import { filterUnusedElements } from '../../../utils/utils'
 import { prepareSpecificSettingsList } from './helper'
 import NewProgramSpecific from './NewProgramSpecific.jsx'
+import { useProgramImageItems } from './ProgramImageQueries'
 import { useProgramFilters } from './ProgramQueries'
 import SpecificTableAction from './SpecificTableAction.jsx'
 
@@ -16,6 +17,7 @@ const ProgramSpecificSettings = ({
     disabled,
 }) => {
     const { programFilterList, loaded } = useProgramFilters()
+    const { programImageItemsById } = useProgramImageItems()
     const [programList, setProgramList] = useState([])
     const [rows, setRows] = useState()
     const [initialRows, setInitialRows] = useState()
@@ -66,6 +68,7 @@ const ProgramSpecificSettings = ({
                             changeRows={setRows}
                             programList={programList}
                             disableAll={disabled}
+                            imageItemsById={programImageItemsById}
                         />
                     )}
 
@@ -74,6 +77,7 @@ const ProgramSpecificSettings = ({
                         rows={rows}
                         handleRows={setRows}
                         disabled={disabled}
+                        imageItemsById={programImageItemsById}
                     />
                 </>
             )}

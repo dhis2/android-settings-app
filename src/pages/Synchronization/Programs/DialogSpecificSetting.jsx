@@ -25,6 +25,7 @@ const DialogSpecificSetting = ({
     handleSubmitDialog,
     disableSave,
     programWithRegistration,
+    imageItemsById,
 }) => (
     <>
         {open && (
@@ -51,6 +52,7 @@ const DialogSpecificSetting = ({
                             onChange={handleChange}
                             programWithRegistration={programWithRegistration}
                             programOptions={programOptions}
+                            imageItemsById={imageItemsById}
                         />
                     )}
                 </ModalContent>
@@ -85,6 +87,7 @@ DialogSpecificSetting.propTypes = {
     handleSubmitDialog: PropTypes.func,
     programWithRegistration: PropTypes.bool,
     disableSave: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default DialogSpecificSetting

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T15:14:00.274Z\n"
-"PO-Revision-Date: 2026-02-25T15:14:00.274Z\n"
+"POT-Creation-Date: 2026-09-09T09:26:54.166Z\n"
+"PO-Revision-Date: 2026-09-09T09:26:54.167Z\n"
 
 msgid ""
 "The initial configuration of the app has been completed and it is now ready "
@@ -495,12 +495,6 @@ msgid ""
 msgstr ""
 "Use this message to communicate with users in order to display important "
 "information"
-
-msgid "6 hours"
-msgstr "6 hours"
-
-msgid "12 hours"
-msgstr "12 hours"
 
 msgid "1 Week"
 msgstr "1 Week"
@@ -1229,6 +1223,16 @@ msgstr "data set"
 
 msgid "Global sync settings"
 msgstr "Global sync settings"
+
+msgid "Maximum quality images"
+msgstr "Maximum quality images"
+
+msgid ""
+"Images compress to medium quality by default. Add items here that should be "
+"synced at full quality"
+msgstr ""
+"Images compress to medium quality by default. Add items here that should be "
+"synced at full quality"
 
 msgid "Values per Program"
 msgstr "Values per Program"

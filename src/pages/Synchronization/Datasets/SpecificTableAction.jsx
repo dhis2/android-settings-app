@@ -11,7 +11,13 @@ import DialogSpecificSettings from './DialogSpecificSettings.jsx'
 import { getPeriodType } from './helper'
 import { parseValueBySettingType } from './parseValueBySettingType'
 
-const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
+const SpecificTableAction = ({
+    rows,
+    changeRows,
+    datasetList,
+    disableAll,
+    imageItemsById,
+}) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [specificSetting, setSpecificSetting] = useState({})
     const [openEditDialog, setOpenEditDialog] = useState(false)
@@ -85,6 +91,7 @@ const SpecificTableAction = ({ rows, changeRows, datasetList, disableAll }) => {
                         handleChange={handleChange}
                         specificSetting={specificSetting}
                         handleSubmitDialog={handleSaveEdit}
+                        imageItemsById={imageItemsById}
                     />
                 </>
             )}
@@ -97,6 +104,7 @@ SpecificTableAction.propTypes = {
     changeRows: PropTypes.func,
     datasetList: PropTypes.array,
     disableAll: PropTypes.bool,
+    imageItemsById: PropTypes.object,
 }
 
 export default SpecificTableAction
