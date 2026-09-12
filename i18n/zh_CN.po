@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-25T15:14:00.274Z\n"
+"POT-Creation-Date: 2026-09-09T09:26:54.166Z\n"
 "PO-Revision-Date: 2026-08-05 13:51+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -459,12 +459,6 @@ msgid ""
 "Use this message to communicate with users in order to display important "
 "information"
 msgstr "使用此消息与用户沟通，以便显示重要信息"
-
-msgid "6 hours"
-msgstr "6小时"
-
-msgid "12 hours"
-msgstr "12小时"
 
 msgid "1 Week"
 msgstr "一周"
@@ -1159,6 +1153,14 @@ msgstr "数据集"
 
 msgid "Global sync settings"
 msgstr "全局同步设置"
+
+msgid "Maximum quality images"
+msgstr ""
+
+msgid ""
+"Images compress to medium quality by default. Add items here that should be "
+"synced at full quality"
+msgstr ""
 
 msgid "Values per Program"
 msgstr "各项目的数值"
