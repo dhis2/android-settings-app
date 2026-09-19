@@ -1155,12 +1155,12 @@ msgid "Global sync settings"
 msgstr "全局同步设置"
 
 msgid "Maximum quality images"
-msgstr ""
+msgstr "最高质量的图像"
 
 msgid ""
 "Images compress to medium quality by default. Add items here that should be "
 "synced at full quality"
-msgstr ""
+msgstr "默认情况下，图片会压缩为中等质量。请在此处添加需要以全质量同步的项目"
 
 msgid "Values per Program"
 msgstr "各项目的数值"
