@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { HelpText, Section } from '../../components/field'
 import { MultiSelect } from '../../components/inputs'
 import { UPLOAD_QUALITY_ORIGINAL } from '../../constants/image-settings'
-import tableTitleStyles from '../../styles/TableTitle.module.css'
 
 /**
  * Multi-select of IMAGE dataElements/attributes to sync at full quality
@@ -40,11 +40,18 @@ const ImageQualitySettings = ({ items, imageSettings, onChange, disabled }) => {
     }
 
     return (
-        <div>
-            <p className={tableTitleStyles.settingsLabel}>
-                {i18n.t('Maximum quality images')}
-            </p>
-
+        <Section
+            legend={
+                <HelpText
+                    helpText={i18n.t('Maximum quality images')}
+                    warning={i18n.t(
+                        'Only applicable for users using Android app version 3.5 or later.'
+                    )}
+                    version={i18n.t('3.5 +')}
+                    type="info"
+                />
+            }
+        >
             <MultiSelect
                 filterable
                 label={i18n.t(
@@ -55,7 +62,7 @@ const ImageQualitySettings = ({ items, imageSettings, onChange, disabled }) => {
                 options={options}
                 disabled={disabled}
             />
-        </div>
+        </Section>
     )
 }
 
